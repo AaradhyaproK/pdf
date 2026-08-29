@@ -1,0 +1,37 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Security Helper Functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && (
+        request.auth.token.email == 'aaradhya1774@gmail.com' ||
+        request.auth.token.admin == true
+      );
+    }
+
+    // 1. Live Visitor Heartbeats Collection
+    match /live_visitors/{visitorId} {
+      allow read, write, create, update, delete: if true;
+    }
+
+    // 2. Admin Settings & Google AdSense Configuration
+    match /admin_settings/{settingId} {
+      allow read, write: if true;
+    }
+
+    // 3. Analytics & Tool Usage Tracking Logs
+    match /analytics_logs/{logId} {
+      allow read, write, create, update, delete: if true;
+    }
+
+    // Default Match
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
