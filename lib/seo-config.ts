@@ -902,8 +902,73 @@ export function generateToolSchemas(slug: string) {
   const tool = SEO_REGISTRY[slug];
   if (!tool) return [];
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://filezenith.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.filezenith.com';
   const pageUrl = `${siteUrl}${slug}`;
+
+  const orgSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    'name': 'FileZenith',
+    'url': siteUrl,
+    'logo': `${siteUrl}/1.png`,
+    'description': 'Free online PDF, image and utility tools. 100% client-side, zero server uploads.',
+    'parentOrganization': {
+      '@type': 'Organization',
+      'name': 'SNAB Innovations / Aurea',
+      'url': 'https://snab.co.in'
+    },
+    'sameAs': [
+      'https://twitter.com/filezenith',
+      'https://www.linkedin.com/company/snab-innovations',
+      'https://github.com/snab-innovations'
+    ]
+  };
+
+  const webSiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    'name': 'FileZenith',
+    'url': siteUrl,
+    'description': 'Free online PDF, image and utility tools. 100% client-side, zero server uploads.',
+    'publisher': {
+      '@type': 'Organization',
+      'name': 'SNAB Innovations / Aurea',
+      'url': 'https://snab.co.in'
+    },
+    'potentialAction': {
+      '@type': 'SearchAction',
+      'target': {
+        '@type': 'EntryPoint',
+        'urlTemplate': `${siteUrl}/studio?q={search_term_string}`
+      },
+      'query-input': 'required name=search_term_string'
+    }
+  };
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      {
+        '@type': 'ListItem',
+        'position': 1,
+        'name': 'Home',
+        'item': siteUrl
+      },
+      {
+        '@type': 'ListItem',
+        'position': 2,
+        'name': tool.category === 'pdf' ? 'PDF Tools' : tool.category === 'image' ? 'Image Tools' : 'Utility Tools',
+        'item': `${siteUrl}/${tool.category}`
+      },
+      {
+        '@type': 'ListItem',
+        'position': 3,
+        'name': tool.title,
+        'item': pageUrl
+      }
+    ]
+  };
 
   const webAppSchema = {
     '@context': 'https://schema.org',
@@ -912,13 +977,14 @@ export function generateToolSchemas(slug: string) {
     'url': pageUrl,
     'description': tool.description,
     'applicationCategory': tool.category === 'pdf' ? 'BusinessApplication' : tool.category === 'image' ? 'DesignApplication' : tool.category === 'social' ? 'MultimediaApplication' : 'UtilitiesApplication',
-    'operatingSystem': 'Any (Web Browser)',
+    'operatingSystem': 'Web Browser',
     'offers': {
       '@type': 'Offer',
       'price': '0',
       'priceCurrency': 'USD'
     },
-    'browserRequirements': 'Requires HTML5 Canvas, WebAssembly, and JavaScript enabled'
+    'browserRequirements': 'Requires HTML5 Canvas, WebAssembly, and JavaScript enabled',
+    'featureList': tool.keywords.join(', ')
   };
 
   const howToSchema = {
@@ -952,5 +1018,5 @@ export function generateToolSchemas(slug: string) {
     }))
   };
 
-  return [webAppSchema, howToSchema, faqSchema];
+  return [orgSchema, webSiteSchema, breadcrumbSchema, webAppSchema, howToSchema, faqSchema];
 }
