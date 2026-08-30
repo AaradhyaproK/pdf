@@ -6,7 +6,6 @@ import { Footer } from '@/components/Footer';
 import { CookieConsent } from '@/components/CookieConsent';
 import { AnalyticsTracker } from '@/components/AnalyticsTracker';
 import { GoogleAdSenseScript } from '@/components/GoogleAdSenseScript';
-import { PWAInstaller } from '@/components/PWAInstaller';
 import { Toaster } from 'sonner';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -63,7 +62,6 @@ export default function RootLayout({
         <div className="flex-1">{children}</div>
         <Footer />
         <CookieConsent />
-        <PWAInstaller />
         <Toaster position="top-right" richColors />
       </body>
     </html>

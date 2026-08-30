@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ShieldCheck, Heart, ExternalLink } from 'lucide-react';
+import { ShieldCheck, Heart, ExternalLink, Smartphone, Download, Sparkles } from 'lucide-react';
 
 export function Footer() {
   return (
@@ -68,12 +68,49 @@ export function Footer() {
             <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-900">
               Daily Quick Utilities
             </h4>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-2.5 text-xs">
+              <li>
+                <Link
+                  href="/download-app"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-600 text-white font-extrabold shadow-sm hover:bg-indigo-500 transition-all"
+                >
+                  <Smartphone className="w-3.5 h-3.5" />
+                  <span>Download Mobile App</span>
+                </Link>
+              </li>
               <li><Link href="/utility/qr-generator" className="hover:text-indigo-600 transition-colors">QR Code Generator</Link></li>
               <li><Link href="/utility/word-counter" className="hover:text-indigo-600 transition-colors">Word Counter & Density</Link></li>
               <li><Link href="/utility/json-formatter" className="hover:text-indigo-600 transition-colors">JSON Formatter & CSV</Link></li>
             </ul>
           </div>
+        </div>
+
+        {/* Highlighted Mobile App Download Section in Footer */}
+        <div className="p-6 rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 border border-slate-800">
+          <div className="flex items-center gap-4 text-center md:text-left">
+            <div className="w-12 h-12 rounded-2xl bg-indigo-600 flex items-center justify-center text-white shrink-0 shadow-md">
+              <Smartphone className="w-6 h-6 text-white" />
+            </div>
+            <div className="space-y-1">
+              <h4 className="text-sm font-black text-white flex items-center justify-center md:justify-start gap-2">
+                <span>Download FileZenith Mobile App</span>
+                <span className="text-[10px] bg-indigo-500/30 text-indigo-300 px-2 py-0.5 rounded-full font-black uppercase">
+                  100% Offline
+                </span>
+              </h4>
+              <p className="text-xs text-slate-300 font-medium">
+                Install web app to use all 20+ PDF & image tools offline anytime without cellular data or Wi-Fi.
+              </p>
+            </div>
+          </div>
+
+          <Link
+            href="/download-app"
+            className="w-full md:w-auto px-6 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs shadow-lg transition-all flex items-center justify-center gap-2 shrink-0 cursor-pointer"
+          >
+            <Download className="w-4 h-4 text-indigo-200" />
+            <span>Download Mobile App Now</span>
+          </Link>
         </div>
 
         <div className="border-t border-slate-200/80 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
@@ -97,3 +134,4 @@ export function Footer() {
     </footer>
   );
 }
+
