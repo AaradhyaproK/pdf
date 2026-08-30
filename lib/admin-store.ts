@@ -34,13 +34,13 @@ export interface AnalyticsSummary {
 }
 
 const DEFAULT_ADS_CONFIG: GoogleAdsConfig = {
-  publisherId: 'ca-pub-1234567890123456',
+  publisherId: 'ca-pub-9075710959353163',
   adSenseScriptEnabled: true,
   headerBannerEnabled: true,
   toolInFeedEnabled: true,
   sidebarEnabled: true,
   bottomStickyEnabled: true,
-  adsTxtContent: `google.com, pub-1234567890123456, DIRECT, f08c47fec0942fa0`,
+  adsTxtContent: `google.com, pub-9075710959353163, DIRECT, f08c47fec0942fa0`,
 };
 
 // 1. Get Ads Config
