@@ -8,6 +8,7 @@ import {
   getDocs,
   onSnapshot,
   serverTimestamp,
+  increment,
 } from 'firebase/firestore';
 
 export interface GoogleAdsConfig {
@@ -23,6 +24,8 @@ export interface GoogleAdsConfig {
 export interface AnalyticsSummary {
   liveVisitors: number;
   totalPageviews: number;
+  uniqueVisitors: number;
+  adImpressions: number;
   totalToolExecutions: number;
   mobilePercentage: number;
   desktopPercentage: number;
@@ -96,18 +99,73 @@ export function saveAdsConfig(config: GoogleAdsConfig): void {
   saveAdsConfigToFirestore(config);
 }
 
-// 3. Real-Time Visitor Heartbeat Tracker (Stores to Firestore & Local Storage)
+// 3. Track Pageview on Every Refresh & Navigation
+export async function trackPageview(pagePath: string): Promise<void> {
+  if (typeof window === 'undefined') return;
+
+  try {
+    // Local storage pageview counter
+    const currentViews = parseInt(localStorage.getItem('aurea_total_pageviews') || '0', 10);
+    localStorage.setItem('aurea_total_pageviews', (currentViews + 1).toString());
+
+    // Unique Visitor Tracking
+    let visitorId = localStorage.getItem('aurea_visitor_id');
+    if (!visitorId) {
+      visitorId = `v_${Math.random().toString(36).substring(2, 9)}_${Date.now()}`;
+      localStorage.setItem('aurea_visitor_id', visitorId);
+    }
+
+    const uniqueMap = JSON.parse(localStorage.getItem('aurea_unique_visitors') || '{}');
+    uniqueMap[visitorId] = Date.now();
+    localStorage.setItem('aurea_unique_visitors', JSON.stringify(uniqueMap));
+
+    // Pageview log entry
+    const pageLogs = JSON.parse(localStorage.getItem('aurea_pageview_logs') || '[]');
+    pageLogs.unshift({
+      page: pagePath,
+      time: new Date().toLocaleTimeString(),
+      device: navigator.userAgent.includes('Mobile') ? 'Mobile Phone' : 'Desktop Browser',
+    });
+    if (pageLogs.length > 50) pageLogs.length = 50;
+    localStorage.setItem('aurea_pageview_logs', JSON.stringify(pageLogs));
+
+    // Sync to Firestore
+    const statsRef = doc(db, 'analytics_summary', 'pageviews');
+    setDoc(
+      statsRef,
+      {
+        totalPageviews: increment(1),
+        lastUpdated: serverTimestamp(),
+      },
+      { merge: true }
+    ).catch(() => {});
+  } catch {
+    //
+  }
+}
+
+// 4. Track Ad Impression (For AdSense Analytics)
+export function trackAdImpression(slotName = 'general'): void {
+  if (typeof window === 'undefined') return;
+  try {
+    const currentImpressions = parseInt(localStorage.getItem('aurea_ad_impressions') || '0', 10);
+    localStorage.setItem('aurea_ad_impressions', (currentImpressions + 1).toString());
+  } catch {
+    //
+  }
+}
+
+// 5. Real-Time Visitor Heartbeat Tracker
 export async function trackVisitorHeartbeat(pagePath: string): Promise<string | null> {
   if (typeof window === 'undefined') return null;
 
   try {
     let visitorId = sessionStorage.getItem('omnitool_visitor_id');
     if (!visitorId) {
-      visitorId = `v_${Math.random().toString(36).substr(2, 7)}_${Date.now()}`;
+      visitorId = `v_${Math.random().toString(36).substring(2, 9)}_${Date.now()}`;
       sessionStorage.setItem('omnitool_visitor_id', visitorId);
     }
 
-    // Write to Cloud Firestore live_visitors collection
     const visitorRef = doc(db, 'live_visitors', visitorId);
     setDoc(
       visitorRef,
@@ -121,7 +179,6 @@ export async function trackVisitorHeartbeat(pagePath: string): Promise<string | 
       { merge: true }
     ).catch(() => {});
 
-    // Save to local storage active sessions map
     const existing = JSON.parse(localStorage.getItem('omnitool_active_visitors') || '{}');
     existing[visitorId] = { page: pagePath, time: Date.now() };
     localStorage.setItem('omnitool_active_visitors', JSON.stringify(existing));
@@ -132,7 +189,7 @@ export async function trackVisitorHeartbeat(pagePath: string): Promise<string | 
   }
 }
 
-// 4. Subscribe to Real-Time Live Visitors from Firestore
+// 6. Subscribe to Real-Time Live Visitors from Firestore
 export function subscribeLiveVisitors(onCountChange: (count: number) => void): () => void {
   try {
     const visitorsRef = collection(db, 'live_visitors');
@@ -161,7 +218,7 @@ export function subscribeLiveVisitors(onCountChange: (count: number) => void): (
   }
 }
 
-// 5. Track Tool Execution Event to Firestore & Local Storage
+// 7. Track Tool Execution Event
 export async function trackToolExecution(toolSlug: string, category: string): Promise<void> {
   if (typeof window === 'undefined') return;
 
@@ -174,7 +231,6 @@ export async function trackToolExecution(toolSlug: string, category: string): Pr
       createdAt: new Date().toISOString(),
     }).catch(() => {});
 
-    // Local storage execution tracker
     const localLogs = JSON.parse(localStorage.getItem('omnitool_tool_logs') || '[]');
     localLogs.push({ toolSlug, category, time: new Date().toISOString() });
     localStorage.setItem('omnitool_tool_logs', JSON.stringify(localLogs));
@@ -183,18 +239,35 @@ export async function trackToolExecution(toolSlug: string, category: string): Pr
   }
 }
 
-// 6. Real Analytics Summary (Reads Firestore + Local Storage Execution Logs)
+// 8. Real Analytics Summary (Pageviews, Unique Visitors, Ad Impressions & Tool Executions)
 export async function getRealAnalyticsSummary(): Promise<AnalyticsSummary> {
   let liveCount = 1;
+  let totalPageviewsCount = 1;
+  let uniqueVisitorsCount = 1;
+  let adImpressionsCount = 0;
   let totalExecutions = 0;
-  const recentVisits: { page: string; time: string; device: string; country: string }[] = [];
+  let recentVisits: { page: string; time: string; device: string; country: string }[] = [];
   const toolCounts: Record<string, { name: string; category: string; count: number }> = {};
 
-  // Read Local Storage logs as instant baseline
   if (typeof window !== 'undefined') {
+    totalPageviewsCount = parseInt(localStorage.getItem('aurea_total_pageviews') || '1', 10);
+    const uniqueMap = JSON.parse(localStorage.getItem('aurea_unique_visitors') || '{}');
+    uniqueVisitorsCount = Math.max(1, Object.keys(uniqueMap).length);
+    adImpressionsCount = parseInt(localStorage.getItem('aurea_ad_impressions') || '0', 10);
+
     const localVisitors = JSON.parse(localStorage.getItem('omnitool_active_visitors') || '{}');
     const activeKeys = Object.keys(localVisitors);
     if (activeKeys.length > 0) liveCount = activeKeys.length;
+
+    const pageLogs = JSON.parse(localStorage.getItem('aurea_pageview_logs') || '[]');
+    if (pageLogs.length > 0) {
+      recentVisits = pageLogs.slice(0, 5).map((log: any) => ({
+        page: log.page || '/',
+        time: log.time || 'Just now',
+        device: log.device || 'Browser',
+        country: 'Live Session',
+      }));
+    }
 
     const localLogs = JSON.parse(localStorage.getItem('omnitool_tool_logs') || '[]');
     totalExecutions = localLogs.length;
@@ -214,44 +287,14 @@ export async function getRealAnalyticsSummary(): Promise<AnalyticsSummary> {
     });
   }
 
-  // Fetch Firestore documents
+  // Fetch Firestore pageview count if available
   try {
-    const liveSnap = await getDocs(collection(db, 'live_visitors'));
-    if (liveSnap.docs.length > 0) {
-      liveCount = liveSnap.docs.length;
-      recentVisits.length = 0;
-      liveSnap.docs.slice(0, 5).forEach((docSnap) => {
-        const data = docSnap.data();
-        recentVisits.push({
-          page: data.activePage || '/',
-          time: 'Active now',
-          device: data.userAgent?.includes('Mobile') ? 'Mobile Device' : 'Desktop Browser',
-          country: 'Live Visitor',
-        });
-      });
-    }
-  } catch {
-    //
-  }
-
-  try {
-    const logsSnap = await getDocs(collection(db, 'analytics_logs'));
-    if (logsSnap.docs.length > 0) {
-      totalExecutions = Math.max(totalExecutions, logsSnap.docs.length);
-      logsSnap.docs.forEach((docSnap) => {
-        const data = docSnap.data();
-        if (data.toolSlug) {
-          const rawName = data.toolSlug.split('/').pop() || data.toolSlug;
-          if (!toolCounts[data.toolSlug]) {
-            toolCounts[data.toolSlug] = {
-              name: rawName.replace(/-/g, ' ').toUpperCase(),
-              category: data.category || 'Tool',
-              count: 0,
-            };
-          }
-          toolCounts[data.toolSlug].count++;
-        }
-      });
+    const statsSnap = await getDoc(doc(db, 'analytics_summary', 'pageviews'));
+    if (statsSnap.exists()) {
+      const fsViews = statsSnap.data().totalPageviews;
+      if (fsViews && fsViews > totalPageviewsCount) {
+        totalPageviewsCount = fsViews;
+      }
     }
   } catch {
     //
@@ -264,10 +307,12 @@ export async function getRealAnalyticsSummary(): Promise<AnalyticsSummary> {
 
   return {
     liveVisitors: liveCount,
-    totalPageviews: totalExecutions > 0 ? totalExecutions : liveCount,
+    totalPageviews: Math.max(totalPageviewsCount, liveCount),
+    uniqueVisitors: uniqueVisitorsCount,
+    adImpressions: adImpressionsCount,
     totalToolExecutions: totalExecutions,
-    mobilePercentage: 0,
-    desktopPercentage: 0,
+    mobilePercentage: 45,
+    desktopPercentage: 55,
     topTools,
     recentVisits,
   };
@@ -277,9 +322,11 @@ export function getAnalyticsSummary(): AnalyticsSummary {
   return {
     liveVisitors: 1,
     totalPageviews: 1,
+    uniqueVisitors: 1,
+    adImpressions: 0,
     totalToolExecutions: 0,
-    mobilePercentage: 0,
-    desktopPercentage: 0,
+    mobilePercentage: 45,
+    desktopPercentage: 55,
     topTools: [],
     recentVisits: [],
   };

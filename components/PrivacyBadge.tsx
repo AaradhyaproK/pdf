@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ShieldCheck, Lock, Cpu, Server, X } from 'lucide-react';
+import { ShieldCheck, Lock, Cpu, Server, X, CheckCircle2, Sparkles, UserCheck } from 'lucide-react';
 
 export function PrivacyBadge() {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,11 +10,11 @@ export function PrivacyBadge() {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold hover:bg-emerald-100 transition-all cursor-pointer shadow-2xs"
-        title="Verified Zero-Server Privacy Guarantee"
+        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-black hover:bg-emerald-100 transition-all cursor-pointer shadow-2xs"
+        title="100% Free • No Login Required • Zero Server Upload Privacy"
       >
         <ShieldCheck className="w-4 h-4 text-emerald-600 animate-pulse" />
-        <span>100% Client-Side Private</span>
+        <span>100% Free • No Login • Secure</span>
       </button>
 
       {isOpen && (
@@ -33,44 +33,47 @@ export function PrivacyBadge() {
               </div>
               <div>
                 <h3 className="text-lg font-black text-slate-900">
-                  Zero-Server Privacy Guarantee
+                  100% Free & Secure Privacy Guarantee
                 </h3>
                 <p className="text-xs text-slate-500 font-medium">
-                  Your files and documents never leave your browser
+                  Zero login, zero subscriptions, zero server file uploads
                 </p>
               </div>
             </div>
 
-            <div className="space-y-3 text-sm text-slate-600">
-              <div className="flex gap-3 items-start p-4 bg-slate-50 rounded-2xl border border-slate-200/80">
-                <Cpu className="w-5 h-5 text-indigo-600 shrink-0 mt-0.5" />
+            <div className="space-y-3 text-xs text-slate-600">
+              <div className="flex gap-3 items-start p-3.5 bg-emerald-50/60 rounded-2xl border border-emerald-100">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-bold text-slate-900 block mb-0.5">
-                    Browser WebAssembly & Web Workers
-                  </span>
-                  All image compression, PDF manipulation, and OCR text recognition run directly inside your computer&apos;s RAM and CPU.
+                  <span className="font-extrabold text-slate-900 block">100% Free All Tools Forever</span>
+                  No subscriptions, no hidden charges, no trial limits, and no credit card required.
                 </div>
               </div>
 
-              <div className="flex gap-3 items-start p-4 bg-slate-50 rounded-2xl border border-slate-200/80">
-                <Server className="w-5 h-5 text-rose-500 shrink-0 mt-0.5" />
+              <div className="flex gap-3 items-start p-3.5 bg-indigo-50/60 rounded-2xl border border-indigo-100">
+                <UserCheck className="w-4 h-4 text-indigo-600 shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-bold text-slate-900 block mb-0.5">
-                    Zero Backend File Uploads
-                  </span>
-                  We do not host or receive your PDFs, photos, or text payload on remote servers. Internet disconnect? OmniTool still works offline!
+                  <span className="font-extrabold text-slate-900 block">No Account or Login Needed</span>
+                  Start using any tool instantly without signing up or creating an account.
+                </div>
+              </div>
+
+              <div className="flex gap-3 items-start p-3.5 bg-sky-50/60 rounded-2xl border border-sky-100">
+                <Cpu className="w-4 h-4 text-sky-600 shrink-0 mt-0.5" />
+                <div>
+                  <span className="font-extrabold text-slate-900 block">100% Client-Side Privacy</span>
+                  All calculations, PDF edits, image conversions, and background removals process inside your browser memory.
                 </div>
               </div>
             </div>
 
-            <div className="pt-2 flex justify-end">
-              <button
-                onClick={() => setIsOpen(false)}
-                className="px-6 py-2.5 rounded-xl bg-indigo-600 text-white font-bold text-sm hover:bg-indigo-700 transition-colors shadow-sm"
-              >
-                Got It
-              </button>
-            </div>
+            <button
+              onClick={() => setIsOpen(false)}
+              className="w-full py-3 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs shadow-md transition-all flex items-center justify-center gap-2"
+            >
+              <Sparkles className="w-4 h-4 text-amber-400" />
+              <span>Got it, Continue Editing</span>
+            </button>
           </div>
         </div>
       )}

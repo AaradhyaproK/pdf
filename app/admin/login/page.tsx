@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { auth } from '@/lib/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { toast } from 'sonner';
-import { ShieldCheck, Lock, Mail, ArrowRight, Sparkles, Key } from 'lucide-react';
+import { Lock, Mail, ArrowRight, Sparkles, Key } from 'lucide-react';
 import Link from 'next/link';
 
 export default function AdminLoginPage() {
@@ -52,11 +52,9 @@ export default function AdminLoginPage() {
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md space-y-6">
         <div className="text-center space-y-2">
-          <Link href="/" className="inline-flex items-center gap-2 text-indigo-600 font-black text-xl tracking-tight">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-600 text-white flex items-center justify-center shadow-md">
-              <ShieldCheck className="w-5 h-5" />
-            </div>
-            <span>OmniTool Admin</span>
+          <Link href="/" className="inline-flex items-center gap-2.5 text-indigo-600 font-black text-xl tracking-tight">
+            <img src="/1.png" alt="Aurea Logo" className="w-9 h-9 object-contain" />
+            <span>Aurea Admin</span>
           </Link>
           <h1 className="text-2xl font-black text-slate-900 tracking-tight">Admin Console Login</h1>
           <p className="text-xs text-slate-500 font-medium">Manage Google Adsense linking, ads.txt, live visitor counter & analytics.</p>
@@ -99,7 +97,7 @@ export default function AdminLoginPage() {
               disabled={isLoading}
               className="w-full py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm shadow-md transition-all flex items-center justify-center gap-2 min-h-[48px]"
             >
-              <span>{isLoading ? 'Authenticating with Firebase...' : 'Sign In to Admin Dashboard'}</span>
+              <span>{isLoading ? 'Authenticating with Firebase...' : 'Sign In to Aurea Admin'}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </form>

@@ -13,10 +13,30 @@ export interface ToolSEO {
 
 export const SEO_REGISTRY: Record<string, ToolSEO> = {
   // --- PDF Studio ---
+  '/pdf/edit': {
+    slug: '/pdf/edit',
+    title: 'Interactive PDF Editor Online',
+    metaTitle: 'Edit PDF Online Free - Add Text, Whiteout, Draw & Sign | Aurea',
+    description: 'Edit PDF documents online directly in your browser. Add text, whiteout/erase content, draw annotations, add images, and rotate pages 100% privately.',
+    keywords: ['edit pdf online', 'pdf editor free', 'add text to pdf', 'whiteout pdf', 'draw on pdf', 'client side pdf editor'],
+    category: 'pdf',
+    howToSteps: [
+      { title: 'Upload PDF Document', text: 'Drag and drop or select any PDF file to load into the visual editor.' },
+      { title: 'Use Editing Tools', text: 'Add custom text, whiteout unwanted sections, draw annotations, or add images.' },
+      { title: 'Apply Changes & Download', text: 'Click Download PDF to export your edited document instantly.' }
+    ],
+    faqs: [
+      { question: 'Is this PDF Editor completely free?', answer: 'Yes! Aurea PDF Editor is 100% free with no page limits, zero subscriptions, and no registration required.' },
+      { question: 'Are my PDF documents uploaded to a remote server?', answer: 'No! All text overlays, drawings, and whiteouts are rendered client-side in your browser memory.' },
+      { question: 'Can I whiteout or erase text on my PDF?', answer: 'Yes! Use the Whiteout tool to cover up sensitive or unwanted text cleanly.' },
+      { question: 'Can I add images, logos, or signatures to pages?', answer: 'Yes! Upload image stamps or draw signatures directly onto PDF pages.' },
+      { question: 'Is my data secure?', answer: '100% secure. Everything processes locally inside your browser.' }
+    ]
+  },
   '/pdf/compress': {
     slug: '/pdf/compress',
     title: 'Compress PDF Online (Zero Server Upload)',
-    metaTitle: 'Compress PDF Online Free - Reduce PDF File Size Client-Side | OmniTool',
+    metaTitle: 'Compress PDF Online Free - Reduce PDF File Size Client-Side | Aurea',
     description: 'Reduce PDF file size online without losing quality. 100% private client-side WebAssembly PDF compression. No file uploads to external servers.',
     keywords: ['compress pdf', 'reduce pdf size', 'pdf compressor online', 'client side pdf compress', 'shrink pdf file'],
     category: 'pdf',
@@ -30,7 +50,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { question: 'How much can I reduce my PDF size?', answer: 'Depending on embedded images and structural metadata, compression can reduce file size by up to 80% with recommended settings.' },
       { question: 'Will image quality be affected?', answer: 'Recommended compression maintains visually crisp text and images while drastically stripping redundant font bytes and uncompressed streams.' },
       { question: 'Is there a file size limit?', answer: 'Since compression uses your device memory directly, you can compress large files up to several hundred megabytes without server timeout limits.' },
-      { question: 'Is OmniTool PDF Compress completely free?', answer: 'Yes! OmniTool is 100% free with unlimited compressions and zero subscription or registration requirements.' }
+      { question: 'Is Aurea PDF Compress completely free?', answer: 'Yes! Aurea is 100% free with unlimited compressions and zero subscription or registration requirements.' }
     ],
     comparisonTable: [
       { feature: 'File Privacy', omnitool: '100% Client-Side (Zero Server)', standardCloud: 'Uploaded to Remote Servers' },
@@ -43,7 +63,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/pdf/compress-to-200kb': {
     slug: '/pdf/compress-to-200kb',
     title: 'Compress PDF to 200KB Online (Client-Side)',
-    metaTitle: 'Compress PDF to 200KB Online Free | OmniTool',
+    metaTitle: 'Compress PDF to 200KB Online Free | Aurea',
     description: 'Compress PDF to under 200KB for government forms, job applications, and portal uploads. Fast, client-side, 100% private.',
     keywords: ['compress pdf to 200kb', 'reduce pdf size to 200kb', 'pdf size reducer under 200kb'],
     category: 'pdf',
@@ -56,7 +76,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { question: 'Can I compress scanned documents to 200KB?', answer: 'Yes! Image-heavy scanned PDFs will be re-sampled to hit target size thresholds cleanly.' },
       { question: 'Why do portals require 200KB PDF files?', answer: 'Many official job portals, university applications, and government forms enforce a strict 200KB upload limit.' },
       { question: 'Are files stored on your servers?', answer: 'Never. Everything is computed locally inside your web browser.' },
-      { question: 'Does this work on mobile devices?', answer: 'Yes, OmniTool works seamlessly on iOS, Android, macOS, Windows, and Linux browsers.' },
+      { question: 'Does this work on mobile devices?', answer: 'Yes, Aurea works seamlessly on iOS, Android, macOS, Windows, and Linux browsers.' },
       { question: 'Is registration required?', answer: 'No registration or credit card is needed.' }
     ]
   },
@@ -64,7 +84,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/pdf/merge': {
     slug: '/pdf/merge',
     title: 'Merge PDF Files Online (100% Private)',
-    metaTitle: 'Merge PDF Files Online - Combine Multiple PDFs into One | OmniTool',
+    metaTitle: 'Merge PDF Files Online - Combine Multiple PDFs into One | Aurea',
     description: 'Combine multiple PDF documents into a single organized file directly in your browser. Reorder pages with visual drag-and-drop.',
     keywords: ['merge pdf', 'combine pdf files', 'join pdf online', 'pdf merger client side'],
     category: 'pdf',
@@ -85,7 +105,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/pdf/split': {
     slug: '/pdf/split',
     title: 'Split PDF Documents Online',
-    metaTitle: 'Split PDF Pages Online Free - Separate PDF Ranges | OmniTool',
+    metaTitle: 'Split PDF Pages Online Free - Separate PDF Ranges | Aurea',
     description: 'Extract specific pages or page ranges from your PDF into standalone documents. 100% client-side security.',
     keywords: ['split pdf', 'extract pdf pages', 'separate pdf pages', 'pdf splitter online'],
     category: 'pdf',
@@ -106,7 +126,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/pdf/organize': {
     slug: '/pdf/organize',
     title: 'Visual PDF Organizer (Rotate, Delete & Reorder)',
-    metaTitle: 'Organize PDF Pages - Rotate, Delete & Rearrange Pages | OmniTool',
+    metaTitle: 'Organize PDF Pages - Rotate, Delete & Rearrange Pages | Aurea',
     description: 'Visual grid tool to rotate individual PDF pages, delete unwanted pages, and reorder document structure in real-time.',
     keywords: ['organize pdf', 'rotate pdf pages', 'delete pdf pages', 'reorder pdf'],
     category: 'pdf',
@@ -127,7 +147,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/pdf/ocr': {
     slug: '/pdf/ocr',
     title: 'Client-Side PDF OCR (Text Extraction)',
-    metaTitle: 'PDF OCR Online Free - Extract Text from Scanned PDFs | OmniTool',
+    metaTitle: 'PDF OCR Online Free - Extract Text from Scanned PDFs | Aurea',
     description: 'Perform optical character recognition (OCR) on scanned PDF files using Web Worker Tesseract AI. Extract editable text directly.',
     keywords: ['pdf ocr', 'extract text from pdf', 'scanned pdf to text', 'ocr pdf online'],
     category: 'pdf',
@@ -148,7 +168,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/pdf/watermark': {
     slug: '/pdf/watermark',
     title: 'Watermark PDF Online (Text & Image Overlay)',
-    metaTitle: 'Watermark PDF Online Free - Add Text & Logo Overlay | OmniTool',
+    metaTitle: 'Watermark PDF Online Free - Add Text & Logo Overlay | Aurea',
     description: 'Add custom text or image watermarks to your PDF documents. Customize opacity, position, font size, color, and rotation angle.',
     keywords: ['watermark pdf', 'add text to pdf', 'logo watermark pdf', 'protect pdf watermark'],
     category: 'pdf',
@@ -169,7 +189,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/pdf/protect': {
     slug: '/pdf/protect',
     title: 'Password Protect PDF Online',
-    metaTitle: 'Protect PDF with Password Online Free | OmniTool',
+    metaTitle: 'Protect PDF with Password Online Free | Aurea',
     description: 'Encrypt your PDF documents with passwords and custom user/owner permission restrictions locally using client-side encryption.',
     keywords: ['protect pdf', 'encrypt pdf', 'password protect pdf online', 'secure pdf file'],
     category: 'pdf',
@@ -190,7 +210,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/pdf/to-image': {
     slug: '/pdf/to-image',
     title: 'Convert PDF to High-Res JPG/PNG Images',
-    metaTitle: 'PDF to Image Converter Free - Save PDF Pages as JPG/PNG | OmniTool',
+    metaTitle: 'PDF to Image Converter Free - Save PDF Pages as JPG/PNG | Aurea',
     description: 'Convert PDF document pages into high-resolution JPG or PNG images. Batch export all pages or download individual images.',
     keywords: ['pdf to image', 'pdf to jpg', 'pdf to png', 'convert pdf to photo'],
     category: 'pdf',
@@ -212,7 +232,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/image/compress': {
     slug: '/image/compress',
     title: 'Smart Image Compressor (Target KB & % Reduction)',
-    metaTitle: 'Compress Image Online Free - Reduce JPG/PNG Size in KB | OmniTool',
+    metaTitle: 'Compress Image Online Free - Reduce JPG/PNG Size in KB | Aurea',
     description: 'Compress JPG, PNG, and WebP images by setting custom target file sizes (e.g. <20KB, <50KB, <100KB) or percentage sliders.',
     keywords: ['compress image', 'reduce image size kb', 'image compressor to 50kb', 'shrink photo size'],
     category: 'image',
@@ -233,7 +253,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/image/compress-to-50kb': {
     slug: '/image/compress-to-50kb',
     title: 'Compress Image to 50KB Online Free',
-    metaTitle: 'Compress Image to 50KB Online Free - Reduce Photo Size | OmniTool',
+    metaTitle: 'Compress Image to 50KB Online Free - Reduce Photo Size | Aurea',
     description: 'Compress JPG, PNG, and photos under 50KB for online application portals. Client-side, fast, zero server upload.',
     keywords: ['compress image to 50kb', 'reduce photo size to 50kb', 'jpg compressor 50kb'],
     category: 'image',
@@ -244,7 +264,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
     ],
     faqs: [
       { question: 'Will my image look blurry at 50KB?', answer: 'Our intelligent canvas scaling maintains sharpness while meeting 50KB limits.' },
-      { question: 'Why use OmniTool for 50KB compression?', answer: 'Because it is 100% private, instant, and works offline inside your browser.' },
+      { question: 'Why use Aurea for 50KB compression?', answer: 'Because it is 100% private, instant, and works offline inside your browser.' },
       { question: 'Can I compress PNG images to 50KB?', answer: 'Yes, PNG files will be optimized or dynamically converted to JPG to hit 50KB.' },
       { question: 'Are files saved on your servers?', answer: 'Never. Processing happens locally in your web browser.' },
       { question: 'Is this free?', answer: 'Yes, 100% free with no limits.' }
@@ -254,7 +274,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/image/compress-to-100kb': {
     slug: '/image/compress-to-100kb',
     title: 'Compress Image to 100KB Online Free',
-    metaTitle: 'Compress Image to 100KB Online Free | OmniTool',
+    metaTitle: 'Compress Image to 100KB Online Free | Aurea',
     description: 'Quickly resize and compress images under 100KB for job applications, identity cards, and website optimization.',
     keywords: ['compress image to 100kb', 'photo size reducer 100kb', 'image compress under 100kb'],
     category: 'image',
@@ -275,7 +295,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/image/resize': {
     slug: '/image/resize',
     title: 'Batch Image Resizer (Pixels, % & Aspect Lock)',
-    metaTitle: 'Resize Image Online Free - Change Dimensions & Aspect Ratio | OmniTool',
+    metaTitle: 'Resize Image Online Free - Change Dimensions & Aspect Ratio | Aurea',
     description: 'Resize JPG, PNG, and WebP images by exact pixel dimensions (width/height) or percentage scaling. Lock aspect ratio.',
     keywords: ['resize image', 'image resizer online', 'change image dimensions', 'crop photo pixels'],
     category: 'image',
@@ -296,7 +316,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/image/passport-maker': {
     slug: '/image/passport-maker',
     title: 'Passport & Visa Photo Maker (US, Schengen, UK, India)',
-    metaTitle: 'Passport Photo Maker Online Free - US, Schengen, UK, India Presets | OmniTool',
+    metaTitle: 'Passport Photo Maker Online Free - US, Schengen, UK, India Presets | Aurea',
     description: 'Crop photos to official passport and visa dimension standards (US 2x2 in, Schengen 35x45 mm, UK, India). Print grid layout.',
     keywords: ['passport photo maker', 'visa photo cropper', 'us passport photo 2x2', 'schengen visa photo maker'],
     category: 'image',
@@ -317,7 +337,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/image/remove-background': {
     slug: '/image/remove-background',
     title: 'AI Background Remover (100% Client-Side Wasm)',
-    metaTitle: 'Remove Background from Image Online Free - 100% Client-Side AI | OmniTool',
+    metaTitle: 'Remove Background from Image Online Free - 100% Client-Side AI | Aurea',
     description: 'Automatically isolate subjects and remove background from photos using local WebAssembly AI. High precision cutout PNG.',
     keywords: ['remove background', 'bg remover online', 'transparent background maker', 'client side ai bg remover'],
     category: 'image',
@@ -338,7 +358,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/image/convert-heic': {
     slug: '/image/convert-heic',
     title: 'Apple HEIC to JPG/PNG Converter (Batch)',
-    metaTitle: 'HEIC to JPG Converter Online Free - Batch Convert iPhone Photos | OmniTool',
+    metaTitle: 'HEIC to JPG Converter Online Free - Batch Convert iPhone Photos | Aurea',
     description: 'Convert Apple iPhone HEIC/HEIF photos to universal JPG or PNG formats in batch. 100% client-side decoding.',
     keywords: ['heic to jpg', 'convert heic to png', 'iphone photo converter', 'heic converter online'],
     category: 'image',
@@ -359,7 +379,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/image/to-pdf': {
     slug: '/image/to-pdf',
     title: 'Image to PDF Converter (JPG, PNG to PDF)',
-    metaTitle: 'Image to PDF Converter Online Free - Combine Photos to PDF | OmniTool',
+    metaTitle: 'Image to PDF Converter Online Free - Combine Photos to PDF | Aurea',
     description: 'Convert JPG, PNG, WebP, and BMP images into a single structured PDF document. Customize page orientation, margins, and page sizes.',
     keywords: ['image to pdf', 'jpg to pdf', 'png to pdf', 'photos to pdf converter'],
     category: 'image',
@@ -377,11 +397,87 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
     ]
   },
 
+  '/image/png-to-jpg': {
+    slug: '/image/png-to-jpg',
+    title: 'PNG to JPG Converter Online (Bulk & High Quality)',
+    metaTitle: 'Convert PNG to JPG Online Free - Fast Bulk Image Converter | Aurea',
+    description: 'Convert PNG images to JPG format online in seconds. Supports bulk conversion, custom image quality compression, and background color selection. 100% client-side.',
+    keywords: ['png to jpg', 'convert png to jpg', 'png to jpg converter free', 'bulk png to jpg', 'change png to jpeg'],
+    category: 'image',
+    howToSteps: [
+      { title: 'Upload PNG Images', text: 'Select or drag and drop PNG files into the converter zone.' },
+      { title: 'Adjust Quality & Background Color', text: 'Choose JPG quality percentage and set solid background color for transparent pixels.' },
+      { title: 'Download JPG Files', text: 'Click Convert to save high-quality JPG images directly to your device.' }
+    ],
+    faqs: [
+      { question: 'Why convert PNG to JPG?', answer: 'JPG files are much smaller in file size than PNGs, making them ideal for web pages, email attachments, and online forms.' },
+      { question: 'What happens to transparent PNG backgrounds?', answer: 'Since JPG does not support transparency, you can pick any solid background color (default is pure white).' },
+      { question: 'Can I batch convert multiple PNG files at once?', answer: 'Yes! Upload dozens of PNG images and convert them all simultaneously.' },
+      { question: 'Are my photos uploaded to a remote server?', answer: 'No! All conversions process 100% locally in your web browser memory.' }
+    ]
+  },
+
+  '/image/png-to-pdf': {
+    slug: '/image/png-to-pdf',
+    title: 'PNG to PDF Converter Online (Combine PNGs to PDF)',
+    metaTitle: 'PNG to PDF Converter Online Free - Convert PNG Images to PDF | Aurea',
+    description: 'Convert PNG images to PDF document online. Combine multiple PNG pictures into one organized PDF file with custom page orientation and margins.',
+    keywords: ['png to pdf', 'convert png to pdf', 'png to pdf converter free', 'combine pngs to pdf', 'save png as pdf'],
+    category: 'image',
+    howToSteps: [
+      { title: 'Upload PNG Files', text: 'Drag and drop one or more PNG image files into the upload box.' },
+      { title: 'Arrange & Format Layout', text: 'Reorder pages, set page orientation (Portrait/Landscape), and adjust margins.' },
+      { title: 'Generate & Download PDF', text: 'Click Convert to PDF to instantly create and download your consolidated PDF file.' }
+    ],
+    faqs: [
+      { question: 'Can I convert multiple PNGs into a single PDF?', answer: 'Yes! You can combine multiple PNG images into one single PDF document.' },
+      { question: 'Does PNG to PDF conversion preserve high resolution?', answer: 'Yes, original PNG image resolution and clarity are fully preserved in the PDF output.' },
+      { question: 'Is there a limit on how many PNG files I can convert?', answer: 'No limits! Convert as many PNG images as you need for free.' }
+    ]
+  },
+
+  '/image/pics-to-pdf': {
+    slug: '/image/pics-to-pdf',
+    title: 'Pics to PDF Converter (Convert Photos & Pictures to PDF)',
+    metaTitle: 'Pics to PDF Converter Online Free - Turn Pictures & Scans to PDF | Aurea',
+    description: 'Turn pictures, receipts, camera photos, and scans into a clean PDF document. Drag and drop reordering, custom page sizes (A4, Letter), and zero server uploads.',
+    keywords: ['pics to pdf', 'picture to pdf', 'convert photos to pdf', 'turn pictures into pdf', 'photo to pdf converter free'],
+    category: 'image',
+    howToSteps: [
+      { title: 'Select Pictures & Scans', text: 'Upload photos from your phone, camera, or computer.' },
+      { title: 'Reorder & Configure Layout', text: 'Drag pictures into your preferred order and select page size (A4, Letter, Auto-fit).' },
+      { title: 'Download PDF Document', text: 'Click Convert Pics to PDF to generate and download your clean document.' }
+    ],
+    faqs: [
+      { question: 'Can I convert pictures taken from my phone camera?', answer: 'Yes! Select photos from your iPhone, Android camera roll, or gallery.' },
+      { question: 'Can I reorder pictures before generating the PDF?', answer: 'Yes! Drag and drop picture cards to arrange the exact page sequence you want.' },
+      { question: 'Is my photo data secure?', answer: '100% secure. Everything is processed locally inside your web browser.' }
+    ]
+  },
+
+  '/image/jpg-to-png': {
+    slug: '/image/jpg-to-png',
+    title: 'JPG to PNG Converter Online (Lossless Image Conversion)',
+    metaTitle: 'Convert JPG to PNG Online Free - Lossless Quality Image Converter | Aurea',
+    description: 'Convert JPG/JPEG images to high-resolution PNG format online. 100% free, bulk image conversion, zero compression artifacts, client-side processing.',
+    keywords: ['jpg to png', 'convert jpg to png', 'jpeg to png converter', 'jpg to png high quality'],
+    category: 'image',
+    howToSteps: [
+      { title: 'Upload JPG Images', text: 'Drop or select JPG/JPEG photos into the converter area.' },
+      { title: 'Convert Lossless', text: 'The engine converts JPG pixel data to lossless PNG format.' },
+      { title: 'Download PNG Files', text: 'Save your PNG images instantly to your device.' }
+    ],
+    faqs: [
+      { question: 'Why convert JPG to PNG?', answer: 'PNG uses lossless compression, making it ideal for editing, overlays, graphics, and transparent image layering.' },
+      { question: 'Is conversion free?', answer: 'Yes, 100% free with no file limits or registration.' }
+    ]
+  },
+
   // --- Social Media Downloader Studio ---
   '/social/youtube-downloader': {
     slug: '/social/youtube-downloader',
     title: 'YouTube Video & Shorts Downloader (1080p, MP4 & MP3)',
-    metaTitle: 'YouTube Video Downloader Free - Download YouTube Videos & Shorts HD | OmniTool',
+    metaTitle: 'YouTube Video Downloader Free - Download YouTube Videos & Shorts HD | Aurea',
     description: 'Download YouTube videos, Shorts, and audio MP3 in 1080p Full HD, 720p HD, and 320kbps MP3. Fast, free, zero software installation.',
     keywords: ['youtube video downloader', 'download youtube shorts', 'youtube to mp4 hd', 'youtube to mp3 converter free'],
     category: 'social',
@@ -402,7 +498,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/social/youtube-shorts-downloader': {
     slug: '/social/youtube-shorts-downloader',
     title: 'YouTube Shorts Downloader Online Free (1080p MP4)',
-    metaTitle: 'YouTube Shorts Downloader Online Free - Save YouTube Shorts HD | OmniTool',
+    metaTitle: 'YouTube Shorts Downloader Online Free - Save YouTube Shorts HD | Aurea',
     description: 'Download YouTube Shorts videos in 1080p Full HD MP4 quality. Fast, free, private client-side processing.',
     keywords: ['youtube shorts downloader', 'download youtube shorts video', 'save yt shorts online'],
     category: 'social',
@@ -423,7 +519,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/social/instagram-downloader': {
     slug: '/social/instagram-downloader',
     title: 'Instagram Reels, Photos & Video Downloader',
-    metaTitle: 'Instagram Downloader Free - Download Reels, Posts & Photos HD | OmniTool',
+    metaTitle: 'Instagram Downloader Free - Download Reels, Posts & Photos HD | Aurea',
     description: 'Download Instagram Reels, video posts, photos, and IGTV media in high definition. 100% free, fast, zero account login.',
     keywords: ['instagram video downloader', 'download instagram reels', 'instagram photo downloader', 'save insta post hd'],
     category: 'social',
@@ -444,7 +540,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/social/instagram-reels-downloader': {
     slug: '/social/instagram-reels-downloader',
     title: 'Instagram Reels Downloader Online Free (HD MP4)',
-    metaTitle: 'Instagram Reels Downloader Online Free - Save Insta Reels Video | OmniTool',
+    metaTitle: 'Instagram Reels Downloader Online Free - Save Insta Reels Video | Aurea',
     description: 'Download Instagram Reels videos in 1080p HD MP4 format. Instant, private, 100% free.',
     keywords: ['instagram reels downloader', 'download insta reels video', 'save instagram reels hd'],
     category: 'social',
@@ -465,7 +561,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/social/twitter-downloader': {
     slug: '/social/twitter-downloader',
     title: 'X / Twitter Video & Media Downloader',
-    metaTitle: 'Twitter Video Downloader Free - Download X Videos & GIFs HD | OmniTool',
+    metaTitle: 'Twitter Video Downloader Free - Download X Videos & GIFs HD | Aurea',
     description: 'Download X (Twitter) videos, GIFs, and post media in 1080p HD MP4 format. Fast, free, client-side downloader.',
     keywords: ['twitter video downloader', 'download x video', 'save twitter gif', 'x post media downloader'],
     category: 'social',
@@ -486,7 +582,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/social/linkedin-downloader': {
     slug: '/social/linkedin-downloader',
     title: 'LinkedIn Video & Document Post Downloader',
-    metaTitle: 'LinkedIn Video Downloader Free - Download LinkedIn Posts & Slides | OmniTool',
+    metaTitle: 'LinkedIn Video Downloader Free - Download LinkedIn Posts & Slides | Aurea',
     description: 'Download LinkedIn professional videos, document PDF slides, and media posts in high resolution.',
     keywords: ['linkedin video downloader', 'download linkedin video', 'save linkedin post video', 'linkedin pdf slides downloader'],
     category: 'social',
@@ -508,7 +604,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/utility/qr-generator': {
     slug: '/utility/qr-generator',
     title: 'Dynamic QR Code Generator (Custom Logo & Colors)',
-    metaTitle: 'Free QR Code Generator with Logo - Create Vector SVG & PNG QR Codes | OmniTool',
+    metaTitle: 'Free QR Code Generator with Logo - Create Vector SVG & PNG QR Codes | Aurea',
     description: 'Generate customizable QR codes for URLs, text, Wi-Fi, and contact cards. Embed center logo image, pick custom colors, export SVG/PNG.',
     keywords: ['qr code generator', 'create qr code with logo', 'custom qr code generator', 'vector svg qr code'],
     category: 'utility',
@@ -529,7 +625,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/utility/word-counter': {
     slug: '/utility/word-counter',
     title: 'Real-Time Word Counter & Keyword Density Analyzer',
-    metaTitle: 'Word Counter Online Free - Count Words, Characters & Reading Time | OmniTool',
+    metaTitle: 'Word Counter Online Free - Count Words, Characters & Reading Time | Aurea',
     description: 'Count words, characters, sentences, paragraphs, reading time, and analyze keyword frequency density in real time.',
     keywords: ['word counter', 'character count online', 'keyword density analyzer', 'reading time calculator'],
     category: 'utility',
@@ -550,7 +646,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/utility/json-formatter': {
     slug: '/utility/json-formatter',
     title: 'JSON Formatter, Validator & CSV/YAML Converter',
-    metaTitle: 'JSON Formatter & Validator Online - Format, Minify, Convert to CSV/YAML | OmniTool',
+    metaTitle: 'JSON Formatter & Validator Online - Format, Minify, Convert to CSV/YAML | Aurea',
     description: 'Format, prettify, minify, validate syntax, and convert JSON arrays to CSV or YAML structures locally in browser.',
     keywords: ['json formatter', 'json validator', 'json to csv', 'json to yaml', 'minify json'],
     category: 'utility',
@@ -573,12 +669,12 @@ export function generateToolMetadata(slug: string) {
   const tool = SEO_REGISTRY[slug];
   if (!tool) {
     return {
-      title: 'OmniTool Suite - 100% Client-Side PDF, Image, Social & Utility Tools',
+      title: 'Aurea - 100% Client-Side PDF, Image, Social & Utility Tools',
       description: 'All-in-one 100% private web tools for PDF compression, image resizing, background removal, social media video downloader, QR code generation, and utilities.'
     };
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://omnitoolsuite.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://aurea.co.in';
   const canonicalUrl = `${siteUrl}${slug}`;
 
   return {
@@ -592,13 +688,13 @@ export function generateToolMetadata(slug: string) {
       title: tool.metaTitle,
       description: tool.description,
       url: canonicalUrl,
-      siteName: 'OmniTool Suite',
+      siteName: 'Aurea',
       type: 'website',
       images: [
         {
-          url: `${siteUrl}/og-image.png`,
-          width: 1200,
-          height: 630,
+          url: `${siteUrl}/1.png`,
+          width: 512,
+          height: 512,
           alt: tool.title
         }
       ]
@@ -607,7 +703,7 @@ export function generateToolMetadata(slug: string) {
       card: 'summary_large_image',
       title: tool.metaTitle,
       description: tool.description,
-      images: [`${siteUrl}/og-image.png`]
+      images: [`${siteUrl}/1.png`]
     }
   };
 }
@@ -616,7 +712,7 @@ export function generateToolSchemas(slug: string) {
   const tool = SEO_REGISTRY[slug];
   if (!tool) return [];
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://omnitoolsuite.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://aurea.co.in';
   const pageUrl = `${siteUrl}${slug}`;
 
   const webAppSchema = {

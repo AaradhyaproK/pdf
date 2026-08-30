@@ -15,9 +15,6 @@ import {
   Eye,
   Wrench,
   Smartphone,
-  Monitor,
-  TrendingUp,
-  ShieldCheck,
   Radio,
   ExternalLink,
   Settings,
@@ -26,6 +23,7 @@ import {
   Activity,
   CheckCircle2,
   Inbox,
+  ShieldCheck,
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -79,7 +77,7 @@ export default function AdminDashboardPage() {
       <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
         <div className="flex items-center gap-2 text-indigo-600 font-bold">
           <Activity className="w-5 h-5 animate-spin" />
-          <span>Fetching Real-Time Firestore Metrics...</span>
+          <span>Fetching Real-Time Aurea Metrics...</span>
         </div>
       </div>
     );
@@ -91,11 +89,9 @@ export default function AdminDashboardPage() {
       <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-600 text-white flex items-center justify-center shadow-md">
-              <ShieldCheck className="w-5 h-5" />
-            </div>
+            <img src="/1.png" alt="Aurea Logo" className="w-9 h-9 object-contain" />
             <div>
-              <h1 className="text-base font-black text-slate-900 leading-tight">OmniTool Admin Console</h1>
+              <h1 className="text-base font-black text-slate-900 leading-tight">Aurea Admin Console</h1>
               <p className="text-xs text-slate-500 font-medium">100% Real Cloud Firestore Metrics • faceid-login-xraxh</p>
             </div>
           </div>
@@ -148,7 +144,7 @@ export default function AdminDashboardPage() {
           </div>
         </div>
 
-        {/* 4 Metric Cards Grid */}
+        {/* Metric Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="p-5 bg-white border border-slate-200/80 rounded-2xl shadow-xs space-y-2">
             <div className="flex items-center justify-between text-slate-500">
@@ -156,7 +152,25 @@ export default function AdminDashboardPage() {
               <Eye className="w-4 h-4 text-indigo-600" />
             </div>
             <div className="text-2xl font-black text-slate-900">{summary.totalPageviews}</div>
-            <p className="text-[11px] text-slate-500 font-medium">Real Firestore Events</p>
+            <p className="text-[11px] text-slate-500 font-medium">Counted on Every Refresh & Navigation</p>
+          </div>
+
+          <div className="p-5 bg-white border border-slate-200/80 rounded-2xl shadow-xs space-y-2">
+            <div className="flex items-center justify-between text-slate-500">
+              <span className="text-xs font-extrabold uppercase tracking-wider">Unique Visitors</span>
+              <Users className="w-4 h-4 text-emerald-600" />
+            </div>
+            <div className="text-2xl font-black text-slate-900">{summary.uniqueVisitors}</div>
+            <p className="text-[11px] text-slate-500 font-medium">Distinct Visitor UUID Sessions</p>
+          </div>
+
+          <div className="p-5 bg-white border border-slate-200/80 rounded-2xl shadow-xs space-y-2">
+            <div className="flex items-center justify-between text-slate-500">
+              <span className="text-xs font-extrabold uppercase tracking-wider">Ad Impressions</span>
+              <DollarSign className="w-4 h-4 text-amber-600" />
+            </div>
+            <div className="text-2xl font-black text-slate-900">{summary.adImpressions}</div>
+            <p className="text-[11px] text-slate-500 font-medium">AdSense Unit Loads</p>
           </div>
 
           <div className="p-5 bg-white border border-slate-200/80 rounded-2xl shadow-xs space-y-2">
@@ -166,24 +180,6 @@ export default function AdminDashboardPage() {
             </div>
             <div className="text-2xl font-black text-slate-900">{summary.totalToolExecutions}</div>
             <p className="text-[11px] text-slate-500 font-medium">Real Execution Logs</p>
-          </div>
-
-          <div className="p-5 bg-white border border-slate-200/80 rounded-2xl shadow-xs space-y-2">
-            <div className="flex items-center justify-between text-slate-500">
-              <span className="text-xs font-extrabold uppercase tracking-wider">Active Sessions</span>
-              <Smartphone className="w-4 h-4 text-emerald-600" />
-            </div>
-            <div className="text-2xl font-black text-slate-900">{liveCount}</div>
-            <p className="text-[11px] text-slate-500 font-medium">Live Connected Clients</p>
-          </div>
-
-          <div className="p-5 bg-white border border-slate-200/80 rounded-2xl shadow-xs space-y-2">
-            <div className="flex items-center justify-between text-slate-500">
-              <span className="text-xs font-extrabold uppercase tracking-wider">Firebase Status</span>
-              <ShieldCheck className="w-4 h-4 text-sky-600" />
-            </div>
-            <div className="text-base font-black text-emerald-600">Connected</div>
-            <p className="text-[11px] text-slate-500 font-medium">faceid-login-xraxh</p>
           </div>
         </div>
 

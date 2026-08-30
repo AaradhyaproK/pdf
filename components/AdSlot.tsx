@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { trackAdImpression } from '@/lib/admin-store';
 
 export interface AdSlotProps {
   slotType: 'header-leaderboard' | 'sticky-sidebar' | 'post-download';
@@ -12,6 +13,7 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
   const adRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    trackAdImpression(slotType);
     try {
       if (typeof window !== 'undefined' && (window as any).adsbygoogle) {
         ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
