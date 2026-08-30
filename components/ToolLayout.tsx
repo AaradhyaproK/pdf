@@ -82,34 +82,9 @@ export function ToolLayout({
             <SEOContent slug={slug} />
           </div>
 
-          {/* Sticky Sidebar (Ad & High CTR Navigation) */}
+          {/* Sticky Sidebar (Ad Placement Unit) */}
           <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-24">
             <AdSlot slotType="sticky-sidebar" />
-
-            <div className="p-6 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl shadow-xl space-y-4 border border-slate-800">
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-amber-400" />
-                <h3 className="text-base font-black">Why Users Choose Aurea</h3>
-              </div>
-              <ul className="space-y-2.5 text-xs text-slate-300">
-                <li className="flex items-center gap-2 font-bold text-emerald-300">
-                  <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-400" />
-                  <span>100% Free Forever • Zero Hidden Fees</span>
-                </li>
-                <li className="flex items-center gap-2 font-bold text-sky-300">
-                  <CheckCircle2 className="w-4 h-4 shrink-0 text-sky-400" />
-                  <span>No Account / No Login / No Registration</span>
-                </li>
-                <li className="flex items-center gap-2 font-bold text-amber-300">
-                  <CheckCircle2 className="w-4 h-4 shrink-0 text-amber-400" />
-                  <span>100% Private • Local Browser Execution</span>
-                </li>
-                <li className="flex items-center gap-2 font-bold text-indigo-300">
-                  <CheckCircle2 className="w-4 h-4 shrink-0 text-indigo-400" />
-                  <span>Unlimited File Conversions</span>
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
       </div>
