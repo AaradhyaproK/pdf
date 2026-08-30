@@ -828,6 +828,30 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { question: 'How does JSON syntax error validation work?', answer: 'If your JSON contains syntax errors, our validator highlights the exact line number, column position, and unexpected token character.' },
       { question: 'Does this JSON formatter work on mobile phones and tablets?', answer: 'Yes! FileZenith JSON Formatter works seamlessly across Android smartphones, iPhones, iPads, MacBooks, and Windows laptops.' }
     ]
+  },
+
+  '/studio': {
+    slug: '/studio',
+    title: 'Flagship All-in-One PDF & Image Studio',
+    metaTitle: 'All-in-One PDF & Image Studio Online Free | FileZenith',
+    description: 'The ultimate all-in-one PDF and image master workspace. Edit PDF, compress, merge, split, OCR, watermark, protect, convert PNG/JPG, passport maker, AI background remover & resize all on one screen 100% privately.',
+    keywords: [
+      'all in one pdf studio',
+      'all in one image editor pdf converter',
+      'edit compress merge split pdf online free',
+      'passport maker background remover online studio',
+      'free all in one online document studio'
+    ],
+    category: 'pdf',
+    howToSteps: [
+      { title: 'Upload Any Document or Image File', text: 'Select or drag and drop any PDF files or images into the master studio canvas.' },
+      { title: 'Choose Any Action from the Tools Grid', text: 'Select any tool at a glance: Edit PDF, Compress, Merge, Split, OCR, Watermark, Protect, Convert, Passport Photo, AI Remove BG, or Resize.' },
+      { title: 'Download Processed Results', text: 'Preview your processed documents and images and download them directly to your device memory 100% privately.' }
+    ],
+    faqs: [
+      { question: 'What is the FileZenith Flagship All-in-One Studio?', answer: 'The All-in-One Studio is our unified master workspace where you can access and execute all 20+ PDF and image processing tools on one single interactive screen without switching pages.' },
+      { question: 'Are my uploaded files safe in the All-in-One Studio?', answer: 'Yes! All calculations, PDF rendering, OCR, and image processing run 100% client-side inside your web browser. Your files are never uploaded to any remote server.' }
+    ]
   }
 };
 
