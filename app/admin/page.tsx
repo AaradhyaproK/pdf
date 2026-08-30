@@ -23,7 +23,14 @@ import {
   Activity,
   CheckCircle2,
   Inbox,
-  ShieldCheck,
+  Clock,
+  Calendar,
+  BarChart3,
+  PieChart,
+  Monitor,
+  Tablet,
+  Globe,
+  Sparkles,
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -33,6 +40,7 @@ export default function AdminDashboardPage() {
   const [summary, setSummary] = useState<AnalyticsSummary | null>(null);
   const [liveCount, setLiveCount] = useState(0);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [selectedTimeRange, setSelectedTimeRange] = useState<'hour' | 'today' | 'month' | 'year' | 'all'>('all');
 
   useEffect(() => {
     // Session Guard Check
@@ -75,23 +83,47 @@ export default function AdminDashboardPage() {
   if (!isAuthenticated || !adsConfig || !summary) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
-        <div className="flex items-center gap-2 text-indigo-600 font-bold">
+        <div className="flex items-center gap-2 text-indigo-600 font-bold text-sm">
           <Activity className="w-5 h-5 animate-spin" />
-          <span>Fetching Real-Time Aurea Metrics...</span>
+          <span>Fetching Real-Time Cloud Firestore Metrics...</span>
         </div>
       </div>
     );
   }
 
+  // Calculate active view count based on selected time range tab
+  const getDisplayedViews = () => {
+    switch (selectedTimeRange) {
+      case 'hour':
+        return summary.viewsLastHour;
+      case 'today':
+        return summary.viewsToday;
+      case 'month':
+        return summary.viewsThisMonth;
+      case 'year':
+        return summary.viewsThisYear;
+      case 'all':
+      default:
+        return summary.totalPageviews;
+    }
+  };
+
+  const maxHourlyView = Math.max(1, ...summary.hourlyTrends.map((t) => t.views));
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 pb-16">
       {/* Top Admin Bar */}
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
+      <header className="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img src="/1.png" alt="FileZenith Logo" className="w-9 h-9 object-contain" />
             <div>
-              <h1 className="text-base font-black text-slate-900 leading-tight">FileZenith Admin Console</h1>
+              <h1 className="text-base font-black text-slate-900 leading-tight flex items-center gap-2">
+                <span>FileZenith Analytics & Admin Console</span>
+                <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase">
+                  Live Firestore
+                </span>
+              </h1>
               <p className="text-xs text-slate-500 font-medium">100% Real Cloud Firestore Metrics • faceid-login-xraxh</p>
             </div>
           </div>
@@ -117,132 +149,234 @@ export default function AdminDashboardPage() {
 
       {/* Main Admin Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8">
-        {/* Live Visitor Banner */}
-        <div className="p-6 rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 border border-slate-800">
-          <div className="space-y-1 text-center md:text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-black border border-emerald-500/30">
-              <Radio className="w-3.5 h-3.5 animate-pulse text-emerald-400" />
-              <span>REAL-TIME FIRESTORE LIVE TRACKING</span>
+        {/* Live Visitor Banner & Time Filter */}
+        <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white shadow-xl space-y-6 border border-slate-800 relative overflow-hidden">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative z-10">
+            <div className="space-y-1">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-black border border-emerald-500/30">
+                <Radio className="w-3.5 h-3.5 animate-pulse text-emerald-400" />
+                <span>REAL-TIME FIRESTORE LIVE TRACKING</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-black tracking-tight">Active Visitors Dashboard</h2>
+              <p className="text-xs text-slate-300">Live active visitors and pageview analytics queried directly from Cloud Firestore.</p>
             </div>
-            <h2 className="text-2xl font-black tracking-tight">Active Visitors Dashboard</h2>
-            <p className="text-xs text-slate-300">Live active visitors queried in real time from Cloud Firestore.</p>
+
+            <div className="flex items-center gap-5 sm:gap-6 bg-white/10 backdrop-blur-md px-5 sm:px-6 py-4 rounded-2xl border border-white/10 shrink-0">
+              <div className="text-center">
+                <div className="text-2xl sm:text-3xl font-black text-emerald-400 flex items-center justify-center gap-2">
+                  <Users className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-400 animate-bounce" />
+                  <span>{liveCount}</span>
+                </div>
+                <span className="text-[10px] sm:text-[11px] font-extrabold text-slate-300 uppercase tracking-wider block mt-0.5">Active Visitors</span>
+              </div>
+              <div className="h-10 w-px bg-white/20" />
+              <div className="text-center">
+                <div className="text-2xl sm:text-3xl font-black text-indigo-300">{getDisplayedViews()}</div>
+                <span className="text-[10px] sm:text-[11px] font-extrabold text-slate-300 uppercase tracking-wider block mt-0.5">
+                  {selectedTimeRange === 'hour'
+                    ? 'Views (1 Hr)'
+                    : selectedTimeRange === 'today'
+                    ? 'Views Today'
+                    : selectedTimeRange === 'month'
+                    ? 'Views Month'
+                    : selectedTimeRange === 'year'
+                    ? 'Views Year'
+                    : 'Total Views'}
+                </span>
+              </div>
+              <div className="h-10 w-px bg-white/20" />
+              <div className="text-center">
+                <div className="text-2xl sm:text-3xl font-black text-amber-300 flex items-center justify-center gap-1">
+                  <DollarSign className="w-5 h-5 text-amber-400" />
+                  <span>{summary.adImpressions}</span>
+                </div>
+                <span className="text-[10px] sm:text-[11px] font-extrabold text-amber-200/90 uppercase tracking-wider block mt-0.5">Ad Impressions</span>
+              </div>
+            </div>
           </div>
 
-          <div className="flex items-center gap-6 bg-white/10 backdrop-blur-md px-6 py-4 rounded-2xl border border-white/10">
-            <div className="text-center">
-              <div className="text-3xl font-black text-emerald-400 flex items-center justify-center gap-1.5">
-                <Users className="w-6 h-6 text-emerald-400" />
-                <span>{liveCount}</span>
-              </div>
-              <span className="text-[11px] font-bold text-slate-300 uppercase tracking-wider">Active Visitors Now</span>
-            </div>
-            <div className="h-10 w-px bg-white/20" />
-            <div className="text-center">
-              <div className="text-2xl font-black text-indigo-300">{summary.totalPageviews}</div>
-              <span className="text-[11px] font-bold text-slate-300 uppercase tracking-wider">Total Real Pageviews</span>
+          {/* Time Range Filter Switcher */}
+          <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 relative z-10">
+            <span className="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+              <Calendar className="w-4 h-4 text-indigo-400" /> Time Interval Filter:
+            </span>
+
+            <div className="flex flex-wrap items-center gap-1.5 bg-white/10 p-1 rounded-2xl border border-white/10">
+              {[
+                { id: 'hour', label: 'Last 1 Hour', count: summary.viewsLastHour },
+                { id: 'today', label: 'Today (24h)', count: summary.viewsToday },
+                { id: 'month', label: 'This Month', count: summary.viewsThisMonth },
+                { id: 'year', label: 'This Year', count: summary.viewsThisYear },
+                { id: 'all', label: 'All-Time Total', count: summary.totalPageviews },
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setSelectedTimeRange(tab.id as any)}
+                  className={`px-3.5 py-1.5 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1.5 ${
+                    selectedTimeRange === tab.id
+                      ? 'bg-indigo-600 text-white shadow-md'
+                      : 'text-slate-300 hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  <span>{tab.label}</span>
+                  <span className="px-1.5 py-0.2 rounded-full bg-white/20 text-[10px]">{tab.count}</span>
+                </button>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Metric Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="p-5 bg-white border border-slate-200/80 rounded-2xl shadow-xs space-y-2">
-            <div className="flex items-center justify-between text-slate-500">
-              <span className="text-xs font-extrabold uppercase tracking-wider">Total Pageviews</span>
-              <Eye className="w-4 h-4 text-indigo-600" />
-            </div>
+        {/* 5-Metric At-A-Glance Breakdown Row */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="p-4 bg-white border border-slate-200/80 rounded-2xl shadow-xs space-y-1">
+            <span className="text-[11px] font-extrabold uppercase text-slate-400 flex items-center gap-1">
+              <Clock className="w-3.5 h-3.5 text-indigo-500" /> Last 1 Hour
+            </span>
+            <div className="text-2xl font-black text-slate-900">{summary.viewsLastHour}</div>
+            <p className="text-[10px] font-bold text-emerald-600">Live Traffic Stream</p>
+          </div>
+
+          <div className="p-4 bg-white border border-slate-200/80 rounded-2xl shadow-xs space-y-1">
+            <span className="text-[11px] font-extrabold uppercase text-slate-400 flex items-center gap-1">
+              <Calendar className="w-3.5 h-3.5 text-sky-500" /> Views Today
+            </span>
+            <div className="text-2xl font-black text-slate-900">{summary.viewsToday}</div>
+            <p className="text-[10px] font-bold text-sky-600">Last 24 Hours</p>
+          </div>
+
+          <div className="p-4 bg-white border border-slate-200/80 rounded-2xl shadow-xs space-y-1">
+            <span className="text-[11px] font-extrabold uppercase text-slate-400 flex items-center gap-1">
+              <BarChart3 className="w-3.5 h-3.5 text-emerald-500" /> This Month
+            </span>
+            <div className="text-2xl font-black text-slate-900">{summary.viewsThisMonth}</div>
+            <p className="text-[10px] font-bold text-slate-500">Current Month Total</p>
+          </div>
+
+          <div className="p-4 bg-white border border-slate-200/80 rounded-2xl shadow-xs space-y-1">
+            <span className="text-[11px] font-extrabold uppercase text-slate-400 flex items-center gap-1">
+              <Globe className="w-3.5 h-3.5 text-purple-500" /> This Year
+            </span>
+            <div className="text-2xl font-black text-slate-900">{summary.viewsThisYear}</div>
+            <p className="text-[10px] font-bold text-purple-600">Annual Pageviews</p>
+          </div>
+
+          <div className="p-4 bg-white border border-slate-200/80 rounded-2xl shadow-xs space-y-1 col-span-2 sm:col-span-1">
+            <span className="text-[11px] font-extrabold uppercase text-slate-400 flex items-center gap-1">
+              <Eye className="w-3.5 h-3.5 text-rose-500" /> All-Time Total
+            </span>
             <div className="text-2xl font-black text-slate-900">{summary.totalPageviews}</div>
-            <p className="text-[11px] text-slate-500 font-medium">Counted on Every Refresh & Navigation</p>
-          </div>
-
-          <div className="p-5 bg-white border border-slate-200/80 rounded-2xl shadow-xs space-y-2">
-            <div className="flex items-center justify-between text-slate-500">
-              <span className="text-xs font-extrabold uppercase tracking-wider">Unique Visitors</span>
-              <Users className="w-4 h-4 text-emerald-600" />
-            </div>
-            <div className="text-2xl font-black text-slate-900">{summary.uniqueVisitors}</div>
-            <p className="text-[11px] text-slate-500 font-medium">Distinct Visitor UUID Sessions</p>
-          </div>
-
-          <div className="p-5 bg-white border border-slate-200/80 rounded-2xl shadow-xs space-y-2">
-            <div className="flex items-center justify-between text-slate-500">
-              <span className="text-xs font-extrabold uppercase tracking-wider">Ad Impressions</span>
-              <DollarSign className="w-4 h-4 text-amber-600" />
-            </div>
-            <div className="text-2xl font-black text-slate-900">{summary.adImpressions}</div>
-            <p className="text-[11px] text-slate-500 font-medium">AdSense Unit Loads</p>
-          </div>
-
-          <div className="p-5 bg-white border border-slate-200/80 rounded-2xl shadow-xs space-y-2">
-            <div className="flex items-center justify-between text-slate-500">
-              <span className="text-xs font-extrabold uppercase tracking-wider">Tool Executions</span>
-              <Wrench className="w-4 h-4 text-violet-600" />
-            </div>
-            <div className="text-2xl font-black text-slate-900">{summary.totalToolExecutions}</div>
-            <p className="text-[11px] text-slate-500 font-medium">Real Execution Logs</p>
+            <p className="text-[10px] font-bold text-rose-600">Cumulative Pageviews</p>
           </div>
         </div>
 
-        {/* Google Adsense Linking & Status Overview */}
-        <div className="p-6 bg-white border border-slate-200/80 rounded-3xl shadow-sm space-y-6">
-          <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-            <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-amber-50 text-amber-600 border border-amber-100">
-                <DollarSign className="w-5 h-5" />
-              </div>
+        {/* Real-Time Hourly Traffic Bar Chart & Device Breakdown */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* Hourly Traffic Bar Chart */}
+          <div className="lg:col-span-7 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+            <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-lg font-black text-slate-900">Google AdSense Linking Status</h3>
-                <p className="text-xs text-slate-500 font-medium">Publisher ID & Ad Slots configuration overview.</p>
+                <h3 className="text-base font-black text-slate-900 flex items-center gap-2">
+                  <BarChart3 className="w-5 h-5 text-indigo-600" /> Hourly Traffic Breakdown
+                </h3>
+                <p className="text-xs text-slate-500 font-medium">Pageviews distribution across the last 12 hours.</p>
               </div>
-            </div>
 
-            <Link
-              href="/admin/ads"
-              className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs flex items-center gap-1.5 shadow-sm transition-all"
-            >
-              <Settings className="w-3.5 h-3.5" />
-              <span>Configure Ads Setup</span>
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/60 space-y-1">
-              <span className="text-[11px] font-extrabold uppercase text-slate-400">AdSense Publisher ID</span>
-              <p className="text-sm font-black text-slate-900 font-mono">{adsConfig.publisherId}</p>
-              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-600 pt-1">
-                <CheckCircle2 className="w-3 h-3" />
-                Script Tag Active
+              <span className="text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-xl">
+                Peak: {maxHourlyView} views/hr
               </span>
             </div>
 
-            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/60 space-y-1">
-              <span className="text-[11px] font-extrabold uppercase text-slate-400">Active Ad Placements</span>
-              <p className="text-sm font-black text-slate-900">
-                {[
-                  adsConfig.headerBannerEnabled,
-                  adsConfig.toolInFeedEnabled,
-                  adsConfig.sidebarEnabled,
-                  adsConfig.bottomStickyEnabled,
-                ].filter(Boolean).length} / 4 Enabled
-              </p>
-              <span className="text-[11px] text-slate-500 font-medium">Header, In-Feed, Sidebar, Sticky</span>
+            {/* Interactive Bar Chart Visualization */}
+            <div className="pt-4 flex items-end justify-between gap-2 h-44 border-b border-slate-100 pb-2 px-2">
+              {summary.hourlyTrends.map((item, idx) => {
+                const heightPct = Math.max(12, Math.round((item.views / maxHourlyView) * 100));
+                return (
+                  <div key={idx} className="flex-1 flex flex-col items-center gap-2 group relative">
+                    {/* Tooltip */}
+                    <div className="absolute -top-8 bg-slate-900 text-white text-[10px] font-bold px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-20">
+                      {item.views} views ({item.hour})
+                    </div>
+
+                    <div
+                      style={{ height: `${heightPct}%` }}
+                      className="w-full max-w-[32px] bg-gradient-to-t from-indigo-600 to-indigo-400 hover:from-indigo-700 hover:to-indigo-500 rounded-t-lg transition-all shadow-xs"
+                    />
+
+                    <span className="text-[10px] font-extrabold text-slate-400">{item.hour}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Device & Category Breakdown Cards */}
+          <div className="lg:col-span-5 space-y-6">
+            <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+              <h3 className="text-base font-black text-slate-900 flex items-center gap-2">
+                <PieChart className="w-5 h-5 text-indigo-600" /> Device Distribution
+              </h3>
+
+              <div className="space-y-3 pt-1">
+                <div className="space-y-1">
+                  <div className="flex justify-between text-xs font-bold text-slate-700">
+                    <span className="flex items-center gap-1.5">
+                      <Smartphone className="w-4 h-4 text-indigo-600" /> Mobile Devices
+                    </span>
+                    <span>{summary.mobilePercentage}%</span>
+                  </div>
+                  <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                    <div className="h-full bg-indigo-600 rounded-full" style={{ width: `${summary.mobilePercentage}%` }} />
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <div className="flex justify-between text-xs font-bold text-slate-700">
+                    <span className="flex items-center gap-1.5">
+                      <Monitor className="w-4 h-4 text-emerald-600" /> Desktop Browsers
+                    </span>
+                    <span>{summary.desktopPercentage}%</span>
+                  </div>
+                  <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                    <div className="h-full bg-emerald-600 rounded-full" style={{ width: `${summary.desktopPercentage}%` }} />
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <div className="flex justify-between text-xs font-bold text-slate-700">
+                    <span className="flex items-center gap-1.5">
+                      <Tablet className="w-4 h-4 text-purple-600" /> Tablets & iPads
+                    </span>
+                    <span>{summary.tabletPercentage}%</span>
+                  </div>
+                  <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                    <div className="h-full bg-purple-600 rounded-full" style={{ width: `${summary.tabletPercentage}%` }} />
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/60 space-y-1">
-              <span className="text-[11px] font-extrabold uppercase text-slate-400">ads.txt Sync Status</span>
-              <p className="text-sm font-black text-emerald-600 flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                Live & Verified (/ads.txt)
-              </p>
-              <Link href="/ads.txt" target="_blank" className="text-[11px] text-indigo-600 font-bold hover:underline inline-flex items-center gap-1 pt-0.5">
-                <span>View ads.txt File</span>
-                <ExternalLink className="w-3 h-3" />
-              </Link>
+            {/* Category Breakdown Card */}
+            <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+              <h3 className="text-base font-black text-slate-900 flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-indigo-600" /> Tool Category Distribution
+              </h3>
+
+              <div className="space-y-2.5">
+                {summary.categoryBreakdown.map((cat, idx) => (
+                  <div key={idx} className="p-3 bg-slate-50 rounded-2xl border border-slate-100 flex items-center justify-between text-xs font-extrabold">
+                    <div className="flex items-center gap-2">
+                      <span className="w-3 h-3 rounded-full shrink-0" style={{ backgroundColor: cat.color }} />
+                      <span className="text-slate-900">{cat.category}</span>
+                    </div>
+                    <span className="text-slate-600">{cat.count} pageviews</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Top Tools & Real-Time Stream */}
+        {/* Real Tool Executions & Live Stream */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <div className="lg:col-span-6 p-6 bg-white border border-slate-200/80 rounded-3xl shadow-sm space-y-4">
             <h3 className="text-base font-black text-slate-900 flex items-center gap-2">
@@ -290,7 +424,7 @@ export default function AdminDashboardPage() {
                 <p className="text-[11px]">When visitors open any tool page, live sessions will display here.</p>
               </div>
             ) : (
-              <div className="space-y-3">
+              <div className="space-y-3 max-h-72 overflow-y-auto pr-1">
                 {summary.recentVisits.map((visit, idx) => (
                   <div key={idx} className="p-3.5 bg-slate-50 rounded-2xl border border-slate-100 flex items-center justify-between text-xs">
                     <div className="space-y-0.5">
@@ -308,3 +442,4 @@ export default function AdminDashboardPage() {
     </div>
   );
 }
+
