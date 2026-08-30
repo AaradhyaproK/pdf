@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ShieldCheck, Heart, ExternalLink, Smartphone, Download, Sparkles } from 'lucide-react';
+import { ShieldCheck, Smartphone, Download } from 'lucide-react';
 
 export function Footer() {
   return (
@@ -114,21 +114,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-slate-200/80 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-          <p>© {new Date().getFullYear()} Aurea. All rights reserved. 100% Client-Side Computation.</p>
-          <div className="flex items-center gap-1.5 text-slate-500 font-medium">
-            <span>Crafted with</span>
-            <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500 inline" />
-            <span>by</span>
-            <a
-              href="https://snab.co.in/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-extrabold text-indigo-600 hover:text-indigo-700 underline flex items-center gap-0.5"
-            >
-              <span>SNAB</span>
-              <ExternalLink className="w-3 h-3" />
-            </a>
-          </div>
+          <p>© {new Date().getFullYear()} FileZenith. All rights reserved. 100% Client-Side Computation.</p>
         </div>
       </div>
     </footer>
