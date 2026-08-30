@@ -75,12 +75,12 @@ export function Navbar() {
         <Link href="/" className="flex items-center gap-2.5 group shrink-0">
           <img
             src="/1.png"
-            alt="Aurea Logo"
+            alt="FileZenith Logo"
             className="w-9 h-9 sm:w-10 sm:h-10 object-contain group-hover:scale-105 transition-transform"
           />
           <div className="flex flex-col">
             <span className="font-black text-lg sm:text-xl tracking-tight text-slate-900 leading-none">
-              Aurea
+              FileZenith
             </span>
             <span className="text-[10px] text-slate-500 font-medium tracking-wide">
               100% Client-Side Engine
@@ -259,26 +259,35 @@ export function Navbar() {
 
       {/* Mobile Touch-Friendly Drawer Menu */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-slate-200 bg-white p-4 space-y-4 shadow-xl max-h-[85vh] overflow-y-auto">
+        <div className="md:hidden border-t border-slate-200 bg-white p-4 space-y-4 shadow-2xl max-h-[85vh] overflow-y-auto">
           {/* Mobile Category Tabs */}
-          <div className="grid grid-cols-3 gap-1 p-1 bg-slate-100 rounded-2xl text-xs font-extrabold text-center">
+          <div className="grid grid-cols-3 gap-1.5 p-1.5 bg-slate-100/80 rounded-2xl text-xs font-black text-center border border-slate-200/60">
             <button
               onClick={() => setMobileTab('pdf')}
-              className={`py-2 rounded-xl transition-all ${mobileTab === 'pdf' ? 'bg-rose-600 text-white shadow' : 'text-slate-600'}`}
+              className={`py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 ${
+                mobileTab === 'pdf' ? 'bg-rose-600 text-white shadow-md' : 'text-slate-700 hover:bg-slate-200/60'
+              }`}
             >
-              PDF
+              <FileText className="w-3.5 h-3.5" />
+              <span>PDF</span>
             </button>
             <button
               onClick={() => setMobileTab('image')}
-              className={`py-2 rounded-xl transition-all ${mobileTab === 'image' ? 'bg-sky-600 text-white shadow' : 'text-slate-600'}`}
+              className={`py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 ${
+                mobileTab === 'image' ? 'bg-sky-600 text-white shadow-md' : 'text-slate-700 hover:bg-slate-200/60'
+              }`}
             >
-              Image
+              <ImageIcon className="w-3.5 h-3.5" />
+              <span>Image</span>
             </button>
             <button
               onClick={() => setMobileTab('utility')}
-              className={`py-2 rounded-xl transition-all ${mobileTab === 'utility' ? 'bg-emerald-600 text-white shadow' : 'text-slate-600'}`}
+              className={`py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 ${
+                mobileTab === 'utility' ? 'bg-emerald-600 text-white shadow-md' : 'text-slate-700 hover:bg-slate-200/60'
+              }`}
             >
-              Utility
+              <Wrench className="w-3.5 h-3.5" />
+              <span>Utility</span>
             </button>
           </div>
 
@@ -286,24 +295,38 @@ export function Navbar() {
           <div className="grid grid-cols-1 gap-2">
             {(mobileTab === 'pdf' ? PDF_TOOLS : mobileTab === 'image' ? IMAGE_TOOLS : UTILITY_TOOLS).map((tool) => {
               const Icon = tool.icon;
+              const iconStyle =
+                mobileTab === 'pdf'
+                  ? 'bg-rose-100 text-rose-700'
+                  : mobileTab === 'image'
+                  ? 'bg-sky-100 text-sky-700'
+                  : 'bg-emerald-100 text-emerald-700';
+
+              const badgeStyle =
+                mobileTab === 'pdf'
+                  ? 'bg-rose-50 text-rose-700 border-rose-200'
+                  : mobileTab === 'image'
+                  ? 'bg-sky-50 text-sky-700 border-sky-200'
+                  : 'bg-emerald-50 text-emerald-700 border-emerald-200';
+
               return (
                 <Link
                   key={tool.slug}
                   href={tool.slug}
                   onClick={() => setMobileOpen(false)}
-                  className="p-3 rounded-2xl bg-slate-50 hover:bg-slate-100 flex items-center justify-between border border-slate-200/80 active:scale-[0.99] transition-all"
+                  className="p-3.5 rounded-2xl bg-slate-50 hover:bg-slate-100 flex items-center justify-between border border-slate-200/80 active:scale-[0.99] transition-all"
                 >
                   <div className="flex items-center gap-3 min-w-0">
-                    <div className="p-2 rounded-xl bg-white shadow-sm text-slate-800 shrink-0">
-                      <Icon className="w-4 h-4 text-indigo-600" />
+                    <div className={`p-2.5 rounded-xl shadow-xs shrink-0 ${iconStyle}`}>
+                      <Icon className="w-4 h-4" />
                     </div>
                     <div className="min-w-0">
-                      <span className="text-xs font-extrabold text-slate-900 truncate block">{tool.name}</span>
-                      <p className="text-[11px] text-slate-500 truncate">{tool.desc}</p>
+                      <span className="text-xs font-black text-slate-900 truncate block">{tool.name}</span>
+                      <p className="text-[11px] text-slate-500 truncate mt-0.5">{tool.desc}</p>
                     </div>
                   </div>
                   {tool.badge && (
-                    <span className="text-[9px] font-black px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 shrink-0">
+                    <span className={`text-[9px] font-black px-2 py-0.5 rounded-full border shrink-0 ${badgeStyle}`}>
                       {tool.badge}
                     </span>
                   )}

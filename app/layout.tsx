@@ -11,21 +11,27 @@ import { Toaster } from 'sonner';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://aurea.co.in'),
-  title: 'Aurea - 100% Client-Side PDF, Image & Social Downloader Studio',
-  description: 'Compress PDF, merge documents, resize images, remove background, download YouTube & Instagram videos, generate QR codes 100% privately inside your browser.',
-  keywords: 'aurea, pdf compressor, merge pdf, resize image, remove background, youtube downloader, instagram reels downloader, qr generator, client-side web tools',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://filezenith.com'),
+  title: 'FileZenith - 100% Free Online PDF, Image & Utility Studio',
+  description: 'FileZenith is an all-in-one private online file studio. Compress PDF, edit documents, convert PNG to JPG, pics to PDF, remove background, and generate QR codes 100% privately inside your browser.',
+  keywords: 'filezenith, file zenith, pdf compressor, edit pdf online, merge pdf, pics to pdf, png to jpg, png to pdf, remove background, qr generator, client-side web tools',
   icons: {
     icon: '/1.png',
     shortcut: '/1.png',
     apple: '/1.png',
   },
   openGraph: {
-    title: 'Aurea - 100% Client-Side PDF, Image & Social Studio',
-    description: 'All-in-one private online tool suite. Zero server file uploads.',
-    siteName: 'Aurea',
+    title: 'FileZenith - 100% Free Online PDF, Image & Utility Studio',
+    description: 'All-in-one private online file tool suite. Zero server file uploads. 100% Free & Secure.',
+    siteName: 'FileZenith',
     type: 'website',
     images: [{ url: '/1.png' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'FileZenith - 100% Free Online PDF, Image & Utility Studio',
+    description: 'All-in-one private online file tool suite. Zero server file uploads.',
+    images: ['/1.png'],
   },
 };
 

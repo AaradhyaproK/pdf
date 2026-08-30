@@ -1,0 +1,21 @@
+{
+  "name": "FileZenith - 100% Free Online PDF, Image & Utility Studio",
+  "short_name": "FileZenith",
+  "description": "FileZenith is an all-in-one private online file studio. Compress PDF, edit documents, convert PNG to JPG, pics to PDF, remove background 100% privately.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {
+      "src": "/1.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/1.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

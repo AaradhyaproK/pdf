@@ -10,11 +10,12 @@ export function PrivacyBadge() {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-black hover:bg-emerald-100 transition-all cursor-pointer shadow-2xs"
+        className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[10px] sm:text-xs font-black hover:bg-emerald-100 transition-all cursor-pointer shadow-2xs shrink-0"
         title="100% Free • No Login Required • Zero Server Upload Privacy"
       >
-        <ShieldCheck className="w-4 h-4 text-emerald-600 animate-pulse" />
-        <span>100% Free • No Login • Secure</span>
+        <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-600 animate-pulse shrink-0" />
+        <span className="hidden sm:inline">100% Free • No Login • Secure</span>
+        <span className="sm:hidden">100% Free • Secure</span>
       </button>
 
       {isOpen && (
