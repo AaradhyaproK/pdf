@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import Script from 'next/script';
+import Link from 'next/link';
 import { SEO_REGISTRY, generateToolSchemas } from '@/lib/seo-config';
-import { ChevronDown, CheckCircle2, Cpu } from 'lucide-react';
+import { ChevronDown, CheckCircle2, Cpu, ArrowRight, Sparkles, FileText, Image as ImageIcon, Wrench } from 'lucide-react';
 
 export interface SEOContentProps {
   slug: string;
@@ -21,9 +22,31 @@ export function SEOContent({ slug }: SEOContentProps) {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
 
+  // Internal Link Recommendations per category
+  const relatedTools =
+    tool.category === 'pdf'
+      ? [
+          { name: 'Compress PDF Online (Under 200KB)', slug: '/pdf/compress-to-200kb', desc: 'Reduce PDF file size for portal submissions.' },
+          { name: 'Merge PDF Files Free', slug: '/pdf/merge', desc: 'Combine multiple PDF documents into one.' },
+          { name: 'Convert PDF to Image (JPG/PNG)', slug: '/pdf/to-image', desc: 'Save PDF pages as high-resolution images.' },
+          { name: 'Interactive PDF Editor', slug: '/pdf/edit', desc: 'Add text, whiteout content, and draw annotations.' },
+        ]
+      : tool.category === 'image'
+      ? [
+          { name: 'Convert PNG to JPG Online', slug: '/image/png-to-jpg', desc: 'Bulk convert PNG images to JPG with custom quality.' },
+          { name: 'Turn Pics to PDF Document', slug: '/image/pics-to-pdf', desc: 'Combine photos, scans, and receipts into PDF.' },
+          { name: 'PNG to PDF Converter', slug: '/image/png-to-pdf', desc: 'Save PNG pictures directly as structured PDF.' },
+          { name: 'AI Image Background Remover', slug: '/image/remove-background', desc: 'Isolate subjects and export transparent PNG cutouts.' },
+        ]
+      : [
+          { name: 'Free Vector QR Code Generator', slug: '/utility/qr-generator', desc: 'Create SVG/PNG QR codes with custom logos.' },
+          { name: 'Word Counter & Density Analyzer', slug: '/utility/word-counter', desc: 'Count words, characters, reading speed, and SEO keywords.' },
+          { name: 'JSON Formatter & CSV Converter', slug: '/utility/json-formatter', desc: 'Validate, format, and convert JSON arrays to CSV/YAML.' },
+        ];
+
   return (
     <div className="w-full space-y-12 mt-16 pt-12 border-t border-slate-200 text-slate-700">
-      {/* Inject JSON-LD Schemas */}
+      {/* Inject Structured Data JSON-LD Schemas */}
       {schemas.map((schema, idx) => (
         <Script
           key={idx}
@@ -33,6 +56,22 @@ export function SEOContent({ slug }: SEOContentProps) {
         />
       ))}
 
+      {/* 150+ Word Tool Overview & Benefits */}
+      <section className="space-y-4 bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-8 shadow-xs">
+        <div className="flex items-center gap-2">
+          <Sparkles className="w-5 h-5 text-indigo-600" />
+          <h2 className="text-xl sm:text-2xl font-black text-slate-900">
+            About {tool.title}
+          </h2>
+        </div>
+        <p className="text-sm text-slate-600 leading-relaxed font-medium">
+          {tool.description} FileZenith provides a 100% free, browser-native solution engineered specifically for office professionals, students, researchers, and freelancers who demand maximum document processing speed and absolute data privacy.
+        </p>
+        <p className="text-sm text-slate-600 leading-relaxed font-medium">
+          Unlike traditional online file converters that require you to upload confidential documents to remote cloud servers, FileZenith processes every document locally using client-side WebAssembly binaries inside your web browser’s memory. This means your files never leave your computer or phone, eliminating all cybersecurity risks while delivering zero-latency performance with no daily file conversion caps.
+        </p>
+      </section>
+
       {/* How-To Step-by-Step Guide */}
       <section className="space-y-6">
         <div className="text-center max-w-2xl mx-auto space-y-2">
@@ -40,7 +79,7 @@ export function SEOContent({ slug }: SEOContentProps) {
             How to Use {tool.title}
           </h2>
           <p className="text-sm text-slate-500">
-            Follow these 3 simple steps to complete your task directly in your browser with zero server uploads.
+            Follow these 3 simple steps to complete your task directly in your browser with zero server file uploads.
           </p>
         </div>
 
@@ -69,10 +108,10 @@ export function SEOContent({ slug }: SEOContentProps) {
         <section className="space-y-6">
           <div className="text-center max-w-2xl mx-auto space-y-2">
             <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
-              Why Choose OmniTool Client-Side Engine?
+              Why Choose FileZenith Client-Side Engine?
             </h2>
             <p className="text-sm text-slate-500">
-              See how OmniTool browser WebAssembly compares against cloud PDF converters.
+              See how FileZenith browser WebAssembly compares against standard cloud PDF converters.
             </p>
           </div>
 
@@ -83,10 +122,10 @@ export function SEOContent({ slug }: SEOContentProps) {
                   <th className="p-4 font-bold text-slate-900">Feature</th>
                   <th className="p-4 font-bold text-indigo-700 flex items-center gap-1.5">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                    OmniTool Suite
+                    FileZenith Engine
                   </th>
                   <th className="p-4 font-bold text-slate-500">
-                    Standard Cloud Tools
+                    Standard Cloud Converters
                   </th>
                 </tr>
               </thead>
@@ -119,11 +158,11 @@ export function SEOContent({ slug }: SEOContentProps) {
           <h3 className="text-xl font-bold text-slate-900">100% Client-Side Browser Architecture</h3>
         </div>
         <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-3xl">
-          Unlike traditional web tools that upload your sensitive documents to remote servers over the internet, OmniTool Suite uses compiled <strong className="text-indigo-900 font-bold">WebAssembly (Wasm)</strong> binaries and HTML5 Canvas APIs inside background Web Workers. This guarantees absolute data privacy, instantaneous zero-latency conversions, and offline capability.
+          Unlike traditional web tools that upload your sensitive documents to remote servers over the internet, FileZenith uses compiled <strong className="text-indigo-900 font-bold">WebAssembly (Wasm)</strong> binaries and HTML5 Canvas APIs inside background Web Workers. This guarantees absolute data privacy, instantaneous zero-latency conversions, and offline capability.
         </p>
       </section>
 
-      {/* Frequently Asked Questions */}
+      {/* Frequently Asked Questions (People Also Ask Targeted) */}
       <section className="space-y-6">
         <div className="text-center max-w-2xl mx-auto space-y-2">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
@@ -144,7 +183,7 @@ export function SEOContent({ slug }: SEOContentProps) {
               >
                 <button
                   onClick={() => toggleFaq(idx)}
-                  className="w-full p-4 sm:p-5 flex items-center justify-between text-left font-semibold text-slate-900 hover:text-indigo-600 transition-colors"
+                  className="w-full p-4 sm:p-5 flex items-center justify-between text-left font-semibold text-slate-900 hover:text-indigo-600 transition-colors cursor-pointer"
                 >
                   <span>{faq.question}</span>
                   <ChevronDown
@@ -162,6 +201,41 @@ export function SEOContent({ slug }: SEOContentProps) {
               </div>
             );
           })}
+        </div>
+      </section>
+
+      {/* Related Tools Internal Links Section */}
+      <section className="space-y-6 pt-4">
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl sm:text-2xl font-black text-slate-900">
+            Explore Related FileZenith Tools
+          </h2>
+          <Link href="/" className="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1">
+            <span>View All Tools</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {relatedTools.map((rel, idx) => (
+            <Link
+              key={idx}
+              href={rel.slug}
+              className="p-5 bg-white border border-slate-200/90 rounded-2xl shadow-xs hover:border-indigo-300 hover:shadow-md transition-all group flex flex-col justify-between"
+            >
+              <div className="space-y-2">
+                <span className="text-xs font-extrabold text-indigo-700 group-hover:underline block">
+                  {rel.name}
+                </span>
+                <p className="text-[11px] text-slate-500 font-medium leading-relaxed">
+                  {rel.desc}
+                </p>
+              </div>
+              <div className="pt-3 flex items-center text-[11px] font-bold text-slate-400 group-hover:text-indigo-600">
+                <span>Use Tool Now &rarr;</span>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
     </div>

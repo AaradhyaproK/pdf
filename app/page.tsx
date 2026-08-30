@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Script from 'next/script';
 import { PrivacyBadge } from '@/components/PrivacyBadge';
 import { AdSlot } from '@/components/AdSlot';
 import {
@@ -22,6 +23,8 @@ import {
   ShieldCheck,
   Camera,
   FileImage,
+  HelpCircle,
+  Lock,
 } from 'lucide-react';
 
 const TOOLS = [
@@ -90,6 +93,30 @@ const TOOLS = [
     color: 'bg-rose-500 text-white',
     badgeStyle: 'bg-purple-50 text-purple-700 border-purple-200',
   },
+  {
+    category: 'pdf',
+    name: 'Watermark PDF',
+    slug: '/pdf/watermark',
+    desc: 'Add custom text or image watermarks to PDF pages.',
+    icon: FileText,
+    color: 'bg-rose-500 text-white',
+  },
+  {
+    category: 'pdf',
+    name: 'Password Protect PDF',
+    slug: '/pdf/protect',
+    desc: 'Encrypt PDF files with passwords and user permissions.',
+    icon: Lock,
+    color: 'bg-rose-500 text-white',
+  },
+  {
+    category: 'pdf',
+    name: 'PDF to High-Res JPG/PNG',
+    slug: '/pdf/to-image',
+    desc: 'Convert PDF document pages into high-resolution images.',
+    icon: FileImage,
+    color: 'bg-rose-500 text-white',
+  },
 
   // Image Studio
   {
@@ -98,53 +125,75 @@ const TOOLS = [
     slug: '/image/pics-to-pdf',
     desc: 'Turn photos, camera pictures, receipts, and scans into a structured PDF document.',
     icon: Camera,
-    badge: 'Popular',
-    color: 'bg-sky-500 text-white',
-    badgeStyle: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-  },
-  {
-    category: 'image',
-    name: 'PNG to JPG Converter',
-    slug: '/image/png-to-jpg',
-    desc: 'Convert single or bulk PNG images to JPG with custom quality & solid background color.',
-    icon: FileImage,
-    badge: 'Bulk',
-    color: 'bg-sky-500 text-white',
-    badgeStyle: 'bg-amber-50 text-amber-700 border-amber-200',
-  },
-  {
-    category: 'image',
-    name: 'PNG to PDF Converter',
-    slug: '/image/png-to-pdf',
-    desc: 'Combine multiple PNG images into one organized PDF document with custom margins.',
-    icon: FileText,
     badge: 'High SEO',
     color: 'bg-sky-500 text-white',
     badgeStyle: 'bg-sky-50 text-sky-700 border-sky-200',
   },
   {
     category: 'image',
-    name: 'JPG to PNG Converter',
+    name: 'Convert PNG to JPG',
+    slug: '/image/png-to-jpg',
+    desc: 'Bulk convert PNG images to JPG format with custom quality & solid background.',
+    icon: ImageIcon,
+    badge: 'High SEO',
+    color: 'bg-sky-500 text-white',
+    badgeStyle: 'bg-sky-50 text-sky-700 border-sky-200',
+  },
+  {
+    category: 'image',
+    name: 'PNG to PDF Converter',
+    slug: '/image/png-to-pdf',
+    desc: 'Convert PNG images directly into a PDF document with custom margins.',
+    icon: FileText,
+    badge: 'Popular',
+    color: 'bg-sky-500 text-white',
+    badgeStyle: 'bg-sky-50 text-sky-700 border-sky-200',
+  },
+  {
+    category: 'image',
+    name: 'Convert JPG to PNG',
     slug: '/image/jpg-to-png',
-    desc: 'Convert JPG photos to high-resolution lossless PNG format online.',
-    icon: FileImage,
+    desc: 'Convert JPG/JPEG images to high-quality lossless PNG format online.',
+    icon: ImageIcon,
     color: 'bg-sky-500 text-white',
   },
   {
     category: 'image',
     name: 'Compress Image (Target KB)',
     slug: '/image/compress',
-    desc: 'Target exact file sizes (<20KB, <50KB, <100KB) or percentage scaling.',
-    icon: ImageIcon,
-    badge: 'Target KB',
+    desc: 'Set custom target sizes (e.g. <20KB, <50KB) or percentage quality sliders.',
+    icon: Minimize2,
     color: 'bg-sky-500 text-white',
-    badgeStyle: 'bg-sky-50 text-sky-700 border-sky-200',
+  },
+  {
+    category: 'image',
+    name: 'Compress Image to 50KB',
+    slug: '/image/compress-to-50kb',
+    desc: 'Reduce photo size under 50KB for online forms and photo portals.',
+    icon: Minimize2,
+    color: 'bg-sky-500 text-white',
+  },
+  {
+    category: 'image',
+    name: 'Compress Image to 100KB',
+    slug: '/image/compress-to-100kb',
+    desc: 'Quickly resize photos under 100KB for identity cards and job uploads.',
+    icon: Minimize2,
+    color: 'bg-sky-500 text-white',
+  },
+  {
+    category: 'image',
+    name: 'Resize Image (Pixels & %)',
+    slug: '/image/resize',
+    desc: 'Resize JPG, PNG, and WebP images by exact pixels or percentage scaling.',
+    icon: ImageIcon,
+    color: 'bg-sky-500 text-white',
   },
   {
     category: 'image',
     name: 'Passport Photo Maker',
     slug: '/image/passport-maker',
-    desc: 'Crop photos to US, Schengen, UK, and India specs + 4x6 print grid.',
+    desc: 'Crop photos to US 2x2 in, Schengen 35x45 mm, UK, India standards.',
     icon: UserCheck,
     badge: 'Presets',
     color: 'bg-sky-500 text-white',
@@ -154,9 +203,9 @@ const TOOLS = [
     category: 'image',
     name: 'AI Background Remover',
     slug: '/image/remove-background',
-    desc: 'Isolate subjects and erase background with Erase/Restore brushes & 300% Zoom.',
+    desc: 'Isolate subjects and remove photo background 100% locally via WebAssembly.',
     icon: Scissors,
-    badge: 'Brush & Zoom',
+    badge: 'AI Wasm',
     color: 'bg-sky-500 text-white',
     badgeStyle: 'bg-purple-50 text-purple-700 border-purple-200',
   },
@@ -198,9 +247,77 @@ const TOOLS = [
   },
 ];
 
+const HOMEPAGE_FAQS = [
+  {
+    q: 'How is FileZenith different from online tools like iLovePDF or Smallpdf?',
+    a: 'Unlike traditional cloud converters like iLovePDF or Smallpdf that upload your private documents to remote servers over the internet, FileZenith processes 100% of your PDFs and images locally on your computer or phone using WebAssembly. Your confidential files never leave your device, eliminating data leak risks while offering unlimited free conversions without subscriptions.',
+  },
+  {
+    q: 'Is FileZenith really 100% free with no login or subscription fees?',
+    a: "Yes! FileZenith is 100% free forever. You don't need to sign up, log in, enter a credit card, or pay any subscription fees to access all 41 PDF, image, and utility tools.",
+  },
+  {
+    q: 'Can I compress PDF files under 200KB for official government job applications?',
+    a: 'Yes! Our specialized PDF compression engine allows students and applicants in India and worldwide to shrink PDF files under 200KB or 50KB to meet strict portal requirements for government applications, passport forms, and college admissions.',
+  },
+  {
+    q: 'Are my uploaded documents stored on any server?',
+    a: "Never. FileZenith operates on a 100% Zero-Server architecture. Your files are converted inside your browser's RAM and CPU memory, making it the safest tool suite for legal documents, tax forms, and personal photos.",
+  },
+  {
+    q: 'Does FileZenith work on mobile phones and tablets?',
+    a: 'Yes! FileZenith works seamlessly across Android smartphones, iPhones, iPads, MacBooks, Windows PCs, and Linux devices using any modern browser.',
+  },
+];
+
+const JSON_LD_SCHEMAS = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'FileZenith',
+    url: 'https://filezenith.com',
+    description: '100% Free Online PDF, Image & Utility Studio. Zero Server File Uploads.',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: 'https://filezenith.com/?q={search_term_string}',
+      'query-input': 'required name=search_term_string',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'FileZenith',
+    url: 'https://filezenith.com',
+    logo: 'https://filezenith.com/1.png',
+    sameAs: ['https://filezenith.com'],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: HOMEPAGE_FAQS.map((faq) => ({
+      '@type': 'Question',
+      name: faq.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.a,
+      },
+    })),
+  },
+];
+
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-slate-50/70">
+      {/* Inject Homepage Structured Data JSON-LD Schemas */}
+      {JSON_LD_SCHEMAS.map((schema, idx) => (
+        <Script
+          key={idx}
+          id={`homepage-json-ld-${idx}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
+
       {/* Human-Designed Light Hero Banner */}
       <section className="relative overflow-hidden pt-16 pb-20 px-4 sm:px-6 lg:px-8 border-b border-slate-200/80 bg-white">
         <div className="max-w-5xl mx-auto text-center space-y-6 relative z-10">
@@ -213,11 +330,11 @@ export default function HomePage() {
           </div>
 
           <h1 className="text-4xl sm:text-6xl font-black text-slate-900 tracking-tight leading-none">
-            All-in-One <span className="bg-gradient-to-r from-indigo-600 via-rose-600 to-emerald-600 bg-clip-text text-transparent">Private PDF, Image & Utility</span> Studio
+            100% Free Online <span className="bg-gradient-to-r from-indigo-600 via-rose-600 to-emerald-600 bg-clip-text text-transparent">PDF, Image & Utility</span> Studio
           </h1>
 
-          <p className="text-base sm:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed font-medium">
-            Edit PDFs online, compress files, remove photo backgrounds with AI, resize images, and generate QR codes directly in your browser. <strong className="text-slate-900">100% Free • No Login Needed • Zero Server Uploads.</strong>
+          <p className="text-base sm:text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed font-medium">
+            FileZenith processes your PDFs, images, and documents 100% locally inside your web browser using client-side WebAssembly technology. Enjoy unlimited file conversions with zero server file uploads, no account registration, and total data privacy.
           </p>
 
           <div className="pt-2 flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs font-black text-slate-700">
@@ -260,7 +377,7 @@ export default function HomePage() {
                   PDF Studio
                 </h2>
                 <p className="text-xs text-slate-500 font-medium">
-                  Client-side PDF editor, compression, merging, splitting, OCR, and security tools
+                  Interactive editing, 200KB compression, merging, splitting & OCR
                 </p>
               </div>
             </div>
@@ -323,7 +440,7 @@ export default function HomePage() {
                   Image Studio
                 </h2>
                 <p className="text-xs text-slate-500 font-medium">
-                  Target KB image compression, passport cropper, AI background removal, and HEIC transcoding
+                  Pics to PDF, PNG to JPG, background removal, passport photos & compression
                 </p>
               </div>
             </div>
@@ -374,7 +491,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Daily Quick Utilities Section */}
+        {/* Daily Quick Utilities */}
         <div className="space-y-6">
           <div className="flex items-center justify-between border-b border-slate-200 pb-4">
             <div className="flex items-center gap-3">
@@ -434,6 +551,37 @@ export default function HomePage() {
                 </Link>
               );
             })}
+          </div>
+        </div>
+
+        {/* Homepage Google "People Also Ask" FAQ Section */}
+        <div className="p-8 bg-white border border-slate-200/90 rounded-3xl space-y-6 shadow-sm">
+          <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
+            <div className="p-2.5 rounded-2xl bg-indigo-50 text-indigo-600 border border-indigo-100">
+              <HelpCircle className="w-6 h-6" />
+            </div>
+            <div>
+              <h2 className="text-2xl font-black text-slate-900">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-xs text-slate-500 font-medium">
+                Everything you need to know about FileZenith privacy, zero-server architecture, and limits.
+              </p>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            {HOMEPAGE_FAQS.map((faq, idx) => (
+              <div key={idx} className="p-5 bg-slate-50 rounded-2xl border border-slate-200/80 space-y-2">
+                <h3 className="text-base font-extrabold text-slate-900 flex items-center gap-2">
+                  <span className="text-indigo-600">Q:</span>
+                  <span>{faq.q}</span>
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium pl-6">
+                  {faq.a}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

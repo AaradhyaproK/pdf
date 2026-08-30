@@ -15,42 +15,56 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   // --- PDF Studio ---
   '/pdf/edit': {
     slug: '/pdf/edit',
-    title: 'Interactive PDF Editor Online',
-    metaTitle: 'Edit PDF Online Free - Add Text, Whiteout, Draw & Sign | FileZenith',
-    description: 'Edit PDF documents online directly in your browser. Add text, whiteout/erase content, draw annotations, add images, and rotate pages 100% privately.',
-    keywords: ['edit pdf online', 'pdf editor free', 'add text to pdf', 'whiteout pdf', 'draw on pdf', 'client side pdf editor'],
+    title: 'Free Interactive Online PDF Editor',
+    metaTitle: 'Edit PDF Online Free - Add Text & Sign | FileZenith',
+    description: 'Edit PDF online free directly in your browser. Add text, erase content, draw annotations & sign documents 100% privately. Try FileZenith PDF Editor now!',
+    keywords: [
+      'edit pdf online',
+      'free online pdf editor no sign up',
+      'add text to pdf free online',
+      'whiteout text in pdf document online',
+      'sign pdf online free without adobe',
+      'edit pdf document privately no upload'
+    ],
     category: 'pdf',
     howToSteps: [
-      { title: 'Upload PDF Document', text: 'Drag and drop or select any PDF file to load into the visual editor.' },
-      { title: 'Use Editing Tools', text: 'Add custom text, whiteout unwanted sections, draw annotations, or add images.' },
-      { title: 'Apply Changes & Download', text: 'Click Download PDF to export your edited document instantly.' }
+      { title: 'Upload PDF Document', text: 'Drag and drop or select any PDF file to load into the visual interactive workspace.' },
+      { title: 'Use Editing & Whiteout Tools', text: 'Add custom text blocks, erase unwanted content with whiteout, draw annotations, or insert image signatures.' },
+      { title: 'Save & Download PDF', text: 'Click Download PDF to export your edited document instantly to your device memory.' }
     ],
     faqs: [
-      { question: 'Is this PDF Editor completely free?', answer: 'Yes! FileZenith PDF Editor is 100% free with no page limits, zero subscriptions, and no registration required.' },
-      { question: 'Are my PDF documents uploaded to a remote server?', answer: 'No! All text overlays, drawings, and whiteouts are rendered client-side in your browser memory.' },
-      { question: 'Can I whiteout or erase text on my PDF?', answer: 'Yes! Use the Whiteout tool to cover up sensitive or unwanted text cleanly.' },
-      { question: 'Can I add images, logos, or signatures to pages?', answer: 'Yes! Upload image stamps or draw signatures directly onto PDF pages.' },
-      { question: 'Is my data secure?', answer: '100% secure. Everything processes locally inside your browser.' }
+      { question: 'Can I edit text on a PDF file for free online?', answer: 'Yes! FileZenith allows you to add new text blocks, erase unwanted text using whiteout, and draw on any PDF document 100% free without installing software.' },
+      { question: 'Is it safe to edit confidential legal documents on FileZenith?', answer: 'Yes, 100%. FileZenith operates on a zero-server architecture. Your files are processed locally inside your web browser and are never uploaded or stored on external servers.' },
+      { question: 'Can I add a handwritten signature or image stamp to my PDF?', answer: 'Absolutely! You can draw your signature directly on screen using your mouse or finger, or upload an image stamp/signature to place anywhere on the document.' },
+      { question: 'How do I erase or whiteout text in a PDF document?', answer: 'Simply select the Whiteout tool from the toolbar and drag a box over the text or section you want to hide. It cleanly covers the content on pure white background.' },
+      { question: 'Does this online PDF editor work on mobile phones and tablets?', answer: 'Yes! FileZenith PDF Editor is fully responsive and works smoothly across Android phones, iPhones, iPads, MacBooks, and Windows PCs.' }
     ]
   },
   '/pdf/compress': {
     slug: '/pdf/compress',
-    title: 'Compress PDF Online (Zero Server Upload)',
-    metaTitle: 'Compress PDF Online Free - Reduce PDF File Size Client-Side | FileZenith',
-    description: 'Reduce PDF file size online without losing quality. 100% private client-side WebAssembly PDF compression. No file uploads to external servers.',
-    keywords: ['compress pdf', 'reduce pdf size', 'pdf compressor online', 'client side pdf compress', 'shrink pdf file'],
+    title: 'Smart Online PDF Compressor',
+    metaTitle: 'Compress PDF Free Online - Reduce File Size | FileZenith',
+    description: 'Compress PDF free online without quality loss. Reduce PDF file size 100% privately in browser with zero server uploads. Shrink your PDF file now!',
+    keywords: [
+      'compress pdf',
+      'compress pdf online free without losing quality',
+      'reduce pdf file size online free',
+      'pdf compressor no upload to server',
+      'shrink pdf size for email attachment',
+      'compress large pdf file fast'
+    ],
     category: 'pdf',
     howToSteps: [
-      { title: 'Upload PDF File', text: 'Select or drag & drop your PDF file into the secure compression box.' },
-      { title: 'Choose Compression Preset', text: 'Select Extreme Compression, Recommended Balance, or Low Compression.' },
-      { title: 'Download Compressed PDF', text: 'Click Compress PDF to process locally and save your optimized PDF instantly.' }
+      { title: 'Upload PDF Document', text: 'Select or drag and drop any large PDF file into the secure compression box.' },
+      { title: 'Select Compression Level', text: 'Choose Extreme Compression, Recommended Balance, or Minimal Compression.' },
+      { title: 'Download Reduced PDF', text: 'Click Compress PDF to process locally and save your optimized file immediately.' }
     ],
     faqs: [
-      { question: 'Is my PDF uploaded to any server?', answer: 'No. All PDF compression happens directly in your web browser using WebAssembly and Web Workers. Your files never leave your device.' },
-      { question: 'How much can I reduce my PDF size?', answer: 'Depending on embedded images and structural metadata, compression can reduce file size by up to 80% with recommended settings.' },
-      { question: 'Will image quality be affected?', answer: 'Recommended compression maintains visually crisp text and images while drastically stripping redundant font bytes and uncompressed streams.' },
-      { question: 'Is there a file size limit?', answer: 'Since compression uses your device memory directly, you can compress large files up to several hundred megabytes without server timeout limits.' },
-      { question: 'Is FileZenith PDF Compress completely free?', answer: 'Yes! FileZenith is 100% free with unlimited compressions and zero subscription or registration requirements.' }
+      { question: 'How do I compress a PDF file without losing quality?', answer: 'FileZenith targets redundant metadata and optimizes embedded images while keeping text crisp and clear, ensuring maximum compression with zero visual quality loss.' },
+      { question: 'Is my PDF document uploaded to any server during compression?', answer: 'No! All PDF compression runs 100% locally inside your web browser using WebAssembly binaries. Your files never leave your computer or phone.' },
+      { question: 'How much can I reduce my PDF file size?', answer: 'Depending on embedded photos and structural data, FileZenith can shrink your PDF file size by up to 80% with recommended settings.' },
+      { question: 'Is there a maximum file size limit for PDF compression?', answer: 'Since processing uses your device memory directly, you can compress large PDF documents up to several hundred megabytes without network timeouts.' },
+      { question: 'Is FileZenith PDF Compressor completely free?', answer: 'Yes! FileZenith is 100% free with unlimited conversions, zero registration requirements, and no credit card prompts.' }
     ],
     comparisonTable: [
       { feature: 'File Privacy', omnitool: '100% Client-Side (Zero Server)', standardCloud: 'Uploaded to Remote Servers' },
@@ -62,212 +76,282 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/pdf/compress-to-200kb': {
     slug: '/pdf/compress-to-200kb',
-    title: 'Compress PDF to 200KB Online (Client-Side)',
-    metaTitle: 'Compress PDF to 200KB Online Free | FileZenith',
-    description: 'Compress PDF to under 200KB for government forms, job applications, and portal uploads. Fast, client-side, 100% private.',
-    keywords: ['compress pdf to 200kb', 'reduce pdf size to 200kb', 'pdf size reducer under 200kb'],
+    title: 'Reduce PDF File Size Under 200KB Online',
+    metaTitle: 'Compress PDF to 200KB Free Online | FileZenith',
+    description: 'Compress PDF to 200KB free online for job & government forms. 100% private zero server uploads. Shrink your PDF file size under 200KB in seconds!',
+    keywords: [
+      'compress pdf to 200kb',
+      'reduce pdf size to 200kb online free',
+      'pdf compressor under 200kb for government portal',
+      'compress pdf to 200kb online without losing quality',
+      'shrink pdf file size under 200kb in mobile',
+      'free pdf size reducer below 200kb no upload'
+    ],
     category: 'pdf',
     howToSteps: [
-      { title: 'Select PDF', text: 'Choose the PDF document requiring reduction to 200KB or less.' },
-      { title: 'Set Target Threshold', text: 'The engine will auto-tune resolution and stream compression for 200KB target.' },
-      { title: 'Download File', text: 'Save your compliant, small PDF file.' }
+      { title: 'Select Your Document', text: 'Click Choose PDF File or drag and drop your PDF file into the upload workspace.' },
+      { title: 'Choose Target Preset', text: 'Select the Under 200KB preset or adjust the compression quality slider.' },
+      { title: 'Download Instantly', text: 'Click Compress PDF & Download to save your reduced PDF file directly to your device memory.' }
     ],
     faqs: [
-      { question: 'Can I compress scanned documents to 200KB?', answer: 'Yes! Image-heavy scanned PDFs will be re-sampled to hit target size thresholds cleanly.' },
-      { question: 'Why do portals require 200KB PDF files?', answer: 'Many official job portals, university applications, and government forms enforce a strict 200KB upload limit.' },
-      { question: 'Are files stored on your servers?', answer: 'Never. Everything is computed locally inside your web browser.' },
-      { question: 'Does this work on mobile devices?', answer: 'Yes, FileZenith works seamlessly on iOS, Android, macOS, Windows, and Linux browsers.' },
-      { question: 'Is registration required?', answer: 'No registration or credit card is needed.' }
+      { question: 'How can I compress a PDF file under 200KB for free?', answer: 'Simply open FileZenith’s Compress PDF to 200KB tool, drag and drop your PDF document, select the 200KB target preset, and click download. Your file is resized instantly in your browser without any cost.' },
+      { question: 'Will my signature and document text remain clear at 200KB?', answer: 'Yes. Our intelligent compression engine targets redundant metadata and heavy image layers while preserving the sharpness of text, official stamps, and handwritten signatures.' },
+      { question: 'Is it safe to compress confidential passport and tax PDFs on this site?', answer: 'Yes, 100%. FileZenith uses 100% client-side technology. Your file is never sent across the internet to any server, making it the safest tool available for sensitive documents.' },
+      { question: 'Why do government job and university portals enforce a 200KB PDF limit?', answer: 'Many official portals enforce strict 200KB limits to manage server storage and ensure fast processing of thousands of applicant forms.' },
+      { question: 'Does this 200KB PDF compressor work on mobile phones?', answer: 'Yes. FileZenith works smoothly on all Android smartphones, iPhones, iPads, Windows laptops, and MacBooks without installing any app.' }
     ]
   },
 
   '/pdf/merge': {
     slug: '/pdf/merge',
-    title: 'Merge PDF Files Online (100% Private)',
-    metaTitle: 'Merge PDF Files Online - Combine Multiple PDFs into One | FileZenith',
-    description: 'Combine multiple PDF documents into a single organized file directly in your browser. Reorder pages with visual drag-and-drop.',
-    keywords: ['merge pdf', 'combine pdf files', 'join pdf online', 'pdf merger client side'],
+    title: 'Combine Multiple PDF Files Online',
+    metaTitle: 'Merge PDF Files Free Online - Combine PDFs | FileZenith',
+    description: 'Merge PDF files free online in seconds. Combine multiple PDF documents into one single organized file 100% privately. Try FileZenith PDF Merger now!',
+    keywords: [
+      'merge pdf',
+      'merge pdf files free online',
+      'combine pdf files into one online',
+      'join pdf documents no upload',
+      'pdf merger online free without registration',
+      'combine multiple pdf pages fast'
+    ],
     category: 'pdf',
     howToSteps: [
-      { title: 'Upload Multiple PDFs', text: 'Drag and drop two or more PDF files into the merger dropzone.' },
-      { title: 'Arrange File Order', text: 'Reorder your files using drag handles or up/down sorting options.' },
-      { title: 'Combine & Download', text: 'Click Merge PDFs to generate and save your single consolidated document.' }
+      { title: 'Upload Multiple PDFs', text: 'Select or drag and drop two or more PDF documents into the file dropzone.' },
+      { title: 'Reorder Document Pages', text: 'Arrange your PDF files in your preferred sequence using visual drag-and-drop handles.' },
+      { title: 'Merge & Download', text: 'Click Merge PDFs to combine your files instantly and save the single compiled PDF.' }
     ],
     faqs: [
-      { question: 'How many PDF files can I merge at once?', answer: 'You can merge as many PDF files as your computer memory allows, with no arbitrary file count limits.' },
-      { question: 'Can I reorder pages before merging?', answer: 'Yes! Visual page reordering lets you drag, drop, and rearrange files and pages easily.' },
-      { question: 'Are merged PDFs encrypted during transit?', answer: 'No data is transmitted over the network; files are processed locally inside your browser memory.' },
-      { question: 'Does merging alter my original files?', answer: 'No, your original PDF files remain untouched on your hard drive.' },
-      { question: 'Can I merge password-protected PDFs?', answer: 'If you know the password, you can unlock the PDF locally before merging.' }
+      { question: 'How do I merge multiple PDF files into one for free?', answer: 'Simply select or drag and drop your PDF files into FileZenith’s PDF Merger, arrange them in your desired order, and click Merge PDFs to download your combined document instantly.' },
+      { question: 'Is it safe to merge confidential documents on FileZenith?', answer: 'Yes, 100%. FileZenith operates on a 100% zero-server architecture. Your files are combined locally in your web browser and are never uploaded or saved on external servers.' },
+      { question: 'Is there a limit on how many PDF files I can merge at once?', answer: 'No! Because processing uses your device memory directly, you can combine as many PDF files and pages as your browser can handle without daily limits.' },
+      { question: 'Will merging PDF files alter my original documents?', answer: 'No. Your original PDF files remain completely untouched on your computer or phone.' },
+      { question: 'Can I merge PDF files on Android or iPhone?', answer: 'Yes! FileZenith PDF Merger is fully responsive and works seamlessly across Android smartphones, iPhones, iPads, MacBooks, and Windows PCs.' }
     ]
   },
 
   '/pdf/split': {
     slug: '/pdf/split',
-    title: 'Split PDF Documents Online',
-    metaTitle: 'Split PDF Pages Online Free - Separate PDF Ranges | FileZenith',
-    description: 'Extract specific pages or page ranges from your PDF into standalone documents. 100% client-side security.',
-    keywords: ['split pdf', 'extract pdf pages', 'separate pdf pages', 'pdf splitter online'],
+    title: 'Separate & Extract PDF Pages Online',
+    metaTitle: 'Split PDF Pages Free Online - Extract Pages | FileZenith',
+    description: 'Split PDF pages free online in seconds. Extract specific page ranges or separate single PDF pages 100% privately. Try FileZenith PDF Splitter now!',
+    keywords: [
+      'split pdf',
+      'split pdf pages free online',
+      'extract pages from pdf file online',
+      'separate pdf pages no upload',
+      'pdf splitter online free without signup',
+      'break pdf into individual pages fast'
+    ],
     category: 'pdf',
     howToSteps: [
-      { title: 'Upload PDF Document', text: 'Select the PDF file you wish to split or extract pages from.' },
-      { title: 'Define Page Range', text: 'Enter specific page numbers (e.g. 1, 3, 5-10) or choose to split every page.' },
-      { title: 'Extract & Download', text: 'Click Split PDF to save your selected pages instantly.' }
+      { title: 'Upload PDF Document', text: 'Select or drag and drop the PDF file you wish to split or extract pages from.' },
+      { title: 'Define Page Range', text: 'Enter specific page numbers (e.g. 1, 3, 5-10) or choose to split every page into single files.' },
+      { title: 'Extract & Download', text: 'Click Split PDF to save your selected pages or ZIP archive directly to your device.' }
     ],
     faqs: [
-      { question: 'How do I specify ranges to split?', answer: 'Use commas and hyphens like "1-3, 5, 8-12" to extract specific custom ranges.' },
-      { question: 'Can I extract single pages into separate PDFs?', answer: 'Yes, you can extract individual pages into standalone single-page PDF files.' },
-      { question: 'Is my sensitive financial or legal PDF safe?', answer: 'Extremely safe! Because processing is 100% client-side, your document data never hits remote servers.' },
-      { question: 'Do extracted pages keep bookmarks and links?', answer: 'Yes, original page layout, fonts, vector text, and hyperlinks are preserved.' },
-      { question: 'Is there a daily limit?', answer: 'No daily limits or restrictions.' }
+      { question: 'How do I split specific pages from a PDF file for free?', answer: 'Simply upload your document to FileZenith’s PDF Splitter, type the page numbers or ranges you want to extract (e.g. 1-3, 5), and click Split PDF to download your new file instantly.' },
+      { question: 'Is it safe to split confidential financial or tax PDFs on FileZenith?', answer: 'Yes, 100%. FileZenith operates on a zero-server architecture. Your files are processed locally inside your web browser’s memory and are never uploaded to any server.' },
+      { question: 'Can I extract single pages into separate PDF files?', answer: 'Yes! You can extract individual pages into standalone PDF files or download all pages in a single organized ZIP package.' },
+      { question: 'Will extracted PDF pages keep their original quality and links?', answer: 'Yes! All original vector fonts, high-resolution images, bookmarks, and internal links remain 100% intact.' },
+      { question: 'Does this online PDF splitter work on mobile phones?', answer: 'Yes! FileZenith PDF Splitter works smoothly on all Android smartphones, iPhones, iPads, MacBooks, and Windows laptops.' }
     ]
   },
 
   '/pdf/organize': {
     slug: '/pdf/organize',
-    title: 'Visual PDF Organizer (Rotate, Delete & Reorder)',
-    metaTitle: 'Organize PDF Pages - Rotate, Delete & Rearrange Pages | FileZenith',
-    description: 'Visual grid tool to rotate individual PDF pages, delete unwanted pages, and reorder document structure in real-time.',
-    keywords: ['organize pdf', 'rotate pdf pages', 'delete pdf pages', 'reorder pdf'],
+    title: 'Visual PDF Page Organizer & Rotator',
+    metaTitle: 'Organize PDF Pages Free Online - Rotate & Reorder | FileZenith',
+    description: 'Organize PDF pages free online in seconds. Rotate upside-down pages, delete unwanted pages, and reorder document structure 100% privately. Try FileZenith now!',
+    keywords: [
+      'organize pdf',
+      'organize pdf pages free online',
+      'rotate pdf pages online free',
+      'delete pages from pdf file no upload',
+      'reorder pdf pages drag and drop',
+      'rearrange pdf page order online'
+    ],
     category: 'pdf',
     howToSteps: [
-      { title: 'Upload PDF', text: 'Load your PDF file into the visual layout grid.' },
-      { title: 'Manipulate Pages', text: 'Hover over thumbnails to rotate 90°, delete, or drag to reorder.' },
-      { title: 'Save Organized PDF', text: 'Click Save PDF to build your new document structure.' }
+      { title: 'Upload PDF File', text: 'Select or drag and drop your PDF document into the visual grid organizer.' },
+      { title: 'Rotate, Delete & Rearrange', text: 'Click rotate buttons on sideways pages, trash unwanted pages, or drag cards to reorder.' },
+      { title: 'Save & Download PDF', text: 'Click Export PDF to compile and download your organized PDF file instantly.' }
     ],
     faqs: [
-      { question: 'Can I rotate sideways pages?', answer: 'Yes! Rotate any page individually 90°, 180°, or 270° clockwise.' },
-      { question: 'How do I delete unwanted blank pages?', answer: 'Hover over the page card in the visual grid and click the Delete bin icon.' },
-      { question: 'Can I reorder pages by dragging?', answer: 'Yes, click and drag page cards to set your exact desired sequence.' },
-      { question: 'Does this run client-side?', answer: 'Yes, all visual thumbnail rendering and canvas operations occur locally.' },
-      { question: 'What file format is exported?', answer: 'A standard clean PDF file containing only your chosen pages in selected orientations.' }
+      { question: 'How do I organize PDF pages for free online?', answer: 'Simply upload your PDF to FileZenith’s PDF Organizer grid, drag thumbnails to reorder pages, click rotate to fix sideways pages, delete blank pages, and click Export PDF to save.' },
+      { question: 'Is it safe to organize sensitive legal or financial PDFs on FileZenith?', answer: 'Yes, 100%. FileZenith operates on a 100% zero-server architecture. All thumbnail rendering and page reordering happen locally inside your web browser memory.' },
+      { question: 'Can I rotate individual sideways or upside-down pages?', answer: 'Yes! You can rotate any individual page 90°, 180°, or 270° clockwise with one click without altering the rest of the document.' },
+      { question: 'How do I delete unwanted blank pages from a PDF?', answer: 'Hover over the page card in the visual grid and click the red trash icon to delete that page instantly.' },
+      { question: 'Does this visual PDF page organizer work on mobile phones?', answer: 'Yes! FileZenith PDF Organizer is fully responsive and touch-friendly across Android phones, iPhones, iPads, MacBooks, and Windows laptops.' }
     ]
   },
 
   '/pdf/ocr': {
     slug: '/pdf/ocr',
-    title: 'Client-Side PDF OCR (Text Extraction)',
-    metaTitle: 'PDF OCR Online Free - Extract Text from Scanned PDFs | FileZenith',
-    description: 'Perform optical character recognition (OCR) on scanned PDF files using Web Worker Tesseract AI. Extract editable text directly.',
-    keywords: ['pdf ocr', 'extract text from pdf', 'scanned pdf to text', 'ocr pdf online'],
+    title: 'Extract Editable Text from Scanned PDFs',
+    metaTitle: 'PDF OCR Online Free - Extract Text from PDF | FileZenith',
+    description: 'PDF OCR online free in browser. Convert scanned PDF documents & images into editable text 100% privately with zero server file uploads. Try FileZenith OCR now!',
+    keywords: [
+      'pdf ocr',
+      'pdf ocr online free text extractor',
+      'extract text from scanned pdf online',
+      'convert scanned pdf to text no upload',
+      'ocr pdf online free without registration',
+      'image to editable text converter fast'
+    ],
     category: 'pdf',
     howToSteps: [
-      { title: 'Upload Scanned PDF', text: 'Select a scanned image-based PDF or document photo.' },
-      { title: 'Select OCR Language', text: 'Choose recognition language (English, Spanish, French, German, etc.).' },
-      { title: 'Run OCR & Copy Text', text: 'Process locally with Tesseract Wasm and copy or download your extracted plain text.' }
+      { title: 'Upload Scanned PDF', text: 'Select or drag and drop your scanned document, photo, or image-based PDF.' },
+      { title: 'Select Recognition Language', text: 'Choose your document language (English, Spanish, French, German, etc.).' },
+      { title: 'Extract & Copy Text', text: 'Click Run OCR to process locally with Tesseract AI and copy or save your editable text.' }
     ],
     faqs: [
-      { question: 'How does browser OCR work without a server?', answer: 'We run Tesseract.js compiled into WebAssembly inside background Web Workers directly in your browser memory.' },
-      { question: 'Is my confidential scanned document private?', answer: '100% private. Document pixels are analyzed by Wasm code inside your browser engine without network transit.' },
-      { question: 'What languages are supported?', answer: 'English, Spanish, French, German, Portuguese, Italian, and common Latin scripts.' },
-      { question: 'Can I copy extracted text directly to clipboard?', answer: 'Yes! Click "Copy to Clipboard" or download as a .txt file.' },
-      { question: 'What resolution works best for OCR?', answer: 'Documents scanned at 200-300 DPI yield near 99% character accuracy.' }
+      { question: 'How do I extract editable text from a scanned PDF for free?', answer: 'Simply upload your scanned PDF or photo document to FileZenith’s PDF OCR tool, select your language, and click Run OCR to copy or download your extracted plain text instantly.' },
+      { question: 'Is my confidential scanned document private during OCR processing?', answer: 'Yes, 100%. FileZenith runs Tesseract AI compiled into WebAssembly directly inside your browser memory. Your document pixels are never uploaded to any external server.' },
+      { question: 'Can I copy extracted PDF text directly to my clipboard?', answer: 'Yes! You can click the Copy Text button to paste extracted text into Microsoft Word or Google Docs, or download it as a plain .txt file.' },
+      { question: 'What scan resolution gives the best OCR accuracy?', answer: 'Scanned PDFs or photo documents taken at 200–300 DPI with clear lighting yield up to 99% text recognition accuracy.' },
+      { question: 'Does this PDF OCR tool work on mobile phones?', answer: 'Yes! FileZenith PDF OCR works seamlessly across Android smartphones, iPhones, iPads, MacBooks, and Windows laptops.' }
     ]
   },
 
   '/pdf/watermark': {
     slug: '/pdf/watermark',
-    title: 'Watermark PDF Online (Text & Image Overlay)',
-    metaTitle: 'Watermark PDF Online Free - Add Text & Logo Overlay | FileZenith',
-    description: 'Add custom text or image watermarks to your PDF documents. Customize opacity, position, font size, color, and rotation angle.',
-    keywords: ['watermark pdf', 'add text to pdf', 'logo watermark pdf', 'protect pdf watermark'],
+    title: 'Add Custom Text & Logo Watermarks to PDF',
+    metaTitle: 'Watermark PDF Free Online - Add Text & Logo | FileZenith',
+    description: 'Watermark PDF free online in browser. Stamp text or image logos on PDF pages 100% privately with zero server file uploads. Try FileZenith Watermark now!',
+    keywords: [
+      'watermark pdf',
+      'watermark pdf online free',
+      'add text watermark to pdf no upload',
+      'stamp logo on pdf pages online',
+      'watermark pdf free without registration',
+      'add confidential stamp to pdf fast'
+    ],
     category: 'pdf',
     howToSteps: [
-      { title: 'Upload PDF File', text: 'Select the PDF file you wish to protect with a watermark.' },
-      { title: 'Configure Watermark Options', text: 'Enter custom text or upload a PNG logo, set opacity, position, and rotation.' },
-      { title: 'Apply & Download', text: 'Stamp pages locally and download your watermarked PDF.' }
+      { title: 'Upload PDF Document', text: 'Select or drag and drop the PDF file you wish to stamp with a watermark.' },
+      { title: 'Customize Watermark Text or Logo', text: 'Type custom text (e.g. CONFIDENTIAL) or upload a logo, set opacity, position, and rotation angle.' },
+      { title: 'Stamp & Download PDF', text: 'Click Apply Watermark to stamp your document locally and save your protected PDF instantly.' }
     ],
     faqs: [
-      { question: 'Can I add confidential or draft stamps?', answer: 'Yes! Type custom text like "CONFIDENTIAL", "DRAFT", or your company name.' },
-      { question: 'Can I use transparent PNG logos?', answer: 'Yes, PNG logos with alpha transparency overlay cleanly onto PDF pages.' },
-      { question: 'Can I adjust watermark transparency?', answer: 'Yes, set opacity slider from 10% (subtle background) to 100% (solid overlay).' },
-      { question: 'Does watermarking apply to all pages?', answer: 'By default watermarks are stamped on every page in your document.' },
-      { question: 'Are files sent to remote servers?', answer: 'Never! Everything is drawn locally via client-side pdf-lib canvas hooks.' }
+      { question: 'How do I add a text or logo watermark to a PDF for free?', answer: 'Simply upload your document to FileZenith’s PDF Watermark tool, type your text or upload a transparent PNG logo, adjust font size and opacity, and click Apply Watermark to download your stamped PDF.' },
+      { question: 'Is my document private when adding a watermark on FileZenith?', answer: 'Yes, 100%. FileZenith operates on a 100% zero-server architecture. All text and logo overlays are stamped locally in your browser memory without network transit.' },
+      { question: 'Can I adjust watermark transparency and rotation angle?', answer: 'Yes! You can adjust opacity sliders from 10% (subtle background watermark) to 100% (solid text) and rotate text at 45° diagonal angles.' },
+      { question: 'Can I upload a transparent PNG company logo as a watermark?', answer: 'Yes! Transparent PNG logos render perfectly onto all PDF pages with clean edge blending.' },
+      { question: 'Does this PDF watermark tool work on mobile phones?', answer: 'Yes! FileZenith PDF Watermark works seamlessly across Android smartphones, iPhones, iPads, MacBooks, and Windows laptops.' }
     ]
   },
 
   '/pdf/protect': {
     slug: '/pdf/protect',
-    title: 'Password Protect PDF Online',
-    metaTitle: 'Protect PDF with Password Online Free | FileZenith',
-    description: 'Encrypt your PDF documents with passwords and custom user/owner permission restrictions locally using client-side encryption.',
-    keywords: ['protect pdf', 'encrypt pdf', 'password protect pdf online', 'secure pdf file'],
+    title: 'Encrypt PDF Files with Password Online',
+    metaTitle: 'Password Protect PDF Free Online - Encrypt PDF | FileZenith',
+    description: 'Password protect PDF free online in browser. Encrypt PDF files with 128-bit security 100% privately with zero server uploads. Protect your PDF now!',
+    keywords: [
+      'password protect pdf',
+      'password protect pdf free online',
+      'encrypt pdf file with password no upload',
+      'add password to pdf document online',
+      'secure pdf file free without registration',
+      'lock pdf document with password fast'
+    ],
     category: 'pdf',
     howToSteps: [
-      { title: 'Upload PDF Document', text: 'Select the PDF file you want to password protect.' },
-      { title: 'Set Secure Passwords', text: 'Enter an open password and confirm restriction permissions.' },
-      { title: 'Encrypt & Download', text: 'Apply standard 128-bit AES/RC4 client encryption and save.' }
+      { title: 'Upload PDF Document', text: 'Select or drag and drop the PDF file you wish to secure with password encryption.' },
+      { title: 'Enter Strong Password', text: 'Type your secure password and set custom permissions (disable printing, copying text, or editing).' },
+      { title: 'Encrypt & Download PDF', text: 'Click Protect PDF to apply client-side AES encryption and download your secure PDF file.' }
     ],
     faqs: [
-      { question: 'Is my encryption password stored anywhere?', answer: 'No! The password is used solely in browser memory to compute key digests for encryption.' },
-      { question: 'Will my password-protected file open in Adobe Reader?', answer: 'Yes, encrypted PDFs follow standard ISO 32000 PDF security specs.' },
-      { question: 'Can anyone intercept my password over Wi-Fi?', answer: 'No, because no data is sent over the internet or to server APIs.' },
-      { question: 'Can I set owner permissions like disabling printing?', answer: 'Yes, set permission flags for printing, copying text, or editing.' },
-      { question: 'Is this free?', answer: '100% free with no file limits.' }
+      { question: 'How do I password protect a PDF file for free online?', answer: 'Simply upload your PDF to FileZenith’s Password Protect PDF tool, enter your desired password, set restriction permissions, and click Protect PDF to download your encrypted file.' },
+      { question: 'Is my password or document saved on any server?', answer: 'Never! FileZenith uses 100% client-side encryption. Your password and PDF file are processed locally inside your browser memory and are never transmitted over the internet.' },
+      { question: 'Will my password-protected PDF open in Adobe Reader and phone apps?', answer: 'Yes! FileZenith uses standard ISO-compliant 128-bit PDF encryption supported by Adobe Acrobat, Apple Preview, Google Chrome, and mobile PDF readers.' },
+      { question: 'Can I set owner permissions like blocking text copying or printing?', answer: 'Yes! You can set permission flags to restrict unauthorized users from printing, editing, or copying text from your PDF.' },
+      { question: 'Does this PDF password protection tool work on mobile devices?', answer: 'Yes! FileZenith Password Protect PDF works smoothly across Android smartphones, iPhones, iPads, MacBooks, and Windows laptops.' }
     ]
   },
 
   '/pdf/to-image': {
     slug: '/pdf/to-image',
-    title: 'Convert PDF to High-Res JPG/PNG Images',
-    metaTitle: 'PDF to Image Converter Free - Save PDF Pages as JPG/PNG | FileZenith',
-    description: 'Convert PDF document pages into high-resolution JPG or PNG images. Batch export all pages or download individual images.',
-    keywords: ['pdf to image', 'pdf to jpg', 'pdf to png', 'convert pdf to photo'],
+    title: 'Convert PDF Pages to High-Res JPG or PNG',
+    metaTitle: 'Convert PDF to JPG/PNG Free Online - PDF to Image | FileZenith',
+    description: 'Convert PDF to JPG or PNG free online in seconds. Export PDF pages into high-resolution images 100% privately with zero server file uploads. Try FileZenith now!',
+    keywords: [
+      'pdf to jpg',
+      'convert pdf to jpg free online',
+      'pdf to png converter high resolution',
+      'save pdf pages as images no upload',
+      'convert pdf to photo free online',
+      'turn pdf into jpg images fast'
+    ],
     category: 'pdf',
     howToSteps: [
-      { title: 'Upload PDF', text: 'Select the PDF file you want to render as images.' },
-      { title: 'Choose Image Format & DPI', text: 'Select PNG (high quality) or JPG (smaller file size) and DPI scale.' },
-      { title: 'Download Images', text: 'Download single page images or a ZIP archive containing all pages.' }
+      { title: 'Upload PDF Document', text: 'Select or drag and drop your PDF file into the converter dropzone.' },
+      { title: 'Choose Format (JPG or PNG)', text: 'Select high-quality PNG for sharp text or lightweight JPG format for smaller file sizes.' },
+      { title: 'Convert & Download Images', text: 'Click Convert to Image to download single page images or a ZIP archive containing all pages.' }
     ],
     faqs: [
-      { question: 'What image formats can I export to?', answer: 'Choose between high-clarity PNG images or lightweight JPG formats.' },
-      { question: 'How is page quality preserved?', answer: 'We render pages using PDF.js vector canvas at 2x-3x high DPI scale.' },
-      { question: 'Can I download all pages as a ZIP file?', answer: 'Yes! Batch export packs all page images into a single zip download.' },
-      { question: 'Are document pages uploaded to a server?', answer: 'No! Rendering is done via HTML5 Canvas in your client browser.' },
-      { question: 'Does it work for multi-page documents?', answer: 'Yes, render multi-page documents effortlessly.' }
+      { question: 'How do I convert a PDF file to JPG or PNG images for free?', answer: 'Simply upload your PDF to FileZenith’s PDF to Image tool, select your preferred image format (JPG or PNG), and click Convert to Image to download your rendered photos instantly.' },
+      { question: 'Is my PDF document private when converting to images on FileZenith?', answer: 'Yes, 100%. FileZenith operates on a 100% zero-server architecture. All page rendering is computed locally inside your web browser’s memory using PDF.js vector canvas hooks.' },
+      { question: 'Can I download all converted PDF pages as a single ZIP file?', answer: 'Yes! You can download individual page images or click Download All as ZIP to save all converted pages in one organized package.' },
+      { question: 'Will the image quality remain sharp and readable?', answer: 'Yes! FileZenith renders PDF pages at 2x-3x high DPI scale to ensure text, graphics, and photos remain crisp and clear.' },
+      { question: 'Does this PDF to JPG converter work on mobile phones?', answer: 'Yes! FileZenith PDF to Image converter is fully responsive across Android smartphones, iPhones, iPads, MacBooks, and Windows laptops.' }
     ]
   },
 
   // --- Image Studio ---
   '/image/compress': {
     slug: '/image/compress',
-    title: 'Smart Image Compressor (Target KB & % Reduction)',
-    metaTitle: 'Compress Image Online Free - Reduce JPG/PNG Size in KB | FileZenith',
-    description: 'Compress JPG, PNG, and WebP images by setting custom target file sizes (e.g. <20KB, <50KB, <100KB) or percentage sliders.',
-    keywords: ['compress image', 'reduce image size kb', 'image compressor to 50kb', 'shrink photo size'],
+    title: 'Smart Online Image Size Compressor',
+    metaTitle: 'Compress Image Free Online - Reduce Photo Size KB | FileZenith',
+    description: 'Compress image free online in seconds. Reduce JPG, PNG & WebP photo size in KB 100% privately with zero server uploads. Shrink your photo size now!',
+    keywords: [
+      'compress image',
+      'compress image online free in kb',
+      'reduce image file size online free',
+      'photo compressor no upload to server',
+      'shrink image size for job application',
+      'compress jpg png photo fast'
+    ],
     category: 'image',
     howToSteps: [
-      { title: 'Upload Images', text: 'Drag and drop your photos into the compressor dropzone.' },
-      { title: 'Set Quality or Target KB', text: 'Use quality percentage slider or select precise target file size limits.' },
-      { title: 'Download Compressed Photo', text: 'Save your compressed images individually or batch download ZIP.' }
+      { title: 'Upload Photos & Images', text: 'Select or drag and drop your JPG, PNG, or WebP photos into the compressor dropzone.' },
+      { title: 'Set Quality & Target KB', text: 'Use the quality slider or choose exact target file size limits (50KB, 100KB, 200KB).' },
+      { title: 'Download Compressed Photo', text: 'Click Compress Image to save your optimized photo directly to your device memory.' }
     ],
     faqs: [
-      { question: 'How does Target KB compression work?', answer: 'Our engine runs binary search quality optimization on HTML5 canvas to hit your exact target size limit.' },
-      { question: 'What formats are supported?', answer: 'JPG, JPEG, PNG, WebP, and GIF.' },
-      { question: 'Can I compress images to under 50KB or 20KB?', answer: 'Yes, perfect for passport portals, visa applications, and student forms.' },
-      { question: 'Are images sent to remote servers?', answer: 'No, all compression executes inside client memory.' },
-      { question: 'Is batch compression supported?', answer: 'Yes! Upload multiple images at once and compress in bulk.' }
+      { question: 'How do I compress an image file size for free online?', answer: 'Simply upload your photo to FileZenith’s Image Compressor, choose your target quality slider or KB limit, and click Compress Image to download your resized photo instantly.' },
+      { question: 'Is my photo private when compressing images on FileZenith?', answer: 'Yes, 100%. FileZenith operates on a 100% zero-server architecture. All image compression runs locally inside your web browser using HTML5 Canvas binary search.' },
+      { question: 'Can I compress images to specific KB limits like 50KB or 100KB?', answer: 'Yes! Our smart engine automatically calculates optimal resolution and compression algorithms to hit exact KB thresholds for official portal uploads.' },
+      { question: 'Will compressing an image make my photo look blurry?', answer: 'No! FileZenith optimizes pixel density and strips unnecessary metadata while maintaining sharp facial details and visual clarity.' },
+      { question: 'Does this image compressor work on mobile phones?', answer: 'Yes! FileZenith Image Compressor is fully responsive and works smoothly across Android smartphones, iPhones, iPads, MacBooks, and Windows laptops.' }
     ]
   },
 
   '/image/compress-to-50kb': {
     slug: '/image/compress-to-50kb',
-    title: 'Compress Image to 50KB Online Free',
-    metaTitle: 'Compress Image to 50KB Online Free - Reduce Photo Size | FileZenith',
-    description: 'Compress JPG, PNG, and photos under 50KB for online application portals. Client-side, fast, zero server upload.',
-    keywords: ['compress image to 50kb', 'reduce photo size to 50kb', 'jpg compressor 50kb'],
+    title: 'Reduce Photo & Image Size Under 50KB Online',
+    metaTitle: 'Compress Image to 50KB Free Online | FileZenith',
+    description: 'Compress image to 50KB free online for job & government portal uploads. 100% private zero server uploads. Shrink your photo size under 50KB in seconds!',
+    keywords: [
+      'compress image to 50kb',
+      'reduce photo size to 50kb online free',
+      'jpg compressor under 50kb for government portal',
+      'compress photo to 50kb online without losing clarity',
+      'shrink image file size under 50kb in mobile',
+      'free photo size reducer below 50kb no upload'
+    ],
     category: 'image',
     howToSteps: [
-      { title: 'Select Photo', text: 'Choose the photo needing compression to under 50KB.' },
-      { title: 'Auto-Target 50KB', text: 'The engine automatically optimizes dimensions and compression level.' },
-      { title: 'Download Image', text: 'Save your 50KB compliant image.' }
+      { title: 'Select Passport Photo or Signature', text: 'Click Choose Image or drag and drop your photo into the compressor dropzone.' },
+      { title: 'Auto-Set 50KB Target Limit', text: 'Select the Under 50KB preset to automatically calculate pixel scaling and quality.' },
+      { title: 'Download Compliant Photo', text: 'Click Compress & Download to save your 50KB-compliant photo directly to your device.' }
     ],
     faqs: [
-      { question: 'Will my image look blurry at 50KB?', answer: 'Our intelligent canvas scaling maintains sharpness while meeting 50KB limits.' },
-      { question: 'Why use FileZenith for 50KB compression?', answer: 'Because it is 100% private, instant, and works offline inside your browser.' },
-      { question: 'Can I compress PNG images to 50KB?', answer: 'Yes, PNG files will be optimized or dynamically converted to JPG to hit 50KB.' },
-      { question: 'Are files saved on your servers?', answer: 'Never. Processing happens locally in your web browser.' },
-      { question: 'Is this free?', answer: 'Yes, 100% free with no limits.' }
+      { question: 'How can I compress an image file under 50KB for free?', answer: 'Simply upload your photo to FileZenith’s Compress Image to 50KB tool, select the 50KB preset, and click download. Your photo is resized instantly in your browser without any cost.' },
+      { question: 'Will my passport photo or signature stay clear at 50KB?', answer: 'Yes! Our intelligent engine scales dimensions and optimizes compression to maintain sharp face outlines, text clarity, and signature visibility.' },
+      { question: 'Is it safe to compress confidential passport and identity photos on this site?', answer: 'Yes, 100%. FileZenith uses 100% client-side technology. Your photo is never sent across the internet to any server, making it the safest tool available for private documents.' },
+      { question: 'Why do official government portals require photos under 50KB?', answer: 'Many recruitment and university portals enforce strict 50KB limits to manage database storage and ensure fast loading of thousands of applicant forms.' },
+      { question: 'Does this 50KB photo compressor work on mobile phones?', answer: 'Yes! FileZenith works smoothly on all Android smartphones, iPhones, iPads, Windows laptops, and MacBooks without installing any app.' }
     ]
   },
 
@@ -294,164 +378,225 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/image/resize': {
     slug: '/image/resize',
-    title: 'Batch Image Resizer (Pixels, % & Aspect Lock)',
-    metaTitle: 'Resize Image Online Free - Change Dimensions & Aspect Ratio | FileZenith',
-    description: 'Resize JPG, PNG, and WebP images by exact pixel dimensions (width/height) or percentage scaling. Lock aspect ratio.',
-    keywords: ['resize image', 'image resizer online', 'change image dimensions', 'crop photo pixels'],
+    title: 'Resize Image Dimensions in Pixels & Percentage',
+    metaTitle: 'Resize Image Free Online - Change Photo Dimensions | FileZenith',
+    description: 'Resize image free online in seconds. Change photo width and height in pixels or percentage 100% privately with zero server file uploads. Try FileZenith now!',
+    keywords: [
+      'resize image',
+      'resize image online free in pixels',
+      'change image width and height online',
+      'image resizer no upload to server',
+      'resize photo for online application form',
+      'crop photo pixels aspect ratio lock'
+    ],
     category: 'image',
     howToSteps: [
-      { title: 'Upload Photo', text: 'Drop your image into the resize workspace.' },
-      { title: 'Enter Dimensions', text: 'Specify target width and height in pixels or percentage, locking aspect ratio if desired.' },
-      { title: 'Resize & Export', text: 'Download resized photo in crisp resolution.' }
+      { title: 'Upload Photo or Image', text: 'Select or drag and drop your JPG, PNG, or WebP photo into the resizer workspace.' },
+      { title: 'Set Width & Height', text: 'Type your target width and height in pixels (or percentage) and toggle aspect ratio lock.' },
+      { title: 'Resize & Download Photo', text: 'Click Resize Image to resample your photo locally and save your new file instantly.' }
     ],
     faqs: [
-      { question: 'Can I maintain aspect ratio while resizing?', answer: 'Yes! Toggle the aspect ratio lock chain icon to automatically scale proportional height.' },
-      { question: 'Can I resize images by percentage?', answer: 'Yes, scale down by 50%, 25%, or upscale as needed.' },
-      { question: 'Does resizing reduce file size?', answer: 'Yes, scaling down pixel count significantly shrinks image byte size.' },
-      { question: 'Are images processed on external servers?', answer: 'No, all pixel resampling is executed on HTML5 Canvas in browser.' },
-      { question: 'What image types can I resize?', answer: 'JPG, PNG, WebP, GIF, and SVG.' }
+      { question: 'How do I resize an image in pixels for free online?', answer: 'Simply upload your photo to FileZenith’s Image Resizer, enter your target width and height in pixels (or percentage scaling), and click Resize Image to download.' },
+      { question: 'Is my photo private when changing image dimensions on FileZenith?', answer: 'Yes, 100%. FileZenith operates on a 100% zero-server architecture. All pixel resampling runs locally inside your browser memory using HTML5 Canvas.' },
+      { question: 'Can I maintain the original photo aspect ratio while resizing?', answer: 'Yes! You can lock the aspect ratio chain toggle to automatically calculate proportional height whenever you change photo width.' },
+      { question: 'Does resizing image dimensions reduce the overall file size in KB?', answer: 'Yes! Scaling down pixel dimensions (e.g. from 4000px to 1000px) significantly shrinks photo byte size for fast website and portal loading.' },
+      { question: 'Does this image resizer work on mobile phones?', answer: 'Yes! FileZenith Image Resizer works seamlessly across Android smartphones, iPhones, iPads, MacBooks, and Windows laptops.' }
     ]
   },
 
   '/image/passport-maker': {
     slug: '/image/passport-maker',
-    title: 'Passport & Visa Photo Maker (US, Schengen, UK, India)',
-    metaTitle: 'Passport Photo Maker Online Free - US, Schengen, UK, India Presets | FileZenith',
-    description: 'Crop photos to official passport and visa dimension standards (US 2x2 in, Schengen 35x45 mm, UK, India). Print grid layout.',
-    keywords: ['passport photo maker', 'visa photo cropper', 'us passport photo 2x2', 'schengen visa photo maker'],
+    title: 'Free Passport & Visa Photo Maker',
+    metaTitle: 'Passport Photo Maker Free Online - US, India, Schengen | FileZenith',
+    description: 'Passport photo maker free online in browser. Crop photos to official US, India, Schengen & UK passport size standards 100% privately. Try FileZenith now!',
+    keywords: [
+      'passport photo maker',
+      'passport photo maker free online',
+      'us passport photo 2x2 maker no upload',
+      'india passport photo maker 35x45mm',
+      'schengen visa photo creator free',
+      'create printable 4x6 passport photo sheet'
+    ],
     category: 'image',
     howToSteps: [
-      { title: 'Upload Portrait Photo', text: 'Select a clear front-facing portrait photo.' },
-      { title: 'Select Passport Preset', text: 'Choose US 2x2 inch, Schengen 35x45 mm, UK, or India specifications.' },
-      { title: 'Align & Crop', text: 'Position head/face inside guided outline and download single photo or 4x6 print sheet.' }
+      { title: 'Upload Front-Facing Portrait', text: 'Select or drag and drop a clear headshot photo into the crop workspace.' },
+      { title: 'Choose Country Standard Preset', text: 'Select US 2x2 in (600x600 px), India Passport (3.5x4.5 cm / 2x2 in), Schengen Visa, or UK specifications.' },
+      { title: 'Align & Download Photo', text: 'Align head inside biometric guides and click Download Single Photo or 4x6 Printable Grid Sheet.' }
     ],
     faqs: [
-      { question: 'What preset dimensions are available?', answer: 'US Passport (2x2 in / 600x600 px), Schengen Visa (35x45 mm), UK Passport (35x45 mm), India Passport (2x2 in / 51x51 mm).' },
-      { question: 'Can I generate a 4x6 print sheet with multiple passport photos?', answer: 'Yes! Export a standard 4x6 inch printable layout containing 6 individual passport photos.' },
-      { question: 'How do I ensure biometric compliance?', answer: 'Use visual head guide overlays to align eyes, chin, and top of head properly.' },
-      { question: 'Is my personal photo stored anywhere?', answer: 'No! Everything is rendered locally inside your browser canvas.' },
-      { question: 'Is this passport photo generator free?', answer: '100% free with unlimited photo exports.' }
+      { question: 'How do I create a passport size photo for free online?', answer: 'Simply upload your headshot to FileZenith’s Passport Photo Maker, select your country passport preset (US, India, Schengen, UK), align your face with the guide, and click download.' },
+      { question: 'Is my personal headshot photo kept private on FileZenith?', answer: 'Yes, 100%. FileZenith operates on a 100% zero-server architecture. All face alignment guides, background fills, and grid layouts are rendered locally inside your browser memory.' },
+      { question: 'What country passport presets are supported?', answer: 'We support US Passport (2x2 inches / 51x51 mm), India Passport (3.5x4.5 cm & 2x2 in), Schengen Visa (35x45 mm), UK Passport (35x45 mm), and custom dimensions.' },
+      { question: 'Can I print multiple passport photos on a 4x6 photo print sheet?', answer: 'Yes! You can generate a standard 4x6 inch printable photo layout containing 6 individual passport photos ready for instant wallet or studio printing.' },
+      { question: 'Does this passport photo creator work on mobile phone cameras?', answer: 'Yes! FileZenith Passport Photo Maker works seamlessly on Android phones, iPhones, iPads, MacBooks, and Windows laptops.' }
     ]
   },
 
   '/image/remove-background': {
     slug: '/image/remove-background',
-    title: 'AI Background Remover (100% Client-Side Wasm)',
-    metaTitle: 'Remove Background from Image Online Free - 100% Client-Side AI | FileZenith',
-    description: 'Automatically isolate subjects and remove background from photos using local WebAssembly AI. High precision cutout PNG.',
-    keywords: ['remove background', 'bg remover online', 'transparent background maker', 'client side ai bg remover'],
+    title: 'AI Image Background Remover (Transparent PNG)',
+    metaTitle: 'Remove Background from Image Free Online - AI | FileZenith',
+    description: 'Remove background from image free online in seconds. Isolate subjects & make PNG backgrounds transparent 100% privately with zero server uploads. Try FileZenith now!',
+    keywords: [
+      'remove background',
+      'remove background from image free online',
+      'transparent background remover no upload',
+      'ai photo background eraser online',
+      'make image background transparent free without sign up',
+      'hd cutout png background remover'
+    ],
     category: 'image',
     howToSteps: [
-      { title: 'Upload Photo', text: 'Upload any product shot, portrait, or object photo.' },
-      { title: 'AI Subject Detection', text: 'Local browser Wasm model isolates subject without sending image to any cloud API.' },
-      { title: 'Download HD Cutout PNG', text: 'Save transparent PNG or add custom background color.' }
+      { title: 'Upload Portrait or Product Photo', text: 'Select or drag and drop your photo into the AI background eraser workspace.' },
+      { title: 'Automatic AI Subject Isolation', text: 'Our local browser WebAssembly neural model automatically detects subject edges and erases the backdrop.' },
+      { title: 'Download Transparent PNG', text: 'Click Download PNG to save your high-resolution cutout image or add a solid white background.' }
     ],
     faqs: [
-      { question: 'Is my private photo uploaded to an AI server?', answer: 'No! Unlike third-party cloud tools, our neural network models run directly in your browser via WebAssembly.' },
-      { question: 'What image format is produced?', answer: 'Exports a clean transparent PNG or customized backdrop JPEG.' },
-      { question: 'Does background removal work on mobile?', answer: 'Yes, modern mobile web browsers with WebGL/Wasm support run background removal cleanly.' },
-      { question: 'Is there any monthly subscription?', answer: 'Zero subscriptions! Unlimited 100% free background removals.' },
-      { question: 'What objects work best?', answer: 'Portraits, products, animals, logos, and distinct objects against contrasting backgrounds.' }
+      { question: 'How do I remove the background from an image for free online?', answer: 'Simply upload your photo to FileZenith’s AI Background Remover, wait a second for automatic AI subject isolation, and click Download PNG to save your transparent image.' },
+      { question: 'Is my personal photo uploaded to any external AI server?', answer: 'No, 100%! Unlike cloud AI tools, FileZenith runs neural network inference models directly inside your browser memory via WebAssembly and WebGL. Your photo pixels never leave your device.' },
+      { question: 'What image formats can I export after background removal?', answer: 'You can export high-clarity transparent PNG cutouts or add solid white/colored backgrounds for official passport and product photos.' },
+      { question: 'Does this AI background remover work on mobile phones?', answer: 'Yes! FileZenith AI Background Remover runs smoothly on modern Android smartphones, iPhones, iPads, MacBooks, and Windows PCs with WebAssembly support.' },
+      { question: 'Is there any monthly subscription or usage limit?', answer: 'Zero subscriptions! Enjoy 100% free, unlimited background removals without daily limits or watermarks.' }
     ]
   },
 
   '/image/convert-heic': {
     slug: '/image/convert-heic',
-    title: 'Apple HEIC to JPG/PNG Converter (Batch)',
-    metaTitle: 'HEIC to JPG Converter Online Free - Batch Convert iPhone Photos | FileZenith',
-    description: 'Convert Apple iPhone HEIC/HEIF photos to universal JPG or PNG formats in batch. 100% client-side decoding.',
-    keywords: ['heic to jpg', 'convert heic to png', 'iphone photo converter', 'heic converter online'],
+    title: 'Convert Apple iPhone HEIC Photos to JPG',
+    metaTitle: 'HEIC to JPG Converter Free Online - Batch iPhone Photos | FileZenith',
+    description: 'Convert HEIC to JPG free online in seconds. Turn Apple iPhone .heic & .heif photos into universal JPG images 100% privately with zero server uploads. Try FileZenith now!',
+    keywords: [
+      'heic to jpg',
+      'heic to jpg converter free online',
+      'convert iphone photos to jpg no upload',
+      'heic image to jpeg converter online',
+      'batch convert heic files free without registration',
+      'open heic photos on windows pc fast'
+    ],
     category: 'image',
     howToSteps: [
-      { title: 'Select Apple HEIC Photos', text: 'Drag & drop .heic or .heif photos from your iPhone or Mac.' },
-      { title: 'Choose Target Format', text: 'Select output format: JPG (standard) or PNG (lossless).' },
-      { title: 'Convert & Download', text: 'Batch decode locally and download all converted photos.' }
+      { title: 'Upload iPhone HEIC Photos', text: 'Select or drag and drop your iPhone .heic or .heif photos into the converter dropzone.' },
+      { title: 'Choose Target Format (JPG or PNG)', text: 'Select universal JPG format or lossless PNG format for your output images.' },
+      { title: 'Convert & Batch Download', text: 'Click Convert HEIC to process locally and save single JPG photos or download a ZIP package.' }
     ],
     faqs: [
-      { question: 'Why can non-Apple devices not open HEIC files?', answer: 'HEIC is Apple proprietary compressed image container; converting to JPG makes photos universally viewable everywhere.' },
-      { question: 'Can I batch convert multiple HEIC files at once?', answer: 'Yes! Convert dozens of HEIC photos simultaneously.' },
-      { question: 'Are my personal iPhone photos sent to a server?', answer: 'No! Decoding is powered client-side using JavaScript Wasm decoder.' },
-      { question: 'Does conversion preserve EXIF photo metadata?', answer: 'Image dimensions and color profiles are preserved standardly.' },
-      { question: 'Is HEIC conversion free?', answer: '100% free with zero file limits.' }
+      { question: 'How do I convert iPhone HEIC photos to JPG for free online?', answer: 'Simply upload your Apple .heic or .heif photos to FileZenith’s HEIC to JPG converter, select JPG format, and click Convert HEIC to download your photos or ZIP package instantly.' },
+      { question: 'Why can’t Windows PCs or Android phones open HEIC photos?', answer: 'HEIC (High Efficiency Image Container) is Apple’s proprietary camera format. Converting HEIC to standard JPG makes your photos viewable on all Windows PCs, Android devices, and websites.' },
+      { question: 'Are my private iPhone photos uploaded to any remote server?', answer: 'No, 100%. FileZenith uses 100% client-side WebAssembly decoding. Your iPhone photos are converted locally inside your web browser’s RAM and are never sent over the internet.' },
+      { question: 'Can I batch convert multiple HEIC photos at once?', answer: 'Yes! You can select and convert dozens of iPhone HEIC photos simultaneously and download them all in a single organized ZIP package.' },
+      { question: 'Does this HEIC to JPG converter work on MacBooks and Windows PCs?', answer: 'Yes! FileZenith HEIC to JPG converter works seamlessly across Windows laptops, MacBooks, Chromebooks, iPhones, and Android smartphones.' }
     ]
   },
 
   '/image/to-pdf': {
     slug: '/image/to-pdf',
-    title: 'Image to PDF Converter (JPG, PNG to PDF)',
-    metaTitle: 'Image to PDF Converter Online Free - Combine Photos to PDF | FileZenith',
-    description: 'Convert JPG, PNG, WebP, and BMP images into a single structured PDF document. Customize page orientation, margins, and page sizes.',
-    keywords: ['image to pdf', 'jpg to pdf', 'png to pdf', 'photos to pdf converter'],
+    title: 'Convert JPG & PNG Images to PDF Online',
+    metaTitle: 'Image to PDF Converter Free Online - Convert Images | FileZenith',
+    description: 'Convert image to PDF free online in seconds. Combine JPG, PNG & WebP photos into one structured PDF document 100% privately with zero server uploads. Try FileZenith now!',
+    keywords: [
+      'image to pdf',
+      'image to pdf converter free online',
+      'convert jpg png photos to pdf no upload',
+      'turn photos into pdf document online',
+      'combine images into pdf free without sign up',
+      'image to pdf high resolution converter'
+    ],
     category: 'image',
     howToSteps: [
-      { title: 'Upload Images', text: 'Select or drop multiple image files into the converter.' },
-      { title: 'Configure Page Layout', text: 'Set page size (A4, Letter), orientation (Portrait/Landscape), and margins.' },
-      { title: 'Create PDF', text: 'Click Generate PDF to combine photos into a document download.' }
+      { title: 'Upload JPG & PNG Images', text: 'Select or drag and drop your photos, scans, or graphic images into the upload box.' },
+      { title: 'Configure Page Layout & Margins', text: 'Select page size (A4, Letter, or Fit to Image), page orientation, and margin spacing.' },
+      { title: 'Convert & Download PDF', text: 'Click Generate PDF to combine your photos into a single downloadable PDF file.' }
     ],
     faqs: [
-      { question: 'Can I reorder images before building PDF?', answer: 'Yes! Drag and drop photo cards to rearrange your desired page sequence.' },
-      { question: 'What page sizes are supported?', answer: 'Standard A4, US Letter, fit-to-image size, portrait, and landscape.' },
-      { question: 'Are my images kept private?', answer: '100% private. Processing happens completely inside your web browser.' },
-      { question: 'Can I adjust margin spacing around photos?', answer: 'Yes, select No Margin, Small Margin, or Big Margin options.' },
-      { question: 'Is there a limit on how many images I can combine?', answer: 'No limit! Combine as many photos as needed.' }
+      { question: 'How do I convert images to a PDF file for free online?', answer: 'Simply upload your photos or images to FileZenith’s Image to PDF converter, select page layout options (A4, Letter, or Auto), and click Generate PDF to download your combined document.' },
+      { question: 'Is my photo data private during Image to PDF conversion on FileZenith?', answer: 'Yes, 100%. FileZenith operates on a 100% zero-server architecture. Your images are compiled locally in your web browser memory and are never uploaded to any server.' },
+      { question: 'What image formats can I convert to PDF?', answer: 'FileZenith supports JPG, JPEG, PNG, WebP, GIF, and HEIC image formats for instant conversion to PDF.' },
+      { question: 'Can I adjust margin spacing and page orientation?', answer: 'Yes! You can choose No Margin, Small Margin, or Big Margin, and toggle between Portrait or Landscape page orientations.' },
+      { question: 'Does this Image to PDF converter work on mobile phones?', answer: 'Yes! FileZenith Image to PDF converter works seamlessly across Android smartphones, iPhones, iPads, MacBooks, and Windows laptops.' }
     ]
   },
 
   '/image/png-to-jpg': {
     slug: '/image/png-to-jpg',
-    title: 'PNG to JPG Converter Online (Bulk & High Quality)',
-    metaTitle: 'Convert PNG to JPG Online Free - Fast Bulk Image Converter | FileZenith',
-    description: 'Convert PNG images to JPG format online in seconds. Supports bulk conversion, custom image quality compression, and background color selection. 100% client-side.',
-    keywords: ['png to jpg', 'convert png to jpg', 'png to jpg converter free', 'bulk png to jpg', 'change png to jpeg'],
+    title: 'Convert PNG Images to High-Quality JPG Format',
+    metaTitle: 'PNG to JPG Converter Free Online - Convert Images | FileZenith',
+    description: 'Convert PNG to JPG free online in seconds. Turn PNG graphics & transparent images into compact JPG photos 100% privately with zero server uploads. Try FileZenith now!',
+    keywords: [
+      'png to jpg',
+      'png to jpg converter free online',
+      'convert png to jpg no upload',
+      'change png image to jpeg online',
+      'bulk png to jpg converter fast',
+      'convert transparent png to jpg white background'
+    ],
     category: 'image',
     howToSteps: [
-      { title: 'Upload PNG Images', text: 'Select or drag and drop PNG files into the converter zone.' },
-      { title: 'Adjust Quality & Background Color', text: 'Choose JPG quality percentage and set solid background color for transparent pixels.' },
-      { title: 'Download JPG Files', text: 'Click Convert to save high-quality JPG images directly to your device.' }
+      { title: 'Upload PNG Images', text: 'Select or drag and drop your PNG graphics, screenshots, or photos.' },
+      { title: 'Set Quality & Background', text: 'Adjust compression quality slider and choose a background color for transparent pixels (default white).' },
+      { title: 'Convert & Download JPG', text: 'Click Convert to JPG to save your individual images or batch download a ZIP archive.' }
     ],
     faqs: [
-      { question: 'Why convert PNG to JPG?', answer: 'JPG files are much smaller in file size than PNGs, making them ideal for web pages, email attachments, and online forms.' },
-      { question: 'What happens to transparent PNG backgrounds?', answer: 'Since JPG does not support transparency, you can pick any solid background color (default is pure white).' },
-      { question: 'Can I batch convert multiple PNG files at once?', answer: 'Yes! Upload dozens of PNG images and convert them all simultaneously.' },
-      { question: 'Are my photos uploaded to a remote server?', answer: 'No! All conversions process 100% locally in your web browser memory.' }
+      { question: 'How do I convert a PNG image to JPG for free online?', answer: 'Simply upload your PNG files to FileZenith’s PNG to JPG converter, select quality preferences, and click Convert to download your JPG image or ZIP package instantly.' },
+      { question: 'What happens to transparent PNG backgrounds when converted to JPG?', answer: 'Since JPG format does not support transparency, transparent background pixels are automatically converted to clean, solid white background.' },
+      { question: 'Are my images uploaded to any remote server during conversion?', answer: 'No, 100%. FileZenith operates on a 100% zero-server architecture. Image format decoding and canvas rendering occur locally inside your web browser.' },
+      { question: 'Can I batch convert multiple PNG files to JPG at once?', answer: 'Yes! You can upload dozens of PNG images simultaneously and download them all as a single organized ZIP package.' },
+      { question: 'Does this PNG to JPG converter work on mobile phones?', answer: 'Yes! FileZenith PNG to JPG converter works seamlessly across Android smartphones, iPhones, iPads, MacBooks, and Windows laptops.' }
     ]
   },
 
   '/image/png-to-pdf': {
     slug: '/image/png-to-pdf',
-    title: 'PNG to PDF Converter Online (Combine PNGs to PDF)',
-    metaTitle: 'PNG to PDF Converter Online Free - Convert PNG Images to PDF | FileZenith',
-    description: 'Convert PNG images to PDF document online. Combine multiple PNG pictures into one organized PDF file with custom page orientation and margins.',
-    keywords: ['png to pdf', 'convert png to pdf', 'png to pdf converter free', 'combine pngs to pdf', 'save png as pdf'],
+    title: 'Combine & Convert PNG Images to PDF',
+    metaTitle: 'PNG to PDF Converter Free Online - Convert PNG to PDF | FileZenith',
+    description: 'Convert PNG to PDF free online in seconds. Combine PNG screenshots, transparent graphics & images into one PDF 100% privately with zero server uploads. Try FileZenith now!',
+    keywords: [
+      'png to pdf',
+      'png to pdf converter free online',
+      'convert png to pdf document no upload',
+      'combine png images into one pdf online',
+      'save png graphics as pdf free without sign up',
+      'png to pdf high resolution converter'
+    ],
     category: 'image',
     howToSteps: [
-      { title: 'Upload PNG Files', text: 'Drag and drop one or more PNG image files into the upload box.' },
-      { title: 'Arrange & Format Layout', text: 'Reorder pages, set page orientation (Portrait/Landscape), and adjust margins.' },
-      { title: 'Generate & Download PDF', text: 'Click Convert to PDF to instantly create and download your consolidated PDF file.' }
+      { title: 'Upload PNG Files', text: 'Select or drag and drop one or more PNG images into the upload workspace.' },
+      { title: 'Arrange Page Sequence & Layout', text: 'Reorder images using visual handles and select page size (A4, Letter, or Auto Fit).' },
+      { title: 'Convert & Download PDF', text: 'Click Convert PNG to PDF to generate and download your clean PDF file instantly.' }
     ],
     faqs: [
-      { question: 'Can I convert multiple PNGs into a single PDF?', answer: 'Yes! You can combine multiple PNG images into one single PDF document.' },
-      { question: 'Does PNG to PDF conversion preserve high resolution?', answer: 'Yes, original PNG image resolution and clarity are fully preserved in the PDF output.' },
-      { question: 'Is there a limit on how many PNG files I can convert?', answer: 'No limits! Convert as many PNG images as you need for free.' }
+      { question: 'How do I convert PNG images to a single PDF for free online?', answer: 'Simply upload your PNG graphics or screenshots to FileZenith’s PNG to PDF converter, drag to reorder pages, select page layout options, and click Convert PNG to PDF to download.' },
+      { question: 'Is my PNG image data private during PDF creation on FileZenith?', answer: 'Yes, 100%. FileZenith operates on a 100% zero-server architecture. Your PNG images are processed locally inside your web browser memory and are never uploaded to any server.' },
+      { question: 'Can I combine multiple transparent PNG graphics into one PDF?', answer: 'Yes! You can combine multiple PNG files into a single structured PDF document while preserving crisp graphics and image transparency.' },
+      { question: 'Will my PNG images lose resolution or quality in the PDF file?', answer: 'No! FileZenith preserves full original PNG pixel resolution and vector clarity inside the generated PDF document.' },
+      { question: 'Does this PNG to PDF converter work on mobile phones?', answer: 'Yes! FileZenith PNG to PDF converter works seamlessly across Android smartphones, iPhones, iPads, MacBooks, and Windows laptops.' }
     ]
   },
 
   '/image/pics-to-pdf': {
     slug: '/image/pics-to-pdf',
-    title: 'Pics to PDF Converter (Convert Photos & Pictures to PDF)',
-    metaTitle: 'Pics to PDF Converter Online Free - Turn Pictures & Scans to PDF | FileZenith',
-    description: 'Turn pictures, receipts, camera photos, and scans into a clean PDF document. Drag and drop reordering, custom page sizes (A4, Letter), and zero server uploads.',
-    keywords: ['pics to pdf', 'picture to pdf', 'convert photos to pdf', 'turn pictures into pdf', 'photo to pdf converter free'],
+    title: 'Convert Pictures & Photos to PDF Online',
+    metaTitle: 'Pics to PDF Converter Free Online - Convert Photos | FileZenith',
+    description: 'Convert pics to PDF free online in seconds. Turn photos, gallery pictures & scans into a single PDF document 100% privately with zero server uploads. Try FileZenith now!',
+    keywords: [
+      'pics to pdf',
+      'pics to pdf converter free online',
+      'convert photos to pdf document no upload',
+      'turn pictures into pdf file online',
+      'photo to pdf converter free without sign up',
+      'combine gallery images into pdf fast'
+    ],
     category: 'image',
     howToSteps: [
-      { title: 'Select Pictures & Scans', text: 'Upload photos from your phone, camera, or computer.' },
-      { title: 'Reorder & Configure Layout', text: 'Drag pictures into your preferred order and select page size (A4, Letter, Auto-fit).' },
-      { title: 'Download PDF Document', text: 'Click Convert Pics to PDF to generate and download your clean document.' }
+      { title: 'Upload Pictures & Camera Photos', text: 'Select or drag and drop photos from your phone gallery, camera roll, or computer.' },
+      { title: 'Reorder Pictures & Set Layout', text: 'Arrange your pictures in preferred sequence and choose page layout (A4, Letter, or Fit to Image).' },
+      { title: 'Convert & Download PDF', text: 'Click Convert Pics to PDF to generate and download your clean PDF document instantly.' }
     ],
     faqs: [
-      { question: 'Can I convert pictures taken from my phone camera?', answer: 'Yes! Select photos from your iPhone, Android camera roll, or gallery.' },
-      { question: 'Can I reorder pictures before generating the PDF?', answer: 'Yes! Drag and drop picture cards to arrange the exact page sequence you want.' },
-      { question: 'Is my photo data secure?', answer: '100% secure. Everything is processed locally inside your web browser.' }
+      { question: 'How do I convert pictures to a single PDF document for free?', answer: 'Simply upload your photos or gallery pictures to FileZenith’s Pics to PDF converter, drag to arrange page order, choose page layout (A4 or Auto), and click Convert Pics to PDF to download.' },
+      { question: 'Is it safe to convert private photos and ID scans on FileZenith?', answer: 'Yes, 100%. FileZenith operates on a 100% zero-server architecture. Your pictures are combined locally inside your web browser’s RAM and are never uploaded or saved on external servers.' },
+      { question: 'Can I combine multiple pictures from my phone camera roll?', answer: 'Yes! You can select multiple JPG, PNG, WebP, or HEIC pictures from your Android phone or iPhone and compile them into a single organized PDF file.' },
+      { question: 'Can I reorder pictures before generating the PDF document?', answer: 'Yes! Use visual drag-and-drop handles to rearrange picture order easily before building your PDF.' },
+      { question: 'Does this Pics to PDF converter work on mobile phones?', answer: 'Yes! FileZenith Pics to PDF converter works seamlessly across Android smartphones, iPhones, iPads, MacBooks, and Windows laptops.' }
     ]
   },
 
@@ -603,64 +748,85 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   // --- Daily Quick Utilities ---
   '/utility/qr-generator': {
     slug: '/utility/qr-generator',
-    title: 'Dynamic QR Code Generator (Custom Logo & Colors)',
-    metaTitle: 'Free QR Code Generator with Logo - Create Vector SVG & PNG QR Codes | FileZenith',
-    description: 'Generate customizable QR codes for URLs, text, Wi-Fi, and contact cards. Embed center logo image, pick custom colors, export SVG/PNG.',
-    keywords: ['qr code generator', 'create qr code with logo', 'custom qr code generator', 'vector svg qr code'],
+    title: 'Custom QR Code Generator with Logo',
+    metaTitle: 'QR Code Generator Free Online - Create Custom QR | FileZenith',
+    description: 'QR code generator free online in browser. Create custom QR codes with logo, custom colors & vector SVG output 100% privately with zero tracking. Try FileZenith now!',
+    keywords: [
+      'qr code generator',
+      'qr code generator free online with logo',
+      'custom qr code generator no registration',
+      'create vector svg qr code online',
+      'wifi qr code generator free',
+      'generate high resolution png qr code'
+    ],
     category: 'utility',
     howToSteps: [
-      { title: 'Enter Content', text: 'Input website URL, plain text, Wi-Fi details, or contact information.' },
-      { title: 'Customize Design', text: 'Choose background/foreground colors, error correction, and upload logo PNG.' },
-      { title: 'Download Vector or PNG', text: 'Download high-resolution PNG or crisp vector SVG QR code.' }
+      { title: 'Enter URL or Data Content', text: 'Input website URL, plain text, Wi-Fi credentials, or contact vCard details.' },
+      { title: 'Customize Colors & Add Logo', text: 'Choose background/foreground colors and upload a center PNG logo image.' },
+      { title: 'Download PNG or Vector SVG', text: 'Click Download PNG or Download SVG to save your high-resolution QR code instantly.' }
     ],
     faqs: [
-      { question: 'Do these QR codes expire?', answer: 'No! Static QR codes generated here contain raw data directly and never expire or depend on third-party redirection.' },
-      { question: 'Can I insert my company logo into the center?', answer: 'Yes! Upload your PNG logo, and our engine automatically applies high error correction to keep QR readable.' },
-      { question: 'What formats can I export?', answer: 'Export high-res PNG bitmap or scalable vector SVG for print graphics.' },
-      { question: 'Can I create Wi-Fi access QR codes?', answer: 'Yes! Format Wi-Fi credentials so mobile devices scan and join automatically.' },
-      { question: 'Is QR code generation tracked or logged?', answer: 'No! Everything is rendered locally on HTML5 Canvas without tracking.' }
+      { question: 'How do I generate a custom QR code with a logo for free online?', answer: 'Simply enter your website link or text into FileZenith’s QR Code Generator, customize colors or upload a center logo image, and click Download PNG or SVG.' },
+      { question: 'Do these QR codes ever expire or rely on third-party redirection servers?', answer: 'No, 100%! All static QR codes generated on FileZenith embed your raw data directly into the matrix code. They never expire and operate without third-party redirection.' },
+      { question: 'Can I generate a QR code for instant Wi-Fi network connection?', answer: 'Yes! Select the Wi-Fi preset, enter your network SSID and password, and generate a QR code that smartphones can scan to join automatically.' },
+      { question: 'What file formats can I download for print and web use?', answer: 'You can download high-resolution PNG bitmap images for websites and social media, or scalable vector SVG files for crisp print graphics.' },
+      { question: 'Does this QR code generator work on mobile phones?', answer: 'Yes! FileZenith QR Code Generator works seamlessly across Android smartphones, iPhones, iPads, MacBooks, and Windows laptops.' }
     ]
   },
 
   '/utility/word-counter': {
     slug: '/utility/word-counter',
-    title: 'Real-Time Word Counter & Keyword Density Analyzer',
-    metaTitle: 'Word Counter Online Free - Count Words, Characters & Reading Time | FileZenith',
-    description: 'Count words, characters, sentences, paragraphs, reading time, and analyze keyword frequency density in real time.',
-    keywords: ['word counter', 'character count online', 'keyword density analyzer', 'reading time calculator'],
+    title: 'Real-Time Word & Character Counter Online',
+    metaTitle: 'Word Counter Free Online - Count Words & Characters | FileZenith',
+    description: 'Word counter free online in browser. Count words, characters, sentences, paragraphs & keyword density 100% privately with zero server uploads. Try FileZenith now!',
+    keywords: [
+      'word counter',
+      'word counter free online',
+      'count words and characters online no upload',
+      'real time character count with spaces',
+      'seo keyword density analyzer tool free',
+      'reading time calculator for essays and blogs'
+    ],
     category: 'utility',
     howToSteps: [
-      { title: 'Paste or Type Text', text: 'Paste your article, essay, or text into the live editor.' },
-      { title: 'View Metrics', text: 'Instantly view word count, character count (with/without spaces), reading speed, and sentence breakdown.' },
-      { title: 'Analyze Keyword Density', text: 'Review top 1-word and 2-word keyword density tables for SEO content optimization.' }
+      { title: 'Type or Paste Text', text: 'Paste your article draft, essay, essay form, or social media caption into the editor.' },
+      { title: 'View Real-Time Metrics', text: 'Instantly inspect total words, character count (with & without spaces), sentences, and estimated reading time.' },
+      { title: 'Analyze Keyword Density', text: 'Review top 1-word and 2-word keyword density tables to optimize your content for search engines.' }
     ],
     faqs: [
-      { question: 'How is reading time calculated?', answer: 'Based on standard average adult reading speed of 200-250 words per minute.' },
-      { question: 'Does character count include spaces?', answer: 'We display both Total Characters (with spaces) and Clean Characters (excluding spaces).' },
-      { question: 'How does keyword density analysis help SEO?', answer: 'Helps identify overused keywords and ensures proper keyword distribution for blog posts and metadata.' },
-      { question: 'Is my pasted text saved on a server?', answer: 'No! Text live-updates strictly in React component state in browser memory.' },
-      { question: 'Is there a character limit?', answer: 'No character limits.' }
+      { question: 'How do I count words and characters in my essay or article for free online?', answer: 'Simply paste or type your text into FileZenith’s Word Counter editor. All word counts, character totals, paragraph statistics, and reading speeds update in real time as you type.' },
+      { question: 'Is my pasted article text stored on any server or database?', answer: 'Never! FileZenith operates on a 100% zero-server architecture. Your text is processed locally inside your web browser’s memory and is never transmitted across the internet.' },
+      { question: 'Does character count include spaces?', answer: 'Our tool displays both Total Characters (with spaces) and Clean Characters (excluding spaces) to meet exact assignment or tweet limit specifications.' },
+      { question: 'How is estimated reading time calculated?', answer: 'Estimated reading time is calculated using standard average adult reading speeds of 200–250 words per minute.' },
+      { question: 'Does this online word counter work on mobile phones and tablets?', answer: 'Yes! FileZenith Word Counter works seamlessly across Android smartphones, iPhones, iPads, MacBooks, and Windows laptops.' }
     ]
   },
 
   '/utility/json-formatter': {
     slug: '/utility/json-formatter',
-    title: 'JSON Formatter, Validator & CSV/YAML Converter',
-    metaTitle: 'JSON Formatter & Validator Online - Format, Minify, Convert to CSV/YAML | FileZenith',
-    description: 'Format, prettify, minify, validate syntax, and convert JSON arrays to CSV or YAML structures locally in browser.',
-    keywords: ['json formatter', 'json validator', 'json to csv', 'json to yaml', 'minify json'],
+    title: 'JSON Formatter, Validator & CSV Converter',
+    metaTitle: 'JSON Formatter & Validator Free Online - Prettify & CSV | FileZenith',
+    description: 'JSON formatter free online in browser. Prettify, minify, validate syntax & convert JSON arrays to CSV 100% privately with zero server uploads. Try FileZenith now!',
+    keywords: [
+      'json formatter',
+      'json formatter online free validator',
+      'prettify json string online no upload',
+      'json to csv converter free',
+      'minify json string online without registration',
+      'validate json syntax error line counter'
+    ],
     category: 'utility',
     howToSteps: [
-      { title: 'Input JSON Code', text: 'Paste raw JSON string into the editor or upload a .json file.' },
-      { title: 'Select Action', text: 'Choose Format (2/4 spaces), Minify, Validate Syntax, or Convert to CSV/YAML.' },
-      { title: 'Copy or Download Output', text: 'Copy formatted JSON or download converted CSV/YAML data file.' }
+      { title: 'Paste Raw JSON String', text: 'Paste your unformatted JSON payload or upload a .json data file into the live editor.' },
+      { title: 'Choose Formatting or Conversion', text: 'Click Format (2/4 space indent), Minify, Validate Syntax, or Convert to CSV/YAML.' },
+      { title: 'Copy or Download Result', text: 'Copy formatted JSON code to your clipboard or download converted CSV spreadsheet files instantly.' }
     ],
     faqs: [
-      { question: 'How does JSON validation work?', answer: 'Highlights exact syntax error line numbers and unexpected token positions.' },
-      { question: 'Can I convert JSON arrays to CSV spreadsheets?', answer: 'Yes! Flat and nested object arrays parse cleanly into downloadable CSV files.' },
-      { question: 'Can I convert JSON to YAML format?', answer: 'Yes, converts JSON structures directly to clean indented YAML.' },
-      { question: 'Is API or customer payload data secure?', answer: '100% secure. Data formatting runs strictly inside local JavaScript execution engine.' },
-      { question: 'Can I minify JSON for production builds?', answer: 'Yes! One-click strip whitespace and line breaks.' }
+      { question: 'How do I format and validate a JSON string for free online?', answer: 'Simply paste your raw JSON string into FileZenith’s JSON Formatter editor, select your preferred indentation (2 or 4 spaces), and click Format JSON or Convert to CSV.' },
+      { question: 'Is my confidential API payload or customer data safe on FileZenith?', answer: 'Yes, 100%. FileZenith operates on a 100% zero-server architecture. All JSON parsing, syntax validation, and CSV conversions execute locally inside your web browser’s JavaScript engine.' },
+      { question: 'Can I convert JSON arrays directly to Excel CSV spreadsheets?', answer: 'Yes! Our smart parser converts JSON object arrays into clean downloadable CSV spreadsheet files for Microsoft Excel or Google Sheets.' },
+      { question: 'How does JSON syntax error validation work?', answer: 'If your JSON contains syntax errors, our validator highlights the exact line number, column position, and unexpected token character.' },
+      { question: 'Does this JSON formatter work on mobile phones and tablets?', answer: 'Yes! FileZenith JSON Formatter works seamlessly across Android smartphones, iPhones, iPads, MacBooks, and Windows laptops.' }
     ]
   }
 };
@@ -674,7 +840,7 @@ export function generateToolMetadata(slug: string) {
     };
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://aurea.co.in';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://filezenith.com';
   const canonicalUrl = `${siteUrl}${slug}`;
 
   return {
@@ -712,7 +878,7 @@ export function generateToolSchemas(slug: string) {
   const tool = SEO_REGISTRY[slug];
   if (!tool) return [];
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://aurea.co.in';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://filezenith.com';
   const pageUrl = `${siteUrl}${slug}`;
 
   const webAppSchema = {
