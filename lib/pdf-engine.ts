@@ -1,4 +1,150 @@
-import { PDFDocument, rgb, degrees, StandardFonts } from 'pdf-lib';
+import forge from 'node-forge';
+import {
+  PDFDocument,
+  rgb,
+  degrees,
+  StandardFonts,
+  PDFHexString,
+  PDFRawStream,
+  PDFStream,
+  PDFName,
+} from 'pdf-lib';
+
+// --- Standard PDF Security Handler (Revision 3 / 128-bit Encryption) Helpers ---
+// Official ISO 32000-1 PDF Specification Padding Bytes (32 bytes)
+const PDF_PADDING = new Uint8Array([
+  0x28, 0xbf, 0x4e, 0x5e, 0x4e, 0x75, 0x8a, 0x41,
+  0x64, 0x00, 0x4e, 0x56, 0xff, 0xfa, 0x01, 0x08,
+  0x2e, 0x2e, 0x00, 0xb6, 0xd0, 0x68, 0x3e, 0x80,
+  0x2f, 0x0c, 0xa9, 0xfe, 0x64, 0x53, 0x69, 0x7a,
+]);
+
+function md5Bytes(data: Uint8Array): Uint8Array {
+  const md = forge.md.md5.create();
+  md.update(forge.util.binary.raw.encode(data));
+  const hex = md.digest().toHex();
+  const out = new Uint8Array(16);
+  for (let i = 0; i < 16; i++) {
+    out[i] = parseInt(hex.substring(i * 2, i * 2 + 2), 16);
+  }
+  return out;
+}
+
+function rc4(key: Uint8Array, data: Uint8Array): Uint8Array {
+  const S = new Uint8Array(256);
+  for (let i = 0; i < 256; i++) S[i] = i;
+  let j = 0;
+  for (let i = 0; i < 256; i++) {
+    j = (j + S[i] + key[i % key.length]) & 0xff;
+    const tmp = S[i];
+    S[i] = S[j];
+    S[j] = tmp;
+  }
+  const out = new Uint8Array(data.length);
+  let i = 0;
+  j = 0;
+  for (let k = 0; k < data.length; k++) {
+    i = (i + 1) & 0xff;
+    j = (j + S[i]) & 0xff;
+    const tmp = S[i];
+    S[i] = S[j];
+    S[j] = tmp;
+    out[k] = data[k] ^ S[(S[i] + S[j]) & 0xff];
+  }
+  return out;
+}
+
+function padPassword(pass: string): Uint8Array {
+  const enc = new TextEncoder().encode(pass);
+  const out = new Uint8Array(32);
+  if (enc.length >= 32) {
+    out.set(enc.subarray(0, 32));
+  } else {
+    out.set(enc);
+    out.set(PDF_PADDING.subarray(0, 32 - enc.length), enc.length);
+  }
+  return out;
+}
+
+function computeOwnerKey(ownerPass: string, userPass: string): Uint8Array {
+  const paddedOwner = padPassword(ownerPass || userPass);
+  let hash = md5Bytes(paddedOwner);
+
+  for (let i = 0; i < 50; i++) {
+    hash = md5Bytes(hash);
+  }
+
+  const paddedUser = padPassword(userPass);
+  let result = paddedUser;
+  const derivedKey = new Uint8Array(16);
+  for (let j = 0; j <= 19; j++) {
+    for (let k = 0; k < 16; ++k) {
+      derivedKey[k] = hash[k] ^ j;
+    }
+    result = rc4(derivedKey, result);
+  }
+
+  return result;
+}
+
+function computeEncryptionKey(
+  userPass: string,
+  oKey: Uint8Array,
+  pVal: number,
+  idBytes: Uint8Array
+): Uint8Array {
+  const paddedUser = padPassword(userPass);
+  const hashData = new Uint8Array(32 + 32 + 4 + idBytes.length);
+  hashData.set(paddedUser, 0);
+  hashData.set(oKey, 32);
+  hashData[64] = pVal & 0xff;
+  hashData[65] = (pVal >> 8) & 0xff;
+  hashData[66] = (pVal >> 16) & 0xff;
+  hashData[67] = (pVal >>> 24) & 0xff;
+  hashData.set(idBytes, 68);
+
+  let hash = md5Bytes(hashData);
+
+  for (let i = 0; i < 50; i++) {
+    hash = md5Bytes(hash);
+  }
+
+  return hash;
+}
+
+function computeUserKey(encKey: Uint8Array, idBytes: Uint8Array): Uint8Array {
+  const hashData = new Uint8Array(32 + idBytes.length);
+  hashData.set(PDF_PADDING, 0);
+  hashData.set(idBytes, 32);
+
+  let checkData = rc4(encKey, md5Bytes(hashData));
+  const n = encKey.length;
+  const derivedKey = new Uint8Array(n);
+  for (let j = 1; j <= 19; ++j) {
+    for (let k = 0; k < n; ++k) {
+      derivedKey[k] = encKey[k] ^ j;
+    }
+    checkData = rc4(derivedKey, checkData);
+  }
+
+  const uVal = new Uint8Array(32);
+  uVal.set(checkData, 0);
+  uVal.set(PDF_PADDING.subarray(0, 16), 16);
+  return uVal;
+}
+
+function computeObjectKey(encKey: Uint8Array, objectId: number, genNum: number): Uint8Array {
+  const buf = new Uint8Array(encKey.length + 5);
+  buf.set(encKey, 0);
+  buf[encKey.length] = objectId & 0xff;
+  buf[encKey.length + 1] = (objectId >> 8) & 0xff;
+  buf[encKey.length + 2] = (objectId >> 16) & 0xff;
+  buf[encKey.length + 3] = genNum & 0xff;
+  buf[encKey.length + 4] = (genNum >> 8) & 0xff;
+
+  const keyHash = md5Bytes(buf);
+  return keyHash.subarray(0, Math.min(16, encKey.length + 5));
+}
 
 export interface PDFPageMeta {
   pageIndex: number;
@@ -153,13 +299,16 @@ export async function watermarkPDF(file: File, options: WatermarkOptions): Promi
     const { width, height } = page.getSize();
 
     if (embeddedImage) {
-      const imgDims = embeddedImage.scale(0.5);
-      const { x, y } = getCoordinates(options.position, width, height, imgDims.width, imgDims.height);
+      const scalePercentage = (options.fontSize ? options.fontSize / 100 : 0.35);
+      const targetW = width * scalePercentage;
+      const targetH = height * scalePercentage;
+      const imgScaled = embeddedImage.scaleToFit(targetW, targetH);
+      const { x, y } = getCoordinates(options.position, width, height, imgScaled.width, imgScaled.height);
       page.drawImage(embeddedImage, {
         x,
         y,
-        width: imgDims.width,
-        height: imgDims.height,
+        width: imgScaled.width,
+        height: imgScaled.height,
         opacity,
         rotate: rotationDeg,
       });
@@ -184,7 +333,7 @@ export async function watermarkPDF(file: File, options: WatermarkOptions): Promi
 }
 
 /**
- * Encrypts and locks a PDF document with client-side permissions.
+ * Encrypts and locks a PDF document with standard 128-bit password protection.
  */
 export async function protectPDF(
   file: File,
@@ -192,19 +341,64 @@ export async function protectPDF(
   ownerPassword?: string
 ): Promise<Uint8Array> {
   const arrayBuffer = await file.arrayBuffer();
-  const srcPdf = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
-  const pdfDoc = await PDFDocument.create();
+  const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
 
-  const copiedPages = await pdfDoc.copyPages(srcPdf, srcPdf.getPageIndices());
-  copiedPages.forEach((p) => pdfDoc.addPage(p));
+  const pass = userPassword || '';
+  const oPass = ownerPassword || pass;
+  const P = -44;
 
-  pdfDoc.setTitle(`Protected - ${file.name}`);
-  pdfDoc.setProducer('OmniTool Suite Protected PDF');
-  pdfDoc.setCreator('OmniTool Client-Side Engine');
+  const idBytes = new Uint8Array(16);
+  if (typeof globalThis !== 'undefined' && globalThis.crypto?.getRandomValues) {
+    globalThis.crypto.getRandomValues(idBytes);
+  } else {
+    for (let i = 0; i < 16; i++) idBytes[i] = Math.floor(Math.random() * 256);
+  }
 
-  return await pdfDoc.save({
-    useObjectStreams: true,
+  const oKey = computeOwnerKey(oPass, pass);
+  const encKey = computeEncryptionKey(pass, oKey, P, idBytes);
+  const uKey = computeUserKey(encKey, idBytes);
+
+  const toHex = (buf: Uint8Array) =>
+    Array.from(buf)
+      .map((b) => b.toString(16).padStart(2, '0'))
+      .join('');
+
+  // Register Encrypt Dictionary in PDF context
+  const encryptDict = pdfDoc.context.obj({
+    Filter: 'Standard',
+    V: 2,
+    R: 3,
+    Length: 128,
+    P: P,
+    O: PDFHexString.of(toHex(oKey)),
+    U: PDFHexString.of(toHex(uKey)),
   });
+
+  const encryptRef = pdfDoc.context.register(encryptDict);
+
+  // Encrypt all indirect stream objects in PDF document context
+  const indirectObjects = pdfDoc.context.enumerateIndirectObjects();
+  for (const [ref, obj] of indirectObjects) {
+    if (ref.objectNumber === encryptRef.objectNumber) continue;
+
+    if (obj instanceof PDFStream) {
+      const objKey = computeObjectKey(encKey, ref.objectNumber, ref.generationNumber);
+      const originalContents = obj.getContents();
+      const encryptedContents = rc4(objKey, originalContents);
+
+      const encryptedStream = PDFRawStream.of(obj.dict, encryptedContents);
+      pdfDoc.context.assign(ref, encryptedStream);
+    }
+  }
+
+  // Set Encrypt & ID entries in PDF Trailer Info (PDF Spec Requirement)
+  (pdfDoc.context as any).trailerInfo.Encrypt = encryptRef;
+  (pdfDoc.context as any).trailerInfo.ID = pdfDoc.context.obj([
+    PDFHexString.of(toHex(idBytes)),
+    PDFHexString.of(toHex(idBytes)),
+  ]);
+
+  return await pdfDoc.save({ useObjectStreams: false });
 }
 
 /**
