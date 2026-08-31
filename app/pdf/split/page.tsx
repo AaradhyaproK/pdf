@@ -11,7 +11,6 @@ import {
   Square,
   CheckCircle2,
   RefreshCw,
-  ZoomIn,
   Maximize2,
   X,
   Eye,
@@ -21,8 +20,6 @@ interface PageThumbnail {
   pageNumber: number; // 1-based
   dataUrl: string;
 }
-
-type ZoomLevel = 'compact' | 'standard' | 'large';
 
 // Converts array of 1-based page numbers [1,2,3,5,7,8] to string "1-3, 5, 7-8"
 function formatPageNumbersToRange(pages: number[]): string {
@@ -75,7 +72,6 @@ export default function SplitPDFPage() {
   const [thumbnails, setThumbnails] = useState<PageThumbnail[]>([]);
   const [selectedPages, setSelectedPages] = useState<number[]>([]);
   const [rangeStr, setRangeStr] = useState<string>('');
-  const [gridZoom, setGridZoom] = useState<ZoomLevel>('standard');
   const [previewModalPage, setPreviewModalPage] = useState<PageThumbnail | null>(null);
   const [isLoadingPages, setIsLoadingPages] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -93,7 +89,7 @@ export default function SplitPDFPage() {
 
     setIsLoadingPages(true);
     try {
-      const rendered = await renderPDFPagesToImages(selected[0].file, 1.2);
+      const rendered = await renderPDFPagesToImages(selected[0].file, 2.0);
       const thumbs = rendered.map((r) => ({
         pageNumber: r.pageNumber,
         dataUrl: r.dataUrl,
@@ -177,30 +173,8 @@ export default function SplitPDFPage() {
     }
   };
 
-  // Dynamic Grid CSS classes based on selected zoom
-  const getGridClasses = () => {
-    switch (gridZoom) {
-      case 'compact':
-        return 'grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2.5';
-      case 'large':
-        return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5';
-      case 'standard':
-      default:
-        return 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4';
-    }
-  };
-
-  const getImgContainerHeight = () => {
-    switch (gridZoom) {
-      case 'compact':
-        return 'h-28';
-      case 'large':
-        return 'h-72';
-      case 'standard':
-      default:
-        return 'h-44';
-    }
-  };
+  const getGridClasses = () => 'grid-cols-1 sm:grid-cols-2 gap-6';
+  const getImgContainerHeight = () => 'h-[480px] sm:h-[560px]';
 
   return (
     <ToolLayout
@@ -225,191 +199,154 @@ export default function SplitPDFPage() {
         />
 
         {isLoadingPages && (
-          <div className="py-12 text-center text-slate-500 dark:text-slate-400 animate-pulse text-sm font-medium flex flex-col items-center justify-center gap-3">
-            <RefreshCw className="w-7 h-7 animate-spin text-indigo-600" />
-            <span>Rendering PDF pages and generating page previews...</span>
+          <div className="p-8 text-center bg-white rounded-3xl border border-slate-200 shadow-sm space-y-3">
+            <RefreshCw className="w-8 h-8 text-indigo-600 animate-spin mx-auto" />
+            <p className="text-sm font-bold text-slate-700">Rendering High-Resolution PDF Pages...</p>
           </div>
         )}
 
         {thumbnails.length > 0 && !isLoadingPages && (
-          <div className="space-y-6 pt-2">
-            {/* Top Toolbar: Range String Input & Selection Presets */}
-            <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3.5">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <label className="text-xs font-black uppercase tracking-wider text-slate-900 flex items-center gap-1.5">
-                  <Scissors className="w-4 h-4 text-indigo-600" />
-                  Selected Pages Range ({selectedPages.length} of {thumbnails.length} Selected)
-                </label>
-                <div className="flex items-center gap-1.5 flex-wrap">
+          <div className="space-y-6 animate-in fade-in duration-200">
+            {/* Range Input & Fast Quick Selection Toolbar */}
+            <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div className="space-y-1">
+                  <h3 className="text-base font-black text-slate-900 flex items-center gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-indigo-600" />
+                    Select Pages to Extract
+                  </h3>
+                  <p className="text-xs text-slate-500 font-medium">
+                    Type a page string (e.g. <strong className="text-slate-700 font-bold">1, 3-5, 8</strong>) or click page cards below to toggle selection.
+                  </p>
+                </div>
+
+                {/* Range Input Field */}
+                <div className="flex items-center gap-2 min-w-[280px]">
+                  <input
+                    type="text"
+                    value={rangeStr}
+                    onChange={(e) => handleRangeInputChange(e.target.value)}
+                    placeholder="e.g. 1, 3-5, 8"
+                    className="flex-1 px-4 py-2.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs font-mono font-bold text-slate-900 focus:bg-white focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all"
+                  />
+                  <button
+                    onClick={() => handleRangeInputChange(rangeStr)}
+                    className="px-4 py-2.5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs shadow-xs transition-colors shrink-0"
+                  >
+                    Apply
+                  </button>
+                </div>
+              </div>
+
+              {/* Fast Quick Buttons */}
+              <div className="pt-2 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+                <div className="flex flex-wrap items-center gap-2">
                   <button
                     type="button"
                     onClick={handleSelectAll}
-                    className="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 border border-slate-200 text-slate-900 hover:bg-indigo-50 hover:text-indigo-600 transition-all cursor-pointer shadow-2xs"
+                    className="px-3 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-extrabold transition-colors"
                   >
-                    Select All
-                  </button>
-                  <button
-                    type="button"
-                    onClick={handleDeselectAll}
-                    className="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 border border-slate-200 text-slate-900 hover:bg-rose-50 hover:text-rose-600 transition-all cursor-pointer shadow-2xs"
-                  >
-                    Deselect All
+                    Select All ({thumbnails.length})
                   </button>
                   <button
                     type="button"
                     onClick={handleSelectOdd}
-                    className="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 border border-slate-200 text-slate-900 hover:bg-indigo-50 hover:text-indigo-600 transition-all cursor-pointer shadow-2xs"
+                    className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold transition-colors"
                   >
-                    Odd Pages
+                    Select Odd Pages
                   </button>
                   <button
                     type="button"
                     onClick={handleSelectEven}
-                    className="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 border border-slate-200 text-slate-900 hover:bg-indigo-50 hover:text-indigo-600 transition-all cursor-pointer shadow-2xs"
+                    className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold transition-colors"
                   >
-                    Even Pages
+                    Select Even Pages
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleDeselectAll}
+                    className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold transition-colors"
+                  >
+                    Clear Selection
                   </button>
                 </div>
-              </div>
 
-              <input
-                type="text"
-                value={rangeStr}
-                onChange={(e) => handleRangeInputChange(e.target.value)}
-                placeholder="e.g. 1, 3, 5-8"
-                className="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white text-slate-900 font-mono font-bold text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-2xs"
-              />
-              <p className="text-xs text-slate-600 font-medium">
-                Click page thumbnails below to check/uncheck pages, or edit page range string above (e.g. &quot;1, 3-5, 8&quot;).
-              </p>
+                <span className="text-xs font-black text-indigo-600 bg-indigo-50 px-3 py-1 rounded-xl">
+                  {selectedPages.length} of {thumbnails.length} Selected
+                </span>
+              </div>
             </div>
 
             {/* Visual PDF Page Selection Grid Section */}
-            <div className="p-5 sm:p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
-              {/* Header Controls: Title & Zoom Selector */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
+            <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4">
+              <div className="flex items-center justify-between gap-3 pb-3 border-b border-slate-100">
                 <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-1 rounded-lg bg-indigo-600 text-white font-extrabold text-xs shadow-2xs">
+                  <span className="px-2.5 py-1 rounded-xl bg-indigo-600 text-white font-black text-xs">
                     {thumbnails.length} Pages
                   </span>
-                  <h3 className="text-xs font-black uppercase tracking-wider text-slate-900">
-                    Entire PDF Page View — Check pages to extract
-                  </h3>
-                </div>
-
-                {/* Page Zoom Control Selector */}
-                <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200 shadow-2xs self-start sm:self-auto">
-                  <span className="text-xs font-extrabold text-slate-700 px-2 flex items-center gap-1">
-                    <ZoomIn className="w-3.5 h-3.5 text-indigo-600" />
-                    Zoom View:
+                  <span className="text-xs font-black text-slate-800">
+                    High-Resolution Large Page Previews
                   </span>
-                  <button
-                    type="button"
-                    onClick={() => setGridZoom('compact')}
-                    className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                      gridZoom === 'compact'
-                        ? 'bg-indigo-600 text-white shadow-xs'
-                        : 'text-slate-800 hover:bg-slate-200'
-                    }`}
-                  >
-                    Small
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setGridZoom('standard')}
-                    className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                      gridZoom === 'standard'
-                        ? 'bg-indigo-600 text-white shadow-xs'
-                        : 'text-slate-800 hover:bg-slate-200'
-                    }`}
-                  >
-                    Medium
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setGridZoom('large')}
-                    className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                      gridZoom === 'large'
-                        ? 'bg-indigo-600 text-white shadow-xs'
-                        : 'text-slate-800 hover:bg-slate-200'
-                    }`}
-                  >
-                    Large Zoom
-                  </button>
                 </div>
               </div>
 
               {/* Responsive Page Card Grid */}
-              <div className={`grid ${getGridClasses()} max-h-[600px] overflow-y-auto p-1 scrollbar-thin`}>
+              <div className={`grid ${getGridClasses()} max-h-[720px] overflow-y-auto p-1.5 scrollbar-thin`}>
                 {thumbnails.map((thumb) => {
                   const isChecked = selectedPages.includes(thumb.pageNumber);
                   return (
                     <div
                       key={thumb.pageNumber}
                       onClick={() => togglePageSelection(thumb.pageNumber)}
-                      className={`relative group cursor-pointer rounded-2xl p-3 flex flex-col items-center justify-between space-y-2.5 border transition-all duration-200 select-none ${
+                      className={`relative group cursor-pointer rounded-3xl p-3 flex flex-col items-center justify-center border transition-all duration-200 select-none ${
                         isChecked
-                          ? 'border-2 border-indigo-600 bg-white ring-2 ring-indigo-500/30 shadow-md scale-[1.01]'
+                          ? 'border-2 border-indigo-600 bg-white ring-4 ring-indigo-500/20 shadow-xl scale-[1.01]'
                           : 'border border-slate-200 bg-white hover:border-slate-400 hover:shadow-xs'
                       }`}
                     >
-                      {/* Card Header Row */}
-                      <div className="w-full flex items-center justify-between px-0.5">
-                        <span className={`text-xs font-black ${isChecked ? 'text-indigo-950' : 'text-slate-800'}`}>
-                          Page {thumb.pageNumber}
-                        </span>
-
-                        <div className="flex items-center gap-1.5">
-                          {/* Full Zoom Preview Icon Button */}
-                          <button
-                            type="button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setPreviewModalPage(thumb);
-                            }}
-                            className="p-1 rounded-lg text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-colors"
-                            title="Zoom Full Page"
-                          >
-                            <Maximize2 className="w-3.5 h-3.5" />
-                          </button>
-
-                          {/* Checkmark Badge */}
-                          <div>
-                            {isChecked ? (
-                              <CheckCircle2 className="w-5 h-5 text-indigo-600 fill-indigo-100" />
-                            ) : (
-                              <Square className="w-5 h-5 text-slate-300" />
-                            )}
+                      {/* Top Right Tick Mark Overlay */}
+                      <div className="absolute top-4 right-4 z-10">
+                        {isChecked ? (
+                          <div className="w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center shadow-lg border-2 border-white">
+                            <CheckCircle2 className="w-6 h-6 fill-indigo-600 text-white" />
                           </div>
-                        </div>
+                        ) : (
+                          <div className="w-8 h-8 rounded-full bg-white/90 border-2 border-slate-300 flex items-center justify-center shadow-xs group-hover:border-indigo-400">
+                            <Square className="w-4 h-4 text-slate-400" />
+                          </div>
+                        )}
                       </div>
 
-                      {/* PDF Thumbnail Container */}
-                      <div className={`relative w-full ${getImgContainerHeight()} flex items-center justify-center overflow-hidden rounded-xl bg-slate-50 p-2 border border-slate-200 shadow-2xs group-hover:border-indigo-200 transition-colors`}>
+                      {/* Top Left Zoom Preview Icon Button */}
+                      <div className="absolute top-4 left-4 z-10">
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setPreviewModalPage(thumb);
+                          }}
+                          className="p-2 rounded-xl bg-white/90 border border-slate-200 text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 transition-colors shadow-xs"
+                          title="Zoom Full Page"
+                        >
+                          <Maximize2 className="w-4 h-4" />
+                        </button>
+                      </div>
+
+                      {/* PDF Thumbnail Container (Big & Readable) */}
+                      <div className={`relative w-full ${getImgContainerHeight()} flex items-center justify-center overflow-hidden rounded-2xl bg-slate-50 p-1.5 border border-slate-200/80`}>
                         <img
                           src={thumb.dataUrl}
                           alt={`PDF Page ${thumb.pageNumber}`}
-                          className="max-h-full max-w-full object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+                          className="max-h-full max-w-full object-contain shadow-xs transition-transform duration-200 group-hover:scale-[1.01]"
                         />
 
                         {/* Hover Overlay Hint */}
                         <div className="absolute inset-0 bg-indigo-900/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
-                          <span className="px-3 py-1 rounded-full bg-white text-indigo-600 font-black text-[11px] shadow-sm flex items-center gap-1">
-                            <Eye className="w-3.5 h-3.5" />
+                          <span className="px-3.5 py-1.5 rounded-full bg-white text-indigo-700 font-black text-xs shadow-md flex items-center gap-1.5">
+                            <Eye className="w-4 h-4" />
                             {isChecked ? 'Click to Deselect' : 'Click to Select'}
                           </span>
                         </div>
-                      </div>
-
-                      {/* Card Footer Status Badge */}
-                      <div className="w-full text-center text-xs font-bold pt-0.5">
-                        {isChecked ? (
-                          <span className="inline-block px-3 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200 text-[11px] font-black">
-                            ✓ Included
-                          </span>
-                        ) : (
-                          <span className="text-slate-500 font-medium text-[11px]">Excluded</span>
-                        )}
                       </div>
                     </div>
                   );
