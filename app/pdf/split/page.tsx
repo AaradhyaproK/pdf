@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ToolLayout } from '@/components/ToolLayout';
 import { FileUploader, FileItem } from '@/components/FileUploader';
 import { splitPDF, renderPDFPagesToImages } from '@/lib/pdf-engine';
@@ -78,6 +78,16 @@ export default function SplitPDFPage() {
   const [isLoadingPages, setIsLoadingPages] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (previewModalPage) {
+      const timer = setTimeout(() => {
+        const el = document.getElementById(`split-preview-page-${previewModalPage.pageNumber}`);
+        el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 80);
+      return () => clearTimeout(timer);
+    }
+  }, [previewModalPage]);
 
   const handleFileSelect = async (selected: FileItem[]) => {
     setFiles(selected);
@@ -399,142 +409,112 @@ export default function SplitPDFPage() {
         )}
       </div>
 
-      {/* Enhanced Mobile-App Zoom Modal Full Page Preview Overlay */}
+      {/* Day Mode Page-Sized Full View Preview Modal */}
       {previewModalPage && (
-        <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-xs flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-150">
-          <div className="relative bg-white dark:bg-slate-900 rounded-2xl sm:rounded-3xl p-4 sm:p-6 max-w-4xl w-full max-h-[92vh] flex flex-col justify-between space-y-3 sm:space-y-4 shadow-2xl border border-slate-200 dark:border-slate-800">
+        <div className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-150">
+          <div className="relative bg-white rounded-3xl p-4 sm:p-6 max-w-4xl w-full max-h-[90vh] sm:max-h-[88vh] flex flex-col justify-between space-y-4 shadow-2xl border border-slate-200 animate-in zoom-in-95 duration-150">
             {/* Modal Header */}
-            <div className="flex items-center justify-between gap-2 pb-3 border-b border-slate-200 dark:border-slate-800">
+            <div className="flex items-center justify-between gap-2 pb-3 border-b border-slate-200 shrink-0">
               <div className="flex items-center gap-2 min-w-0">
-                <span className="px-2.5 py-1 rounded-xl bg-indigo-600 text-white font-black text-xs shrink-0">
-                  Page {previewModalPage.pageNumber} / {thumbnails.length}
+                <span className="px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 font-extrabold text-xs shrink-0 flex items-center gap-1">
+                  <span>Page {previewModalPage.pageNumber} / {thumbnails.length}</span>
                 </span>
-
-                {/* Jump to Any Page Dropdown Selector */}
-                <select
-                  value={previewModalPage.pageNumber}
-                  onChange={(e) => {
-                    const targetNum = parseInt(e.target.value, 10);
-                    const targetThumb = thumbnails.find((t) => t.pageNumber === targetNum);
-                    if (targetThumb) setPreviewModalPage(targetThumb);
-                  }}
-                  className="px-2.5 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-700 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500/20 shrink-0"
-                >
-                  {thumbnails.map((t) => (
-                    <option key={t.pageNumber} value={t.pageNumber}>
-                      Jump to Page {t.pageNumber} {selectedPages.includes(t.pageNumber) ? '✓' : ''}
-                    </option>
-                  ))}
-                </select>
+                <span className="text-xs font-bold text-slate-500 truncate hidden sm:inline">
+                  Vertical Scroll Mode
+                </span>
               </div>
 
               <button
                 type="button"
                 onClick={() => setPreviewModalPage(null)}
-                className="p-1.5 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors shrink-0"
-                title="Close"
+                className="p-2 rounded-full text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors shrink-0 cursor-pointer"
+                title="Close preview"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Modal Body: Image Container with Prev / Next Navigation Overlay */}
-            <div className="relative flex-1 min-h-[320px] overflow-auto flex items-center justify-center bg-slate-100 dark:bg-slate-950 p-2 sm:p-4 rounded-xl sm:rounded-2xl border border-slate-200/80 dark:border-slate-800">
-              {/* Previous Page Button Overlay */}
-              <button
-                disabled={previewModalPage.pageNumber <= 1}
-                onClick={() => {
-                  const prevThumb = thumbnails.find((t) => t.pageNumber === previewModalPage.pageNumber - 1);
-                  if (prevThumb) setPreviewModalPage(prevThumb);
-                }}
-                className="absolute left-2 sm:left-4 z-20 p-2 sm:p-3 rounded-full bg-slate-900/80 text-white hover:bg-slate-900 disabled:opacity-20 shadow-lg border border-slate-700 active:scale-95 transition-all cursor-pointer"
-                title="Previous Page"
-              >
-                <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
-              </button>
+            {/* Modal Body: Vertical Scroll of All Document Pages */}
+            <div className="flex-1 overflow-y-auto bg-slate-100/90 p-3 sm:p-5 rounded-2xl border border-slate-200/80 space-y-6 scrollbar-thin">
+              {thumbnails.map((thumb) => {
+                const isSelected = selectedPages.includes(thumb.pageNumber);
+                return (
+                  <div
+                    key={thumb.pageNumber}
+                    id={`split-preview-page-${thumb.pageNumber}`}
+                    className={`bg-white p-3 sm:p-5 rounded-2xl shadow-md border transition-all max-w-3xl mx-auto flex flex-col items-center gap-3 relative ${
+                      isSelected ? 'border-indigo-500 ring-2 ring-indigo-500/20' : 'border-slate-200'
+                    }`}
+                  >
+                    {/* Header bar per page */}
+                    <div className="w-full flex items-center justify-between pb-2 border-b border-slate-100">
+                      <span className="px-2.5 py-0.5 rounded-full bg-slate-900 text-white font-black text-[11px]">
+                        Page {thumb.pageNumber} of {thumbnails.length}
+                      </span>
 
-              {/* High-Res PDF Page Image */}
-              <img
-                src={previewModalPage.dataUrl}
-                alt={`PDF Page ${previewModalPage.pageNumber}`}
-                className="max-h-[62vh] max-w-full object-contain rounded-lg shadow-md"
-              />
+                      <button
+                        type="button"
+                        onClick={() => togglePageSelection(thumb.pageNumber)}
+                        className={`px-3 py-1 rounded-xl text-xs font-extrabold flex items-center gap-1.5 transition-all cursor-pointer ${
+                          isSelected
+                            ? 'bg-indigo-600 text-white shadow-xs'
+                            : 'bg-slate-100 text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 border border-slate-200'
+                        }`}
+                      >
+                        {isSelected ? (
+                          <>
+                            <CheckCircle2 className="w-3.5 h-3.5 text-white" />
+                            <span>Selected</span>
+                          </>
+                        ) : (
+                          <>
+                            <Square className="w-3.5 h-3.5 text-slate-400" />
+                            <span>Select Page</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
 
-              {/* Next Page Button Overlay */}
-              <button
-                disabled={previewModalPage.pageNumber >= thumbnails.length}
-                onClick={() => {
-                  const nextThumb = thumbnails.find((t) => t.pageNumber === previewModalPage.pageNumber + 1);
-                  if (nextThumb) setPreviewModalPage(nextThumb);
-                }}
-                className="absolute right-2 sm:right-4 z-20 p-2 sm:p-3 rounded-full bg-slate-900/80 text-white hover:bg-slate-900 disabled:opacity-20 shadow-lg border border-slate-700 active:scale-95 transition-all cursor-pointer"
-                title="Next Page"
-              >
-                <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
-              </button>
+                    {/* Page Image */}
+                    <div className="w-full flex items-center justify-center p-1 bg-slate-50 rounded-xl overflow-hidden min-h-[200px]">
+                      <img
+                        src={thumb.dataUrl}
+                        alt={`PDF Page ${thumb.pageNumber}`}
+                        className="max-h-[70vh] max-w-full object-contain rounded-lg shadow-xs"
+                      />
+                    </div>
+                  </div>
+                );
+              })}
             </div>
 
             {/* Modal Footer Controls */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-2.5 pt-1">
-              <div className="flex items-center gap-2 w-full sm:w-auto">
-                {/* Prev Quick Button */}
-                <button
-                  type="button"
-                  disabled={previewModalPage.pageNumber <= 1}
-                  onClick={() => {
-                    const prevThumb = thumbnails.find((t) => t.pageNumber === previewModalPage.pageNumber - 1);
-                    if (prevThumb) setPreviewModalPage(prevThumb);
-                  }}
-                  className="px-3 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 disabled:opacity-30 text-xs font-bold flex items-center gap-1 active:scale-95"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                  <span>Prev</span>
-                </button>
-
-                {/* Direct Selection Toggle Button */}
-                <button
-                  type="button"
-                  onClick={() => {
-                    togglePageSelection(previewModalPage.pageNumber);
-                  }}
-                  className={`flex-1 sm:flex-initial px-4 py-2.5 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer active:scale-95 ${
-                    selectedPages.includes(previewModalPage.pageNumber)
-                      ? 'bg-indigo-600 text-white shadow-md'
-                      : 'bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700'
-                  }`}
-                >
-                  {selectedPages.includes(previewModalPage.pageNumber) ? (
-                    <>
-                      <CheckCircle2 className="w-4 h-4 text-white" />
-                      <span>Selected for Extraction</span>
-                    </>
-                  ) : (
-                    <>
-                      <Square className="w-4 h-4 text-slate-500" />
-                      <span>Select Page for Extraction</span>
-                    </>
-                  )}
-                </button>
-
-                {/* Next Quick Button */}
-                <button
-                  type="button"
-                  disabled={previewModalPage.pageNumber >= thumbnails.length}
-                  onClick={() => {
-                    const nextThumb = thumbnails.find((t) => t.pageNumber === previewModalPage.pageNumber + 1);
-                    if (nextThumb) setPreviewModalPage(nextThumb);
-                  }}
-                  className="px-3 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 disabled:opacity-30 text-xs font-bold flex items-center gap-1 active:scale-95"
-                >
-                  <span>Next</span>
-                  <ChevronRight className="w-4 h-4" />
-                </button>
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-2.5 pt-1 shrink-0">
+              <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto py-1">
+                <span className="text-[11px] font-bold text-slate-400 shrink-0">Jump to:</span>
+                {thumbnails.map((t) => (
+                  <button
+                    key={t.pageNumber}
+                    type="button"
+                    onClick={() => {
+                      const el = document.getElementById(`split-preview-page-${t.pageNumber}`);
+                      el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }}
+                    className={`px-2.5 py-1 rounded-xl text-xs font-extrabold transition-all shrink-0 cursor-pointer ${
+                      selectedPages.includes(t.pageNumber)
+                        ? 'bg-indigo-50 text-indigo-700 border border-indigo-200'
+                        : 'bg-slate-100 text-slate-700 border border-slate-200 hover:bg-slate-200'
+                    }`}
+                  >
+                    #{t.pageNumber}
+                  </button>
+                ))}
               </div>
 
               <button
                 type="button"
                 onClick={() => setPreviewModalPage(null)}
-                className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-xs transition-colors"
+                className="w-full sm:w-auto px-5 py-2.5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs shadow-sm transition-colors cursor-pointer"
               >
                 Close Preview
               </button>

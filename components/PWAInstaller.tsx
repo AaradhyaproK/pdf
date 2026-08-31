@@ -11,16 +11,24 @@ export function PWAInstaller() {
   const [isInstalled, setIsInstalled] = useState<boolean>(false);
 
   useEffect(() => {
-    // Register PWA Service Worker
+    // Register PWA Service Worker (only in production to avoid dev HMR chunk caching)
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker
-        .register('/sw.js')
-        .then((reg) => {
-          console.log('PWA Service Worker registered:', reg.scope);
-        })
-        .catch((err) => {
-          console.error('Service worker registration failed:', err);
+      if (process.env.NODE_ENV === 'production') {
+        navigator.serviceWorker
+          .register('/sw.js')
+          .then((reg) => {
+            console.log('PWA Service Worker registered:', reg.scope);
+          })
+          .catch((err) => {
+            console.error('Service worker registration failed:', err);
+          });
+      } else {
+        navigator.serviceWorker.getRegistrations().then((registrations) => {
+          for (const registration of registrations) {
+            registration.unregister();
+          }
         });
+      }
     }
 
     // Check if app is already running in standalone mode or dismissed permanently

@@ -107,65 +107,98 @@ export function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full luma-glass-texture transition-all duration-300 ${
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? 'luma-glass-header-scrolled'
-          : 'luma-glass-header'
+          ? 'bg-transparent py-1.5 md:py-0 md:bg-white md:border-b md:border-slate-200 md:shadow-xs'
+          : 'bg-transparent py-1 md:py-0 md:bg-white md:border-b md:border-slate-200/80 md:shadow-2xs'
       }`}
     >
-      {/* YouTube-Style Expanded Search Bar Header on Mobile */}
+      {/* Expanded Search Bar Header on Mobile */}
       {searchOpen ? (
-        <div className="max-w-7xl mx-auto px-2 h-14 flex items-center gap-2 bg-white/60 backdrop-blur-2xl z-50">
+        <div className="max-w-md mx-auto px-2 py-1.5 flex items-center gap-2 bg-white/85 backdrop-blur-2xl rounded-full border border-white/80 shadow-2xl z-50 my-1">
           <button
             onClick={() => {
               setSearchOpen(false);
               setSearchQuery('');
             }}
-            className="p-2 text-slate-600 hover:text-slate-900 rounded-full active:scale-90 transition-all duration-150"
+            className="p-1.5 text-slate-600 hover:text-slate-900 rounded-full active:scale-90 transition-all duration-150"
             aria-label="Close search"
           >
-            <ArrowLeft className="w-5 h-5 text-slate-700" />
+            <ArrowLeft className="w-4 h-4 text-slate-700" />
           </button>
 
           <div className="flex-1 relative flex items-center">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3 pointer-events-none" />
+            <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 pointer-events-none" />
             <input
               ref={searchInputRef}
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search PDF, Image & Utility tools..."
-              className="w-full pl-9 pr-8 py-2 bg-slate-100/90 border border-slate-200/90 rounded-full text-xs font-semibold text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 shadow-inner"
+              placeholder="Search tools..."
+              className="w-full pl-8 pr-7 py-1.5 bg-slate-100/90 border border-slate-200/90 rounded-full text-xs font-semibold text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-slate-900/20 focus:border-slate-800 shadow-inner"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-2.5 text-slate-400 hover:text-slate-600 p-1"
+                className="absolute right-2 text-slate-400 hover:text-slate-600 p-1"
               >
-                <X className="w-4 h-4" />
+                <X className="w-3.5 h-3.5" />
               </button>
             )}
           </div>
         </div>
       ) : (
-        /* Standard Header Navigation */
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-2">
-          {/* Brand Logo - Minimal on Mobile */}
-          <Link href="/" className="flex items-center gap-1.5 sm:gap-2.5 group shrink-0 active:scale-95 transition-transform duration-200">
-            <img
-              src="/1.png"
-              alt="FileZenith Logo"
-              className="w-7 h-7 sm:w-10 sm:h-10 object-contain group-hover:scale-105 transition-transform"
-            />
-            <div className="flex flex-col">
-              <span className="font-black text-[13px] sm:text-xl tracking-tight text-slate-900 leading-none">
+        <>
+          {/* Mobile Header: Floating Liquid Glass Capsule on Scroll / Transparent at Top */}
+          <div
+            className={`md:hidden transition-all duration-300 ease-out ${
+              scrolled
+                ? 'apple-dynamic-island luma-glass-texture rounded-full px-3.5 py-1.5 shadow-xl border border-white/80 max-w-[calc(100%-1.5rem)] sm:max-w-md mx-auto flex items-center justify-between gap-2'
+                : 'w-full px-4 py-2 flex items-center justify-between gap-2 bg-transparent'
+            }`}
+          >
+            {/* Mobile Brand Logo Capsule */}
+            <Link href="/" className="flex items-center gap-2 group shrink-0 active:scale-95 transition-transform duration-200">
+              <img
+                src="/1.png"
+                alt="FileZenith Logo"
+                className={`object-contain transition-all duration-300 ${scrolled ? 'w-6 h-6' : 'w-7 h-7'}`}
+              />
+              <span className={`font-black tracking-tight text-slate-900 leading-none transition-all duration-300 ${scrolled ? 'text-xs sm:text-sm' : 'text-sm sm:text-base'}`}>
                 FileZenith
               </span>
-              <span className="hidden sm:block text-[10px] text-slate-500 font-medium tracking-wide">
-                100% Client-Side Engine
-              </span>
-            </div>
-          </Link>
+            </Link>
+
+            {/* Mobile Search Button Pill */}
+            <button
+              onClick={() => setSearchOpen(true)}
+              className="luma-glass-pill px-2.5 py-1 flex items-center gap-1 text-slate-800 hover:text-slate-900 active:scale-95 transition-all cursor-pointer"
+              aria-label="Search tools"
+              title="Search Tools"
+            >
+              <Search className="w-3.5 h-3.5 text-slate-800 stroke-[2.2]" />
+              <span className="text-[11px] font-extrabold tracking-tight text-slate-800">Search</span>
+            </button>
+          </div>
+
+          {/* Desktop Header Navigation */}
+          <div className="hidden md:flex max-w-7xl mx-auto px-6 lg:px-8 h-16 items-center justify-between gap-2">
+            {/* Brand Logo - Desktop */}
+            <Link href="/" className="flex items-center gap-2.5 group shrink-0 active:scale-95 transition-transform duration-200">
+              <img
+                src="/1.png"
+                alt="FileZenith Logo"
+                className="w-9 h-9 object-contain group-hover:scale-105 transition-transform"
+              />
+              <div className="flex flex-col">
+                <span className="font-black text-xl tracking-tight text-slate-900 leading-none">
+                  FileZenith
+                </span>
+                <span className="text-[10px] text-slate-500 font-medium tracking-wide">
+                  100% Client-Side Engine
+                </span>
+              </div>
+            </Link>
 
           {/* Desktop Megamenu Navigation */}
           <nav className="hidden md:flex items-center gap-1 text-sm font-semibold text-slate-700">
@@ -175,20 +208,20 @@ export function Navbar() {
                 href="/pdf/compress"
                 className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-all ${
                   isActive('/pdf')
-                    ? 'bg-rose-50 text-rose-700 font-extrabold border border-rose-200/60'
+                    ? 'bg-slate-900/10 text-slate-900 font-extrabold border border-slate-900/15 backdrop-blur-sm'
                     : 'hover:bg-slate-100 hover:text-slate-900'
                 }`}
               >
-                <FileText className="w-4 h-4 text-rose-500" />
+                <FileText className="w-4 h-4 text-slate-700" />
                 <span>PDF Studio</span>
                 <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:rotate-180 transition-transform duration-200" />
               </Link>
 
               {/* Megamenu Panel */}
-              <div className="absolute top-full left-0 w-[580px] bg-white border border-slate-200 rounded-3xl shadow-2xl p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0 grid grid-cols-2 gap-2">
+              <div className="absolute top-full left-0 w-[580px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0 grid grid-cols-2 gap-2">
                 <div className="col-span-2 px-3 py-1.5 flex items-center justify-between border-b border-slate-100 mb-1">
-                  <span className="text-xs font-black uppercase tracking-wider text-rose-600">PDF Studio Tools</span>
-                  <span className="text-[10px] bg-rose-50 text-rose-700 px-2 py-0.5 rounded-full font-bold">100% Private</span>
+                  <span className="text-xs font-black uppercase tracking-wider text-slate-900">PDF Studio Tools</span>
+                  <span className="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded-full font-bold border border-slate-200/80">100% Private</span>
                 </div>
                 {PDF_TOOLS.map((tool) => {
                   const Icon = tool.icon;
@@ -196,18 +229,18 @@ export function Navbar() {
                     <Link
                       key={tool.slug}
                       href={tool.slug}
-                      className="p-2.5 rounded-2xl hover:bg-rose-50/60 transition-colors flex items-start gap-3 group/item border border-transparent hover:border-rose-100"
+                      className="p-2.5 rounded-2xl hover:bg-slate-100/80 transition-colors flex items-start gap-3 group/item border border-transparent hover:border-slate-200/80"
                     >
-                      <div className="p-2 rounded-xl bg-rose-100/80 text-rose-700 group-hover/item:bg-rose-600 group-hover/item:text-white transition-colors shrink-0">
+                      <div className="p-2 rounded-xl bg-slate-100 text-slate-800 group-hover/item:bg-slate-900 group-hover/item:text-white transition-colors shrink-0">
                         <Icon className="w-4 h-4" />
                       </div>
                       <div className="min-w-0">
                         <div className="flex items-center gap-1.5">
-                          <span className="text-xs font-bold text-slate-900 group-hover/item:text-rose-700 transition-colors truncate">
+                          <span className="text-xs font-bold text-slate-900 transition-colors truncate">
                             {tool.name}
                           </span>
                           {tool.badge && (
-                            <span className="text-[9px] font-black px-1.5 py-0.2 rounded bg-rose-100 text-rose-800 shrink-0">
+                            <span className="text-[9px] font-black px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200/80 shrink-0">
                               {tool.badge}
                             </span>
                           )}
@@ -226,20 +259,20 @@ export function Navbar() {
                 href="/image/compress"
                 className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-all ${
                   isActive('/image')
-                    ? 'bg-sky-50 text-sky-700 font-extrabold border border-sky-200/60'
+                    ? 'bg-slate-900/10 text-slate-900 font-extrabold border border-slate-900/15 backdrop-blur-sm'
                     : 'hover:bg-slate-100 hover:text-slate-900'
                 }`}
               >
-                <ImageIcon className="w-4 h-4 text-sky-500" />
+                <ImageIcon className="w-4 h-4 text-slate-700" />
                 <span>Image Studio</span>
                 <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:rotate-180 transition-transform duration-200" />
               </Link>
 
               {/* Megamenu Panel */}
-              <div className="absolute top-full left-0 w-[580px] bg-white border border-slate-200 rounded-3xl shadow-2xl p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0 grid grid-cols-2 gap-2">
+              <div className="absolute top-full left-0 w-[580px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0 grid grid-cols-2 gap-2">
                 <div className="col-span-2 px-3 py-1.5 flex items-center justify-between border-b border-slate-100 mb-1">
-                  <span className="text-xs font-black uppercase tracking-wider text-sky-600">Image Studio Tools</span>
-                  <span className="text-[10px] bg-sky-50 text-sky-700 px-2 py-0.5 rounded-full font-bold">Fast Canvas AI</span>
+                  <span className="text-xs font-black uppercase tracking-wider text-slate-900">Image Studio Tools</span>
+                  <span className="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded-full font-bold border border-slate-200/80">Fast Canvas AI</span>
                 </div>
                 {IMAGE_TOOLS.map((tool) => {
                   const Icon = tool.icon;
@@ -247,18 +280,18 @@ export function Navbar() {
                     <Link
                       key={tool.slug}
                       href={tool.slug}
-                      className="p-2.5 rounded-2xl hover:bg-sky-50/60 transition-colors flex items-start gap-3 group/item border border-transparent hover:border-sky-100"
+                      className="p-2.5 rounded-2xl hover:bg-slate-100/80 transition-colors flex items-start gap-3 group/item border border-transparent hover:border-slate-200/80"
                     >
-                      <div className="p-2 rounded-xl bg-sky-100/80 text-sky-700 group-hover/item:bg-sky-600 group-hover/item:text-white transition-colors shrink-0">
+                      <div className="p-2 rounded-xl bg-slate-100 text-slate-800 group-hover/item:bg-slate-900 group-hover/item:text-white transition-colors shrink-0">
                         <Icon className="w-4 h-4" />
                       </div>
                       <div className="min-w-0">
                         <div className="flex items-center gap-1.5">
-                          <span className="text-xs font-bold text-slate-900 group-hover/item:text-sky-700 transition-colors truncate">
+                          <span className="text-xs font-bold text-slate-900 transition-colors truncate">
                             {tool.name}
                           </span>
                           {tool.badge && (
-                            <span className="text-[9px] font-black px-1.5 py-0.2 rounded bg-sky-100 text-sky-800 shrink-0">
+                            <span className="text-[9px] font-black px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200/80 shrink-0">
                               {tool.badge}
                             </span>
                           )}
@@ -277,19 +310,19 @@ export function Navbar() {
                 href="/utility/qr-generator"
                 className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-all ${
                   isActive('/utility')
-                    ? 'bg-emerald-50 text-emerald-700 font-extrabold border border-emerald-200/60'
+                    ? 'bg-slate-900/10 text-slate-900 font-extrabold border border-slate-900/15 backdrop-blur-sm'
                     : 'hover:bg-slate-100 hover:text-slate-900'
                 }`}
               >
-                <Wrench className="w-4 h-4 text-emerald-500" />
+                <Wrench className="w-4 h-4 text-slate-700" />
                 <span>Daily Utilities</span>
                 <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:rotate-180 transition-transform duration-200" />
               </Link>
 
               {/* Dropdown Panel */}
-              <div className="absolute top-full left-0 w-[340px] bg-white border border-slate-200 rounded-3xl shadow-2xl p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0 space-y-2">
+              <div className="absolute top-full left-0 w-[340px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0 space-y-2">
                 <div className="px-3 py-1.5 flex items-center justify-between border-b border-slate-100 mb-1">
-                  <span className="text-xs font-black uppercase tracking-wider text-emerald-600">Daily Quick Utilities</span>
+                  <span className="text-xs font-black uppercase tracking-wider text-slate-900">Daily Quick Utilities</span>
                 </div>
                 {UTILITY_TOOLS.map((tool) => {
                   const Icon = tool.icon;
@@ -297,18 +330,18 @@ export function Navbar() {
                     <Link
                       key={tool.slug}
                       href={tool.slug}
-                      className="p-2.5 rounded-2xl hover:bg-emerald-50/60 transition-colors flex items-start gap-3 group/item border border-transparent hover:border-emerald-100"
+                      className="p-2.5 rounded-2xl hover:bg-slate-100/80 transition-colors flex items-start gap-3 group/item border border-transparent hover:border-slate-200/80"
                     >
-                      <div className="p-2 rounded-xl bg-emerald-100/80 text-emerald-700 group-hover/item:bg-emerald-600 group-hover/item:text-white transition-colors shrink-0">
+                      <div className="p-2 rounded-xl bg-slate-100 text-slate-800 group-hover/item:bg-slate-900 group-hover/item:text-white transition-colors shrink-0">
                         <Icon className="w-4 h-4" />
                       </div>
                       <div className="min-w-0">
                         <div className="flex items-center gap-1.5">
-                          <span className="text-xs font-bold text-slate-900 group-hover/item:text-emerald-700 transition-colors truncate">
+                          <span className="text-xs font-bold text-slate-900 transition-colors truncate">
                             {tool.name}
                           </span>
                           {tool.badge && (
-                            <span className="text-[9px] font-black px-1.5 py-0.2 rounded bg-emerald-100 text-emerald-800 shrink-0">
+                            <span className="text-[9px] font-black px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200/80 shrink-0">
                               {tool.badge}
                             </span>
                           )}
@@ -335,7 +368,8 @@ export function Navbar() {
             </button>
           </div>
         </div>
-      )}
+      </>
+    )}
 
       {/* Instant Dropdown Search Results Overlay on Mobile */}
       {searchOpen && searchQuery && (

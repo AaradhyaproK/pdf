@@ -40,8 +40,17 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const request = event.request;
 
-  // Ignore non-GET requests or admin/api requests
-  if (request.method !== 'GET' || request.url.includes('/api/') || request.url.includes('/admin/')) {
+  // Ignore non-GET requests, API, admin, and Next.js static/HMR assets
+  const url = new URL(request.url);
+  if (
+    request.method !== 'GET' ||
+    url.pathname.startsWith('/api/') ||
+    url.pathname.startsWith('/admin/') ||
+    url.pathname.startsWith('/_next/') ||
+    url.pathname.includes('webpack') ||
+    url.pathname.includes('turbopack') ||
+    url.pathname.includes('hot-reloader')
+  ) {
     return;
   }
 

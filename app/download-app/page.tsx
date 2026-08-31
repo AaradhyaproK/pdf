@@ -24,10 +24,18 @@ export default function DownloadAppPage() {
   useEffect(() => {
     // Register PWA Service Worker
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker
-        .register('/sw.js')
-        .then((reg) => console.log('PWA Service Worker registered:', reg.scope))
-        .catch((err) => console.error('Service Worker registration failed:', err));
+      if (process.env.NODE_ENV === 'production') {
+        navigator.serviceWorker
+          .register('/sw.js')
+          .then((reg) => console.log('PWA Service Worker registered:', reg.scope))
+          .catch((err) => console.error('Service Worker registration failed:', err));
+      } else {
+        navigator.serviceWorker.getRegistrations().then((registrations) => {
+          for (const registration of registrations) {
+            registration.unregister();
+          }
+        });
+      }
     }
 
     // Check if app is already running in standalone mode
