@@ -57,6 +57,8 @@ export const metadata: Metadata = {
 };
 
 import { CloudflareAnalytics } from '@/components/CloudflareAnalytics';
+import { MobileBottomNav } from '@/components/MobileBottomNav';
+import { PWAInstaller } from '@/components/PWAInstaller';
 
 export default function RootLayout({
   children,
@@ -89,8 +91,10 @@ export default function RootLayout({
         <CloudflareAnalytics />
         <AnalyticsTracker />
         <Navbar />
-        <div className="flex-1">{children}</div>
+        <div className="flex-1 pb-16 md:pb-0">{children}</div>
         <Footer />
+        <MobileBottomNav />
+        <PWAInstaller />
         <CookieConsent />
         <Toaster position="top-right" richColors />
       </body>

@@ -85,7 +85,7 @@ export function PWAInstaller() {
   if (isInstalled || !showInstallBanner) return null;
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-4 z-50 sm:max-w-sm bg-slate-900 text-white p-4.5 rounded-3xl shadow-2xl border border-slate-800 space-y-3 animate-in slide-in-from-bottom duration-300">
+    <div className="fixed bottom-16 left-4 right-4 sm:bottom-4 sm:left-auto sm:right-4 z-50 sm:max-w-sm bg-slate-900 text-white p-4.5 rounded-3xl shadow-2xl border border-slate-800 space-y-3 animate-in slide-in-from-bottom duration-300">
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-2xl bg-indigo-600 flex items-center justify-center text-white shrink-0 shadow-md">
