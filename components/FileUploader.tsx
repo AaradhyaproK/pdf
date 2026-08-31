@@ -99,10 +99,10 @@ export function FileUploader({
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         onClick={() => inputRef.current?.click()}
-        className={`relative w-full border-2 border-dashed rounded-3xl p-6 sm:p-10 text-center cursor-pointer transition-all duration-200 flex flex-col items-center justify-center ${
+        className={`relative w-full border-2 border-dashed rounded-2xl sm:rounded-3xl p-5 sm:p-10 text-center cursor-pointer transition-all duration-200 flex flex-col items-center justify-center ${
           isDragOver
             ? 'border-indigo-500 bg-indigo-50/80 scale-[1.01]'
-            : 'border-slate-300 bg-slate-50/60 hover:border-indigo-400 hover:bg-slate-100/50'
+            : 'border-slate-300/90 bg-slate-50/70 hover:border-indigo-400 hover:bg-slate-100/60'
         }`}
       >
         <input
@@ -114,20 +114,20 @@ export function FileUploader({
           className="hidden"
         />
 
-        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-3 sm:mb-4 border border-indigo-100">
-          <UploadCloud className="w-7 h-7 sm:w-8 sm:h-8" />
+        <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-3 border border-indigo-100 shadow-2xs">
+          <UploadCloud className="w-6 h-6 sm:w-8 sm:h-8 text-indigo-600" />
         </div>
 
-        <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-1 px-2">
+        <h3 className="text-sm sm:text-base font-black text-slate-900 mb-1 px-2 leading-snug">
           {title}
         </h3>
-        <p className="text-xs sm:text-sm text-slate-500 mb-4 max-w-md px-2">
+        <p className="text-xs text-slate-500 mb-3 sm:mb-4 max-w-md px-2 font-medium leading-relaxed">
           {subtitle}
         </p>
 
-        <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-bold text-xs sm:text-sm shadow-md shadow-indigo-500/20 transition-all">
+        <div className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-extrabold text-xs sm:text-sm shadow-md transition-all">
           <FolderPlus className="w-4 h-4" />
-          <span>Browse Files</span>
+          <span>Browse Files from Device</span>
         </div>
       </div>
 
@@ -151,20 +151,37 @@ export function FileUploader({
 
       {/* Selected File List / Previews */}
       {files.length > 0 && (
-        <div className="space-y-2.5 mt-4">
-          <div className="flex justify-between items-center px-1">
-            <span className="text-xs font-extrabold uppercase tracking-wider text-slate-400">
-              Selected Files ({files.length})
+        <div className="space-y-3 pt-2">
+          <div className="flex items-center justify-between px-1">
+            <span className="text-xs font-black uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+              <span>Selected Files</span>
+              <span className="px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 text-[10px] font-extrabold border border-indigo-100">
+                {files.length}
+              </span>
             </span>
+            {multiple && (
+              <button
+                onClick={() => inputRef.current?.click()}
+                className="text-xs font-bold text-indigo-600 hover:text-indigo-700 flex items-center gap-1 bg-indigo-50 px-2.5 py-1 rounded-xl border border-indigo-100 active:scale-95"
+              >
+                <FolderPlus className="w-3.5 h-3.5" />
+                <span>Add More</span>
+              </button>
+            )}
           </div>
 
-          <div className="grid grid-cols-1 gap-2.5 max-h-72 overflow-y-auto pr-1">
+          <div className="grid grid-cols-1 gap-2.5 max-h-80 overflow-y-auto pr-0.5">
             {files.map((item, index) => (
               <div
                 key={item.id}
-                className="flex items-center justify-between p-3 bg-white border border-slate-200/90 rounded-2xl shadow-xs hover:border-slate-300 transition-all"
+                className="flex items-center justify-between p-3 bg-white border border-slate-200/90 rounded-2xl shadow-2xs hover:border-slate-300 transition-all gap-3"
               >
-                <div className="flex items-center gap-3 min-w-0 pr-2">
+                <div className="flex items-center gap-3 min-w-0 pr-1">
+                  {/* Sequence Order Number Badge */}
+                  <span className="w-6 h-6 rounded-lg bg-slate-100 text-slate-600 text-[10px] font-black flex items-center justify-center shrink-0 border border-slate-200">
+                    #{index + 1}
+                  </span>
+
                   {item.previewUrl ? (
                     <img
                       src={item.previewUrl}
@@ -185,38 +202,38 @@ export function FileUploader({
                     <p className="text-xs sm:text-sm font-bold text-slate-900 truncate">
                       {item.file.name}
                     </p>
-                    <p className="text-[11px] text-slate-400">
-                      {(item.file.size / 1024).toFixed(1)} KB
+                    <p className="text-[10px] text-slate-400 font-semibold">
+                      {(item.file.size / (1024 * 1024)).toFixed(2)} MB
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-1 shrink-0">
                   {onReorderFiles && multiple && files.length > 1 && (
-                    <>
+                    <div className="flex items-center gap-1 bg-slate-50 p-1 rounded-xl border border-slate-200/70">
                       <button
                         onClick={() => moveItem(index, 'up')}
                         disabled={index === 0}
-                        className="min-h-[36px] min-w-[36px] flex items-center justify-center rounded-xl text-slate-400 hover:text-slate-700 disabled:opacity-20"
+                        className="w-7 h-7 flex items-center justify-center rounded-lg text-slate-500 hover:text-slate-900 hover:bg-white disabled:opacity-20 transition-all"
                         title="Move Up"
                       >
-                        <ArrowUp className="w-4 h-4" />
+                        <ArrowUp className="w-3.5 h-3.5" />
                       </button>
                       <button
                         onClick={() => moveItem(index, 'down')}
                         disabled={index === files.length - 1}
-                        className="min-h-[36px] min-w-[36px] flex items-center justify-center rounded-xl text-slate-400 hover:text-slate-700 disabled:opacity-20"
+                        className="w-7 h-7 flex items-center justify-center rounded-lg text-slate-500 hover:text-slate-900 hover:bg-white disabled:opacity-20 transition-all"
                         title="Move Down"
                       >
-                        <ArrowDown className="w-4 h-4" />
+                        <ArrowDown className="w-3.5 h-3.5" />
                       </button>
-                    </>
+                    </div>
                   )}
 
                   {onRemoveFile && (
                     <button
                       onClick={() => onRemoveFile(item.id)}
-                      className="min-h-[36px] min-w-[36px] flex items-center justify-center rounded-xl text-slate-400 hover:text-rose-600 transition-colors"
+                      className="w-8 h-8 flex items-center justify-center rounded-xl text-slate-400 hover:text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-100 transition-all"
                       title="Remove file"
                     >
                       <Trash2 className="w-4 h-4" />

@@ -5,7 +5,7 @@ import { ToolLayout } from '@/components/ToolLayout';
 import { FileUploader, FileItem } from '@/components/FileUploader';
 import { mergePDFs } from '@/lib/pdf-engine';
 import { toast } from 'sonner';
-import { Download } from 'lucide-react';
+import { Download, Combine, CheckCircle2, Sparkles, AlertCircle } from 'lucide-react';
 
 export default function MergePDFPage() {
   const [files, setFiles] = useState<FileItem[]>([]);
@@ -38,7 +38,7 @@ export default function MergePDFPage() {
       title="Merge PDF Files Online"
       subtitle="Combine multiple PDF documents into a single organized file directly in your browser. Reorder files easily."
     >
-      <div className="space-y-6">
+      <div className="space-y-5">
         <FileUploader
           accept="application/pdf"
           multiple={true}
@@ -47,29 +47,56 @@ export default function MergePDFPage() {
           onRemoveFile={(id) => setFiles(files.filter((f) => f.id !== id))}
           onReorderFiles={setFiles}
           title="Upload multiple PDF files to merge"
-          subtitle="Drag & drop or browse. Use arrows to reorder file sequence."
+          subtitle="Drag & drop or tap to browse. Reorder sequence with # numbers."
         />
+
+        {files.length === 1 && (
+          <div className="p-3.5 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-semibold flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 text-amber-600 shrink-0" />
+            <span>Select at least <strong>1 more PDF file</strong> to activate the Merge action.</span>
+          </div>
+        )}
 
         {files.length > 1 && (
           <button
             onClick={handleMerge}
             disabled={isProcessing}
-            className="w-full py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-base shadow-lg transition-all"
+            className="w-full py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 active:scale-[0.98] text-white font-black text-sm sm:text-base shadow-xl shadow-indigo-600/20 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
           >
-            {isProcessing ? 'Merging PDFs Locally...' : `Merge ${files.length} PDF Files`}
+            {isProcessing ? (
+              <>
+                <Sparkles className="w-4 h-4 animate-spin" />
+                <span>Merging PDFs Locally...</span>
+              </>
+            ) : (
+              <>
+                <Combine className="w-5 h-5" />
+                <span>Merge {files.length} PDF Documents</span>
+              </>
+            )}
           </button>
         )}
 
         {downloadUrl && (
-          <div className="p-6 rounded-3xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-900 dark:text-emerald-300 flex items-center justify-between gap-4">
-            <div>
-              <h4 className="font-bold">Merged PDF Ready!</h4>
-              <p className="text-xs text-emerald-700 dark:text-emerald-400">Combined {files.length} documents into one clean file.</p>
+          <div className="p-5 sm:p-6 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-emerald-500/10 via-emerald-500/15 to-emerald-500/10 border border-emerald-500/30 text-emerald-950 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-md">
+            <div className="flex items-center gap-3 text-left w-full sm:w-auto">
+              <div className="w-10 h-10 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-sm">
+                <CheckCircle2 className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="font-black text-sm sm:text-base text-slate-900 flex items-center gap-1.5">
+                  <span>Merged PDF Document Ready!</span>
+                </h4>
+                <p className="text-xs text-slate-600 font-medium">
+                  Combined {files.length} PDF files with 100% data privacy.
+                </p>
+              </div>
             </div>
+
             <a
               href={downloadUrl}
               download="merged-document.pdf"
-              className="px-6 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md flex items-center gap-2"
+              className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-black text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2"
             >
               <Download className="w-4 h-4" />
               <span>Download Merged PDF</span>
