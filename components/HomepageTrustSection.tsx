@@ -97,9 +97,9 @@ export function HomepageTrustSection() {
         {/* Live Trust Metrics Bar */}
         <div className="pt-4 border-t border-slate-100 grid grid-cols-2 md:grid-cols-4 gap-3 text-center">
           <div className="p-3 rounded-2xl bg-emerald-50/70 border border-emerald-100/80">
-            <span className="text-base sm:text-xl font-black text-emerald-800 block">4.9 / 5.0</span>
+            <span className="text-base sm:text-xl font-black text-emerald-800 block">25+ Tools</span>
             <span className="text-[10px] sm:text-xs text-emerald-700 font-semibold flex items-center justify-center gap-1">
-              <Star className="w-3 h-3 text-amber-500 fill-amber-400" /> 58,400+ Reviews
+              <CheckCircle2 className="w-3 h-3 text-emerald-600" /> PDF, Image & Utility
             </span>
           </div>
 
