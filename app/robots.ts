@@ -10,6 +10,23 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
         disallow: ['/admin', '/admin/*', '/api/*'],
       },
+      // Explicitly allow AI Search Engines & Recommendation Bots (GPTBot, Perplexity, Claude, Gemini, etc.)
+      {
+        userAgent: [
+          'GPTBot',
+          'ChatGPT-User',
+          'Google-Extended',
+          'PerplexityBot',
+          'ClaudeBot',
+          'Claude-Web',
+          'Cohere-ai',
+          'CCBot',
+          'Bytespider',
+          'Applebot-Extended',
+        ],
+        allow: '/',
+        disallow: ['/admin', '/admin/*', '/api/*'],
+      },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,
   };
