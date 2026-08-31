@@ -23,8 +23,13 @@ export function PWAInstaller() {
         });
     }
 
-    // Check if app is already running in standalone mode
-    if (window.matchMedia('(display-mode: standalone)').matches || (navigator as any).standalone) {
+    // Check if app is already running in standalone mode or dismissed permanently
+    const hasDismissed = localStorage.getItem('filezenith_pwa_dismissed');
+    if (
+      hasDismissed === 'true' ||
+      window.matchMedia('(display-mode: standalone)').matches ||
+      (navigator as any).standalone
+    ) {
       setIsInstalled(true);
       return;
     }
@@ -34,16 +39,13 @@ export function PWAInstaller() {
     const isIOSDevice = /iPad|iPhone|iPod/.test(userAgent) && !(window as any).MSStream;
     setIsIOS(isIOSDevice);
 
-    if (isIOSDevice) {
-      // Show iOS PWA banner after 2 seconds on first visit
-      const hasDismissedIOS = localStorage.getItem('filezenith_ios_pwa_dismissed');
-      if (!hasDismissedIOS) {
-        setTimeout(() => setShowInstallBanner(true), 2000);
-      }
+    if (isIOSDevice && !hasDismissed) {
+      setTimeout(() => setShowInstallBanner(true), 2000);
     }
 
     // Capture Android & Desktop Chrome/Edge native install prompt
     const handleBeforeInstallPrompt = (e: Event) => {
+      if (localStorage.getItem('filezenith_pwa_dismissed') === 'true') return;
       e.preventDefault();
       setDeferredPrompt(e);
       setShowInstallBanner(true);
@@ -55,6 +57,7 @@ export function PWAInstaller() {
       setIsInstalled(true);
       setShowInstallBanner(false);
       setDeferredPrompt(null);
+      localStorage.setItem('filezenith_pwa_dismissed', 'true');
       toast.success('FileZenith Mobile App installed successfully!');
     });
 
@@ -69,6 +72,7 @@ export function PWAInstaller() {
       const { outcome } = await deferredPrompt.userChoice;
       if (outcome === 'accepted') {
         toast.success('Installing FileZenith Mobile App to your home screen...');
+        localStorage.setItem('filezenith_pwa_dismissed', 'true');
       }
       setDeferredPrompt(null);
       setShowInstallBanner(false);
@@ -77,9 +81,7 @@ export function PWAInstaller() {
 
   const handleDismiss = () => {
     setShowInstallBanner(false);
-    if (isIOS) {
-      localStorage.setItem('filezenith_ios_pwa_dismissed', 'true');
-    }
+    localStorage.setItem('filezenith_pwa_dismissed', 'true');
   };
 
   if (isInstalled || !showInstallBanner) return null;
