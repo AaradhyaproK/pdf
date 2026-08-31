@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { PrivacyBadge } from './PrivacyBadge';
 import {
   FileText,
   Image as ImageIcon,
@@ -170,19 +169,6 @@ export function Navbar() {
 
           {/* Desktop Megamenu Navigation */}
           <nav className="hidden md:flex items-center gap-1 text-sm font-semibold text-slate-700">
-            {/* Flagship All-in-One Studio Link */}
-            <Link
-              href="/studio"
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-extrabold transition-all border shadow-2xs ${
-                isActive('/studio')
-                  ? 'bg-indigo-600 text-white border-indigo-600'
-                  : 'bg-indigo-50 text-indigo-700 border-indigo-200/80 hover:bg-indigo-600 hover:text-white hover:border-indigo-600'
-              }`}
-            >
-              <Sparkles className="w-3.5 h-3.5 animate-pulse" />
-              <span>All-in-One Studio</span>
-            </Link>
-
             {/* PDF Studio Dropdown */}
             <div className="relative group py-4">
               <Link
@@ -336,13 +322,8 @@ export function Navbar() {
             </div>
           </nav>
 
-          {/* Privacy Badge & Luma-Style Floating Glass Pill Container */}
+          {/* Luma-Style Floating Glass Search Pill */}
           <div className="flex items-center gap-2">
-            <div className="hidden sm:block">
-              <PrivacyBadge />
-            </div>
-
-            {/* Luma-Style Floating Glass Search Pill */}
             <button
               onClick={() => setSearchOpen(true)}
               className="luma-glass-pill px-3 py-1.5 flex items-center gap-1.5 text-slate-800 hover:text-slate-900 active:scale-95 transition-all cursor-pointer"

@@ -2,6 +2,7 @@
 
 import { ReactNode, useEffect } from 'react';
 import { AdSlot } from './AdSlot';
+import { RelatedToolsSection } from './RelatedToolsSection';
 import { SEOContent } from './SEOContent';
 import { trackVisitorHeartbeat } from '@/lib/admin-store';
 import { ShieldCheck, Zap, Lock, CheckCircle2, Sparkles } from 'lucide-react';
@@ -59,6 +60,9 @@ export function ToolLayout({
 
             {/* Post-Download In-Feed Ad Slot */}
             <AdSlot slotType="post-download" />
+
+            {/* Explore Related FileZenith Tools */}
+            <RelatedToolsSection currentSlug={slug} />
 
             {/* Programmatic SEO Content & FAQs */}
             <SEOContent slug={slug} />
