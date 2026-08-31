@@ -1,12 +1,150 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
-import { ShieldCheck, Smartphone, Download } from 'lucide-react';
+import {
+  ShieldCheck,
+  Smartphone,
+  Download,
+  ChevronDown,
+  FileText,
+  Image as ImageIcon,
+  Wrench,
+  Sparkles,
+  Lock,
+  Zap,
+} from 'lucide-react';
 import { VisitorCounter } from './VisitorCounter';
 
 export function Footer() {
+  const [openSection, setOpenSection] = useState<'pdf' | 'image' | 'company' | null>('pdf');
+
+  const toggleSection = (section: 'pdf' | 'image' | 'company') => {
+    setOpenSection(openSection === section ? null : section);
+  };
+
   return (
-    <footer className="w-full bg-white text-slate-600 border-t border-slate-200/80 pt-16 pb-12 mt-20 text-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer id="main-footer" className="w-full bg-white text-slate-600 border-t border-slate-200/80 pt-10 sm:pt-16 pb-16 sm:pb-12 mt-12 sm:mt-20 text-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
+        {/* Mobile Brand Card Header (Mobile Only) */}
+        <div className="sm:hidden p-5 rounded-3xl bg-slate-900 text-white space-y-3 border border-slate-800 shadow-md">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <img src="/1.png" alt="FileZenith Logo" className="w-8 h-8 object-contain" />
+              <span className="font-black text-lg text-white tracking-tight">FileZenith</span>
+            </div>
+            <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
+              <ShieldCheck className="w-3 h-3 text-emerald-400" /> 100% Client-Side
+            </span>
+          </div>
+          <p className="text-xs text-slate-300 leading-relaxed font-medium">
+            100% Free Client-Side PDF & Image Studio. All conversion engines execute strictly in your device memory with zero server file uploads.
+          </p>
+        </div>
+
+        {/* Mobile Accordion Nav Links (< sm) */}
+        <div className="sm:hidden space-y-3">
+          {/* PDF Studio Accordion */}
+          <div className="border border-slate-200/90 rounded-2xl bg-white overflow-hidden shadow-2xs">
+            <button
+              onClick={() => toggleSection('pdf')}
+              className="w-full p-4 flex items-center justify-between text-left font-black text-slate-900 bg-slate-50/50 hover:bg-slate-100/60 transition-colors"
+            >
+              <div className="flex items-center gap-2.5">
+                <div className="p-2 rounded-xl bg-rose-50 text-rose-600 border border-rose-100">
+                  <FileText className="w-4 h-4" />
+                </div>
+                <span className="text-xs font-black uppercase tracking-wider text-slate-900">PDF Studio</span>
+                <span className="text-[10px] bg-rose-100 text-rose-700 font-extrabold px-2 py-0.5 rounded-full">10 Tools</span>
+              </div>
+              <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${openSection === 'pdf' ? 'rotate-180 text-rose-600' : ''}`} />
+            </button>
+            {openSection === 'pdf' && (
+              <div className="p-4 bg-white border-t border-slate-100 grid grid-cols-1 gap-2.5 animate-in fade-in duration-150">
+                <Link href="/pdf/edit" className="p-2.5 rounded-xl bg-rose-50/50 hover:bg-rose-50 border border-rose-100/60 text-xs font-black text-rose-950 flex items-center justify-between">
+                  <span>Edit PDF Online</span>
+                  <span className="text-[9px] bg-rose-600 text-white px-2 py-0.5 rounded-full font-bold">Interactive</span>
+                </Link>
+                <Link href="/pdf/compress" className="p-2 rounded-xl text-xs font-bold text-slate-700 hover:text-rose-600 hover:bg-slate-50 transition-all">Compress PDF (Auto)</Link>
+                <Link href="/pdf/compress-to-200kb" className="p-2 rounded-xl text-xs font-bold text-slate-700 hover:text-rose-600 hover:bg-slate-50 transition-all">Compress PDF to 200KB</Link>
+                <Link href="/pdf/merge" className="p-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-rose-600 hover:bg-slate-50 transition-all">Merge Multiple PDFs</Link>
+                <Link href="/pdf/split" className="p-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-rose-600 hover:bg-slate-50 transition-all">Split & Extract Pages</Link>
+                <Link href="/pdf/organize" className="p-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-rose-600 hover:bg-slate-50 transition-all">Organize & Rotate Pages</Link>
+                <Link href="/pdf/ocr" className="p-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-rose-600 hover:bg-slate-50 transition-all">PDF OCR Text Extractor</Link>
+                <Link href="/pdf/watermark" className="p-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-rose-600 hover:bg-slate-50 transition-all">Watermark PDF</Link>
+                <Link href="/pdf/protect" className="p-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-rose-600 hover:bg-slate-50 transition-all">Password Protect PDF</Link>
+                <Link href="/pdf/to-image" className="p-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-rose-600 hover:bg-slate-50 transition-all">PDF to JPG / PNG</Link>
+              </div>
+            )}
+          </div>
+
+          {/* Image Studio Accordion */}
+          <div className="border border-slate-200/90 rounded-2xl bg-white overflow-hidden shadow-2xs">
+            <button
+              onClick={() => toggleSection('image')}
+              className="w-full p-4 flex items-center justify-between text-left font-black text-slate-900 bg-slate-50/50 hover:bg-slate-100/60 transition-colors"
+            >
+              <div className="flex items-center gap-2.5">
+                <div className="p-2 rounded-xl bg-sky-50 text-sky-600 border border-sky-100">
+                  <ImageIcon className="w-4 h-4" />
+                </div>
+                <span className="text-xs font-black uppercase tracking-wider text-slate-900">Image Studio</span>
+                <span className="text-[10px] bg-sky-100 text-sky-700 font-extrabold px-2 py-0.5 rounded-full">12 Tools</span>
+              </div>
+              <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${openSection === 'image' ? 'rotate-180 text-sky-600' : ''}`} />
+            </button>
+            {openSection === 'image' && (
+              <div className="p-4 bg-white border-t border-slate-100 grid grid-cols-1 gap-2 animate-in fade-in duration-150">
+                <Link href="/image/pics-to-pdf" className="p-2 rounded-xl text-xs font-black text-sky-900 bg-sky-50/50 border border-sky-100 flex items-center justify-between">
+                  <span>Pics to PDF Converter</span>
+                  <span className="text-[9px] bg-sky-600 text-white px-2 py-0.5 rounded-full font-bold">Popular</span>
+                </Link>
+                <Link href="/image/png-to-jpg" className="p-2 rounded-xl text-xs font-bold text-slate-700 hover:text-sky-600 hover:bg-slate-50 transition-all">PNG to JPG Converter</Link>
+                <Link href="/image/png-to-pdf" className="p-2 rounded-xl text-xs font-bold text-slate-700 hover:text-sky-600 hover:bg-slate-50 transition-all">PNG to PDF Converter</Link>
+                <Link href="/image/jpg-to-png" className="p-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-sky-600 hover:bg-slate-50 transition-all">JPG to PNG Converter</Link>
+                <Link href="/image/compress" className="p-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-sky-600 hover:bg-slate-50 transition-all">Compress Image (Target KB)</Link>
+                <Link href="/image/compress-to-50kb" className="p-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-sky-600 hover:bg-slate-50 transition-all">Compress Image to 50KB</Link>
+                <Link href="/image/compress-to-100kb" className="p-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-sky-600 hover:bg-slate-50 transition-all">Compress Image to 100KB</Link>
+                <Link href="/image/passport-maker" className="p-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-sky-600 hover:bg-slate-50 transition-all">Passport Photo Maker</Link>
+                <Link href="/image/remove-background" className="p-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-sky-600 hover:bg-slate-50 transition-all">AI Background Remover</Link>
+                <Link href="/image/convert-heic" className="p-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-sky-600 hover:bg-slate-50 transition-all">Apple HEIC to JPG</Link>
+                <Link href="/image/resize" className="p-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-sky-600 hover:bg-slate-50 transition-all">Resize Image (Pixels / %)</Link>
+              </div>
+            )}
+          </div>
+
+          {/* Company & Legal Accordion */}
+          <div className="border border-slate-200/90 rounded-2xl bg-white overflow-hidden shadow-2xs">
+            <button
+              onClick={() => toggleSection('company')}
+              className="w-full p-4 flex items-center justify-between text-left font-black text-slate-900 bg-slate-50/50 hover:bg-slate-100/60 transition-colors"
+            >
+              <div className="flex items-center gap-2.5">
+                <div className="p-2 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100">
+                  <Wrench className="w-4 h-4" />
+                </div>
+                <span className="text-xs font-black uppercase tracking-wider text-slate-900">Company & Utilities</span>
+              </div>
+              <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${openSection === 'company' ? 'rotate-180 text-emerald-600' : ''}`} />
+            </button>
+            {openSection === 'company' && (
+              <div className="p-4 bg-white border-t border-slate-100 grid grid-cols-1 gap-2 animate-in fade-in duration-150">
+                <Link href="/utility/qr-generator" className="p-2 rounded-xl text-xs font-bold text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-all">QR Code Generator</Link>
+                <Link href="/utility/word-counter" className="p-2 rounded-xl text-xs font-bold text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-all">Word & Character Counter</Link>
+                <Link href="/utility/json-formatter" className="p-2 rounded-xl text-xs font-bold text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-all">JSON Formatter & CSV</Link>
+                <div className="border-t border-slate-100 my-1 pt-2">
+                  <Link href="/privacy" className="p-2 rounded-xl text-xs font-black text-slate-900 hover:text-indigo-600 block">Privacy Policy</Link>
+                  <Link href="/terms" className="p-2 rounded-xl text-xs font-black text-slate-900 hover:text-indigo-600 block">Terms of Service</Link>
+                  <Link href="/about" className="p-2 rounded-xl text-xs font-bold text-slate-700 hover:text-indigo-600 block">About Us</Link>
+                  <Link href="/contact" className="p-2 rounded-xl text-xs font-bold text-slate-700 hover:text-indigo-600 block">Contact Support</Link>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Desktop 4-Column Footer Navigation (Hidden on Mobile) */}
+        <div className="hidden sm:grid sm:grid-cols-2 md:grid-cols-4 gap-8">
           {/* Brand Column */}
           <div className="space-y-4 md:col-span-1">
             <div className="flex items-center gap-2">
@@ -91,20 +229,20 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Highlighted Mobile App Download Section in Footer */}
-        <div className="p-6 rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 border border-slate-800">
-          <div className="flex items-center gap-4 text-center md:text-left">
-            <div className="w-12 h-12 rounded-2xl bg-indigo-600 flex items-center justify-center text-white shrink-0 shadow-md">
-              <Smartphone className="w-6 h-6 text-white" />
+        {/* App-Centric Highlighted Mobile App Banner */}
+        <div className="p-5 sm:p-6 rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-5 border border-slate-800">
+          <div className="flex items-center gap-3.5 text-center md:text-left">
+            <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-indigo-600 flex items-center justify-center text-white shrink-0 shadow-md">
+              <Smartphone className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
             </div>
             <div className="space-y-1">
-              <h4 className="text-sm font-black text-white flex items-center justify-center md:justify-start gap-2">
+              <h4 className="text-xs sm:text-sm font-black text-white flex items-center justify-center md:justify-start gap-2">
                 <span>Download FileZenith Mobile App</span>
-                <span className="text-[10px] bg-indigo-500/30 text-indigo-300 px-2 py-0.5 rounded-full font-black uppercase">
+                <span className="text-[9px] bg-indigo-500/30 text-indigo-300 px-2 py-0.5 rounded-full font-black uppercase">
                   100% Offline
                 </span>
               </h4>
-              <p className="text-xs text-slate-300 font-medium">
+              <p className="text-[11px] sm:text-xs text-slate-300 font-medium leading-normal">
                 Install web app to use all 20+ PDF & image tools offline anytime without cellular data or Wi-Fi.
               </p>
             </div>
@@ -112,16 +250,17 @@ export function Footer() {
 
           <Link
             href="/download-app"
-            className="w-full md:w-auto px-6 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs shadow-lg transition-all flex items-center justify-center gap-2 shrink-0 cursor-pointer"
+            className="w-full md:w-auto px-5 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs shadow-lg transition-all flex items-center justify-center gap-2 shrink-0 cursor-pointer active:scale-95"
           >
             <Download className="w-4 h-4 text-indigo-200" />
             <span>Download Mobile App Now</span>
           </Link>
         </div>
 
-        <div className="border-t border-slate-200/80 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+        {/* Footer Bottom Legal & Copyright Bar */}
+        <div className="border-t border-slate-200/80 pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-center sm:text-left">
           <p>© {new Date().getFullYear()} FileZenith. Product of <a href="https://www.snab.co.in/" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-600 font-bold underline text-slate-800">Snab</a>. All rights reserved.</p>
-          <div className="flex flex-wrap items-center gap-4 text-slate-500 font-semibold">
+          <div className="flex flex-wrap items-center justify-center gap-3.5 text-slate-500 font-semibold text-[11px] sm:text-xs">
             <Link href="/privacy" className="hover:text-indigo-600 transition-colors">Privacy Policy</Link>
             <span>&bull;</span>
             <Link href="/terms" className="hover:text-indigo-600 transition-colors">Terms of Service</Link>
@@ -135,4 +274,5 @@ export function Footer() {
     </footer>
   );
 }
+
 

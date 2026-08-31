@@ -9,39 +9,39 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicyPage() {
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10 text-slate-700">
-      {/* Header */}
-      <div className="space-y-4 border-b border-slate-200 pb-8">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-emerald-700 text-xs font-extrabold border border-emerald-200/80">
-          <ShieldCheck className="w-4 h-4 text-emerald-600" />
-          <span>100% Privacy Guaranteed</span>
+    <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-12 space-y-6 sm:space-y-10 text-slate-700">
+      {/* Header Banner */}
+      <div className="space-y-3 p-5 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-2xs text-center max-w-3xl mx-auto">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-black border border-emerald-200/80">
+          <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+          <span>100% Client-Side Privacy Guaranteed</span>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+        <h1 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
           Privacy Policy
         </h1>
-        <p className="text-sm text-slate-500 font-medium">
+        <p className="text-xs text-slate-500 font-medium">
           Last Updated: August 31, 2026 | Effective Date: Immediately
         </p>
       </div>
 
-      {/* Summary Highlights */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="p-5 rounded-2xl bg-indigo-50/60 border border-indigo-100 space-y-2">
-          <div className="flex items-center gap-2 text-indigo-900 font-bold text-sm">
-            <ServerOff className="w-4 h-4 text-indigo-600" />
+      {/* Summary Highlights Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4">
+        <div className="p-4 sm:p-5 rounded-2xl bg-emerald-50/70 border border-emerald-100 shadow-2xs space-y-2">
+          <div className="flex items-center gap-2 text-emerald-950 font-black text-xs sm:text-sm">
+            <ServerOff className="w-4 h-4 text-emerald-600 shrink-0" />
             <span>Zero Server File Uploads</span>
           </div>
-          <p className="text-xs text-slate-600 leading-relaxed">
+          <p className="text-xs text-slate-600 leading-relaxed font-medium">
             All PDF, image, and document conversions happen 100% inside your web browser using client-side WebAssembly. Your files are never uploaded to any cloud server or stored anywhere.
           </p>
         </div>
 
-        <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
-          <div className="flex items-center gap-2 text-slate-900 font-bold text-sm">
-            <Cookie className="w-4 h-4 text-slate-600" />
+        <div className="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs space-y-2">
+          <div className="flex items-center gap-2 text-slate-900 font-black text-xs sm:text-sm">
+            <Cookie className="w-4 h-4 text-indigo-600 shrink-0" />
             <span>Advertising & Cookie Transparency</span>
           </div>
-          <p className="text-xs text-slate-600 leading-relaxed">
+          <p className="text-xs text-slate-600 leading-relaxed font-medium">
             We partner with Google AdSense to serve non-intrusive advertisements. Third-party vendors, including Google, use cookies to serve ads based on prior website visits.
           </p>
         </div>

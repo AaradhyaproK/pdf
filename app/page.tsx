@@ -3,15 +3,13 @@ import Script from 'next/script';
 import { PrivacyBadge } from '@/components/PrivacyBadge';
 import { AdSlot } from '@/components/AdSlot';
 import { LandingToolGrid } from '@/components/LandingToolGrid';
+import { HomepageTrustSection } from '@/components/HomepageTrustSection';
+import { HomepageFAQAccordion } from '@/components/HomepageFAQAccordion';
 import {
-  Zap,
   CheckCircle2,
   ShieldCheck,
-  HelpCircle,
   Lock,
   Star,
-  Cpu,
-  Globe,
   Sparkles,
 } from 'lucide-react';
 
@@ -148,97 +146,12 @@ export default function HomePage() {
         <LandingToolGrid />
       </section>
 
-      {/* High-Trust Features Grid Section */}
-      <section className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-8 sm:py-14">
-        <div className="bg-white rounded-2xl sm:rounded-3xl border border-slate-200 p-5 sm:p-12 shadow-2xs space-y-8 sm:space-y-12">
-          <div className="text-center max-w-3xl mx-auto space-y-2 sm:space-y-3">
-            <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-rose-600 bg-rose-50 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full border border-rose-100">
-              Zero-Server Security Engine
-            </span>
-            <h2 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">
-              Why Millions Trust FileZenith
-            </h2>
-            <p className="text-xs sm:text-base text-slate-600 font-medium">
-              Traditional cloud tools upload your confidential PDFs to remote servers. FileZenith executes 100% of conversions directly on your local device.
-            </p>
-          </div>
+      {/* Mobile App-Centric High-Trust Features Grid Section */}
+      <HomepageTrustSection />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            <div className="p-4 sm:p-6 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2.5">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
-                <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6" />
-              </div>
-              <h3 className="text-sm sm:text-base font-black text-slate-900">100% Client-Side Privacy</h3>
-              <p className="text-xs text-slate-600 leading-relaxed font-medium">
-                Your PDF and image files are processed strictly inside your device RAM. Zero file uploads or data storage guaranteed.
-              </p>
-            </div>
-
-            <div className="p-4 sm:p-6 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2.5">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center font-bold">
-                <Zap className="w-5 h-5 sm:w-6 sm:h-6" />
-              </div>
-              <h3 className="text-sm sm:text-base font-black text-slate-900">Instant Local Speed</h3>
-              <p className="text-xs text-slate-600 leading-relaxed font-medium">
-                No internet bandwidth bottlenecks or uploading delays. Large 100MB PDFs compress and convert instantly on your CPU.
-              </p>
-            </div>
-
-            <div className="p-4 sm:p-6 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2.5">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold">
-                <Cpu className="w-5 h-5 sm:w-6 sm:h-6" />
-              </div>
-              <h3 className="text-sm sm:text-base font-black text-slate-900">Advanced AI & Wasm</h3>
-              <p className="text-xs text-slate-600 leading-relaxed font-medium">
-                Powered by compiled WebAssembly engines including pdf-lib, qpdf-wasm, Tesseract.js OCR, and canvas background isolation.
-              </p>
-            </div>
-
-            <div className="p-4 sm:p-6 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2.5">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold">
-                <Globe className="w-5 h-5 sm:w-6 sm:h-6" />
-              </div>
-              <h3 className="text-sm sm:text-base font-black text-slate-900">Cross-Platform Everywhere</h3>
-              <p className="text-xs text-slate-600 leading-relaxed font-medium">
-                Works seamlessly on iPhone, Android, Mac, Windows, and Linux. No software installation or app store download required.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Frequently Asked Questions Section */}
-      <section className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 mb-12">
-        <div className="p-5 sm:p-10 bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl space-y-4 sm:space-y-6 shadow-2xs">
-          <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
-            <div className="p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-rose-50 text-rose-600 border border-rose-100">
-              <HelpCircle className="w-5 h-5 sm:w-6 sm:h-6" />
-            </div>
-            <div>
-              <h2 className="text-lg sm:text-2xl font-black text-slate-900">
-                Frequently Asked Questions
-              </h2>
-              <p className="text-[11px] sm:text-xs text-slate-500 font-medium">
-                Everything you need to know about FileZenith privacy, zero-server architecture, and limits.
-              </p>
-            </div>
-          </div>
-
-          <div className="space-y-3 sm:space-y-4">
-            {HOMEPAGE_FAQS.map((faq, idx) => (
-              <div key={idx} className="p-4 sm:p-5 bg-slate-50 rounded-xl sm:rounded-2xl border border-slate-200/80 space-y-1.5">
-                <h3 className="text-xs sm:text-base font-extrabold text-slate-900 flex items-center gap-2">
-                  <span className="text-rose-600 font-black">Q:</span>
-                  <span>{faq.q}</span>
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium pl-5 sm:pl-6">
-                  {faq.a}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Interactive Mobile-Optimized FAQ Accordion Section */}
+      <HomepageFAQAccordion faqs={HOMEPAGE_FAQS} />
     </main>
   );
 }
+

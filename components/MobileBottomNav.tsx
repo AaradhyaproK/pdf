@@ -66,11 +66,29 @@ export function MobileBottomNav() {
   const pathname = usePathname();
   const [activeDrawer, setActiveDrawer] = useState<'pdf' | 'image' | 'utility' | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [inFooter, setInFooter] = useState(false);
 
   // Close drawer on page route change
   useEffect(() => {
     setActiveDrawer(null);
     setSearchQuery('');
+  }, [pathname]);
+
+  // Hide bottom nav when scrolling into footer (#main-footer)
+  useEffect(() => {
+    const footerEl = document.getElementById('main-footer');
+    if (!footerEl) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        setInFooter(entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(footerEl);
+    return () => observer.disconnect();
   }, [pathname]);
 
   const toggleDrawer = (tab: 'pdf' | 'image' | 'utility') => {
@@ -115,8 +133,10 @@ export function MobileBottomNav() {
             onClick={() => setActiveDrawer(null)}
           />
 
-          {/* Drawer Sheet Content */}
-          <div className="relative bg-white rounded-t-3xl shadow-2xl border-t border-slate-200 max-h-[80vh] flex flex-col overflow-hidden animate-in slide-in-from-bottom duration-300 z-10 pb-20">
+          <div
+            className="relative bg-white rounded-t-3xl shadow-2xl border-t border-slate-200 max-h-[80vh] flex flex-col overflow-hidden animate-in slide-in-from-bottom duration-300 z-10"
+            style={{ paddingBottom: 'calc(5.5rem + env(safe-area-inset-bottom, 0px))' }}
+          >
             {/* Handlebar Pill */}
             <div className="pt-3 pb-1 flex justify-center cursor-pointer" onClick={() => setActiveDrawer(null)}>
               <div className="w-12 h-1.5 rounded-full bg-slate-300" />
@@ -234,8 +254,14 @@ export function MobileBottomNav() {
         </div>
       )}
 
-      {/* Native App-Style Mobile Bottom Bar (Fixed at bottom on screens < md) */}
-      <nav aria-label="Mobile Navigation" className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 shadow-[0_-4px_20px_rgba(0,0,0,0.06)] px-2 py-1.5">
+      {/* Native App-Style Mobile Bottom Bar (Fixed at bottom on screens < md, smoothly hides when in footer) */}
+      <nav
+        aria-label="Mobile Navigation"
+        className={`md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] px-2 pt-2 transition-all duration-300 ease-in-out ${
+          inFooter ? 'translate-y-full opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'
+        }`}
+        style={{ paddingBottom: 'calc(0.85rem + env(safe-area-inset-bottom, 0px))' }}
+      >
         <div className="grid grid-cols-5 gap-1 max-w-md mx-auto">
           {/* 1. Home Tab */}
           <Link

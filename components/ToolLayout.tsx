@@ -4,7 +4,7 @@ import { ReactNode, useEffect } from 'react';
 import { AdSlot } from './AdSlot';
 import { SEOContent } from './SEOContent';
 import { trackVisitorHeartbeat } from '@/lib/admin-store';
-import { ShieldCheck, Zap, Lock, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, Zap, Lock, CheckCircle2, Sparkles } from 'lucide-react';
 
 export interface ToolLayoutProps {
   slug: string;
@@ -41,43 +41,15 @@ export function ToolLayout({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-8 items-start">
           {/* Main Content Workspace */}
           <div className="lg:col-span-8 space-y-3 sm:space-y-8">
-            {/* Desktop Tool Header Title Block with High-CTR Trust Badges (Hidden on Mobile) */}
-            <div className="hidden sm:block space-y-3">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-black border border-emerald-200 shadow-2xs">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                  100% Free • No Subscription
-                </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 text-indigo-800 text-xs font-black border border-indigo-200 shadow-2xs">
-                  <Lock className="w-3.5 h-3.5 text-indigo-600" />
-                  No Login Required
-                </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 text-sky-800 text-xs font-black border border-sky-200 shadow-2xs">
-                  <ShieldCheck className="w-3.5 h-3.5 text-sky-600" />
-                  100% Secure Data
-                </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-800 text-xs font-bold border border-amber-200">
-                  <Zap className="w-3.5 h-3.5 text-amber-600" />
-                  {badgeText}
-                </span>
-              </div>
-
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">
+            {/* Tool Header Title & Subtitle Container */}
+            <div className="p-3.5 sm:p-0 rounded-2xl sm:rounded-none bg-white sm:bg-transparent border sm:border-none border-slate-200/90 sm:shadow-none shadow-2xs space-y-1.5 sm:space-y-2">
+              <h1 className="text-base sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-snug sm:leading-tight">
                 {title}
               </h1>
-              <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-medium">
+
+              <p className="text-xs sm:text-base lg:text-lg text-slate-600 leading-relaxed font-medium">
                 {subtitle}
               </p>
-            </div>
-
-            {/* Compact Mobile Title Label (Function-Centric Focus) */}
-            <div className="sm:hidden flex items-center justify-between px-1 py-0.5">
-              <h1 className="text-sm font-black text-slate-900 truncate">
-                {title}
-              </h1>
-              <span className="text-[9px] font-black text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100 shrink-0">
-                100% Local Wasm
-              </span>
             </div>
 
             {/* Function-Centric Interactive Workspace Area */}
