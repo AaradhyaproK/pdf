@@ -8,11 +8,8 @@ import {
   FileText,
   Image as ImageIcon,
   Wrench,
-  Sparkles,
   Search,
   X,
-  ChevronUp,
-  Download,
   ShieldCheck,
   Edit3,
   Minimize2,
@@ -30,6 +27,7 @@ import {
   QrCode,
   Type,
   Code2,
+  FilePlus,
 } from 'lucide-react';
 
 const PDF_TOOLS = [
@@ -86,7 +84,7 @@ export function MobileBottomNav() {
 
   const isTabActive = (category: string) => {
     if (category === 'home') return pathname === '/';
-    if (category === 'studio') return pathname === '/studio';
+    if (category === 'create-pdf') return pathname === '/image/pics-to-pdf' || pathname === '/image/to-pdf';
     if (category === 'pdf') return pathname?.startsWith('/pdf') || activeDrawer === 'pdf';
     if (category === 'image') return pathname?.startsWith('/image') || activeDrawer === 'image';
     if (category === 'utility') return pathname?.startsWith('/utility') || activeDrawer === 'utility';
@@ -167,7 +165,7 @@ export function MobileBottomNav() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder={`Search ${activeDrawer.toUpperCase()} tools...`}
-                  className="w-full pl-9 pr-4 py-2.5 bg-white border border-slate-200 rounded-2xl text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600"
+                  className="w-full pl-9 pr-4 py-2.5 bg-white border border-slate-200 rounded-2xl text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-600"
                 />
                 {searchQuery && (
                   <button
@@ -243,7 +241,7 @@ export function MobileBottomNav() {
           <Link
             href="/"
             className={`flex flex-col items-center justify-center py-1 rounded-xl transition-all active:scale-95 ${
-              isTabActive('home') ? 'text-indigo-600 font-extrabold' : 'text-slate-500 hover:text-slate-900'
+              isTabActive('home') ? 'text-rose-600 font-extrabold' : 'text-slate-500 hover:text-slate-900'
             }`}
           >
             <Home className="w-5 h-5" />
@@ -261,15 +259,15 @@ export function MobileBottomNav() {
             <span className="text-[10px] mt-0.5">PDF</span>
           </button>
 
-          {/* 3. All Studio (Center Highlighted Floating Action Tab) */}
+          {/* 3. Create PDF (Center Highlighted Action Tab - Pics to PDF) */}
           <Link
-            href="/studio"
+            href="/image/pics-to-pdf"
             className="flex flex-col items-center justify-center -mt-3.5 active:scale-95 transition-all"
           >
-            <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-indigo-600 to-indigo-500 text-white flex items-center justify-center shadow-lg shadow-indigo-500/30 border-2 border-white">
-              <Sparkles className="w-5 h-5 animate-pulse" />
+            <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-rose-600 to-rose-500 text-white flex items-center justify-center shadow-lg shadow-rose-500/30 border-2 border-white">
+              <FilePlus className="w-5 h-5" />
             </div>
-            <span className="text-[10px] font-black text-indigo-700 mt-0.5">Studio</span>
+            <span className="text-[10px] font-black text-rose-700 mt-0.5">Create PDF</span>
           </Link>
 
           {/* 4. Image Studio Sheet Trigger */}

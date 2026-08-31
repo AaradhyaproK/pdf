@@ -4,7 +4,7 @@ import { ReactNode, useEffect } from 'react';
 import { AdSlot } from './AdSlot';
 import { SEOContent } from './SEOContent';
 import { trackVisitorHeartbeat } from '@/lib/admin-store';
-import { ShieldCheck, Zap, Lock, Sparkles, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, Zap, Lock, CheckCircle2 } from 'lucide-react';
 
 export interface ToolLayoutProps {
   slug: string;
@@ -32,17 +32,17 @@ export function ToolLayout({
   }, [slug]);
 
   return (
-    <main className="min-h-screen w-full bg-slate-50/70 py-8 px-4 sm:px-6 lg:px-8 transition-colors">
-      <div className="max-w-7xl mx-auto space-y-8">
+    <main className="min-h-screen w-full bg-slate-50/70 py-2 sm:py-8 px-2 sm:px-6 lg:px-8 transition-colors">
+      <div className="max-w-7xl mx-auto space-y-3 sm:space-y-8">
         {/* Header Leaderboard Ad Slot (CLS = 0) */}
         <AdSlot slotType="header-leaderboard" />
 
         {/* Main Grid: Workspace & Sidebar */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-8 items-start">
           {/* Main Content Workspace */}
-          <div className="lg:col-span-8 space-y-8">
-            {/* Tool Header Title Block with High-CTR Trust Badges */}
-            <div className="space-y-3">
+          <div className="lg:col-span-8 space-y-3 sm:space-y-8">
+            {/* Desktop Tool Header Title Block with High-CTR Trust Badges (Hidden on Mobile) */}
+            <div className="hidden sm:block space-y-3">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-black border border-emerald-200 shadow-2xs">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
@@ -70,8 +70,18 @@ export function ToolLayout({
               </p>
             </div>
 
-            {/* Interactive Workspace Area */}
-            <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-md">
+            {/* Compact Mobile Title Label (Function-Centric Focus) */}
+            <div className="sm:hidden flex items-center justify-between px-1 py-0.5">
+              <h1 className="text-sm font-black text-slate-900 truncate">
+                {title}
+              </h1>
+              <span className="text-[9px] font-black text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100 shrink-0">
+                100% Local Wasm
+              </span>
+            </div>
+
+            {/* Function-Centric Interactive Workspace Area */}
+            <div className="bg-white p-3.5 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-md">
               {children}
             </div>
 
