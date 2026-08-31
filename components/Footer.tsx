@@ -65,10 +65,10 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Daily Quick Utilities */}
+          {/* Daily Quick Utilities & Company */}
           <div className="space-y-3">
             <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-900">
-              Daily Quick Utilities
+              Company & Legal
             </h4>
             <ul className="space-y-2.5 text-xs">
               <li>
@@ -80,6 +80,10 @@ export function Footer() {
                   <span>Download Mobile App</span>
                 </Link>
               </li>
+              <li><Link href="/privacy" className="hover:text-indigo-600 font-bold text-slate-900 transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="hover:text-indigo-600 font-bold text-slate-900 transition-colors">Terms of Service</Link></li>
+              <li><Link href="/about" className="hover:text-indigo-600 transition-colors">About Us</Link></li>
+              <li><Link href="/contact" className="hover:text-indigo-600 transition-colors">Contact Support</Link></li>
               <li><Link href="/utility/qr-generator" className="hover:text-indigo-600 transition-colors">QR Code Generator</Link></li>
               <li><Link href="/utility/word-counter" className="hover:text-indigo-600 transition-colors">Word Counter & Density</Link></li>
               <li><Link href="/utility/json-formatter" className="hover:text-indigo-600 transition-colors">JSON Formatter & CSV</Link></li>
@@ -116,7 +120,16 @@ export function Footer() {
         </div>
 
         <div className="border-t border-slate-200/80 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-          <p>© {new Date().getFullYear()} FileZenith. All rights reserved. 100% Client-Side Computation.</p>
+          <p>© {new Date().getFullYear()} FileZenith. Product of <a href="https://www.snab.co.in/" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-600 font-bold underline text-slate-800">Snab</a>. All rights reserved.</p>
+          <div className="flex flex-wrap items-center gap-4 text-slate-500 font-semibold">
+            <Link href="/privacy" className="hover:text-indigo-600 transition-colors">Privacy Policy</Link>
+            <span>&bull;</span>
+            <Link href="/terms" className="hover:text-indigo-600 transition-colors">Terms of Service</Link>
+            <span>&bull;</span>
+            <Link href="/about" className="hover:text-indigo-600 transition-colors">About Us</Link>
+            <span>&bull;</span>
+            <Link href="/contact" className="hover:text-indigo-600 transition-colors">Contact Us</Link>
+          </div>
         </div>
       </div>
     </footer>

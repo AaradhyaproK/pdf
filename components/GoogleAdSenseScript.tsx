@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import Script from 'next/script';
 import { getAdsConfig, GoogleAdsConfig } from '@/lib/admin-store';
 
+const DEFAULT_PUB_ID = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID || 'ca-pub-9075710959353163';
+
 export function GoogleAdSenseScript() {
   const [config, setConfig] = useState<GoogleAdsConfig | null>(null);
 
@@ -11,11 +13,14 @@ export function GoogleAdSenseScript() {
     setConfig(getAdsConfig());
   }, []);
 
-  if (!config || !config.adSenseScriptEnabled || !config.publisherId) return null;
+  const isEnabled = config ? config.adSenseScriptEnabled : true;
+  const publisherId = config?.publisherId || DEFAULT_PUB_ID;
 
-  const pubId = config.publisherId.startsWith('ca-pub-')
-    ? config.publisherId
-    : `ca-pub-${config.publisherId}`;
+  if (!isEnabled || !publisherId) return null;
+
+  const pubId = publisherId.startsWith('ca-pub-')
+    ? publisherId
+    : `ca-pub-${publisherId}`;
 
   return (
     <Script
@@ -26,3 +31,4 @@ export function GoogleAdSenseScript() {
     />
   );
 }
+
