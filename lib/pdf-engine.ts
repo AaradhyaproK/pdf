@@ -203,7 +203,8 @@ export async function splitPDF(file: File, rangeStr: string): Promise<Uint8Array
  */
 export async function compressPDF(
   file: File,
-  preset: 'extreme' | 'recommended' | 'low'
+  preset: 'extreme' | 'recommended' | 'low' | 'target',
+  targetKB?: number
 ): Promise<Uint8Array> {
   const pdfjsLib = await import('pdfjs-dist');
   pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
@@ -213,9 +214,51 @@ export async function compressPDF(
   const pdfjsDoc = await loadingTask.promise;
   const totalPages = pdfjsDoc.numPages;
 
-  const newPdf = await PDFDocument.create();
+  const origSizeKB = file.size / 1024;
 
-  // Compression parameters per preset
+  const renderPass = async (s: number, q: number) => {
+    const newPdf = await PDFDocument.create();
+    for (let i = 1; i <= totalPages; i++) {
+      const page = await pdfjsDoc.getPage(i);
+      const origViewport = page.getViewport({ scale: 1.0 });
+      const scaledViewport = page.getViewport({ scale: s });
+
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+      canvas.width = scaledViewport.width;
+      canvas.height = scaledViewport.height;
+
+      if (context) {
+        context.imageSmoothingEnabled = true;
+        context.imageSmoothingQuality = 'medium';
+
+        await page.render({
+          canvasContext: context,
+          viewport: scaledViewport,
+        } as any).promise;
+
+        const jpegDataUrl = canvas.toDataURL('image/jpeg', q);
+        const embeddedJpg = await newPdf.embedJpg(jpegDataUrl);
+
+        const newPage = newPdf.addPage([origViewport.width, origViewport.height]);
+        newPage.drawImage(embeddedJpg, {
+          x: 0,
+          y: 0,
+          width: origViewport.width,
+          height: origViewport.height,
+        });
+      }
+    }
+
+    newPdf.setTitle('Compressed PDF');
+    newPdf.setProducer('FileZenith Client-Side Compressed Engine');
+    newPdf.setCreator('FileZenith');
+
+    return await newPdf.save({
+      useObjectStreams: true,
+    });
+  };
+
   let scale = 1.2;
   let quality = 0.55;
 
@@ -228,47 +271,70 @@ export async function compressPDF(
   } else if (preset === 'low') {
     scale = 1.4;
     quality = 0.75;
-  }
+  } else if (preset === 'target' && targetKB && targetKB > 0) {
+    const targetBytes = targetKB * 1024;
+    const ratio = targetKB / origSizeKB;
 
-  for (let i = 1; i <= totalPages; i++) {
-    const page = await pdfjsDoc.getPage(i);
-    const origViewport = page.getViewport({ scale: 1.0 });
-    const scaledViewport = page.getViewport({ scale });
-
-    const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
-    canvas.width = scaledViewport.width;
-    canvas.height = scaledViewport.height;
-
-    if (context) {
-      context.imageSmoothingEnabled = true;
-      context.imageSmoothingQuality = 'medium';
-
-      await page.render({
-        canvasContext: context,
-        viewport: scaledViewport,
-      } as any).promise;
-
-      const jpegDataUrl = canvas.toDataURL('image/jpeg', quality);
-      const embeddedJpg = await newPdf.embedJpg(jpegDataUrl);
-
-      const newPage = newPdf.addPage([origViewport.width, origViewport.height]);
-      newPage.drawImage(embeddedJpg, {
-        x: 0,
-        y: 0,
-        width: origViewport.width,
-        height: origViewport.height,
-      });
+    if (ratio >= 0.95) {
+      scale = 1.3;
+      quality = 0.8;
+    } else {
+      scale = Math.max(0.55, Math.min(1.25, Math.sqrt(ratio) * 1.15));
+      quality = Math.max(0.2, Math.min(0.8, ratio * 0.75 + 0.15));
     }
+
+    let pdfBytes = await renderPass(scale, quality);
+    let bestResult = pdfBytes;
+    let bestSize = pdfBytes.length;
+
+    // Perform up to 2 adaptive tuning passes to bring the output size close to targetBytes (80%-98% range)
+    for (let attempt = 0; attempt < 2; attempt++) {
+      const currentSize = pdfBytes.length;
+
+      // If output is within [78% .. 102%] of target, it's virtually optimal!
+      if (currentSize <= targetBytes * 1.02 && currentSize >= targetBytes * 0.78) {
+        break;
+      }
+
+      if (currentSize > targetBytes * 1.02) {
+        // Output is too large -> scale down parameters
+        const factor = Math.sqrt(targetBytes / currentSize);
+        scale = Math.max(0.4, scale * factor);
+        quality = Math.max(0.15, quality * factor);
+      } else if (currentSize < targetBytes * 0.78) {
+        // Output is too small -> scale up parameters to improve quality and hit near target size
+        const factor = Math.min(1.45, Math.sqrt(targetBytes / currentSize));
+        const newScale = Math.min(1.4, scale * factor);
+        const newQuality = Math.min(0.88, quality * factor);
+
+        if (Math.abs(newScale - scale) < 0.03 && Math.abs(newQuality - quality) < 0.03) {
+          break;
+        }
+        scale = newScale;
+        quality = newQuality;
+      }
+
+      const nextBytes = await renderPass(scale, quality);
+
+      if (nextBytes.length <= targetBytes * 1.03) {
+        pdfBytes = nextBytes;
+        bestResult = nextBytes;
+        bestSize = nextBytes.length;
+      } else if (bestSize > targetBytes) {
+        if (nextBytes.length < bestSize) {
+          pdfBytes = nextBytes;
+          bestResult = nextBytes;
+          bestSize = nextBytes.length;
+        }
+      } else {
+        break;
+      }
+    }
+
+    return bestResult;
   }
 
-  newPdf.setTitle('Compressed PDF');
-  newPdf.setProducer('OmniTool Suite Client-Side Compressed Engine');
-  newPdf.setCreator('OmniTool Suite');
-
-  return await newPdf.save({
-    useObjectStreams: true,
-  });
+  return await renderPass(scale, quality);
 }
 
 /**
@@ -451,13 +517,16 @@ export async function renderPDFPagesToImages(
     canvas.width = viewport.width;
 
     if (context) {
+      context.fillStyle = '#ffffff';
+      context.fillRect(0, 0, canvas.width, canvas.height);
+
       await page.render({
         canvasContext: context,
         viewport,
       } as any).promise;
       pageImages.push({
         pageNumber: i,
-        dataUrl: canvas.toDataURL('image/png'),
+        dataUrl: canvas.toDataURL('image/jpeg', 0.92),
       });
     }
   }

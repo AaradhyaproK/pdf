@@ -5,11 +5,14 @@ import { ToolLayout } from '@/components/ToolLayout';
 import { FileUploader, FileItem } from '@/components/FileUploader';
 import { compressPDF } from '@/lib/pdf-engine';
 import { toast } from 'sonner';
-import { Download, Sliders, Minimize2, CheckCircle2, Sparkles, Zap } from 'lucide-react';
+import { Download, Sliders, Minimize2, CheckCircle2, Sparkles, Target, Zap, Info } from 'lucide-react';
 
 export default function CompressPDFPage() {
   const [files, setFiles] = useState<FileItem[]>([]);
+  const [mode, setMode] = useState<'preset' | 'target'>('preset');
   const [preset, setPreset] = useState<'extreme' | 'recommended' | 'low'>('recommended');
+  const [targetVal, setTargetVal] = useState<number>(200);
+  const [targetUnit, setTargetUnit] = useState<'KB' | 'MB'>('KB');
   const [isProcessing, setIsProcessing] = useState(false);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const [resultInfo, setResultInfo] = useState<{ origSize: number; compSize: number } | null>(null);
@@ -26,7 +29,20 @@ export default function CompressPDFPage() {
 
     try {
       const originalFile = files[0].file;
-      const compressedBytes = await compressPDF(originalFile, preset);
+      let compressedBytes: Uint8Array;
+
+      if (mode === 'preset') {
+        compressedBytes = await compressPDF(originalFile, preset);
+      } else {
+        const targetKB = targetUnit === 'MB' ? targetVal * 1024 : targetVal;
+        if (isNaN(targetKB) || targetKB <= 0) {
+          toast.error('Please enter a valid target size.');
+          setIsProcessing(false);
+          return;
+        }
+        compressedBytes = await compressPDF(originalFile, 'target', targetKB);
+      }
+
       const blob = new Blob([new Uint8Array(compressedBytes)], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
 
@@ -51,11 +67,52 @@ export default function CompressPDFPage() {
     return Math.round((diff / resultInfo.origSize) * 100);
   };
 
+  const formatBytes = (bytes: number): string => {
+    if (bytes <= 0) return '0 KB';
+    if (bytes < 1024 * 1024) {
+      return `${(bytes / 1024).toFixed(0)} KB`;
+    }
+    return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+  };
+
+  // Dynamic estimate calculation based on file size and selected options
+  const getEstimatedSize = (level: 'extreme' | 'recommended' | 'low') => {
+    if (files.length === 0) return null;
+    const origBytes = files[0].file.size;
+    let factor = 0.48; // default recommended
+    if (level === 'extreme') factor = 0.22;
+    if (level === 'low') factor = 0.78;
+
+    const estBytes = Math.round(origBytes * factor);
+    return formatBytes(estBytes);
+  };
+
+  const getTargetEstimatedSize = () => {
+    if (files.length === 0) return null;
+    const origBytes = files[0].file.size;
+    const targetKB = targetUnit === 'MB' ? targetVal * 1024 : targetVal;
+    const targetBytes = targetKB * 1024;
+
+    if (targetBytes >= origBytes) {
+      return {
+        estText: formatBytes(Math.round(origBytes * 0.85)),
+        reductionPct: '~15%',
+      };
+    }
+
+    const estBytes = Math.min(origBytes, targetBytes);
+    const savedPct = Math.round(((origBytes - estBytes) / origBytes) * 100);
+    return {
+      estText: `~${formatBytes(estBytes)}`,
+      reductionPct: `~${savedPct}%`,
+    };
+  };
+
   return (
     <ToolLayout
       slug="/pdf/compress"
       title="Compress PDF Online"
-      subtitle="Reduce PDF file size without losing quality using client-side WebAssembly. Zero file uploads."
+      subtitle="Reduce PDF file size to target KB/MB or compression levels without losing quality. 100% Client-Side Wasm."
     >
       <div className="space-y-5">
         <FileUploader
@@ -74,67 +131,218 @@ export default function CompressPDFPage() {
 
         {files.length > 0 && (
           <div className="space-y-4 pt-2">
-            {/* Compression Presets Bar (3 Columns on Mobile & Desktop) */}
-            <div className="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-2xs space-y-3">
-              <label className="text-xs font-black uppercase tracking-wider text-slate-500 flex items-center justify-between">
-                <span className="flex items-center gap-1.5">
+            {/* Control Panel Header & Mode Switcher */}
+            <div className="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs space-y-4">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-black uppercase tracking-wider text-slate-600 flex items-center gap-1.5">
                   <Sliders className="w-4 h-4 text-indigo-600 shrink-0" />
                   Select Compression Level
+                </label>
+                <span className="text-[10px] text-indigo-700 bg-indigo-50 border border-indigo-200/60 px-2.5 py-1 rounded-md font-extrabold uppercase tracking-wide">
+                  {mode === 'preset'
+                    ? `Preset: ${preset.toUpperCase()}`
+                    : `Target: ${targetVal} ${targetUnit}`}
                 </span>
-                <span className="text-[10px] text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md font-bold">
-                  Preset: {preset.toUpperCase()}
-                </span>
-              </label>
+              </div>
 
-              <div className="grid grid-cols-3 gap-2 sm:gap-3">
+              {/* Mode Toggle Tabs */}
+              <div className="grid grid-cols-2 gap-2 p-1 bg-slate-100/90 rounded-xl border border-slate-200/80">
                 <button
                   type="button"
-                  onClick={() => setPreset('extreme')}
-                  className={`p-2.5 sm:p-4 rounded-xl border text-center transition-all flex flex-col items-center justify-between gap-1 active:scale-95 ${
-                    preset === 'extreme'
-                      ? 'border-2 border-indigo-600 bg-indigo-50/40 text-indigo-950 font-black shadow-xs ring-2 ring-indigo-500/20'
-                      : 'border-slate-200 bg-white hover:border-slate-300 text-slate-700 font-semibold'
+                  onClick={() => setMode('preset')}
+                  className={`py-2 px-3 rounded-lg text-xs font-black transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                    mode === 'preset'
+                      ? 'bg-white text-indigo-950 shadow-xs border border-slate-200'
+                      : 'text-slate-600 hover:text-slate-900'
                   }`}
                 >
-                  <span className="text-[10px] font-black uppercase text-amber-600 bg-amber-50 px-1.5 py-0.2 rounded border border-amber-200">
-                    Max Shrink
-                  </span>
-                  <div className="text-xs sm:text-sm font-black text-slate-900 mt-1">Extreme</div>
-                  <div className="text-[9px] sm:text-xs text-slate-400 font-medium">Up to -80%</div>
+                  <Sliders className="w-3.5 h-3.5" />
+                  <span>Compression Presets</span>
                 </button>
-
                 <button
                   type="button"
-                  onClick={() => setPreset('recommended')}
-                  className={`p-2.5 sm:p-4 rounded-xl border text-center transition-all flex flex-col items-center justify-between gap-1 active:scale-95 ${
-                    preset === 'recommended'
-                      ? 'border-2 border-indigo-600 bg-indigo-50/40 text-indigo-950 font-black shadow-xs ring-2 ring-indigo-500/20'
-                      : 'border-slate-200 bg-white hover:border-slate-300 text-slate-700 font-semibold'
+                  onClick={() => setMode('target')}
+                  className={`py-2 px-3 rounded-lg text-xs font-black transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                    mode === 'target'
+                      ? 'bg-white text-indigo-950 shadow-xs border border-slate-200'
+                      : 'text-slate-600 hover:text-slate-900'
                   }`}
                 >
-                  <span className="text-[10px] font-black uppercase text-emerald-600 bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200">
-                    Optimal
-                  </span>
-                  <div className="text-xs sm:text-sm font-black text-slate-900 mt-1">Recommended</div>
-                  <div className="text-[9px] sm:text-xs text-slate-400 font-medium">Best Quality</div>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setPreset('low')}
-                  className={`p-2.5 sm:p-4 rounded-xl border text-center transition-all flex flex-col items-center justify-between gap-1 active:scale-95 ${
-                    preset === 'low'
-                      ? 'border-2 border-indigo-600 bg-indigo-50/40 text-indigo-950 font-black shadow-xs ring-2 ring-indigo-500/20'
-                      : 'border-slate-200 bg-white hover:border-slate-300 text-slate-700 font-semibold'
-                  }`}
-                >
-                  <span className="text-[10px] font-black uppercase text-sky-600 bg-sky-50 px-1.5 py-0.2 rounded border border-sky-200">
-                    High Res
-                  </span>
-                  <div className="text-xs sm:text-sm font-black text-slate-900 mt-1">Light</div>
-                  <div className="text-[9px] sm:text-xs text-slate-400 font-medium">HD Output</div>
+                  <Target className="w-3.5 h-3.5 text-indigo-600" />
+                  <span>Target File Size</span>
                 </button>
               </div>
+
+              {/* Preset Cards View */}
+              {mode === 'preset' && (
+                <div className="grid grid-cols-3 gap-2 sm:gap-3 pt-1">
+                  {/* Extreme */}
+                  <button
+                    type="button"
+                    onClick={() => setPreset('extreme')}
+                    className={`p-2.5 sm:p-4 rounded-xl border text-center transition-all flex flex-col items-center justify-between gap-1 cursor-pointer active:scale-95 ${
+                      preset === 'extreme'
+                        ? 'border-2 border-indigo-600 bg-indigo-50/40 text-indigo-950 font-black shadow-xs ring-2 ring-indigo-500/20'
+                        : 'border-slate-200 bg-white hover:border-slate-300 text-slate-700 font-semibold'
+                    }`}
+                  >
+                    <span className="text-[10px] font-black uppercase text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200">
+                      Max Shrink
+                    </span>
+                    <div className="text-xs sm:text-sm font-black text-slate-900 mt-1">Extreme</div>
+                    <div className="text-[9px] sm:text-xs text-slate-400 font-medium">Up to -80%</div>
+                    {files.length > 0 && (
+                      <span className="mt-1 text-[10px] font-extrabold text-amber-700 bg-amber-50/80 px-1.5 py-0.5 rounded-md border border-amber-200/50">
+                        ~{getEstimatedSize('extreme')}
+                      </span>
+                    )}
+                  </button>
+
+                  {/* Recommended */}
+                  <button
+                    type="button"
+                    onClick={() => setPreset('recommended')}
+                    className={`p-2.5 sm:p-4 rounded-xl border text-center transition-all flex flex-col items-center justify-between gap-1 cursor-pointer active:scale-95 ${
+                      preset === 'recommended'
+                        ? 'border-2 border-indigo-600 bg-indigo-50/40 text-indigo-950 font-black shadow-xs ring-2 ring-indigo-500/20'
+                        : 'border-slate-200 bg-white hover:border-slate-300 text-slate-700 font-semibold'
+                    }`}
+                  >
+                    <span className="text-[10px] font-black uppercase text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
+                      Optimal
+                    </span>
+                    <div className="text-xs sm:text-sm font-black text-slate-900 mt-1">Recommended</div>
+                    <div className="text-[9px] sm:text-xs text-slate-400 font-medium">Best Quality</div>
+                    {files.length > 0 && (
+                      <span className="mt-1 text-[10px] font-extrabold text-emerald-700 bg-emerald-50/80 px-1.5 py-0.5 rounded-md border border-emerald-200/50">
+                        ~{getEstimatedSize('recommended')}
+                      </span>
+                    )}
+                  </button>
+
+                  {/* Light */}
+                  <button
+                    type="button"
+                    onClick={() => setPreset('low')}
+                    className={`p-2.5 sm:p-4 rounded-xl border text-center transition-all flex flex-col items-center justify-between gap-1 cursor-pointer active:scale-95 ${
+                      preset === 'low'
+                        ? 'border-2 border-indigo-600 bg-indigo-50/40 text-indigo-950 font-black shadow-xs ring-2 ring-indigo-500/20'
+                        : 'border-slate-200 bg-white hover:border-slate-300 text-slate-700 font-semibold'
+                    }`}
+                  >
+                    <span className="text-[10px] font-black uppercase text-sky-600 bg-sky-50 px-1.5 py-0.5 rounded border border-sky-200">
+                      High Res
+                    </span>
+                    <div className="text-xs sm:text-sm font-black text-slate-900 mt-1">Light</div>
+                    <div className="text-[9px] sm:text-xs text-slate-400 font-medium">HD Output</div>
+                    {files.length > 0 && (
+                      <span className="mt-1 text-[10px] font-extrabold text-sky-700 bg-sky-50/80 px-1.5 py-0.5 rounded-md border border-sky-200/50">
+                        ~{getEstimatedSize('low')}
+                      </span>
+                    )}
+                  </button>
+                </div>
+              )}
+
+              {/* Target File Size Controls View */}
+              {mode === 'target' && (
+                <div className="space-y-4 pt-1">
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                    <div className="flex-1 space-y-1">
+                      <label className="text-[11px] font-bold text-slate-600 uppercase tracking-wider">
+                        Enter Desired Max Size
+                      </label>
+                      <div className="relative">
+                        <input
+                          type="number"
+                          min="10"
+                          max="50000"
+                          value={targetVal}
+                          onChange={(e) => setTargetVal(Number(e.target.value))}
+                          className="w-full pl-3.5 pr-20 py-2.5 rounded-xl border border-slate-300 focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500/20 text-slate-900 font-black text-sm outline-hidden transition-all bg-slate-50/50 focus:bg-white"
+                          placeholder="e.g. 200"
+                        />
+                        <div className="absolute right-1.5 top-1.5 bottom-1.5 flex items-center bg-slate-200/70 rounded-lg p-0.5">
+                          <button
+                            type="button"
+                            onClick={() => setTargetUnit('KB')}
+                            className={`px-2.5 py-1 rounded-md text-[10px] font-black transition-all cursor-pointer ${
+                              targetUnit === 'KB'
+                                ? 'bg-indigo-600 text-white shadow-xs'
+                                : 'text-slate-600 hover:text-slate-900'
+                            }`}
+                          >
+                            KB
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setTargetUnit('MB')}
+                            className={`px-2.5 py-1 rounded-md text-[10px] font-black transition-all cursor-pointer ${
+                              targetUnit === 'MB'
+                                ? 'bg-indigo-600 text-white shadow-xs'
+                                : 'text-slate-600 hover:text-slate-900'
+                            }`}
+                          >
+                            MB
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Quick Preset Size Pills */}
+                    <div className="space-y-1">
+                      <label className="text-[11px] font-bold text-slate-600 uppercase tracking-wider">
+                        Quick Targets
+                      </label>
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        {[
+                          { val: 100, unit: 'KB' },
+                          { val: 200, unit: 'KB' },
+                          { val: 500, unit: 'KB' },
+                          { val: 1, unit: 'MB' },
+                          { val: 2, unit: 'MB' },
+                        ].map((item) => (
+                          <button
+                            key={`${item.val}-${item.unit}`}
+                            type="button"
+                            onClick={() => {
+                              setTargetVal(item.val);
+                              setTargetUnit(item.unit as 'KB' | 'MB');
+                            }}
+                            className={`px-2.5 py-1.5 rounded-lg text-xs font-extrabold border transition-all cursor-pointer ${
+                              targetVal === item.val && targetUnit === item.unit
+                                ? 'border-indigo-600 bg-indigo-50 text-indigo-900 shadow-2xs'
+                                : 'border-slate-200 bg-white hover:border-slate-300 text-slate-700'
+                            }`}
+                          >
+                            {item.val} {item.unit}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Approximate PDF Size Indicator Box */}
+                  {files.length > 0 && getTargetEstimatedSize() && (
+                    <div className="p-3.5 rounded-xl bg-indigo-50/60 border border-indigo-100 flex items-center justify-between gap-3 text-indigo-950">
+                      <div className="flex items-center gap-2">
+                        <Info className="w-4 h-4 text-indigo-600 shrink-0" />
+                        <div>
+                          <p className="text-xs font-bold text-slate-800">
+                            Estimated PDF Size: <span className="font-black text-indigo-700">{getTargetEstimatedSize()?.estText}</span>
+                          </p>
+                          <p className="text-[10px] text-slate-500 font-medium">
+                            Original file size is {formatBytes(files[0].file.size)}
+                          </p>
+                        </div>
+                      </div>
+                      <span className="text-[10px] font-black bg-indigo-600 text-white px-2 py-0.5 rounded-md shadow-2xs shrink-0">
+                        {getTargetEstimatedSize()?.reductionPct} Reduction
+                      </span>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
             {/* Action Compress Button */}
@@ -151,7 +359,11 @@ export default function CompressPDFPage() {
               ) : (
                 <>
                   <Minimize2 className="w-4 h-4 text-white" />
-                  <span>Compress PDF File Now</span>
+                  <span>
+                    {mode === 'target'
+                      ? `Compress PDF to < ${targetVal} ${targetUnit}`
+                      : 'Compress PDF File Now'}
+                  </span>
                 </>
               )}
             </button>
@@ -176,8 +388,8 @@ export default function CompressPDFPage() {
                     )}
                   </h4>
                   <p className="text-xs text-slate-600 font-medium mt-0.5">
-                    Reduced from {(resultInfo.origSize / (1024 * 1024)).toFixed(2)} MB to{' '}
-                    <strong className="text-emerald-800 font-bold">{(resultInfo.compSize / (1024 * 1024)).toFixed(2)} MB</strong>
+                    Reduced from {formatBytes(resultInfo.origSize)} to{' '}
+                    <strong className="text-emerald-800 font-bold">{formatBytes(resultInfo.compSize)}</strong>
                   </p>
                 </div>
               </div>
@@ -185,7 +397,7 @@ export default function CompressPDFPage() {
               <a
                 href={downloadUrl}
                 download={`compressed-${files[0]?.file.name || 'document.pdf'}`}
-                className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-black text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-black text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Download className="w-4 h-4 text-white" />
                 <span>Download Compressed PDF</span>
@@ -197,3 +409,4 @@ export default function CompressPDFPage() {
     </ToolLayout>
   );
 }
+

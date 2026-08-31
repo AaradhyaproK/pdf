@@ -856,140 +856,83 @@ export default function PicsToPDFPage() {
         )}
       </div>
 
-      {/* Floating Bottom Mobile Bar */}
-      {items.length > 0 && (
-        <div className="md:hidden fixed bottom-[4.75rem] left-3 right-3 z-30 bg-slate-900/95 backdrop-blur-xl text-white rounded-2xl p-2 shadow-2xl flex items-center justify-between gap-2 border border-slate-800 animate-in slide-in-from-bottom duration-200">
-          <button
-            onClick={() => openPreview(0)}
-            className="p-2 rounded-xl bg-slate-800 text-slate-200 hover:text-white flex items-center gap-1 text-[11px] font-bold shrink-0 border border-slate-700 cursor-pointer"
-          >
-            <Eye className="w-3.5 h-3.5" />
-            <span>Preview</span>
-          </button>
+      {/* Pure Liquid Glass Full View Modal (Frameless Document Sheets, No Box-in-Box, No Bottom Download/Preview Bar) */}
+      {isPreviewOpen && items.length > 0 && (
+        <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-2xl flex flex-col animate-in fade-in duration-200">
+          {/* Top Liquid Glass Header Bar */}
+          <div className="px-4 sm:px-8 py-4 bg-slate-900/80 backdrop-blur-2xl border-b border-white/10 shadow-2xl flex items-center justify-between gap-4 shrink-0">
+            <div className="flex items-center gap-3 min-w-0">
+              <span className="px-4 py-1.5 rounded-full bg-slate-800/90 text-white font-black text-xs sm:text-sm flex items-center gap-2 shadow-lg border border-white/15">
+                <Eye className="w-4 h-4 text-cyan-300" />
+                <span>Full View Stream ({items.length} Pages)</span>
+              </span>
+            </div>
 
-          <div className="min-w-0 flex-1 px-1">
-            <span className="text-xs font-black block truncate text-white">
-              {items.length} Page(s)
-            </span>
-            <p className="text-[9px] font-bold text-amber-300 truncate">
-              {QUALITY_PRESETS[qualityPreset].label}
-            </p>
+            <div className="flex items-center gap-3 shrink-0">
+              <button
+                onClick={handleGeneratePDF}
+                disabled={isGenerating}
+                className="px-5 py-2.5 rounded-2xl liquid-glass-btn-primary text-white font-extrabold text-xs sm:text-sm shadow-xl transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50 active:scale-95"
+              >
+                {isGenerating ? <RefreshCw className="w-4 h-4 animate-spin text-cyan-300" /> : <Download className="w-4 h-4 text-cyan-300" />}
+                <span>Create PDF</span>
+              </button>
+
+              <button
+                onClick={() => setIsPreviewOpen(false)}
+                className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all cursor-pointer border border-white/20 shadow-md active:scale-95"
+                aria-label="Close preview"
+                title="Close preview"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
           </div>
 
-          <button
-            onClick={handleGeneratePDF}
-            disabled={isGenerating || loadingFiles}
-            className="px-3 py-2 rounded-xl bg-white text-slate-900 text-xs font-black shadow-md flex items-center gap-1 disabled:opacity-50 active:scale-95 transition-all cursor-pointer shrink-0"
-          >
-            {isGenerating ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Download className="w-3.5 h-3.5 text-amber-600" />}
-            <span>Create PDF</span>
-          </button>
-        </div>
-      )}
-
-      {/* Day Mode Page-Sized Full View Preview Modal */}
-      {isPreviewOpen && items.length > 0 && (
-        <div className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-200">
-          <div className="bg-white rounded-3xl shadow-2xl border border-slate-200/90 max-w-4xl w-full max-h-[90vh] sm:max-h-[88vh] flex flex-col overflow-hidden animate-in zoom-in-95 duration-150">
-            {/* Day Mode Modal Header */}
-            <div className="px-4 sm:px-6 py-3.5 bg-white border-b border-slate-200/90 flex items-center justify-between gap-3 shrink-0">
-              <div className="flex items-center gap-2.5 min-w-0">
-                <span className="px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 font-extrabold text-xs flex items-center gap-1.5 shrink-0">
-                  <Eye className="w-3.5 h-3.5 text-indigo-600" />
-                  <span>Full View Preview ({items.length} Pages)</span>
-                </span>
-                <span className="text-xs font-bold text-slate-500 truncate hidden sm:inline">
-                  Vertical Scroll Mode
-                </span>
-              </div>
-
-              <div className="flex items-center gap-2 shrink-0">
-                <button
-                  onClick={handleGeneratePDF}
-                  disabled={isGenerating}
-                  className="px-4 py-2 rounded-2xl bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-extrabold text-xs shadow-md transition-all flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
-                >
-                  <Download className="w-4 h-4" />
-                  <span>Create PDF</span>
-                </button>
-
-                <button
-                  onClick={() => setIsPreviewOpen(false)}
-                  className="p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 transition-all cursor-pointer"
-                  aria-label="Close preview"
-                  title="Close preview"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
-
-            {/* Day Mode Modal Body: Vertical Scroll of All Pages */}
-            <div className="flex-1 overflow-y-auto bg-slate-100/90 p-4 sm:p-6 space-y-6 scrollbar-thin">
-              {items.map((item, index) => (
-                <div
-                  key={item.id}
-                  id={`full-view-page-${index}`}
-                  className="bg-white p-3 sm:p-5 rounded-2xl shadow-md border border-slate-200/90 max-w-3xl mx-auto flex flex-col items-center gap-3 relative group"
-                >
-                  {/* Day Mode Page Badge Header */}
-                  <div className="w-full flex items-center justify-between pb-2 border-b border-slate-100">
-                    <span className="px-2.5 py-0.5 rounded-full bg-slate-900 text-white font-black text-[11px] shadow-2xs">
-                      Page {index + 1} of {items.length}
+          {/* Full View Stream Canvas: Direct Document Sheets Floating on Canvas */}
+          <div className="flex-1 overflow-y-auto p-4 sm:p-10 space-y-10 flex flex-col items-center custom-scrollbar">
+            {items.map((item, index) => (
+              <div
+                key={item.id}
+                id={`full-view-page-${index}`}
+                className="relative bg-white shadow-[0_30px_70px_rgba(0,0,0,0.6)] rounded-2xl overflow-hidden max-w-3xl w-full transition-all border border-white/90 group"
+              >
+                {/* Floating Minimal Glass Badge Overlay (No Nested Dark Box) */}
+                <div className="absolute top-3 left-3 right-3 z-10 flex items-center justify-between pointer-events-none">
+                  <span className="px-3.5 py-1 rounded-full bg-slate-950/80 backdrop-blur-md text-white font-black text-xs shadow-lg border border-white/20">
+                    Page {index + 1} of {items.length}
+                  </span>
+                  <span className="px-3.5 py-1 rounded-full bg-white/90 backdrop-blur-md text-slate-900 font-bold text-xs shadow-md border border-white/60 truncate max-w-[200px] sm:max-w-xs">
+                    {item.name}
+                  </span>
+                  {item.rotation !== 0 && (
+                    <span className="px-3 py-1 rounded-full bg-cyan-400 text-slate-950 font-black text-[10px] shadow-lg">
+                      {item.rotation}°
                     </span>
-                    <span className="text-xs font-bold text-slate-700 truncate max-w-[200px] sm:max-w-xs">
-                      {item.name}
-                    </span>
-                    {item.rotation !== 0 && (
-                      <span className="text-[10px] font-extrabold bg-amber-50 text-amber-700 px-2 py-0.5 rounded-md border border-amber-200">
-                        {item.rotation}° Rotated
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Page Image Display */}
-                  <div className="w-full flex items-center justify-center p-1 min-h-[240px] bg-slate-50 rounded-xl overflow-hidden">
-                    {item.previewUrl ? (
-                      <img
-                        src={item.previewUrl}
-                        alt={item.name}
-                        className="max-w-full max-h-[72vh] w-auto h-auto object-contain rounded-lg shadow-sm transition-all duration-200"
-                        style={{
-                          filter: getCssFilter(item.filter),
-                          transform: `rotate(${item.rotation}deg)`,
-                        }}
-                      />
-                    ) : (
-                      <div className="py-16 text-slate-400 flex flex-col items-center gap-2">
-                        <FileText className="w-12 h-12" />
-                        <span className="text-xs font-bold">PDF Page Preview</span>
-                      </div>
-                    )}
-                  </div>
+                  )}
                 </div>
-              ))}
-            </div>
 
-            {/* Day Mode Quick Jump Page Navigation Bar */}
-            {items.length > 1 && (
-              <div className="px-4 py-2.5 bg-white border-t border-slate-200 flex items-center gap-2 overflow-x-auto shrink-0 justify-center">
-                <span className="text-[11px] font-bold text-slate-400 shrink-0 mr-1">
-                  Jump to:
-                </span>
-                {items.map((it, i) => (
-                  <button
-                    key={it.id}
-                    onClick={() => {
-                      const el = document.getElementById(`full-view-page-${i}`);
-                      el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }}
-                    className="px-2.5 py-1 rounded-xl bg-slate-100 hover:bg-indigo-50 hover:text-indigo-700 border border-slate-200 hover:border-indigo-200 text-slate-700 font-extrabold text-xs transition-all shrink-0 cursor-pointer"
-                  >
-                    #{i + 1}
-                  </button>
-                ))}
+                {/* Pure Page Image Canvas (Direct display, no nested box containers) */}
+                <div className="w-full bg-white flex items-center justify-center p-0">
+                  {item.previewUrl ? (
+                    <img
+                      src={item.previewUrl}
+                      alt={item.name}
+                      className="w-full h-auto object-contain block transition-all duration-200"
+                      style={{
+                        filter: getCssFilter(item.filter),
+                        transform: `rotate(${item.rotation}deg)`,
+                      }}
+                    />
+                  ) : (
+                    <div className="py-24 text-slate-400 flex flex-col items-center gap-2">
+                      <FileText className="w-12 h-12" />
+                      <span className="text-xs font-bold">PDF Page Preview</span>
+                    </div>
+                  )}
+                </div>
               </div>
-            )}
+            ))}
           </div>
         </div>
       )}
