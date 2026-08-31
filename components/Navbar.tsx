@@ -29,6 +29,8 @@ import {
   Search,
   X,
   ArrowLeft,
+  Plus,
+  Bell,
 } from 'lucide-react';
 
 const PDF_TOOLS = [
@@ -68,11 +70,21 @@ const ALL_SEARCHABLE_TOOLS = [...PDF_TOOLS, ...IMAGE_TOOLS, ...UTILITY_TOOLS];
 export function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [scrolled, setScrolled] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
   const router = useRouter();
 
   const isActive = (path: string) => pathname?.startsWith(path);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     if (searchOpen && searchInputRef.current) {
@@ -95,16 +107,22 @@ export function Navbar() {
     : [];
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-slate-200/80 transition-all shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
+    <header
+      className={`sticky top-0 z-50 w-full luma-glass-texture transition-all duration-300 ${
+        scrolled
+          ? 'luma-glass-header-scrolled'
+          : 'luma-glass-header'
+      }`}
+    >
       {/* YouTube-Style Expanded Search Bar Header on Mobile */}
       {searchOpen ? (
-        <div className="max-w-7xl mx-auto px-2 h-14 flex items-center gap-2 bg-white z-50">
+        <div className="max-w-7xl mx-auto px-2 h-14 flex items-center gap-2 bg-white/60 backdrop-blur-2xl z-50">
           <button
             onClick={() => {
               setSearchOpen(false);
               setSearchQuery('');
             }}
-            className="p-2 text-slate-600 hover:text-slate-900 rounded-full active:scale-95 transition-all"
+            className="p-2 text-slate-600 hover:text-slate-900 rounded-full active:scale-90 transition-all duration-150"
             aria-label="Close search"
           >
             <ArrowLeft className="w-5 h-5 text-slate-700" />
@@ -118,7 +136,7 @@ export function Navbar() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search PDF, Image & Utility tools..."
-              className="w-full pl-9 pr-8 py-2 bg-slate-100 border border-slate-200 rounded-full text-xs font-semibold text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500"
+              className="w-full pl-9 pr-8 py-2 bg-slate-100/90 border border-slate-200/90 rounded-full text-xs font-semibold text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 shadow-inner"
             />
             {searchQuery && (
               <button
@@ -134,7 +152,7 @@ export function Navbar() {
         /* Standard Header Navigation */
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-2">
           {/* Brand Logo - Minimal on Mobile */}
-          <Link href="/" className="flex items-center gap-1.5 sm:gap-2.5 group shrink-0">
+          <Link href="/" className="flex items-center gap-1.5 sm:gap-2.5 group shrink-0 active:scale-95 transition-transform duration-200">
             <img
               src="/1.png"
               alt="FileZenith Logo"
@@ -318,20 +336,21 @@ export function Navbar() {
             </div>
           </nav>
 
-          {/* Privacy Badge & Mobile YouTube-Style Search Button */}
+          {/* Privacy Badge & Luma-Style Floating Glass Pill Container */}
           <div className="flex items-center gap-2">
             <div className="hidden sm:block">
               <PrivacyBadge />
             </div>
 
-            {/* YouTube Style Search Button on Mobile (Replaces Hamburger) */}
+            {/* Luma-Style Floating Glass Search Pill */}
             <button
               onClick={() => setSearchOpen(true)}
-              className="md:hidden p-2 rounded-full text-slate-700 bg-slate-100 hover:bg-slate-200 transition-all active:scale-95 flex items-center gap-1.5 text-xs font-bold"
+              className="luma-glass-pill px-3 py-1.5 flex items-center gap-1.5 text-slate-800 hover:text-slate-900 active:scale-95 transition-all cursor-pointer"
               aria-label="Search tools"
+              title="Search Tools"
             >
-              <Search className="w-4.5 h-4.5 text-rose-600" />
-              <span className="text-[11px] text-slate-600 pr-1">Search</span>
+              <Search className="w-4 h-4 text-slate-800 stroke-[2.2]" />
+              <span className="text-xs font-extrabold tracking-tight text-slate-800">Search</span>
             </button>
           </div>
         </div>

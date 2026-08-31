@@ -62,6 +62,8 @@ const UTILITY_TOOLS = [
   { name: 'JSON Formatter & CSV', slug: '/utility/json-formatter', desc: 'Beautify, validate & convert JSON', icon: Code2 },
 ];
 
+import { motion } from 'framer-motion';
+
 export function MobileBottomNav() {
   const pathname = usePathname();
   const [activeDrawer, setActiveDrawer] = useState<'pdf' | 'image' | 'utility' | null>(null);
@@ -100,14 +102,16 @@ export function MobileBottomNav() {
     }
   };
 
-  const isTabActive = (category: string) => {
-    if (category === 'home') return pathname === '/';
-    if (category === 'create-pdf') return pathname === '/image/pics-to-pdf' || pathname === '/image/to-pdf';
-    if (category === 'pdf') return pathname?.startsWith('/pdf') || activeDrawer === 'pdf';
-    if (category === 'image') return pathname?.startsWith('/image') || activeDrawer === 'image';
-    if (category === 'utility') return pathname?.startsWith('/utility') || activeDrawer === 'utility';
-    return false;
+  const getActiveTab = () => {
+    if (activeDrawer === 'pdf' || (pathname?.startsWith('/pdf') && !activeDrawer)) return 'pdf';
+    if (activeDrawer === 'image' || (pathname?.startsWith('/image') && !activeDrawer && pathname !== '/image/pics-to-pdf')) return 'image';
+    if (activeDrawer === 'utility' || (pathname?.startsWith('/utility') && !activeDrawer)) return 'utility';
+    if (pathname === '/image/pics-to-pdf' || pathname === '/image/to-pdf') return 'create-pdf';
+    if (pathname === '/') return 'home';
+    return null;
   };
+
+  const activeTab = getActiveTab();
 
   const getToolsForCategory = () => {
     if (activeDrawer === 'pdf') return PDF_TOOLS;
@@ -129,24 +133,24 @@ export function MobileBottomNav() {
         <div className="md:hidden fixed inset-0 z-50 flex flex-col justify-end animate-in fade-in duration-200">
           {/* Touch Backdrop */}
           <div
-            className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs"
+            className="fixed inset-0 bg-slate-950/30 backdrop-blur-md transition-opacity"
             onClick={() => setActiveDrawer(null)}
           />
 
           <div
-            className="relative bg-white rounded-t-3xl shadow-2xl border-t border-slate-200 max-h-[80vh] flex flex-col overflow-hidden animate-in slide-in-from-bottom duration-300 z-10"
-            style={{ paddingBottom: 'calc(5.5rem + env(safe-area-inset-bottom, 0px))' }}
+            className="relative liquid-glass-drawer rounded-t-3xl shadow-2xl border-t border-white/60 max-h-[80vh] flex flex-col overflow-hidden animate-in slide-in-from-bottom duration-300 z-10"
+            style={{ paddingBottom: 'calc(6rem + env(safe-area-inset-bottom, 0px))' }}
           >
             {/* Handlebar Pill */}
             <div className="pt-3 pb-1 flex justify-center cursor-pointer" onClick={() => setActiveDrawer(null)}>
-              <div className="w-12 h-1.5 rounded-full bg-slate-300" />
+              <div className="w-12 h-1.5 rounded-full bg-slate-300/80 shadow-xs" />
             </div>
 
             {/* Header */}
-            <div className="px-5 py-3 border-b border-slate-100 flex items-center justify-between">
+            <div className="px-5 py-3 border-b border-slate-200/60 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div
-                  className={`p-2 rounded-xl text-white font-bold ${
+                  className={`p-2 rounded-xl text-white font-bold shadow-sm ${
                     activeDrawer === 'pdf'
                       ? 'bg-rose-600'
                       : activeDrawer === 'image'
@@ -159,7 +163,7 @@ export function MobileBottomNav() {
                   {activeDrawer === 'utility' && <Wrench className="w-4 h-4" />}
                 </div>
                 <div>
-                  <h3 className="text-sm font-black text-slate-900 capitalize">
+                  <h3 className="text-sm font-black text-slate-900 capitalize tracking-tight">
                     {activeDrawer === 'pdf' ? 'PDF Studio Tools' : activeDrawer === 'image' ? 'Image Studio Tools' : 'Daily Quick Utilities'}
                   </h3>
                   <p className="text-[10px] text-slate-500 font-semibold flex items-center gap-1">
@@ -170,14 +174,14 @@ export function MobileBottomNav() {
 
               <button
                 onClick={() => setActiveDrawer(null)}
-                className="p-2 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors"
+                className="p-2 rounded-full bg-slate-100/80 text-slate-600 hover:bg-slate-200 active:scale-90 transition-all"
               >
                 <X className="w-4.5 h-4.5" />
               </button>
             </div>
 
             {/* Instant Search Bar inside Mobile Drawer */}
-            <div className="p-4 bg-slate-50 border-b border-slate-100">
+            <div className="p-4 bg-slate-50/70 border-b border-slate-200/50 backdrop-blur-md">
               <div className="relative">
                 <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
@@ -185,12 +189,12 @@ export function MobileBottomNav() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder={`Search ${activeDrawer.toUpperCase()} tools...`}
-                  className="w-full pl-9 pr-4 py-2.5 bg-white border border-slate-200 rounded-2xl text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-600"
+                  className="w-full pl-9 pr-4 py-2.5 bg-white/90 border border-slate-200/90 rounded-2xl text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-600 shadow-xs"
                 />
                 {searchQuery && (
                   <button
                     onClick={() => setSearchQuery('')}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-bold"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-bold hover:text-slate-600"
                   >
                     Clear
                   </button>
@@ -201,7 +205,7 @@ export function MobileBottomNav() {
             {/* Scrollable Tool List */}
             <div className="p-4 space-y-2 overflow-y-auto max-h-[50vh]">
               {filteredTools.length === 0 ? (
-                <div className="py-8 text-center text-xs text-slate-400">
+                <div className="py-8 text-center text-xs text-slate-400 font-medium">
                   No tools found matching &quot;{searchQuery}&quot;
                 </div>
               ) : (
@@ -225,7 +229,7 @@ export function MobileBottomNav() {
                     <Link
                       key={tool.slug}
                       href={tool.slug}
-                      className="p-3 rounded-2xl bg-white hover:bg-slate-50 border border-slate-200/80 flex items-center justify-between active:scale-[0.99] transition-all"
+                      className="p-3 rounded-2xl bg-white/80 hover:bg-white border border-slate-200/70 flex items-center justify-between active:scale-[0.98] transition-all duration-150 shadow-2xs"
                     >
                       <div className="flex items-center gap-3 min-w-0">
                         <div className={`p-2.5 rounded-xl border shrink-0 ${iconStyle}`}>
@@ -254,68 +258,98 @@ export function MobileBottomNav() {
         </div>
       )}
 
-      {/* Native App-Style Mobile Bottom Bar (Fixed at bottom on screens < md, smoothly hides when in footer) */}
+      {/* Apple Dynamic Island Floating Mobile Bottom Nav */}
       <nav
         aria-label="Mobile Navigation"
-        className={`md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] px-2 pt-2 transition-all duration-300 ease-in-out ${
-          inFooter ? 'translate-y-full opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'
+        className={`md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[calc(100%-1.75rem)] max-w-sm sm:max-w-md apple-dynamic-island luma-glass-texture rounded-full p-1.5 transition-all duration-300 ease-in-out ${
+          inFooter ? 'translate-y-24 opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'
         }`}
-        style={{ paddingBottom: 'calc(0.85rem + env(safe-area-inset-bottom, 0px))' }}
+        style={{ marginBottom: 'env(safe-area-inset-bottom, 0px)' }}
       >
-        <div className="grid grid-cols-5 gap-1 max-w-md mx-auto">
+        <div className="grid grid-cols-5 gap-1 items-center relative">
           {/* 1. Home Tab */}
           <Link
             href="/"
-            className={`flex flex-col items-center justify-center py-1 rounded-xl transition-all active:scale-95 ${
-              isTabActive('home') ? 'text-rose-600 font-extrabold' : 'text-slate-500 hover:text-slate-900'
+            className={`relative flex flex-col items-center justify-center py-2 px-1 rounded-full transition-all duration-200 active:scale-90 ${
+              activeTab === 'home' ? 'text-slate-900 font-extrabold' : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            <Home className="w-5 h-5" />
-            <span className="text-[10px] mt-0.5">Home</span>
+            {activeTab === 'home' && (
+              <motion.div
+                layoutId="dynamic-island-active-pill"
+                className="absolute inset-0 rounded-full bg-slate-900/10 border border-slate-900/15 shadow-[inset_0_1px_1px_rgba(255,255,255,0.8)]"
+                transition={{ type: 'spring', stiffness: 450, damping: 35 }}
+              />
+            )}
+            <Home className="w-4.5 h-4.5 z-10" />
+            <span className="text-[9px] mt-0.5 z-10 tracking-tight font-medium">Home</span>
           </Link>
 
           {/* 2. PDF Studio Sheet Trigger */}
           <button
             onClick={() => toggleDrawer('pdf')}
-            className={`flex flex-col items-center justify-center py-1 rounded-xl transition-all active:scale-95 ${
-              isTabActive('pdf') ? 'text-rose-600 font-extrabold' : 'text-slate-500 hover:text-slate-900'
+            className={`relative flex flex-col items-center justify-center py-2 px-1 rounded-full transition-all duration-200 active:scale-90 ${
+              activeTab === 'pdf' ? 'text-rose-600 font-extrabold' : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            <FileText className="w-5 h-5" />
-            <span className="text-[10px] mt-0.5">PDF</span>
+            {activeTab === 'pdf' && (
+              <motion.div
+                layoutId="dynamic-island-active-pill"
+                className="absolute inset-0 rounded-full bg-rose-500/15 border border-rose-500/25 shadow-[inset_0_1px_1px_rgba(255,255,255,0.8)]"
+                transition={{ type: 'spring', stiffness: 450, damping: 35 }}
+              />
+            )}
+            <FileText className="w-4.5 h-4.5 z-10" />
+            <span className="text-[9px] mt-0.5 z-10 tracking-tight font-medium">PDF</span>
           </button>
 
-          {/* 3. Create PDF (Center Highlighted Action Tab - Pics to PDF) */}
+          {/* 3. Create PDF (Center Highlighted Liquid Glass Orb) */}
           <Link
             href="/image/pics-to-pdf"
-            className="flex flex-col items-center justify-center -mt-3.5 active:scale-95 transition-all"
+            className="relative flex flex-col items-center justify-center -mt-5 active:scale-90 transition-transform duration-150 group"
           >
-            <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-rose-600 to-rose-500 text-white flex items-center justify-center shadow-lg shadow-rose-500/30 border-2 border-white">
-              <FilePlus className="w-5 h-5" />
+            <div className="w-12 h-12 rounded-full liquid-orb-glow text-white flex items-center justify-center relative border border-white/70 shadow-lg overflow-hidden group-hover:scale-105 transition-transform">
+              {/* Specular glare reflection dot */}
+              <div className="absolute top-1 left-2.5 w-3.5 h-1.5 rounded-full bg-white/70 blur-[0.5px]" />
+              <FilePlus className="w-5 h-5 drop-shadow-xs" />
             </div>
-            <span className="text-[10px] font-black text-rose-700 mt-0.5">Create PDF</span>
+            <span className="text-[9px] font-black text-rose-600 mt-1 tracking-tight">Create PDF</span>
           </Link>
 
           {/* 4. Image Studio Sheet Trigger */}
           <button
             onClick={() => toggleDrawer('image')}
-            className={`flex flex-col items-center justify-center py-1 rounded-xl transition-all active:scale-95 ${
-              isTabActive('image') ? 'text-sky-600 font-extrabold' : 'text-slate-500 hover:text-slate-900'
+            className={`relative flex flex-col items-center justify-center py-2 px-1 rounded-full transition-all duration-200 active:scale-90 ${
+              activeTab === 'image' ? 'text-sky-600 font-extrabold' : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            <ImageIcon className="w-5 h-5" />
-            <span className="text-[10px] mt-0.5">Image</span>
+            {activeTab === 'image' && (
+              <motion.div
+                layoutId="dynamic-island-active-pill"
+                className="absolute inset-0 rounded-full bg-sky-500/15 border border-sky-500/25 shadow-[inset_0_1px_1px_rgba(255,255,255,0.8)]"
+                transition={{ type: 'spring', stiffness: 450, damping: 35 }}
+              />
+            )}
+            <ImageIcon className="w-4.5 h-4.5 z-10" />
+            <span className="text-[9px] mt-0.5 z-10 tracking-tight font-medium">Image</span>
           </button>
 
           {/* 5. Quick Utility Sheet Trigger */}
           <button
             onClick={() => toggleDrawer('utility')}
-            className={`flex flex-col items-center justify-center py-1 rounded-xl transition-all active:scale-95 ${
-              isTabActive('utility') ? 'text-emerald-600 font-extrabold' : 'text-slate-500 hover:text-slate-900'
+            className={`relative flex flex-col items-center justify-center py-2 px-1 rounded-full transition-all duration-200 active:scale-90 ${
+              activeTab === 'utility' ? 'text-emerald-600 font-extrabold' : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            <Wrench className="w-5 h-5" />
-            <span className="text-[10px] mt-0.5">Utility</span>
+            {activeTab === 'utility' && (
+              <motion.div
+                layoutId="dynamic-island-active-pill"
+                className="absolute inset-0 rounded-full bg-emerald-500/15 border border-emerald-500/25 shadow-[inset_0_1px_1px_rgba(255,255,255,0.8)]"
+                transition={{ type: 'spring', stiffness: 450, damping: 35 }}
+              />
+            )}
+            <Wrench className="w-4.5 h-4.5 z-10" />
+            <span className="text-[9px] mt-0.5 z-10 tracking-tight font-medium">Utility</span>
           </button>
         </div>
       </nav>
