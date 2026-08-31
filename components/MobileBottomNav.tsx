@@ -313,7 +313,7 @@ export function MobileBottomNav() {
               <div className="absolute top-1 left-2.5 w-3.5 h-1.5 rounded-full bg-white/70 blur-[0.5px]" />
               <FilePlus className="w-5 h-5 drop-shadow-xs" />
             </div>
-            <span className="text-[9px] font-black text-rose-600 mt-1 tracking-tight">Create PDF</span>
+            <span className="text-[9px] font-black text-blue-600 mt-1 tracking-tight">Create PDF</span>
           </Link>
 
           {/* 4. Image Studio Sheet Trigger */}
