@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ShieldCheck, Smartphone, Download } from 'lucide-react';
+import { VisitorCounter } from './VisitorCounter';
 
 export function Footer() {
   return (
@@ -17,6 +18,7 @@ export function Footer() {
             <p className="text-xs text-slate-500 leading-relaxed">
               100% Client-Side PDF, Image, and Daily Utility Platform. Engineered for privacy and speed.
             </p>
+
             <div className="flex items-center gap-2 text-xs text-emerald-700 bg-emerald-50 border border-emerald-200/80 px-3 py-1.5 rounded-full w-fit font-semibold">
               <ShieldCheck className="w-4 h-4 text-emerald-600" />
               <span>Zero Server Guaranteed</span>

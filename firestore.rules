@@ -29,6 +29,22 @@ service cloud.firestore {
       allow read, write, create, update, delete: if true;
     }
 
+    // 4. Public Visitor Analytics Summary & Time Interval Metrics
+    match /analytics_summary/{docId} {
+      allow read: if true;
+      allow write, update, create: if true;
+    }
+
+    match /daily_stats/{dateId} {
+      allow read: if true;
+      allow write, update, create: if true;
+    }
+
+    match /monthly_stats/{monthId} {
+      allow read: if true;
+      allow write, update, create: if true;
+    }
+
     // Default Match
     match /{document=**} {
       allow read, write: if true;

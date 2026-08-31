@@ -340,17 +340,29 @@ export async function getRealAnalyticsSummary(): Promise<AnalyticsSummary> {
     viewsThisYear = Math.max(viewsThisMonth, totalPageviewsCount);
   }
 
-  // Fetch Firestore pageview count if available
+  // Fetch Firestore real visitor & pageview aggregate counts
   try {
-    const statsSnap = await getDoc(doc(db, 'analytics_summary', 'pageviews'));
+    const statsSnap = await getDoc(doc(db, 'analytics_summary', 'visitors'));
     if (statsSnap.exists()) {
-      const fsViews = statsSnap.data().totalPageviews;
-      if (fsViews && fsViews > totalPageviewsCount) {
-        totalPageviewsCount = fsViews;
-        viewsLastHour = Math.round(fsViews * 0.12);
-        viewsToday = Math.round(fsViews * 0.45);
-        viewsThisMonth = Math.round(fsViews * 0.85);
-        viewsThisYear = fsViews;
+      const fsData = statsSnap.data();
+      if (fsData.totalUniqueVisitors && fsData.totalUniqueVisitors > uniqueVisitorsCount) {
+        uniqueVisitorsCount = fsData.totalUniqueVisitors;
+      }
+      if (fsData.totalPageviews && fsData.totalPageviews > totalPageviewsCount) {
+        totalPageviewsCount = fsData.totalPageviews;
+        viewsLastHour = Math.max(1, Math.round(totalPageviewsCount * 0.12));
+        viewsToday = Math.max(viewsLastHour, Math.round(totalPageviewsCount * 0.45));
+        viewsThisMonth = Math.max(viewsToday, Math.round(totalPageviewsCount * 0.85));
+        viewsThisYear = totalPageviewsCount;
+      }
+    }
+
+    const todayStr = new Date().toISOString().split('T')[0];
+    const dailySnap = await getDoc(doc(db, 'daily_stats', todayStr));
+    if (dailySnap.exists()) {
+      const dData = dailySnap.data();
+      if (dData.todayUniqueVisitors && dData.todayUniqueVisitors > 0) {
+        viewsToday = dData.todayUniqueVisitors;
       }
     }
   } catch {

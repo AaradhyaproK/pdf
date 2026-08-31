@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { PrivacyBadge } from './PrivacyBadge';
+import { VisitorCounter } from './VisitorCounter';
 import {
   FileText,
   Image as ImageIcon,

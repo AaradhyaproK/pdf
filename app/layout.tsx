@@ -48,6 +48,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { CloudflareAnalytics } from '@/components/CloudflareAnalytics';
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -57,6 +59,7 @@ export default function RootLayout({
     <html lang="en" className="h-full scroll-smooth light">
       <body className={`${inter.className} min-h-full flex flex-col bg-slate-50/70 text-slate-900 antialiased`}>
         <GoogleAdSenseScript />
+        <CloudflareAnalytics />
         <AnalyticsTracker />
         <Navbar />
         <div className="flex-1">{children}</div>
