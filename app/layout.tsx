@@ -29,9 +29,14 @@ export const metadata: Metadata = {
     title: 'FileZenith',
   },
   icons: {
-    icon: '/1.png',
+    icon: [
+      { url: '/1.png', sizes: 'any', type: 'image/png' },
+      { url: '/logo.png', sizes: 'any', type: 'image/png' },
+    ],
     shortcut: '/1.png',
-    apple: '/1.png',
+    apple: [
+      { url: '/1.png', sizes: '180x180', type: 'image/png' },
+    ],
   },
   openGraph: {
     title: 'FileZenith - 100% Free Online PDF, Image & Utility Studio',
