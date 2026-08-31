@@ -45,13 +45,19 @@ export function PWAInstaller() {
 
     // Capture Android & Desktop Chrome/Edge native install prompt
     const handleBeforeInstallPrompt = (e: Event) => {
-      if (localStorage.getItem('filezenith_pwa_dismissed') === 'true') return;
       e.preventDefault();
       setDeferredPrompt(e);
+      if (localStorage.getItem('filezenith_pwa_dismissed') !== 'true') {
+        setShowInstallBanner(true);
+      }
+    };
+
+    const handleCustomInstall = () => {
       setShowInstallBanner(true);
     };
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    window.addEventListener('filezenith-install-app', handleCustomInstall);
 
     window.addEventListener('appinstalled', () => {
       setIsInstalled(true);
@@ -63,6 +69,7 @@ export function PWAInstaller() {
 
     return () => {
       window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+      window.removeEventListener('filezenith-install-app', handleCustomInstall);
     };
   }, []);
 
@@ -76,6 +83,8 @@ export function PWAInstaller() {
       }
       setDeferredPrompt(null);
       setShowInstallBanner(false);
+    } else {
+      window.location.href = '/download-app';
     }
   };
 

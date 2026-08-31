@@ -133,47 +133,69 @@ export default function DownloadAppPage() {
             </div>
           </div>
 
-          {/* Android & Desktop 1-Click Install Button */}
+          {/* Android & Desktop 1-Click Install Button & Step Guide */}
           {!isIOS && (
             <div className="space-y-4 text-center sm:text-left">
-              <div className="p-6 rounded-2xl bg-slate-900 text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-md">
+              <div className="p-5 sm:p-6 rounded-2xl bg-slate-900 text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-md border border-slate-800">
                 <div className="space-y-1">
-                  <h3 className="text-base font-black text-white flex items-center gap-2">
+                  <h3 className="text-sm sm:text-base font-black text-white flex items-center justify-center sm:justify-start gap-2">
                     <Download className="w-5 h-5 text-indigo-400" />
-                    1-Click Direct Installation
+                    Direct Android & Desktop Installation
                   </h3>
-                  <p className="text-xs text-slate-300">
-                    Installs the app directly to your home screen or desktop application menu.
+                  <p className="text-xs text-slate-300 font-medium">
+                    Installs FileZenith App directly to your Android home screen or computer application drawer.
                   </p>
                 </div>
 
                 <button
                   onClick={handleInstallClick}
                   disabled={isInstalled}
-                  className="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-800 text-white font-black text-sm shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-800 text-white font-black text-xs sm:text-sm shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95 shrink-0"
                 >
-                  <Download className="w-4 h-4" />
-                  <span>{isInstalled ? 'App Installed' : 'Install App Now'}</span>
+                  <Download className="w-4 h-4 text-white" />
+                  <span>{isInstalled ? 'App Already Installed' : 'Install App Now'}</span>
                 </button>
+              </div>
+
+              {/* Android Manual Step Fallback (Visible if browser menu action is needed) */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-indigo-50/60 border border-indigo-100/90 text-left space-y-2.5">
+                <h4 className="text-xs font-black text-slate-900 flex items-center gap-1.5">
+                  <Smartphone className="w-4 h-4 text-indigo-600" />
+                  <span>How to Install manually on Android (Chrome / Edge / Samsung Internet):</span>
+                </h4>
+                <ol className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs font-semibold text-slate-700">
+                  <li className="p-2.5 bg-white rounded-xl border border-indigo-100 flex items-center gap-2">
+                    <span className="w-5 h-5 rounded-full bg-indigo-600 text-white text-[10px] font-black flex items-center justify-center shrink-0">1</span>
+                    <span>Tap Chrome <strong>3 dots (⋮)</strong> menu top-right.</span>
+                  </li>
+                  <li className="p-2.5 bg-white rounded-xl border border-indigo-100 flex items-center gap-2">
+                    <span className="w-5 h-5 rounded-full bg-indigo-600 text-white text-[10px] font-black flex items-center justify-center shrink-0">2</span>
+                    <span>Tap <strong>"Install app"</strong> or <strong>"Add to Home screen"</strong>.</span>
+                  </li>
+                  <li className="p-2.5 bg-white rounded-xl border border-indigo-100 flex items-center gap-2">
+                    <span className="w-5 h-5 rounded-full bg-indigo-600 text-white text-[10px] font-black flex items-center justify-center shrink-0">3</span>
+                    <span>Tap <strong>Install</strong> to add to app drawer.</span>
+                  </li>
+                </ol>
               </div>
             </div>
           )}
 
           {/* iOS Safari Installation Steps Guide */}
           {isIOS && (
-            <div className="space-y-4 text-left bg-indigo-50/60 p-6 rounded-2xl border border-indigo-100">
-              <h3 className="text-base font-black text-slate-900 flex items-center gap-2">
+            <div className="space-y-4 text-left bg-indigo-50/60 p-5 sm:p-6 rounded-2xl border border-indigo-100">
+              <h3 className="text-sm sm:text-base font-black text-slate-900 flex items-center gap-2">
                 <Share className="w-5 h-5 text-indigo-600" />
                 How to Install on iPhone & iPad (Safari):
               </h3>
-              <ol className="space-y-3 text-xs text-slate-700 font-semibold list-none">
+              <ol className="space-y-2.5 text-xs text-slate-700 font-semibold list-none">
                 <li className="flex items-center gap-3 p-3 bg-white rounded-xl border border-indigo-100 shadow-2xs">
                   <span className="w-6 h-6 rounded-full bg-indigo-600 text-white text-xs font-black flex items-center justify-center shrink-0">1</span>
                   <span>Tap the <strong className="text-slate-900">Share</strong> icon at the bottom of Safari browser toolbar.</span>
                 </li>
                 <li className="flex items-center gap-3 p-3 bg-white rounded-xl border border-indigo-100 shadow-2xs">
                   <span className="w-6 h-6 rounded-full bg-indigo-600 text-white text-xs font-black flex items-center justify-center shrink-0">2</span>
-                  <span>Scroll down the popup list and tap <strong className="text-slate-900 font-black">"Add to Home Screen"</strong>.</span>
+                  <span>Scroll down the popup list and tap <strong className="text-slate-900 font-black">&quot;Add to Home Screen&quot;</strong>.</span>
                 </li>
                 <li className="flex items-center gap-3 p-3 bg-white rounded-xl border border-indigo-100 shadow-2xs">
                   <span className="w-6 h-6 rounded-full bg-indigo-600 text-white text-xs font-black flex items-center justify-center shrink-0">3</span>
@@ -183,20 +205,27 @@ export default function DownloadAppPage() {
             </div>
           )}
 
-          {/* QR Code Section for Scanning on Phone */}
-          <div className="pt-4 flex flex-col sm:flex-row items-center gap-6 p-6 rounded-2xl bg-slate-50 border border-slate-200/80">
-            <div className="p-3 bg-white rounded-2xl border border-slate-200 shadow-sm shrink-0">
-              <QrCode className="w-24 h-24 text-slate-900" />
+          {/* Real Scannable QR Code Section for Scanning on Phone */}
+          <div className="pt-2 flex flex-col sm:flex-row items-center gap-5 p-5 sm:p-6 rounded-2xl bg-slate-50 border border-slate-200/80">
+            <div className="p-2.5 bg-white rounded-2xl border border-slate-200 shadow-sm shrink-0 flex items-center justify-center">
+              <img
+                src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://filezenith.com/download-app&color=0f172a"
+                alt="Scan to Install FileZenith Mobile App"
+                className="w-28 h-28 sm:w-32 sm:h-32 object-contain rounded-xl"
+              />
             </div>
             <div className="space-y-1.5 text-center sm:text-left">
+              <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200 inline-block">
+                100% Scannable QR Code
+              </span>
               <h4 className="text-sm font-black text-slate-900 flex items-center justify-center sm:justify-start gap-1.5">
-                <span>Scan QR Code to Install on Phone</span>
+                <span>Scan with Phone Camera to Install App</span>
               </h4>
               <p className="text-xs text-slate-500 font-medium leading-relaxed">
-                Scan this QR code with your iPhone or Android camera to open this download page on your mobile browser instantly.
+                Point your iPhone Camera or Android Google Lens at this QR code to open the instant mobile app installer directly on your device.
               </p>
               <div className="pt-1">
-                <span className="text-[11px] font-mono font-bold text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-lg">
+                <span className="text-[11px] font-mono font-bold text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-lg border border-indigo-100 inline-block">
                   https://filezenith.com/download-app
                 </span>
               </div>
