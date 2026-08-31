@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://filezenith.com'),
   title: 'FileZenith - 100% Free Online PDF, Image & Utility Studio',
   description: 'FileZenith is an all-in-one private online file studio. Compress PDF, edit documents, convert PNG to JPG, pics to PDF, remove background, and generate QR codes 100% privately inside your browser.',
-  keywords: 'filezenith, file zenith, pdf compressor, edit pdf online, merge pdf, pics to pdf, png to jpg, png to pdf, remove background, qr generator, client-side web tools',
+  keywords: 'filezenith, file zenith, filezenith.com, pdf compressor, edit pdf online, merge pdf, pics to pdf, png to jpg, png to pdf, remove background, qr generator, client-side web tools',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
@@ -46,6 +46,9 @@ export const metadata: Metadata = {
     description: 'All-in-one private online file tool suite. Zero server file uploads.',
     images: ['/1.png'],
   },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',
+  },
 };
 
 import { CloudflareAnalytics } from '@/components/CloudflareAnalytics';
@@ -55,8 +58,27 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'FileZenith',
+    alternateName: ['File Zenith', 'FileZenith PDF & Image Studio'],
+    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://filezenith.com',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://filezenith.com'}/search?q={search_term_string}`,
+      'query-input': 'required name=search_term_string',
+    },
+  };
+
   return (
     <html lang="en" className="h-full scroll-smooth light">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className={`${inter.className} min-h-full flex flex-col bg-slate-50/70 text-slate-900 antialiased`}>
         <GoogleAdSenseScript />
         <CloudflareAnalytics />
