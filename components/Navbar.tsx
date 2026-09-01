@@ -30,6 +30,8 @@ import {
   ArrowLeft,
   Plus,
   Bell,
+  Target,
+  Download,
 } from 'lucide-react';
 
 const PDF_TOOLS = [
@@ -91,9 +93,28 @@ export function Navbar() {
     }
   }, [searchOpen]);
 
+  const [compressReadyInfo, setCompressReadyInfo] = useState<{ url: string; name: string } | null>(null);
+
+  useEffect(() => {
+    const handleReady = (e: any) => {
+      if (e.detail?.downloadUrl) {
+        setCompressReadyInfo({ url: e.detail.downloadUrl, name: e.detail.filename || 'document.pdf' });
+      }
+    };
+    const handleReset = () => setCompressReadyInfo(null);
+
+    window.addEventListener('compress-pdf-ready', handleReady);
+    window.addEventListener('compress-pdf-reset', handleReset);
+    return () => {
+      window.removeEventListener('compress-pdf-ready', handleReady);
+      window.removeEventListener('compress-pdf-reset', handleReset);
+    };
+  }, []);
+
   useEffect(() => {
     setSearchOpen(false);
     setSearchQuery('');
+    setCompressReadyInfo(null);
   }, [pathname]);
 
   const searchResults = searchQuery.trim()
@@ -188,16 +209,31 @@ export function Navbar() {
               </Link>
             )}
 
-            {/* Mobile Search Button Pill */}
-            <button
-              onClick={() => setSearchOpen(true)}
-              className="luma-glass-pill px-2.5 py-1 flex items-center gap-1 text-slate-800 hover:text-slate-900 active:scale-95 transition-all cursor-pointer shrink-0"
-              aria-label="Search tools"
-              title="Search Tools"
-            >
-              <Search className="w-3.5 h-3.5 text-slate-800 stroke-[2.2]" />
-              <span className="text-[11px] font-extrabold tracking-tight text-slate-800">Search</span>
-            </button>
+            {/* Right Action Pills */}
+            <div className="flex items-center gap-1.5 shrink-0">
+              {pathname === '/pdf/compress' && compressReadyInfo && (
+                <a
+                  href={compressReadyInfo.url}
+                  download={`compressed-${compressReadyInfo.name}`}
+                  className="luma-glass-pill px-3 py-1 flex items-center gap-1.5 text-white bg-emerald-600 hover:bg-emerald-700 font-black active:scale-95 transition-all cursor-pointer shrink-0 shadow-md animate-in zoom-in-95 duration-200"
+                  title="Download Compressed PDF"
+                >
+                  <Download className="w-3.5 h-3.5 text-white stroke-[2.5]" />
+                  <span className="text-[11px] font-black tracking-tight">Download PDF</span>
+                </a>
+              )}
+
+              {/* Mobile Search Button Pill */}
+              <button
+                onClick={() => setSearchOpen(true)}
+                className="luma-glass-pill px-2.5 py-1 flex items-center gap-1 text-slate-800 hover:text-slate-900 active:scale-95 transition-all cursor-pointer shrink-0"
+                aria-label="Search tools"
+                title="Search Tools"
+              >
+                <Search className="w-3.5 h-3.5 text-slate-800 stroke-[2.2]" />
+                <span className="text-[11px] font-extrabold tracking-tight text-slate-800">Search</span>
+              </button>
+            </div>
           </div>
 
           {/* Desktop Header Navigation */}
