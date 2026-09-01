@@ -52,7 +52,7 @@ export function HomepageTrustSection() {
             <span>Zero-Server Security Engine</span>
           </div>
           <h2 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
-            Why Millions Trust FileZenith
+            Why You Can Trust FileZenith
           </h2>
           <p className="text-xs sm:text-base text-slate-600 font-medium leading-relaxed max-w-xl mx-auto">
             Traditional cloud PDF tools upload your sensitive documents to remote servers. FileZenith executes 100% of conversions directly on your local device.
