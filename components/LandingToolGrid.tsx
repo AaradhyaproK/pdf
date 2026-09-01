@@ -213,18 +213,6 @@ export const ALL_TOOLS: ToolItem[] = [
     badgeStyle: 'bg-sky-50 text-sky-700 border-sky-200',
   },
   {
-    id: 'png-to-pdf',
-    name: 'PNG to PDF',
-    slug: '/image/png-to-pdf',
-    desc: 'Convert transparent or solid PNG pictures into PDF.',
-    category: 'image',
-    tags: ['convert-to', 'image'],
-    icon: FileText,
-    colorClass: 'text-sky-600',
-    iconBgClass: 'bg-sky-50 text-sky-600 border-sky-100 group-hover:bg-sky-600 group-hover:text-white',
-    hoverTitleClass: 'group-hover:text-sky-600',
-  },
-  {
     id: 'jpg-to-png',
     name: 'JPG to PNG',
     slug: '/image/jpg-to-png',

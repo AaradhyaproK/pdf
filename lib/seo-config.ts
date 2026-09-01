@@ -599,29 +599,45 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/image/pics-to-pdf': {
     slug: '/image/pics-to-pdf',
-    title: 'Convert Pictures & Photos to PDF Online',
-    metaTitle: 'Pics to PDF Converter Free Online - Convert Photos | FileZenith',
-    description: 'Convert pics to PDF free online in seconds. Turn photos, gallery pictures & scans into a single PDF document 100% privately with zero server uploads. Try FileZenith now!',
+    title: 'Free Pics & Image to PDF Converter (JPG, PNG, WebP & Photos to PDF)',
+    metaTitle: 'Pics & Image to PDF Converter Free Online - JPG, PNG, WebP to PDF | FileZenith',
+    description: 'Convert JPG, PNG, WebP, HEIC & gallery photos to PDF free online. Combine multiple pictures, screenshots & scanned document pages into a single PDF 100% privately in browser with zero server uploads.',
     keywords: [
       'pics to pdf',
+      'jpg to pdf',
+      'png to pdf',
+      'webp to pdf',
+      'heic to pdf',
+      'image to pdf converter free online',
+      'convert jpg png photos to pdf no upload',
       'pics to pdf converter free online',
       'convert photos to pdf document no upload',
       'turn pictures into pdf file online',
       'photo to pdf converter free without sign up',
-      'combine gallery images into pdf fast'
+      'combine gallery images into pdf fast',
+      'convert transparent png to pdf online',
+      'convert iphone heic photos to pdf free',
+      'document scanner camera to pdf online',
+      'high resolution image to pdf converter'
     ],
     category: 'image',
     howToSteps: [
-      { title: 'Upload Pictures & Camera Photos', text: 'Select or drag and drop photos from your phone gallery, camera roll, or computer.' },
-      { title: 'Reorder Pictures & Set Layout', text: 'Arrange your pictures in preferred sequence and choose page layout (A4, Letter, or Fit to Image).' },
-      { title: 'Convert & Download PDF', text: 'Click Convert Pics to PDF to generate and download your clean PDF document instantly.' }
+      { title: 'Upload Pictures & Camera Photos', text: 'Select or drag and drop JPG, PNG, WebP, or HEIC photos from your phone gallery, camera roll, or computer.' },
+      { title: 'Reorder Pictures & Set Layout', text: 'Arrange your pictures in preferred sequence, select document scan filters (B&W Scan, Color Boost), and choose page size (A4, Letter, or Fit to Photo).' },
+      { title: 'Convert & Download PDF', text: 'Click Download PDF to compile and save your clean multi-page PDF document instantly to your device.' }
     ],
     faqs: [
-      { question: 'How do I convert pictures to a single PDF document for free?', answer: 'Simply upload your photos or gallery pictures to FileZenith’s Pics to PDF converter, drag to arrange page order, choose page layout (A4 or Auto), and click Convert Pics to PDF to download.' },
-      { question: 'Is it safe to convert private photos and ID scans on FileZenith?', answer: 'Yes, 100%. FileZenith operates on a 100% zero-server architecture. Your pictures are combined locally inside your web browser’s RAM and are never uploaded or saved on external servers.' },
-      { question: 'Can I combine multiple pictures from my phone camera roll?', answer: 'Yes! You can select multiple JPG, PNG, WebP, or HEIC pictures from your Android phone or iPhone and compile them into a single organized PDF file.' },
-      { question: 'Can I reorder pictures before generating the PDF document?', answer: 'Yes! Use visual drag-and-drop handles to rearrange picture order easily before building your PDF.' },
-      { question: 'Does this Pics to PDF converter work on mobile phones?', answer: 'Yes! FileZenith Pics to PDF converter works seamlessly across Android smartphones, iPhones, iPads, MacBooks, and Windows laptops.' }
+      { question: 'How do I convert JPG, PNG, and WebP images into a single PDF document for free?', answer: 'Simply select or drag and drop your JPG, PNG, WebP, or HEIC photos into FileZenith’s Pics to PDF converter, reorder pages, select your page size (A4, Letter, or Fit to Image), and click Download PDF to save instantly.' },
+      { question: 'Can I convert transparent PNG screenshots and graphics into PDF?', answer: 'Yes! FileZenith seamlessly renders PNG screenshots, transparent graphics, and high-res photos into crisp multi-page PDF documents while preserving original pixel resolution.' },
+      { question: 'Can I combine iPhone HEIC camera photos and PDF document pages together?', answer: 'Yes! You can combine iPhone HEIC photos, Android gallery pictures, and existing PDF pages into a single compiled document.' },
+      { question: 'Is my photo data safe during conversion?', answer: 'Yes, 100%. FileZenith operates on a 100% zero-server architecture. All image rendering and PDF compiling happen locally inside your web browser memory without network uploads.' },
+      { question: 'Does this Image to PDF converter work on mobile phones?', answer: 'Yes! FileZenith Pics to PDF Converter is fully responsive across Android smartphones, iPhones, iPads, MacBooks, and Windows laptops.' }
+    ],
+    comparisonTable: [
+      { feature: 'Format Support', omnitool: 'JPG, PNG, WebP, HEIC, GIF, BMP & PDF Pages', standardCloud: 'Only supports standard JPG' },
+      { feature: 'Data Privacy', omnitool: '100% Client-Side WebAssembly (Zero Server Uploads)', standardCloud: 'Images uploaded to remote cloud servers' },
+      { feature: 'Scan Filters', omnitool: 'B&W Scan, Color Boost, Grayscale & Original Filters', standardCloud: 'No document scan filters' },
+      { feature: 'Page Geometry', omnitool: 'Automatic Page Auto-Rotate & Margin Controls', standardCloud: 'Static unaligned pages' }
     ]
   },
 

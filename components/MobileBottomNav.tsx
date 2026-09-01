@@ -46,7 +46,6 @@ const PDF_TOOLS = [
 const IMAGE_TOOLS = [
   { name: 'Pics to PDF Converter', slug: '/image/pics-to-pdf', desc: 'Turn photos to PDF', icon: Camera, badge: 'Popular' },
   { name: 'PNG to JPG Converter', slug: '/image/png-to-jpg', desc: 'Convert PNG to JPG', icon: FileImage, badge: 'Bulk' },
-  { name: 'PNG to PDF Converter', slug: '/image/png-to-pdf', desc: 'Combine PNG into PDF', icon: FileText },
   { name: 'JPG to PNG Converter', slug: '/image/jpg-to-png', desc: 'Lossless quality converter', icon: FileImage },
   { name: 'Compress Image (Target KB)', slug: '/image/compress', desc: 'Compress to <50KB, <100KB', icon: Minimize2, badge: 'Target KB' },
   { name: 'Passport Photo Maker', slug: '/image/passport-maker', desc: 'US, UK, Schengen & India', icon: UserCheck, badge: 'Presets' },
