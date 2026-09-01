@@ -188,29 +188,54 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/pdf/ocr': {
     slug: '/pdf/ocr',
-    title: 'Extract Editable Text from Scanned PDFs',
-    metaTitle: 'PDF OCR Online Free - Extract Text from PDF | FileZenith',
-    description: 'PDF OCR online free in browser. Convert scanned PDF documents & images into editable text 100% privately with zero server file uploads. Try FileZenith OCR now!',
+    title: 'Free Multilingual PDF OCR & Text Extractor (Hindi, Marathi, English & 50+ Languages)',
+    metaTitle: 'PDF OCR Online Free - Hindi, Marathi, English & 50+ Languages Text Extractor | FileZenith',
+    description: 'Free PDF OCR Online. Extract editable text from scanned PDFs & images in Hindi (हिंदी), Marathi (मराठी), English, Spanish, French, German, Arabic, Chinese & 50+ popular languages. 100% private browser AI OCR with zero server uploads.',
     keywords: [
       'pdf ocr',
       'pdf ocr online free text extractor',
-      'extract text from scanned pdf online',
+      'hindi pdf ocr online free text extractor',
+      'marathi pdf ocr text converter online',
+      'extract text from scanned hindi pdf',
+      'marathi image to text ocr free',
+      'bengali pdf ocr text extractor',
+      'tamil pdf text ocr free',
+      'telugu scanned pdf ocr online',
+      'gujarati pdf ocr text reader',
+      'punjabi pdf ocr text converter',
+      'arabic pdf ocr online free',
+      'spanish pdf ocr text extractor',
+      'french scanned pdf to text converter',
+      'german pdf ocr software online',
+      'chinese pdf ocr text recognition',
+      'japanese pdf ocr free online',
+      'korean pdf ocr online converter',
+      'russian pdf ocr online free',
+      'portuguese pdf ocr text extractor',
       'convert scanned pdf to text no upload',
       'ocr pdf online free without registration',
-      'image to editable text converter fast'
+      'image to editable text converter fast',
+      'scanned document text reader online free',
+      'multilingual pdf ocr converter'
     ],
     category: 'pdf',
     howToSteps: [
-      { title: 'Upload Scanned PDF', text: 'Select or drag and drop your scanned document, photo, or image-based PDF.' },
-      { title: 'Select Recognition Language', text: 'Choose your document language (English, Spanish, French, German, etc.).' },
-      { title: 'Extract & Copy Text', text: 'Click Run OCR to process locally with Tesseract AI and copy or save your editable text.' }
+      { title: 'Upload Scanned PDF or Image', text: 'Select or drag and drop your scanned document, receipt, or photo-based PDF into the secure uploader.' },
+      { title: 'Select Document Language', text: 'Choose your recognition language from Hindi (हिंदी), Marathi (मराठी), English, Spanish, French, German, Arabic, Chinese & 50+ languages.' },
+      { title: 'Extract & Copy Text', text: 'Click Extract Editable Text to process locally with browser Tesseract AI and copy or download your text file instantly.' }
     ],
     faqs: [
-      { question: 'How do I extract editable text from a scanned PDF for free?', answer: 'Simply upload your scanned PDF or photo document to FileZenith’s PDF OCR tool, select your language, and click Run OCR to copy or download your extracted plain text instantly.' },
-      { question: 'Is my confidential scanned document private during OCR processing?', answer: 'Yes, 100%. FileZenith runs Tesseract AI compiled into WebAssembly directly inside your browser memory. Your document pixels are never uploaded to any external server.' },
-      { question: 'Can I copy extracted PDF text directly to my clipboard?', answer: 'Yes! You can click the Copy Text button to paste extracted text into Microsoft Word or Google Docs, or download it as a plain .txt file.' },
-      { question: 'What scan resolution gives the best OCR accuracy?', answer: 'Scanned PDFs or photo documents taken at 200–300 DPI with clear lighting yield up to 99% text recognition accuracy.' },
-      { question: 'Does this PDF OCR tool work on mobile phones?', answer: 'Yes! FileZenith PDF OCR works seamlessly across Android smartphones, iPhones, iPads, MacBooks, and Windows laptops.' }
+      { question: 'How do I extract editable text from Hindi and Marathi scanned PDFs for free?', answer: 'Simply upload your scanned PDF or photo document to FileZenith PDF OCR, select Hindi (हिंदी) or Marathi (मराठी) from the language dropdown, and click Extract Editable Text. FileZenith processes the document instantly in your browser and gives you copyable plain text.' },
+      { question: 'Which languages are supported by FileZenith PDF OCR?', answer: 'FileZenith supports over 50 popular global and regional languages including Hindi, Marathi, English, Bengali, Tamil, Telugu, Gujarati, Kannada, Malayalam, Punjabi, Urdu, Spanish, French, German, Portuguese, Italian, Chinese (Simplified & Traditional), Japanese, Korean, Arabic, Russian, and Swahili.' },
+      { question: 'Is my confidential scanned document uploaded to any cloud server?', answer: 'No! FileZenith operates on a 100% client-side zero-server architecture. All OCR recognition runs inside your browser using Tesseract AI WebAssembly. Your documents never leave your phone or computer.' },
+      { question: 'Can I copy and export the extracted text into Word or TXT?', answer: 'Yes! You can copy the extracted text to your clipboard with 1 click or download it directly as a .txt plain text file to open in Microsoft Word, Google Docs, or Notepad.' },
+      { question: 'Does FileZenith PDF OCR work on mobile phones?', answer: 'Yes! FileZenith OCR is 100% mobile responsive and works seamlessly across Android smartphones, iPhones, iPads, MacBooks, and Windows PCs.' }
+    ],
+    comparisonTable: [
+      { feature: 'Language Support', omnitool: '50+ Global & Indian Languages (Hindi, Marathi, English, etc.)', standardCloud: 'Limited to 3-5 basic Western languages' },
+      { feature: 'Data Privacy', omnitool: '100% Client-Side WebAssembly (Zero Server Uploads)', standardCloud: 'Scanned files uploaded to remote servers' },
+      { feature: 'File Security', omnitool: 'GDPR & HIPAA Compliant by Design', standardCloud: 'Third-party cloud storage risks' },
+      { feature: 'Cost & Limits', omnitool: '100% Free with Unlimited OCR Scans', standardCloud: 'Requires paid subscriptions for >3 pages' }
     ]
   },
 
