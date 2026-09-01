@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { ToolLayout } from '@/components/ToolLayout';
 import { FileUploader, FileItem } from '@/components/FileUploader';
 import { renderPDFPagesToImages } from '@/lib/pdf-engine';
+import { PDFPageGridList } from '@/components/PDFPageGridList';
 import JSZip from 'jszip';
 import { toast } from 'sonner';
 import { Download, FileImage } from 'lucide-react';
@@ -15,6 +16,24 @@ export default function PDFToImagePage() {
   const [renderedImages, setRenderedImages] = useState<{ pageNumber: number; dataUrl: string }[]>([]);
   const [zipUrl, setZipUrl] = useState<string | null>(null);
 
+  const handleFileSelect = async (selected: FileItem[]) => {
+    setFiles(selected);
+    setRenderedImages([]);
+    setZipUrl(null);
+
+    if (selected.length > 0) {
+      setIsProcessing(true);
+      try {
+        const images = await renderPDFPagesToImages(selected[0].file, 1.5);
+        setRenderedImages(images);
+      } catch (err: any) {
+        toast.error('Failed to render PDF page thumbnails.');
+      } finally {
+        setIsProcessing(false);
+      }
+    }
+  };
+
   const handleConvert = async () => {
     if (files.length === 0) {
       toast.error('Please upload a PDF file.');
@@ -22,11 +41,13 @@ export default function PDFToImagePage() {
     }
 
     setIsProcessing(true);
-    setRenderedImages([]);
     setZipUrl(null);
 
     try {
-      const images = await renderPDFPagesToImages(files[0].file, 2.0);
+      const images = renderedImages.length > 0
+        ? renderedImages
+        : await renderPDFPagesToImages(files[0].file, 2.0);
+
       setRenderedImages(images);
 
       // Create ZIP archive
@@ -60,7 +81,7 @@ export default function PDFToImagePage() {
           accept="application/pdf"
           multiple={false}
           files={files}
-          onFilesSelected={setFiles}
+          onFilesSelected={handleFileSelect}
           onRemoveFile={() => {
             setFiles([]);
             setRenderedImages([]);
@@ -69,46 +90,54 @@ export default function PDFToImagePage() {
           title="Upload PDF document to convert to images"
         />
 
-        {files.length > 0 && (
-          <div className="space-y-4 pt-4 border-t border-slate-100 dark:border-slate-800">
-            <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-                <FileImage className="w-4 h-4 text-indigo-500" />
-                Select Output Format
-              </label>
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  type="button"
-                  onClick={() => setFormat('png')}
-                  className={`p-3 rounded-2xl border font-bold text-sm transition-all ${
-                    format === 'png'
-                      ? 'border-indigo-600 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400'
-                      : 'border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300'
-                  }`}
-                >
-                  PNG (High Quality)
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setFormat('jpeg')}
-                  className={`p-3 rounded-2xl border font-bold text-sm transition-all ${
-                    format === 'jpeg'
-                      ? 'border-indigo-600 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400'
-                      : 'border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300'
-                  }`}
-                >
-                  JPG (Compact Size)
-                </button>
-              </div>
-            </div>
+        {renderedImages.length > 0 && (
+          <div className="space-y-6">
+            <PDFPageGridList
+              title="PDF Pages Preview"
+              pages={renderedImages}
+              selectable={false}
+            />
 
-            <button
-              onClick={handleConvert}
-              disabled={isProcessing}
-              className="w-full py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-base shadow-lg transition-all"
-            >
-              {isProcessing ? 'Rendering PDF Pages locally...' : 'Convert PDF Pages to Images'}
-            </button>
+            <div className="space-y-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+              <div className="space-y-2">
+                <label className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                  <FileImage className="w-4 h-4 text-indigo-500" />
+                  Select Output Format
+                </label>
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setFormat('png')}
+                    className={`p-3 rounded-2xl border font-bold text-sm transition-all ${
+                      format === 'png'
+                        ? 'border-indigo-600 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400'
+                        : 'border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300'
+                    }`}
+                  >
+                    PNG (High Quality)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setFormat('jpeg')}
+                    className={`p-3 rounded-2xl border font-bold text-sm transition-all ${
+                      format === 'jpeg'
+                        ? 'border-indigo-600 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400'
+                        : 'border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300'
+                    }`}
+                  >
+                    JPG (Compact Size)
+                  </button>
+                </div>
+              </div>
+
+              <button
+                onClick={handleConvert}
+                disabled={isProcessing}
+                className="w-full py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-base shadow-lg transition-all cursor-pointer"
+              >
+                {isProcessing ? 'Processing PDF Pages...' : `Convert ${renderedImages.length} Pages to ${format.toUpperCase()}`}
+              </button>
+            </div>
           </div>
         )}
 
@@ -117,7 +146,7 @@ export default function PDFToImagePage() {
             <div className="p-6 rounded-3xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-900 dark:text-emerald-300 flex items-center justify-between gap-4">
               <div>
                 <h4 className="font-bold">Rendered {renderedImages.length} Pages!</h4>
-                <p className="text-xs text-emerald-700 dark:text-emerald-400">Download single page images or complete ZIP.</p>
+                <p className="text-xs text-emerald-700 dark:text-emerald-400">Download single page images or complete ZIP archive.</p>
               </div>
               <a
                 href={zipUrl}
@@ -127,23 +156,6 @@ export default function PDFToImagePage() {
                 <Download className="w-4 h-4" />
                 <span>Download ZIP Archive</span>
               </a>
-            </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {renderedImages.map((img) => (
-                <div key={img.pageNumber} className="bg-slate-100 dark:bg-slate-800 rounded-2xl p-3 border space-y-2">
-                  <span className="text-[10px] font-bold text-slate-400">Page {img.pageNumber}</span>
-                  <img src={img.dataUrl} alt={`Page ${img.pageNumber}`} className="w-full h-36 object-contain rounded-lg bg-white" />
-                  <a
-                    href={img.dataUrl}
-                    download={`page-${img.pageNumber}.${format === 'png' ? 'png' : 'jpg'}`}
-                    className="w-full py-1.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold flex items-center justify-center gap-1"
-                  >
-                    <Download className="w-3 h-3" />
-                    <span>Save Image</span>
-                  </a>
-                </div>
-              ))}
             </div>
           </div>
         )}

@@ -86,7 +86,7 @@ export default function PDFEditPage() {
   const [pdfDoc, setPdfDoc] = useState<any>(null);
   const [numPages, setNumPages] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [zoom] = useState<number>(1.2);
+  const [zoom, setZoom] = useState<number>(1.2);
   const [activeTool, setActiveTool] = useState<
     'autoDetect' | 'select' | 'text' | 'replaceText' | 'whiteout' | 'draw' | 'highlight' | 'image'
   >('autoDetect');
@@ -941,7 +941,37 @@ export default function PDFEditPage() {
                 )}
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-wrap">
+                {/* Zoom Controls */}
+                <div className="flex items-center gap-1 bg-slate-800 p-1 rounded-xl border border-slate-700">
+                  <button
+                    onClick={() => setZoom((z) => Math.max(0.6, z - 0.2))}
+                    className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700 font-extrabold text-xs"
+                    title="Zoom Out"
+                  >
+                    -
+                  </button>
+                  <select
+                    value={Math.round(zoom * 100)}
+                    onChange={(e) => setZoom(Number(e.target.value) / 100)}
+                    className="bg-slate-900 text-slate-200 text-xs font-bold px-2 py-1 rounded-lg border border-slate-700"
+                  >
+                    <option value={60}>60%</option>
+                    <option value={80}>80%</option>
+                    <option value={100}>100% (Fit)</option>
+                    <option value={120}>120%</option>
+                    <option value={150}>150%</option>
+                    <option value={200}>200%</option>
+                  </select>
+                  <button
+                    onClick={() => setZoom((z) => Math.min(2.5, z + 0.2))}
+                    className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700 font-extrabold text-xs"
+                    title="Zoom In"
+                  >
+                    +
+                  </button>
+                </div>
+
                 <button
                   onClick={handleRotateCurrentPage}
                   className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300"

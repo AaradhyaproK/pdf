@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { ToolLayout } from '@/components/ToolLayout';
 import { FileUploader, FileItem } from '@/components/FileUploader';
 import { protectPDF, renderPDFPagesToImages } from '@/lib/pdf-engine';
+import { PDFPageGridList } from '@/components/PDFPageGridList';
 import { toast } from 'sonner';
 import { Download, Lock, Eye, EyeOff, ShieldCheck, RefreshCw, CheckCircle2 } from 'lucide-react';
 
@@ -36,7 +37,7 @@ export default function ProtectPDFPage() {
     setIsLoadingPages(true);
     try {
       const rendered = await renderPDFPagesToImages(selected[0].file, 1.0);
-      const thumbs = rendered.slice(0, 4).map((r) => ({
+      const thumbs = rendered.map((r) => ({
         pageNumber: r.pageNumber,
         dataUrl: r.dataUrl,
       }));
@@ -131,28 +132,11 @@ export default function ProtectPDFPage() {
               </div>
 
               {thumbnails.length > 0 && (
-                <div className="space-y-2">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-600">
-                    Document Page Preview
-                  </span>
-                  <div className="flex items-center gap-3 overflow-x-auto p-2 bg-slate-50 rounded-xl border border-slate-200 scrollbar-thin">
-                    {thumbnails.map((thumb) => (
-                      <div
-                        key={thumb.pageNumber}
-                        className="relative flex-shrink-0 h-28 w-20 bg-white rounded-lg border border-slate-200 shadow-2xs overflow-hidden flex items-center justify-center p-1"
-                      >
-                        <img
-                          src={thumb.dataUrl}
-                          alt={`Page ${thumb.pageNumber}`}
-                          className="max-h-full max-w-full object-contain"
-                        />
-                        <span className="absolute bottom-1 right-1 px-1.5 py-0.5 rounded bg-slate-900/80 text-white font-extrabold text-[9px]">
-                          P{thumb.pageNumber}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <PDFPageGridList
+                  title="Document Page Preview"
+                  pages={thumbnails}
+                  selectable={false}
+                />
               )}
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

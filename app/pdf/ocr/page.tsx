@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { ToolLayout } from '@/components/ToolLayout';
 import { FileUploader, FileItem } from '@/components/FileUploader';
-import { extractTextOCR } from '@/lib/pdf-engine';
+import { extractTextOCR, renderPDFPagesToImages } from '@/lib/pdf-engine';
+import { PDFPageGridList } from '@/components/PDFPageGridList';
 import { toast } from 'sonner';
 import { Copy, Download, FileCheck } from 'lucide-react';
 
@@ -14,6 +15,23 @@ export default function PDFOCRPage() {
   const [progressPercent, setProgressPercent] = useState(0);
   const [progressStatus, setProgressStatus] = useState('');
   const [extractedText, setExtractedText] = useState<string | null>(null);
+  const [thumbnails, setThumbnails] = useState<{ pageNumber: number; dataUrl: string }[]>([]);
+
+  const handleFileSelect = async (selected: FileItem[]) => {
+    setFiles(selected);
+    setExtractedText(null);
+    if (selected.length === 0) {
+      setThumbnails([]);
+      return;
+    }
+
+    try {
+      const rendered = await renderPDFPagesToImages(selected[0].file, 1.0);
+      setThumbnails(rendered);
+    } catch {
+      // Ignore
+    }
+  };
 
   const handleRunOCR = async () => {
     if (files.length === 0) {
@@ -68,16 +86,25 @@ export default function PDFOCRPage() {
           accept="application/pdf"
           multiple={false}
           files={files}
-          onFilesSelected={setFiles}
+          onFilesSelected={handleFileSelect}
           onRemoveFile={() => {
             setFiles([]);
             setExtractedText(null);
+            setThumbnails([]);
           }}
           isProcessing={isProcessing}
           progressPercent={progressPercent}
           progressStatus={progressStatus}
           title="Upload Scanned PDF Document"
         />
+
+        {thumbnails.length > 0 && (
+          <PDFPageGridList
+            title="Scanned Document Pages Preview"
+            pages={thumbnails}
+            selectable={false}
+          />
+        )}
 
         {files.length > 0 && (
           <div className="space-y-4 pt-4 border-t border-slate-100 dark:border-slate-800">

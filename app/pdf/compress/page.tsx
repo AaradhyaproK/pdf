@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { ToolLayout } from '@/components/ToolLayout';
 import { FileUploader, FileItem } from '@/components/FileUploader';
-import { compressPDF } from '@/lib/pdf-engine';
+import { compressPDF, renderPDFPagesToImages } from '@/lib/pdf-engine';
+import { PDFPageGridList } from '@/components/PDFPageGridList';
 import { toast } from 'sonner';
 import { Download, Sliders, Minimize2, CheckCircle2, Sparkles, Target, Zap, Info } from 'lucide-react';
 
@@ -16,6 +17,28 @@ export default function CompressPDFPage() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const [resultInfo, setResultInfo] = useState<{ origSize: number; compSize: number } | null>(null);
+  const [thumbnails, setThumbnails] = useState<{ pageNumber: number; dataUrl: string }[]>([]);
+  const [isLoadingPages, setIsLoadingPages] = useState(false);
+
+  const handleFileSelect = async (selected: FileItem[]) => {
+    setFiles(selected);
+    setDownloadUrl(null);
+    setResultInfo(null);
+    if (selected.length === 0) {
+      setThumbnails([]);
+      return;
+    }
+
+    setIsLoadingPages(true);
+    try {
+      const rendered = await renderPDFPagesToImages(selected[0].file, 1.0);
+      setThumbnails(rendered);
+    } catch {
+      // Ignore thumbnail render error for compress
+    } finally {
+      setIsLoadingPages(false);
+    }
+  };
 
   const handleCompress = async () => {
     if (files.length === 0) {
@@ -119,15 +142,24 @@ export default function CompressPDFPage() {
           accept="application/pdf"
           multiple={false}
           files={files}
-          onFilesSelected={setFiles}
+          onFilesSelected={handleFileSelect}
           onRemoveFile={() => {
             setFiles([]);
             setDownloadUrl(null);
             setResultInfo(null);
+            setThumbnails([]);
           }}
           title="Upload your PDF document"
           subtitle="Drag & drop single PDF file to compress"
         />
+
+        {thumbnails.length > 0 && !isLoadingPages && (
+          <PDFPageGridList
+            title="PDF Document Pages Preview"
+            pages={thumbnails}
+            selectable={false}
+          />
+        )}
 
         {files.length > 0 && (
           <div className="space-y-4 pt-2">

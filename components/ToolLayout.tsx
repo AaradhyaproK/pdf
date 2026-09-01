@@ -33,7 +33,7 @@ export function ToolLayout({
   }, [slug]);
 
   return (
-    <main className="min-h-screen w-full bg-slate-50/70 py-2 sm:py-8 px-2 sm:px-6 lg:px-8 transition-colors">
+    <main className="min-h-screen w-full bg-slate-50/70 pt-3 sm:pt-8 pb-32 sm:pb-16 px-2 sm:px-6 lg:px-8 transition-colors">
       <div className="max-w-7xl mx-auto space-y-3 sm:space-y-8">
         {/* Header Leaderboard Ad Slot (CLS = 0) */}
         <AdSlot slotType="header-leaderboard" />
@@ -44,7 +44,7 @@ export function ToolLayout({
           <div className="lg:col-span-8 space-y-3 sm:space-y-8">
             {/* Tool Header Title & Subtitle Container */}
             <div className="p-3.5 sm:p-0 rounded-2xl sm:rounded-none bg-white sm:bg-transparent border sm:border-none border-slate-200/90 sm:shadow-none shadow-2xs space-y-1.5 sm:space-y-2">
-              <h1 className="text-base sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-snug sm:leading-tight">
+              <h1 className="text-lg sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-snug sm:leading-tight">
                 {title}
               </h1>
 
@@ -54,7 +54,7 @@ export function ToolLayout({
             </div>
 
             {/* Function-Centric Interactive Workspace Area */}
-            <div className="bg-white p-3.5 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-md">
+            <div className="bg-white p-3 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-md">
               {children}
             </div>
 

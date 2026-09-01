@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { ToolLayout } from '@/components/ToolLayout';
 import { FileUploader, FileItem } from '@/components/FileUploader';
 import { watermarkPDF, renderPDFPagesToImages, WatermarkOptions } from '@/lib/pdf-engine';
+import { FullPageViewerModal } from '@/components/FullPageViewerModal';
 import { toast } from 'sonner';
 import {
   Download,
@@ -17,6 +18,7 @@ import {
   Sliders,
   RotateCw,
   Upload,
+  Maximize2,
 } from 'lucide-react';
 
 interface PageThumbnail {
@@ -44,6 +46,7 @@ export default function WatermarkPDFPage() {
 
   const [isProcessing, setIsProcessing] = useState(false);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
+  const [isFullViewerOpen, setIsFullViewerOpen] = useState(false);
 
   const handleFileSelect = async (selected: FileItem[]) => {
     setFiles(selected);
@@ -179,6 +182,15 @@ export default function WatermarkPDFPage() {
 
                   {/* Page Navigation Controls */}
                   <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setIsFullViewerOpen(true)}
+                      className="p-1.5 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-700 hover:bg-indigo-100 transition-colors flex items-center gap-1 text-xs font-extrabold cursor-pointer"
+                      title="Zoom Full Page View"
+                    >
+                      <Maximize2 className="w-3.5 h-3.5" />
+                      <span>Full Page</span>
+                    </button>
                     <button
                       type="button"
                       onClick={() => setActivePageIndex((prev) => Math.max(0, prev - 1))}
@@ -454,6 +466,16 @@ export default function WatermarkPDFPage() {
               <span>Download Watermarked PDF</span>
             </a>
           </div>
+        )}
+
+        {isFullViewerOpen && (
+          <FullPageViewerModal
+            isOpen={isFullViewerOpen}
+            onClose={() => setIsFullViewerOpen(false)}
+            pages={thumbnails}
+            initialPageIndex={activePageIndex}
+            title="PDF Watermark Full Page View"
+          />
         )}
       </div>
     </ToolLayout>

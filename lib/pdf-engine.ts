@@ -496,16 +496,20 @@ export async function organizePDFPages(
 export async function renderPDFPagesToImages(
   file: File,
   scale: number = 1.5
-): Promise<{ pageNumber: number; dataUrl: string }[]> {
+): Promise<{ pageNumber: number; dataUrl: string; width: number; height: number }[]> {
   const pdfjsLib = await import('pdfjs-dist');
-  pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+  try {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+  } catch {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
+  }
 
   const arrayBuffer = await file.arrayBuffer();
   const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
   const pdfDoc = await loadingTask.promise;
   const totalPages = pdfDoc.numPages;
 
-  const pageImages: { pageNumber: number; dataUrl: string }[] = [];
+  const pageImages: { pageNumber: number; dataUrl: string; width: number; height: number }[] = [];
 
   for (let i = 1; i <= totalPages; i++) {
     const page = await pdfDoc.getPage(i);
@@ -527,11 +531,52 @@ export async function renderPDFPagesToImages(
       pageImages.push({
         pageNumber: i,
         dataUrl: canvas.toDataURL('image/jpeg', 0.92),
+        width: viewport.width,
+        height: viewport.height,
       });
     }
   }
 
   return pageImages;
+}
+
+/**
+ * Renders a single PDF page at high resolution.
+ */
+export async function renderPDFPageToImage(
+  file: File,
+  pageNumber: number,
+  scale: number = 2.0
+): Promise<{ dataUrl: string; width: number; height: number }> {
+  const pdfjsLib = await import('pdfjs-dist');
+  pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+
+  const arrayBuffer = await file.arrayBuffer();
+  const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
+  const pdfDoc = await loadingTask.promise;
+  const page = await pdfDoc.getPage(pageNumber);
+  const viewport = page.getViewport({ scale });
+
+  const canvas = document.createElement('canvas');
+  const context = canvas.getContext('2d');
+  canvas.height = viewport.height;
+  canvas.width = viewport.width;
+
+  if (!context) throw new Error('Failed to create canvas context');
+
+  context.fillStyle = '#ffffff';
+  context.fillRect(0, 0, canvas.width, canvas.height);
+
+  await page.render({
+    canvasContext: context,
+    viewport,
+  } as any).promise;
+
+  return {
+    dataUrl: canvas.toDataURL('image/png'),
+    width: viewport.width,
+    height: viewport.height,
+  };
 }
 
 /**
