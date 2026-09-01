@@ -789,29 +789,40 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   // --- Daily Quick Utilities ---
   '/utility/qr-generator': {
     slug: '/utility/qr-generator',
-    title: 'Custom QR Code Generator with Logo',
-    metaTitle: 'QR Code Generator Free Online - Create Custom QR | FileZenith',
-    description: 'QR code generator free online in browser. Create custom QR codes with logo, custom colors & vector SVG output 100% privately with zero tracking. Try FileZenith now!',
+    title: 'Free QR Code Generator with Logo - Wi-Fi, URL, WhatsApp & VCard',
+    metaTitle: 'Free QR Code Generator with Logo - Wi-Fi, URL, WhatsApp, VCard & Vector SVG | FileZenith',
+    description: 'Generate custom QR codes free online for URLs, Wi-Fi networks, WhatsApp direct chats, contact cards & text. Embed center PNG logo, pick custom color themes, and export HD PNG & vector SVG 100% privately.',
     keywords: [
       'qr code generator',
-      'qr code generator free online with logo',
-      'custom qr code generator no registration',
-      'create vector svg qr code online',
-      'wifi qr code generator free',
-      'generate high resolution png qr code'
+      'qr code generator with logo free',
+      'free qr code maker online no sign up',
+      'wifi qr code generator with password',
+      'whatsapp qr code generator with message',
+      'vcard qr code generator free',
+      'custom qr code generator with logo overlay',
+      'create color qr code vector svg download',
+      'url link to qr code generator online',
+      'text to qr code generator high resolution',
+      'hd png qr code generator with logo',
+      'vector svg qr code maker online',
+      'free high resolution qr code creator no registration',
+      'scannable wifi network qr code generator',
+      'whatsapp chat link qr code generator',
+      'business card vcard contact qr code maker',
+      'qr code custom colors background transparent'
     ],
     category: 'utility',
     howToSteps: [
-      { title: 'Enter URL or Data Content', text: 'Input website URL, plain text, Wi-Fi credentials, or contact vCard details.' },
-      { title: 'Customize Colors & Add Logo', text: 'Choose background/foreground colors and upload a center PNG logo image.' },
-      { title: 'Download PNG or Vector SVG', text: 'Click Download PNG or Download SVG to save your high-resolution QR code instantly.' }
+      { title: 'Select Content Type & Details', text: 'Choose your desired QR code type: Website URL, Wi-Fi Credentials, WhatsApp Direct Chat, VCard Contact, or Plain Text, and enter your information.' },
+      { title: 'Customize Colors & Upload Logo', text: 'Pick a curated color theme preset or custom hex colors, and upload your PNG logo image to embed as a center overlay.' },
+      { title: 'Generate & Download HD Files', text: 'Click Download PNG for high-resolution images or Download Vector SVG for crisp, scalable printing on business cards and signs.' }
     ],
     faqs: [
-      { question: 'How do I generate a custom QR code with a logo for free online?', answer: 'Simply enter your website link or text into FileZenith’s QR Code Generator, customize colors or upload a center logo image, and click Download PNG or SVG.' },
-      { question: 'Do these QR codes ever expire or rely on third-party redirection servers?', answer: 'No, 100%! All static QR codes generated on FileZenith embed your raw data directly into the matrix code. They never expire and operate without third-party redirection.' },
-      { question: 'Can I generate a QR code for instant Wi-Fi network connection?', answer: 'Yes! Select the Wi-Fi preset, enter your network SSID and password, and generate a QR code that smartphones can scan to join automatically.' },
-      { question: 'What file formats can I download for print and web use?', answer: 'You can download high-resolution PNG bitmap images for websites and social media, or scalable vector SVG files for crisp print graphics.' },
-      { question: 'Does this QR code generator work on mobile phones?', answer: 'Yes! FileZenith QR Code Generator works seamlessly across Android smartphones, iPhones, iPads, MacBooks, and Windows laptops.' }
+      { question: 'How do I create a free custom QR code with a logo online?', answer: 'Simply enter your URL, Wi-Fi info, or text into FileZenith’s QR Code Generator, upload your PNG logo image as a center overlay, select custom colors, and click Download PNG or Vector SVG.' },
+      { question: 'Can I create a Wi-Fi QR code so guests can scan and connect automatically?', answer: 'Yes! Select the Wi-Fi option, enter your Wi-Fi network name (SSID), password, and security type (WPA/WEP). When guests scan the generated QR code with their phone camera, they will automatically join your Wi-Fi network without typing a password.' },
+      { question: 'Is my data private when using FileZenith QR Code Generator?', answer: 'Yes, 100%. FileZenith operates on a 100% zero-server architecture. Your URLs, Wi-Fi passwords, contact details, and uploaded logo images are processed locally inside your web browser’s memory and are never sent to any server.' },
+      { question: 'Can I download vector SVG QR codes for professional printing?', answer: 'Yes! FileZenith generates true vector SVG QR codes that scale infinitely without pixelation, making them ideal for business cards, flyers, posters, and product packaging.' },
+      { question: 'Will my generated QR codes ever expire or require a paid subscription?', answer: 'No! All QR codes generated on FileZenith are static standard QR codes that never expire, have no scan limits, and are 100% free to use for personal and commercial projects forever.' }
     ]
   },
 
