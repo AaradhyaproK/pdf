@@ -25,6 +25,12 @@ import {
   Sparkles,
   Move,
   Check,
+  Grid,
+  Calendar,
+  CheckSquare,
+  Minus,
+  Plus,
+  Hand,
 } from 'lucide-react';
 
 interface TextAnnotation {
@@ -36,6 +42,7 @@ interface TextAnnotation {
   color: string;
   isBold?: boolean;
   isItalic?: boolean;
+  fontFamily?: 'helvetica' | 'times' | 'courier';
 }
 
 interface WhiteoutAnnotation {
@@ -46,7 +53,7 @@ interface WhiteoutAnnotation {
   height: number;
 }
 
-interface DrawStroke {
+interface DrawingStroke {
   id: string;
   points: { x: number; y: number }[];
   color: string;
@@ -54,7 +61,7 @@ interface DrawStroke {
   isHighlighter?: boolean;
 }
 
-interface ImageAnnotation {
+interface ImageStamp {
   id: string;
   x: number;
   y: number;
@@ -66,8 +73,8 @@ interface ImageAnnotation {
 interface PageEdits {
   texts: TextAnnotation[];
   whiteouts: WhiteoutAnnotation[];
-  drawings: DrawStroke[];
-  images: ImageAnnotation[];
+  drawings: DrawingStroke[];
+  images: ImageStamp[];
   rotation: number;
 }
 
@@ -87,13 +94,22 @@ export default function PDFEditPage() {
   const [numPages, setNumPages] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [zoom, setZoom] = useState<number>(1.2);
+
+  // Auto-fit initial zoom on mobile screens
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.innerWidth < 640) {
+      setZoom(0.75);
+    }
+  }, []);
   const [activeTool, setActiveTool] = useState<
-    'autoDetect' | 'select' | 'text' | 'replaceText' | 'whiteout' | 'draw' | 'highlight' | 'image'
-  >('autoDetect');
+    'editText' | 'select' | 'pan' | 'text' | 'replaceText' | 'whiteout' | 'draw' | 'highlight' | 'image' | 'autoDetect'
+  >('editText');
 
   // Tool Style Settings
-  const [textColor, setTextColor] = useState<string>('#1e293b');
+  const [textColor, setTextColor] = useState<string>('#0f172a');
   const [textSize, setTextSize] = useState<number>(18);
+  const [fontFamily, setFontFamily] = useState<'helvetica' | 'times' | 'courier'>('helvetica');
+  const [showGrid, setShowGrid] = useState<boolean>(false);
   const [drawColor, setDrawColor] = useState<string>('#2563eb');
   const [drawWidth] = useState<number>(3);
   const [highlightColor] = useState<string>('#fde047');
@@ -102,8 +118,10 @@ export default function PDFEditPage() {
   const [detectedTexts, setDetectedTexts] = useState<DetectedTextItem[]>([]);
   const [hoveredTextId, setHoveredTextId] = useState<string | null>(null);
 
-  // Inline Active Editing State
+  // Inline Active Editing & Photo Stamp State
   const [editingTextId, setEditingTextId] = useState<string | null>(null);
+  const [activeImageId, setActiveImageId] = useState<string | null>(null);
+  const [activeStampPreset, setActiveStampPreset] = useState<'date' | 'signature' | 'check' | 'cross' | null>(null);
 
   // Edits data per page
   const [pageEdits, setPageEdits] = useState<Record<number, PageEdits>>({});
@@ -116,8 +134,188 @@ export default function PDFEditPage() {
   const isDrawingRef = useRef<boolean>(false);
   const currentStrokeRef = useRef<{ x: number; y: number }[]>([]);
   const dragStartRef = useRef<{ x: number; y: number } | null>(null);
+  const mousePosRef = useRef<{ x: number; y: number } | null>(null);
   const isDraggingTextRef = useRef<boolean>(false);
+  const isDraggingImageRef = useRef<boolean>(false);
+  const activeImageIdRef = useRef<string | null>(null);
+  const workspaceRef = useRef<HTMLDivElement | null>(null);
+  const isPanningRef = useRef<boolean>(false);
+  const panStartRef = useRef<{ x: number; y: number; scrollLeft: number; scrollTop: number } | null>(null);
   const [isExporting, setIsExporting] = useState<boolean>(false);
+  const [isSpacePressed, setIsSpacePressed] = useState<boolean>(false);
+
+  // Keep activeImageIdRef in sync with activeImageId state
+  useEffect(() => {
+    activeImageIdRef.current = activeImageId;
+  }, [activeImageId]);
+
+  // Spacebar key listener for holding Space to drag-pan anywhere
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const targetTag = (e.target as HTMLElement)?.tagName;
+      if (e.code === 'Space' && targetTag !== 'INPUT' && targetTag !== 'TEXTAREA') {
+        setIsSpacePressed(true);
+      }
+    };
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (e.code === 'Space') {
+        setIsSpacePressed(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, []);
+
+  // Auto-fit zoom level on mobile screen load (0.55 on mobile, 1.2 on desktop)
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.innerWidth < 640) {
+      setZoom(0.55);
+    }
+  }, []);
+
+  // Global Window Mouse & Touch Listener for Rock-Solid Photo Dragging, Text Dragging, Panning
+  useEffect(() => {
+    const handleWindowMouseMove = (e: MouseEvent) => {
+      // 1. Pan Canvas View (Drag to scroll zoomed-in page in any direction)
+      if (isPanningRef.current && panStartRef.current && workspaceRef.current) {
+        const dx = e.clientX - panStartRef.current.x;
+        const dy = e.clientY - panStartRef.current.y;
+        workspaceRef.current.scrollLeft = panStartRef.current.scrollLeft - dx;
+        workspaceRef.current.scrollTop = panStartRef.current.scrollTop - dy;
+        return;
+      }
+
+      // 2. Photo Stamp Dragging
+      if (isDraggingImageRef.current && activeImageIdRef.current && dragStartRef.current) {
+        const dx = e.clientX - dragStartRef.current.x;
+        const dy = e.clientY - dragStartRef.current.y;
+        dragStartRef.current = { x: e.clientX, y: e.clientY };
+
+        setPageEdits((prev) => {
+          const edits = prev[currentPage] || { texts: [], whiteouts: [], drawings: [], images: [], rotation: 0 };
+          return {
+            ...prev,
+            [currentPage]: {
+              ...edits,
+              images: edits.images.map((img) =>
+                img.id === activeImageIdRef.current ? { ...img, x: img.x + dx, y: img.y + dy } : img
+              ),
+            },
+          };
+        });
+        return;
+      }
+
+      // 3. Text Annotation Dragging
+      if (!isDraggingTextRef.current || !editingTextId || !dragStartRef.current || !overlayCanvasRef.current) return;
+      const rect = overlayCanvasRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const dx = x - dragStartRef.current.x;
+      const dy = y - dragStartRef.current.y;
+      dragStartRef.current = { x, y };
+
+      setPageEdits((prev) => {
+        const edits = prev[currentPage] || { texts: [], whiteouts: [], drawings: [], images: [], rotation: 0 };
+        return {
+          ...prev,
+          [currentPage]: {
+            ...edits,
+            texts: edits.texts.map((t) => (t.id === editingTextId ? { ...t, x: t.x + dx, y: t.y + dy } : t)),
+          },
+        };
+      });
+    };
+
+    const handleWindowTouchMove = (e: TouchEvent) => {
+      if (isDraggingImageRef.current && activeImageIdRef.current && dragStartRef.current && e.touches.length === 1) {
+        const clientX = e.touches[0].clientX;
+        const clientY = e.touches[0].clientY;
+        const dx = clientX - dragStartRef.current.x;
+        const dy = clientY - dragStartRef.current.y;
+        dragStartRef.current = { x: clientX, y: clientY };
+
+        setPageEdits((prev) => {
+          const edits = prev[currentPage] || { texts: [], whiteouts: [], drawings: [], images: [], rotation: 0 };
+          return {
+            ...prev,
+            [currentPage]: {
+              ...edits,
+              images: edits.images.map((img) =>
+                img.id === activeImageIdRef.current ? { ...img, x: img.x + dx, y: img.y + dy } : img
+              ),
+            },
+          };
+        });
+      }
+    };
+
+    const handleWindowMouseUp = () => {
+      if (isPanningRef.current) {
+        isPanningRef.current = false;
+        panStartRef.current = null;
+      }
+      if (isDraggingImageRef.current) {
+        isDraggingImageRef.current = false;
+        dragStartRef.current = null;
+      }
+      if (isDraggingTextRef.current) {
+        isDraggingTextRef.current = false;
+        dragStartRef.current = null;
+      }
+    };
+
+    window.addEventListener('mousemove', handleWindowMouseMove);
+    window.addEventListener('mouseup', handleWindowMouseUp);
+    window.addEventListener('touchmove', handleWindowTouchMove, { passive: true });
+    window.addEventListener('touchend', handleWindowMouseUp);
+    return () => {
+      window.removeEventListener('mousemove', handleWindowMouseMove);
+      window.removeEventListener('mouseup', handleWindowMouseUp);
+      window.removeEventListener('touchmove', handleWindowTouchMove);
+      window.removeEventListener('touchend', handleWindowMouseUp);
+    };
+  }, [editingTextId, currentPage]);
+
+  // Keyboard Shortcuts (Enter / Escape to Lock & Drop, Arrow Keys to Nudge 1px)
+  useEffect(() => {
+    if (!editingTextId) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        setEditingTextId(null);
+        toast.success('Text placed!');
+        return;
+      }
+      if (e.key === 'Escape') {
+        setEditingTextId(null);
+        return;
+      }
+      if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+        e.preventDefault();
+        const dx = e.key === 'ArrowLeft' ? -1 : e.key === 'ArrowRight' ? 1 : 0;
+        const dy = e.key === 'ArrowUp' ? -1 : e.key === 'ArrowDown' ? 1 : 0;
+
+        setPageEdits((prev) => {
+          const edits = prev[currentPage] || { texts: [], whiteouts: [], drawings: [], images: [], rotation: 0 };
+          return {
+            ...prev,
+            [currentPage]: {
+              ...edits,
+              texts: edits.texts.map((t) => (t.id === editingTextId ? { ...t, x: t.x + dx, y: t.y + dy } : t)),
+            },
+          };
+        });
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [editingTextId, currentPage]);
 
   // Initialize PDF.js
   useEffect(() => {
@@ -170,12 +368,11 @@ export default function PDFEditPage() {
 
     let isMounted = true;
 
-    // Cancel any previous render task on canvas
     if (renderTaskRef.current) {
       try {
         renderTaskRef.current.cancel();
       } catch {
-        // Ignore cancellation error
+        // Ignore
       }
       renderTaskRef.current = null;
     }
@@ -198,7 +395,6 @@ export default function PDFEditPage() {
         overlayCanvasRef.current.height = viewport.height;
       }
 
-      // Render Base Canvas with safe task reference
       const renderTask = page.render({ canvasContext: context, viewport });
       renderTaskRef.current = renderTask;
 
@@ -212,52 +408,36 @@ export default function PDFEditPage() {
         }
       }
 
-      // Extract PDF Text Content & Group Items into Full Complete Lines
       try {
         const textContent = await page.getTextContent();
-        const lineGroups: Record<number, any[]> = {};
-
-        textContent.items.forEach((item: any) => {
-          if (item.str && item.str.trim().length > 0) {
-            const pdfY = Math.round(item.transform[5] / 6) * 6; // Group by 6pt baseline threshold
-            if (!lineGroups[pdfY]) lineGroups[pdfY] = [];
-            lineGroups[pdfY].push(item);
-          }
-        });
-
         const detectedItems: DetectedTextItem[] = [];
         let idx = 0;
 
-        Object.values(lineGroups).forEach((itemsOnLine) => {
-          // Sort line items horizontally left to right
-          itemsOnLine.sort((a, b) => a.transform[4] - b.transform[4]);
+        textContent.items.forEach((item: any) => {
+          if (item.str && item.str.trim().length > 0) {
+            const pdfX = item.transform[4];
+            const pdfY = item.transform[5];
+            const itemWidth = item.width || 30;
+            const itemHeight = Math.abs(item.transform[3]) || item.height || 14;
 
-          const fullLineText = itemsOnLine.map((it) => it.str).join(' ');
-          const firstItem = itemsOnLine[0];
-          const lastItem = itemsOnLine[itemsOnLine.length - 1];
+            const v1 = viewport.convertToViewportPoint(pdfX, pdfY);
+            const v2 = viewport.convertToViewportPoint(pdfX + itemWidth, pdfY + itemHeight);
 
-          const pdfX = firstItem.transform[4];
-          const pdfY = firstItem.transform[5];
-          const totalPdfWidth = lastItem.transform[4] + (lastItem.width || 40) - pdfX;
-          const itemHeight = Math.abs(firstItem.transform[3]) || firstItem.height || 14;
+            const rx = Math.min(v1[0], v2[0]);
+            const ry = Math.min(v1[1], v2[1]);
+            const rw = Math.max(16, Math.abs(v2[0] - v1[0]));
+            const rh = Math.max(12, Math.abs(v2[1] - v1[1]));
 
-          const v1 = viewport.convertToViewportPoint(pdfX, pdfY);
-          const v2 = viewport.convertToViewportPoint(pdfX + totalPdfWidth, pdfY + itemHeight);
-
-          const rx = Math.min(v1[0], v2[0]);
-          const ry = Math.min(v1[1], v2[1]);
-          const rw = Math.max(20, Math.abs(v2[0] - v1[0]));
-          const rh = Math.max(12, Math.abs(v2[1] - v1[1]));
-
-          detectedItems.push({
-            id: `dt_line_${idx++}_${Date.now()}`,
-            str: fullLineText,
-            x: rx,
-            y: ry,
-            width: rw,
-            height: rh,
-            fontSize: Math.max(12, Math.round(rh * 0.82)),
-          });
+            detectedItems.push({
+              id: `dt_word_${idx++}_${Date.now()}`,
+              str: item.str,
+              x: rx,
+              y: ry,
+              width: rw,
+              height: rh,
+              fontSize: Math.max(11, Math.round(rh * 0.84)),
+            });
+          }
         });
 
         if (isMounted) {
@@ -281,7 +461,7 @@ export default function PDFEditPage() {
     };
   }, [pdfDoc, currentPage, zoom, currentRotation]);
 
-  // Render Overlays (Clean, Realistic - NO Blue Dashed Line Over Erased / Edited Text)
+  // Render Overlays with Alignment Grid
   const renderOverlay = useCallback(
     (detectedList = detectedTexts) => {
       if (!overlayCanvasRef.current) return;
@@ -292,8 +472,27 @@ export default function PDFEditPage() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const edits = getPageEdits(currentPage);
 
-      // 1. Draw Auto-Detected PDF Text Line Highlights
-      if (activeTool === 'autoDetect') {
+      // 0. Alignment Grid Overlay
+      if (showGrid) {
+        ctx.strokeStyle = 'rgba(148, 163, 184, 0.25)';
+        ctx.lineWidth = 0.5;
+        const gridSize = 20;
+        for (let gx = 0; gx < canvas.width; gx += gridSize) {
+          ctx.beginPath();
+          ctx.moveTo(gx, 0);
+          ctx.lineTo(gx, canvas.height);
+          ctx.stroke();
+        }
+        for (let gy = 0; gy < canvas.height; gy += gridSize) {
+          ctx.beginPath();
+          ctx.moveTo(0, gy);
+          ctx.lineTo(canvas.width, gy);
+          ctx.stroke();
+        }
+      }
+
+      // 1. Draw Auto-Detected PDF Text Word Highlights
+      if (activeTool === 'editText' || activeTool === 'autoDetect') {
         detectedList.forEach((dt) => {
           const isErased = edits.whiteouts.some(
             (w) =>
@@ -305,13 +504,13 @@ export default function PDFEditPage() {
 
           if (!isErased) {
             const isHovered = dt.id === hoveredTextId;
-            ctx.fillStyle = isHovered ? 'rgba(59, 130, 246, 0.18)' : 'rgba(99, 102, 241, 0.05)';
+            ctx.fillStyle = isHovered ? 'rgba(59, 130, 246, 0.22)' : 'rgba(99, 102, 241, 0.06)';
             ctx.fillRect(dt.x, dt.y, dt.width, dt.height);
           }
         });
       }
 
-      // 2. Draw Whiteouts (Solid Pure White, ZERO Borders)
+      // 2. Draw Whiteouts
       edits.whiteouts.forEach((w) => {
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(w.x, w.y, w.width, w.height);
@@ -354,15 +553,99 @@ export default function PDFEditPage() {
       // 5. Draw Non-Active Texts
       edits.texts.forEach((t) => {
         if (t.id !== editingTextId) {
-          const fontStyle = `${t.isItalic ? 'italic ' : ''}${t.isBold ? 'bold ' : ''}${t.fontSize}px sans-serif`;
+          const fontFamStr = t.fontFamily === 'times' ? 'serif' : t.fontFamily === 'courier' ? 'monospace' : 'sans-serif';
+          const fontStyle = `${t.isItalic ? 'italic ' : ''}${t.isBold ? 'bold ' : ''}${t.fontSize}px ${fontFamStr}`;
           ctx.font = fontStyle;
           ctx.fillStyle = t.color;
           ctx.textBaseline = 'top';
           ctx.fillText(t.text, t.x, t.y);
         }
       });
+
+      // 6. Draw Move Mode Highlights for ALL text elements (original PDF text + edited text) when in Move/Reposition Mode
+      if (activeTool === 'select') {
+        // Original PDF text items not yet erased
+        detectedList.forEach((dt) => {
+          const isErased = edits.whiteouts.some(
+            (w) =>
+              dt.x + dt.width >= w.x &&
+              dt.x <= w.x + w.width &&
+              dt.y + dt.height >= w.y &&
+              dt.y <= w.y + w.height
+          );
+
+          if (!isErased) {
+            ctx.strokeStyle = 'rgba(59, 130, 246, 0.7)';
+            ctx.lineWidth = 1.5;
+            ctx.setLineDash([4, 4]);
+            ctx.strokeRect(dt.x - 2, dt.y - 2, dt.width + 4, dt.height + 4);
+            ctx.setLineDash([]);
+            ctx.fillStyle = 'rgba(59, 130, 246, 0.08)';
+            ctx.fillRect(dt.x - 2, dt.y - 2, dt.width + 4, dt.height + 4);
+          }
+        });
+
+        // Edited text items
+        edits.texts.forEach((t) => {
+          const fontFamStr = t.fontFamily === 'times' ? 'serif' : t.fontFamily === 'courier' ? 'monospace' : 'sans-serif';
+          ctx.font = `${t.fontSize}px ${fontFamStr}`;
+          const metrics = ctx.measureText(t.text);
+          ctx.strokeStyle = 'rgba(59, 130, 246, 0.7)';
+          ctx.lineWidth = 1.5;
+          ctx.setLineDash([4, 4]);
+          ctx.strokeRect(t.x - 3, t.y - 2, metrics.width + 6, t.fontSize + 4);
+          ctx.setLineDash([]);
+          ctx.fillStyle = 'rgba(59, 130, 246, 0.08)';
+          ctx.fillRect(t.x - 3, t.y - 2, metrics.width + 6, t.fontSize + 4);
+        });
+      }
+
+      // 7. Live Blueprint Ghost Preview for Quick Stamp Placement Cursor
+      if (activeStampPreset && mousePosRef.current) {
+        const mx = mousePosRef.current.x;
+        const my = mousePosRef.current.y;
+
+        let stampText = '';
+        let color = textColor;
+        if (activeStampPreset === 'date') stampText = new Date().toISOString().split('T')[0];
+        else if (activeStampPreset === 'signature') stampText = '____________________ (Signature)';
+        else if (activeStampPreset === 'check') { stampText = '✓ Approved'; color = '#16a34a'; }
+        else if (activeStampPreset === 'cross') { stampText = '✗ Rejected'; color = '#dc2626'; }
+
+        const fontFamStr = fontFamily === 'times' ? 'serif' : fontFamily === 'courier' ? 'monospace' : 'sans-serif';
+        ctx.font = `${textSize}px ${fontFamStr}`;
+        const metrics = ctx.measureText(stampText);
+        const stampWidth = metrics.width;
+
+        // Blueprint Background & Dashed Box Outline
+        ctx.fillStyle = 'rgba(59, 130, 246, 0.12)';
+        ctx.fillRect(mx - 4, my - 2, stampWidth + 8, textSize + 6);
+
+        ctx.strokeStyle = '#2563eb';
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([4, 4]);
+        ctx.strokeRect(mx - 4, my - 2, stampWidth + 8, textSize + 6);
+        ctx.setLineDash([]);
+
+        // Target Crosshair Guide
+        ctx.strokeStyle = 'rgba(37, 99, 235, 0.5)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(mx - 10, my);
+        ctx.lineTo(mx + 10, my);
+        ctx.moveTo(mx, my - 10);
+        ctx.lineTo(mx, my + 10);
+        ctx.stroke();
+
+        // Ghost Text Preview
+        ctx.fillStyle = color;
+        ctx.globalAlpha = 0.8;
+        ctx.textBaseline = 'top';
+        ctx.fillText(stampText, mx, my);
+        ctx.globalAlpha = 1.0;
+      }
     },
-    [currentPage, getPageEdits, activeTool, hoveredTextId, detectedTexts, editingTextId]
+    [currentPage, getPageEdits, activeTool, hoveredTextId, detectedTexts, editingTextId, showGrid, activeStampPreset, textColor, textSize, fontFamily]
   );
 
   // Trigger Overlay Re-render on editing/state updates
@@ -378,7 +661,60 @@ export default function PDFEditPage() {
     const y = e.clientY - rect.top;
     const edits = getPageEdits(currentPage);
 
-    // 0. Check if user clicked on ANY existing typed text element -> Select & enable drag moving!
+    // 0. Pan / Drag Canvas View Mode (Drag mouse/finger to scroll zoomed document)
+    if (activeTool === 'pan' || e.button === 1) {
+      isPanningRef.current = true;
+      if (workspaceRef.current) {
+        panStartRef.current = {
+          x: e.clientX,
+          y: e.clientY,
+          scrollLeft: workspaceRef.current.scrollLeft,
+          scrollTop: workspaceRef.current.scrollTop,
+        };
+      }
+      return;
+    }
+
+    // 0. Quick Stamp Preset Placement Mode on Manual Canvas Click
+    if (activeStampPreset) {
+      const newId = `t_${Date.now()}`;
+      let stampText = '';
+      let size = textSize;
+      let color = textColor;
+
+      if (activeStampPreset === 'date') {
+        stampText = new Date().toISOString().split('T')[0];
+      } else if (activeStampPreset === 'signature') {
+        stampText = '____________________ (Signature)';
+      } else if (activeStampPreset === 'check') {
+        stampText = '✓ Approved';
+        color = '#16a34a';
+      } else if (activeStampPreset === 'cross') {
+        stampText = '✗ Rejected';
+        color = '#dc2626';
+      }
+
+      const newText: TextAnnotation = {
+        id: newId,
+        x,
+        y,
+        text: stampText,
+        fontSize: size,
+        color,
+        fontFamily,
+      };
+
+      setPageEdits({
+        ...pageEdits,
+        [currentPage]: { ...edits, texts: [...edits.texts, newText] },
+      });
+      setEditingTextId(newId);
+      setActiveStampPreset(null);
+      toast.success(`Placed ${activeStampPreset} stamp!`);
+      return;
+    }
+
+    // 0. Check if user clicked on ANY existing typed text element
     const clickedExistingText = edits.texts.find((t) => {
       const ctx = overlayCanvasRef.current?.getContext('2d');
       if (!ctx) return false;
@@ -389,8 +725,11 @@ export default function PDFEditPage() {
 
     if (clickedExistingText) {
       setEditingTextId(clickedExistingText.id);
-      isDraggingTextRef.current = true;
-      dragStartRef.current = { x, y };
+      // Allow moving text ONLY when activeTool === 'select'
+      if (activeTool === 'select') {
+        isDraggingTextRef.current = true;
+        dragStartRef.current = { x, y };
+      }
       return;
     }
 
@@ -399,18 +738,36 @@ export default function PDFEditPage() {
       setEditingTextId(null);
     }
 
-    // 1. AUTO DETECT MODE: Click any full text line to auto-erase & replace full sentence!
-    if (activeTool === 'autoDetect') {
+    // 1. EDIT EXISTING PDF TEXT / MOVE MODE FOR DETECTED PDF TEXT: Click any word to edit or move!
+    if (activeTool === 'editText' || activeTool === 'autoDetect' || activeTool === 'select') {
       const clickedDetected = detectedTexts.find(
         (dt) => x >= dt.x && x <= dt.x + dt.width && y >= dt.y && y <= dt.y + dt.height
       );
 
       if (clickedDetected) {
+        // Sample exact text color from base PDF canvas before whiteout
+        let wordColor = textColor;
+        const baseCanvas = canvasRef.current;
+        if (baseCanvas) {
+          const baseCtx = baseCanvas.getContext('2d');
+          if (baseCtx) {
+            const sampleX = Math.round(clickedDetected.x + clickedDetected.width / 2);
+            const sampleY = Math.round(clickedDetected.y + clickedDetected.height / 2);
+            const pixel = baseCtx.getImageData(sampleX, sampleY, 1, 1).data;
+            if (pixel[0] < 245 || pixel[1] < 245 || pixel[2] < 245) {
+              wordColor = `#${((1 << 24) + (pixel[0] << 16) + (pixel[1] << 8) + pixel[2])
+                .toString(16)
+                .slice(1)}`;
+              setTextColor(wordColor);
+            }
+          }
+        }
+
         const newWhiteout: WhiteoutAnnotation = {
           id: `w_${Date.now()}`,
           x: clickedDetected.x - 2,
           y: clickedDetected.y - 2,
-          width: clickedDetected.width + 6,
+          width: clickedDetected.width + 4,
           height: clickedDetected.height + 4,
         };
 
@@ -421,7 +778,8 @@ export default function PDFEditPage() {
           y: clickedDetected.y,
           text: clickedDetected.str,
           fontSize: clickedDetected.fontSize,
-          color: textColor,
+          color: wordColor,
+          fontFamily,
         };
 
         setPageEdits({
@@ -434,7 +792,14 @@ export default function PDFEditPage() {
         });
 
         setEditingTextId(replacementId);
-        toast.success(`Auto-erased line! Edit full sentence below.`);
+
+        if (activeTool === 'select') {
+          isDraggingTextRef.current = true;
+          dragStartRef.current = { x, y };
+          toast.success(`Moving text "${clickedDetected.str}"`);
+        } else {
+          toast.success(`Editing text "${clickedDetected.str}"`);
+        }
         return;
       }
     }
@@ -486,8 +851,16 @@ export default function PDFEditPage() {
     const y = e.clientY - rect.top;
     const edits = getPageEdits(currentPage);
 
-    // Hover detection for Auto Detect Mode
-    if (activeTool === 'autoDetect') {
+    // Track Mouse Coordinates for Live Blueprint Preview & Dragging
+    mousePosRef.current = { x, y };
+
+    // Live Blueprint Ghost Preview for Quick Stamps
+    if (activeStampPreset) {
+      renderOverlay();
+    }
+
+    // Hover detection for Edit Existing Text / Auto Detect Mode
+    if (activeTool === 'editText' || activeTool === 'autoDetect') {
       const hovered = detectedTexts.find(
         (dt) => x >= dt.x && x <= dt.x + dt.width && y >= dt.y && y <= dt.y + dt.height
       );
@@ -617,7 +990,7 @@ export default function PDFEditPage() {
     if (isDrawingRef.current && (activeTool === 'draw' || activeTool === 'highlight')) {
       isDrawingRef.current = false;
       const edits = getPageEdits(currentPage);
-      const newStroke: DrawStroke = {
+      const newStroke: DrawingStroke = {
         id: `s_${Date.now()}`,
         points: [...currentStrokeRef.current],
         color: activeTool === 'highlight' ? highlightColor : drawColor,
@@ -640,19 +1013,21 @@ export default function PDFEditPage() {
     reader.onload = () => {
       const dataUrl = reader.result as string;
       const edits = getPageEdits(currentPage);
-      const newImage: ImageAnnotation = {
-        id: `img_${Date.now()}`,
-        x: 50,
-        y: 50,
-        width: 120,
-        height: 120,
+      const newId = `img_${Date.now()}`;
+      const newImage: ImageStamp = {
+        id: newId,
+        x: 60,
+        y: 60,
+        width: 140,
+        height: 140,
         dataUrl,
       };
       setPageEdits({
         ...pageEdits,
         [currentPage]: { ...edits, images: [...edits.images, newImage] },
       });
-      toast.success('Image stamp added to page!');
+      setActiveImageId(newId);
+      toast.success('Photo added! Use the move handle to place it anywhere on page.');
     };
     reader.readAsDataURL(stampFile);
   };
@@ -723,6 +1098,10 @@ export default function PDFEditPage() {
       const remainingPages = pdfDocLib.getPages();
       const helveticaFont = await pdfDocLib.embedFont(StandardFonts.Helvetica);
       const helveticaBoldFont = await pdfDocLib.embedFont(StandardFonts.HelveticaBold);
+      const timesFont = await pdfDocLib.embedFont(StandardFonts.TimesRoman);
+      const timesBoldFont = await pdfDocLib.embedFont(StandardFonts.TimesRomanBold);
+      const courierFont = await pdfDocLib.embedFont(StandardFonts.Courier);
+      const courierBoldFont = await pdfDocLib.embedFont(StandardFonts.CourierBold);
 
       for (let i = 1; i <= numPages; i++) {
         if (deletedPages.has(i)) continue;
@@ -749,16 +1128,47 @@ export default function PDFEditPage() {
 
           // Apply Texts
           edits.texts.forEach((t) => {
-            const chosenFont = t.isBold ? helveticaBoldFont : helveticaFont;
+            let chosenFont = t.isBold ? helveticaBoldFont : helveticaFont;
+            if (t.fontFamily === 'times') {
+              chosenFont = t.isBold ? timesBoldFont : timesFont;
+            } else if (t.fontFamily === 'courier') {
+              chosenFont = t.isBold ? courierBoldFont : courierFont;
+            }
             const pdfFontSize = t.fontSize / zoom;
+
+            const hex = (t.color || '#0f172a').replace('#', '');
+            const r = parseInt(hex.substring(0, 2), 16) / 255 || 0;
+            const g = parseInt(hex.substring(2, 4), 16) / 255 || 0;
+            const b = parseInt(hex.substring(4, 6), 16) / 255 || 0;
+
             page.drawText(t.text, {
               x: t.x / zoom,
               y: height - t.y / zoom - pdfFontSize * 0.82,
               size: pdfFontSize,
               font: chosenFont,
-              color: rgb(0.1, 0.1, 0.2),
+              color: rgb(r, g, b),
             });
           });
+
+          // Apply Photo Stamps
+          for (const img of edits.images) {
+            try {
+              let embeddedImg;
+              if (img.dataUrl.startsWith('data:image/png')) {
+                embeddedImg = await pdfDocLib.embedPng(img.dataUrl);
+              } else {
+                embeddedImg = await pdfDocLib.embedJpg(img.dataUrl);
+              }
+              page.drawImage(embeddedImg, {
+                x: img.x / zoom,
+                y: height - img.y / zoom - img.height / zoom,
+                width: img.width / zoom,
+                height: img.height / zoom,
+              });
+            } catch (imgErr) {
+              console.error('Failed to embed image in PDF export', imgErr);
+            }
+          }
         }
       }
 
@@ -779,6 +1189,17 @@ export default function PDFEditPage() {
       toast.error(err?.message || 'Failed to export PDF.');
     } finally {
       setIsExporting(false);
+    }
+  };
+
+  // Stamp Presets (Click button -> Click anywhere on page to place!)
+  const handleAddStampPreset = (presetType: 'date' | 'signature' | 'check' | 'cross') => {
+    if (activeStampPreset === presetType) {
+      setActiveStampPreset(null);
+      toast.info('Stamp placement cancelled');
+    } else {
+      setActiveStampPreset(presetType);
+      toast.info(`Click anywhere on the PDF page to place ${presetType} stamp`);
     }
   };
 
@@ -811,89 +1232,119 @@ export default function PDFEditPage() {
           </label>
         </div>
       ) : (
-        <div className="space-y-6">
-          {/* Interactive Main Toolbar */}
-          <div className="p-4 bg-slate-900 text-white rounded-2xl shadow-lg space-y-4">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              {/* Primary Editing Tools */}
-              <div className="flex flex-wrap items-center gap-1.5 bg-slate-800 p-1.5 rounded-xl border border-slate-700">
+        <div className="space-y-6 pb-28 sm:pb-8">
+          {/* Main Day/Light Mode Interactive Toolbar */}
+          <div className="p-3 sm:p-5 bg-white rounded-3xl border border-slate-200/90 shadow-md space-y-3 sm:space-y-4 text-slate-900">
+            <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+              {/* Primary Tool Selector: Scrollable on Mobile, Fully Expanded Grid on Desktop */}
+              <div className="flex items-center md:flex-wrap gap-1.5 bg-slate-100/90 p-1.5 rounded-2xl border border-slate-200/80 overflow-x-auto md:overflow-visible max-w-full no-scrollbar">
                 <button
-                  onClick={() => setActiveTool('autoDetect')}
-                  className={`px-3.5 py-2 rounded-lg text-xs font-black flex items-center gap-1.5 transition-colors ${
-                    activeTool === 'autoDetect' ? 'bg-indigo-600 text-white' : 'text-slate-300 hover:bg-slate-700'
+                  onClick={() => setActiveTool('editText')}
+                  className={`px-3 py-2 rounded-xl text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer shrink-0 whitespace-nowrap ${
+                    activeTool === 'editText'
+                      ? 'bg-slate-900 text-white shadow-xs'
+                      : 'text-slate-700 hover:bg-white hover:text-slate-900'
                   }`}
-                  title="Click any text line on the PDF page to auto-erase & edit full sentence"
+                  title="Click any existing text in the PDF to edit it instantly in matching font size & color"
                 >
-                  <Target className="w-4 h-4 text-emerald-400 animate-pulse" />
-                  <span>Auto Detect & Erase Text</span>
-                </button>
-
-                <button
-                  onClick={() => setActiveTool('replaceText')}
-                  className={`px-3.5 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors ${
-                    activeTool === 'replaceText' ? 'bg-indigo-600 text-white' : 'text-slate-300 hover:bg-slate-700'
-                  }`}
-                  title="Click & Drag over existing PDF text to erase & type replacement directly"
-                >
-                  <Edit3 className="w-4 h-4 text-amber-400" />
-                  <span>Manual Drag Erase</span>
-                </button>
-
-                <button
-                  onClick={() => setActiveTool('text')}
-                  className={`px-3.5 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors ${
-                    activeTool === 'text' ? 'bg-indigo-600 text-white' : 'text-slate-300 hover:bg-slate-700'
-                  }`}
-                  title="Click anywhere on PDF to type text directly"
-                >
-                  <Type className="w-4 h-4" />
-                  <span>Type Text</span>
+                  <Edit3 className="w-4 h-4 text-emerald-500" />
+                  <span>Edit Existing Text</span>
+                  <span className="text-[9px] uppercase tracking-wider bg-emerald-500/20 text-emerald-700 px-1.5 py-0.5 rounded-md ml-0.5">
+                    Default
+                  </span>
                 </button>
 
                 <button
                   onClick={() => setActiveTool('select')}
-                  className={`px-3.5 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors ${
-                    activeTool === 'select' ? 'bg-indigo-600 text-white' : 'text-slate-300 hover:bg-slate-700'
+                  className={`px-3 py-2 rounded-xl text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer shrink-0 whitespace-nowrap ${
+                    activeTool === 'select'
+                      ? 'bg-slate-900 text-white shadow-xs'
+                      : 'text-slate-700 hover:bg-white hover:text-slate-900'
                   }`}
-                  title="Click & Drag existing text annotations to move or edit"
+                  title="Click & Drag any text box (original PDF text or edited text) to reposition it anywhere on page"
                 >
-                  <MousePointer className="w-4 h-4" />
-                  <span>Select / Move Text</span>
+                  <MousePointer className="w-4 h-4 text-blue-500" />
+                  <span>Move Text</span>
+                </button>
+
+                <button
+                  onClick={() => setActiveTool('pan')}
+                  className={`px-3 py-2 rounded-xl text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer shrink-0 whitespace-nowrap ${
+                    activeTool === 'pan'
+                      ? 'bg-slate-900 text-white shadow-xs'
+                      : 'text-slate-700 hover:bg-white hover:text-slate-900'
+                  }`}
+                  title="Click & Drag anywhere on page to pan/scroll zoomed document view in any direction"
+                >
+                  <Hand className="w-4 h-4 text-amber-500" />
+                  <span>Pan View</span>
+                </button>
+
+                <button
+                  onClick={() => setActiveTool('text')}
+                  className={`px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shrink-0 whitespace-nowrap ${
+                    activeTool === 'text'
+                      ? 'bg-slate-900 text-white shadow-xs'
+                      : 'text-slate-700 hover:bg-white hover:text-slate-900'
+                  }`}
+                  title="Click anywhere on PDF to type new text directly"
+                >
+                  <Type className="w-4 h-4 text-indigo-600" />
+                  <span>Type New Text</span>
+                </button>
+
+                <button
+                  onClick={() => setActiveTool('replaceText')}
+                  className={`px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shrink-0 whitespace-nowrap ${
+                    activeTool === 'replaceText'
+                      ? 'bg-slate-900 text-white shadow-xs'
+                      : 'text-slate-700 hover:bg-white hover:text-slate-900'
+                  }`}
+                  title="Click & Drag over existing PDF text to erase & type replacement directly"
+                >
+                  <Edit3 className="w-4 h-4 text-amber-500" />
+                  <span>Manual Erase</span>
                 </button>
 
                 <button
                   onClick={() => setActiveTool('whiteout')}
-                  className={`px-3.5 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors ${
-                    activeTool === 'whiteout' ? 'bg-indigo-600 text-white' : 'text-slate-300 hover:bg-slate-700'
+                  className={`px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap ${
+                    activeTool === 'whiteout'
+                      ? 'bg-slate-900 text-white shadow-xs'
+                      : 'text-slate-700 hover:bg-white hover:text-slate-900'
                   }`}
                   title="Drag to erase content with whiteout"
                 >
-                  <Eraser className="w-4 h-4" />
+                  <Eraser className="w-4 h-4 text-slate-600" />
                   <span>Whiteout</span>
                 </button>
 
                 <button
                   onClick={() => setActiveTool('draw')}
-                  className={`px-3.5 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors ${
-                    activeTool === 'draw' ? 'bg-indigo-600 text-white' : 'text-slate-300 hover:bg-slate-700'
+                  className={`px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap ${
+                    activeTool === 'draw'
+                      ? 'bg-slate-900 text-white shadow-xs'
+                      : 'text-slate-700 hover:bg-white hover:text-slate-900'
                   }`}
                 >
-                  <PenTool className="w-4 h-4" />
-                  <span>Draw Pen</span>
+                  <PenTool className="w-4 h-4 text-sky-600" />
+                  <span>Pen</span>
                 </button>
 
                 <button
                   onClick={() => setActiveTool('highlight')}
-                  className={`px-3.5 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors ${
-                    activeTool === 'highlight' ? 'bg-indigo-600 text-white' : 'text-slate-300 hover:bg-slate-700'
+                  className={`px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap ${
+                    activeTool === 'highlight'
+                      ? 'bg-slate-900 text-white shadow-xs'
+                      : 'text-slate-700 hover:bg-white hover:text-slate-900'
                   }`}
                 >
-                  <Highlighter className="w-4 h-4 text-amber-300" />
+                  <Highlighter className="w-4 h-4 text-amber-500" />
                   <span>Highlight</span>
                 </button>
 
-                <label className="px-3.5 py-2 rounded-lg text-xs font-bold text-slate-300 hover:bg-slate-700 flex items-center gap-1.5 cursor-pointer transition-colors">
-                  <ImageIcon className="w-4 h-4" />
+                <label className="px-3 py-2 rounded-xl text-xs font-bold text-slate-700 hover:bg-white hover:text-slate-900 flex items-center gap-1.5 cursor-pointer transition-all shrink-0 whitespace-nowrap">
+                  <ImageIcon className="w-4 h-4 text-purple-600" />
                   <span>Add Image</span>
                   <input type="file" accept="image/*" onChange={handleImageStampUpload} className="hidden" />
                 </label>
@@ -903,39 +1354,170 @@ export default function PDFEditPage() {
               <button
                 onClick={handleExportPDF}
                 disabled={isExporting}
-                className="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-md transition-all flex items-center gap-2 min-h-[38px]"
+                className="w-full md:w-auto px-5 py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-md transition-all flex items-center justify-center gap-2 min-h-[40px] cursor-pointer shrink-0"
               >
-                {isExporting ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Download className="w-3.5 h-3.5" />}
+                {isExporting ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
                 <span>Download Edited PDF</span>
               </button>
             </div>
 
-            {/* Contextual Navigation & Page Manipulation Controls */}
-            <div className="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-slate-800 text-xs">
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2 text-slate-300">
+            {/* Precision Options Sub-Bar (Typography, Swatches, Alignment Grid & Quick Presets) */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pt-3 border-t border-slate-100 text-xs">
+              {/* Precision Typography & Styling Controls */}
+              <div className="flex items-center gap-2 overflow-x-auto md:overflow-visible md:flex-wrap max-w-full no-scrollbar py-0.5">
+                {/* Font Family Selector */}
+                <select
+                  value={fontFamily}
+                  onChange={(e) => setFontFamily(e.target.value as any)}
+                  className="bg-slate-100 border border-slate-200 text-slate-900 rounded-xl px-2.5 py-1.5 font-bold text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 shrink-0"
+                  title="Select Font Family"
+                >
+                  <option value="helvetica">Helvetica</option>
+                  <option value="times">Times Roman</option>
+                  <option value="courier">Courier</option>
+                </select>
+
+                {/* Precision Size Stepper */}
+                <div className="flex items-center gap-1 bg-slate-100 border border-slate-200 rounded-xl p-1 shrink-0">
+                  <button
+                    onClick={() => setTextSize((s) => Math.max(8, s - 2))}
+                    className="p-1 rounded-lg text-slate-700 hover:bg-white hover:text-slate-900 font-black"
+                    title="Decrease Font Size"
+                  >
+                    <Minus className="w-3.5 h-3.5" />
+                  </button>
+                  <span className="px-1.5 font-black text-xs text-slate-900 min-w-[32px] text-center">
+                    {textSize}px
+                  </span>
+                  <button
+                    onClick={() => setTextSize((s) => Math.min(72, s + 2))}
+                    className="p-1 rounded-lg text-slate-700 hover:bg-white hover:text-slate-900 font-black"
+                    title="Increase Font Size"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+
+                {/* Color Swatches */}
+                <div className="flex items-center gap-1 bg-slate-100 border border-slate-200 rounded-xl p-1 shrink-0">
+                  {['#0f172a', '#2563eb', '#dc2626', '#16a34a', '#d97706'].map((hex) => (
+                    <button
+                      key={hex}
+                      onClick={() => setTextColor(hex)}
+                      className={`w-5 h-5 rounded-full border border-white transition-all ${
+                        textColor === hex ? 'scale-110 ring-2 ring-indigo-500 shadow-xs' : 'opacity-80 hover:opacity-100'
+                      }`}
+                      style={{ backgroundColor: hex }}
+                      title={`Select Color ${hex}`}
+                    />
+                  ))}
+                  <input
+                    type="color"
+                    value={textColor}
+                    onChange={(e) => setTextColor(e.target.value)}
+                    className="w-5 h-5 rounded-full cursor-pointer border-0 p-0"
+                    title="Custom Color"
+                  />
+                </div>
+
+                {/* Precision Alignment Grid Toggle */}
+                <button
+                  onClick={() => setShowGrid((g) => !g)}
+                  className={`px-3 py-1.5 rounded-xl font-bold text-xs flex items-center gap-1.5 border transition-all shrink-0 whitespace-nowrap ${
+                    showGrid
+                      ? 'bg-indigo-50 border-indigo-300 text-indigo-900 font-black shadow-2xs'
+                      : 'bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200'
+                  }`}
+                  title="Toggle 20px alignment grid overlay for pixel-perfect positioning"
+                >
+                  <Grid className="w-3.5 h-3.5 text-indigo-600" />
+                  <span>Align Grid</span>
+                </button>
+              </div>
+
+              {/* Quick Stamp Presets */}
+              <div className="flex items-center gap-1.5 overflow-x-auto md:overflow-visible md:flex-wrap max-w-full no-scrollbar py-0.5">
+                <span className="text-[11px] font-extrabold text-slate-500 uppercase tracking-wider shrink-0">Stamps:</span>
+                <button
+                  onClick={() => handleAddStampPreset('date')}
+                  className={`px-2.5 py-1 rounded-xl border font-bold text-xs flex items-center gap-1 transition-all cursor-pointer shrink-0 whitespace-nowrap ${
+                    activeStampPreset === 'date'
+                      ? 'bg-indigo-600 text-white border-indigo-700 ring-2 ring-indigo-400 font-black shadow-xs'
+                      : 'bg-slate-100 hover:bg-slate-200 border-slate-200/80 text-slate-800'
+                  }`}
+                  title="Click Date then click anywhere on PDF page to place stamp"
+                >
+                  <Calendar className="w-3.5 h-3.5" />
+                  <span>Date</span>
+                </button>
+
+                <button
+                  onClick={() => handleAddStampPreset('signature')}
+                  className={`px-2.5 py-1 rounded-xl border font-bold text-xs flex items-center gap-1 transition-all cursor-pointer shrink-0 whitespace-nowrap ${
+                    activeStampPreset === 'signature'
+                      ? 'bg-amber-600 text-white border-amber-700 ring-2 ring-amber-400 font-black shadow-xs'
+                      : 'bg-slate-100 hover:bg-slate-200 border-slate-200/80 text-slate-800'
+                  }`}
+                  title="Click Signature Line then click anywhere on PDF page to place stamp"
+                >
+                  <Edit3 className="w-3.5 h-3.5" />
+                  <span>Signature Line</span>
+                </button>
+
+                <button
+                  onClick={() => handleAddStampPreset('check')}
+                  className={`px-2.5 py-1 rounded-xl border font-bold text-xs flex items-center gap-1 transition-all cursor-pointer shrink-0 whitespace-nowrap ${
+                    activeStampPreset === 'check'
+                      ? 'bg-emerald-600 text-white border-emerald-700 ring-2 ring-emerald-400 font-black shadow-xs'
+                      : 'bg-emerald-50 hover:bg-emerald-100 border-emerald-200 text-emerald-800'
+                  }`}
+                  title="Click ✓ Check then click anywhere on PDF page to place stamp"
+                >
+                  <CheckSquare className="w-3.5 h-3.5" />
+                  <span>✓ Check</span>
+                </button>
+
+                <button
+                  onClick={() => handleAddStampPreset('cross')}
+                  className={`px-2.5 py-1 rounded-xl border font-bold text-xs flex items-center gap-1 transition-all cursor-pointer shrink-0 whitespace-nowrap ${
+                    activeStampPreset === 'cross'
+                      ? 'bg-rose-600 text-white border-rose-700 ring-2 ring-rose-400 font-black shadow-xs'
+                      : 'bg-rose-50 hover:bg-rose-100 border-rose-200 text-rose-800'
+                  }`}
+                  title="Click ✗ Cross then click anywhere on PDF page to place stamp"
+                >
+                  <XCircle className="w-3.5 h-3.5" />
+                  <span>✗ Cross</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Page Navigation & Operations */}
+            <div className="flex flex-wrap items-center justify-between gap-4 pt-3 border-t border-slate-100 text-xs">
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl border border-slate-200">
                   <button
                     disabled={currentPage <= 1}
                     onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                    className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 disabled:opacity-40 font-bold"
+                    className="px-2.5 py-1 rounded-lg bg-white hover:bg-slate-200 text-slate-900 disabled:opacity-40 font-bold shadow-2xs"
                   >
                     Prev Page
                   </button>
-                  <span className="font-extrabold text-indigo-300">
+                  <span className="font-black text-indigo-900 px-2">
                     Page {currentPage} of {numPages}
                   </span>
                   <button
                     disabled={currentPage >= numPages}
                     onClick={() => setCurrentPage((p) => Math.min(numPages, p + 1))}
-                    className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 disabled:opacity-40 font-bold"
+                    className="px-2.5 py-1 rounded-lg bg-white hover:bg-slate-200 text-slate-900 disabled:opacity-40 font-bold shadow-2xs"
                   >
                     Next Page
                   </button>
                 </div>
 
                 {activeTool === 'replaceText' && (
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold border border-amber-500/30">
-                    <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-900 text-xs font-bold border border-amber-200">
+                    <Sparkles className="w-3.5 h-3.5 text-amber-600" />
                     <span>Click and drag over any PDF text to erase it and type replacement text directly!</span>
                   </div>
                 )}
@@ -943,10 +1525,10 @@ export default function PDFEditPage() {
 
               <div className="flex items-center gap-2 flex-wrap">
                 {/* Zoom Controls */}
-                <div className="flex items-center gap-1 bg-slate-800 p-1 rounded-xl border border-slate-700">
+                <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200">
                   <button
                     onClick={() => setZoom((z) => Math.max(0.6, z - 0.2))}
-                    className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700 font-extrabold text-xs"
+                    className="p-1.5 rounded-lg text-slate-700 hover:bg-white font-extrabold text-xs"
                     title="Zoom Out"
                   >
                     -
@@ -954,7 +1536,7 @@ export default function PDFEditPage() {
                   <select
                     value={Math.round(zoom * 100)}
                     onChange={(e) => setZoom(Number(e.target.value) / 100)}
-                    className="bg-slate-900 text-slate-200 text-xs font-bold px-2 py-1 rounded-lg border border-slate-700"
+                    className="bg-white text-slate-900 text-xs font-bold px-2 py-1 rounded-lg border border-slate-200"
                   >
                     <option value={60}>60%</option>
                     <option value={80}>80%</option>
@@ -965,7 +1547,7 @@ export default function PDFEditPage() {
                   </select>
                   <button
                     onClick={() => setZoom((z) => Math.min(2.5, z + 0.2))}
-                    className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700 font-extrabold text-xs"
+                    className="p-1.5 rounded-lg text-slate-700 hover:bg-white font-extrabold text-xs"
                     title="Zoom In"
                   >
                     +
@@ -974,21 +1556,21 @@ export default function PDFEditPage() {
 
                 <button
                   onClick={handleRotateCurrentPage}
-                  className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300"
+                  className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200/80"
                   title="Rotate Page 90°"
                 >
                   <RotateCw className="w-4 h-4" />
                 </button>
                 <button
                   onClick={handleClearCurrentPageEdits}
-                  className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300"
+                  className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200/80"
                   title="Clear Page Edits"
                 >
                   <RefreshCw className="w-4 h-4" />
                 </button>
                 <button
                   onClick={handleDeleteCurrentPage}
-                  className="p-2 rounded-lg bg-rose-900/60 hover:bg-rose-900 text-rose-300"
+                  className="p-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200"
                   title="Delete Page"
                 >
                   <Trash2 className="w-4 h-4" />
@@ -997,168 +1579,305 @@ export default function PDFEditPage() {
             </div>
           </div>
 
-          {/* Interactive PDF Page Canvas Workspace with INLINE TYPING OVERLAY */}
-          <div className="bg-slate-200 p-6 sm:p-8 rounded-3xl flex items-center justify-center overflow-auto min-h-[500px]">
-            {deletedPages.has(currentPage) ? (
-              <div className="p-12 bg-white rounded-2xl text-center space-y-3">
-                <Trash2 className="w-10 h-10 text-rose-500 mx-auto" />
-                <h4 className="text-lg font-black text-slate-900">Page {currentPage} Marked for Deletion</h4>
-                <button
-                  onClick={() => {
-                    const nextDel = new Set(deletedPages);
-                    nextDel.delete(currentPage);
-                    setDeletedPages(nextDel);
-                  }}
-                  className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs"
-                >
-                  Restore Page
-                </button>
-              </div>
-            ) : (
-              <div className="relative shadow-2xl rounded-xl bg-white border border-slate-300 inline-block overflow-hidden">
+          {/* Interactive PDF Page Canvas Workspace (Light Mode Day Canvas Container) */}
+          <div
+            ref={workspaceRef}
+            className={`bg-slate-100/70 border border-slate-200/90 rounded-3xl overflow-auto max-h-[75vh] shadow-inner w-full relative transition-all ${
+              activeTool === 'pan' || isSpacePressed ? 'cursor-grab active:cursor-grabbing select-none' : ''
+            }`}
+            onPointerDown={(e) => {
+              if (activeTool === 'pan' || isSpacePressed || e.button === 1) {
+                isPanningRef.current = true;
+                panStartRef.current = {
+                  x: e.clientX,
+                  y: e.clientY,
+                  scrollLeft: workspaceRef.current?.scrollLeft || 0,
+                  scrollTop: workspaceRef.current?.scrollTop || 0,
+                };
+                if (e.currentTarget.setPointerCapture) {
+                  try {
+                    e.currentTarget.setPointerCapture(e.pointerId);
+                  } catch {}
+                }
+              }
+            }}
+            onPointerMove={(e) => {
+              if (isPanningRef.current && panStartRef.current && workspaceRef.current) {
+                const dx = e.clientX - panStartRef.current.x;
+                const dy = e.clientY - panStartRef.current.y;
+                workspaceRef.current.scrollLeft = panStartRef.current.scrollLeft - dx;
+                workspaceRef.current.scrollTop = panStartRef.current.scrollTop - dy;
+              }
+            }}
+            onPointerUp={(e) => {
+              if (isPanningRef.current) {
+                isPanningRef.current = false;
+                panStartRef.current = null;
+                if (e.currentTarget.releasePointerCapture) {
+                  try {
+                    e.currentTarget.releasePointerCapture(e.pointerId);
+                  } catch {}
+                }
+              }
+            }}
+          >
+            <div className="min-w-full min-h-full inline-flex items-center justify-center p-2 sm:p-8">
+              {deletedPages.has(currentPage) ? (
+                <div className="p-12 bg-white rounded-3xl text-center space-y-3 border border-slate-200 shadow-md">
+                  <Trash2 className="w-10 h-10 text-rose-500 mx-auto" />
+                  <h4 className="text-lg font-black text-slate-900">Page {currentPage} Marked for Deletion</h4>
+                  <button
+                    onClick={() => {
+                      const nextDel = new Set(deletedPages);
+                      nextDel.delete(currentPage);
+                      setDeletedPages(nextDel);
+                    }}
+                    className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs cursor-pointer"
+                  >
+                    Restore Page
+                  </button>
+                </div>
+              ) : (
+                <div className="relative shadow-2xl rounded-2xl bg-white border border-slate-200 inline-block shrink-0">
                 <canvas ref={canvasRef} className="block" />
                 <canvas
                   ref={overlayCanvasRef}
-                  className="absolute top-0 left-0 cursor-crosshair touch-none"
+                  className={`absolute top-0 left-0 touch-none ${
+                    activeTool === 'pan' ? 'cursor-grab active:cursor-grabbing' : 'cursor-crosshair'
+                  }`}
                   onMouseDown={handleOverlayMouseDown}
                   onMouseMove={handleOverlayMouseMove}
                   onMouseUp={handleOverlayMouseUp}
+                  onTouchStart={(e) => {
+                    if (activeTool === 'pan' && e.touches.length === 1 && workspaceRef.current) {
+                      isPanningRef.current = true;
+                      panStartRef.current = {
+                        x: e.touches[0].clientX,
+                        y: e.touches[0].clientY,
+                        scrollLeft: workspaceRef.current.scrollLeft,
+                        scrollTop: workspaceRef.current.scrollTop,
+                      };
+                    }
+                  }}
+                  onTouchMove={(e) => {
+                    if (isPanningRef.current && panStartRef.current && workspaceRef.current && e.touches.length === 1) {
+                      const dx = e.touches[0].clientX - panStartRef.current.x;
+                      const dy = e.touches[0].clientY - panStartRef.current.y;
+                      workspaceRef.current.scrollLeft = panStartRef.current.scrollLeft - dx;
+                      workspaceRef.current.scrollTop = panStartRef.current.scrollTop - dy;
+                    }
+                  }}
+                  onTouchEnd={() => {
+                    isPanningRef.current = false;
+                    panStartRef.current = null;
+                  }}
                 />
 
                 {activeEditingTextObj && (
                   <div
-                    className="absolute z-30 group"
+                    className="absolute z-30 group p-0 m-0 border-b border-indigo-500/80"
                     style={{
                       left: `${activeEditingTextObj.x}px`,
                       top: `${activeEditingTextObj.y}px`,
+                      lineHeight: 1.0,
+                    }}
+                    onMouseDown={(e) => e.stopPropagation()}
+                    onMouseUp={(e) => e.stopPropagation()}
+                    onClick={(e) => e.stopPropagation()}
+                    onDoubleClick={(e) => {
+                      e.stopPropagation();
+                      setEditingTextId(null);
+                      toast.success('Text placed!');
                     }}
                   >
-                    {/* Floating Mini Control Bar */}
-                    <div className="absolute -top-10 left-0 bg-slate-900 text-white rounded-xl shadow-xl px-2.5 py-1 flex items-center gap-2 border border-slate-700 text-xs whitespace-nowrap">
-                      {/* MOVE / REPOSITION DRAG HANDLE */}
-                      <div
-                        className="cursor-move p-1 rounded hover:bg-slate-800 text-indigo-300 flex items-center gap-1 font-bold"
-                        title="Click & Drag handle to reposition text anywhere on page"
-                        onMouseDown={(e) => {
-                          e.stopPropagation();
-                          isDraggingTextRef.current = true;
-                          dragStartRef.current = { x: e.clientX, y: e.clientY };
-                        }}
-                      >
-                        <Move className="w-3.5 h-3.5 text-indigo-400" />
-                        <span className="text-[10px]">Move</span>
-                      </div>
+                    {/* Floating Light Mode Mini Control Bar */}
+                    <div
+                      onMouseDown={(e) => e.stopPropagation()}
+                      onMouseUp={(e) => e.stopPropagation()}
+                      onClick={(e) => e.stopPropagation()}
+                      className={`absolute bg-white text-slate-900 rounded-2xl shadow-2xl px-2.5 py-1.5 flex items-center gap-1.5 border border-slate-200 text-xs z-50 pointer-events-auto max-w-[85vw] overflow-x-auto no-scrollbar ${
+                        activeEditingTextObj.y < 45 ? 'top-full mt-2' : '-top-12'
+                      } ${activeEditingTextObj.x > 180 ? 'right-0' : 'left-0'}`}
+                    >
+                      {activeTool === 'select' ? (
+                        /* MOVE ONLY CONTROL BAR */
+                        <>
+                          <div
+                            className="cursor-move px-2 py-1 rounded-lg bg-indigo-50 text-indigo-700 flex items-center gap-1.5 font-black text-[11px]"
+                            title="Click & Drag to reposition text anywhere, or use Arrow keys (1px nudge)"
+                            onMouseDown={(e) => {
+                              e.stopPropagation();
+                              isDraggingTextRef.current = true;
+                              dragStartRef.current = { x: e.clientX, y: e.clientY };
+                            }}
+                          >
+                            <Move className="w-3.5 h-3.5 text-indigo-600" />
+                            <span>Drag / Nudge Position</span>
+                          </div>
 
-                      <div className="h-3 w-px bg-slate-700" />
+                          <div className="h-3 w-px bg-slate-200" />
 
-                      {/* EASY DONE DROP BUTTON */}
-                      <button
-                        onClick={() => setEditingTextId(null)}
-                        className="px-2 py-0.5 rounded bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-[11px] flex items-center gap-1 shadow-sm transition-all"
-                        title="Lock and drop text onto page"
-                      >
-                        <Check className="w-3.5 h-3.5" />
-                        <span>Done / Drop</span>
-                      </button>
+                          <button
+                            onClick={() => {
+                              setEditingTextId(null);
+                              toast.success('Position locked!');
+                            }}
+                            className="px-2.5 py-0.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-[11px] flex items-center gap-1 shadow-xs transition-all cursor-pointer"
+                            title="Lock and drop position"
+                          >
+                            <Check className="w-3.5 h-3.5" />
+                            <span>Lock Position</span>
+                          </button>
 
-                      <div className="h-3 w-px bg-slate-700" />
+                          <div className="h-3 w-px bg-slate-200" />
 
-                      <select
-                        value={activeEditingTextObj.fontSize}
-                        onChange={(e) => {
-                          const newSize = Number(e.target.value);
-                          setPageEdits({
-                            ...pageEdits,
-                            [currentPage]: {
-                              ...currentEdits,
-                              texts: currentEdits.texts.map((t) =>
-                                t.id === editingTextId ? { ...t, fontSize: newSize } : t
-                              ),
-                            },
-                          });
-                        }}
-                        className="bg-slate-800 text-white rounded px-1.5 py-0.5 border border-slate-700 font-bold text-[11px]"
-                      >
-                        <option value={12}>12px</option>
-                        <option value={14}>14px</option>
-                        <option value={16}>16px</option>
-                        <option value={18}>18px</option>
-                        <option value={20}>20px</option>
-                        <option value={24}>24px</option>
-                        <option value={32}>32px</option>
-                      </select>
+                          <button
+                            onClick={() => handleDeleteText(editingTextId!)}
+                            className="text-rose-600 hover:text-rose-700 p-0.5"
+                            title="Delete text"
+                          >
+                            <XCircle className="w-4 h-4" />
+                          </button>
+                        </>
+                      ) : (
+                        /* ALL EDIT OPTIONS CONTROL BAR (NO MOVE OPTION - EDIT ONLY) */
+                        <>
+                          {/* DONE / LOCK BUTTON */}
+                          <button
+                            onClick={() => {
+                              setEditingTextId(null);
+                              toast.success('Text placed!');
+                            }}
+                            className="px-2.5 py-0.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-[11px] flex items-center gap-1 shadow-xs transition-all cursor-pointer"
+                            title="Lock and drop text onto page (or press Enter key)"
+                          >
+                            <Check className="w-3.5 h-3.5" />
+                            <span>Done / Drop</span>
+                          </button>
 
-                      <input
-                        type="color"
-                        value={activeEditingTextObj.color}
-                        onChange={(e) => {
-                          const newColor = e.target.value;
-                          setPageEdits({
-                            ...pageEdits,
-                            [currentPage]: {
-                              ...currentEdits,
-                              texts: currentEdits.texts.map((t) =>
-                                t.id === editingTextId ? { ...t, color: newColor } : t
-                              ),
-                            },
-                          });
-                        }}
-                        className="w-5 h-5 rounded cursor-pointer border-0"
-                      />
+                          <div className="h-3 w-px bg-slate-200" />
 
-                      <button
-                        onClick={() => {
-                          setPageEdits({
-                            ...pageEdits,
-                            [currentPage]: {
-                              ...currentEdits,
-                              texts: currentEdits.texts.map((t) =>
-                                t.id === editingTextId ? { ...t, isBold: !t.isBold } : t
-                              ),
-                            },
-                          });
-                        }}
-                        className={`p-1 rounded hover:bg-slate-800 ${
-                          activeEditingTextObj.isBold ? 'bg-indigo-600 text-white' : 'text-slate-300'
-                        }`}
-                      >
-                        <Bold className="w-3.5 h-3.5" />
-                      </button>
+                          {/* Font Family Selector */}
+                          <select
+                            value={activeEditingTextObj.fontFamily || 'helvetica'}
+                            onChange={(e) => {
+                              const newFam = e.target.value as any;
+                              setPageEdits({
+                                ...pageEdits,
+                                [currentPage]: {
+                                  ...currentEdits,
+                                  texts: currentEdits.texts.map((t) =>
+                                    t.id === editingTextId ? { ...t, fontFamily: newFam } : t
+                                  ),
+                                },
+                              });
+                            }}
+                            className="bg-slate-100 text-slate-900 rounded-lg px-1.5 py-0.5 border border-slate-200 font-bold text-[11px]"
+                          >
+                            <option value="helvetica">Helvetica</option>
+                            <option value="times">Times</option>
+                            <option value="courier">Courier</option>
+                          </select>
 
-                      <button
-                        onClick={() => {
-                          setPageEdits({
-                            ...pageEdits,
-                            [currentPage]: {
-                              ...currentEdits,
-                              texts: currentEdits.texts.map((t) =>
-                                t.id === editingTextId ? { ...t, isItalic: !t.isItalic } : t
-                              ),
-                            },
-                          });
-                        }}
-                        className={`p-1 rounded hover:bg-slate-800 ${
-                          activeEditingTextObj.isItalic ? 'bg-indigo-600 text-white' : 'text-slate-300'
-                        }`}
-                      >
-                        <Italic className="w-3.5 h-3.5" />
-                      </button>
+                          <select
+                            value={activeEditingTextObj.fontSize}
+                            onChange={(e) => {
+                              const newSize = Number(e.target.value);
+                              setPageEdits({
+                                ...pageEdits,
+                                [currentPage]: {
+                                  ...currentEdits,
+                                  texts: currentEdits.texts.map((t) =>
+                                    t.id === editingTextId ? { ...t, fontSize: newSize } : t
+                                  ),
+                                },
+                              });
+                            }}
+                            className="bg-slate-100 text-slate-900 rounded-lg px-1.5 py-0.5 border border-slate-200 font-bold text-[11px]"
+                          >
+                            <option value={12}>12px</option>
+                            <option value={14}>14px</option>
+                            <option value={16}>16px</option>
+                            <option value={18}>18px</option>
+                            <option value={20}>20px</option>
+                            <option value={24}>24px</option>
+                            <option value={32}>32px</option>
+                          </select>
 
-                      <div className="h-3 w-px bg-slate-700" />
+                          <input
+                            type="color"
+                            value={activeEditingTextObj.color}
+                            onChange={(e) => {
+                              const newColor = e.target.value;
+                              setPageEdits({
+                                ...pageEdits,
+                                [currentPage]: {
+                                  ...currentEdits,
+                                  texts: currentEdits.texts.map((t) =>
+                                    t.id === editingTextId ? { ...t, color: newColor } : t
+                                  ),
+                                },
+                              });
+                            }}
+                            className="w-5 h-5 rounded-full cursor-pointer border-0"
+                          />
 
-                      <button
-                        onClick={() => handleDeleteText(editingTextId!)}
-                        className="text-rose-400 hover:text-rose-300 p-0.5"
-                        title="Delete text"
-                      >
-                        <XCircle className="w-4 h-4" />
-                      </button>
+                          <button
+                            onClick={() => {
+                              setPageEdits({
+                                ...pageEdits,
+                                [currentPage]: {
+                                  ...currentEdits,
+                                  texts: currentEdits.texts.map((t) =>
+                                    t.id === editingTextId ? { ...t, isBold: !t.isBold } : t
+                                  ),
+                                },
+                              });
+                            }}
+                            className={`p-1 rounded-lg hover:bg-slate-100 ${
+                              activeEditingTextObj.isBold ? 'bg-indigo-600 text-white' : 'text-slate-700'
+                            }`}
+                          >
+                            <Bold className="w-3.5 h-3.5" />
+                          </button>
+
+                          <button
+                            onClick={() => {
+                              setPageEdits({
+                                ...pageEdits,
+                                [currentPage]: {
+                                  ...currentEdits,
+                                  texts: currentEdits.texts.map((t) =>
+                                    t.id === editingTextId ? { ...t, isItalic: !t.isItalic } : t
+                                  ),
+                                },
+                              });
+                            }}
+                            className={`p-1 rounded-lg hover:bg-slate-100 ${
+                              activeEditingTextObj.isItalic ? 'bg-indigo-600 text-white' : 'text-slate-700'
+                            }`}
+                          >
+                            <Italic className="w-3.5 h-3.5" />
+                          </button>
+
+                          <div className="h-3 w-px bg-slate-200" />
+
+                          <button
+                            onClick={() => handleDeleteText(editingTextId!)}
+                            className="text-rose-600 hover:text-rose-700 p-0.5"
+                            title="Delete text"
+                          >
+                            <XCircle className="w-4 h-4" />
+                          </button>
+                        </>
+                      )}
                     </div>
 
-                    {/* Live Inline Typing Input Box (Auto Expands to Show Full Line / Complete Sentence) */}
+                    {/* Live Inline Typing Input Box */}
                     <input
                       type="text"
-                      autoFocus
+                      readOnly={activeTool === 'select'}
+                      autoFocus={activeTool !== 'select'}
                       value={activeEditingTextObj.text}
                       onChange={(e) => {
                         const newText = e.target.value;
@@ -1177,24 +1896,300 @@ export default function PDFEditPage() {
                           setEditingTextId(null);
                         }
                       }}
-                      className="bg-transparent border-b border-indigo-400/60 text-slate-900 font-medium focus:outline-none p-0 max-w-[90vw]"
+                      className={`bg-transparent border-none text-slate-900 font-medium focus:outline-none p-0 m-0 max-w-[90vw] leading-none ${
+                        activeTool === 'select' ? 'cursor-move select-none' : ''
+                      }`}
                       style={{
                         fontSize: `${activeEditingTextObj.fontSize}px`,
                         color: activeEditingTextObj.color,
                         fontWeight: activeEditingTextObj.isBold ? 'bold' : 'normal',
                         fontStyle: activeEditingTextObj.isItalic ? 'italic' : 'normal',
+                        fontFamily:
+                          activeEditingTextObj.fontFamily === 'times'
+                            ? 'serif'
+                            : activeEditingTextObj.fontFamily === 'courier'
+                            ? 'monospace'
+                            : 'sans-serif',
                         lineHeight: 1.0,
                         width: `${Math.max(
-                          350,
-                          activeEditingTextObj.text.length * (activeEditingTextObj.fontSize * 0.62) + 50
+                          60,
+                          activeEditingTextObj.text.length * (activeEditingTextObj.fontSize * 0.58) + 16
                         )}px`,
                       }}
                     />
                   </div>
                 )}
+
+                {/* Interactive Photo Stamp Control Boxes with Precision Drag Move Handles & Resizing */}
+                {currentEdits.images.map((img) => {
+                  const isActive = activeImageId === img.id;
+                  return (
+                    <div
+                      key={img.id}
+                      className={`absolute z-30 group rounded-lg ${
+                        isActive
+                          ? 'ring-2 ring-blue-500 ring-offset-1 shadow-2xl cursor-move'
+                          : 'hover:ring-1 hover:ring-blue-400/80 cursor-pointer'
+                      }`}
+                      style={{
+                        left: `${img.x}px`,
+                        top: `${img.y}px`,
+                        width: `${img.width}px`,
+                        height: `${img.height}px`,
+                      }}
+                      onMouseDown={(e) => {
+                        e.stopPropagation();
+                        setActiveImageId(img.id);
+                        activeImageIdRef.current = img.id;
+                        isDraggingImageRef.current = true;
+                        dragStartRef.current = { x: e.clientX, y: e.clientY };
+                      }}
+                      onTouchStart={(e) => {
+                        e.stopPropagation();
+                        setActiveImageId(img.id);
+                        activeImageIdRef.current = img.id;
+                        isDraggingImageRef.current = true;
+                        dragStartRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+                      }}
+                    >
+                      {/* Photo Image Frame */}
+                      <img
+                        src={img.dataUrl}
+                        alt="Uploaded Photo Stamp"
+                        className="w-full h-full object-contain pointer-events-none rounded-lg"
+                      />
+
+                      {/* Floating Control Toolbar for Active Photo Stamp */}
+                      {isActive && (
+                        <div
+                          className={`absolute z-40 bg-slate-900/95 backdrop-blur-md text-white px-2 py-1 rounded-xl shadow-2xl flex items-center gap-1.5 text-xs pointer-events-auto max-w-[85vw] overflow-x-auto no-scrollbar animate-in fade-in zoom-in-95 duration-150 ${
+                            img.y < 45 ? 'top-full mt-2' : '-top-11'
+                          } ${img.x > 150 || img.x + img.width > 240 ? 'right-0' : 'left-0'}`}
+                          onMouseDown={(e) => e.stopPropagation()}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          {/* Drag Move Handle */}
+                          <div
+                            className="flex items-center gap-1 bg-blue-600 hover:bg-blue-700 px-2 py-1 rounded-lg text-white font-black text-xs cursor-move select-none active:scale-95 transition-all shadow-xs"
+                            title="Click & Drag to position photo anywhere on PDF page"
+                            onMouseDown={(e) => {
+                              e.stopPropagation();
+                              isDraggingImageRef.current = true;
+                              dragStartRef.current = { x: e.clientX, y: e.clientY };
+                            }}
+                            onTouchStart={(e) => {
+                              e.stopPropagation();
+                              isDraggingImageRef.current = true;
+                              dragStartRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+                            }}
+                          >
+                            <Move className="w-3.5 h-3.5" />
+                            <span>Move</span>
+                          </div>
+
+                          {/* Shrink (-) Button */}
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setPageEdits((prev) => ({
+                                ...prev,
+                                [currentPage]: {
+                                  ...currentEdits,
+                                  images: currentEdits.images.map((i) =>
+                                    i.id === img.id
+                                      ? {
+                                          ...i,
+                                          width: Math.max(30, i.width - 20),
+                                          height: Math.max(30, i.height - 20),
+                                        }
+                                      : i
+                                  ),
+                                },
+                              }));
+                            }}
+                            className="p-1 rounded-lg hover:bg-slate-800 text-slate-200 cursor-pointer"
+                            title="Shrink photo"
+                          >
+                            <Minus className="w-3.5 h-3.5" />
+                          </button>
+
+                          <span className="text-[10px] font-mono text-slate-300 font-bold px-0.5 select-none">
+                            {Math.round(img.width)}px
+                          </span>
+
+                          {/* Enlarge (+) Button */}
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setPageEdits((prev) => ({
+                                ...prev,
+                                [currentPage]: {
+                                  ...currentEdits,
+                                  images: currentEdits.images.map((i) =>
+                                    i.id === img.id
+                                      ? { ...i, width: i.width + 20, height: i.height + 20 }
+                                      : i
+                                  ),
+                                },
+                              }));
+                            }}
+                            className="p-1 rounded-lg hover:bg-slate-800 text-slate-200 cursor-pointer"
+                            title="Enlarge photo"
+                          >
+                            <Plus className="w-3.5 h-3.5" />
+                          </button>
+
+                          <div className="h-3 w-px bg-slate-700 mx-0.5" />
+
+                          {/* Delete Photo Stamp Button */}
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setPageEdits((prev) => ({
+                                ...prev,
+                                [currentPage]: {
+                                  ...currentEdits,
+                                  images: currentEdits.images.filter((i) => i.id !== img.id),
+                                },
+                              }));
+                              setActiveImageId(null);
+                              toast.info('Photo stamp deleted');
+                            }}
+                            className="p-1 rounded-lg hover:bg-rose-600/80 text-rose-400 hover:text-white cursor-pointer"
+                            title="Delete photo"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+
+                          {/* Lock Position Button */}
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setActiveImageId(null);
+                              toast.success('Photo position locked!');
+                            }}
+                            className="p-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold cursor-pointer"
+                            title="Lock photo position"
+                          >
+                            <Check className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             )}
           </div>
+        </div>
+      </div>
+    )}
+
+      {/* Liquid Glass Floating Mobile Action Navbar for 100% Mobile Accessibility & Ultra Responsiveness */}
+      {file && (
+        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[94vw] max-w-lg bg-white/85 backdrop-blur-xl border border-slate-200/90 shadow-2xl rounded-3xl p-2 flex items-center justify-between gap-1 sm:hidden text-slate-900 pointer-events-auto">
+          <div className="flex items-center gap-1 overflow-x-auto no-scrollbar py-0.5 px-1 max-w-full">
+            {/* 1. Edit Existing PDF Text (Default) */}
+            <button
+              onClick={() => setActiveTool('editText')}
+              className={`px-3 py-2 rounded-2xl text-[11px] font-black flex items-center gap-1.5 whitespace-nowrap transition-all shrink-0 cursor-pointer ${
+                activeTool === 'editText'
+                  ? 'bg-slate-900 text-white shadow-md'
+                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+              }`}
+            >
+              <Edit3 className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Edit Text</span>
+            </button>
+
+            {/* 2. Move / Reposition Text */}
+            <button
+              onClick={() => setActiveTool('select')}
+              className={`px-3 py-2 rounded-2xl text-[11px] font-black flex items-center gap-1.5 whitespace-nowrap transition-all shrink-0 cursor-pointer ${
+                activeTool === 'select'
+                  ? 'bg-slate-900 text-white shadow-md'
+                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+              }`}
+            >
+              <MousePointer className="w-3.5 h-3.5 text-blue-400" />
+              <span>Move Text</span>
+            </button>
+
+            {/* 3. Pan / Scroll View */}
+            <button
+              onClick={() => setActiveTool('pan')}
+              className={`px-3 py-2 rounded-2xl text-[11px] font-black flex items-center gap-1.5 whitespace-nowrap transition-all shrink-0 cursor-pointer ${
+                activeTool === 'pan'
+                  ? 'bg-slate-900 text-white shadow-md'
+                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+              }`}
+            >
+              <Hand className="w-3.5 h-3.5 text-amber-400" />
+              <span>Pan View</span>
+            </button>
+
+            {/* 3. Type New Text */}
+            <button
+              onClick={() => setActiveTool('text')}
+              className={`px-3 py-2 rounded-2xl text-[11px] font-bold flex items-center gap-1.5 whitespace-nowrap transition-all shrink-0 cursor-pointer ${
+                activeTool === 'text'
+                  ? 'bg-slate-900 text-white shadow-md'
+                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+              }`}
+            >
+              <Type className="w-3.5 h-3.5 text-indigo-500" />
+              <span>Type</span>
+            </button>
+
+            {/* 4. Manual Drag Erase */}
+            <button
+              onClick={() => setActiveTool('replaceText')}
+              className={`px-3 py-2 rounded-2xl text-[11px] font-bold flex items-center gap-1.5 whitespace-nowrap transition-all shrink-0 cursor-pointer ${
+                activeTool === 'replaceText'
+                  ? 'bg-slate-900 text-white shadow-md'
+                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+              }`}
+            >
+              <Eraser className="w-3.5 h-3.5 text-amber-500" />
+              <span>Erase</span>
+            </button>
+
+            {/* 5. Pen Draw */}
+            <button
+              onClick={() => setActiveTool('draw')}
+              className={`px-3 py-2 rounded-2xl text-[11px] font-bold flex items-center gap-1.5 whitespace-nowrap transition-all shrink-0 cursor-pointer ${
+                activeTool === 'draw'
+                  ? 'bg-slate-900 text-white shadow-md'
+                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+              }`}
+            >
+              <PenTool className="w-3.5 h-3.5 text-sky-500" />
+              <span>Pen</span>
+            </button>
+
+            {/* 6. Highlight */}
+            <button
+              onClick={() => setActiveTool('highlight')}
+              className={`px-3 py-2 rounded-2xl text-[11px] font-bold flex items-center gap-1.5 whitespace-nowrap transition-all shrink-0 cursor-pointer ${
+                activeTool === 'highlight'
+                  ? 'bg-slate-900 text-white shadow-md'
+                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+              }`}
+            >
+              <Highlighter className="w-3.5 h-3.5 text-amber-400" />
+              <span>Highlight</span>
+            </button>
+          </div>
+
+          {/* Mobile Export Action Pill Button */}
+          <button
+            onClick={handleExportPDF}
+            disabled={isExporting}
+            className="px-3.5 py-2 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-[11px] flex items-center gap-1.5 shrink-0 shadow-lg cursor-pointer whitespace-nowrap"
+          >
+            <Download className="w-3.5 h-3.5" />
+            <span>Export</span>
+          </button>
         </div>
       )}
     </ToolLayout>

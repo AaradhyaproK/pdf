@@ -130,13 +130,13 @@ export function Navbar() {
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? 'bg-transparent py-1.5 md:py-0 md:bg-white md:border-b md:border-slate-200 md:shadow-xs'
-          : 'bg-transparent py-1 md:py-0 md:bg-white md:border-b md:border-slate-200/80 md:shadow-2xs'
+          ? 'bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-xs'
+          : 'bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-2xs'
       }`}
     >
       {/* Expanded Search Bar Header on Mobile */}
       {searchOpen ? (
-        <div className="max-w-md mx-auto px-2 py-1.5 flex items-center gap-2 bg-white/85 backdrop-blur-2xl rounded-full border border-white/80 shadow-2xl z-50 my-1">
+        <div className="max-w-md mx-auto px-2 py-1.5 flex items-center gap-2 bg-white/95 backdrop-blur-2xl rounded-full border border-slate-200 shadow-xl z-50 my-1">
           <button
             onClick={() => {
               setSearchOpen(false);
@@ -170,20 +170,14 @@ export function Navbar() {
         </div>
       ) : (
         <>
-          {/* Mobile Header: Floating Liquid Glass Capsule with Back Button on Tool Pages */}
-          <div
-            className={`md:hidden transition-all duration-300 ease-out ${
-              scrolled || pathname !== '/'
-                ? 'apple-dynamic-island luma-glass-texture rounded-full px-3.5 py-1.5 shadow-xl border border-white/80 max-w-[calc(100%-1.25rem)] sm:max-w-md mx-auto flex items-center justify-between gap-2 my-1'
-                : 'w-full px-4 py-2 flex items-center justify-between gap-2 bg-transparent'
-            }`}
-          >
+          {/* Mobile Header Bar */}
+          <div className="md:hidden w-full px-3.5 py-2 flex items-center justify-between gap-2">
             {/* Mobile Brand / Back Button Capsule */}
             {pathname !== '/' ? (
               <div className="flex items-center gap-2 min-w-0">
                 <button
                   onClick={() => router.back()}
-                  className="p-1.5 rounded-full bg-slate-900/10 hover:bg-slate-900/20 text-slate-900 active:scale-90 transition-all cursor-pointer shrink-0"
+                  className="p-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-900 active:scale-90 transition-all cursor-pointer shrink-0 border border-slate-200/80"
                   aria-label="Go Back"
                   title="Go Back"
                 >
@@ -215,7 +209,7 @@ export function Navbar() {
                 <a
                   href={compressReadyInfo.url}
                   download={`compressed-${compressReadyInfo.name}`}
-                  className="luma-glass-pill px-3 py-1 flex items-center gap-1.5 text-white bg-emerald-600 hover:bg-emerald-700 font-black active:scale-95 transition-all cursor-pointer shrink-0 shadow-md animate-in zoom-in-95 duration-200"
+                  className="px-3 py-1 flex items-center gap-1.5 text-white bg-emerald-600 hover:bg-emerald-700 rounded-full font-black active:scale-95 transition-all cursor-pointer shrink-0 shadow-md animate-in zoom-in-95 duration-200"
                   title="Download Compressed PDF"
                 >
                   <Download className="w-3.5 h-3.5 text-white stroke-[2.5]" />
@@ -226,7 +220,7 @@ export function Navbar() {
               {/* Mobile Search Button Pill */}
               <button
                 onClick={() => setSearchOpen(true)}
-                className="luma-glass-pill px-2.5 py-1 flex items-center gap-1 text-slate-800 hover:text-slate-900 active:scale-95 transition-all cursor-pointer shrink-0"
+                className="px-3 py-1 flex items-center gap-1.5 text-slate-800 hover:text-slate-900 bg-slate-100/90 border border-slate-200/90 rounded-full active:scale-95 transition-all cursor-pointer shrink-0"
                 aria-label="Search tools"
                 title="Search Tools"
               >
