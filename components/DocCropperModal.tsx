@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { X, Check, RefreshCw, RotateCw, Crop, Sparkles, Maximize, Wand2 } from 'lucide-react';
+import { X, Check, RefreshCw, RotateCw, Crop, Sparkles, Maximize, Wand2, Eye, ArrowUp, ArrowDown, ArrowLeft, ArrowRight, Target, Sliders } from 'lucide-react';
 
 export interface Point {
   x: number; // Percentage 0 - 100
@@ -12,6 +12,7 @@ interface DocCropperModalProps {
   isOpen: boolean;
   imageUrl: string;
   initialPoints?: Point[];
+  showBiometricFaceGuide?: boolean;
   onClose: () => void;
   onSaveCrop: (croppedDataUrl: string, savedPoints: Point[]) => void;
 }
@@ -275,6 +276,7 @@ export function DocCropperModal({
   isOpen,
   imageUrl,
   initialPoints,
+  showBiometricFaceGuide = false,
   onClose,
   onSaveCrop,
 }: DocCropperModalProps) {
@@ -286,6 +288,7 @@ export function DocCropperModal({
   ]);
   const [activePointIndex, setActivePointIndex] = useState<number | null>(null);
   const [rotation, setRotation] = useState<number>(0);
+  const [showFaceGuide, setShowFaceGuide] = useState<boolean>(showBiometricFaceGuide);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -322,6 +325,35 @@ export function DocCropperModal({
       { x: 98, y: 2 },
       { x: 98, y: 98 },
       { x: 2, y: 98 },
+    ]);
+  };
+
+  const handleNudge = (dx: number, dy: number) => {
+    setPoints((prev) =>
+      prev.map((pt) => ({
+        x: Math.max(0, Math.min(100, pt.x + dx)),
+        y: Math.max(0, Math.min(100, pt.y + dy)),
+      }))
+    );
+  };
+
+  const handleZoomBox = (factor: number) => {
+    setPoints((prev) => {
+      const centerX = (prev[0].x + prev[1].x + prev[2].x + prev[3].x) / 4;
+      const centerY = (prev[0].y + prev[1].y + prev[2].y + prev[3].y) / 4;
+      return prev.map((pt) => ({
+        x: Math.max(0, Math.min(100, centerX + (pt.x - centerX) * factor)),
+        y: Math.max(0, Math.min(100, centerY + (pt.y - centerY) * factor)),
+      }));
+    });
+  };
+
+  const handleCenterBox = () => {
+    setPoints([
+      { x: 15, y: 15 },
+      { x: 85, y: 15 },
+      { x: 85, y: 85 },
+      { x: 15, y: 85 },
     ]);
   };
 
@@ -404,6 +436,19 @@ export function DocCropperModal({
 
           <div className="flex items-center gap-1.5 sm:gap-2">
             <button
+              onClick={() => setShowFaceGuide((v) => !v)}
+              className={`px-2.5 py-1.5 rounded-xl border text-xs font-black flex items-center gap-1.5 transition-colors cursor-pointer ${
+                showFaceGuide
+                  ? 'bg-emerald-50 text-emerald-800 border-emerald-300'
+                  : 'bg-slate-100 text-slate-700 border-slate-200'
+              }`}
+              title="Toggle Biometric Eye & Chin Guide"
+            >
+              <Eye className="w-3.5 h-3.5 text-emerald-600" />
+              <span>Face Guide</span>
+            </button>
+
+            <button
               onClick={runAutoDetect}
               className="px-2.5 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-900 font-extrabold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
               title="Auto Detect Edges"
@@ -438,6 +483,83 @@ export function DocCropperModal({
           </div>
         </div>
 
+        {/* Face Alignment & Zoom Pad Bar */}
+        <div className="px-4 py-2 bg-slate-50 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2 shrink-0 text-slate-800 text-xs">
+          <div className="flex items-center gap-1.5 font-black uppercase text-[11px] text-indigo-900">
+            <Sliders className="w-3.5 h-3.5 text-indigo-600" />
+            <span>Crop, Zoom & Face Alignment Pad</span>
+          </div>
+
+          <div className="flex items-center gap-2 flex-wrap">
+            {/* Directional Nudge Buttons */}
+            <div className="flex items-center gap-1 bg-white border border-slate-200 p-1 rounded-xl shadow-2xs">
+              <button
+                type="button"
+                onClick={() => handleNudge(0, -3)}
+                className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 active:bg-indigo-100 text-slate-800 cursor-pointer"
+                title="Nudge Up"
+              >
+                <ArrowUp className="w-3.5 h-3.5" />
+              </button>
+              <button
+                type="button"
+                onClick={() => handleNudge(0, 3)}
+                className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 active:bg-indigo-100 text-slate-800 cursor-pointer"
+                title="Nudge Down"
+              >
+                <ArrowDown className="w-3.5 h-3.5" />
+              </button>
+              <button
+                type="button"
+                onClick={() => handleNudge(-3, 0)}
+                className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 active:bg-indigo-100 text-slate-800 cursor-pointer"
+                title="Nudge Left"
+              >
+                <ArrowLeft className="w-3.5 h-3.5" />
+              </button>
+              <button
+                type="button"
+                onClick={() => handleNudge(3, 0)}
+                className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 active:bg-indigo-100 text-slate-800 cursor-pointer"
+                title="Nudge Right"
+              >
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+
+            {/* Center Head */}
+            <button
+              type="button"
+              onClick={handleCenterBox}
+              className="px-2.5 py-1.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-100 text-slate-800 font-extrabold text-xs flex items-center gap-1 shadow-2xs cursor-pointer"
+            >
+              <Target className="w-3.5 h-3.5 text-indigo-600" />
+              <span>Center Head</span>
+            </button>
+
+            {/* Zoom Box In/Out */}
+            <div className="flex items-center gap-1 bg-white border border-slate-200 p-1 rounded-xl shadow-2xs font-extrabold text-xs">
+              <span className="text-[10px] text-slate-500 px-1">Zoom:</span>
+              <button
+                type="button"
+                onClick={() => handleZoomBox(0.9)}
+                className="px-2 py-0.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 font-black cursor-pointer"
+                title="Zoom In"
+              >
+                +
+              </button>
+              <button
+                type="button"
+                onClick={() => handleZoomBox(1.1)}
+                className="px-2 py-0.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 font-black cursor-pointer"
+                title="Zoom Out"
+              >
+                -
+              </button>
+            </div>
+          </div>
+        </div>
+
         {/* Interactive 4-Dot Image Canvas Area */}
         <div className="flex-1 bg-slate-950 p-4 overflow-hidden flex items-center justify-center relative select-none">
           <div
@@ -457,6 +579,22 @@ export function DocCropperModal({
               alt="Scan crop preview"
               className="max-h-[60vh] max-w-full w-auto h-auto object-contain block pointer-events-none"
             />
+
+            {/* Biometric Face Guide Reference Overlay */}
+            {showFaceGuide && (
+              <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center p-4 z-20">
+                <div className="w-[55%] h-[65%] border-2 border-dashed border-emerald-400/90 rounded-full relative shadow-xs">
+                  <div className="absolute top-[42%] left-0 right-0 border-t border-emerald-400/90" />
+                  <span className="absolute top-[43%] right-1 text-[9px] font-black text-emerald-950 bg-emerald-100/90 px-1 rounded border border-emerald-300">
+                    EYE LINE
+                  </span>
+                  <div className="absolute bottom-[8%] left-0 right-0 border-b border-emerald-400/90" />
+                  <span className="absolute bottom-[2%] left-1/2 -translate-x-1/2 text-[9px] font-black text-emerald-950 bg-emerald-100/90 px-1 rounded border border-emerald-300">
+                    CHIN LINE
+                  </span>
+                </div>
+              </div>
+            )}
 
             {/* Polygon Overlay & Connected Lines (SVG 0-100 coordinate space) */}
             <svg

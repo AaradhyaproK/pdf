@@ -17,9 +17,15 @@ import {
   Eye,
   Printer,
   Sparkles,
-  Maximize2,
   Check,
+  Crop,
+  ArrowUp,
+  ArrowDown,
+  ArrowLeft,
+  ArrowRight,
+  Target,
 } from 'lucide-react';
+import { DocCropperModal } from '@/components/DocCropperModal';
 
 export interface PassportPreset {
   id: string;
@@ -68,6 +74,7 @@ export const SHEET_LAYOUTS = [
 export default function PassportMakerPage() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [filePreview, setFilePreview] = useState<string | null>(null);
+  const [isCropperOpen, setIsCropperOpen] = useState<boolean>(false);
 
   // Preset Selection
   const [selectedPreset, setSelectedPreset] = useState<PassportPreset>(PASSPORT_PRESETS[0]);
@@ -158,8 +165,6 @@ export default function PassportMakerPage() {
       ctx.scale(flipX ? -1 : 1, 1);
 
       const scaleFactor = zoom / 100;
-      const drawW = img.width * scaleFactor;
-      const drawH = img.height * scaleFactor;
 
       // Fit cover base math
       const coverScale = Math.max(targetW / img.width, targetH / img.height);
@@ -184,6 +189,16 @@ export default function PassportMakerPage() {
     contrast,
     bgColor,
   ]);
+
+  // Handle Save Cropped Image from DocCropperModal
+  const handleSaveCrop = (croppedDataUrl: string) => {
+    setFilePreview(croppedDataUrl);
+    setIsCropperOpen(false);
+    setPanX(0);
+    setPanY(0);
+    setZoom(100);
+    toast.success('Photo cropped & loaded into passport canvas!');
+  };
 
   // Generate Passport Photos and Sheet
   const handleGeneratePassport = async () => {
@@ -247,23 +262,36 @@ export default function PassportMakerPage() {
     <ToolLayout
       slug="/image/passport-maker"
       title="Passport & Visa Photo Maker (US, Schengen, UK, India, Canada)"
-      subtitle="Studio-grade biometric passport photo creator. Auto face alignment guides, background color changer, custom sizes, and multi-photo A4/4x6 print sheet generator."
+      subtitle="Studio-grade biometric passport photo creator with interactive cropping, face alignment nudging, background color changer, and multi-photo A4/4x6 print sheet generator."
       badgeText="Biometric Passport Studio"
     >
-      <div className="max-w-5xl mx-auto space-y-8">
+      {/* Doc Cropper Modal with Biometric Face Guide */}
+      {filePreview && (
+        <DocCropperModal
+          isOpen={isCropperOpen}
+          imageUrl={filePreview}
+          showBiometricFaceGuide={true}
+          onClose={() => setIsCropperOpen(false)}
+          onSaveCrop={handleSaveCrop}
+        />
+      )}
+
+      <div className="max-w-5xl mx-auto space-y-8 pb-24 md:pb-6">
         {!filePreview ? (
-          <div className="p-8 sm:p-14 border-2 border-dashed border-slate-300 hover:border-indigo-500 rounded-3xl bg-slate-50/50 hover:bg-slate-50 transition-all text-center space-y-4">
-            <div className="w-16 h-16 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto shadow-sm">
+          <div className="p-8 sm:p-14 border border-slate-200 hover:border-slate-800 rounded-3xl bg-slate-50/70 hover:bg-slate-50 transition-all text-center space-y-4 shadow-2xs">
+            <div className="w-16 h-16 rounded-2xl bg-slate-900 text-white flex items-center justify-center mx-auto shadow-md">
               <UserCheck className="w-8 h-8" />
             </div>
             <div>
-              <h3 className="text-xl font-black text-slate-900">Upload Front-Facing Portrait Photo</h3>
-              <p className="text-xs text-slate-500 mt-1 max-w-md mx-auto">
+              <h3 className="text-xl font-black text-slate-900 tracking-tight">
+                Upload Front-Facing Portrait Photo
+              </h3>
+              <p className="text-xs text-slate-600 mt-1 max-w-md mx-auto font-medium">
                 Upload a clear portrait photo taken against a plain wall. Works with smartphone photos, camera rolls, and digital portraits.
               </p>
             </div>
 
-            <label className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm shadow-md transition-all cursor-pointer">
+            <label className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-sm shadow-md active:scale-95 transition-all cursor-pointer">
               <Upload className="w-4 h-4" />
               <span>Select Portrait Photo</span>
               <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
@@ -273,35 +301,43 @@ export default function PassportMakerPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Live Interactive Studio Canvas (Left Column) */}
             <div className="lg:col-span-5 space-y-4">
-              <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+              <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-md space-y-4 text-slate-900">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
-                    <Eye className="w-4 h-4 text-indigo-600" /> Live Studio Canvas Preview
+                  <span className="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
+                    <Eye className="w-4 h-4 text-indigo-600" /> Live Passport Preview
                   </span>
-                  <label className="text-[11px] font-bold text-indigo-600 hover:underline cursor-pointer">
-                    Change Photo
-                    <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
-                  </label>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => setIsCropperOpen(true)}
+                      className="px-3 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-extrabold text-xs border border-indigo-200 flex items-center gap-1 transition-all cursor-pointer"
+                    >
+                      <Crop className="w-3.5 h-3.5" /> Crop Photo
+                    </button>
+                    <label className="text-[11px] font-bold text-slate-500 hover:text-slate-900 cursor-pointer">
+                      Change
+                      <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
+                    </label>
+                  </div>
                 </div>
 
                 {/* Canvas Container with Biometric Guide Overlay */}
-                <div className="relative w-full aspect-square bg-slate-100 rounded-2xl overflow-hidden border border-slate-200 flex items-center justify-center">
+                <div className="relative w-full aspect-square bg-slate-100 rounded-2xl overflow-hidden border border-slate-200 flex items-center justify-center shadow-inner">
                   <canvas ref={previewCanvasRef} className="max-w-full max-h-full object-contain" />
 
                   {/* Biometric Face Outline Overlay */}
                   {showBiometricGuide && (
                     <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center p-4">
                       {/* Head Ellipse */}
-                      <div className="w-[55%] h-[65%] border-2 border-dashed border-emerald-400/80 rounded-full relative">
+                      <div className="w-[55%] h-[65%] border-2 border-dashed border-emerald-500/90 rounded-full relative shadow-xs">
                         {/* Eye level line */}
-                        <div className="absolute top-[42%] left-0 right-0 border-t border-emerald-400/70" />
-                        <span className="absolute top-[43%] right-1 text-[9px] font-bold text-emerald-600 bg-white/80 px-1 rounded">
+                        <div className="absolute top-[42%] left-0 right-0 border-t border-emerald-500/80" />
+                        <span className="absolute top-[43%] right-1 text-[9px] font-black text-emerald-800 bg-white/90 px-1 rounded border border-emerald-200">
                           EYE LINE
                         </span>
                         {/* Chin level line */}
-                        <div className="absolute bottom-[8%] left-0 right-0 border-b border-emerald-400/70" />
-                        <span className="absolute bottom-[2%] left-1/2 -translate-x-1/2 text-[9px] font-bold text-emerald-600 bg-white/80 px-1 rounded">
-                          CHIN
+                        <div className="absolute bottom-[8%] left-0 right-0 border-b border-emerald-500/80" />
+                        <span className="absolute bottom-[2%] left-1/2 -translate-x-1/2 text-[9px] font-black text-emerald-800 bg-white/90 px-1 rounded border border-emerald-200">
+                          CHIN LINE
                         </span>
                       </div>
                     </div>
@@ -311,10 +347,10 @@ export default function PassportMakerPage() {
                 <div className="flex items-center justify-between text-xs pt-1">
                   <button
                     onClick={() => setShowBiometricGuide(!showBiometricGuide)}
-                    className={`px-3 py-1.5 rounded-xl border text-xs font-extrabold transition-all flex items-center gap-1.5 ${
+                    className={`px-3 py-1.5 rounded-xl border text-xs font-extrabold transition-all flex items-center gap-1.5 cursor-pointer ${
                       showBiometricGuide
-                        ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
-                        : 'bg-slate-50 text-slate-600 border-slate-200'
+                        ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
+                        : 'bg-slate-100 text-slate-700 border-slate-200'
                     }`}
                   >
                     <Eye className="w-3.5 h-3.5" />
@@ -332,33 +368,183 @@ export default function PassportMakerPage() {
                       setContrast(100);
                       setBgColor('#FFFFFF');
                     }}
-                    className="text-slate-500 hover:text-slate-900 text-xs font-bold flex items-center gap-1"
+                    className="text-slate-500 hover:text-slate-900 text-xs font-bold flex items-center gap-1 cursor-pointer"
                   >
-                    <RotateCcw className="w-3.5 h-3.5" /> Reset Adjustments
+                    <RotateCcw className="w-3.5 h-3.5" /> Reset
                   </button>
+                </div>
+
+                {/* Crop, Zoom & Face Alignment Pad Directly Below Image Preview */}
+                <div className="space-y-4 pt-3 border-t border-slate-200">
+                  <div className="flex items-center justify-between">
+                    <label className="text-xs font-black uppercase text-slate-900 flex items-center gap-1.5">
+                      <Sliders className="w-4 h-4 text-indigo-600" />
+                      <span>Crop, Zoom & Face Alignment Pad</span>
+                    </label>
+
+                    <button
+                      onClick={() => setIsCropperOpen(true)}
+                      className="px-3 py-1 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs shadow-xs flex items-center gap-1 cursor-pointer"
+                    >
+                      <Crop className="w-3.5 h-3.5" />
+                      <span>Crop Edges</span>
+                    </button>
+                  </div>
+
+                  {/* Nudge Direction Pad & Zoom Buttons */}
+                  <div className="space-y-3 bg-slate-50 p-3.5 sm:p-4 rounded-2xl border border-slate-200">
+                    {/* Directional Nudge Controller */}
+                    <div className="space-y-2">
+                      <span className="text-xs font-black text-slate-700 block">Nudge & Position Head:</span>
+                      <div className="flex items-center gap-3">
+                        {/* 4-Way D-Pad */}
+                        <div className="grid grid-cols-3 gap-1 w-24 h-24 sm:w-28 sm:h-28 bg-white p-1 rounded-2xl border border-slate-200 shadow-2xs items-center justify-center shrink-0">
+                          <div />
+                          <button
+                            type="button"
+                            onClick={() => setPanY(panY - 10)}
+                            className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 active:bg-indigo-100 text-slate-800 flex items-center justify-center cursor-pointer"
+                            title="Nudge Up"
+                          >
+                            <ArrowUp className="w-4 h-4" />
+                          </button>
+                          <div />
+
+                          <button
+                            type="button"
+                            onClick={() => setPanX(panX - 10)}
+                            className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 active:bg-indigo-100 text-slate-800 flex items-center justify-center cursor-pointer"
+                            title="Nudge Left"
+                          >
+                            <ArrowLeft className="w-4 h-4" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setPanX(0);
+                              setPanY(0);
+                            }}
+                            className="p-1.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-extrabold text-[10px] flex items-center justify-center cursor-pointer"
+                            title="Center Face"
+                          >
+                            <Target className="w-4 h-4" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setPanX(panX + 10)}
+                            className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 active:bg-indigo-100 text-slate-800 flex items-center justify-center cursor-pointer"
+                            title="Nudge Right"
+                          >
+                            <ArrowRight className="w-4 h-4" />
+                          </button>
+
+                          <div />
+                          <button
+                            type="button"
+                            onClick={() => setPanY(panY + 10)}
+                            className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 active:bg-indigo-100 text-slate-800 flex items-center justify-center cursor-pointer"
+                            title="Nudge Down"
+                          >
+                            <ArrowDown className="w-4 h-4" />
+                          </button>
+                          <div />
+                        </div>
+
+                        <div className="space-y-2 text-xs">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setPanX(0);
+                              setPanY(0);
+                              setZoom(100);
+                            }}
+                            className="px-3 py-1.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-100 text-slate-800 font-extrabold shadow-2xs block cursor-pointer"
+                          >
+                            Center Head
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setFlipX(!flipX)}
+                            className={`px-3 py-1.5 rounded-xl border text-xs font-extrabold flex items-center gap-1 cursor-pointer ${
+                              flipX ? 'bg-indigo-50 border-indigo-300 text-indigo-700' : 'bg-white border-slate-200 text-slate-800'
+                            }`}
+                          >
+                            <FlipHorizontal className="w-3.5 h-3.5" /> Flip Mirror
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Zoom & Rotation Sliders */}
+                    <div className="space-y-3 pt-2 border-t border-slate-200/80">
+                      <div className="space-y-1">
+                        <div className="flex justify-between text-xs font-bold text-slate-700">
+                          <span>Zoom Level ({zoom}%):</span>
+                          <div className="flex items-center gap-1">
+                            <button
+                              type="button"
+                              onClick={() => setZoom(Math.max(50, zoom - 10))}
+                              className="px-2 py-0.5 rounded bg-slate-200 hover:bg-slate-300 text-slate-800 font-black text-xs cursor-pointer"
+                            >
+                              -
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => setZoom(Math.min(250, zoom + 10))}
+                              className="px-2 py-0.5 rounded bg-slate-200 hover:bg-slate-300 text-slate-800 font-black text-xs cursor-pointer"
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
+                        <input
+                          type="range"
+                          min="50"
+                          max="250"
+                          value={zoom}
+                          onChange={(e) => setZoom(Number(e.target.value))}
+                          className="w-full accent-indigo-600 cursor-pointer"
+                        />
+                      </div>
+
+                      <div className="space-y-1">
+                        <div className="flex justify-between text-xs font-bold text-slate-700">
+                          <span>Rotation ({rotation}°):</span>
+                        </div>
+                        <input
+                          type="range"
+                          min="-45"
+                          max="45"
+                          value={rotation}
+                          onChange={(e) => setRotation(Number(e.target.value))}
+                          className="w-full accent-indigo-600 cursor-pointer"
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Studio Control Tabs & Settings (Right Column) */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+              <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-md space-y-6 text-slate-900">
                 {/* 1. Country & Specification Preset */}
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <label className="text-xs font-black uppercase text-slate-900 flex items-center gap-1.5">
-                      <UserCheck className="w-4 h-4 text-indigo-600" /> 1. Passport & Visa Standard
+                      <UserCheck className="w-4 h-4 text-indigo-600" /> 1. Country Passport Standard
                     </label>
                     <button
                       onClick={() => setIsCustom(!isCustom)}
-                      className="text-xs text-indigo-600 font-extrabold hover:underline"
+                      className="text-xs text-indigo-600 font-extrabold hover:underline cursor-pointer"
                     >
                       {isCustom ? 'Choose Country Presets' : '+ Custom Size (mm)'}
                     </button>
                   </div>
 
                   {!isCustom ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-48 overflow-y-auto pr-1">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-48 overflow-y-auto pr-1 no-scrollbar">
                       {PASSPORT_PRESETS.map((preset) => (
                         <button
                           key={preset.id}
@@ -366,10 +552,10 @@ export default function PassportMakerPage() {
                             setSelectedPreset(preset);
                             setIsCustom(false);
                           }}
-                          className={`p-3 rounded-2xl border text-left transition-all flex items-start justify-between ${
+                          className={`p-3 rounded-2xl border text-left transition-all flex items-start justify-between cursor-pointer ${
                             selectedPreset.id === preset.id && !isCustom
-                              ? 'border-indigo-600 bg-indigo-50 text-indigo-900 font-extrabold shadow-sm'
-                              : 'border-slate-200 bg-slate-50/50 hover:bg-slate-100/80 text-slate-800'
+                              ? 'border-indigo-600 bg-indigo-50 text-indigo-950 font-black shadow-2xs'
+                              : 'border-slate-200 bg-slate-50/70 hover:bg-slate-100 text-slate-800'
                           }`}
                         >
                           <div>
@@ -404,86 +590,10 @@ export default function PassportMakerPage() {
                   )}
                 </div>
 
-                {/* 2. Studio Photo Crop & Zoom Adjustments */}
+                {/* 2. Studio Background & Lighting */}
                 <div className="space-y-4 pt-4 border-t border-slate-200">
                   <label className="text-xs font-black uppercase text-slate-900 flex items-center gap-1.5">
-                    <Sliders className="w-4 h-4 text-indigo-600" /> 2. Crop, Zoom & Position
-                  </label>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200">
-                    <div className="space-y-1">
-                      <div className="flex justify-between text-xs font-bold text-slate-700">
-                        <span>Zoom ({zoom}%):</span>
-                      </div>
-                      <input
-                        type="range"
-                        min="50"
-                        max="250"
-                        value={zoom}
-                        onChange={(e) => setZoom(Number(e.target.value))}
-                        className="w-full accent-indigo-600"
-                      />
-                    </div>
-
-                    <div className="space-y-1">
-                      <div className="flex justify-between text-xs font-bold text-slate-700">
-                        <span>Rotation ({rotation}°):</span>
-                      </div>
-                      <input
-                        type="range"
-                        min="-45"
-                        max="45"
-                        value={rotation}
-                        onChange={(e) => setRotation(Number(e.target.value))}
-                        className="w-full accent-indigo-600"
-                      />
-                    </div>
-
-                    <div className="space-y-1">
-                      <div className="flex justify-between text-xs font-bold text-slate-700">
-                        <span>Move Horizontal (X):</span>
-                      </div>
-                      <input
-                        type="range"
-                        min="-150"
-                        max="150"
-                        value={panX}
-                        onChange={(e) => setPanX(Number(e.target.value))}
-                        className="w-full accent-indigo-600"
-                      />
-                    </div>
-
-                    <div className="space-y-1">
-                      <div className="flex justify-between text-xs font-bold text-slate-700">
-                        <span>Move Vertical (Y):</span>
-                      </div>
-                      <input
-                        type="range"
-                        min="-150"
-                        max="150"
-                        value={panY}
-                        onChange={(e) => setPanY(Number(e.target.value))}
-                        className="w-full accent-indigo-600"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={() => setFlipX(!flipX)}
-                      className={`px-3 py-2 rounded-xl border text-xs font-extrabold flex items-center gap-1.5 transition-all ${
-                        flipX ? 'bg-indigo-50 border-indigo-300 text-indigo-700' : 'bg-slate-50 border-slate-200 text-slate-700'
-                      }`}
-                    >
-                      <FlipHorizontal className="w-3.5 h-3.5" /> Flip Mirror Photo
-                    </button>
-                  </div>
-                </div>
-
-                {/* 3. Background Color & Image Enhancements */}
-                <div className="space-y-4 pt-4 border-t border-slate-200">
-                  <label className="text-xs font-black uppercase text-slate-900 flex items-center gap-1.5">
-                    <Palette className="w-4 h-4 text-indigo-600" /> 3. Background Color & Light Enhancements
+                    <Palette className="w-4 h-4 text-indigo-600" /> 2. Studio Background & Lighting
                   </label>
 
                   <div className="space-y-2">
@@ -493,9 +603,9 @@ export default function PassportMakerPage() {
                         <button
                           key={bg.id}
                           onClick={() => setBgColor(bg.value)}
-                          className={`p-2.5 rounded-xl border text-left transition-all flex items-center gap-2 ${
+                          className={`p-2.5 rounded-xl border text-left transition-all flex items-center gap-2 cursor-pointer ${
                             bgColor === bg.value
-                              ? 'border-indigo-600 bg-indigo-50 font-extrabold text-slate-900 shadow-sm'
+                              ? 'border-indigo-600 bg-indigo-50 font-black text-indigo-950 shadow-2xs'
                               : 'border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700'
                           }`}
                         >
@@ -542,10 +652,10 @@ export default function PassportMakerPage() {
                   </div>
                 </div>
 
-                {/* 4. Multiple Print Sheet Options (More Photos on 1 Page) */}
+                {/* 3. Multiple Print Sheet Options */}
                 <div className="space-y-4 pt-4 border-t border-slate-200">
                   <label className="text-xs font-black uppercase text-slate-900 flex items-center gap-1.5">
-                    <Printer className="w-4 h-4 text-indigo-600" /> 4. Print Sheet Layout (Photos Per Page)
+                    <Printer className="w-4 h-4 text-indigo-600" /> 3. Print Sheet Layout (Photos Per Page)
                   </label>
 
                   <div className="space-y-2">
@@ -556,7 +666,7 @@ export default function PassportMakerPage() {
                         const layout = SHEET_LAYOUTS.find((l) => l.id === e.target.value);
                         if (layout) setSelectedSheetLayout(layout);
                       }}
-                      className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-xs font-extrabold text-slate-900 focus:ring-2 focus:ring-indigo-500"
+                      className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-xs font-extrabold text-slate-900 focus:ring-2 focus:ring-indigo-500 shadow-2xs"
                     >
                       {SHEET_LAYOUTS.map((layout) => (
                         <option key={layout.id} value={layout.id}>
@@ -582,10 +692,10 @@ export default function PassportMakerPage() {
                 <button
                   onClick={handleGeneratePassport}
                   disabled={isGenerating}
-                  className="w-full py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm shadow-md transition-all flex items-center justify-center gap-2"
+                  className="w-full py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 active:scale-[0.99] text-white font-extrabold text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
-                  {isGenerating ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
-                  <span>Generate Passport Photos & Print Sheet</span>
+                  {isGenerating ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4 text-indigo-200" />}
+                  <span>Generate Passport Sheet</span>
                 </button>
               </div>
             </div>
@@ -644,7 +754,40 @@ export default function PassportMakerPage() {
           </div>
         )}
       </div>
+
+      {/* Floating Mobile Action Navbar for Mobile */}
+      {filePreview && (
+        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[94vw] max-w-lg bg-white/90 backdrop-blur-xl border border-slate-200 shadow-2xl rounded-3xl p-2.5 flex items-center justify-between gap-2 md:hidden text-slate-900">
+          <button
+            onClick={() => setIsCropperOpen(true)}
+            className="px-3.5 py-2 rounded-2xl bg-indigo-50 border border-indigo-200 text-indigo-700 font-extrabold text-xs flex items-center gap-1.5 shrink-0 cursor-pointer"
+          >
+            <Crop className="w-3.5 h-3.5" />
+            <span>Crop</span>
+          </button>
+
+          <button
+            onClick={() => {
+              setPanX(0);
+              setPanY(0);
+              setZoom(100);
+            }}
+            className="px-3.5 py-2 rounded-2xl bg-slate-100 border border-slate-200 text-slate-800 font-extrabold text-xs flex items-center gap-1.5 shrink-0 cursor-pointer"
+          >
+            <Target className="w-3.5 h-3.5 text-indigo-600" />
+            <span>Center Face</span>
+          </button>
+
+          <button
+            onClick={handleGeneratePassport}
+            disabled={isGenerating}
+            className="px-3.5 py-2 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs flex items-center gap-1.5 shrink-0 shadow-md cursor-pointer"
+          >
+            {isGenerating ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Sparkles className="w-3.5 h-3.5 text-indigo-200" />}
+            <span>Generate</span>
+          </button>
+        </div>
+      )}
     </ToolLayout>
   );
 }
-
