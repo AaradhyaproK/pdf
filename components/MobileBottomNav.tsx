@@ -126,6 +126,9 @@ export function MobileBottomNav() {
       t.desc.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const isHomePage = pathname === '/' || pathname === '' || pathname === '/about';
+  if (!isHomePage) return null;
+
   return (
     <>
       {/* Mobile Glassmorphic Bottom Drawer Sheet (Visible when activeDrawer !== null) */}

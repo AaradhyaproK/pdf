@@ -955,7 +955,7 @@ export default function PicsToPDFPage() {
               <div className="hidden sm:flex flex-row items-center gap-2.5 pt-3">
                 <button
                   onClick={() => setIsPageSizeModalOpen(true)}
-                  className="px-4 py-3 rounded-2xl bg-white border border-slate-300 hover:border-slate-800 text-slate-900 font-extrabold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-2xs active:scale-95"
+                  className="px-4 py-3.5 rounded-2xl bg-white hover:bg-slate-50 border border-slate-200/90 text-slate-800 font-extrabold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-2xs active:scale-95"
                 >
                   <SlidersHorizontal className="w-4 h-4 text-slate-700" />
                   <span>Page Size Options</span>
@@ -963,7 +963,7 @@ export default function PicsToPDFPage() {
 
                 <button
                   onClick={() => openPreview(0)}
-                  className="px-4 py-3 rounded-2xl bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-indigo-950 font-extrabold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95"
+                  className="px-5 py-3.5 rounded-2xl bg-indigo-50/90 hover:bg-indigo-100/90 border border-indigo-200/80 text-indigo-950 font-black text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95 shadow-2xs"
                 >
                   <Maximize2 className="w-4 h-4 text-indigo-600" />
                   <span>Document Preview</span>
@@ -972,10 +972,10 @@ export default function PicsToPDFPage() {
                 <button
                   onClick={handleGeneratePDF}
                   disabled={isGenerating || loadingFiles}
-                  className="flex-1 py-3 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer active:scale-[0.99]"
+                  className="flex-1 py-3.5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-black text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer active:scale-[0.99]"
                 >
-                  {isGenerating ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4 text-amber-300" />}
-                  <span>Create PDF ({items.length} Pages)</span>
+                  {isGenerating && <RefreshCw className="w-4 h-4 animate-spin text-white" />}
+                  <span>Create PDF ({items.length === 1 ? '1 Page' : `${items.length} Pages`})</span>
                 </button>
               </div>
             </div>
@@ -983,21 +983,21 @@ export default function PicsToPDFPage() {
         )}
       </div>
 
-      {/* MOBILE ELEGANT FLOATING ACTION CAPSULE (Positioned at bottom-[4.75rem] above MobileBottomNav z-40) */}
+      {/* MOBILE LIQUID GLASS DYNAMIC ISLAND TOOL ACTION CAPSULE */}
       {items.length > 0 && (
-        <div className="sm:hidden fixed bottom-[4.75rem] left-3 right-3 z-30 bg-slate-900/95 backdrop-blur-xl border border-slate-800 p-2 rounded-2xl shadow-2xl flex items-center justify-between gap-2 text-white animate-in slide-in-from-bottom-2 duration-200">
+        <div className="sm:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[calc(100%-1.5rem)] max-w-sm apple-dynamic-island luma-glass-texture rounded-full p-1.5 shadow-2xl flex items-center justify-between gap-2 border border-white/80 animate-in slide-in-from-bottom-3 duration-200">
           <button
             onClick={() => openPreview(0)}
-            className="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-indigo-300 font-black text-xs flex items-center gap-1.5 shrink-0 active:scale-95 transition-all cursor-pointer border border-slate-700/60"
+            className="px-3.5 py-2 rounded-full luma-glass-pill text-slate-900 font-black text-xs flex items-center gap-1.5 shrink-0 active:scale-95 transition-all cursor-pointer"
           >
-            <Maximize2 className="w-3.5 h-3.5 text-indigo-400" />
+            <Maximize2 className="w-3.5 h-3.5 text-indigo-600" />
             <span>Preview</span>
           </button>
 
           <button
             onClick={() => fileInputRef.current?.click()}
             disabled={loadingFiles}
-            className="p-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white shrink-0 active:scale-95 transition-all cursor-pointer border border-slate-700/60"
+            className="p-2 rounded-full luma-glass-pill text-slate-800 shrink-0 active:scale-95 transition-all cursor-pointer"
             title="Add Pages"
           >
             <Plus className="w-4 h-4" />
@@ -1006,10 +1006,10 @@ export default function PicsToPDFPage() {
           <button
             onClick={handleGeneratePDF}
             disabled={isGenerating || loadingFiles}
-            className="flex-1 py-2 px-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-black text-xs shadow-md flex items-center justify-center gap-1.5 disabled:opacity-50 active:scale-95 transition-all cursor-pointer"
+            className="flex-1 py-2.5 px-4 rounded-full bg-slate-900 text-white font-black text-xs shadow-md flex items-center justify-center gap-1.5 disabled:opacity-50 active:scale-95 transition-all cursor-pointer"
           >
-            {isGenerating ? <RefreshCw className="w-3.5 h-3.5 animate-spin text-white" /> : <Sparkles className="w-3.5 h-3.5 text-amber-300" />}
-            <span>Create PDF ({items.length})</span>
+            {isGenerating && <RefreshCw className="w-3.5 h-3.5 animate-spin text-white" />}
+            <span>Create PDF ({items.length === 1 ? '1 Page' : `${items.length} Pages`})</span>
           </button>
         </div>
       )}

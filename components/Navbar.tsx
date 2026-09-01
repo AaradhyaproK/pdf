@@ -149,30 +149,49 @@ export function Navbar() {
         </div>
       ) : (
         <>
-          {/* Mobile Header: Floating Liquid Glass Capsule on Scroll / Transparent at Top */}
+          {/* Mobile Header: Floating Liquid Glass Capsule with Back Button on Tool Pages */}
           <div
             className={`md:hidden transition-all duration-300 ease-out ${
-              scrolled
-                ? 'apple-dynamic-island luma-glass-texture rounded-full px-3.5 py-1.5 shadow-xl border border-white/80 max-w-[calc(100%-1.5rem)] sm:max-w-md mx-auto flex items-center justify-between gap-2'
+              scrolled || pathname !== '/'
+                ? 'apple-dynamic-island luma-glass-texture rounded-full px-3.5 py-1.5 shadow-xl border border-white/80 max-w-[calc(100%-1.25rem)] sm:max-w-md mx-auto flex items-center justify-between gap-2 my-1'
                 : 'w-full px-4 py-2 flex items-center justify-between gap-2 bg-transparent'
             }`}
           >
-            {/* Mobile Brand Logo Capsule */}
-            <Link href="/" className="flex items-center gap-2 group shrink-0 active:scale-95 transition-transform duration-200">
-              <img
-                src="/1.png"
-                alt="FileZenith Logo"
-                className={`object-contain transition-all duration-300 ${scrolled ? 'w-6 h-6' : 'w-7 h-7'}`}
-              />
-              <span className={`font-black tracking-tight text-slate-900 leading-none transition-all duration-300 ${scrolled ? 'text-xs sm:text-sm' : 'text-sm sm:text-base'}`}>
-                FileZenith
-              </span>
-            </Link>
+            {/* Mobile Brand / Back Button Capsule */}
+            {pathname !== '/' ? (
+              <div className="flex items-center gap-2 min-w-0">
+                <button
+                  onClick={() => router.back()}
+                  className="p-1.5 rounded-full bg-slate-900/10 hover:bg-slate-900/20 text-slate-900 active:scale-90 transition-all cursor-pointer shrink-0"
+                  aria-label="Go Back"
+                  title="Go Back"
+                >
+                  <ArrowLeft className="w-4 h-4 text-slate-900 stroke-[2.5]" />
+                </button>
+                <Link href="/" className="flex items-center gap-1.5 min-w-0 shrink">
+                  <img src="/1.png" alt="FileZenith Logo" className="w-5 h-5 object-contain" />
+                  <span className="font-black text-xs text-slate-900 truncate tracking-tight">
+                    FileZenith
+                  </span>
+                </Link>
+              </div>
+            ) : (
+              <Link href="/" className="flex items-center gap-2 group shrink-0 active:scale-95 transition-transform duration-200">
+                <img
+                  src="/1.png"
+                  alt="FileZenith Logo"
+                  className={`object-contain transition-all duration-300 ${scrolled ? 'w-6 h-6' : 'w-7 h-7'}`}
+                />
+                <span className={`font-black tracking-tight text-slate-900 leading-none transition-all duration-300 ${scrolled ? 'text-xs sm:text-sm' : 'text-sm sm:text-base'}`}>
+                  FileZenith
+                </span>
+              </Link>
+            )}
 
             {/* Mobile Search Button Pill */}
             <button
               onClick={() => setSearchOpen(true)}
-              className="luma-glass-pill px-2.5 py-1 flex items-center gap-1 text-slate-800 hover:text-slate-900 active:scale-95 transition-all cursor-pointer"
+              className="luma-glass-pill px-2.5 py-1 flex items-center gap-1 text-slate-800 hover:text-slate-900 active:scale-95 transition-all cursor-pointer shrink-0"
               aria-label="Search tools"
               title="Search Tools"
             >
