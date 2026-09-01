@@ -199,7 +199,7 @@ export function Footer() {
               <li><Link href="/image/passport-maker" className="hover:text-indigo-600 transition-colors">Passport Photo Maker</Link></li>
               <li><Link href="/image/remove-background" className="hover:text-indigo-600 transition-colors">AI Background Remover</Link></li>
               <li><Link href="/image/convert-heic" className="hover:text-indigo-600 transition-colors">Apple HEIC to JPG</Link></li>
-              <li><Link href="/image/to-pdf" className="hover:text-indigo-600 transition-colors">Image to PDF Converter</Link></li>
+              <li><Link href="/image/pics-to-pdf" className="hover:text-indigo-600 transition-colors">Pics & Images to PDF</Link></li>
             </ul>
           </div>
 

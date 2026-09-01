@@ -3,21 +3,12 @@
 import { useState } from 'react';
 import { ToolLayout } from '@/components/ToolLayout';
 import { FileUploader, FileItem } from '@/components/FileUploader';
-import { protectPDF, renderPDFPagesToImages } from '@/lib/pdf-engine';
-import { PDFPageGridList } from '@/components/PDFPageGridList';
+import { protectPDF } from '@/lib/pdf-engine';
 import { toast } from 'sonner';
-import { Download, Lock, Eye, EyeOff, ShieldCheck, RefreshCw, CheckCircle2 } from 'lucide-react';
-
-interface PageThumbnail {
-  pageNumber: number;
-  dataUrl: string;
-}
+import { Download, Lock, Eye, EyeOff, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
 export default function ProtectPDFPage() {
   const [files, setFiles] = useState<FileItem[]>([]);
-  const [thumbnails, setThumbnails] = useState<PageThumbnail[]>([]);
-  const [isLoadingPages, setIsLoadingPages] = useState(false);
-
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -26,27 +17,9 @@ export default function ProtectPDFPage() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
 
-  const handleFileSelect = async (selected: FileItem[]) => {
+  const handleFileSelect = (selected: FileItem[]) => {
     setFiles(selected);
     setDownloadUrl(null);
-    if (selected.length === 0) {
-      setThumbnails([]);
-      return;
-    }
-
-    setIsLoadingPages(true);
-    try {
-      const rendered = await renderPDFPagesToImages(selected[0].file, 1.0);
-      const thumbs = rendered.map((r) => ({
-        pageNumber: r.pageNumber,
-        dataUrl: r.dataUrl,
-      }));
-      setThumbnails(thumbs);
-    } catch (err: any) {
-      toast.error('Failed to render PDF page preview.');
-    } finally {
-      setIsLoadingPages(false);
-    }
   };
 
   const handleProtect = async () => {
@@ -84,7 +57,8 @@ export default function ProtectPDFPage() {
     <ToolLayout
       slug="/pdf/protect"
       title="Password Protect PDF Online"
-      subtitle="Encrypt your PDF documents with custom open passwords and permission rules locally in your browser."
+      subtitle="Encrypt your PDF documents with custom open passwords and 128-bit protection locally in your browser."
+      badgeText="128-bit Encryption"
     >
       <div className="space-y-6">
         <FileUploader
@@ -94,22 +68,14 @@ export default function ProtectPDFPage() {
           onFilesSelected={handleFileSelect}
           onRemoveFile={() => {
             setFiles([]);
-            setThumbnails([]);
             setDownloadUrl(null);
           }}
           title="Upload PDF document to encrypt & protect"
         />
 
-        {isLoadingPages && (
-          <div className="py-8 text-center text-slate-600 animate-pulse text-sm font-medium flex flex-col items-center justify-center gap-2">
-            <RefreshCw className="w-6 h-6 animate-spin text-indigo-600" />
-            <span>Rendering document page preview...</span>
-          </div>
-        )}
-
-        {files.length > 0 && !isLoadingPages && (
+        {files.length > 0 && (
           <div className="space-y-6 pt-2">
-            <div className="p-5 sm:p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-5">
+            <div className="p-5 sm:p-6 rounded-3xl bg-white border border-slate-200 shadow-md space-y-5 text-slate-900">
               <div className="flex items-center justify-between pb-3 border-b border-slate-200">
                 <div className="flex items-center gap-2">
                   <span className="p-2 rounded-xl bg-indigo-50 border border-indigo-200 text-indigo-600">
@@ -131,14 +97,6 @@ export default function ProtectPDFPage() {
                 </span>
               </div>
 
-              {thumbnails.length > 0 && (
-                <PDFPageGridList
-                  title="Document Page Preview"
-                  pages={thumbnails}
-                  selectable={false}
-                />
-              )}
-
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <label className="text-xs font-black uppercase tracking-wider text-slate-900 flex items-center justify-between">
@@ -155,7 +113,7 @@ export default function ProtectPDFPage() {
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 transition-colors"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 transition-colors cursor-pointer"
                       title={showPassword ? 'Hide password' : 'Show password'}
                     >
                       {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -183,7 +141,7 @@ export default function ProtectPDFPage() {
                     <button
                       type="button"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 transition-colors"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 transition-colors cursor-pointer"
                       title={showConfirmPassword ? 'Hide password' : 'Show password'}
                     >
                       {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -205,9 +163,9 @@ export default function ProtectPDFPage() {
         )}
 
         {downloadUrl && (
-          <div className="p-6 rounded-3xl bg-emerald-50 border border-emerald-200 text-emerald-950 flex items-center justify-between gap-4 animate-in fade-in duration-200">
+          <div className="p-6 rounded-3xl bg-emerald-50 border border-emerald-200 text-emerald-950 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 animate-in fade-in duration-200 shadow-md">
             <div className="flex items-center gap-3">
-              <div className="p-3 rounded-2xl bg-emerald-600 text-white shadow-xs">
+              <div className="p-3 rounded-2xl bg-emerald-600 text-white shadow-xs shrink-0">
                 <CheckCircle2 className="w-6 h-6" />
               </div>
               <div>
@@ -219,8 +177,8 @@ export default function ProtectPDFPage() {
             </div>
             <a
               href={downloadUrl}
-              download="protected-document.pdf"
-              className="px-6 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md flex items-center gap-2 flex-shrink-0"
+              download={`protected-${files[0]?.file.name || 'document.pdf'}`}
+              className="w-full sm:w-auto px-6 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md flex items-center justify-center gap-2 shrink-0 cursor-pointer"
             >
               <Download className="w-4 h-4" />
               <span>Download Protected PDF</span>

@@ -604,9 +604,9 @@ export default function PicsToPDFPage() {
   return (
     <ToolLayout
       slug="/image/pics-to-pdf"
-      title="Doc Scanner"
-      subtitle="Scan camera snaps, photos & PDFs into clean PDF documents. Includes document scan filters, custom margins, and paper sizes."
-      badgeText="Doc Scanner"
+      title="Pics & Images to PDF Converter (JPG, PNG, WebP to PDF)"
+      subtitle="Combine JPG, PNG, WebP, HEIC camera photos, pictures & PDF pages into a clean, multi-page PDF document. Includes scan filters, margins, and paper sizes."
+      badgeText="JPG, PNG, WebP & Photos to PDF"
     >
       {/* Hidden File & Camera Inputs */}
       <input
@@ -639,10 +639,10 @@ export default function PicsToPDFPage() {
 
             <div>
               <h3 className="text-lg sm:text-2xl font-black text-slate-900 tracking-tight">
-                Upload Photos or Snap Document
+                Upload JPG, PNG, WebP Images or Snap Camera Document
               </h3>
               <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-lg mx-auto font-medium">
-                Combine camera photos, receipts & document pages into a clean PDF document.
+                Combine JPG, PNG, WebP, HEIC photos, receipts & document pages into a clean PDF document.
               </p>
             </div>
 

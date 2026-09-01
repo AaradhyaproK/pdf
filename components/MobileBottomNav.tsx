@@ -53,7 +53,6 @@ const IMAGE_TOOLS = [
   { name: 'AI Background Remover', slug: '/image/remove-background', desc: 'Isolate subjects 100% locally', icon: Scissors, badge: 'AI Wasm' },
   { name: 'Apple HEIC to JPG', slug: '/image/convert-heic', desc: 'Convert iPhone HEIC photos', icon: Smartphone },
   { name: 'Resize Image', slug: '/image/resize', desc: 'Resize pixels & percent', icon: ImageIcon },
-  { name: 'Image to PDF', slug: '/image/to-pdf', desc: 'Combine photos into PDF', icon: FileText },
 ];
 
 const UTILITY_TOOLS = [
