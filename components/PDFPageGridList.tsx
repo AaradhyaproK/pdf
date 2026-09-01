@@ -32,6 +32,7 @@ export interface PDFPageGridListProps {
   selectable?: boolean;
   reorderable?: boolean;
   deletable?: boolean;
+  showPreviewModal?: boolean;
   title?: string;
 }
 
@@ -51,6 +52,7 @@ export function PDFPageGridList({
   selectable = true,
   reorderable = false,
   deletable = false,
+  showPreviewModal = true,
   title = 'Document Pages',
 }: PDFPageGridListProps) {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -263,15 +265,16 @@ export function PDFPageGridList({
                       <span>{rot}°</span>
                     </button>
                   )}
-
-                  <button
-                    type="button"
-                    onClick={() => setViewerModalIndex(idx)}
-                    className="p-1.5 rounded-lg text-slate-600 hover:bg-slate-100 transition-all cursor-pointer"
-                    title="Zoom Full Page"
-                  >
-                    <Eye className="w-3.5 h-3.5 text-indigo-600" />
-                  </button>
+                  {showPreviewModal && (
+                    <button
+                      type="button"
+                      onClick={() => setViewerModalIndex(idx)}
+                      className="p-1.5 rounded-lg text-slate-600 hover:bg-slate-100 transition-all cursor-pointer"
+                      title="Zoom Full Page"
+                    >
+                      <Eye className="w-3.5 h-3.5 text-indigo-600" />
+                    </button>
+                  )}
 
                   {deletable && onDeletePage && (
                     <button
@@ -359,14 +362,16 @@ export function PDFPageGridList({
 
                 {/* Actions */}
                 <div className="flex items-center gap-1.5 shrink-0">
-                  <button
-                    type="button"
-                    onClick={() => setViewerModalIndex(idx)}
-                    className="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold flex items-center gap-1 cursor-pointer"
-                  >
-                    <Maximize2 className="w-3.5 h-3.5 text-indigo-600" />
-                    <span className="hidden sm:inline">Zoom</span>
-                  </button>
+                  {showPreviewModal && (
+                    <button
+                      type="button"
+                      onClick={() => setViewerModalIndex(idx)}
+                      className="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold flex items-center gap-1 cursor-pointer"
+                    >
+                      <Maximize2 className="w-3.5 h-3.5 text-indigo-600" />
+                      <span className="hidden sm:inline">Zoom</span>
+                    </button>
+                  )}
 
                   {onRotatePage && (
                     <button
