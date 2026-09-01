@@ -34,13 +34,13 @@ interface ImageItem {
 }
 
 export const SOCIAL_PRESETS = [
-  { id: 'insta_sq', name: 'Instagram Square Post', width: 1080, height: 1080, label: '1080 x 1080 px (1:1)' },
-  { id: 'insta_story', name: 'Instagram Story / Reel', width: 1080, height: 1920, label: '1080 x 1920 px (9:16)' },
-  { id: 'yt_thumb', name: 'YouTube Thumbnail', width: 1280, height: 720, label: '1280 x 720 px (16:9)' },
-  { id: 'fb_cover', name: 'Facebook Cover', width: 820, height: 312, label: '820 x 312 px' },
-  { id: 'tw_header', name: 'Twitter Header', width: 1500, height: 500, label: '1500 x 500 px (3:1)' },
-  { id: 'hd_1080p', name: 'Full HD 1080p', width: 1920, height: 1080, label: '1920 x 1080 px (16:9)' },
-  { id: 'uhd_4k', name: '4K Ultra HD', width: 3840, height: 2160, label: '3840 x 2160 px' },
+  { id: 'insta_sq', name: 'Instagram Square Post', width: 1080, height: 1080, label: '1080 × 1080 px (1:1)' },
+  { id: 'insta_story', name: 'Instagram Story / Reel', width: 1080, height: 1920, label: '1080 × 1920 px (9:16)' },
+  { id: 'yt_thumb', name: 'YouTube Thumbnail', width: 1280, height: 720, label: '1280 × 720 px (16:9)' },
+  { id: 'fb_cover', name: 'Facebook Cover', width: 820, height: 312, label: '820 × 312 px' },
+  { id: 'tw_header', name: 'Twitter Header', width: 1500, height: 500, label: '1500 × 500 px (3:1)' },
+  { id: 'hd_1080p', name: 'Full HD 1080p', width: 1920, height: 1080, label: '1920 × 1080 px (16:9)' },
+  { id: 'uhd_4k', name: '4K Ultra HD', width: 3840, height: 2160, label: '3840 × 2160 px' },
 ];
 
 export default function ResizeImagePage() {
@@ -251,7 +251,7 @@ export default function ResizeImagePage() {
     toast.info('Packaging images into ZIP archive...');
     const zip = new JSZip();
 
-    resizedItems.forEach((item, index) => {
+    resizedItems.forEach((item) => {
       const ext = outputFormat === 'image/png' ? 'png' : outputFormat === 'image/webp' ? 'webp' : 'jpg';
       const baseName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
       const fileName = `resized_${baseName}_${item.targetW}x${item.targetH}.${ext}`;
@@ -268,6 +268,8 @@ export default function ResizeImagePage() {
     toast.success('ZIP file downloaded!');
   };
 
+  const hasResizedItems = items.some((i) => i.resizedBlob);
+
   return (
     <ToolLayout
       slug="/image/resize"
@@ -275,20 +277,20 @@ export default function ResizeImagePage() {
       subtitle="Resize JPG, PNG, and WebP photos in batch by exact pixel dimensions with auto-linked aspect ratio, percentage scaling, or social media presets."
       badgeText="Batch Image Resizer"
     >
-      <div className="max-w-4xl mx-auto space-y-8">
+      <div className="max-w-4xl mx-auto space-y-8 pb-24 md:pb-6">
         {!items.length ? (
-          <div className="p-8 sm:p-14 border-2 border-dashed border-slate-300 hover:border-indigo-500 rounded-3xl bg-slate-50/50 hover:bg-slate-50 transition-all text-center space-y-4">
-            <div className="w-16 h-16 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto shadow-sm">
+          <div className="p-8 sm:p-14 border border-slate-200 hover:border-slate-800 rounded-3xl bg-slate-50/70 hover:bg-slate-50 transition-all text-center space-y-4 shadow-2xs">
+            <div className="w-16 h-16 rounded-2xl bg-slate-900 text-white flex items-center justify-center mx-auto shadow-md">
               <Maximize2 className="w-8 h-8" />
             </div>
             <div>
-              <h3 className="text-xl font-black text-slate-900">Upload Multiple Images to Resize</h3>
-              <p className="text-xs text-slate-500 mt-1 max-w-md mx-auto">
+              <h3 className="text-xl font-black text-slate-900 tracking-tight">Upload Multiple Images to Resize</h3>
+              <p className="text-xs text-slate-600 mt-1 max-w-md mx-auto font-medium">
                 Select one or multiple photos to scale by exact pixels, percentage (%), or social media formats.
               </p>
             </div>
 
-            <label className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm shadow-md transition-all cursor-pointer">
+            <label className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-sm shadow-md active:scale-95 transition-all cursor-pointer">
               {loadingFiles ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
               <span>Select Images to Resize</span>
               <input
@@ -303,53 +305,59 @@ export default function ResizeImagePage() {
           </div>
         ) : (
           <div className="space-y-6">
-            <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+            <div className="bg-white p-4 sm:p-6 rounded-3xl border border-slate-200 shadow-md space-y-6 text-slate-900">
               {/* Resizing Mode Selector */}
-              <div className="space-y-3">
-                <label className="text-xs font-black uppercase text-slate-900 block">Choose Resize Mode:</label>
-                <div className="grid grid-cols-3 gap-2 bg-slate-100 p-1.5 rounded-2xl border border-slate-200">
+              <div className="space-y-2">
+                <label className="text-xs font-black uppercase tracking-wider text-slate-900 block">Choose Resize Mode:</label>
+                <div className="grid grid-cols-3 gap-1.5 sm:gap-2 bg-slate-100 p-1.5 rounded-2xl border border-slate-200">
                   <button
                     onClick={() => setResizeMode('pixels')}
-                    className={`py-2.5 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 ${
-                      resizeMode === 'pixels' ? 'bg-white text-indigo-600 shadow-sm' : 'text-slate-600 hover:text-slate-900'
+                    className={`py-2.5 rounded-xl text-xs font-black transition-all flex items-center justify-center gap-1 cursor-pointer ${
+                      resizeMode === 'pixels' ? 'bg-white text-indigo-900 shadow-sm border border-slate-200/80' : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
-                    <Sliders className="w-3.5 h-3.5" /> Exact Pixels (px)
+                    <Sliders className="w-3.5 h-3.5 text-indigo-600" />
+                    <span className="hidden sm:inline">Exact Pixels (px)</span>
+                    <span className="sm:hidden">Pixels</span>
                   </button>
 
                   <button
                     onClick={() => setResizeMode('percentage')}
-                    className={`py-2.5 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 ${
-                      resizeMode === 'percentage' ? 'bg-white text-indigo-600 shadow-sm' : 'text-slate-600 hover:text-slate-900'
+                    className={`py-2.5 rounded-xl text-xs font-black transition-all flex items-center justify-center gap-1 cursor-pointer ${
+                      resizeMode === 'percentage' ? 'bg-white text-indigo-900 shadow-sm border border-slate-200/80' : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
-                    <Percent className="w-3.5 h-3.5" /> Percentage (%)
+                    <Percent className="w-3.5 h-3.5 text-indigo-600" />
+                    <span className="hidden sm:inline">Percentage (%)</span>
+                    <span className="sm:hidden">% Scale</span>
                   </button>
 
                   <button
                     onClick={() => setResizeMode('preset')}
-                    className={`py-2.5 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 ${
-                      resizeMode === 'preset' ? 'bg-white text-indigo-600 shadow-sm' : 'text-slate-600 hover:text-slate-900'
+                    className={`py-2.5 rounded-xl text-xs font-black transition-all flex items-center justify-center gap-1 cursor-pointer ${
+                      resizeMode === 'preset' ? 'bg-white text-indigo-900 shadow-sm border border-slate-200/80' : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
-                    <Sparkles className="w-3.5 h-3.5" /> Social Presets
+                    <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
+                    <span className="hidden sm:inline">Social Presets</span>
+                    <span className="sm:hidden">Presets</span>
                   </button>
                 </div>
               </div>
 
               {/* Mode Controls */}
-              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-4">
+              <div className="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200 space-y-4">
                 {/* 1. Pixels Mode */}
                 {resizeMode === 'pixels' && (
                   <div className="space-y-4">
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 sm:gap-3">
                       <div className="flex-1 space-y-1">
                         <label className="text-xs font-bold text-slate-700 block">Width (px):</label>
                         <input
                           type="number"
                           value={width}
                           onChange={(e) => handleWidthChange(Number(e.target.value))}
-                          className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs font-bold text-slate-900 focus:ring-2 focus:ring-indigo-500"
+                          className="w-full bg-white border border-slate-300 rounded-xl px-3 sm:px-4 py-2.5 text-xs font-bold text-slate-900 focus:ring-2 focus:ring-indigo-500 shadow-2xs"
                         />
                       </div>
 
@@ -357,7 +365,7 @@ export default function ResizeImagePage() {
                       <button
                         type="button"
                         onClick={() => setLockAspect(!lockAspect)}
-                        className={`p-3 rounded-2xl border mt-5 transition-all flex items-center justify-center ${
+                        className={`p-3 rounded-2xl border mt-5 transition-all flex items-center justify-center shrink-0 cursor-pointer ${
                           lockAspect
                             ? 'bg-indigo-600 border-indigo-600 text-white shadow-sm'
                             : 'bg-white border-slate-300 text-slate-400 hover:text-slate-700'
@@ -373,7 +381,7 @@ export default function ResizeImagePage() {
                           type="number"
                           value={height}
                           onChange={(e) => handleHeightChange(Number(e.target.value))}
-                          className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs font-bold text-slate-900 focus:ring-2 focus:ring-indigo-500"
+                          className="w-full bg-white border border-slate-300 rounded-xl px-3 sm:px-4 py-2.5 text-xs font-bold text-slate-900 focus:ring-2 focus:ring-indigo-500 shadow-2xs"
                         />
                       </div>
                     </div>
@@ -389,8 +397,11 @@ export default function ResizeImagePage() {
                 {/* 2. Percentage Mode */}
                 {resizeMode === 'percentage' && (
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between text-xs font-bold text-slate-900">
-                      <span>Scale Percentage: {percentage}%</span>
+                    <div className="flex items-center justify-between text-xs font-black text-slate-900">
+                      <span>Scale Percentage:</span>
+                      <span className="text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-full border border-indigo-100 font-extrabold">
+                        {percentage}%
+                      </span>
                     </div>
 
                     <input
@@ -400,19 +411,19 @@ export default function ResizeImagePage() {
                       step="5"
                       value={percentage}
                       onChange={(e) => setPercentage(Number(e.target.value))}
-                      className="w-full accent-indigo-600"
+                      className="w-full accent-indigo-600 cursor-pointer h-2 bg-slate-200 rounded-lg"
                     />
 
                     {/* Quick Percentage Presets */}
-                    <div className="flex flex-wrap items-center justify-center gap-2">
+                    <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
                       {[25, 50, 75, 100, 125, 150, 200].map((pct) => (
                         <button
                           key={pct}
                           onClick={() => setPercentage(pct)}
-                          className={`px-3.5 py-1.5 rounded-xl border text-xs font-extrabold transition-all ${
+                          className={`px-3 py-1.5 rounded-xl border text-xs font-black transition-all cursor-pointer ${
                             percentage === pct
-                              ? 'bg-indigo-600 border-indigo-600 text-white shadow-sm'
-                              : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100'
+                              ? 'bg-indigo-600 border-indigo-700 text-white shadow-xs'
+                              : 'bg-white border-slate-200 text-slate-800 hover:bg-slate-100'
                           }`}
                         >
                           {pct}%
@@ -424,15 +435,15 @@ export default function ResizeImagePage() {
 
                 {/* 3. Social Media Presets */}
                 {resizeMode === 'preset' && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-56 overflow-y-auto no-scrollbar">
                     {SOCIAL_PRESETS.map((preset) => (
                       <button
                         key={preset.id}
                         onClick={() => setSelectedPreset(preset)}
-                        className={`p-3 rounded-2xl border text-left transition-all flex items-center justify-between ${
+                        className={`p-3 rounded-2xl border text-left transition-all flex items-center justify-between cursor-pointer ${
                           selectedPreset.id === preset.id
-                            ? 'border-indigo-600 bg-white text-indigo-900 font-extrabold shadow-sm'
-                            : 'border-slate-200 bg-white/60 hover:bg-white text-slate-800'
+                            ? 'border-indigo-600 bg-indigo-50 text-indigo-950 font-black shadow-2xs'
+                            : 'border-slate-200 bg-white hover:bg-slate-100 text-slate-800'
                         }`}
                       >
                         <div>
@@ -446,12 +457,12 @@ export default function ResizeImagePage() {
                 )}
 
                 {/* Output Format Selector */}
-                <div className="pt-3 border-t border-slate-200 flex items-center justify-between">
+                <div className="pt-3 border-t border-slate-200 flex items-center justify-between gap-2">
                   <span className="text-xs font-bold text-slate-700">Export Format:</span>
                   <select
                     value={outputFormat}
                     onChange={(e) => setOutputFormat(e.target.value as any)}
-                    className="bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-900 focus:ring-2 focus:ring-indigo-500"
+                    className="bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs font-extrabold text-slate-900 focus:ring-2 focus:ring-indigo-500 shadow-2xs cursor-pointer"
                   >
                     <option value="original">Keep Original Format</option>
                     <option value="image/jpeg">JPG / JPEG</option>
@@ -465,18 +476,18 @@ export default function ResizeImagePage() {
               <button
                 onClick={handleBatchResize}
                 disabled={isProcessing || loadingFiles}
-                className="w-full py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                className="w-full py-3.5 sm:py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 active:scale-[0.99] text-white font-extrabold text-xs sm:text-base shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
               >
-                {isProcessing ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
+                {isProcessing ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4 text-indigo-200" />}
                 <span>Resize {items.length} Image(s) Now</span>
               </button>
             </div>
 
             {/* Batch Image Cards List */}
-            <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+            <div className="bg-white p-4 sm:p-6 rounded-3xl border border-slate-200 shadow-md space-y-4 text-slate-900">
               <div className="flex items-center justify-between">
-                <h4 className="text-xs font-extrabold uppercase text-slate-500">Image Batch Queue ({items.length} Files)</h4>
-                <label className="text-xs text-indigo-600 font-bold hover:underline cursor-pointer">
+                <h4 className="text-xs font-black uppercase text-slate-700">Image Batch Queue ({items.length} Files)</h4>
+                <label className="text-xs text-indigo-600 font-extrabold hover:underline cursor-pointer">
                   + Add More Images
                   <input
                     type="file"
@@ -490,8 +501,8 @@ export default function ResizeImagePage() {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                {items.map((item, index) => (
-                  <div key={item.id} className="p-3 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 relative">
+                {items.map((item) => (
+                  <div key={item.id} className="p-3 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 relative shadow-2xs">
                     <div className="relative">
                       <img
                         src={item.resizedUrl || item.previewUrl}
@@ -499,21 +510,21 @@ export default function ResizeImagePage() {
                         className="w-full h-32 object-contain bg-white rounded-xl border border-slate-200"
                       />
                       {item.resizedUrl && (
-                        <span className="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-emerald-600 text-white font-extrabold text-[10px] shadow-sm">
+                        <span className="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-emerald-600 text-white font-black text-[10px] shadow-sm">
                           RESIZED
                         </span>
                       )}
                     </div>
 
                     <div className="space-y-1">
-                      <p className="text-xs font-bold text-slate-900 truncate" title={item.name}>
+                      <p className="text-xs font-extrabold text-slate-900 truncate" title={item.name}>
                         {item.name}
                       </p>
-                      <div className="flex items-center justify-between text-[10px] font-semibold text-slate-500">
-                        <span>Original: {item.origW} x {item.origH} px</span>
+                      <div className="flex items-center justify-between text-[10px] font-bold text-slate-500">
+                        <span>Original: {item.origW} × {item.origH} px</span>
                         {item.resizedBlob && (
-                          <span className="text-emerald-700 font-extrabold">
-                            Target: {item.targetW} x {item.targetH} px
+                          <span className="text-emerald-700 font-black">
+                            Target: {item.targetW} × {item.targetH} px
                           </span>
                         )}
                       </div>
@@ -524,7 +535,7 @@ export default function ResizeImagePage() {
                         <a
                           href={item.resizedUrl}
                           download={`resized-${item.name}`}
-                          className="text-xs font-extrabold text-indigo-600 hover:underline flex items-center gap-1"
+                          className="text-xs font-black text-indigo-600 hover:underline flex items-center gap-1"
                         >
                           <Download className="w-3.5 h-3.5" /> Download
                         </a>
@@ -534,7 +545,7 @@ export default function ResizeImagePage() {
 
                       <button
                         onClick={() => handleRemoveItem(item.id)}
-                        className="p-1 rounded-lg hover:bg-rose-100 text-rose-600 transition-colors"
+                        className="p-1.5 rounded-lg hover:bg-rose-100 text-rose-600 transition-colors cursor-pointer"
                         title="Remove"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
@@ -545,10 +556,10 @@ export default function ResizeImagePage() {
               </div>
 
               {/* ZIP Download Button if Resized Items Exist */}
-              {items.some((i) => i.resizedBlob) && items.length > 1 && (
+              {hasResizedItems && items.length > 1 && (
                 <button
                   onClick={handleDownloadZip}
-                  className="w-full py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-md transition-all flex items-center justify-center gap-2 mt-4"
+                  className="w-full py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2 mt-4 cursor-pointer"
                 >
                   <Archive className="w-4 h-4" />
                   <span>Download All Resized Images (ZIP Archive)</span>
@@ -558,7 +569,59 @@ export default function ResizeImagePage() {
           </div>
         )}
       </div>
+
+      {/* Floating Mobile Action Navbar */}
+      {items.length > 0 && (
+        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[94vw] max-w-lg bg-white/95 backdrop-blur-xl border border-slate-200 shadow-2xl rounded-3xl p-2.5 flex items-center justify-between gap-2 md:hidden text-slate-900">
+          {/* Quick Mode Pills Scroller */}
+          <div className="flex items-center gap-1 overflow-x-auto no-scrollbar py-0.5 px-1 max-w-[60vw]">
+            <button
+              onClick={() => setResizeMode('pixels')}
+              className={`px-2.5 py-1.5 rounded-xl text-[11px] font-black shrink-0 transition-all cursor-pointer ${
+                resizeMode === 'pixels' ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-700'
+              }`}
+            >
+              Pixels
+            </button>
+            <button
+              onClick={() => setResizeMode('percentage')}
+              className={`px-2.5 py-1.5 rounded-xl text-[11px] font-black shrink-0 transition-all cursor-pointer ${
+                resizeMode === 'percentage' ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-700'
+              }`}
+            >
+              % Scale
+            </button>
+            <button
+              onClick={() => setResizeMode('preset')}
+              className={`px-2.5 py-1.5 rounded-xl text-[11px] font-black shrink-0 transition-all cursor-pointer ${
+                resizeMode === 'preset' ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-700'
+              }`}
+            >
+              Presets
+            </button>
+          </div>
+
+          {/* Action Button: Resize / Download */}
+          {hasResizedItems ? (
+            <button
+              onClick={handleDownloadZip}
+              className="px-3.5 py-2 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs flex items-center gap-1.5 shrink-0 shadow-md cursor-pointer whitespace-nowrap"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>Download</span>
+            </button>
+          ) : (
+            <button
+              onClick={handleBatchResize}
+              disabled={isProcessing || loadingFiles}
+              className="px-3.5 py-2 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs flex items-center gap-1.5 shrink-0 shadow-md cursor-pointer whitespace-nowrap"
+            >
+              {isProcessing ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Sparkles className="w-3.5 h-3.5 text-indigo-200" />}
+              <span>Resize</span>
+            </button>
+          )}
+        </div>
+      )}
     </ToolLayout>
   );
 }
-
