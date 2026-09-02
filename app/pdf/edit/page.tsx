@@ -329,7 +329,7 @@ export default function PDFEditPage() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const pdfjsLib = require('pdfjs-dist');
-      pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+      pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
     }
   }, []);
 

@@ -207,7 +207,9 @@ export async function compressPDF(
   targetKB?: number
 ): Promise<Uint8Array> {
   const pdfjsLib = await import('pdfjs-dist');
-  pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
+  if (typeof window !== 'undefined' && pdfjsLib?.GlobalWorkerOptions) {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
+  }
 
   const arrayBuffer = await file.arrayBuffer();
   const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
@@ -498,10 +500,8 @@ export async function renderPDFPagesToImages(
   scale: number = 1.5
 ): Promise<{ pageNumber: number; dataUrl: string; width: number; height: number }[]> {
   const pdfjsLib = await import('pdfjs-dist');
-  try {
-    pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
-  } catch {
-    pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
+  if (typeof window !== 'undefined' && pdfjsLib?.GlobalWorkerOptions) {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
   }
 
   const arrayBuffer = await file.arrayBuffer();
@@ -549,7 +549,9 @@ export async function renderPDFPageToImage(
   scale: number = 2.0
 ): Promise<{ dataUrl: string; width: number; height: number }> {
   const pdfjsLib = await import('pdfjs-dist');
-  pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+  if (typeof window !== 'undefined' && pdfjsLib?.GlobalWorkerOptions) {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
+  }
 
   const arrayBuffer = await file.arrayBuffer();
   const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });

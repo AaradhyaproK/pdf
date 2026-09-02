@@ -41,7 +41,6 @@ export default function PDFPageNumbersPage() {
   const [format, setFormat] = useState<Format>('page-x-of-y');
   const [fontSize, setFontSize] = useState<number>(11);
   const [textColor, setTextColor] = useState<string>('#1e293b');
-  const [startNum, setStartNum] = useState<number>(1);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [progressPercent, setProgressPercent] = useState<number>(0);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
@@ -91,7 +90,7 @@ export default function PDFPageNumbersPage() {
   };
 
   const getPageText = (pageIdx: number, total: number) => {
-    const currentPageNum = startNum + pageIdx;
+    const currentPageNum = pageIdx + 1;
     if (format === 'page-x-of-y') {
       return `Page ${currentPageNum} of ${total}`;
     } else if (format === 'x') {
@@ -252,7 +251,7 @@ export default function PDFPageNumbersPage() {
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 text-xs font-semibold">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs font-semibold">
                 {/* Format Selector */}
                 <div className="space-y-1.5">
                   <label className="text-slate-700 font-bold block">Number Format</label>
@@ -314,18 +313,6 @@ export default function PDFPageNumbersPage() {
                       className="w-7 h-7 rounded-full border border-slate-200 cursor-pointer p-0"
                     />
                   </div>
-                </div>
-
-                {/* Start Number */}
-                <div className="space-y-1.5">
-                  <label className="text-slate-700 font-bold block">Start Numbering From</label>
-                  <input
-                    type="number"
-                    min={1}
-                    value={startNum}
-                    onChange={(e) => setStartNum(parseInt(e.target.value) || 1)}
-                    className="w-full p-2.5 bg-white border border-slate-200 rounded-xl font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500/20"
-                  />
                 </div>
 
                 {/* Font Size */}

@@ -67,7 +67,8 @@ export default function WatermarkPDFPage() {
       setThumbnails(thumbs);
       setActivePageIndex(0);
     } catch (err: any) {
-      toast.error('Failed to render PDF page previews.');
+      console.error('PDF watermark preview error:', err);
+      toast.error(err?.message ? `Failed to render PDF previews: ${err.message}` : 'Failed to render PDF page previews. Ensure the file is not password-protected.');
     } finally {
       setIsLoadingPages(false);
     }
