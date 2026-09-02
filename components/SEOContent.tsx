@@ -70,7 +70,7 @@ export function SEOContent({ slug }: SEOContentProps) {
           {tool.description} FileZenith provides a 100% free, browser-native solution engineered specifically for office professionals, students, researchers, and freelancers who demand maximum document processing speed and absolute data privacy.
         </p>
         <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
-          Unlike traditional online file converters that require you to upload confidential documents to remote cloud servers, FileZenith processes every document locally using client-side WebAssembly binaries inside your web browser’s memory. This means your files never leave your computer or phone, eliminating all cybersecurity risks while delivering zero-latency performance with no daily file conversion caps.
+          Unlike traditional online file converters that require you to upload confidential documents to remote cloud servers, your PDF is processed directly in your browser, helping keep your document processing private. This means your files never leave your computer or phone, eliminating all cybersecurity risks with no daily file conversion caps.
         </p>
       </section>
 
@@ -115,10 +115,10 @@ export function SEOContent({ slug }: SEOContentProps) {
         <section className="space-y-4">
           <div className="text-center max-w-2xl mx-auto space-y-1 sm:space-y-2">
             <h2 className="text-lg sm:text-2xl font-black text-slate-900">
-              Why Choose FileZenith Client-Side Engine?
+              Why Choose FileZenith Browser Engine?
             </h2>
             <p className="text-xs sm:text-sm text-slate-500 font-medium">
-              See how FileZenith browser WebAssembly compares against standard cloud PDF converters.
+              See how FileZenith browser processing compares against standard cloud PDF converters.
             </p>
           </div>
 
@@ -163,14 +163,14 @@ export function SEOContent({ slug }: SEOContentProps) {
             <div className="p-2 rounded-xl bg-indigo-600 text-white shrink-0 shadow-xs">
               <Cpu className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
-            <h3 className="text-sm sm:text-xl font-black text-white">100% Client-Side Browser Architecture</h3>
+            <h3 className="text-sm sm:text-xl font-black text-white">100% Secure Serverless Architecture</h3>
           </div>
           <span className="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shrink-0">
-            Wasm Engine
+            100% Private
           </span>
         </div>
         <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-medium">
-          Unlike traditional web tools that upload your sensitive documents to remote servers over the internet, FileZenith uses compiled <strong className="text-white font-black">WebAssembly (Wasm)</strong> binaries and HTML5 Canvas APIs inside background Web Workers. This guarantees absolute data privacy, instantaneous zero-latency conversions, and offline capability.
+          Unlike traditional web tools that upload your sensitive documents to remote servers over the internet, your PDF is processed directly in your browser, helping keep your document processing private. This guarantees absolute data privacy, instant local execution, and offline capability.
         </p>
       </section>
 

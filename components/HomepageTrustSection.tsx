@@ -1,6 +1,7 @@
 'use client';
 
-import { ShieldCheck, Zap, Cpu, Globe, Star, Lock, Sparkles, CheckCircle2 } from 'lucide-react';
+import Link from 'next/link';
+import { ShieldCheck, Zap, Cpu, Globe, Star, Lock, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
 
 export function HomepageTrustSection() {
   const trustFeatures = [
@@ -11,12 +12,12 @@ export function HomepageTrustSection() {
       badgeColor: 'bg-emerald-100 text-emerald-800 border-emerald-200',
       iconBg: 'bg-emerald-50 text-emerald-600 border-emerald-100',
       accentBorder: 'border-emerald-200/80',
-      desc: 'Your PDF and image files are processed strictly inside your device RAM memory. Zero file uploads or data tracking guaranteed.',
+      desc: 'Your PDF is processed directly in your browser, helping keep your document processing private. Zero file uploads or data tracking guaranteed.',
     },
     {
       icon: Zap,
-      title: 'Instant Local Speed',
-      badge: 'Wasm Accelerated',
+      title: 'Instant Browser Speed',
+      badge: 'Instant Processing',
       badgeColor: 'bg-rose-100 text-rose-800 border-rose-200',
       iconBg: 'bg-rose-50 text-rose-600 border-rose-100',
       accentBorder: 'border-rose-200/80',
@@ -24,12 +25,12 @@ export function HomepageTrustSection() {
     },
     {
       icon: Cpu,
-      title: 'Advanced AI & WebAssembly',
-      badge: 'Client Wasm Engine',
+      title: 'Browser-Native Technology',
+      badge: '100% Secure Serverless',
       badgeColor: 'bg-indigo-100 text-indigo-800 border-indigo-200',
       iconBg: 'bg-indigo-50 text-indigo-600 border-indigo-100',
       accentBorder: 'border-indigo-200/80',
-      desc: 'Powered by compiled WebAssembly engines including pdf-lib, qpdf-wasm, Tesseract.js AI OCR, and HTML5 Canvas processing.',
+      desc: 'Engineered for complete document protection. Your PDF is processed directly in your browser without ever hitting external cloud servers.',
     },
     {
       icon: Globe,
@@ -57,6 +58,15 @@ export function HomepageTrustSection() {
           <p className="text-xs sm:text-base text-slate-600 font-medium leading-relaxed max-w-xl mx-auto">
             Traditional cloud PDF tools upload your sensitive documents to remote servers. FileZenith executes 100% of conversions directly on your local device.
           </p>
+          <div className="pt-1">
+            <Link
+              href="/security"
+              className="inline-flex items-center gap-1.5 text-xs font-extrabold text-indigo-600 hover:text-indigo-800 hover:underline"
+            >
+              <span>Learn about 100% Secure Serverless processing</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
         </div>
 
         {/* Mobile Swipeable Card Carousel / Desktop Responsive Grid */}

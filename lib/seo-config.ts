@@ -61,7 +61,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
     ],
     faqs: [
       { question: 'How do I compress a PDF file without losing quality?', answer: 'FileZenith targets redundant metadata and optimizes embedded images while keeping text crisp and clear, ensuring maximum compression with zero visual quality loss.' },
-      { question: 'Is my PDF document uploaded to any server during compression?', answer: 'No! All PDF compression runs 100% locally inside your web browser using WebAssembly binaries. Your files never leave your computer or phone.' },
+      { question: 'Is my PDF document uploaded to any server during compression?', answer: 'No! All PDF compression runs 100% locally inside your web browser. Your PDF is processed directly in your browser, helping keep your document processing private.' },
       { question: 'How much can I reduce my PDF file size?', answer: 'Depending on embedded photos and structural data, FileZenith can shrink your PDF file size by up to 80% with recommended settings.' },
       { question: 'Is there a maximum file size limit for PDF compression?', answer: 'Since processing uses your device memory directly, you can compress large PDF documents up to several hundred megabytes without network timeouts.' },
       { question: 'Is FileZenith PDF Compressor completely free?', answer: 'Yes! FileZenith is 100% free with unlimited conversions, zero registration requirements, and no credit card prompts.' }
@@ -227,13 +227,13 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
     faqs: [
       { question: 'How do I extract editable text from Hindi and Marathi scanned PDFs for free?', answer: 'Simply upload your scanned PDF or photo document to FileZenith PDF OCR, select Hindi (हिंदी) or Marathi (मराठी) from the language dropdown, and click Extract Editable Text. FileZenith processes the document instantly in your browser and gives you copyable plain text.' },
       { question: 'Which languages are supported by FileZenith PDF OCR?', answer: 'FileZenith supports over 50 popular global and regional languages including Hindi, Marathi, English, Bengali, Tamil, Telugu, Gujarati, Kannada, Malayalam, Punjabi, Urdu, Spanish, French, German, Portuguese, Italian, Chinese (Simplified & Traditional), Japanese, Korean, Arabic, Russian, and Swahili.' },
-      { question: 'Is my confidential scanned document uploaded to any cloud server?', answer: 'No! FileZenith operates on a 100% client-side zero-server architecture. All OCR recognition runs inside your browser using Tesseract AI WebAssembly. Your documents never leave your phone or computer.' },
+      { question: 'Is my confidential scanned document uploaded to any cloud server?', answer: 'No! FileZenith operates on a 100% client-side zero-server architecture. Your PDF is processed directly in your browser, helping keep your document processing private. Your documents never leave your phone or computer.' },
       { question: 'Can I copy and export the extracted text into Word or TXT?', answer: 'Yes! You can copy the extracted text to your clipboard with 1 click or download it directly as a .txt plain text file to open in Microsoft Word, Google Docs, or Notepad.' },
       { question: 'Does FileZenith PDF OCR work on mobile phones?', answer: 'Yes! FileZenith OCR is 100% mobile responsive and works seamlessly across Android smartphones, iPhones, iPads, MacBooks, and Windows PCs.' }
     ],
     comparisonTable: [
       { feature: 'Language Support', omnitool: '50+ Global & Indian Languages (Hindi, Marathi, English, etc.)', standardCloud: 'Limited to 3-5 basic Western languages' },
-      { feature: 'Data Privacy', omnitool: '100% Client-Side WebAssembly (Zero Server Uploads)', standardCloud: 'Scanned files uploaded to remote servers' },
+      { feature: 'Data Privacy', omnitool: '100% Client-Side Browser Engine (Zero Server Uploads)', standardCloud: 'Scanned files uploaded to remote servers' },
       { feature: 'File Security', omnitool: 'GDPR & HIPAA Compliant by Design', standardCloud: 'Third-party cloud storage risks' },
       { feature: 'Cost & Limits', omnitool: '100% Free with Unlimited OCR Scans', standardCloud: 'Requires paid subscriptions for >3 pages' }
     ]
@@ -316,7 +316,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
     ],
     faqs: [
       { question: 'How do I convert a PDF file to JPG or PNG images for free?', answer: 'Simply upload your PDF to FileZenith’s PDF to Image tool, select your preferred image format (JPG or PNG), and click Convert to Image to download your rendered photos instantly.' },
-      { question: 'Is my PDF document private when converting to images on FileZenith?', answer: 'Yes, 100%. FileZenith operates on a 100% zero-server architecture. All page rendering is computed locally inside your web browser’s memory using PDF.js vector canvas hooks.' },
+      { question: 'Is my PDF document private when converting to images on FileZenith?', answer: 'Yes, 100%. FileZenith operates on a 100% zero-server architecture. Your PDF is processed directly in your browser, helping keep your document processing private.' },
       { question: 'Can I download all converted PDF pages as a single ZIP file?', answer: 'Yes! You can download individual page images or click Download All as ZIP to save all converted pages in one organized package.' },
       { question: 'Will the image quality remain sharp and readable?', answer: 'Yes! FileZenith renders PDF pages at 2x-3x high DPI scale to ensure text, graphics, and photos remain crisp and clear.' },
       { question: 'Does this PDF to JPG converter work on mobile phones?', answer: 'Yes! FileZenith PDF to Image converter is fully responsive across Android smartphones, iPhones, iPads, MacBooks, and Windows laptops.' }
@@ -345,7 +345,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
     ],
     faqs: [
       { question: 'How do I compress an image file size for free online?', answer: 'Simply upload your photo to FileZenith’s Image Compressor, choose your target quality slider or KB limit, and click Compress Image to download your resized photo instantly.' },
-      { question: 'Is my photo private when compressing images on FileZenith?', answer: 'Yes, 100%. FileZenith operates on a 100% zero-server architecture. All image compression runs locally inside your web browser using HTML5 Canvas binary search.' },
+      { question: 'Is my photo private when compressing images on FileZenith?', answer: 'Yes, 100%. FileZenith operates on a 100% zero-server architecture. All image compression runs locally inside your web browser with zero server uploads.' },
       { question: 'Can I compress images to specific KB limits like 50KB or 100KB?', answer: 'Yes! Our smart engine automatically calculates optimal resolution and compression algorithms to hit exact KB thresholds for official portal uploads.' },
       { question: 'Will compressing an image make my photo look blurry?', answer: 'No! FileZenith optimizes pixel density and strips unnecessary metadata while maintaining sharp facial details and visual clarity.' },
       { question: 'Does this image compressor work on mobile phones?', answer: 'Yes! FileZenith Image Compressor is fully responsive and works smoothly across Android smartphones, iPhones, iPads, MacBooks, and Windows laptops.' }
@@ -473,14 +473,14 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
     category: 'image',
     howToSteps: [
       { title: 'Upload Portrait or Product Photo', text: 'Select or drag and drop your photo into the AI background eraser workspace.' },
-      { title: 'Automatic AI Subject Isolation', text: 'Our local browser WebAssembly neural model automatically detects subject edges and erases the backdrop.' },
+      { title: 'Automatic AI Subject Isolation', text: 'Our browser AI neural model automatically detects subject edges and erases the backdrop.' },
       { title: 'Download Transparent PNG', text: 'Click Download PNG to save your high-resolution cutout image or add a solid white background.' }
     ],
     faqs: [
       { question: 'How do I remove the background from an image for free online?', answer: 'Simply upload your photo to FileZenith’s AI Background Remover, wait a second for automatic AI subject isolation, and click Download PNG to save your transparent image.' },
-      { question: 'Is my personal photo uploaded to any external AI server?', answer: 'No, 100%! Unlike cloud AI tools, FileZenith runs neural network inference models directly inside your browser memory via WebAssembly and WebGL. Your photo pixels never leave your device.' },
+      { question: 'Is my personal photo uploaded to any external AI server?', answer: 'No, 100%! Unlike cloud AI tools, FileZenith runs neural network inference models directly inside your browser memory. Your photo pixels never leave your device.' },
       { question: 'What image formats can I export after background removal?', answer: 'You can export high-clarity transparent PNG cutouts or add solid white/colored backgrounds for official passport and product photos.' },
-      { question: 'Does this AI background remover work on mobile phones?', answer: 'Yes! FileZenith AI Background Remover runs smoothly on modern Android smartphones, iPhones, iPads, MacBooks, and Windows PCs with WebAssembly support.' },
+      { question: 'Does this AI background remover work on mobile phones?', answer: 'Yes! FileZenith AI Background Remover runs smoothly on modern Android smartphones, iPhones, iPads, MacBooks, and Windows PCs.' },
       { question: 'Is there any monthly subscription or usage limit?', answer: 'Zero subscriptions! Enjoy 100% free, unlimited background removals without daily limits or watermarks.' }
     ]
   },
@@ -507,7 +507,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
     faqs: [
       { question: 'How do I convert iPhone HEIC photos to JPG for free online?', answer: 'Simply upload your Apple .heic or .heif photos to FileZenith’s HEIC to JPG converter, select JPG format, and click Convert HEIC to download your photos or ZIP package instantly.' },
       { question: 'Why can’t Windows PCs or Android phones open HEIC photos?', answer: 'HEIC (High Efficiency Image Container) is Apple’s proprietary camera format. Converting HEIC to standard JPG makes your photos viewable on all Windows PCs, Android devices, and websites.' },
-      { question: 'Are my private iPhone photos uploaded to any remote server?', answer: 'No, 100%. FileZenith uses 100% client-side WebAssembly decoding. Your iPhone photos are converted locally inside your web browser’s RAM and are never sent over the internet.' },
+      { question: 'Are my private iPhone photos uploaded to any remote server?', answer: 'No, 100%. Your PDF is processed directly in your browser, helping keep your document processing private. Your iPhone photos are converted locally inside your web browser’s RAM and are never sent over the internet.' },
       { question: 'Can I batch convert multiple HEIC photos at once?', answer: 'Yes! You can select and convert dozens of iPhone HEIC photos simultaneously and download them all in a single organized ZIP package.' },
       { question: 'Does this HEIC to JPG converter work on MacBooks and Windows PCs?', answer: 'Yes! FileZenith HEIC to JPG converter works seamlessly across Windows laptops, MacBooks, Chromebooks, iPhones, and Android smartphones.' }
     ]
@@ -635,7 +635,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
     ],
     comparisonTable: [
       { feature: 'Format Support', omnitool: 'JPG, PNG, WebP, HEIC, GIF, BMP & PDF Pages', standardCloud: 'Only supports standard JPG' },
-      { feature: 'Data Privacy', omnitool: '100% Client-Side WebAssembly (Zero Server Uploads)', standardCloud: 'Images uploaded to remote cloud servers' },
+      { feature: 'Data Privacy', omnitool: '100% Client-Side Browser Engine (Zero Server Uploads)', standardCloud: 'Images uploaded to remote cloud servers' },
       { feature: 'Scan Filters', omnitool: 'B&W Scan, Color Boost, Grayscale & Original Filters', standardCloud: 'No document scan filters' },
       { feature: 'Page Geometry', omnitool: 'Automatic Page Auto-Rotate & Margin Controls', standardCloud: 'Static unaligned pages' }
     ]
@@ -1035,7 +1035,7 @@ export function generateToolSchemas(slug: string) {
       'price': '0',
       'priceCurrency': 'USD'
     },
-    'browserRequirements': 'Requires HTML5 Canvas, WebAssembly, and JavaScript enabled',
+    'browserRequirements': 'Requires modern web browser with JavaScript enabled',
     'featureList': tool.keywords.join(', ')
   };
 

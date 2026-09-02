@@ -36,7 +36,7 @@ export default function TermsPage() {
       <section className="space-y-3">
         <h2 className="text-xl font-extrabold text-slate-900">2. Service Description & Client-Side Execution</h2>
         <p className="text-sm text-slate-600 leading-relaxed">
-          FileZenith provides online file processing utilities including PDF editing, PDF compression, image format conversion, background removal, and quick developer utilities. All file conversions are executed directly inside your web browser using WebAssembly. FileZenith does not upload, inspect, or store your documents on remote servers.
+          FileZenith provides online file processing utilities including PDF editing, PDF compression, image format conversion, background removal, and quick developer utilities. Your PDF is processed directly in your browser, helping keep your document processing private. FileZenith does not upload, inspect, or store your documents on remote servers.
         </p>
       </section>
 

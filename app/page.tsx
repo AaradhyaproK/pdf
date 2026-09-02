@@ -16,7 +16,7 @@ import {
 const HOMEPAGE_FAQS = [
   {
     q: 'How is FileZenith different from online tools like iLovePDF or Smallpdf?',
-    a: 'Unlike traditional cloud tools like iLovePDF or Smallpdf that require uploading your private documents to remote cloud servers, FileZenith processes 100% of your PDFs, images, and files locally inside your browser using client-side WebAssembly technology. Your confidential files never touch external servers or the internet.',
+    a: 'Unlike traditional cloud tools like iLovePDF or Smallpdf that require uploading your private documents to remote cloud servers, your PDF is processed directly in your browser, helping keep your document processing private. Your confidential files never touch external servers or leave your device.',
   },
   {
     q: 'Is FileZenith really 100% free with no hidden fees or subscriptions?',
@@ -28,7 +28,7 @@ const HOMEPAGE_FAQS = [
   },
   {
     q: 'Are my uploaded files or documents saved on any server?',
-    a: "Never. FileZenith operates on a strict 100% Zero-Server architecture. Your files stay strictly in your computer or phone's local RAM and CPU memory during processing.",
+    a: "Never. FileZenith operates on a strict 100% Zero-Server architecture. Your PDF is processed directly in your browser, helping keep your document processing private.",
   },
   {
     q: 'Does FileZenith work on mobile devices and tablets?',
@@ -111,7 +111,7 @@ export default function HomePage() {
 
           {/* Crisp Subtitle */}
           <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-medium">
-            100% FREE! Merge, split, compress, convert, edit, protect, and OCR your files with zero server uploads — powered by local browser WebAssembly.
+            100% FREE! Merge, split, compress, convert, edit, protect, and OCR your files. Your PDF is processed directly in your browser, helping keep your document processing private.
           </p>
 
           {/* Trust Badges Bar */}

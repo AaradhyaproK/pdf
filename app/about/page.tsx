@@ -4,7 +4,7 @@ import { ShieldCheck, Cpu, Zap, Sparkles, ArrowRight, CheckCircle2 } from 'lucid
 
 export const metadata: Metadata = {
   title: 'About Us - FileZenith',
-  description: 'Learn about FileZenith, the private client-side online file studio engineered with WebAssembly technology.',
+  description: 'Learn about FileZenith, where your PDF is processed directly in your browser, keeping your document processing 100% private.',
 };
 
 export default function AboutPage() {
@@ -32,7 +32,7 @@ export default function AboutPage() {
           </div>
           <h3 className="text-base font-black text-slate-900">100% Data Privacy</h3>
           <p className="text-xs text-slate-600 leading-relaxed font-medium">
-            Unlike traditional PDF tools that upload your sensitive files to cloud servers, FileZenith processes documents entirely inside your browser using WebAssembly.
+            Unlike traditional PDF tools that upload sensitive files to cloud servers, your PDF is processed directly in your browser, helping keep your document processing private.
           </p>
         </div>
 
@@ -40,9 +40,9 @@ export default function AboutPage() {
           <div className="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-600 border border-indigo-100 flex items-center justify-center font-bold shrink-0">
             <Zap className="w-5 h-5" />
           </div>
-          <h3 className="text-base font-black text-slate-900">Zero-Latency Speed</h3>
+          <h3 className="text-base font-black text-slate-900">Instant Local Speed</h3>
           <p className="text-xs text-slate-600 leading-relaxed font-medium">
-            Eliminating network upload and download bottlenecks allows FileZenith tools to compress, edit, and convert documents up to 10x faster.
+            Eliminating network upload and download bottlenecks allows FileZenith tools to compress, edit, and convert documents instantly on your device.
           </p>
         </div>
 
@@ -50,9 +50,9 @@ export default function AboutPage() {
           <div className="w-10 h-10 rounded-2xl bg-sky-50 text-sky-600 border border-sky-100 flex items-center justify-center font-bold shrink-0">
             <Cpu className="w-5 h-5" />
           </div>
-          <h3 className="text-base font-black text-slate-900">Client-Side Engine</h3>
+          <h3 className="text-base font-black text-slate-900">100% Secure Serverless</h3>
           <p className="text-xs text-slate-600 leading-relaxed font-medium">
-            Powered by modern WebAssembly binaries, canvas technology, and offline progressive web app storage.
+            Your files are processed directly inside your web browser, giving you instant results without any file uploads or cloud risks.
           </p>
         </div>
       </div>

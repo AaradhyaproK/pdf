@@ -32,7 +32,7 @@ export default function PrivacyPolicyPage() {
             <span>Zero Server File Uploads</span>
           </div>
           <p className="text-xs text-slate-600 leading-relaxed font-medium">
-            All PDF, image, and document conversions happen 100% inside your web browser using client-side WebAssembly. Your files are never uploaded to any cloud server or stored anywhere.
+            All PDF, image, and document conversions happen 100% inside your web browser. Your PDF is processed directly in your browser, helping keep your document processing private. Your files are never uploaded to any cloud server or stored anywhere.
           </p>
         </div>
 
@@ -59,10 +59,10 @@ export default function PrivacyPolicyPage() {
       <section className="space-y-3">
         <h2 className="text-xl font-extrabold text-slate-900">2. Browser-Native Client-Side Processing (Zero Server Upload)</h2>
         <p className="text-sm text-slate-600 leading-relaxed">
-          FileZenith is engineered as a client-side web application. When you select, compress, edit, convert, or process PDF documents or image files on our platform:
+          FileZenith is engineered as a serverless client-side web application. When you select, compress, edit, convert, or process PDF documents or image files on our platform:
         </p>
         <ul className="list-disc list-inside text-sm text-slate-600 space-y-1.5 pl-2">
-          <li><strong>No File Transfers:</strong> Your source files are read directly into your device&apos;s local browser memory (RAM) using standard WebAssembly (Wasm) and HTML5 APIs.</li>
+          <li><strong>No File Transfers:</strong> Your PDF is processed directly in your browser, helping keep your document processing private.</li>
           <li><strong>No Cloud Storage:</strong> Your documents are never uploaded to, transmitted across, or saved on remote web servers.</li>
           <li><strong>Immediate Clearance:</strong> All temporary browser memory allocation for file processing is immediately freed once you complete your task or close the browser tab.</li>
         </ul>

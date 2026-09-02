@@ -8,7 +8,12 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/admin', '/admin/*', '/api/*'],
+        disallow: ['/admin', '/api/'],
+      },
+      {
+        userAgent: ['Googlebot', 'Googlebot-Image', 'Bingbot'],
+        allow: '/',
+        disallow: ['/admin', '/api/'],
       },
       // Explicitly allow AI Search Engines & Recommendation Bots (GPTBot, Perplexity, Claude, Gemini, etc.)
       {
@@ -25,7 +30,7 @@ export default function robots(): MetadataRoute.Robots {
           'Applebot-Extended',
         ],
         allow: '/',
-        disallow: ['/admin', '/admin/*', '/api/*'],
+        disallow: ['/admin', '/api/'],
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,

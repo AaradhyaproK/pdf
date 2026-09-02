@@ -249,7 +249,7 @@ export default function DownloadAppPage() {
             </div>
             <h3 className="text-base font-black text-slate-900">100% Offline Execution</h3>
             <p className="text-xs text-slate-600 font-medium leading-relaxed">
-              Service Worker caches all WebAssembly binaries (`.wasm`) locally. Edit PDFs and process images anywhere without cellular data or Wi-Fi.
+              Your PDF is processed directly in your browser, helping keep your document processing private. Edit PDFs and process images anywhere without cellular data or Wi-Fi.
             </p>
           </div>
 
