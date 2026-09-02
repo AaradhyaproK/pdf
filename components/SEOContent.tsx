@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Script from 'next/script';
 import Link from 'next/link';
 import { SEO_REGISTRY, generateToolSchemas } from '@/lib/seo-config';
 import { ChevronDown, CheckCircle2, Cpu, ArrowRight, Sparkles, FileText, Image as ImageIcon, Wrench } from 'lucide-react';
@@ -48,7 +47,7 @@ export function SEOContent({ slug }: SEOContentProps) {
     <div className="w-full space-y-6 sm:space-y-10 mt-6 sm:mt-12 pt-6 sm:pt-10 border-t border-slate-200/80 text-slate-700">
       {/* Inject Structured Data JSON-LD Schemas */}
       {schemas.map((schema, idx) => (
-        <Script
+        <script
           key={idx}
           id={`json-ld-${slug.replace(/\//g, '-')}-${idx}`}
           type="application/ld+json"
@@ -216,13 +215,16 @@ export function SEOContent({ slug }: SEOContentProps) {
                   </div>
                 </button>
 
-                {isOpen && (
-                  <div className="px-3.5 pb-3.5 sm:px-5 sm:pb-5 text-xs sm:text-sm text-slate-600 leading-relaxed font-medium pt-2 border-t border-indigo-100/60 animate-in fade-in duration-200">
-                    <div className="pl-3.5 sm:pl-5 border-l-2 border-indigo-400/80">
-                      {faq.answer}
-                    </div>
+                <div
+                  className={`px-3.5 pb-3.5 sm:px-5 sm:pb-5 text-xs sm:text-sm text-slate-600 leading-relaxed font-medium pt-2 border-t border-indigo-100/60 ${
+                    isOpen ? 'block' : 'hidden'
+                  }`}
+                  aria-hidden={!isOpen}
+                >
+                  <div className="pl-3.5 sm:pl-5 border-l-2 border-indigo-400/80">
+                    {faq.answer}
                   </div>
-                )}
+                </div>
               </div>
             );
           })}

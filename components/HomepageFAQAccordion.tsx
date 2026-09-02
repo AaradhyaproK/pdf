@@ -63,13 +63,16 @@ export function HomepageFAQAccordion({ faqs }: { faqs: FAQItem[] }) {
                   </div>
                 </button>
 
-                {isOpen && (
-                  <div className="px-4 pb-4 sm:px-5 sm:pb-5 text-xs sm:text-sm text-slate-600 leading-relaxed font-medium pt-1 border-t border-rose-100/60 animate-in fade-in duration-200">
-                    <div className="pl-6 sm:pl-7 border-l-2 border-rose-400/80">
-                      {faq.a}
-                    </div>
+                <div
+                  className={`px-4 pb-4 sm:px-5 sm:pb-5 text-xs sm:text-sm text-slate-600 leading-relaxed font-medium pt-1 border-t border-rose-100/60 ${
+                    isOpen ? 'block' : 'hidden'
+                  }`}
+                  aria-hidden={!isOpen}
+                >
+                  <div className="pl-6 sm:pl-7 border-l-2 border-rose-400/80">
+                    {faq.a}
                   </div>
-                )}
+                </div>
               </div>
             );
           })}

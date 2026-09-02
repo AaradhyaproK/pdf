@@ -150,11 +150,11 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { title: 'Extract & Download', text: 'Click Split PDF to save your selected pages or ZIP archive directly to your device.' }
     ],
     faqs: [
-      { question: 'How do I split specific pages from a PDF file for free?', answer: 'Simply upload your document to FileZenith’s PDF Splitter, type the page numbers or ranges you want to extract (e.g. 1-3, 5), and click Split PDF to download your new file instantly.' },
-      { question: 'Is it safe to split confidential financial or tax PDFs on FileZenith?', answer: 'Yes, 100%. FileZenith operates on a zero-server architecture. Your files are processed locally inside your web browser’s memory and are never uploaded to any server.' },
-      { question: 'Can I extract single pages into separate PDF files?', answer: 'Yes! You can extract individual pages into standalone PDF files or download all pages in a single organized ZIP package.' },
-      { question: 'Will extracted PDF pages keep their original quality and links?', answer: 'Yes! All original vector fonts, high-resolution images, bookmarks, and internal links remain 100% intact.' },
-      { question: 'Does this online PDF splitter work on mobile phones?', answer: 'Yes! FileZenith PDF Splitter works smoothly on all Android smartphones, iPhones, iPads, MacBooks, and Windows laptops.' }
+      { question: 'Is it safe to split confidential PDFs?', answer: 'FileZenith processes your PDF directly inside your web browser using client-side JavaScript (pdf-lib). Your document is never uploaded to any remote server or third-party cloud service.' },
+      { question: 'Can I extract specific pages from a PDF?', answer: 'Yes. You can select individual page thumbnails or enter page ranges (such as 1-3, 5, 8-10) to extract exactly the pages you need into a new PDF document or separate files.' },
+      { question: 'Will splitting a PDF reduce quality?', answer: 'No. Splitting a PDF extracts the original vector fonts, page layout, embedded images, and graphics without re-encoding or degrading the original document quality.' },
+      { question: 'Does Split PDF work on mobile?', answer: 'Yes. FileZenith Split PDF works on all modern mobile web browsers including iOS Safari on iPhone/iPad and Chrome/Firefox on Android devices.' },
+      { question: 'Is Split PDF free?', answer: 'FileZenith Split PDF is free with no account registration, no file count limits, and no paid subscription required.' }
     ]
   },
 
