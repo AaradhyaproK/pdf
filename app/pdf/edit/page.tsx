@@ -98,7 +98,7 @@ export default function PDFEditPage() {
   // Auto-fit initial zoom on mobile screens
   useEffect(() => {
     if (typeof window !== 'undefined' && window.innerWidth < 640) {
-      setZoom(0.75);
+      setZoom(0.85);
     }
   }, []);
   const [activeTool, setActiveTool] = useState<
@@ -141,6 +141,7 @@ export default function PDFEditPage() {
   const workspaceRef = useRef<HTMLDivElement | null>(null);
   const isPanningRef = useRef<boolean>(false);
   const panStartRef = useRef<{ x: number; y: number; scrollLeft: number; scrollTop: number } | null>(null);
+  const touchPanStartRef = useRef<{ x: number; y: number; scrollLeft: number; scrollTop: number } | null>(null);
   const [isExporting, setIsExporting] = useState<boolean>(false);
   const [isSpacePressed, setIsSpacePressed] = useState<boolean>(false);
 
@@ -170,10 +171,10 @@ export default function PDFEditPage() {
     };
   }, []);
 
-  // Auto-fit zoom level on mobile screen load (0.55 on mobile, 1.2 on desktop)
+  // Auto-fit zoom level on mobile screen load (0.85 on mobile, 1.2 on desktop)
   useEffect(() => {
     if (typeof window !== 'undefined' && window.innerWidth < 640) {
-      setZoom(0.55);
+      setZoom(0.85);
     }
   }, []);
 
@@ -1212,16 +1213,17 @@ export default function PDFEditPage() {
       title="Interactive PDF Editor"
       subtitle="Auto-detect existing text to erase and edit in matching font size, or drag manually to erase & type replacement text live on page."
       badgeText="Seamless Whiteout & Authentic Text Engine"
+      noCardWrapper={true}
     >
       {!file ? (
-        <div className="p-8 sm:p-12 border-2 border-dashed border-slate-300 hover:border-indigo-500 rounded-3xl bg-slate-50/50 hover:bg-slate-50 transition-all text-center space-y-4">
+        <div className="max-w-2xl mx-auto p-8 sm:p-12 border-2 border-dashed border-slate-300 hover:border-indigo-500 rounded-3xl bg-white shadow-sm transition-all text-center space-y-4 my-6">
           <div className="w-16 h-16 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto shadow-sm">
             <Upload className="w-8 h-8" />
           </div>
           <div>
             <h3 className="text-xl font-black text-slate-900">Upload PDF to Edit</h3>
-            <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
-              Select any PDF file to open in the visual interactive editor. Zero server uploads guaranteed.
+            <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto font-medium">
+              Select any PDF file to open in the visual interactive editor. 100% private client-side processing.
             </p>
           </div>
 
@@ -1232,357 +1234,256 @@ export default function PDFEditPage() {
           </label>
         </div>
       ) : (
-        <div className="space-y-6 pb-28 sm:pb-8">
-          {/* Main Day/Light Mode Interactive Toolbar */}
-          <div className="p-3 sm:p-5 bg-white rounded-3xl border border-slate-200/90 shadow-md space-y-3 sm:space-y-4 text-slate-900">
-            <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
-              {/* Primary Tool Selector: Scrollable on Mobile, Fully Expanded Grid on Desktop */}
-              <div className="flex items-center md:flex-wrap gap-1.5 bg-slate-100/90 p-1.5 rounded-2xl border border-slate-200/80 overflow-x-auto md:overflow-visible max-w-full no-scrollbar">
+        <div className="space-y-2.5 pb-24 sm:pb-6 text-slate-900">
+          {/* Top Studio Header Toolbar */}
+          <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-2.5 sm:p-3 space-y-2">
+            <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-2">
+              {/* Left: File Info & Page Navigation Controls */}
+              <div className="flex items-center justify-between lg:justify-start gap-2 overflow-x-auto no-scrollbar py-0.5">
+                <div className="flex items-center gap-2 shrink-0">
+                  <div className="p-1.5 rounded-xl bg-indigo-50 text-indigo-600">
+                    <FileText className="w-4 h-4" />
+                  </div>
+                  <span className="text-xs font-black text-slate-900 max-w-[130px] sm:max-w-[180px] truncate" title={file.name}>
+                    {file.name}
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200/80 shrink-0">
+                  <button
+                    disabled={currentPage <= 1}
+                    onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                    className="px-2 py-0.5 rounded-lg bg-white hover:bg-slate-200 text-slate-900 disabled:opacity-40 font-black text-[11px]"
+                  >
+                    Prev
+                  </button>
+                  <span className="font-black text-xs text-indigo-950 px-1.5">
+                    {currentPage}/{numPages}
+                  </span>
+                  <button
+                    disabled={currentPage >= numPages}
+                    onClick={() => setCurrentPage((p) => Math.min(numPages, p + 1))}
+                    className="px-2 py-0.5 rounded-lg bg-white hover:bg-slate-200 text-slate-900 disabled:opacity-40 font-black text-[11px]"
+                  >
+                    Next
+                  </button>
+                </div>
+
+                <div className="flex items-center gap-1 shrink-0">
+                  <button
+                    onClick={handleRotateCurrentPage}
+                    className="p-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700"
+                    title="Rotate Page 90°"
+                  >
+                    <RotateCw className="w-3.5 h-3.5" />
+                  </button>
+                  <button
+                    onClick={handleDeleteCurrentPage}
+                    className="p-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-600"
+                    title="Delete Page"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Center: Primary Tool Action Pills */}
+              <div className="flex items-center gap-1 bg-slate-100/90 p-1 rounded-xl border border-slate-200/80 overflow-x-auto no-scrollbar">
                 <button
                   onClick={() => setActiveTool('editText')}
-                  className={`px-3 py-2 rounded-xl text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer shrink-0 whitespace-nowrap ${
-                    activeTool === 'editText'
-                      ? 'bg-slate-900 text-white shadow-xs'
-                      : 'text-slate-700 hover:bg-white hover:text-slate-900'
+                  className={`px-2.5 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap ${
+                    activeTool === 'editText' ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-700 hover:bg-white'
                   }`}
-                  title="Click any existing text in the PDF to edit it instantly in matching font size & color"
+                  title="Click existing PDF text to edit directly in matching font & color"
                 >
-                  <Edit3 className="w-4 h-4 text-emerald-500" />
-                  <span>Edit Existing Text</span>
-                  <span className="text-[9px] uppercase tracking-wider bg-emerald-500/20 text-emerald-700 px-1.5 py-0.5 rounded-md ml-0.5">
-                    Default
-                  </span>
+                  <Edit3 className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Edit Text</span>
                 </button>
-
                 <button
                   onClick={() => setActiveTool('select')}
-                  className={`px-3 py-2 rounded-xl text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer shrink-0 whitespace-nowrap ${
-                    activeTool === 'select'
-                      ? 'bg-slate-900 text-white shadow-xs'
-                      : 'text-slate-700 hover:bg-white hover:text-slate-900'
+                  className={`px-2.5 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap ${
+                    activeTool === 'select' ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-700 hover:bg-white'
                   }`}
-                  title="Click & Drag any text box (original PDF text or edited text) to reposition it anywhere on page"
+                  title="Click & Drag to reposition text anywhere on page"
                 >
-                  <MousePointer className="w-4 h-4 text-blue-500" />
-                  <span>Move Text</span>
+                  <MousePointer className="w-3.5 h-3.5 text-blue-400" />
+                  <span>Move</span>
                 </button>
-
                 <button
                   onClick={() => setActiveTool('pan')}
-                  className={`px-3 py-2 rounded-xl text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer shrink-0 whitespace-nowrap ${
-                    activeTool === 'pan'
-                      ? 'bg-slate-900 text-white shadow-xs'
-                      : 'text-slate-700 hover:bg-white hover:text-slate-900'
+                  className={`px-2.5 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap ${
+                    activeTool === 'pan' ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-700 hover:bg-white'
                   }`}
-                  title="Click & Drag anywhere on page to pan/scroll zoomed document view in any direction"
+                  title="Drag anywhere to scroll/pan zoomed page view"
                 >
-                  <Hand className="w-4 h-4 text-amber-500" />
-                  <span>Pan View</span>
+                  <Hand className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Pan</span>
                 </button>
-
                 <button
                   onClick={() => setActiveTool('text')}
-                  className={`px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shrink-0 whitespace-nowrap ${
-                    activeTool === 'text'
-                      ? 'bg-slate-900 text-white shadow-xs'
-                      : 'text-slate-700 hover:bg-white hover:text-slate-900'
+                  className={`px-2.5 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap ${
+                    activeTool === 'text' ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-700 hover:bg-white'
                   }`}
-                  title="Click anywhere on PDF to type new text directly"
                 >
-                  <Type className="w-4 h-4 text-indigo-600" />
-                  <span>Type New Text</span>
+                  <Type className="w-3.5 h-3.5 text-indigo-500" />
+                  <span>Type</span>
                 </button>
-
                 <button
                   onClick={() => setActiveTool('replaceText')}
-                  className={`px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shrink-0 whitespace-nowrap ${
-                    activeTool === 'replaceText'
-                      ? 'bg-slate-900 text-white shadow-xs'
-                      : 'text-slate-700 hover:bg-white hover:text-slate-900'
+                  className={`px-2.5 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap ${
+                    activeTool === 'replaceText' ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-700 hover:bg-white'
                   }`}
-                  title="Click & Drag over existing PDF text to erase & type replacement directly"
                 >
-                  <Edit3 className="w-4 h-4 text-amber-500" />
-                  <span>Manual Erase</span>
+                  <Eraser className="w-3.5 h-3.5 text-amber-500" />
+                  <span>Erase</span>
                 </button>
-
-                <button
-                  onClick={() => setActiveTool('whiteout')}
-                  className={`px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap ${
-                    activeTool === 'whiteout'
-                      ? 'bg-slate-900 text-white shadow-xs'
-                      : 'text-slate-700 hover:bg-white hover:text-slate-900'
-                  }`}
-                  title="Drag to erase content with whiteout"
-                >
-                  <Eraser className="w-4 h-4 text-slate-600" />
-                  <span>Whiteout</span>
-                </button>
-
                 <button
                   onClick={() => setActiveTool('draw')}
-                  className={`px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap ${
-                    activeTool === 'draw'
-                      ? 'bg-slate-900 text-white shadow-xs'
-                      : 'text-slate-700 hover:bg-white hover:text-slate-900'
+                  className={`px-2.5 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap ${
+                    activeTool === 'draw' ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-700 hover:bg-white'
                   }`}
                 >
-                  <PenTool className="w-4 h-4 text-sky-600" />
+                  <PenTool className="w-3.5 h-3.5 text-sky-500" />
                   <span>Pen</span>
                 </button>
-
                 <button
                   onClick={() => setActiveTool('highlight')}
-                  className={`px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap ${
-                    activeTool === 'highlight'
-                      ? 'bg-slate-900 text-white shadow-xs'
-                      : 'text-slate-700 hover:bg-white hover:text-slate-900'
+                  className={`px-2.5 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap ${
+                    activeTool === 'highlight' ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-700 hover:bg-white'
                   }`}
                 >
-                  <Highlighter className="w-4 h-4 text-amber-500" />
+                  <Highlighter className="w-3.5 h-3.5 text-amber-400" />
                   <span>Highlight</span>
                 </button>
-
-                <label className="px-3 py-2 rounded-xl text-xs font-bold text-slate-700 hover:bg-white hover:text-slate-900 flex items-center gap-1.5 cursor-pointer transition-all shrink-0 whitespace-nowrap">
-                  <ImageIcon className="w-4 h-4 text-purple-600" />
-                  <span>Add Image</span>
+                <label className="px-2.5 py-1.5 rounded-lg text-xs font-black text-slate-700 hover:bg-white flex items-center gap-1 cursor-pointer shrink-0 whitespace-nowrap">
+                  <ImageIcon className="w-3.5 h-3.5 text-purple-600" />
+                  <span>Image</span>
                   <input type="file" accept="image/*" onChange={handleImageStampUpload} className="hidden" />
                 </label>
               </div>
 
-              {/* Download Action */}
+              {/* Right: Export Button */}
               <button
                 onClick={handleExportPDF}
                 disabled={isExporting}
-                className="w-full md:w-auto px-5 py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-md transition-all flex items-center justify-center gap-2 min-h-[40px] cursor-pointer shrink-0"
+                className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-sm transition-all flex items-center justify-center gap-1.5 cursor-pointer shrink-0"
               >
-                {isExporting ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
-                <span>Download Edited PDF</span>
+                {isExporting ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Download className="w-3.5 h-3.5" />}
+                <span>Download PDF</span>
               </button>
             </div>
 
-            {/* Precision Options Sub-Bar (Typography, Swatches, Alignment Grid & Quick Presets) */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pt-3 border-t border-slate-100 text-xs">
-              {/* Precision Typography & Styling Controls */}
-              <div className="flex items-center gap-2 overflow-x-auto md:overflow-visible md:flex-wrap max-w-full no-scrollbar py-0.5">
-                {/* Font Family Selector */}
+            {/* Secondary Options Row (Typography, Swatches, Grid & Stamps) */}
+            <div className="flex flex-wrap items-center justify-between gap-2 text-xs pt-1">
+              <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
                 <select
                   value={fontFamily}
                   onChange={(e) => setFontFamily(e.target.value as any)}
-                  className="bg-slate-100 border border-slate-200 text-slate-900 rounded-xl px-2.5 py-1.5 font-bold text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 shrink-0"
-                  title="Select Font Family"
+                  className="bg-slate-100 border border-slate-200 text-slate-900 rounded-lg px-2 py-1 font-bold text-xs focus:outline-none"
                 >
                   <option value="helvetica">Helvetica</option>
-                  <option value="times">Times Roman</option>
+                  <option value="times">Times</option>
                   <option value="courier">Courier</option>
                 </select>
 
-                {/* Precision Size Stepper */}
-                <div className="flex items-center gap-1 bg-slate-100 border border-slate-200 rounded-xl p-1 shrink-0">
+                <div className="flex items-center gap-1 bg-slate-100 border border-slate-200/80 rounded-lg p-0.5">
                   <button
                     onClick={() => setTextSize((s) => Math.max(8, s - 2))}
-                    className="p-1 rounded-lg text-slate-700 hover:bg-white hover:text-slate-900 font-black"
-                    title="Decrease Font Size"
+                    className="p-1 text-slate-700 font-black hover:bg-white rounded"
                   >
-                    <Minus className="w-3.5 h-3.5" />
+                    <Minus className="w-3 h-3" />
                   </button>
-                  <span className="px-1.5 font-black text-xs text-slate-900 min-w-[32px] text-center">
-                    {textSize}px
-                  </span>
+                  <span className="px-1 font-black text-xs min-w-[28px] text-center">{textSize}px</span>
                   <button
                     onClick={() => setTextSize((s) => Math.min(72, s + 2))}
-                    className="p-1 rounded-lg text-slate-700 hover:bg-white hover:text-slate-900 font-black"
-                    title="Increase Font Size"
+                    className="p-1 text-slate-700 font-black hover:bg-white rounded"
                   >
-                    <Plus className="w-3.5 h-3.5" />
+                    <Plus className="w-3 h-3" />
                   </button>
                 </div>
 
-                {/* Color Swatches */}
-                <div className="flex items-center gap-1 bg-slate-100 border border-slate-200 rounded-xl p-1 shrink-0">
+                <div className="flex items-center gap-1 bg-slate-100 border border-slate-200/80 rounded-lg p-1">
                   {['#0f172a', '#2563eb', '#dc2626', '#16a34a', '#d97706'].map((hex) => (
                     <button
                       key={hex}
                       onClick={() => setTextColor(hex)}
-                      className={`w-5 h-5 rounded-full border border-white transition-all ${
-                        textColor === hex ? 'scale-110 ring-2 ring-indigo-500 shadow-xs' : 'opacity-80 hover:opacity-100'
+                      className={`w-4 h-4 rounded-full border border-white transition-all ${
+                        textColor === hex ? 'ring-2 ring-indigo-500 scale-110' : 'opacity-80'
                       }`}
                       style={{ backgroundColor: hex }}
-                      title={`Select Color ${hex}`}
                     />
                   ))}
                   <input
                     type="color"
                     value={textColor}
                     onChange={(e) => setTextColor(e.target.value)}
-                    className="w-5 h-5 rounded-full cursor-pointer border-0 p-0"
-                    title="Custom Color"
+                    className="w-4 h-4 rounded-full cursor-pointer border-0 p-0"
                   />
                 </div>
 
-                {/* Precision Alignment Grid Toggle */}
                 <button
                   onClick={() => setShowGrid((g) => !g)}
-                  className={`px-3 py-1.5 rounded-xl font-bold text-xs flex items-center gap-1.5 border transition-all shrink-0 whitespace-nowrap ${
-                    showGrid
-                      ? 'bg-indigo-50 border-indigo-300 text-indigo-900 font-black shadow-2xs'
-                      : 'bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200'
+                  className={`px-2.5 py-1 rounded-lg font-bold text-xs flex items-center gap-1 border transition-all ${
+                    showGrid ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-slate-100 text-slate-700 border-slate-200'
                   }`}
-                  title="Toggle 20px alignment grid overlay for pixel-perfect positioning"
                 >
-                  <Grid className="w-3.5 h-3.5 text-indigo-600" />
-                  <span>Align Grid</span>
+                  <Grid className="w-3 h-3" />
+                  <span>Grid</span>
                 </button>
               </div>
 
-              {/* Quick Stamp Presets */}
-              <div className="flex items-center gap-1.5 overflow-x-auto md:overflow-visible md:flex-wrap max-w-full no-scrollbar py-0.5">
-                <span className="text-[11px] font-extrabold text-slate-500 uppercase tracking-wider shrink-0">Stamps:</span>
-                <button
-                  onClick={() => handleAddStampPreset('date')}
-                  className={`px-2.5 py-1 rounded-xl border font-bold text-xs flex items-center gap-1 transition-all cursor-pointer shrink-0 whitespace-nowrap ${
-                    activeStampPreset === 'date'
-                      ? 'bg-indigo-600 text-white border-indigo-700 ring-2 ring-indigo-400 font-black shadow-xs'
-                      : 'bg-slate-100 hover:bg-slate-200 border-slate-200/80 text-slate-800'
-                  }`}
-                  title="Click Date then click anywhere on PDF page to place stamp"
-                >
-                  <Calendar className="w-3.5 h-3.5" />
-                  <span>Date</span>
-                </button>
-
-                <button
-                  onClick={() => handleAddStampPreset('signature')}
-                  className={`px-2.5 py-1 rounded-xl border font-bold text-xs flex items-center gap-1 transition-all cursor-pointer shrink-0 whitespace-nowrap ${
-                    activeStampPreset === 'signature'
-                      ? 'bg-amber-600 text-white border-amber-700 ring-2 ring-amber-400 font-black shadow-xs'
-                      : 'bg-slate-100 hover:bg-slate-200 border-slate-200/80 text-slate-800'
-                  }`}
-                  title="Click Signature Line then click anywhere on PDF page to place stamp"
-                >
-                  <Edit3 className="w-3.5 h-3.5" />
-                  <span>Signature Line</span>
-                </button>
-
-                <button
-                  onClick={() => handleAddStampPreset('check')}
-                  className={`px-2.5 py-1 rounded-xl border font-bold text-xs flex items-center gap-1 transition-all cursor-pointer shrink-0 whitespace-nowrap ${
-                    activeStampPreset === 'check'
-                      ? 'bg-emerald-600 text-white border-emerald-700 ring-2 ring-emerald-400 font-black shadow-xs'
-                      : 'bg-emerald-50 hover:bg-emerald-100 border-emerald-200 text-emerald-800'
-                  }`}
-                  title="Click ✓ Check then click anywhere on PDF page to place stamp"
-                >
-                  <CheckSquare className="w-3.5 h-3.5" />
-                  <span>✓ Check</span>
-                </button>
-
-                <button
-                  onClick={() => handleAddStampPreset('cross')}
-                  className={`px-2.5 py-1 rounded-xl border font-bold text-xs flex items-center gap-1 transition-all cursor-pointer shrink-0 whitespace-nowrap ${
-                    activeStampPreset === 'cross'
-                      ? 'bg-rose-600 text-white border-rose-700 ring-2 ring-rose-400 font-black shadow-xs'
-                      : 'bg-rose-50 hover:bg-rose-100 border-rose-200 text-rose-800'
-                  }`}
-                  title="Click ✗ Cross then click anywhere on PDF page to place stamp"
-                >
-                  <XCircle className="w-3.5 h-3.5" />
-                  <span>✗ Cross</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Page Navigation & Operations */}
-            <div className="flex flex-wrap items-center justify-between gap-4 pt-3 border-t border-slate-100 text-xs">
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl border border-slate-200">
-                  <button
-                    disabled={currentPage <= 1}
-                    onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                    className="px-2.5 py-1 rounded-lg bg-white hover:bg-slate-200 text-slate-900 disabled:opacity-40 font-bold shadow-2xs"
-                  >
-                    Prev Page
-                  </button>
-                  <span className="font-black text-indigo-900 px-2">
-                    Page {currentPage} of {numPages}
-                  </span>
-                  <button
-                    disabled={currentPage >= numPages}
-                    onClick={() => setCurrentPage((p) => Math.min(numPages, p + 1))}
-                    className="px-2.5 py-1 rounded-lg bg-white hover:bg-slate-200 text-slate-900 disabled:opacity-40 font-bold shadow-2xs"
-                  >
-                    Next Page
-                  </button>
-                </div>
-
-                {activeTool === 'replaceText' && (
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-900 text-xs font-bold border border-amber-200">
-                    <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-                    <span>Click and drag over any PDF text to erase it and type replacement text directly!</span>
-                  </div>
-                )}
-              </div>
-
-              <div className="flex items-center gap-2 flex-wrap">
-                {/* Zoom Controls */}
-                <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200">
+              {/* Stamps & Zoom Controls */}
+              <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
+                <div className="flex items-center gap-1 bg-slate-100 p-0.5 rounded-lg border border-slate-200/80">
                   <button
                     onClick={() => setZoom((z) => Math.max(0.6, z - 0.2))}
-                    className="p-1.5 rounded-lg text-slate-700 hover:bg-white font-extrabold text-xs"
-                    title="Zoom Out"
+                    className="px-1.5 font-black text-xs text-slate-700 hover:bg-white rounded"
                   >
                     -
                   </button>
-                  <select
-                    value={Math.round(zoom * 100)}
-                    onChange={(e) => setZoom(Number(e.target.value) / 100)}
-                    className="bg-white text-slate-900 text-xs font-bold px-2 py-1 rounded-lg border border-slate-200"
-                  >
-                    <option value={60}>60%</option>
-                    <option value={80}>80%</option>
-                    <option value={100}>100% (Fit)</option>
-                    <option value={120}>120%</option>
-                    <option value={150}>150%</option>
-                    <option value={200}>200%</option>
-                  </select>
+                  <span className="font-black text-[11px] text-slate-900 px-1">{Math.round(zoom * 100)}%</span>
                   <button
                     onClick={() => setZoom((z) => Math.min(2.5, z + 0.2))}
-                    className="p-1.5 rounded-lg text-slate-700 hover:bg-white font-extrabold text-xs"
-                    title="Zoom In"
+                    className="px-1.5 font-black text-xs text-slate-700 hover:bg-white rounded"
                   >
                     +
                   </button>
                 </div>
 
-                <button
-                  onClick={handleRotateCurrentPage}
-                  className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200/80"
-                  title="Rotate Page 90°"
-                >
-                  <RotateCw className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={handleClearCurrentPageEdits}
-                  className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200/80"
-                  title="Clear Page Edits"
-                >
-                  <RefreshCw className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={handleDeleteCurrentPage}
-                  className="p-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200"
-                  title="Delete Page"
-                >
-                  <Trash2 className="w-4 h-4" />
-                </button>
+                <div className="flex items-center gap-1">
+                  <button
+                    onClick={() => handleAddStampPreset('date')}
+                    className={`px-2 py-1 rounded-lg text-[11px] font-bold border transition-all ${
+                      activeStampPreset === 'date' ? 'bg-indigo-600 text-white border-indigo-600 shadow-xs' : 'bg-slate-100 text-slate-700 border-slate-200'
+                    }`}
+                  >
+                    + Date
+                  </button>
+                  <button
+                    onClick={() => handleAddStampPreset('signature')}
+                    className={`px-2 py-1 rounded-lg text-[11px] font-bold border transition-all ${
+                      activeStampPreset === 'signature' ? 'bg-amber-600 text-white border-amber-600 shadow-xs' : 'bg-slate-100 text-slate-700 border-slate-200'
+                    }`}
+                  >
+                    + Signature
+                  </button>
+                  <button
+                    onClick={() => handleAddStampPreset('check')}
+                    className={`px-2 py-1 rounded-lg text-[11px] font-bold border transition-all ${
+                      activeStampPreset === 'check' ? 'bg-emerald-600 text-white border-emerald-600 shadow-xs' : 'bg-emerald-50 text-emerald-800 border-emerald-200'
+                    }`}
+                  >
+                    ✓ Check
+                  </button>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Interactive PDF Page Canvas Workspace (Light Mode Day Canvas Container) */}
+          {/* Interactive PDF Page Canvas Viewport (Studio Backdrop) */}
           <div
             ref={workspaceRef}
-            className={`bg-slate-100/70 border border-slate-200/90 rounded-3xl overflow-auto max-h-[75vh] shadow-inner w-full relative transition-all ${
+            className={`bg-slate-200/70 rounded-2xl border border-slate-300/70 overflow-x-auto overflow-y-auto max-h-[78vh] sm:max-h-[82vh] shadow-inner w-full relative transition-all touch-pan-x touch-pan-y ${
               activeTool === 'pan' || isSpacePressed ? 'cursor-grab active:cursor-grabbing select-none' : ''
             }`}
             onPointerDown={(e) => {
@@ -1621,7 +1522,7 @@ export default function PDFEditPage() {
               }
             }}
           >
-            <div className="min-w-full min-h-full inline-flex items-center justify-center p-2 sm:p-8">
+            <div className="min-w-max min-h-full inline-flex items-center justify-center p-2 sm:p-8">
               {deletedPages.has(currentPage) ? (
                 <div className="p-12 bg-white rounded-3xl text-center space-y-3 border border-slate-200 shadow-md">
                   <Trash2 className="w-10 h-10 text-rose-500 mx-auto" />
@@ -1642,14 +1543,27 @@ export default function PDFEditPage() {
                 <canvas ref={canvasRef} className="block" />
                 <canvas
                   ref={overlayCanvasRef}
-                  className={`absolute top-0 left-0 touch-none ${
+                  className={`absolute top-0 left-0 ${
+                    ['draw', 'highlight', 'whiteout', 'replaceText'].includes(activeTool)
+                      ? 'touch-none'
+                      : 'touch-pan-x touch-pan-y'
+                  } ${
                     activeTool === 'pan' ? 'cursor-grab active:cursor-grabbing' : 'cursor-crosshair'
                   }`}
                   onMouseDown={handleOverlayMouseDown}
                   onMouseMove={handleOverlayMouseMove}
                   onMouseUp={handleOverlayMouseUp}
                   onTouchStart={(e) => {
-                    if (activeTool === 'pan' && e.touches.length === 1 && workspaceRef.current) {
+                    if (e.touches.length === 2 && workspaceRef.current) {
+                      const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+                      const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+                      touchPanStartRef.current = {
+                        x: midX,
+                        y: midY,
+                        scrollLeft: workspaceRef.current.scrollLeft,
+                        scrollTop: workspaceRef.current.scrollTop,
+                      };
+                    } else if (e.touches.length === 1 && workspaceRef.current && activeTool === 'pan') {
                       isPanningRef.current = true;
                       panStartRef.current = {
                         x: e.touches[0].clientX,
@@ -1660,6 +1574,15 @@ export default function PDFEditPage() {
                     }
                   }}
                   onTouchMove={(e) => {
+                    if (e.touches.length === 2 && touchPanStartRef.current && workspaceRef.current) {
+                      const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+                      const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+                      const dx = midX - touchPanStartRef.current.x;
+                      const dy = midY - touchPanStartRef.current.y;
+                      workspaceRef.current.scrollLeft = touchPanStartRef.current.scrollLeft - dx;
+                      workspaceRef.current.scrollTop = touchPanStartRef.current.scrollTop - dy;
+                      return;
+                    }
                     if (isPanningRef.current && panStartRef.current && workspaceRef.current && e.touches.length === 1) {
                       const dx = e.touches[0].clientX - panStartRef.current.x;
                       const dy = e.touches[0].clientY - panStartRef.current.y;
@@ -1670,6 +1593,7 @@ export default function PDFEditPage() {
                   onTouchEnd={() => {
                     isPanningRef.current = false;
                     panStartRef.current = null;
+                    touchPanStartRef.current = null;
                   }}
                 />
 
