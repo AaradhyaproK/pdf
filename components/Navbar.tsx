@@ -255,17 +255,17 @@ export function Navbar() {
       {/* MOBILE DEFAULT NAVBAR (Visible on mobile when search is closed) */}
       {/* ========================================================= */}
       {!searchOpen && (
-        <div className="md:hidden w-full px-3.5 py-2 flex items-center justify-between gap-2">
-          {/* Mobile Brand / Back Button */}
+        <div className="md:hidden w-full px-3 py-2 flex items-center justify-between gap-2">
+          {/* Mobile Brand / Prominent Bigger Back Button */}
           {pathname !== '/' ? (
             <div className="flex items-center gap-2 min-w-0">
               <button
                 onClick={() => router.back()}
-                className="p-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-900 active:scale-90 transition-all cursor-pointer shrink-0 border border-slate-200/80"
+                className="p-2 sm:p-2.5 rounded-2xl bg-white/80 backdrop-blur-xl border border-slate-200/90 shadow-md hover:bg-white active:scale-90 transition-all cursor-pointer shrink-0 flex items-center justify-center text-slate-900 luma-glass-pill group"
                 aria-label="Go Back"
-                title="Go Back"
+                title="Go Back to Previous Page"
               >
-                <ArrowLeft className="w-4 h-4 text-slate-900 stroke-[2.5]" />
+                <ArrowLeft className="w-5 h-5 sm:w-6 sm:h-6 text-slate-900 stroke-[3] group-hover:-translate-x-0.5 transition-transform" />
               </button>
               <Link href="/" className="flex items-center gap-1.5 min-w-0 shrink">
                 <img src="/1.png" alt="FileZenith Logo" className="w-5 h-5 object-contain" />
@@ -304,7 +304,7 @@ export function Navbar() {
             {/* Mobile Search Button Pill */}
             <button
               onClick={() => setSearchOpen(true)}
-              className="px-3 py-1 flex items-center gap-1.5 text-slate-800 hover:text-slate-900 bg-slate-100/90 border border-slate-200/90 rounded-full active:scale-95 transition-all cursor-pointer shrink-0"
+              className="px-3 py-1.5 flex items-center gap-1.5 text-slate-800 hover:text-slate-900 bg-slate-100/90 border border-slate-200/90 rounded-full active:scale-95 transition-all cursor-pointer shrink-0"
               aria-label="Search tools"
               title="Search Tools"
             >
@@ -594,12 +594,14 @@ export function Navbar() {
                       <Link
                         key={tool.slug}
                         href={tool.slug}
-                        onClick={() => {
+                        onClick={(e) => {
+                          e.preventDefault();
                           setSearchOpen(false);
                           setSearchQuery('');
+                          router.push(tool.slug);
                         }}
                         onMouseEnter={() => setSelectedIndex(idx)}
-                        className={`p-2.5 rounded-2xl flex items-center justify-between transition-all duration-150 border ${
+                        className={`p-2.5 rounded-2xl flex items-center justify-between transition-all duration-150 border cursor-pointer ${
                           isSelected
                             ? 'bg-slate-900 text-white border-slate-900 shadow-md translate-x-1'
                             : 'hover:bg-slate-100/80 border-transparent text-slate-900'
@@ -743,11 +745,13 @@ export function Navbar() {
                 <Link
                   key={tool.slug}
                   href={tool.slug}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault();
                     setSearchOpen(false);
                     setSearchQuery('');
+                    router.push(tool.slug);
                   }}
-                  className="p-3 rounded-2xl bg-slate-50 hover:bg-slate-100 border border-slate-200/80 flex items-center justify-between active:scale-[0.98] transition-all"
+                  className="p-3 rounded-2xl bg-slate-50 hover:bg-slate-100 border border-slate-200/80 flex items-center justify-between active:scale-[0.98] transition-all cursor-pointer"
                 >
                   <div className="flex items-center gap-3 min-w-0">
                     <div
