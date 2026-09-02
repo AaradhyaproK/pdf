@@ -90,6 +90,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full scroll-smooth light">
       <head>
+        {/* Monetag Official Ad Script */}
+        <script
+          src="https://quge5.com/88/tag.min.js"
+          data-zone="275617"
+          async
+          data-cfasync="false"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
