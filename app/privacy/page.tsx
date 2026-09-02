@@ -5,6 +5,9 @@ import { ShieldCheck, Lock, Eye, Cookie, FileText, Mail, ServerOff } from 'lucid
 export const metadata: Metadata = {
   title: 'Privacy Policy - FileZenith',
   description: 'Learn about FileZenith privacy practices, 100% client-side zero-server file processing, cookie policies, and Google AdSense compliance.',
+  alternates: {
+    canonical: 'https://www.filezenith.com/privacy',
+  },
 };
 
 export default function PrivacyPolicyPage() {

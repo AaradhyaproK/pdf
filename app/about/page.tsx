@@ -5,6 +5,9 @@ import { ShieldCheck, Cpu, Zap, Sparkles, ArrowRight, CheckCircle2 } from 'lucid
 export const metadata: Metadata = {
   title: 'About Us - FileZenith',
   description: 'Learn about FileZenith, where your PDF is processed directly in your browser, keeping your document processing 100% private.',
+  alternates: {
+    canonical: 'https://www.filezenith.com/about',
+  },
 };
 
 export default function AboutPage() {

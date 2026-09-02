@@ -18,11 +18,14 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://filezenith.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.filezenith.com'),
   title: 'FileZenith - 100% Free Online PDF, Image & Utility Studio',
   description: 'FileZenith is an all-in-one private online file studio. Compress PDF, edit documents, convert PNG to JPG, pics to PDF, remove background, and generate QR codes 100% privately inside your browser.',
   keywords: 'filezenith, file zenith, filezenith.com, pdf compressor, edit pdf online, merge pdf, pics to pdf, png to jpg, png to pdf, remove background, qr generator, client-side web tools',
   manifest: '/manifest.json',
+  alternates: {
+    canonical: '/',
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
@@ -41,6 +44,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'FileZenith - 100% Free Online PDF, Image & Utility Studio',
     description: 'All-in-one private online file tool suite. Zero server file uploads. 100% Free & Secure.',
+    url: 'https://www.filezenith.com',
     siteName: 'FileZenith',
     type: 'website',
     images: [{ url: '/1.png' }],
@@ -65,15 +69,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.filezenith.com';
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'FileZenith',
     alternateName: ['File Zenith', 'FileZenith PDF & Image Studio'],
-    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://filezenith.com',
+    url: siteUrl,
     potentialAction: {
       '@type': 'SearchAction',
-      target: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://filezenith.com'}/search?q={search_term_string}`,
+      target: `${siteUrl}/studio?q={search_term_string}`,
       'query-input': 'required name=search_term_string',
     },
   };

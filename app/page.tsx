@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import Script from 'next/script';
 import { PrivacyBadge } from '@/components/PrivacyBadge';
@@ -36,16 +37,31 @@ const HOMEPAGE_FAQS = [
   },
 ];
 
+export const metadata: Metadata = {
+  title: 'FileZenith - 100% Free Online PDF, Image & Utility Studio',
+  description: 'FileZenith is an all-in-one private online file studio. Compress PDF, edit documents, convert PNG to JPG, pics to PDF, remove background, and generate QR codes 100% privately inside your browser.',
+  alternates: {
+    canonical: 'https://www.filezenith.com/',
+  },
+  openGraph: {
+    title: 'FileZenith - 100% Free Online PDF, Image & Utility Studio',
+    description: 'All-in-one private online file tool suite. Zero server file uploads. 100% Free & Secure.',
+    url: 'https://www.filezenith.com/',
+    siteName: 'FileZenith',
+    type: 'website',
+  },
+};
+
 const JSON_LD_SCHEMAS = [
   {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'FileZenith',
-    url: 'https://filezenith.com',
+    url: 'https://www.filezenith.com',
     description: '100% Free Online iLovePDF Alternative. All PDF, Image & Utility Tools in One Place. Zero Server File Uploads.',
     potentialAction: {
       '@type': 'SearchAction',
-      target: 'https://filezenith.com/?q={search_term_string}',
+      target: 'https://www.filezenith.com/studio?q={search_term_string}',
       'query-input': 'required name=search_term_string',
     },
   },

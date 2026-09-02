@@ -217,7 +217,7 @@ export default function DownloadAppPage() {
           <div className="pt-2 flex flex-col sm:flex-row items-center gap-5 p-5 sm:p-6 rounded-2xl bg-slate-50 border border-slate-200/80">
             <div className="p-2.5 bg-white rounded-2xl border border-slate-200 shadow-sm shrink-0 flex items-center justify-center">
               <img
-                src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://filezenith.com/download-app&color=0f172a"
+                src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://www.filezenith.com/download-app&color=0f172a"
                 alt="Scan to Install FileZenith Mobile App"
                 className="w-28 h-28 sm:w-32 sm:h-32 object-contain rounded-xl"
               />
@@ -234,7 +234,7 @@ export default function DownloadAppPage() {
               </p>
               <div className="pt-1">
                 <span className="text-[11px] font-mono font-bold text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-lg border border-indigo-100 inline-block">
-                  https://filezenith.com/download-app
+                  https://www.filezenith.com/download-app
                 </span>
               </div>
             </div>

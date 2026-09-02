@@ -916,7 +916,7 @@ export function generateToolMetadata(slug: string) {
     };
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://filezenith.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.filezenith.com';
   const canonicalUrl = `${siteUrl}${slug}`;
 
   return {
