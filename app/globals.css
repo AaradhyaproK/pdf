@@ -169,6 +169,15 @@ header {
   will-change: transform, opacity;
 }
 
+/* Shimmer animation for PWA splash loader */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.animate-shimmer {
+  animation: shimmer 1.4s infinite ease-in-out;
+}
+
 /* Ultra smooth button active click response */
 button:active, a:active {
   transition: transform 0.1s cubic-bezier(0.16, 1, 0.3, 1);
