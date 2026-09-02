@@ -184,14 +184,31 @@ export function Navbar() {
     setSelectedIndex(0);
   }, [searchQuery, selectedCategory]);
 
-  // Focus mobile input when mobile search is toggled
   useEffect(() => {
     if (searchOpen && searchInputRef.current && window.innerWidth < 768) {
       searchInputRef.current.focus();
     }
   }, [searchOpen]);
 
-  // Dismiss desktop search dropdown on click outside
+  const handleBack = () => {
+    if (typeof window !== 'undefined' && window.history.length > 1) {
+      router.back();
+    } else {
+      router.push('/');
+    }
+  };
+
+  useEffect(() => {
+    if (searchOpen && window.innerWidth < 768) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [searchOpen]);
+
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (searchContainerRef.current && !searchContainerRef.current.contains(e.target as Node)) {
@@ -206,70 +223,157 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed sm:sticky top-0 inset-x-0 z-50 w-full transition-all duration-300 ${
+      className={`sticky top-0 inset-x-0 z-50 w-full transition-all duration-300 pt-[env(safe-area-inset-top,0px)] ${
         scrolled
           ? 'bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-xs'
           : 'bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-2xs'
       }`}
     >
-      {/* ========================================================= */}
-      {/* MOBILE SEARCH HEADER (Visible on mobile screens when active) */}
-      {/* ========================================================= */}
       {searchOpen && (
-        <div className="md:hidden max-w-md mx-auto px-2 py-1.5 flex items-center gap-2 bg-white/95 backdrop-blur-2xl rounded-full border border-slate-200 shadow-xl z-50 my-1">
-          <button
-            onClick={() => {
-              setSearchOpen(false);
-              setSearchQuery('');
-            }}
-            className="p-1.5 text-slate-600 hover:text-slate-900 rounded-full active:scale-90 transition-all duration-150"
-            aria-label="Close search"
-          >
-            <ArrowLeft className="w-4 h-4 text-slate-700" />
-          </button>
+        <div className="md:hidden fixed inset-0 z-[100] bg-white flex flex-col pt-[env(safe-area-inset-top,0px)] animate-in fade-in duration-150">
+          <div className="p-3 border-b border-slate-200/80 flex items-center gap-2.5 bg-white shadow-xs">
+            <button
+              onClick={() => {
+                setSearchOpen(false);
+                setSearchQuery('');
+              }}
+              className="w-9 h-9 rounded-full bg-slate-100 text-slate-800 flex items-center justify-center active:scale-90 transition-transform shrink-0 cursor-pointer"
+              aria-label="Close search"
+            >
+              <ArrowLeft className="w-5 h-5 text-slate-900 stroke-[2.5]" />
+            </button>
 
-          <div className="flex-1 relative flex items-center">
-            <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 pointer-events-none" />
-            <input
-              ref={searchInputRef}
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search 20+ tools..."
-              className="w-full pl-8 pr-7 py-1.5 bg-slate-100/90 border border-slate-200/90 rounded-full text-xs font-semibold text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-slate-900/20 focus:border-slate-800 shadow-inner"
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery('')}
-                className="absolute right-2 text-slate-400 hover:text-slate-600 p-1"
-                aria-label="Clear search"
-              >
-                <X className="w-3.5 h-3.5" />
-              </button>
+            <div className="flex-1 relative flex items-center">
+              <Search className="w-4 h-4 text-slate-400 absolute left-3.5 pointer-events-none stroke-[2.2]" />
+              <input
+                ref={searchInputRef}
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search 20+ PDF, Image & Utility tools..."
+                className="w-full pl-9 pr-9 py-2 bg-slate-100 border border-slate-200 rounded-full text-xs font-semibold text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-slate-900/20 focus:border-slate-900 transition-all shadow-inner"
+                autoFocus
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-2.5 text-slate-400 hover:text-slate-700 p-1 cursor-pointer"
+                  aria-label="Clear search"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+          </div>
+
+          <div className="p-2.5 bg-slate-50 border-b border-slate-200/60 flex items-center gap-1.5 overflow-x-auto no-scrollbar shrink-0">
+            {[
+              { id: 'all', label: 'All Tools', count: ALL_SEARCHABLE_TOOLS.length },
+              { id: 'pdf', label: 'PDF Studio', count: PDF_TOOLS.length },
+              { id: 'image', label: 'Image Studio', count: IMAGE_TOOLS.length },
+              { id: 'utility', label: 'Utilities', count: UTILITY_TOOLS.length },
+            ].map((tab) => {
+              const isTabActive = selectedCategory === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setSelectedCategory(tab.id as any)}
+                  className={`px-3 py-1 rounded-full text-xs font-bold transition-all shrink-0 flex items-center gap-1.5 border ${
+                    isTabActive
+                      ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
+                      : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-100 hover:text-slate-900'
+                  }`}
+                >
+                  <span>{tab.label}</span>
+                  <span
+                    className={`px-1.5 py-0.2 rounded-full text-[9px] font-black ${
+                      isTabActive ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-500'
+                    }`}
+                  >
+                    {tab.count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="flex-1 overflow-y-auto p-3 space-y-2 pb-16">
+            {filteredTools.length === 0 ? (
+              <div className="py-12 text-center space-y-2">
+                <div className="w-12 h-12 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto">
+                  <Search className="w-6 h-6" />
+                </div>
+                <p className="text-sm font-semibold text-slate-600">
+                  No tools found matching &quot;{searchQuery}&quot;
+                </p>
+                <button
+                  onClick={() => {
+                    setSearchQuery('');
+                    setSelectedCategory('all');
+                  }}
+                  className="text-xs font-bold text-rose-600 hover:underline cursor-pointer"
+                >
+                  Reset search filter
+                </button>
+              </div>
+            ) : (
+              filteredTools.map((tool) => {
+                const Icon = tool.icon;
+                return (
+                  <Link
+                    key={tool.slug}
+                    href={tool.slug}
+                    onClick={() => {
+                      setSearchOpen(false);
+                      setSearchQuery('');
+                    }}
+                    className="p-3 rounded-2xl bg-slate-50 hover:bg-slate-100/90 border border-slate-200/80 flex items-center justify-between active:scale-[0.98] transition-all cursor-pointer shadow-2xs"
+                  >
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div
+                        className={`p-2.5 rounded-xl shrink-0 ${
+                          tool.category === 'pdf'
+                            ? 'bg-rose-50 text-rose-600 border border-rose-100'
+                            : tool.category === 'image'
+                            ? 'bg-sky-50 text-sky-600 border border-sky-100'
+                            : 'bg-emerald-50 text-emerald-600 border border-emerald-100'
+                        }`}
+                      >
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <div className="min-w-0">
+                        <span className="text-xs font-black text-slate-900 block truncate">{tool.name}</span>
+                        <p className="text-[11px] text-slate-500 truncate mt-0.5 font-medium">{tool.desc}</p>
+                      </div>
+                    </div>
+                    {tool.badge && (
+                      <span className="text-[9px] font-black px-2 py-0.5 rounded-full bg-white text-slate-700 border border-slate-200 shrink-0 ml-2 shadow-2xs">
+                        {tool.badge}
+                      </span>
+                    )}
+                  </Link>
+                );
+              })
             )}
           </div>
         </div>
       )}
 
-      {/* ========================================================= */}
-      {/* MOBILE DEFAULT NAVBAR (Visible on mobile when search is closed) */}
-      {/* ========================================================= */}
       {!searchOpen && (
-        <div className="md:hidden w-full px-3 py-2 flex items-center justify-between gap-2">
-          {/* Mobile Brand / Prominent Bigger Back Button */}
+        <div className="md:hidden w-full px-3 py-2 flex items-center justify-between gap-2 min-h-[52px]">
           {pathname !== '/' ? (
             <div className="flex items-center gap-2 min-w-0">
               <button
-                onClick={() => router.back()}
-                className="p-2 sm:p-2.5 rounded-2xl bg-white/80 backdrop-blur-xl border border-slate-200/90 shadow-md hover:bg-white active:scale-90 transition-all cursor-pointer shrink-0 flex items-center justify-center text-slate-900 luma-glass-pill group"
+                onClick={handleBack}
+                className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-100/90 hover:bg-slate-200/90 border border-slate-200/90 shadow-xs hover:shadow transition-all cursor-pointer shrink-0 flex items-center justify-center text-slate-900 active:scale-90"
                 aria-label="Go Back"
                 title="Go Back to Previous Page"
               >
-                <ArrowLeft className="w-5 h-5 sm:w-6 sm:h-6 text-slate-900 stroke-[3] group-hover:-translate-x-0.5 transition-transform" />
+                <ArrowLeft className="w-5 h-5 text-slate-900 stroke-[2.5]" />
               </button>
-              <Link href="/" className="flex items-center gap-1.5 min-w-0 shrink">
-                <img src="/1.png" alt="FileZenith Logo" className="w-5 h-5 object-contain" />
-                <span className="font-black text-xs text-slate-900 truncate tracking-tight">
+              <Link href="/" className="flex items-center gap-1.5 min-w-0 shrink active:scale-95 transition-transform">
+                <img src="/1.png" alt="FileZenith Logo" className="w-6 h-6 object-contain shrink-0" />
+                <span className="font-black text-xs sm:text-sm text-slate-900 truncate tracking-tight">
                   FileZenith
                 </span>
               </Link>
@@ -287,39 +391,33 @@ export function Navbar() {
             </Link>
           )}
 
-          {/* Mobile Action Pills */}
           <div className="flex items-center gap-1.5 shrink-0">
             {pathname === '/pdf/compress' && compressReadyInfo && (
               <a
                 href={compressReadyInfo.url}
                 download={`compressed-${compressReadyInfo.name}`}
-                className="px-3 py-1 flex items-center gap-1.5 text-white bg-emerald-600 hover:bg-emerald-700 rounded-full font-black active:scale-95 transition-all cursor-pointer shrink-0 shadow-md animate-in zoom-in-95 duration-200"
+                className="px-2.5 py-1.5 flex items-center gap-1 text-white bg-emerald-600 hover:bg-emerald-700 rounded-full font-black active:scale-95 transition-all cursor-pointer shrink-0 shadow-md animate-in zoom-in-95 duration-200"
                 title="Download Compressed PDF"
               >
                 <Download className="w-3.5 h-3.5 text-white stroke-[2.5]" />
-                <span className="text-[11px] font-black tracking-tight">Download PDF</span>
+                <span className="text-[11px] font-black tracking-tight">PDF</span>
               </a>
             )}
 
-            {/* Mobile Search Button Pill */}
             <button
               onClick={() => setSearchOpen(true)}
-              className="px-3 py-1.5 flex items-center gap-1.5 text-slate-800 hover:text-slate-900 bg-slate-100/90 border border-slate-200/90 rounded-full active:scale-95 transition-all cursor-pointer shrink-0"
+              className="px-3 py-1.5 flex items-center gap-1.5 text-slate-800 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 border border-slate-200/90 rounded-full active:scale-95 transition-all cursor-pointer shrink-0 shadow-xs"
               aria-label="Search tools"
               title="Search Tools"
             >
-              <Search className="w-3.5 h-3.5 text-slate-800 stroke-[2.2]" />
-              <span className="text-[11px] font-extrabold tracking-tight text-slate-800">Search</span>
+              <Search className="w-4 h-4 text-slate-800 stroke-[2.2]" />
+              <span className="text-xs font-extrabold tracking-tight text-slate-800">Search</span>
             </button>
           </div>
         </div>
       )}
 
-      {/* ========================================================= */}
-      {/* DESKTOP HEADER NAVIGATION & INTEGRATED SEARCH BAR */}
-      {/* ========================================================= */}
       <div className="hidden md:flex max-w-7xl mx-auto px-6 lg:px-8 h-16 items-center justify-between gap-4">
-        {/* Brand Logo - Desktop */}
         <Link href="/" className="flex items-center gap-2.5 group shrink-0 active:scale-95 transition-transform duration-200">
           <img
             src="/1.png"
@@ -336,9 +434,7 @@ export function Navbar() {
           </div>
         </Link>
 
-        {/* Desktop Megamenu Navigation */}
         <nav className="flex items-center gap-1 text-sm font-semibold text-slate-700">
-          {/* PDF Studio Dropdown */}
           <div className="relative group py-4">
             <Link
               href="/pdf/compress"
@@ -353,7 +449,6 @@ export function Navbar() {
               <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:rotate-180 transition-transform duration-200" />
             </Link>
 
-            {/* PDF Megamenu Panel */}
             <div className="absolute top-full left-0 w-[580px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0 grid grid-cols-2 gap-2">
               <div className="col-span-2 px-3 py-1.5 flex items-center justify-between border-b border-slate-100 mb-1">
                 <span className="text-xs font-black uppercase tracking-wider text-slate-900">PDF Studio Tools</span>
@@ -389,7 +484,6 @@ export function Navbar() {
             </div>
           </div>
 
-          {/* Image Studio Dropdown */}
           <div className="relative group py-4">
             <Link
               href="/image/compress"
@@ -404,7 +498,6 @@ export function Navbar() {
               <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:rotate-180 transition-transform duration-200" />
             </Link>
 
-            {/* Image Megamenu Panel */}
             <div className="absolute top-full left-0 w-[580px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0 grid grid-cols-2 gap-2">
               <div className="col-span-2 px-3 py-1.5 flex items-center justify-between border-b border-slate-100 mb-1">
                 <span className="text-xs font-black uppercase tracking-wider text-slate-900">Image Studio Tools</span>
@@ -440,7 +533,6 @@ export function Navbar() {
             </div>
           </div>
 
-          {/* Daily Utilities Dropdown */}
           <div className="relative group py-4">
             <Link
               href="/utility/qr-generator"
@@ -455,7 +547,6 @@ export function Navbar() {
               <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:rotate-180 transition-transform duration-200" />
             </Link>
 
-            {/* Utility Dropdown Panel */}
             <div className="absolute top-full left-0 w-[340px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0 space-y-2">
               <div className="px-3 py-1.5 flex items-center justify-between border-b border-slate-100 mb-1">
                 <span className="text-xs font-black uppercase tracking-wider text-slate-900">Daily Quick Utilities</span>
@@ -491,7 +582,6 @@ export function Navbar() {
           </div>
         </nav>
 
-        {/* Desktop Top Navbar Search Bar Input */}
         <div ref={searchContainerRef} className="relative flex items-center w-64 lg:w-80">
           <div
             className={`w-full relative flex items-center rounded-full transition-all duration-200 ${
@@ -516,7 +606,7 @@ export function Navbar() {
             {searchQuery ? (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 text-slate-400 hover:text-slate-600 p-1"
+                className="absolute right-3 text-slate-400 hover:text-slate-600 p-1 cursor-pointer"
                 aria-label="Clear search"
               >
                 <X className="w-3.5 h-3.5" />
@@ -528,12 +618,8 @@ export function Navbar() {
             )}
           </div>
 
-          {/* ========================================================= */}
-          {/* DESKTOP SEARCH TOOLS FLOATING DROPDOWN PALETTE */}
-          {/* ========================================================= */}
           {searchOpen && (
             <div className="absolute top-full right-0 mt-2 w-[480px] lg:w-[540px] bg-white/95 backdrop-blur-2xl border border-slate-200/90 rounded-3xl shadow-2xl z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-150">
-              {/* Top Category Filter Tabs Bar */}
               <div className="p-3 bg-slate-50/80 border-b border-slate-200/70 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
                 {[
                   { id: 'all', label: 'All Tools', count: ALL_SEARCHABLE_TOOLS.length },
@@ -546,7 +632,7 @@ export function Navbar() {
                     <button
                       key={tab.id}
                       onClick={() => setSelectedCategory(tab.id as any)}
-                      className={`px-3 py-1 rounded-full text-[11px] font-bold transition-all shrink-0 flex items-center gap-1.5 border ${
+                      className={`px-3 py-1 rounded-full text-[11px] font-bold transition-all shrink-0 flex items-center gap-1.5 border cursor-pointer ${
                         isTabActive
                           ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
                           : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-100 hover:text-slate-900'
@@ -565,7 +651,6 @@ export function Navbar() {
                 })}
               </div>
 
-              {/* Tool Results List */}
               <div className="p-2 space-y-1 max-h-[60vh] overflow-y-auto">
                 {filteredTools.length === 0 ? (
                   <div className="py-10 text-center space-y-2">
@@ -580,7 +665,7 @@ export function Navbar() {
                         setSearchQuery('');
                         setSelectedCategory('all');
                       }}
-                      className="text-[11px] font-bold text-rose-600 hover:underline"
+                      className="text-[11px] font-bold text-rose-600 hover:underline cursor-pointer"
                     >
                       Reset search query
                     </button>
@@ -672,7 +757,6 @@ export function Navbar() {
                 )}
               </div>
 
-              {/* Bottom Quick Keyboard Hint Bar */}
               <div className="px-4 py-2 bg-slate-50 border-t border-slate-200/80 flex items-center justify-between text-[10px] text-slate-500 font-medium">
                 <div className="flex items-center gap-3">
                   <span className="flex items-center gap-1">
@@ -703,84 +787,6 @@ export function Navbar() {
           )}
         </div>
       </div>
-
-      {/* ========================================================= */}
-      {/* INSTANT DROPDOWN SEARCH RESULTS OVERLAY ON MOBILE */}
-      {/* ========================================================= */}
-      {searchOpen && (
-        <div className="md:hidden bg-white border-b border-slate-200 max-h-[75vh] overflow-y-auto p-3 space-y-2 shadow-2xl z-50 animate-in slide-in-from-top duration-200">
-          {/* Mobile Category Filters */}
-          <div className="flex items-center gap-1.5 pb-2 border-b border-slate-100 overflow-x-auto no-scrollbar">
-            {[
-              { id: 'all', label: 'All' },
-              { id: 'pdf', label: 'PDF' },
-              { id: 'image', label: 'Image' },
-              { id: 'utility', label: 'Utility' },
-            ].map((tab) => {
-              const isTabActive = selectedCategory === tab.id;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setSelectedCategory(tab.id as any)}
-                  className={`px-3 py-1 rounded-full text-[11px] font-bold shrink-0 border ${
-                    isTabActive
-                      ? 'bg-slate-900 text-white border-slate-900'
-                      : 'bg-slate-100 text-slate-600 border-slate-200'
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              );
-            })}
-          </div>
-
-          {filteredTools.length === 0 ? (
-            <div className="py-8 text-center text-xs text-slate-400">
-              No tools found matching &quot;{searchQuery}&quot;
-            </div>
-          ) : (
-            filteredTools.map((tool) => {
-              const Icon = tool.icon;
-              return (
-                <Link
-                  key={tool.slug}
-                  href={tool.slug}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setSearchOpen(false);
-                    setSearchQuery('');
-                    router.push(tool.slug);
-                  }}
-                  className="p-3 rounded-2xl bg-slate-50 hover:bg-slate-100 border border-slate-200/80 flex items-center justify-between active:scale-[0.98] transition-all cursor-pointer"
-                >
-                  <div className="flex items-center gap-3 min-w-0">
-                    <div
-                      className={`p-2 rounded-xl shrink-0 ${
-                        tool.category === 'pdf'
-                          ? 'bg-rose-100 text-rose-600'
-                          : tool.category === 'image'
-                          ? 'bg-sky-100 text-sky-600'
-                          : 'bg-emerald-100 text-emerald-600'
-                      }`}
-                    >
-                      <Icon className="w-4 h-4" />
-                    </div>
-                    <div className="min-w-0">
-                      <span className="text-xs font-black text-slate-900 block truncate">{tool.name}</span>
-                      <p className="text-[11px] text-slate-500 truncate mt-0.5">{tool.desc}</p>
-                    </div>
-                  </div>
-                  {tool.badge && (
-                    <span className="text-[9px] font-black px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200 shrink-0 ml-2">
-                      {tool.badge}
-                    </span>
-                  )}
-                </Link>
-              );
-            })
-          )}
-        </div>
-      )}
     </header>
   );
 }
