@@ -1287,11 +1287,11 @@ export default function PDFEditPage() {
                 </div>
               </div>
 
-              {/* Download Button */}
+              {/* Download Button (Hidden on Mobile, Visible on Desktop) */}
               <button
                 onClick={handleExportPDF}
                 disabled={isExporting}
-                className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-sm transition-all flex items-center justify-center gap-1.5 cursor-pointer shrink-0"
+                className="hidden sm:flex px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-sm transition-all items-center justify-center gap-1.5 cursor-pointer shrink-0"
               >
                 {isExporting ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Download className="w-3.5 h-3.5" />}
                 <span>Download PDF</span>
