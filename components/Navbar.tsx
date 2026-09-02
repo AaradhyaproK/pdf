@@ -198,6 +198,16 @@ export function Navbar() {
     }
   };
 
+  // Select tool from mobile/desktop search results cleanly
+  const handleSelectTool = (slug: string) => {
+    setSearchOpen(false);
+    setSearchQuery('');
+    if (typeof window !== 'undefined') {
+      document.body.style.overflow = '';
+    }
+    router.push(slug);
+  };
+
   useEffect(() => {
     if (searchOpen && window.innerWidth < 768) {
       document.body.style.overflow = 'hidden';
@@ -230,12 +240,13 @@ export function Navbar() {
       }`}
     >
       {searchOpen && (
-        <div className="md:hidden fixed inset-0 z-[100] bg-white flex flex-col pt-[env(safe-area-inset-top,0px)] animate-in fade-in duration-150">
-          <div className="p-3 border-b border-slate-200/80 flex items-center gap-2.5 bg-white shadow-xs">
+        <div className="md:hidden fixed inset-0 h-[100dvh] w-full z-[100] bg-white flex flex-col pt-[env(safe-area-inset-top,0px)] animate-in fade-in duration-150">
+          <div className="p-3 border-b border-slate-200/80 flex items-center gap-2.5 bg-white shadow-xs shrink-0">
             <button
               onClick={() => {
                 setSearchOpen(false);
                 setSearchQuery('');
+                if (typeof window !== 'undefined') document.body.style.overflow = '';
               }}
               className="w-9 h-9 rounded-full bg-slate-100 text-slate-800 flex items-center justify-center active:scale-90 transition-transform shrink-0 cursor-pointer"
               aria-label="Close search"
@@ -278,7 +289,7 @@ export function Navbar() {
                 <button
                   key={tab.id}
                   onClick={() => setSelectedCategory(tab.id as any)}
-                  className={`px-3 py-1 rounded-full text-xs font-bold transition-all shrink-0 flex items-center gap-1.5 border ${
+                  className={`px-3 py-1 rounded-full text-xs font-bold transition-all shrink-0 flex items-center gap-1.5 border cursor-pointer ${
                     isTabActive
                       ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
                       : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-100 hover:text-slate-900'
@@ -297,7 +308,7 @@ export function Navbar() {
             })}
           </div>
 
-          <div className="flex-1 overflow-y-auto p-3 space-y-2 pb-16">
+          <div className="flex-1 overflow-y-auto p-3 space-y-2 pb-24 overscroll-contain">
             {filteredTools.length === 0 ? (
               <div className="py-12 text-center space-y-2">
                 <div className="w-12 h-12 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto">
@@ -320,29 +331,27 @@ export function Navbar() {
               filteredTools.map((tool) => {
                 const Icon = tool.icon;
                 return (
-                  <Link
+                  <button
                     key={tool.slug}
-                    href={tool.slug}
-                    onClick={() => {
-                      setSearchOpen(false);
-                      setSearchQuery('');
-                    }}
-                    className="p-3 rounded-2xl bg-slate-50 hover:bg-slate-100/90 border border-slate-200/80 flex items-center justify-between active:scale-[0.98] transition-all cursor-pointer shadow-2xs"
+                    onClick={() => handleSelectTool(tool.slug)}
+                    className="w-full text-left p-3 rounded-2xl bg-slate-50 hover:bg-slate-100 active:bg-slate-200/80 border border-slate-200/80 flex items-center justify-between active:scale-[0.98] transition-all cursor-pointer shadow-2xs group"
                   >
                     <div className="flex items-center gap-3 min-w-0">
                       <div
                         className={`p-2.5 rounded-xl shrink-0 ${
                           tool.category === 'pdf'
-                            ? 'bg-rose-50 text-rose-600 border border-rose-100'
+                            ? 'bg-rose-50 text-rose-600 border border-rose-100 group-hover:bg-rose-600 group-hover:text-white'
                             : tool.category === 'image'
-                            ? 'bg-sky-50 text-sky-600 border border-sky-100'
-                            : 'bg-emerald-50 text-emerald-600 border border-emerald-100'
-                        }`}
+                            ? 'bg-sky-50 text-sky-600 border border-sky-100 group-hover:bg-sky-600 group-hover:text-white'
+                            : 'bg-emerald-50 text-emerald-600 border border-emerald-100 group-hover:bg-emerald-600 group-hover:text-white'
+                        } transition-colors`}
                       >
                         <Icon className="w-5 h-5" />
                       </div>
                       <div className="min-w-0">
-                        <span className="text-xs font-black text-slate-900 block truncate">{tool.name}</span>
+                        <span className="text-xs font-black text-slate-900 block truncate group-hover:text-slate-950">
+                          {tool.name}
+                        </span>
                         <p className="text-[11px] text-slate-500 truncate mt-0.5 font-medium">{tool.desc}</p>
                       </div>
                     </div>
@@ -351,7 +360,7 @@ export function Navbar() {
                         {tool.badge}
                       </span>
                     )}
-                  </Link>
+                  </button>
                 );
               })
             )}

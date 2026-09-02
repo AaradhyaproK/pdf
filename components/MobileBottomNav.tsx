@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import {
   Home,
   FileText,
@@ -64,9 +64,16 @@ import { motion } from 'framer-motion';
 
 export function MobileBottomNav() {
   const pathname = usePathname();
+  const router = useRouter();
   const [activeDrawer, setActiveDrawer] = useState<'pdf' | 'image' | 'utility' | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [inFooter, setInFooter] = useState(false);
+
+  const handleSelectTool = (slug: string) => {
+    setActiveDrawer(null);
+    setSearchQuery('');
+    router.push(slug);
+  };
 
   // Close drawer on page route change
   useEffect(() => {
@@ -208,10 +215,10 @@ export function MobileBottomNav() {
                   const badgeStyle = 'bg-slate-100 text-slate-700 border-slate-200/80';
 
                   return (
-                    <Link
+                    <button
                       key={tool.slug}
-                      href={tool.slug}
-                      className="p-3 rounded-2xl bg-white/80 hover:bg-white border border-slate-200/70 flex items-center justify-between active:scale-[0.98] transition-all duration-150 shadow-2xs"
+                      onClick={() => handleSelectTool(tool.slug)}
+                      className="w-full text-left p-3 rounded-2xl bg-white/80 hover:bg-white active:bg-slate-100 border border-slate-200/70 flex items-center justify-between active:scale-[0.98] transition-all duration-150 shadow-2xs cursor-pointer"
                     >
                       <div className="flex items-center gap-3 min-w-0">
                         <div className={`p-2.5 rounded-xl border shrink-0 ${iconStyle}`}>
@@ -231,7 +238,7 @@ export function MobileBottomNav() {
                           {tool.badge}
                         </span>
                       )}
-                    </Link>
+                    </button>
                   );
                 })
               )}
