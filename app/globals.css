@@ -151,35 +151,22 @@ html, body {
   overscroll-behavior-y: contain;
 }
 
-/* Global Native App Selection Prevention: Prevents long-press copy popup callouts on UI text */
+/* Enable text selection across all elements by default */
 *,
 ::before,
 ::after {
   -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none; /* Disables native iOS/Android long-press copy/share callout balloon */
-  -webkit-user-select: none;   /* Disables native text selection highlighting on UI elements */
-  user-select: none;
 }
 
-/* Prevent drag ghosting on images and icons */
-img,
-svg,
-a {
-  -webkit-user-drag: none;
-  user-drag: none;
+/* Custom text selection styling */
+::selection {
+  background-color: rgba(59, 130, 246, 0.25);
+  color: inherit;
 }
 
-/* Explicitly re-enable text selection for user input fields, textareas, and copyable text areas */
-input,
-textarea,
-[contenteditable="true"],
-code,
-pre,
-.selectable-text,
-.select-text {
-  -webkit-user-select: text !important;
-  user-select: text !important;
-  -webkit-touch-callout: default !important;
+::-moz-selection {
+  background-color: rgba(59, 130, 246, 0.25);
+  color: inherit;
 }
 
 /* Hardware accelerated smooth rendering utilities */
