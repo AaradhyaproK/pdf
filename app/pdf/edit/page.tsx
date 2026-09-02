@@ -1237,14 +1237,14 @@ export default function PDFEditPage() {
         <div className="space-y-2.5 pb-24 sm:pb-6 text-slate-900">
           {/* Top Studio Header Toolbar */}
           <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-2.5 sm:p-3 space-y-2">
-            <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-2">
-              {/* Left: File Info & Page Navigation Controls */}
-              <div className="flex items-center justify-between lg:justify-start gap-2 overflow-x-auto no-scrollbar py-0.5">
+            {/* Top Row: File Name & Page Navigation (Left) + Download Action (Right) */}
+            <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-2">
+              <div className="flex items-center gap-2 min-w-0 overflow-x-auto no-scrollbar">
                 <div className="flex items-center gap-2 shrink-0">
                   <div className="p-1.5 rounded-xl bg-indigo-50 text-indigo-600">
                     <FileText className="w-4 h-4" />
                   </div>
-                  <span className="text-xs font-black text-slate-900 max-w-[130px] sm:max-w-[180px] truncate" title={file.name}>
+                  <span className="text-xs font-black text-slate-900 max-w-[140px] sm:max-w-[220px] truncate" title={file.name}>
                     {file.name}
                   </span>
                 </div>
@@ -1287,82 +1287,7 @@ export default function PDFEditPage() {
                 </div>
               </div>
 
-              {/* Center: Primary Tool Action Pills */}
-              <div className="flex items-center gap-1 bg-slate-100/90 p-1 rounded-xl border border-slate-200/80 overflow-x-auto no-scrollbar">
-                <button
-                  onClick={() => setActiveTool('editText')}
-                  className={`px-2.5 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap ${
-                    activeTool === 'editText' ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-700 hover:bg-white'
-                  }`}
-                  title="Click existing PDF text to edit directly in matching font & color"
-                >
-                  <Edit3 className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>Edit Text</span>
-                </button>
-                <button
-                  onClick={() => setActiveTool('select')}
-                  className={`px-2.5 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap ${
-                    activeTool === 'select' ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-700 hover:bg-white'
-                  }`}
-                  title="Click & Drag to reposition text anywhere on page"
-                >
-                  <MousePointer className="w-3.5 h-3.5 text-blue-400" />
-                  <span>Move</span>
-                </button>
-                <button
-                  onClick={() => setActiveTool('pan')}
-                  className={`px-2.5 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap ${
-                    activeTool === 'pan' ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-700 hover:bg-white'
-                  }`}
-                  title="Drag anywhere to scroll/pan zoomed page view"
-                >
-                  <Hand className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Pan</span>
-                </button>
-                <button
-                  onClick={() => setActiveTool('text')}
-                  className={`px-2.5 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap ${
-                    activeTool === 'text' ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-700 hover:bg-white'
-                  }`}
-                >
-                  <Type className="w-3.5 h-3.5 text-indigo-500" />
-                  <span>Type</span>
-                </button>
-                <button
-                  onClick={() => setActiveTool('replaceText')}
-                  className={`px-2.5 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap ${
-                    activeTool === 'replaceText' ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-700 hover:bg-white'
-                  }`}
-                >
-                  <Eraser className="w-3.5 h-3.5 text-amber-500" />
-                  <span>Erase</span>
-                </button>
-                <button
-                  onClick={() => setActiveTool('draw')}
-                  className={`px-2.5 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap ${
-                    activeTool === 'draw' ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-700 hover:bg-white'
-                  }`}
-                >
-                  <PenTool className="w-3.5 h-3.5 text-sky-500" />
-                  <span>Pen</span>
-                </button>
-                <button
-                  onClick={() => setActiveTool('highlight')}
-                  className={`px-2.5 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap ${
-                    activeTool === 'highlight' ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-700 hover:bg-white'
-                  }`}
-                >
-                  <Highlighter className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Highlight</span>
-                </button>
-                <label className="px-2.5 py-1.5 rounded-lg text-xs font-black text-slate-700 hover:bg-white flex items-center gap-1 cursor-pointer shrink-0 whitespace-nowrap">
-                  <ImageIcon className="w-3.5 h-3.5 text-purple-600" />
-                  <span>Image</span>
-                  <input type="file" accept="image/*" onChange={handleImageStampUpload} className="hidden" />
-                </label>
-              </div>
-
-              {/* Right: Export Button */}
+              {/* Download Button */}
               <button
                 onClick={handleExportPDF}
                 disabled={isExporting}
@@ -1371,6 +1296,81 @@ export default function PDFEditPage() {
                 {isExporting ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Download className="w-3.5 h-3.5" />}
                 <span>Download PDF</span>
               </button>
+            </div>
+
+            {/* Second Row: Primary Tool Action Pills (Full-Width so ALL options are 100% visible on Desktop) */}
+            <div className="flex items-center gap-1.5 bg-slate-100/90 p-1.5 rounded-xl border border-slate-200/80 overflow-x-auto no-scrollbar">
+              <button
+                onClick={() => setActiveTool('editText')}
+                className={`px-3 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap ${
+                  activeTool === 'editText' ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-700 hover:bg-white'
+                }`}
+                title="Click existing PDF text to edit directly in matching font & color"
+              >
+                <Edit3 className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Edit Text</span>
+              </button>
+              <button
+                onClick={() => setActiveTool('select')}
+                className={`px-3 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap ${
+                  activeTool === 'select' ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-700 hover:bg-white'
+                }`}
+                title="Click & Drag to reposition text anywhere on page"
+              >
+                <MousePointer className="w-3.5 h-3.5 text-blue-400" />
+                <span>Move</span>
+              </button>
+              <button
+                onClick={() => setActiveTool('pan')}
+                className={`px-3 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap ${
+                  activeTool === 'pan' ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-700 hover:bg-white'
+                }`}
+                title="Drag anywhere to scroll/pan zoomed page view"
+              >
+                <Hand className="w-3.5 h-3.5 text-amber-400" />
+                <span>Pan</span>
+              </button>
+              <button
+                onClick={() => setActiveTool('text')}
+                className={`px-3 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap ${
+                  activeTool === 'text' ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-700 hover:bg-white'
+                }`}
+              >
+                <Type className="w-3.5 h-3.5 text-indigo-500" />
+                <span>Type</span>
+              </button>
+              <button
+                onClick={() => setActiveTool('replaceText')}
+                className={`px-3 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap ${
+                  activeTool === 'replaceText' ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-700 hover:bg-white'
+                }`}
+              >
+                <Eraser className="w-3.5 h-3.5 text-amber-500" />
+                <span>Erase</span>
+              </button>
+              <button
+                onClick={() => setActiveTool('draw')}
+                className={`px-3 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap ${
+                  activeTool === 'draw' ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-700 hover:bg-white'
+                }`}
+              >
+                <PenTool className="w-3.5 h-3.5 text-sky-500" />
+                <span>Pen</span>
+              </button>
+              <button
+                onClick={() => setActiveTool('highlight')}
+                className={`px-3 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap ${
+                  activeTool === 'highlight' ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-700 hover:bg-white'
+                }`}
+              >
+                <Highlighter className="w-3.5 h-3.5 text-amber-400" />
+                <span>Highlight</span>
+              </button>
+              <label className="px-3 py-1.5 rounded-lg text-xs font-black text-slate-700 hover:bg-white flex items-center gap-1.5 cursor-pointer shrink-0 whitespace-nowrap">
+                <ImageIcon className="w-3.5 h-3.5 text-purple-600" />
+                <span>Image</span>
+                <input type="file" accept="image/*" onChange={handleImageStampUpload} className="hidden" />
+              </label>
             </div>
 
             {/* Secondary Options Row (Typography, Swatches, Grid & Stamps) */}
@@ -2005,6 +2005,27 @@ export default function PDFEditPage() {
               </div>
             )}
           </div>
+        </div>
+
+        {/* Bottom Download Action Bar (Positioned directly above "Sponsored Offer" ad box in both mobile & desktop views) */}
+        <div className="bg-white rounded-2xl border border-slate-200/90 shadow-md p-3.5 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-900 mt-3 sm:mt-4">
+          <div className="flex items-center gap-3 text-left w-full sm:w-auto">
+            <div className="p-2.5 sm:p-3 rounded-2xl bg-emerald-50 text-emerald-600 shrink-0">
+              <Download className="w-5 h-5 sm:w-6 sm:h-6" />
+            </div>
+            <div>
+              <h4 className="text-xs sm:text-sm font-black text-slate-900">Finished editing your PDF?</h4>
+              <p className="text-[11px] sm:text-xs text-slate-500 font-medium">Download your updated document with all text edits & annotations preserved.</p>
+            </div>
+          </div>
+          <button
+            onClick={handleExportPDF}
+            disabled={isExporting}
+            className="w-full sm:w-auto px-6 py-3 rounded-xl sm:rounded-2xl bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white font-extrabold text-xs sm:text-sm shadow-lg shadow-emerald-600/20 transition-all flex items-center justify-center gap-2 cursor-pointer shrink-0"
+          >
+            {isExporting ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
+            <span>Download PDF</span>
+          </button>
         </div>
       </div>
     )}
