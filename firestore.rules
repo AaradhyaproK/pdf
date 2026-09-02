@@ -2,7 +2,7 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Security Helper Functions
+    // Helper Functions
     function isAuthenticated() {
       return request.auth != null;
     }
@@ -14,38 +14,36 @@ service cloud.firestore {
       );
     }
 
-    // 1. Live Visitor Heartbeats Collection
+    // 1. Real-Time Live Visitors (Presence Heartbeat)
     match /live_visitors/{visitorId} {
-      allow read, write, create, update, delete: if true;
+      allow read, create, update, delete: if true;
     }
 
-    // 2. Admin Settings & Google AdSense Configuration
+    // 2. Admin Settings & Master Ads Configuration
     match /admin_settings/{settingId} {
-      allow read, write: if true;
-    }
-
-    // 3. Analytics & Tool Usage Tracking Logs
-    match /analytics_logs/{logId} {
-      allow read, write, create, update, delete: if true;
-    }
-
-    // 4. Public Visitor Analytics Summary & Time Interval Metrics
-    match /analytics_summary/{docId} {
       allow read: if true;
-      allow write, update, create: if true;
+      allow write, create, update, delete: if true;
+    }
+
+    // 3. Analytics & Tool Execution Logs
+    match /analytics_logs/{logId} {
+      allow read, create, update, delete: if true;
+    }
+
+    // 4. Analytics Summaries & Time-Based Metrics
+    match /analytics_summary/{docId} {
+      allow read, create, update, delete: if true;
     }
 
     match /daily_stats/{dateId} {
-      allow read: if true;
-      allow write, update, create: if true;
+      allow read, create, update, delete: if true;
     }
 
     match /monthly_stats/{monthId} {
-      allow read: if true;
-      allow write, update, create: if true;
+      allow read, create, update, delete: if true;
     }
 
-    // Default Match
+    // Default Fallback
     match /{document=**} {
       allow read, write: if true;
     }

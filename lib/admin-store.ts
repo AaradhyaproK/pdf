@@ -11,45 +11,72 @@ import {
   increment,
 } from 'firebase/firestore';
 
-export interface GoogleAdsConfig {
+export interface AdsManagerConfig {
+  // Active Ad Provider ('adsterra' | 'adsense' | 'custom')
+  adProvider: 'adsterra' | 'adsense' | 'custom';
+
+  // Adsterra Settings
+  adsterraHeaderKey: string;
+  adsterraSidebarKey: string;
+  adsterraContainerScript: string;
+  adsterraContainerId: string;
+
+  // Custom Ad Code Embeds
+  customHeaderCode?: string;
+  customSidebarCode?: string;
+  customPostDownloadCode?: string;
+
+  // Support Developer Text Customizations
+  supportDevTextHeader: string;
+  supportDevTextSidebar: string;
+  supportDevTextPostDownload: string;
+
+  // Google AdSense Settings
   publisherId: string;
   adSenseScriptEnabled: boolean;
+
+  // Slot Enable/Disable Toggles
   headerBannerEnabled: boolean;
   toolInFeedEnabled: boolean;
   sidebarEnabled: boolean;
+  monetagEnabled: boolean;
   bottomStickyEnabled: boolean;
+
+  // ads.txt Content
   adsTxtContent: string;
 }
 
-export interface AnalyticsSummary {
-  liveVisitors: number;
-  totalPageviews: number;
-  uniqueVisitors: number;
-  adImpressions: number;
-  totalToolExecutions: number;
-  mobilePercentage: number;
-  desktopPercentage: number;
-  topTools: { name: string; slug: string; category: string; count: number }[];
-  recentVisits: { page: string; time: string; device: string; country: string }[];
-}
+export type GoogleAdsConfig = AdsManagerConfig;
 
-const DEFAULT_ADS_CONFIG: GoogleAdsConfig = {
+const DEFAULT_ADS_CONFIG: AdsManagerConfig = {
+  adProvider: 'adsterra',
+  adsterraHeaderKey: '1f0ffa4c1356415c0882b66a415fa778',
+  adsterraSidebarKey: 'ae79652e11f3a4d27e0103e1bbfa3b96',
+  adsterraContainerScript: 'https://pl31153051.profitableratecpmnetwork.com/1c9f44a13215d061cf2fa93f0e7157ff/invoke.js',
+  adsterraContainerId: 'container-1c9f44a13215d061cf2fa93f0e7157ff',
+  customHeaderCode: '',
+  customSidebarCode: '',
+  customPostDownloadCode: '',
+  supportDevTextHeader: 'Support Developer by Clicking Ads • Keeps All Tools 100% Free',
+  supportDevTextSidebar: 'Support Developer by Clicking Ads',
+  supportDevTextPostDownload: 'Enjoyed Free Tools? Support Developer by Clicking Ads Below!',
   publisherId: 'ca-pub-9075710959353163',
-  adSenseScriptEnabled: true,
+  adSenseScriptEnabled: false,
   headerBannerEnabled: true,
   toolInFeedEnabled: true,
   sidebarEnabled: true,
+  monetagEnabled: true,
   bottomStickyEnabled: true,
   adsTxtContent: `google.com, pub-9075710959353163, DIRECT, f08c47fec0942fa0`,
 };
 
 // 1. Get Ads Config
-export async function getAdsConfigFromFirestore(): Promise<GoogleAdsConfig> {
+export async function getAdsConfigFromFirestore(): Promise<AdsManagerConfig> {
   try {
     const docRef = doc(db, 'admin_settings', 'ads_config');
     const snap = await getDoc(docRef);
     if (snap.exists()) {
-      return snap.data() as GoogleAdsConfig;
+      return { ...DEFAULT_ADS_CONFIG, ...(snap.data() as AdsManagerConfig) };
     }
   } catch {
     //
@@ -58,7 +85,7 @@ export async function getAdsConfigFromFirestore(): Promise<GoogleAdsConfig> {
   if (typeof window !== 'undefined') {
     try {
       const saved = localStorage.getItem('omnitool_ads_config');
-      if (saved) return JSON.parse(saved);
+      if (saved) return { ...DEFAULT_ADS_CONFIG, ...JSON.parse(saved) };
     } catch {
       //
     }
@@ -68,7 +95,7 @@ export async function getAdsConfigFromFirestore(): Promise<GoogleAdsConfig> {
 }
 
 // 2. Save Ads Config
-export async function saveAdsConfigToFirestore(config: GoogleAdsConfig): Promise<void> {
+export async function saveAdsConfigToFirestore(config: AdsManagerConfig): Promise<void> {
   if (typeof window !== 'undefined') {
     try {
       localStorage.setItem('omnitool_ads_config', JSON.stringify(config));
@@ -85,17 +112,17 @@ export async function saveAdsConfigToFirestore(config: GoogleAdsConfig): Promise
   }
 }
 
-export function getAdsConfig(): GoogleAdsConfig {
+export function getAdsConfig(): AdsManagerConfig {
   if (typeof window === 'undefined') return DEFAULT_ADS_CONFIG;
   try {
     const saved = localStorage.getItem('omnitool_ads_config');
-    return saved ? JSON.parse(saved) : DEFAULT_ADS_CONFIG;
+    return saved ? { ...DEFAULT_ADS_CONFIG, ...JSON.parse(saved) } : DEFAULT_ADS_CONFIG;
   } catch {
     return DEFAULT_ADS_CONFIG;
   }
 }
 
-export function saveAdsConfig(config: GoogleAdsConfig): void {
+export function saveAdsConfig(config: AdsManagerConfig): void {
   saveAdsConfigToFirestore(config);
 }
 

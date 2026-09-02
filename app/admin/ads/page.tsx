@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { getAdsConfig, saveAdsConfig, GoogleAdsConfig } from '@/lib/admin-store';
+import { getAdsConfig, saveAdsConfig, AdsManagerConfig } from '@/lib/admin-store';
 import { toast } from 'sonner';
 import {
   DollarSign,
@@ -17,14 +17,18 @@ import {
   ExternalLink,
   Sparkles,
   Copy,
-  HelpCircle,
+  Layers,
+  Heart,
+  Settings,
+  Radio,
 } from 'lucide-react';
 import Link from 'next/link';
 
 export default function AdminAdsPage() {
   const router = useRouter();
-  const [config, setConfig] = useState<GoogleAdsConfig | null>(null);
+  const [config, setConfig] = useState<AdsManagerConfig | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [activeTab, setActiveTab] = useState<'provider' | 'adsterra' | 'custom' | 'badges' | 'adsense' | 'slots' | 'adstxt'>('provider');
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -41,7 +45,7 @@ export default function AdminAdsPage() {
   const handleSave = () => {
     if (!config) return;
     saveAdsConfig(config);
-    toast.success('Google Ads & ads.txt settings saved successfully!');
+    toast.success('All Ad settings saved successfully and live on site!');
   };
 
   const handleCopyScript = () => {
@@ -56,8 +60,8 @@ export default function AdminAdsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 pb-16">
-      {/* Top Header */}
+    <div className="min-h-screen bg-slate-50 text-slate-900 pb-20">
+      {/* Top Bar Header */}
       <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -65,249 +69,548 @@ export default function AdminAdsPage() {
               <ArrowLeft className="w-4 h-4" />
             </Link>
             <div>
-              <h1 className="text-base font-black text-slate-900 leading-tight">Google AdSense Monetization Console</h1>
-              <p className="text-xs text-slate-500 font-medium">Configure Publisher ID, Ad Placements & ads.txt File</p>
+              <h1 className="text-base font-black text-slate-900 leading-tight">Master Ads Management Console</h1>
+              <p className="text-xs text-slate-500 font-medium">Control Adsterra, AdSense, Custom Codes, Badges & Slot Toggles</p>
             </div>
           </div>
 
           <button
             onClick={handleSave}
-            className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs shadow-md transition-all flex items-center gap-1.5"
+            className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs shadow-md transition-all flex items-center gap-1.5 active:scale-95"
           >
             <Save className="w-4 h-4" />
-            <span>Save Settings</span>
+            <span>Save All Settings</span>
           </button>
         </div>
       </header>
 
-      {/* Main Content */}
+      {/* Main Container */}
       <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8">
-        {/* Step-by-Step Google AdSense Approval & Setup Guide Box */}
-        <div className="p-6 bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl shadow-xl space-y-6 border border-slate-800">
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/30">
-              <Sparkles className="w-6 h-6" />
-            </div>
-            <div>
-              <h2 className="text-xl font-black">Step-by-Step Google AdSense Approval Guide</h2>
-              <p className="text-xs text-slate-300">Follow these 4 simple steps to connect and approve AdSense on your Aurea domain.</p>
-            </div>
-          </div>
+        {/* Navigation Tabs Bar */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-slate-200 text-xs font-bold">
+          <button
+            onClick={() => setActiveTab('provider')}
+            className={`px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 whitespace-nowrap ${
+              activeTab === 'provider' ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
+            }`}
+          >
+            <Radio className="w-4 h-4" />
+            <span>1. Network Provider</span>
+          </button>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
-            <div className="p-4 bg-white/10 rounded-2xl border border-white/10 space-y-2">
-              <div className="w-6 h-6 rounded-full bg-amber-500 text-slate-950 font-black flex items-center justify-center text-xs">
-                1
-              </div>
-              <h3 className="font-extrabold text-white">Get Publisher ID</h3>
-              <p className="text-[11px] text-slate-300 leading-relaxed">
-                Log into Google AdSense dashboard and copy your Publisher ID (e.g. <code className="text-amber-300 font-mono">pub-1234567890123456</code>).
-              </p>
-            </div>
+          <button
+            onClick={() => setActiveTab('adsterra')}
+            className={`px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 whitespace-nowrap ${
+              activeTab === 'adsterra' ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
+            }`}
+          >
+            <Sparkles className="w-4 h-4" />
+            <span>2. Adsterra Keys</span>
+          </button>
 
-            <div className="p-4 bg-white/10 rounded-2xl border border-white/10 space-y-2">
-              <div className="w-6 h-6 rounded-full bg-amber-500 text-slate-950 font-black flex items-center justify-center text-xs">
-                2
-              </div>
-              <h3 className="font-extrabold text-white">Paste in Console</h3>
-              <p className="text-[11px] text-slate-300 leading-relaxed">
-                Enter your Publisher ID below and ensure <strong className="text-amber-300">Auto-Inject Script</strong> is toggled ON.
-              </p>
-            </div>
+          <button
+            onClick={() => setActiveTab('badges')}
+            className={`px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 whitespace-nowrap ${
+              activeTab === 'badges' ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
+            }`}
+          >
+            <Heart className="w-4 h-4" />
+            <span>3. Support Badges Text</span>
+          </button>
 
-            <div className="p-4 bg-white/10 rounded-2xl border border-white/10 space-y-2">
-              <div className="w-6 h-6 rounded-full bg-amber-500 text-slate-950 font-black flex items-center justify-center text-xs">
-                3
-              </div>
-              <h3 className="font-extrabold text-white">Configure ads.txt</h3>
-              <p className="text-[11px] text-slate-300 leading-relaxed">
-                Update the <strong className="text-amber-300">ads.txt</strong> text box below with your pub ID line and click Save Settings.
-              </p>
-            </div>
+          <button
+            onClick={() => setActiveTab('slots')}
+            className={`px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 whitespace-nowrap ${
+              activeTab === 'slots' ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
+            }`}
+          >
+            <Layers className="w-4 h-4" />
+            <span>4. Slot Toggles</span>
+          </button>
 
-            <div className="p-4 bg-white/10 rounded-2xl border border-white/10 space-y-2">
-              <div className="w-6 h-6 rounded-full bg-amber-500 text-slate-950 font-black flex items-center justify-center text-xs">
-                4
-              </div>
-              <h3 className="font-extrabold text-white">Verify & Submit</h3>
-              <p className="text-[11px] text-slate-300 leading-relaxed">
-                Check <a href="/ads.txt" target="_blank" className="text-indigo-300 underline">/ads.txt</a> live link, then click &quot;Request Review&quot; in Google AdSense!
-              </p>
-            </div>
-          </div>
+          <button
+            onClick={() => setActiveTab('custom')}
+            className={`px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 whitespace-nowrap ${
+              activeTab === 'custom' ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
+            }`}
+          >
+            <Code className="w-4 h-4" />
+            <span>5. Custom Code Embeds</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('adsense')}
+            className={`px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 whitespace-nowrap ${
+              activeTab === 'adsense' ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
+            }`}
+          >
+            <DollarSign className="w-4 h-4" />
+            <span>6. Google AdSense</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('adstxt')}
+            className={`px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 whitespace-nowrap ${
+              activeTab === 'adstxt' ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
+            }`}
+          >
+            <FileText className="w-4 h-4" />
+            <span>7. ads.txt</span>
+          </button>
         </div>
 
-        {/* Section 1: Publisher ID & AdSense Script */}
-        <div className="p-6 bg-white border border-slate-200/80 rounded-3xl shadow-sm space-y-6">
-          <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
-            <div className="p-2.5 rounded-xl bg-amber-50 text-amber-600 border border-amber-100">
-              <DollarSign className="w-5 h-5" />
+        {/* Tab 1: Ad Network Provider Selection */}
+        {(activeTab === 'provider' || activeTab === 'adsterra') && (
+          <div className="p-6 bg-white border border-slate-200/80 rounded-3xl shadow-xs space-y-6">
+            <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
+              <div className="p-2.5 rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-100">
+                <Radio className="w-5 h-5" />
+              </div>
+              <div>
+                <h2 className="text-lg font-black text-slate-900">Active Ad Network Provider</h2>
+                <p className="text-xs text-slate-500 font-medium">Select which ad network serves ads across all site banner slots.</p>
+              </div>
             </div>
-            <div>
-              <h2 className="text-lg font-black text-slate-900">Google AdSense Publisher ID</h2>
-              <p className="text-xs text-slate-500 font-medium">Link your official Google AdSense account ID to enable ad serving globally.</p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <label
+                className={`p-5 rounded-2xl border cursor-pointer transition-all flex flex-col justify-between space-y-3 ${
+                  config.adProvider === 'adsterra' ? 'border-indigo-600 bg-indigo-50/50 ring-2 ring-indigo-600/20' : 'border-slate-200 bg-slate-50 hover:bg-slate-100/80'
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="font-extrabold text-sm text-slate-900 flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-amber-500" />
+                    Adsterra Ads
+                  </span>
+                  <input
+                    type="radio"
+                    name="adProvider"
+                    checked={config.adProvider === 'adsterra'}
+                    onChange={() => setConfig({ ...config, adProvider: 'adsterra' })}
+                    className="w-4 h-4 text-indigo-600"
+                  />
+                </div>
+                <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                  High CPM CPM network with 728x90, 300x250, and Native Container banners.
+                </p>
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-indigo-700 bg-indigo-100/80 px-2.5 py-1 rounded-full w-max">
+                  Recommended Active
+                </span>
+              </label>
+
+              <label
+                className={`p-5 rounded-2xl border cursor-pointer transition-all flex flex-col justify-between space-y-3 ${
+                  config.adProvider === 'adsense' ? 'border-indigo-600 bg-indigo-50/50 ring-2 ring-indigo-600/20' : 'border-slate-200 bg-slate-50 hover:bg-slate-100/80'
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="font-extrabold text-sm text-slate-900 flex items-center gap-2">
+                    <DollarSign className="w-4 h-4 text-emerald-600" />
+                    Google AdSense
+                  </span>
+                  <input
+                    type="radio"
+                    name="adProvider"
+                    checked={config.adProvider === 'adsense'}
+                    onChange={() => setConfig({ ...config, adProvider: 'adsense' })}
+                    className="w-4 h-4 text-indigo-600"
+                  />
+                </div>
+                <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                  Official Google AdSense auto-ads & responsive display units.
+                </p>
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-emerald-700 bg-emerald-100/80 px-2.5 py-1 rounded-full w-max">
+                  AdSense Account
+                </span>
+              </label>
+
+              <label
+                className={`p-5 rounded-2xl border cursor-pointer transition-all flex flex-col justify-between space-y-3 ${
+                  config.adProvider === 'custom' ? 'border-indigo-600 bg-indigo-50/50 ring-2 ring-indigo-600/20' : 'border-slate-200 bg-slate-50 hover:bg-slate-100/80'
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="font-extrabold text-sm text-slate-900 flex items-center gap-2">
+                    <Code className="w-4 h-4 text-indigo-600" />
+                    Custom HTML / Script
+                  </span>
+                  <input
+                    type="radio"
+                    name="adProvider"
+                    checked={config.adProvider === 'custom'}
+                    onChange={() => setConfig({ ...config, adProvider: 'custom' })}
+                    className="w-4 h-4 text-indigo-600"
+                  />
+                </div>
+                <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                  Paste custom script tags, affiliate banners, or HTML code snippets.
+                </p>
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-700 bg-slate-200 px-2.5 py-1 rounded-full w-max">
+                  Custom Code
+                </span>
+              </label>
             </div>
           </div>
+        )}
 
-          <div className="space-y-4">
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                AdSense Publisher ID (ca-pub-XXXXXXXXXXXXXXXX)
-              </label>
-              <input
-                type="text"
-                value={config.publisherId}
-                onChange={(e) => {
-                  const val = e.target.value;
-                  const pubNum = val.replace(/[^0-9]/g, '');
-                  const updatedAdsTxt = `google.com, pub-${pubNum || '1234567890123456'}, DIRECT, f08c47fec0942fa0`;
-                  setConfig({ ...config, publisherId: val, adsTxtContent: updatedAdsTxt });
-                }}
-                placeholder="ca-pub-1234567890123456"
-                className="w-full px-4 py-3 rounded-2xl border border-slate-300 bg-slate-50 text-slate-900 font-mono font-bold text-sm focus:outline-none focus:border-indigo-600 min-h-[48px]"
-              />
+        {/* Tab 2: Adsterra Configuration */}
+        {(activeTab === 'provider' || activeTab === 'adsterra') && (
+          <div className="p-6 bg-white border border-slate-200/80 rounded-3xl shadow-xs space-y-6">
+            <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
+              <div className="p-2.5 rounded-xl bg-amber-50 text-amber-600 border border-amber-100">
+                <Sparkles className="w-5 h-5" />
+              </div>
+              <div>
+                <h2 className="text-lg font-black text-slate-900">Adsterra Script Keys & Container Configuration</h2>
+                <p className="text-xs text-slate-500 font-medium">Update keys for your Adsterra Leaderboard, Sidebar, and Native Container banners.</p>
+              </div>
             </div>
 
-            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/60 flex items-center justify-between">
-              <div>
-                <p className="text-xs font-bold text-slate-900">Auto-Inject Google AdSense Script</p>
-                <p className="text-[11px] text-slate-500 font-medium">Loads pagead2.googlesyndication.com script globally in app layout.</p>
+            <div className="space-y-4">
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                  Top Header Leaderboard Adsterra Key (728x90)
+                </label>
+                <input
+                  type="text"
+                  value={config.adsterraHeaderKey}
+                  onChange={(e) => setConfig({ ...config, adsterraHeaderKey: e.target.value })}
+                  placeholder="1f0ffa4c1356415c0882b66a415fa778"
+                  className="w-full px-4 py-3 rounded-2xl border border-slate-300 bg-slate-50 text-slate-900 font-mono font-bold text-sm focus:outline-none focus:border-indigo-600"
+                />
               </div>
 
-              <button
-                onClick={() => setConfig({ ...config, adSenseScriptEnabled: !config.adSenseScriptEnabled })}
-                className="text-indigo-600"
-              >
-                {config.adSenseScriptEnabled ? <ToggleRight className="w-8 h-8 text-indigo-600" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
-              </button>
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                  Sticky Sidebar Adsterra Key (300x250)
+                </label>
+                <input
+                  type="text"
+                  value={config.adsterraSidebarKey}
+                  onChange={(e) => setConfig({ ...config, adsterraSidebarKey: e.target.value })}
+                  placeholder="ae79652e11f3a4d27e0103e1bbfa3b96"
+                  className="w-full px-4 py-3 rounded-2xl border border-slate-300 bg-slate-50 text-slate-900 font-mono font-bold text-sm focus:outline-none focus:border-indigo-600"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                    Native Container Script URL
+                  </label>
+                  <input
+                    type="text"
+                    value={config.adsterraContainerScript}
+                    onChange={(e) => setConfig({ ...config, adsterraContainerScript: e.target.value })}
+                    placeholder="https://pl31153051.profitableratecpmnetwork.com/1c9f44a13215d061cf2fa93f0e7157ff/invoke.js"
+                    className="w-full px-4 py-3 rounded-2xl border border-slate-300 bg-slate-50 text-slate-900 font-mono text-xs focus:outline-none focus:border-indigo-600"
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                    Native Container Element ID
+                  </label>
+                  <input
+                    type="text"
+                    value={config.adsterraContainerId}
+                    onChange={(e) => setConfig({ ...config, adsterraContainerId: e.target.value })}
+                    placeholder="container-1c9f44a13215d061cf2fa93f0e7157ff"
+                    className="w-full px-4 py-3 rounded-2xl border border-slate-300 bg-slate-50 text-slate-900 font-mono text-xs focus:outline-none focus:border-indigo-600"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Tab 3: Support Developer Badges Customization */}
+        {(activeTab === 'badges' || activeTab === 'provider') && (
+          <div className="p-6 bg-white border border-slate-200/80 rounded-3xl shadow-xs space-y-6">
+            <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
+              <div className="p-2.5 rounded-xl bg-rose-50 text-rose-600 border border-rose-100">
+                <Heart className="w-5 h-5" />
+              </div>
+              <div>
+                <h2 className="text-lg font-black text-slate-900">Support Developer Badges Text Customization</h2>
+                <p className="text-xs text-slate-500 font-medium">Customize the callout text displayed above banner slots.</p>
+              </div>
             </div>
 
-            <div className="p-4 bg-amber-50/60 border border-amber-100 rounded-2xl space-y-2">
-              <div className="flex items-center justify-between text-xs font-bold text-amber-800">
-                <div className="flex items-center gap-1.5">
-                  <Code className="w-4 h-4 text-amber-600" />
-                  Generated AdSense Script Embed
+            <div className="space-y-4">
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                  Top Header Banner Support Text
+                </label>
+                <input
+                  type="text"
+                  value={config.supportDevTextHeader}
+                  onChange={(e) => setConfig({ ...config, supportDevTextHeader: e.target.value })}
+                  className="w-full px-4 py-3 rounded-2xl border border-slate-300 bg-slate-50 text-slate-900 font-bold text-sm focus:outline-none focus:border-indigo-600"
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                  Sidebar Banner Support Text
+                </label>
+                <input
+                  type="text"
+                  value={config.supportDevTextSidebar}
+                  onChange={(e) => setConfig({ ...config, supportDevTextSidebar: e.target.value })}
+                  className="w-full px-4 py-3 rounded-2xl border border-slate-300 bg-slate-50 text-slate-900 font-bold text-sm focus:outline-none focus:border-indigo-600"
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                  Post-Download / In-Feed Support Text
+                </label>
+                <input
+                  type="text"
+                  value={config.supportDevTextPostDownload}
+                  onChange={(e) => setConfig({ ...config, supportDevTextPostDownload: e.target.value })}
+                  className="w-full px-4 py-3 rounded-2xl border border-slate-300 bg-slate-50 text-slate-900 font-bold text-sm focus:outline-none focus:border-indigo-600"
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Tab 4: Slot Enable/Disable Toggles */}
+        {(activeTab === 'slots' || activeTab === 'provider') && (
+          <div className="p-6 bg-white border border-slate-200/80 rounded-3xl shadow-xs space-y-6">
+            <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
+              <div className="p-2.5 rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-100">
+                <Layers className="w-5 h-5" />
+              </div>
+              <div>
+                <h2 className="text-lg font-black text-slate-900">Ad Placement Units & Toggles</h2>
+                <p className="text-xs text-slate-500 font-medium">Turn specific ad positions on or off globally across the application.</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/60 flex items-center justify-between">
+                <div>
+                  <p className="text-xs font-bold text-slate-900">Top Header Banner Ad Slot (728x90)</p>
+                  <p className="text-[11px] text-slate-500 font-medium">Visible at top of tool pages & homepage.</p>
                 </div>
-                <button
-                  onClick={handleCopyScript}
-                  className="px-2.5 py-1 rounded bg-amber-200/80 hover:bg-amber-200 text-amber-900 font-extrabold text-[11px] flex items-center gap-1"
-                >
-                  <Copy className="w-3 h-3" />
-                  <span>Copy Snippet</span>
+                <button onClick={() => setConfig({ ...config, headerBannerEnabled: !config.headerBannerEnabled })}>
+                  {config.headerBannerEnabled ? <ToggleRight className="w-8 h-8 text-indigo-600" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
                 </button>
               </div>
-              <code className="block p-3 bg-slate-900 text-amber-300 rounded-xl text-[11px] font-mono overflow-x-auto">
-                {`<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${config.publisherId}" crossorigin="anonymous"></script>`}
-              </code>
+
+              <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/60 flex items-center justify-between">
+                <div>
+                  <p className="text-xs font-bold text-slate-900">Sticky Sidebar Ad Slot (300x530 Skyscraper)</p>
+                  <p className="text-[11px] text-slate-500 font-medium">Desktop sidebar banner unit.</p>
+                </div>
+                <button onClick={() => setConfig({ ...config, sidebarEnabled: !config.sidebarEnabled })}>
+                  {config.sidebarEnabled ? <ToggleRight className="w-8 h-8 text-indigo-600" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
+                </button>
+              </div>
+
+              <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/60 flex items-center justify-between">
+                <div>
+                  <p className="text-xs font-bold text-slate-900">Tool Page In-Feed Ad Slot</p>
+                  <p className="text-[11px] text-slate-500 font-medium">Native ad unit inside workspace layout.</p>
+                </div>
+                <button onClick={() => setConfig({ ...config, toolInFeedEnabled: !config.toolInFeedEnabled })}>
+                  {config.toolInFeedEnabled ? <ToggleRight className="w-8 h-8 text-indigo-600" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
+                </button>
+              </div>
+
+              <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/60 flex items-center justify-between">
+                <div>
+                  <p className="text-xs font-bold text-slate-900">Monetag Banner Script</p>
+                  <p className="text-[11px] text-slate-500 font-medium">Auto-inject Monetag script tag in head.</p>
+                </div>
+                <button onClick={() => setConfig({ ...config, monetagEnabled: !config.monetagEnabled })}>
+                  {config.monetagEnabled ? <ToggleRight className="w-8 h-8 text-indigo-600" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
-        {/* Section 2: Ad Placement Units */}
-        <div className="p-6 bg-white border border-slate-200/80 rounded-3xl shadow-sm space-y-6">
-          <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
-            <div className="p-2.5 rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-100">
-              <Code className="w-5 h-5" />
+        {/* Tab 5: Custom Code Embeds */}
+        {(activeTab === 'custom' || activeTab === 'provider') && (
+          <div className="p-6 bg-white border border-slate-200/80 rounded-3xl shadow-xs space-y-6">
+            <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
+              <div className="p-2.5 rounded-xl bg-purple-50 text-purple-600 border border-purple-100">
+                <Code className="w-5 h-5" />
+              </div>
+              <div>
+                <h2 className="text-lg font-black text-slate-900">Custom HTML / Ad Code Snippets</h2>
+                <p className="text-xs text-slate-500 font-medium">Paste custom script tags or affiliate iframe embeds for each slot.</p>
+              </div>
             </div>
-            <div>
-              <h2 className="text-lg font-black text-slate-900">Ad Placement Units (Zero CLS Reserved Layouts)</h2>
-              <p className="text-xs text-slate-500 font-medium">Control live ad slots on tools, header, and sticky banners.</p>
+
+            <div className="space-y-4">
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                  Custom Top Header Ad Code
+                </label>
+                <textarea
+                  rows={3}
+                  value={config.customHeaderCode || ''}
+                  onChange={(e) => setConfig({ ...config, customHeaderCode: e.target.value })}
+                  placeholder="<script src='...'></script>"
+                  className="w-full p-3 rounded-2xl border border-slate-300 bg-slate-900 text-amber-300 font-mono text-xs focus:outline-none focus:border-indigo-600"
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                  Custom Sidebar Ad Code
+                </label>
+                <textarea
+                  rows={3}
+                  value={config.customSidebarCode || ''}
+                  onChange={(e) => setConfig({ ...config, customSidebarCode: e.target.value })}
+                  placeholder="<script src='...'></script>"
+                  className="w-full p-3 rounded-2xl border border-slate-300 bg-slate-900 text-amber-300 font-mono text-xs focus:outline-none focus:border-indigo-600"
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                  Custom Post-Download Ad Code
+                </label>
+                <textarea
+                  rows={3}
+                  value={config.customPostDownloadCode || ''}
+                  onChange={(e) => setConfig({ ...config, customPostDownloadCode: e.target.value })}
+                  placeholder="<script src='...'></script>"
+                  className="w-full p-3 rounded-2xl border border-slate-300 bg-slate-900 text-amber-300 font-mono text-xs focus:outline-none focus:border-indigo-600"
+                />
+              </div>
             </div>
           </div>
+        )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/60 flex items-center justify-between">
-              <div>
-                <p className="text-xs font-bold text-slate-900">Top Header Banner Ad (728x90)</p>
-                <p className="text-[11px] text-slate-500 font-medium">Visible above tool forms.</p>
+        {/* Tab 6: Google AdSense Console */}
+        {(activeTab === 'adsense' || activeTab === 'provider') && (
+          <div className="p-6 bg-white border border-slate-200/80 rounded-3xl shadow-xs space-y-6">
+            <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
+              <div className="p-2.5 rounded-xl bg-amber-50 text-amber-600 border border-amber-100">
+                <DollarSign className="w-5 h-5" />
               </div>
-              <button onClick={() => setConfig({ ...config, headerBannerEnabled: !config.headerBannerEnabled })}>
-                {config.headerBannerEnabled ? <ToggleRight className="w-8 h-8 text-indigo-600" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
-              </button>
+              <div>
+                <h2 className="text-lg font-black text-slate-900">Google AdSense Publisher ID</h2>
+                <p className="text-xs text-slate-500 font-medium">Link your official Google AdSense Publisher account ID.</p>
+              </div>
             </div>
 
-            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/60 flex items-center justify-between">
-              <div>
-                <p className="text-xs font-bold text-slate-900">Tool Page In-Feed Ad (Responsive)</p>
-                <p className="text-[11px] text-slate-500 font-medium">Native ad unit inside tool layouts.</p>
+            <div className="space-y-4">
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                  AdSense Publisher ID (ca-pub-XXXXXXXXXXXXXXXX)
+                </label>
+                <input
+                  type="text"
+                  value={config.publisherId}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    const pubNum = val.replace(/[^0-9]/g, '');
+                    const updatedAdsTxt = `google.com, pub-${pubNum || '1234567890123456'}, DIRECT, f08c47fec0942fa0`;
+                    setConfig({ ...config, publisherId: val, adsTxtContent: updatedAdsTxt });
+                  }}
+                  placeholder="ca-pub-1234567890123456"
+                  className="w-full px-4 py-3 rounded-2xl border border-slate-300 bg-slate-50 text-slate-900 font-mono font-bold text-sm focus:outline-none focus:border-indigo-600 min-h-[48px]"
+                />
               </div>
-              <button onClick={() => setConfig({ ...config, toolInFeedEnabled: !config.toolInFeedEnabled })}>
-                {config.toolInFeedEnabled ? <ToggleRight className="w-8 h-8 text-indigo-600" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
-              </button>
-            </div>
 
-            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/60 flex items-center justify-between">
-              <div>
-                <p className="text-xs font-bold text-slate-900">Sidebar Skyscraper Ad (300x600)</p>
-                <p className="text-[11px] text-slate-500 font-medium">Desktop sidebar banner.</p>
-              </div>
-              <button onClick={() => setConfig({ ...config, sidebarEnabled: !config.sidebarEnabled })}>
-                {config.sidebarEnabled ? <ToggleRight className="w-8 h-8 text-indigo-600" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
-              </button>
-            </div>
+              <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/60 flex items-center justify-between">
+                <div>
+                  <p className="text-xs font-bold text-slate-900">Auto-Inject Google AdSense Script</p>
+                  <p className="text-[11px] text-slate-500 font-medium">Loads pagead2.googlesyndication.com script globally in app layout.</p>
+                </div>
 
-            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/60 flex items-center justify-between">
-              <div>
-                <p className="text-xs font-bold text-slate-900">Bottom Sticky Anchor Ad (320x50)</p>
-                <p className="text-[11px] text-slate-500 font-medium">High conversion mobile sticky banner.</p>
+                <button
+                  onClick={() => setConfig({ ...config, adSenseScriptEnabled: !config.adSenseScriptEnabled })}
+                  className="text-indigo-600"
+                >
+                  {config.adSenseScriptEnabled ? <ToggleRight className="w-8 h-8 text-indigo-600" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
+                </button>
               </div>
-              <button onClick={() => setConfig({ ...config, bottomStickyEnabled: !config.bottomStickyEnabled })}>
-                {config.bottomStickyEnabled ? <ToggleRight className="w-8 h-8 text-indigo-600" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
-              </button>
+
+              <div className="p-4 bg-amber-50/60 border border-amber-100 rounded-2xl space-y-2">
+                <div className="flex items-center justify-between text-xs font-bold text-amber-800">
+                  <div className="flex items-center gap-1.5">
+                    <Code className="w-4 h-4 text-amber-600" />
+                    Generated AdSense Script Embed
+                  </div>
+                  <button
+                    onClick={handleCopyScript}
+                    className="px-2.5 py-1 rounded bg-amber-200/80 hover:bg-amber-200 text-amber-900 font-extrabold text-[11px] flex items-center gap-1"
+                  >
+                    <Copy className="w-3 h-3" />
+                    <span>Copy Snippet</span>
+                  </button>
+                </div>
+                <code className="block p-3 bg-slate-900 text-amber-300 rounded-xl text-[11px] font-mono overflow-x-auto">
+                  {`<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${config.publisherId}" crossorigin="anonymous"></script>`}
+                </code>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
-        {/* Section 3: ads.txt File Management */}
-        <div className="p-6 bg-white border border-slate-200/80 rounded-3xl shadow-sm space-y-6">
-          <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-            <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100">
-                <FileText className="w-5 h-5" />
+        {/* Tab 7: ads.txt File Management */}
+        {(activeTab === 'adstxt' || activeTab === 'provider') && (
+          <div className="p-6 bg-white border border-slate-200/80 rounded-3xl shadow-xs space-y-6">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100">
+                  <FileText className="w-5 h-5" />
+                </div>
+                <div>
+                  <h2 className="text-lg font-black text-slate-900">ads.txt Content Management</h2>
+                  <p className="text-xs text-slate-500 font-medium">Edit live records served dynamically at domain root (/ads.txt).</p>
+                </div>
               </div>
-              <div>
-                <h2 className="text-lg font-black text-slate-900">ads.txt Content Management</h2>
-                <p className="text-xs text-slate-500 font-medium">Edit live records served dynamically at domain root (/ads.txt).</p>
-              </div>
+
+              <Link
+                href="/ads.txt"
+                target="_blank"
+                className="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center gap-1.5 transition-colors"
+              >
+                <span>Preview /ads.txt</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </Link>
             </div>
 
-            <Link
-              href="/ads.txt"
-              target="_blank"
-              className="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center gap-1.5 transition-colors"
-            >
-              <span>Preview /ads.txt</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </Link>
+            <div className="space-y-2">
+              <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                ads.txt File Body
+              </label>
+              <textarea
+                rows={4}
+                value={config.adsTxtContent}
+                onChange={(e) => setConfig({ ...config, adsTxtContent: e.target.value })}
+                className="w-full p-4 rounded-2xl border border-slate-300 bg-slate-900 text-emerald-400 font-mono text-xs focus:outline-none focus:border-indigo-600 leading-relaxed"
+              />
+              <p className="text-[11px] text-slate-400 font-medium">Standard format: <code className="text-slate-200">google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0</code></p>
+            </div>
           </div>
+        )}
 
-          <div className="space-y-2">
-            <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-              ads.txt File Body
-            </label>
-            <textarea
-              rows={4}
-              value={config.adsTxtContent}
-              onChange={(e) => setConfig({ ...config, adsTxtContent: e.target.value })}
-              className="w-full p-4 rounded-2xl border border-slate-300 bg-slate-900 text-emerald-400 font-mono text-xs focus:outline-none focus:border-indigo-600 leading-relaxed"
-            />
-            <p className="text-[11px] text-slate-400 font-medium">Standard format: <code className="text-slate-200">google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0</code></p>
-          </div>
-        </div>
-
-        {/* Save Bar */}
+        {/* Save Settings Bar */}
         <div className="p-4 bg-slate-900 text-white rounded-3xl flex items-center justify-between shadow-xl border border-slate-800">
           <div className="flex items-center gap-2 text-xs font-bold">
             <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-            <span>Ready to apply Google AdSense updates</span>
+            <span>Ready to save all Ad management updates</span>
           </div>
 
           <button
             onClick={handleSave}
-            className="px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm shadow-md transition-all flex items-center gap-2"
+            className="px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm shadow-md transition-all flex items-center gap-2 active:scale-95"
           >
             <Save className="w-4 h-4" />
-            <span>Save Google Ads Settings</span>
+            <span>Save Ads Settings</span>
           </button>
         </div>
       </main>

@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect } from 'react';
-import { trackAdImpression } from '@/lib/admin-store';
+import { useEffect, useState } from 'react';
+import { trackAdImpression, getAdsConfig, getAdsConfigFromFirestore, AdsManagerConfig } from '@/lib/admin-store';
 import { Heart } from 'lucide-react';
 
 export interface AdSlotProps {
@@ -10,8 +10,9 @@ export interface AdSlotProps {
   className?: string;
 }
 
-// Full-Width 728x90 Leaderboard Adsterra Banner
-function AdsterraLeaderboardBanner() {
+// 728x90 Leaderboard Adsterra Banner
+function AdsterraLeaderboardBanner({ adKey }: { adKey: string }) {
+  const key = adKey || '1f0ffa4c1356415c0882b66a415fa778';
   const htmlContent = `
     <!DOCTYPE html>
     <html>
@@ -34,14 +35,14 @@ function AdsterraLeaderboardBanner() {
       <body>
         <script type="text/javascript">
           atOptions = {
-            'key' : '1f0ffa4c1356415c0882b66a415fa778',
+            'key' : '${key}',
             'format' : 'iframe',
             'height' : 90,
             'width' : 728,
             'params' : {}
           };
         </script>
-        <script type="text/javascript" src="https://www.highrevenueformat.com/1f0ffa4c1356415c0882b66a415fa778/invoke.js"></script>
+        <script type="text/javascript" src="https://www.highrevenueformat.com/${key}/invoke.js"></script>
       </body>
     </html>
   `;
@@ -61,7 +62,11 @@ function AdsterraLeaderboardBanner() {
 }
 
 // Tall Skyscraper Sidebar Adsterra Banner (Height 530px+)
-function AdsterraSidebarTallBanner() {
+function AdsterraSidebarTallBanner({ sidebarKey, scriptUrl, containerId }: { sidebarKey: string; scriptUrl: string; containerId: string }) {
+  const key = sidebarKey || 'ae79652e11f3a4d27e0103e1bbfa3b96';
+  const script = scriptUrl || 'https://pl31153051.profitableratecpmnetwork.com/1c9f44a13215d061cf2fa93f0e7157ff/invoke.js';
+  const cId = containerId || 'container-1c9f44a13215d061cf2fa93f0e7157ff';
+
   const htmlContent = `
     <!DOCTYPE html>
     <html>
@@ -83,7 +88,7 @@ function AdsterraSidebarTallBanner() {
             gap: 16px;
           }
           ::-webkit-scrollbar { display: none; }
-          #container-1c9f44a13215d061cf2fa93f0e7157ff {
+          #${cId} {
             width: 100%;
             display: flex;
             justify-content: center;
@@ -94,17 +99,17 @@ function AdsterraSidebarTallBanner() {
       <body>
         <script type="text/javascript">
           atOptions = {
-            'key' : 'ae79652e11f3a4d27e0103e1bbfa3b96',
+            'key' : '${key}',
             'format' : 'iframe',
             'height' : 250,
             'width' : 300,
             'params' : {}
           };
         </script>
-        <script type="text/javascript" src="https://www.highrevenueformat.com/ae79652e11f3a4d27e0103e1bbfa3b96/invoke.js"></script>
+        <script type="text/javascript" src="https://www.highrevenueformat.com/${key}/invoke.js"></script>
 
-        <div id="container-1c9f44a13215d061cf2fa93f0e7157ff"></div>
-        <script async="async" data-cfasync="false" src="https://pl31153051.profitableratecpmnetwork.com/1c9f44a13215d061cf2fa93f0e7157ff/invoke.js"></script>
+        <div id="${cId}"></div>
+        <script async="async" data-cfasync="false" src="${script}"></script>
       </body>
     </html>
   `;
@@ -124,7 +129,10 @@ function AdsterraSidebarTallBanner() {
 }
 
 // Native Container Adsterra Banner
-function AdsterraContainerBanner() {
+function AdsterraContainerBanner({ scriptUrl, containerId }: { scriptUrl: string; containerId: string }) {
+  const script = scriptUrl || 'https://pl31153051.profitableratecpmnetwork.com/1c9f44a13215d061cf2fa93f0e7157ff/invoke.js';
+  const cId = containerId || 'container-1c9f44a13215d061cf2fa93f0e7157ff';
+
   const htmlContent = `
     <!DOCTYPE html>
     <html>
@@ -142,7 +150,7 @@ function AdsterraContainerBanner() {
             align-items: center;
             background: transparent;
           }
-          #container-1c9f44a13215d061cf2fa93f0e7157ff {
+          #${cId} {
             width: 100%;
             display: flex;
             justify-content: center;
@@ -151,8 +159,8 @@ function AdsterraContainerBanner() {
         </style>
       </head>
       <body>
-        <div id="container-1c9f44a13215d061cf2fa93f0e7157ff"></div>
-        <script async="async" data-cfasync="false" src="https://pl31153051.profitableratecpmnetwork.com/1c9f44a13215d061cf2fa93f0e7157ff/invoke.js"></script>
+        <div id="${cId}"></div>
+        <script async="async" data-cfasync="false" src="${script}"></script>
       </body>
     </html>
   `;
@@ -171,10 +179,62 @@ function AdsterraContainerBanner() {
   );
 }
 
+// Custom Code Embed Runner
+function CustomAdEmbed({ code, height = 250 }: { code: string; height?: number }) {
+  const htmlContent = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <style>
+          html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; display: flex; justify-content: center; align-items: center; background: transparent; }
+        </style>
+      </head>
+      <body>
+        ${code}
+      </body>
+    </html>
+  `;
+
+  return (
+    <div className="w-full flex justify-center items-center py-1">
+      <iframe
+        srcDoc={htmlContent}
+        width="100%"
+        height={height}
+        title="Custom Ad Embed"
+        className="border-0 overflow-hidden w-full rounded-2xl"
+        scrolling="no"
+      />
+    </div>
+  );
+}
+
 export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
+  const [config, setConfig] = useState<AdsManagerConfig | null>(null);
+
   useEffect(() => {
     trackAdImpression(slotType);
+    setConfig(getAdsConfig());
+
+    // Sync live Firebase Firestore stored ad configurations & support texts
+    getAdsConfigFromFirestore().then((liveConfig) => {
+      if (liveConfig) {
+        setConfig(liveConfig);
+      }
+    });
   }, [slotType]);
+
+  if (!config) return null;
+
+  // Check if slot is disabled by Admin settings
+  if (slotType === 'header-leaderboard' && !config.headerBannerEnabled) return null;
+  if (slotType === 'sticky-sidebar' && !config.sidebarEnabled) return null;
+  if (slotType === 'post-download' && !config.toolInFeedEnabled) return null;
+
+  const headerBadge = config.supportDevTextHeader || 'Support Developer by Clicking Ads • Keeps All Tools 100% Free';
+  const sidebarBadge = config.supportDevTextSidebar || 'Support Developer by Clicking Ads';
+  const postDownloadBadge = config.supportDevTextPostDownload || 'Enjoyed Free Tools? Support Developer by Clicking Ads Below!';
 
   if (slotType === 'header-leaderboard') {
     return (
@@ -186,20 +246,22 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
           </span>
           <span className="text-[11px] sm:text-xs uppercase tracking-wider text-rose-700 font-extrabold flex items-center gap-1.5 bg-rose-50 border border-rose-200 px-4 py-1.5 rounded-full shadow-2xs">
             <Heart className="w-3.5 h-3.5 text-rose-600 fill-rose-600 animate-pulse" />
-            Support Developer by Clicking Ads • Keeps All Tools 100% Free
+            {headerBadge}
           </span>
         </div>
         <div className="w-full min-h-[115px] bg-white border border-slate-200/90 rounded-2xl p-3 sm:p-4 shadow-2xs flex items-center justify-center">
-          {clientAdId ? (
+          {config.adProvider === 'adsense' || clientAdId ? (
             <ins
               className="adsbygoogle"
               style={{ display: 'block', width: '100%', height: '100%' }}
-              data-ad-client={clientAdId}
+              data-ad-client={clientAdId || config.publisherId}
               data-ad-slot="1234567890"
               data-ad-format="auto"
             />
+          ) : config.adProvider === 'custom' && config.customHeaderCode ? (
+            <CustomAdEmbed code={config.customHeaderCode} height={90} />
           ) : (
-            <AdsterraLeaderboardBanner />
+            <AdsterraLeaderboardBanner adKey={config.adsterraHeaderKey} />
           )}
         </div>
       </div>
@@ -216,19 +278,25 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
           </span>
           <span className="text-[11px] uppercase tracking-wider text-rose-700 font-extrabold flex items-center gap-1.5 bg-rose-50 border border-rose-200 px-3.5 py-1 rounded-full shadow-2xs">
             <Heart className="w-3.5 h-3.5 text-rose-600 fill-rose-600" />
-            Support Developer by Clicking Ads
+            {sidebarBadge}
           </span>
         </div>
         <div className="w-full min-h-[580px] bg-white border border-slate-200/90 rounded-3xl p-4 sm:p-5 flex flex-col items-center justify-start text-center shadow-2xs space-y-3">
-          {clientAdId ? (
+          {config.adProvider === 'adsense' || clientAdId ? (
             <ins
               className="adsbygoogle"
               style={{ display: 'block', width: '100%', height: '100%' }}
-              data-ad-client={clientAdId}
+              data-ad-client={clientAdId || config.publisherId}
               data-ad-slot="0987654321"
             />
+          ) : config.adProvider === 'custom' && config.customSidebarCode ? (
+            <CustomAdEmbed code={config.customSidebarCode} height={530} />
           ) : (
-            <AdsterraSidebarTallBanner />
+            <AdsterraSidebarTallBanner
+              sidebarKey={config.adsterraSidebarKey}
+              scriptUrl={config.adsterraContainerScript}
+              containerId={config.adsterraContainerId}
+            />
           )}
         </div>
       </div>
@@ -241,18 +309,23 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
       <div className="w-full flex items-center justify-center gap-1.5 mb-3">
         <span className="text-[11px] uppercase tracking-wider text-rose-700 font-extrabold flex items-center gap-1.5 bg-rose-50 border border-rose-200 px-3.5 py-1 rounded-full shadow-2xs">
           <Heart className="w-3.5 h-3.5 text-rose-600 fill-rose-600 animate-pulse" />
-          Enjoyed Free Tools? Support Developer by Clicking Ads Below!
+          {postDownloadBadge}
         </span>
       </div>
-      {clientAdId ? (
+      {config.adProvider === 'adsense' || clientAdId ? (
         <ins
           className="adsbygoogle"
           style={{ display: 'block', width: '100%', height: '100%' }}
-          data-ad-client={clientAdId}
+          data-ad-client={clientAdId || config.publisherId}
           data-ad-slot="1122334455"
         />
+      ) : config.adProvider === 'custom' && config.customPostDownloadCode ? (
+        <CustomAdEmbed code={config.customPostDownloadCode} height={250} />
       ) : (
-        <AdsterraContainerBanner />
+        <AdsterraContainerBanner
+          scriptUrl={config.adsterraContainerScript}
+          containerId={config.adsterraContainerId}
+        />
       )}
     </div>
   );
