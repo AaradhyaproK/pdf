@@ -904,6 +904,134 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { question: 'What is the FileZenith Flagship All-in-One Studio?', answer: 'The All-in-One Studio is our unified master workspace where you can access and execute all 20+ PDF and image processing tools on one single interactive screen without switching pages.' },
       { question: 'Are my uploaded files safe in the All-in-One Studio?', answer: 'Yes! All calculations, PDF rendering, OCR, and image processing run 100% client-side inside your web browser. Your files are never uploaded to any remote server.' }
     ]
+  },
+  '/image/crop': {
+    slug: '/image/crop',
+    title: 'Free Online Image Cropper & Aspect Ratio Tool',
+    metaTitle: 'Crop Image Online Free - 1:1, 16:9, 4:3 Aspect Ratio | FileZenith',
+    description: 'Crop images online free to exact aspect ratios (1:1, 16:9, 4:3, 9:16, 3:2). Rotate, flip & resize photos 100% privately in browser without upload.',
+    keywords: [
+      'crop image online free',
+      'image cropper online no sign up',
+      'crop photo 1 1 square aspect ratio',
+      'crop image 16 9 hd online',
+      'crop image for instagram story 9 16',
+      'rotate and crop photo online',
+      'free photo cropping tool no watermark',
+      'crop image privately client side'
+    ],
+    category: 'image',
+    howToSteps: [
+      { title: 'Upload Image File', text: 'Select or drag and drop your photo into the interactive cropper workspace.' },
+      { title: 'Choose Aspect Ratio & Angle', text: 'Click aspect ratio buttons (1:1, 16:9, 4:3, 9:16) or adjust rotation and flip settings.' },
+      { title: 'Apply & Download Cropped Image', text: 'Click Render Crop to generate high-quality PNG cutout and save directly to your device.' }
+    ],
+    faqs: [
+      { question: 'Is this online image cropper 100% free with no watermark?', answer: 'Yes! FileZenith Image Cropper is completely free to use with zero watermarks, registration, or file limits.' },
+      { question: 'Does cropping reduce photo resolution or quality?', answer: 'No, cropping preserves full source pixel resolution within the crop boundary and outputs a lossless 100% sharp PNG image.' },
+      { question: 'Are my images uploaded to any server during cropping?', answer: 'No, all image processing and crop rendering happen 100% locally inside your web browser using JavaScript HTML5 Canvas.' }
+    ]
+  },
+  '/pdf/page-numbers': {
+    slug: '/pdf/page-numbers',
+    title: 'Add Page Numbers to PDF Online Free',
+    metaTitle: 'Add Page Numbers to PDF Free Online - Page X of Y | FileZenith',
+    description: 'Add page numbers to PDF documents online free. Number pages as "Page X of Y", custom footers, headers & positions 100% privately without server uploads.',
+    keywords: [
+      'add page numbers to pdf',
+      'add page numbers to pdf online free',
+      'pdf page numberer no upload',
+      'number pdf pages page 1 of n',
+      'insert footer page numbers in pdf',
+      'add page numbers to pdf without adobe',
+      'free pdf numbering tool online'
+    ],
+    category: 'pdf',
+    howToSteps: [
+      { title: 'Upload PDF Document', text: 'Choose or drag and drop your PDF file into the upload zone.' },
+      { title: 'Configure Page Numbering Options', text: 'Select number format (Page X of Y, Page X, 1), position (Bottom Center, Bottom Right, etc.), and font size.' },
+      { title: 'Embed Page Numbers & Download', text: 'Click Add Page Numbers to render footers using pdf-lib Wasm and download your numbered PDF.' }
+    ],
+    faqs: [
+      { question: 'Can I add "Page X of Y" footers to all PDF pages?', answer: 'Yes! You can choose "Page X of Y", "Page X", or simple numeric page numbers with custom font sizes and alignment.' },
+      { question: 'Is my document sent to any external server?', answer: 'No, FileZenith processes PDF files 100% locally in your browser memory using WebAssembly pdf-lib engines.' }
+    ]
+  },
+  '/utility/base64': {
+    slug: '/utility/base64',
+    title: 'Base64 File & Image Encoder / Decoder Online',
+    metaTitle: 'Base64 Encoder & Decoder Online Free - Image to Data URL | FileZenith',
+    description: 'Encode files and images to Base64 Data URLs, HTML img tags & CSS background strings online free. Decode Base64 data strings back to downloadable files 100% locally.',
+    keywords: [
+      'base64 encoder online',
+      'base64 decoder online free',
+      'convert image to base64 data url',
+      'image to base64 converter online',
+      'decode base64 string to file download',
+      'base64 to image online converter',
+      'base64 data uri generator free',
+      'convert pdf to base64 string'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Select Encoding or Decoding Mode', text: 'Choose File to Base64 (Encode) or Base64 to File (Decode) from top tabs.' },
+      { title: 'Upload File or Paste Base64 Data', text: 'Drop any file/image to generate Data URI, HTML <img> tag, and CSS background code, or paste Base64 code.' },
+      { title: 'Copy Snippet or Download Decoded File', text: 'Click 1-click Copy for code snippets or download decoded files directly.' }
+    ],
+    faqs: [
+      { question: 'What is Base64 encoding used for?', answer: 'Base64 encoding converts binary files into ASCII text strings, allowing you to embed images directly into HTML pages, CSS stylesheets, JSON APIs, and emails without external file links.' },
+      { question: 'Can I convert large images or PDFs to Base64?', answer: 'Yes, FileZenith supports encoding any file type or size 100% locally in browser memory.' }
+    ]
+  },
+  '/utility/markdown-editor': {
+    slug: '/utility/markdown-editor',
+    title: 'Free Live Markdown Editor & PDF Exporter',
+    metaTitle: 'Markdown Live Editor Online - Free Real-Time Preview & PDF | FileZenith',
+    description: 'Free online Markdown editor with instant live side-by-side preview. Write READMEs, format text & export Markdown to PDF or HTML 100% privately in browser.',
+    keywords: [
+      'markdown editor online free',
+      'live markdown editor with preview',
+      'convert markdown to pdf online free',
+      'export markdown as pdf document',
+      'markdown preview online no sign up',
+      'online readme editor markdown',
+      'markdown text to html converter'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Write or Paste Markdown Content', text: 'Type Markdown text into the source code panel or use toolbar formatting shortcuts.' },
+      { title: 'Review Real-Time HTML Preview', text: 'Watch your headings, lists, code blocks, and blockquotes render instantly side-by-side.' },
+      { title: 'Export to PDF or Download .md File', text: 'Click Export PDF to print/save a clean PDF document or download raw .md file.' }
+    ],
+    faqs: [
+      { question: 'Can I export Markdown documents directly to PDF for free?', answer: 'Yes! Click Export PDF to generate a formatted printable document or save as PDF in 1 click.' },
+      { question: 'Is my document text saved on your servers?', answer: 'No, FileZenith is 100% client-side. Your text remains strictly on your local device.' }
+    ]
+  },
+  '/image/svg-converter': {
+    slug: '/image/svg-converter',
+    title: 'High-Res SVG to PNG & JPG Vector Converter',
+    metaTitle: 'Convert SVG to PNG / JPG Free Online - 2x 4x HD Scale | FileZenith',
+    description: 'Convert SVG vector files to high-resolution PNG & JPG images online free. Render SVG to 2x, 4x, 8x HD resolution cutouts with transparent or colored backgrounds.',
+    keywords: [
+      'svg to png converter online',
+      'convert svg to jpg free online',
+      'svg to high resolution png 4k',
+      'convert svg vector to transparent png',
+      'svg renderer to raster image online',
+      'vector to png converter 4x scale',
+      'convert svg to png without quality loss'
+    ],
+    category: 'image',
+    howToSteps: [
+      { title: 'Upload SVG Vector Graphics', text: 'Drag and drop your .svg file into the online renderer.' },
+      { title: 'Select Resolution Scale & Background Color', text: 'Choose 1x, 2x, 4x, or 8x scale multiplier and transparent or solid background.' },
+      { title: 'Render & Download PNG/JPG', text: 'Click Convert & Render SVG to download crisp raster images.' }
+    ],
+    faqs: [
+      { question: 'How do I convert SVG to transparent PNG in 4K resolution?', answer: 'Upload your SVG, set Resolution Scale to 4x or 8x, ensure Transparent background is selected, and click Convert.' },
+      { question: 'Are vector graphic details preserved during conversion?', answer: 'Yes! Vector graphics scale infinitely before rasterization, ensuring 100% sharp edges at any scale factor.' }
+    ]
   }
 };
 

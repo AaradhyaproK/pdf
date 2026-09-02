@@ -31,6 +31,9 @@ import {
   Sliders,
   CornerDownLeft,
   Sparkles,
+  Crop,
+  Hash,
+  FileCode,
 } from 'lucide-react';
 
 const PDF_TOOLS = [
@@ -39,6 +42,7 @@ const PDF_TOOLS = [
   { name: 'Compress PDF to 200KB', slug: '/pdf/compress-to-200kb', desc: 'Target size for form uploads', icon: Minimize2, badge: 'Form Preset', category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'Merge PDF', slug: '/pdf/merge', desc: 'Combine multiple PDFs into one', icon: Combine, category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'Split PDF', slug: '/pdf/split', desc: 'Extract pages & custom page ranges', icon: Split, category: 'pdf', catLabel: 'PDF Studio' },
+  { name: 'PDF Page Numberer', slug: '/pdf/page-numbers', desc: 'Add Page X of Y & custom footers', icon: Hash, badge: 'New', category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'Organize PDF', slug: '/pdf/organize', desc: 'Rotate, reorder & delete pages', icon: Grid, category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'PDF OCR Text Extractor', slug: '/pdf/ocr', desc: 'Extract editable text via AI Tesseract', icon: FileCheck, badge: 'AI Wasm', category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'Watermark PDF', slug: '/pdf/watermark', desc: 'Add text watermark overlays', icon: Stamp, category: 'pdf', catLabel: 'PDF Studio' },
@@ -47,6 +51,8 @@ const PDF_TOOLS = [
 ];
 
 const IMAGE_TOOLS = [
+  { name: 'Image Cropper & Aspect', slug: '/image/crop', desc: 'Crop 1:1, 16:9, 4:3, rotate & flip', icon: Crop, badge: 'New', category: 'image', catLabel: 'Image Studio' },
+  { name: 'SVG Vector Converter', slug: '/image/svg-converter', desc: 'Convert SVG to 2x/4x PNG & JPG', icon: FileCode, badge: 'New', category: 'image', catLabel: 'Image Studio' },
   { name: 'Pics to PDF Converter', slug: '/image/pics-to-pdf', desc: 'Turn photos & scans into PDF', icon: Camera, badge: 'Popular', category: 'image', catLabel: 'Image Studio' },
   { name: 'PNG to JPG Converter', slug: '/image/png-to-jpg', desc: 'Convert PNG to JPG with background color', icon: FileImage, badge: 'Bulk', category: 'image', catLabel: 'Image Studio' },
   { name: 'JPG to PNG Converter', slug: '/image/jpg-to-png', desc: 'Lossless quality JPG to PNG conversion', icon: FileImage, category: 'image', catLabel: 'Image Studio' },
@@ -60,6 +66,8 @@ const IMAGE_TOOLS = [
 ];
 
 const UTILITY_TOOLS = [
+  { name: 'Base64 Encoder & Decoder', slug: '/utility/base64', desc: 'Convert files/images to Data URLs', icon: Code2, badge: 'New', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Markdown Editor & PDF', slug: '/utility/markdown-editor', desc: 'Live Markdown preview & PDF export', icon: FileText, badge: 'New', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'QR Code Generator', slug: '/utility/qr-generator', desc: 'Create custom QR codes with logo & colors', icon: QrCode, badge: 'Custom', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'Word & Character Counter', slug: '/utility/word-counter', desc: 'Real-time text stats, reading time & SEO', icon: Type, category: 'utility', catLabel: 'Daily Utility' },
   { name: 'JSON Formatter & Validator', slug: '/utility/json-formatter', desc: 'Beautify, minify, and validate JSON data', icon: Code2, category: 'utility', catLabel: 'Daily Utility' },
