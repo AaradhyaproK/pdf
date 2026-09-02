@@ -142,4 +142,21 @@ body {
   scrollbar-width: none;
 }
 
+/* Native App Shell Steady & Touch Safety Utilities */
+html, body {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
 
+/* Prevent text selection and double-tap zoom on mobile app UI controls */
+.app-shell-steady,
+.app-control,
+button,
+select,
+nav,
+header {
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}

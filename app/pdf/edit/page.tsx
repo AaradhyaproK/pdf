@@ -31,6 +31,10 @@ import {
   Minus,
   Plus,
   Hand,
+  SlidersHorizontal,
+  ChevronUp,
+  X,
+  Settings2,
 } from 'lucide-react';
 
 interface TextAnnotation {
@@ -86,6 +90,8 @@ interface DetectedTextItem {
   width: number;
   height: number;
   fontSize: number;
+  fontFamily?: 'helvetica' | 'times' | 'courier';
+  color?: string;
 }
 
 export default function PDFEditPage() {
@@ -94,6 +100,7 @@ export default function PDFEditPage() {
   const [numPages, setNumPages] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [zoom, setZoom] = useState<number>(1.2);
+  const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState<boolean>(false);
 
   // Auto-fit initial zoom on mobile screens
   useEffect(() => {
@@ -2030,112 +2037,320 @@ export default function PDFEditPage() {
       </div>
     )}
 
-      {/* Liquid Glass Floating Mobile Action Navbar for 100% Mobile Accessibility & Ultra Responsiveness */}
+      {/* Native Apple iOS Mobile Action Island & Bottom Sheet Drawer */}
       {file && (
-        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[94vw] max-w-lg bg-white/85 backdrop-blur-xl border border-slate-200/90 shadow-2xl rounded-3xl p-2 flex items-center justify-between gap-1 sm:hidden text-slate-900 pointer-events-auto">
-          <div className="flex items-center gap-1 overflow-x-auto no-scrollbar py-0.5 px-1 max-w-full">
-            {/* 1. Edit Existing PDF Text (Default) */}
-            <button
-              onClick={() => setActiveTool('editText')}
-              className={`px-3 py-2 rounded-2xl text-[11px] font-black flex items-center gap-1.5 whitespace-nowrap transition-all shrink-0 cursor-pointer ${
-                activeTool === 'editText'
-                  ? 'bg-slate-900 text-white shadow-md'
-                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-              }`}
-            >
-              <Edit3 className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Edit Text</span>
-            </button>
+        <>
+          {/* Floating Mobile Dynamic Action Island */}
+          <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[94vw] max-w-lg bg-white/90 backdrop-blur-xl border border-slate-200/90 shadow-2xl rounded-3xl p-1.5 flex items-center justify-between gap-1 sm:hidden text-slate-900 pointer-events-auto touch-manipulation select-none">
+            <div className="flex items-center gap-1 overflow-x-auto no-scrollbar py-0.5 px-1 max-w-full">
+              {/* 1. Edit Text */}
+              <button
+                onClick={() => setActiveTool('editText')}
+                className={`px-3 py-2 rounded-2xl text-[11px] font-black flex items-center gap-1.5 whitespace-nowrap transition-all shrink-0 cursor-pointer active:scale-95 ${
+                  activeTool === 'editText'
+                    ? 'bg-slate-900 text-white shadow-md'
+                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                }`}
+              >
+                <Edit3 className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Edit Text</span>
+              </button>
 
-            {/* 2. Move / Reposition Text */}
-            <button
-              onClick={() => setActiveTool('select')}
-              className={`px-3 py-2 rounded-2xl text-[11px] font-black flex items-center gap-1.5 whitespace-nowrap transition-all shrink-0 cursor-pointer ${
-                activeTool === 'select'
-                  ? 'bg-slate-900 text-white shadow-md'
-                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-              }`}
-            >
-              <MousePointer className="w-3.5 h-3.5 text-blue-400" />
-              <span>Move Text</span>
-            </button>
+              {/* 2. Move Text */}
+              <button
+                onClick={() => setActiveTool('select')}
+                className={`px-3 py-2 rounded-2xl text-[11px] font-black flex items-center gap-1.5 whitespace-nowrap transition-all shrink-0 cursor-pointer active:scale-95 ${
+                  activeTool === 'select'
+                    ? 'bg-slate-900 text-white shadow-md'
+                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                }`}
+              >
+                <MousePointer className="w-3.5 h-3.5 text-blue-400" />
+                <span>Move</span>
+              </button>
 
-            {/* 3. Pan / Scroll View */}
-            <button
-              onClick={() => setActiveTool('pan')}
-              className={`px-3 py-2 rounded-2xl text-[11px] font-black flex items-center gap-1.5 whitespace-nowrap transition-all shrink-0 cursor-pointer ${
-                activeTool === 'pan'
-                  ? 'bg-slate-900 text-white shadow-md'
-                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-              }`}
-            >
-              <Hand className="w-3.5 h-3.5 text-amber-400" />
-              <span>Pan View</span>
-            </button>
+              {/* 3. Pan View */}
+              <button
+                onClick={() => setActiveTool('pan')}
+                className={`px-3 py-2 rounded-2xl text-[11px] font-black flex items-center gap-1.5 whitespace-nowrap transition-all shrink-0 cursor-pointer active:scale-95 ${
+                  activeTool === 'pan'
+                    ? 'bg-slate-900 text-white shadow-md'
+                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                }`}
+              >
+                <Hand className="w-3.5 h-3.5 text-amber-400" />
+                <span>Pan</span>
+              </button>
 
-            {/* 3. Type New Text */}
-            <button
-              onClick={() => setActiveTool('text')}
-              className={`px-3 py-2 rounded-2xl text-[11px] font-bold flex items-center gap-1.5 whitespace-nowrap transition-all shrink-0 cursor-pointer ${
-                activeTool === 'text'
-                  ? 'bg-slate-900 text-white shadow-md'
-                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-              }`}
-            >
-              <Type className="w-3.5 h-3.5 text-indigo-500" />
-              <span>Type</span>
-            </button>
+              {/* 4. Type Text */}
+              <button
+                onClick={() => setActiveTool('text')}
+                className={`px-3 py-2 rounded-2xl text-[11px] font-bold flex items-center gap-1.5 whitespace-nowrap transition-all shrink-0 cursor-pointer active:scale-95 ${
+                  activeTool === 'text'
+                    ? 'bg-slate-900 text-white shadow-md'
+                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                }`}
+              >
+                <Type className="w-3.5 h-3.5 text-indigo-500" />
+                <span>Type</span>
+              </button>
 
-            {/* 4. Manual Drag Erase */}
-            <button
-              onClick={() => setActiveTool('replaceText')}
-              className={`px-3 py-2 rounded-2xl text-[11px] font-bold flex items-center gap-1.5 whitespace-nowrap transition-all shrink-0 cursor-pointer ${
-                activeTool === 'replaceText'
-                  ? 'bg-slate-900 text-white shadow-md'
-                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-              }`}
-            >
-              <Eraser className="w-3.5 h-3.5 text-amber-500" />
-              <span>Erase</span>
-            </button>
+              {/* 5. Erase */}
+              <button
+                onClick={() => setActiveTool('replaceText')}
+                className={`px-3 py-2 rounded-2xl text-[11px] font-bold flex items-center gap-1.5 whitespace-nowrap transition-all shrink-0 cursor-pointer active:scale-95 ${
+                  activeTool === 'replaceText'
+                    ? 'bg-slate-900 text-white shadow-md'
+                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                }`}
+              >
+                <Eraser className="w-3.5 h-3.5 text-amber-500" />
+                <span>Erase</span>
+              </button>
 
-            {/* 5. Pen Draw */}
-            <button
-              onClick={() => setActiveTool('draw')}
-              className={`px-3 py-2 rounded-2xl text-[11px] font-bold flex items-center gap-1.5 whitespace-nowrap transition-all shrink-0 cursor-pointer ${
-                activeTool === 'draw'
-                  ? 'bg-slate-900 text-white shadow-md'
-                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-              }`}
-            >
-              <PenTool className="w-3.5 h-3.5 text-sky-500" />
-              <span>Pen</span>
-            </button>
+              {/* 6. Pen */}
+              <button
+                onClick={() => setActiveTool('draw')}
+                className={`px-3 py-2 rounded-2xl text-[11px] font-bold flex items-center gap-1.5 whitespace-nowrap transition-all shrink-0 cursor-pointer active:scale-95 ${
+                  activeTool === 'draw'
+                    ? 'bg-slate-900 text-white shadow-md'
+                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                }`}
+              >
+                <PenTool className="w-3.5 h-3.5 text-sky-500" />
+                <span>Pen</span>
+              </button>
 
-            {/* 6. Highlight */}
+              {/* 7. Highlight */}
+              <button
+                onClick={() => setActiveTool('highlight')}
+                className={`px-3 py-2 rounded-2xl text-[11px] font-bold flex items-center gap-1.5 whitespace-nowrap transition-all shrink-0 cursor-pointer active:scale-95 ${
+                  activeTool === 'highlight'
+                    ? 'bg-slate-900 text-white shadow-md'
+                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                }`}
+              >
+                <Highlighter className="w-3.5 h-3.5 text-amber-400" />
+                <span>Highlight</span>
+              </button>
+            </div>
+
+            {/* Format Drawer Toggle Pill */}
             <button
-              onClick={() => setActiveTool('highlight')}
-              className={`px-3 py-2 rounded-2xl text-[11px] font-bold flex items-center gap-1.5 whitespace-nowrap transition-all shrink-0 cursor-pointer ${
-                activeTool === 'highlight'
-                  ? 'bg-slate-900 text-white shadow-md'
-                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-              }`}
+              onClick={() => setIsMobileDrawerOpen(true)}
+              className="p-2 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-[11px] flex items-center gap-1 shrink-0 shadow-md cursor-pointer active:scale-95 transition-all"
+              title="Open formatting & page drawer"
             >
-              <Highlighter className="w-3.5 h-3.5 text-amber-400" />
-              <span>Highlight</span>
+              <SlidersHorizontal className="w-4 h-4" />
+              <span className="sr-only sm:not-sr-only">Format</span>
             </button>
           </div>
 
-          {/* Mobile Export Action Pill Button */}
-          <button
-            onClick={handleExportPDF}
-            disabled={isExporting}
-            className="px-3.5 py-2 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-[11px] flex items-center gap-1.5 shrink-0 shadow-lg cursor-pointer whitespace-nowrap"
+          {/* Backdrop Blur Overlay */}
+          {isMobileDrawerOpen && (
+            <div
+              onClick={() => setIsMobileDrawerOpen(false)}
+              className="fixed inset-0 z-50 bg-slate-950/40 backdrop-blur-xs sm:hidden transition-opacity"
+            />
+          )}
+
+          {/* Native iOS Bottom Sheet Drawer */}
+          <div
+            className={`fixed bottom-0 inset-x-0 z-50 bg-white/95 backdrop-blur-2xl border-t border-slate-200/90 shadow-2xl rounded-t-[32px] p-4 space-y-4 sm:hidden text-slate-900 transition-transform duration-300 ease-out select-none touch-manipulation ${
+              isMobileDrawerOpen ? 'translate-y-0' : 'translate-y-full pointer-events-none'
+            }`}
           >
-            <Download className="w-3.5 h-3.5" />
-            <span>Export</span>
-          </button>
-        </div>
+            {/* Drawer Drag Handle Pill */}
+            <div
+              className="w-12 h-1.5 bg-slate-300 rounded-full mx-auto -mt-1 mb-1 cursor-pointer"
+              onClick={() => setIsMobileDrawerOpen(false)}
+            />
+
+            <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
+              <div className="flex items-center gap-2">
+                <SlidersHorizontal className="w-4 h-4 text-indigo-600" />
+                <h4 className="text-sm font-black text-slate-900">Format & Page Controls</h4>
+              </div>
+              <button
+                onClick={() => setIsMobileDrawerOpen(false)}
+                className="p-1.5 rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 font-bold"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Page Navigation Stepper & Operations */}
+            <div className="flex items-center justify-between gap-2 bg-slate-50 p-2 rounded-2xl border border-slate-200/70">
+              <div className="flex items-center gap-1.5">
+                <button
+                  disabled={currentPage <= 1}
+                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                  className="px-3 py-1.5 rounded-xl bg-white hover:bg-slate-200 text-slate-900 disabled:opacity-40 font-black text-xs border border-slate-200/60"
+                >
+                  Prev
+                </button>
+                <span className="font-black text-xs text-indigo-950 px-1.5">
+                  Page {currentPage} of {numPages}
+                </span>
+                <button
+                  disabled={currentPage >= numPages}
+                  onClick={() => setCurrentPage((p) => Math.min(numPages, p + 1))}
+                  className="px-3 py-1.5 rounded-xl bg-white hover:bg-slate-200 text-slate-900 disabled:opacity-40 font-black text-xs border border-slate-200/60"
+                >
+                  Next
+                </button>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <button
+                  onClick={handleRotateCurrentPage}
+                  className="p-2 rounded-xl bg-white hover:bg-slate-200 text-slate-700 border border-slate-200/60"
+                  title="Rotate Page"
+                >
+                  <RotateCw className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={handleDeleteCurrentPage}
+                  className="p-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200/60"
+                  title="Delete Page"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Zoom Controls */}
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-xs font-extrabold text-slate-700">Page Zoom</span>
+              <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl border border-slate-200/80">
+                <button
+                  onClick={() => setZoom((z) => Math.max(0.6, z - 0.2))}
+                  className="px-2.5 py-1 font-black text-xs text-slate-800 bg-white rounded-lg"
+                >
+                  -
+                </button>
+                <span className="font-black text-xs text-slate-900 px-2">{Math.round(zoom * 100)}%</span>
+                <button
+                  onClick={() => setZoom((z) => Math.min(2.5, z + 0.2))}
+                  className="px-2.5 py-1 font-black text-xs text-slate-800 bg-white rounded-lg"
+                >
+                  +
+                </button>
+                <button
+                  onClick={() => setZoom(0.85)}
+                  className="px-2 py-1 font-black text-[11px] text-indigo-600 bg-indigo-50 rounded-lg ml-1"
+                >
+                  Fit
+                </button>
+              </div>
+            </div>
+
+            {/* Typography & Size */}
+            <div className="space-y-2">
+              <span className="text-xs font-extrabold text-slate-700">Typography & Font Size</span>
+              <div className="flex items-center gap-2">
+                <select
+                  value={fontFamily}
+                  onChange={(e) => setFontFamily(e.target.value as any)}
+                  className="bg-slate-100 text-slate-900 font-bold px-3 py-2 rounded-xl border border-slate-200 text-xs flex-1"
+                >
+                  <option value="helvetica">Helvetica / Arial</option>
+                  <option value="times">Times New Roman</option>
+                  <option value="courier">Courier Monospace</option>
+                </select>
+
+                <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200">
+                  <button
+                    onClick={() => setTextSize((s) => Math.max(8, s - 2))}
+                    className="px-2.5 py-1 font-black text-xs text-slate-800 bg-white rounded-lg"
+                  >
+                    -
+                  </button>
+                  <span className="font-black text-xs text-slate-900 px-1.5">{textSize}px</span>
+                  <button
+                    onClick={() => setTextSize((s) => Math.min(72, s + 2))}
+                    className="px-2.5 py-1 font-black text-xs text-slate-800 bg-white rounded-lg"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Swatches & Quick Stamps */}
+            <div className="space-y-2">
+              <span className="text-xs font-extrabold text-slate-700">Swatches & Quick Stamps</span>
+              <div className="flex items-center justify-between gap-2 overflow-x-auto no-scrollbar py-1">
+                <div className="flex items-center gap-1.5 shrink-0">
+                  {['#0f172a', '#dc2626', '#2563eb', '#16a34a', '#d97706', '#475569'].map((c) => (
+                    <button
+                      key={c}
+                      onClick={() => {
+                        setTextColor(c);
+                        setDrawColor(c);
+                      }}
+                      className={`w-6 h-6 rounded-full border-2 transition-transform active:scale-90 ${
+                        textColor === c ? 'border-indigo-600 scale-110 shadow-sm' : 'border-white'
+                      }`}
+                      style={{ backgroundColor: c }}
+                    />
+                  ))}
+                  <input
+                    type="color"
+                    value={textColor}
+                    onChange={(e) => {
+                      setTextColor(e.target.value);
+                      setDrawColor(e.target.value);
+                    }}
+                    className="w-6 h-6 rounded-full border-0 cursor-pointer overflow-hidden p-0"
+                  />
+                </div>
+
+                <div className="flex items-center gap-1 shrink-0">
+                  <button
+                    onClick={() => {
+                      handleAddStampPreset('date');
+                      setIsMobileDrawerOpen(false);
+                    }}
+                    className="px-2.5 py-1.5 rounded-xl text-[11px] font-bold bg-slate-100 text-slate-800 border border-slate-200"
+                  >
+                    + Date
+                  </button>
+                  <button
+                    onClick={() => {
+                      handleAddStampPreset('signature');
+                      setIsMobileDrawerOpen(false);
+                    }}
+                    className="px-2.5 py-1.5 rounded-xl text-[11px] font-bold bg-amber-50 text-amber-900 border border-amber-200"
+                  >
+                    + Signature
+                  </button>
+                  <button
+                    onClick={() => {
+                      handleAddStampPreset('check');
+                      setIsMobileDrawerOpen(false);
+                    }}
+                    className="px-2.5 py-1.5 rounded-xl text-[11px] font-bold bg-emerald-50 text-emerald-900 border border-emerald-200"
+                  >
+                    ✓ Check
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Primary Export Action */}
+            <button
+              onClick={() => {
+                setIsMobileDrawerOpen(false);
+                handleExportPDF();
+              }}
+              disabled={isExporting}
+              className="w-full py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white font-extrabold text-sm shadow-lg shadow-emerald-600/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
+            >
+              {isExporting ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
+              <span>Download PDF Document</span>
+            </button>
+          </div>
+        </>
       )}
     </ToolLayout>
   );
