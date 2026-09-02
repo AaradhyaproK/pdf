@@ -4,14 +4,17 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 export function AppSplashScreen() {
-  const [isMounted, setIsMounted] = useState(false);
   const [isFading, setIsFading] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
+    // Skip splash screen on desktop screens (>= 768px)
+    if (typeof window !== 'undefined' && window.innerWidth >= 768) {
+      setIsHidden(true);
+      return;
+    }
 
-    // Fade out splash screen after app hydrates
+    // Fade out splash screen after mobile app hydrates
     const fadeTimer = setTimeout(() => {
       setIsFading(true);
     }, 400);
@@ -31,7 +34,7 @@ export function AppSplashScreen() {
   return (
     <div
       id="app-splash-screen"
-      className={`fixed inset-0 z-[9999] bg-white flex flex-col items-center justify-between p-8 select-none transition-all duration-500 ease-out ${
+      className={`md:hidden fixed inset-0 z-[9999] bg-white flex flex-col items-center justify-between p-8 select-none transition-all duration-500 ease-out ${
         isFading ? 'opacity-0 pointer-events-none scale-105' : 'opacity-100'
       }`}
       style={{
@@ -39,7 +42,7 @@ export function AppSplashScreen() {
         paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 36px)',
       }}
     >
-      {/* Top Spacer */}
+      {/* Top Tag */}
       <div className="w-full flex justify-center">
         <span className="px-3.5 py-1 rounded-full bg-rose-50 border border-rose-100 text-rose-600 font-extrabold text-[10px] uppercase tracking-widest shadow-2xs">
           100% Client-Side Engine
