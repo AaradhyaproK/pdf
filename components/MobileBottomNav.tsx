@@ -215,9 +215,17 @@ export function MobileBottomNav() {
                   const badgeStyle = 'bg-slate-100 text-slate-700 border-slate-200/80';
 
                   return (
-                    <button
+                    <Link
                       key={tool.slug}
-                      onClick={() => handleSelectTool(tool.slug)}
+                      href={tool.slug}
+                      onPointerDown={(e) => {
+                        e.preventDefault();
+                        handleSelectTool(tool.slug);
+                      }}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleSelectTool(tool.slug);
+                      }}
                       className="w-full text-left p-3 rounded-2xl bg-white/80 hover:bg-white active:bg-slate-100 border border-slate-200/70 flex items-center justify-between active:scale-[0.98] transition-all duration-150 shadow-2xs cursor-pointer"
                     >
                       <div className="flex items-center gap-3 min-w-0">
@@ -238,7 +246,7 @@ export function MobileBottomNav() {
                           {tool.badge}
                         </span>
                       )}
-                    </button>
+                    </Link>
                   );
                 })
               )}

@@ -190,6 +190,7 @@ export function Navbar() {
     }
   }, [searchOpen]);
 
+  // Handle smart back navigation with fallback
   const handleBack = () => {
     if (typeof window !== 'undefined' && window.history.length > 1) {
       router.back();
@@ -199,13 +200,27 @@ export function Navbar() {
   };
 
   // Select tool from mobile/desktop search results cleanly
+  const selectingRef = useRef(false);
   const handleSelectTool = (slug: string) => {
+    if (selectingRef.current) return;
+    selectingRef.current = true;
+
+    // Blur active input to prevent keyboard layout shift cancellation on touch devices
+    if (typeof document !== 'undefined' && document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+
     setSearchOpen(false);
     setSearchQuery('');
     if (typeof window !== 'undefined') {
       document.body.style.overflow = '';
     }
+
     router.push(slug);
+
+    setTimeout(() => {
+      selectingRef.current = false;
+    }, 400);
   };
 
   useEffect(() => {
@@ -331,9 +346,17 @@ export function Navbar() {
               filteredTools.map((tool) => {
                 const Icon = tool.icon;
                 return (
-                  <button
+                  <Link
                     key={tool.slug}
-                    onClick={() => handleSelectTool(tool.slug)}
+                    href={tool.slug}
+                    onPointerDown={(e) => {
+                      e.preventDefault();
+                      handleSelectTool(tool.slug);
+                    }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleSelectTool(tool.slug);
+                    }}
                     className="w-full text-left p-3 rounded-2xl bg-slate-50 hover:bg-slate-100 active:bg-slate-200/80 border border-slate-200/80 flex items-center justify-between active:scale-[0.98] transition-all cursor-pointer shadow-2xs group"
                   >
                     <div className="flex items-center gap-3 min-w-0">
@@ -360,7 +383,7 @@ export function Navbar() {
                         {tool.badge}
                       </span>
                     )}
-                  </button>
+                  </Link>
                 );
               })
             )}
@@ -688,11 +711,13 @@ export function Navbar() {
                       <Link
                         key={tool.slug}
                         href={tool.slug}
+                        onPointerDown={(e) => {
+                          e.preventDefault();
+                          handleSelectTool(tool.slug);
+                        }}
                         onClick={(e) => {
                           e.preventDefault();
-                          setSearchOpen(false);
-                          setSearchQuery('');
-                          router.push(tool.slug);
+                          handleSelectTool(tool.slug);
                         }}
                         onMouseEnter={() => setSelectedIndex(idx)}
                         className={`p-2.5 rounded-2xl flex items-center justify-between transition-all duration-150 border cursor-pointer ${
