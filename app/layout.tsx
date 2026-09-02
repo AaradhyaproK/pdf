@@ -98,7 +98,7 @@ export default function RootLayout({
         <CloudflareAnalytics />
         <AnalyticsTracker />
         <Navbar />
-        <div className="flex-1 pb-24 md:pb-0">{children}</div>
+        <div className="flex-1 pt-12 sm:pt-0 pb-24 md:pb-0">{children}</div>
         <Footer />
         <MobileBottomNav />
         <PWAInstaller />
