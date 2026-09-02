@@ -1,6 +1,7 @@
 'use client';
 
 import { ReactNode, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { AdSlot } from './AdSlot';
 import { RelatedToolsSection } from './RelatedToolsSection';
 import { SEOContent } from './SEOContent';
@@ -36,7 +37,12 @@ export function ToolLayout({
 
   return (
     <main className="min-h-screen w-full bg-slate-50/70 pt-3 sm:pt-6 pb-32 sm:pb-16 px-2 sm:px-6 lg:px-8 transition-colors">
-      <div className="max-w-7xl mx-auto space-y-3 sm:space-y-6">
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-7xl mx-auto space-y-3 sm:space-y-6"
+      >
         {/* Header Leaderboard Ad Slot (CLS = 0) */}
         <AdSlot slotType="header-leaderboard" />
 
@@ -63,9 +69,14 @@ export function ToolLayout({
             {noCardWrapper ? (
               children
             ) : (
-              <div className="bg-white p-3 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-md">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.995 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+                className="bg-white p-3 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-md"
+              >
                 {children}
-              </div>
+              </motion.div>
             )}
 
             {/* Post-Download In-Feed Ad Slot */}
@@ -83,7 +94,7 @@ export function ToolLayout({
             <AdSlot slotType="sticky-sidebar" />
           </div>
         </div>
-      </div>
+      </motion.div>
     </main>
   );
 }

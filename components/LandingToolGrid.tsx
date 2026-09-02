@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   FileText,
   Edit3,
@@ -102,15 +103,15 @@ export const ALL_TOOLS: ToolItem[] = [
     colorClass: 'text-rose-600',
     iconBgClass: 'bg-rose-50 text-rose-600 border-rose-100 group-hover:bg-rose-600 group-hover:text-white',
     hoverTitleClass: 'group-hover:text-rose-600',
-    badgeStyle: 'bg-amber-50 text-amber-800 border-amber-200',
+    badgeStyle: 'bg-rose-50 text-rose-700 border-rose-200',
   },
   {
     id: 'edit-pdf',
     name: 'Edit PDF Online',
     slug: '/pdf/edit',
-    desc: 'Add text, whiteout, draw annotations, and insert stamps.',
+    desc: 'Draw, add text, whiteout content, & sign documents.',
     category: 'pdf',
-    tags: ['organize', 'edit-security'],
+    tags: ['edit-security'],
     icon: Edit3,
     badge: 'Interactive',
     colorClass: 'text-rose-600',
@@ -122,7 +123,7 @@ export const ALL_TOOLS: ToolItem[] = [
     id: 'organize-pdf',
     name: 'Organize PDF',
     slug: '/pdf/organize',
-    desc: 'Reorder, rotate, delete, and manage individual PDF pages.',
+    desc: 'Rotate, reorder, & delete pages visually.',
     category: 'pdf',
     tags: ['organize'],
     icon: Grid,
@@ -131,36 +132,24 @@ export const ALL_TOOLS: ToolItem[] = [
     hoverTitleClass: 'group-hover:text-rose-600',
   },
   {
-    id: 'pdf-to-image',
-    name: 'PDF to JPG/PNG',
-    slug: '/pdf/to-image',
-    desc: 'Convert PDF pages into high-res images.',
+    id: 'pdf-ocr',
+    name: 'PDF OCR Extractor',
+    slug: '/pdf/ocr',
+    desc: 'Extract editable text from scanned PDFs via AI OCR.',
     category: 'pdf',
     tags: ['convert-from'],
-    icon: FileImage,
+    icon: FileCheck,
+    badge: 'AI Wasm',
     colorClass: 'text-rose-600',
     iconBgClass: 'bg-rose-50 text-rose-600 border-rose-100 group-hover:bg-rose-600 group-hover:text-white',
     hoverTitleClass: 'group-hover:text-rose-600',
-  },
-  {
-    id: 'ocr-pdf',
-    name: 'PDF OCR Extractor',
-    slug: '/pdf/ocr',
-    desc: 'Extract editable text from scanned PDFs via AI.',
-    category: 'pdf',
-    tags: ['edit-security'],
-    icon: FileCheck,
-    badge: 'AI Wasm',
-    colorClass: 'text-purple-600',
-    iconBgClass: 'bg-purple-50 text-purple-600 border-purple-100 group-hover:bg-purple-600 group-hover:text-white',
-    hoverTitleClass: 'group-hover:text-purple-600',
-    badgeStyle: 'bg-purple-50 text-purple-700 border-purple-200',
+    badgeStyle: 'bg-rose-50 text-rose-700 border-rose-200',
   },
   {
     id: 'watermark-pdf',
     name: 'Watermark PDF',
     slug: '/pdf/watermark',
-    desc: 'Stamp custom text or image watermarks on PDF pages.',
+    desc: 'Add custom text overlays to protect PDF pages.',
     category: 'pdf',
     tags: ['edit-security'],
     icon: Stamp,
@@ -170,9 +159,9 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: 'protect-pdf',
-    name: 'Protect PDF',
+    name: 'Password Protect PDF',
     slug: '/pdf/protect',
-    desc: 'Encrypt PDF files with a secure password.',
+    desc: 'Encrypt PDF files with strong password protection.',
     category: 'pdf',
     tags: ['edit-security'],
     icon: Lock,
@@ -180,19 +169,31 @@ export const ALL_TOOLS: ToolItem[] = [
     colorClass: 'text-rose-600',
     iconBgClass: 'bg-rose-50 text-rose-600 border-rose-100 group-hover:bg-rose-600 group-hover:text-white',
     hoverTitleClass: 'group-hover:text-rose-600',
-    badgeStyle: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+    badgeStyle: 'bg-rose-50 text-rose-700 border-rose-200',
+  },
+  {
+    id: 'pdf-to-image',
+    name: 'PDF to JPG / PNG',
+    slug: '/pdf/to-image',
+    desc: 'Export PDF pages as crisp images.',
+    category: 'pdf',
+    tags: ['convert-from'],
+    icon: FileImage,
+    colorClass: 'text-rose-600',
+    iconBgClass: 'bg-rose-50 text-rose-600 border-rose-100 group-hover:bg-rose-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-rose-600',
   },
 
-  // --- IMAGE TOOLS (Sky/Blue Theme) ---
+  // --- IMAGE TOOLS (Sky Blue Theme) ---
   {
     id: 'pics-to-pdf',
     name: 'Pics to PDF',
     slug: '/image/pics-to-pdf',
-    desc: 'Convert photos, camera scans, and pictures to PDF.',
+    desc: 'Convert photos & scans into a single clean PDF.',
     category: 'image',
     tags: ['convert-to', 'image'],
     icon: Camera,
-    badge: 'Top Pick',
+    badge: 'Popular',
     colorClass: 'text-sky-600',
     iconBgClass: 'bg-sky-50 text-sky-600 border-sky-100 group-hover:bg-sky-600 group-hover:text-white',
     hoverTitleClass: 'group-hover:text-sky-600',
@@ -200,13 +201,13 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: 'png-to-jpg',
-    name: 'PNG to JPG',
+    name: 'PNG to JPG Converter',
     slug: '/image/png-to-jpg',
     desc: 'Bulk convert PNG images to JPG with custom background.',
     category: 'image',
     tags: ['image'],
-    icon: ImageIcon,
-    badge: 'Bulk Fast',
+    icon: FileImage,
+    badge: 'Bulk',
     colorClass: 'text-sky-600',
     iconBgClass: 'bg-sky-50 text-sky-600 border-sky-100 group-hover:bg-sky-600 group-hover:text-white',
     hoverTitleClass: 'group-hover:text-sky-600',
@@ -214,21 +215,21 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: 'jpg-to-png',
-    name: 'JPG to PNG',
+    name: 'JPG to PNG Converter',
     slug: '/image/jpg-to-png',
-    desc: 'Convert JPG to lossless quality PNG format.',
+    desc: 'Lossless quality conversion from JPG to PNG.',
     category: 'image',
     tags: ['image'],
-    icon: ImageIcon,
+    icon: FileImage,
     colorClass: 'text-sky-600',
     iconBgClass: 'bg-sky-50 text-sky-600 border-sky-100 group-hover:bg-sky-600 group-hover:text-white',
     hoverTitleClass: 'group-hover:text-sky-600',
   },
   {
     id: 'compress-image',
-    name: 'Compress Image',
+    name: 'Compress Image (Target KB)',
     slug: '/image/compress',
-    desc: 'Compress images to target KB sizes (<20KB, <50KB).',
+    desc: 'Target size compression (<20KB, <50KB, <100KB).',
     category: 'image',
     tags: ['compress', 'image'],
     icon: Minimize2,
@@ -236,13 +237,13 @@ export const ALL_TOOLS: ToolItem[] = [
     colorClass: 'text-sky-600',
     iconBgClass: 'bg-sky-50 text-sky-600 border-sky-100 group-hover:bg-sky-600 group-hover:text-white',
     hoverTitleClass: 'group-hover:text-sky-600',
-    badgeStyle: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+    badgeStyle: 'bg-sky-50 text-sky-700 border-sky-200',
   },
   {
-    id: 'compress-to-50kb',
-    name: 'Compress to 50KB',
+    id: 'compress-image-50kb',
+    name: 'Compress Image to 50KB',
     slug: '/image/compress-to-50kb',
-    desc: 'Reduce photo size under 50KB for online forms.',
+    desc: 'Shrink photo size under 50KB for online forms.',
     category: 'image',
     tags: ['compress', 'image'],
     icon: Minimize2,
@@ -251,10 +252,10 @@ export const ALL_TOOLS: ToolItem[] = [
     hoverTitleClass: 'group-hover:text-sky-600',
   },
   {
-    id: 'compress-to-100kb',
-    name: 'Compress to 100KB',
+    id: 'compress-image-100kb',
+    name: 'Compress Image to 100KB',
     slug: '/image/compress-to-100kb',
-    desc: 'Resize photo size under 100KB for identity forms.',
+    desc: 'Shrink photos under 100KB for identity verification.',
     category: 'image',
     tags: ['compress', 'image'],
     icon: Minimize2,
@@ -264,37 +265,37 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: 'passport-maker',
-    name: 'Passport Photo',
+    name: 'Passport Photo Maker',
     slug: '/image/passport-maker',
-    desc: 'Crop photo to US 2x2, 35x45 mm Schengen, UK & India.',
+    desc: 'Crop to exact US, UK, Schengen & India specs.',
     category: 'image',
     tags: ['image'],
     icon: UserCheck,
     badge: 'Presets',
-    colorClass: 'text-indigo-600',
-    iconBgClass: 'bg-indigo-50 text-indigo-600 border-indigo-100 group-hover:bg-indigo-600 group-hover:text-white',
-    hoverTitleClass: 'group-hover:text-indigo-600',
-    badgeStyle: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+    colorClass: 'text-sky-600',
+    iconBgClass: 'bg-sky-50 text-sky-600 border-sky-100 group-hover:bg-sky-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-sky-600',
+    badgeStyle: 'bg-sky-50 text-sky-700 border-sky-200',
   },
   {
     id: 'remove-background',
-    name: 'AI Background Eraser',
+    name: 'AI Background Remover',
     slug: '/image/remove-background',
     desc: 'Remove photo backgrounds 100% locally with AI.',
     category: 'image',
     tags: ['image'],
     icon: Scissors,
     badge: 'AI Wasm',
-    colorClass: 'text-purple-600',
-    iconBgClass: 'bg-purple-50 text-purple-600 border-purple-100 group-hover:bg-purple-600 group-hover:text-white',
-    hoverTitleClass: 'group-hover:text-purple-600',
-    badgeStyle: 'bg-purple-50 text-purple-700 border-purple-200',
+    colorClass: 'text-sky-600',
+    iconBgClass: 'bg-sky-50 text-sky-600 border-sky-100 group-hover:bg-sky-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-sky-600',
+    badgeStyle: 'bg-sky-50 text-sky-700 border-sky-200',
   },
   {
-    id: 'convert-heic',
-    name: 'HEIC to JPG',
+    id: 'heic-converter',
+    name: 'Apple HEIC to JPG',
     slug: '/image/convert-heic',
-    desc: 'Batch convert iPhone HEIC photos into universal JPG.',
+    desc: 'Convert iPhone HEIC photos to compatible JPGs.',
     category: 'image',
     tags: ['image'],
     icon: Smartphone,
@@ -304,9 +305,9 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: 'resize-image',
-    name: 'Resize Image',
+    name: 'Resize Image (Pixels / %)',
     slug: '/image/resize',
-    desc: 'Resize dimensions by exact pixels or percentage.',
+    desc: 'Resize image dimensions cleanly with aspect lock.',
     category: 'image',
     tags: ['image'],
     icon: Sliders,
@@ -427,7 +428,7 @@ export function LandingToolGrid() {
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 transition-colors"
+              className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 transition-colors cursor-pointer"
               aria-label="Clear search"
             >
               <X className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -452,7 +453,7 @@ export function LandingToolGrid() {
               <button
                 key={pill.id}
                 onClick={() => setActiveFilter(pill.id as CategoryFilter)}
-                className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-[11px] sm:text-xs font-bold transition-all duration-200 flex items-center gap-1.5 shrink-0 border ${
+                className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-[11px] sm:text-xs font-bold transition-all duration-200 flex items-center gap-1.5 shrink-0 border cursor-pointer ${
                   isActive
                     ? 'bg-rose-600 text-white border-rose-600 shadow-md scale-105'
                     : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
@@ -499,76 +500,94 @@ export function LandingToolGrid() {
         </span>
       </div>
 
-      {/* Touch-Friendly 2-Column App Grid on Mobile */}
-      {filteredTools.length > 0 ? (
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
-          {filteredTools.map((tool) => {
-            const IconComp = tool.icon;
-            return (
-              <Link
-                key={tool.id}
-                href={tool.slug}
-                className="group relative bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-xl hover:border-rose-300 active:scale-[0.98] sm:active:scale-100 hover:-translate-y-1 transition-all duration-200 flex flex-col justify-between space-y-3 sm:space-y-4"
-              >
-                <div className="space-y-3 sm:space-y-4">
-                  {/* Top Row: Icon Container & Badge */}
-                  <div className="flex items-center justify-between gap-2">
-                    <div
-                      className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl border ${tool.iconBgClass} flex items-center justify-center transition-all duration-200 shadow-2xs shrink-0`}
-                    >
-                      <IconComp className="w-5 h-5 sm:w-6 sm:h-6 transition-transform group-hover:scale-110" />
-                    </div>
-
-                    {tool.badge && (
-                      <span
-                        className={`px-2 py-0.5 sm:px-2.5 sm:py-0.5 rounded-full text-[9px] sm:text-[10px] font-extrabold tracking-tight border shrink-0 ${
-                          tool.badgeStyle || 'bg-slate-100 text-slate-700 border-slate-200'
-                        }`}
-                      >
-                        {tool.badge}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Title & Description */}
-                  <div>
-                    <h3
-                      className={`text-xs sm:text-base font-black text-slate-900 ${tool.hoverTitleClass} transition-colors flex items-center justify-between gap-1 leading-snug`}
-                    >
-                      <span className="truncate">{tool.name}</span>
-                      <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-300 group-hover:text-rose-600 group-hover:translate-x-1 transition-all shrink-0" />
-                    </h3>
-                    <p className="text-[10px] sm:text-xs text-slate-500 font-medium leading-relaxed mt-1 line-clamp-2">
-                      {tool.desc}
-                    </p>
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-      ) : (
-        /* Empty State */
-        <div className="text-center py-12 px-4 bg-white rounded-2xl border border-slate-200 space-y-3">
-          <div className="w-12 h-12 rounded-full bg-rose-50 text-rose-500 flex items-center justify-center mx-auto">
-            <Search className="w-6 h-6" />
-          </div>
-          <h3 className="text-base font-black text-slate-900">No tools found matching &quot;{searchQuery}&quot;</h3>
-          <p className="text-xs text-slate-500 max-w-md mx-auto font-medium">
-            Try searching for &quot;merge&quot;, &quot;compress&quot;, &quot;png&quot;, or click reset.
-          </p>
-          <button
-            onClick={() => {
-              setSearchQuery('');
-              setActiveFilter('all');
-            }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-rose-600 text-white rounded-xl text-xs font-bold hover:bg-rose-700 transition-colors shadow-md"
+      {/* Touch-Friendly 2-Column App Grid on Mobile with Framer Motion Entrance */}
+      <AnimatePresence mode="wait">
+        {filteredTools.length > 0 ? (
+          <motion.div
+            key={activeFilter + searchQuery}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6"
           >
-            <X className="w-4 h-4" />
-            Reset All Filters
-          </button>
-        </div>
-      )}
+            {filteredTools.map((tool) => {
+              const IconComp = tool.icon;
+              return (
+                <motion.div
+                  key={tool.id}
+                  whileHover={{ y: -4, transition: { duration: 0.15 } }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  <Link
+                    href={tool.slug}
+                    className="group relative bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-xl hover:border-rose-300 transition-all duration-200 flex flex-col justify-between space-y-3 sm:space-y-4 h-full"
+                  >
+                    <div className="space-y-3 sm:space-y-4">
+                      {/* Top Row: Icon Container & Badge */}
+                      <div className="flex items-center justify-between gap-2">
+                        <div
+                          className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl border ${tool.iconBgClass} flex items-center justify-center transition-all duration-200 shadow-2xs shrink-0`}
+                        >
+                          <IconComp className="w-5 h-5 sm:w-6 sm:h-6 transition-transform group-hover:scale-110" />
+                        </div>
+
+                        {tool.badge && (
+                          <span
+                            className={`px-2 py-0.5 sm:px-2.5 sm:py-0.5 rounded-full text-[9px] sm:text-[10px] font-extrabold tracking-tight border shrink-0 ${
+                              tool.badgeStyle || 'bg-slate-100 text-slate-700 border-slate-200'
+                            }`}
+                          >
+                            {tool.badge}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Title & Description */}
+                      <div>
+                        <h3
+                          className={`text-xs sm:text-base font-black text-slate-900 ${tool.hoverTitleClass} transition-colors flex items-center justify-between gap-1 leading-snug`}
+                        >
+                          <span className="truncate">{tool.name}</span>
+                          <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-300 group-hover:text-rose-600 group-hover:translate-x-1 transition-all shrink-0" />
+                        </h3>
+                        <p className="text-[10px] sm:text-xs text-slate-500 font-medium leading-relaxed mt-1 line-clamp-2">
+                          {tool.desc}
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        ) : (
+          /* Empty State */
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="text-center py-12 px-4 bg-white rounded-2xl border border-slate-200 space-y-3"
+          >
+            <div className="w-12 h-12 rounded-full bg-rose-50 text-rose-500 flex items-center justify-center mx-auto">
+              <Search className="w-6 h-6" />
+            </div>
+            <h3 className="text-base font-black text-slate-900">No tools found matching &quot;{searchQuery}&quot;</h3>
+            <p className="text-xs text-slate-500 max-w-md mx-auto font-medium">
+              Try searching for &quot;merge&quot;, &quot;compress&quot;, &quot;png&quot;, or click reset.
+            </p>
+            <button
+              onClick={() => {
+                setSearchQuery('');
+                setActiveFilter('all');
+              }}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-rose-600 text-white rounded-xl text-xs font-bold hover:bg-rose-700 transition-colors shadow-md cursor-pointer"
+            >
+              <X className="w-4 h-4" />
+              Reset All Filters
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

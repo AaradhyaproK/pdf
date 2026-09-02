@@ -147,6 +147,7 @@ html, body {
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
+  scroll-behavior: smooth;
 }
 
 /* Prevent text selection and double-tap zoom on mobile app UI controls */
@@ -159,4 +160,16 @@ header {
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+}
+
+/* Hardware accelerated smooth rendering utilities */
+.smooth-gpu {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+/* Ultra smooth button active click response */
+button:active, a:active {
+  transition: transform 0.1s cubic-bezier(0.16, 1, 0.3, 1);
 }
