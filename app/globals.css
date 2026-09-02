@@ -148,18 +148,38 @@ html, body {
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
   scroll-behavior: smooth;
+  overscroll-behavior-y: contain;
 }
 
-/* Prevent text selection and double-tap zoom on mobile app UI controls */
-.app-shell-steady,
-.app-control,
-button,
-select,
-nav,
-header {
+/* Global Native App Selection Prevention: Prevents long-press copy popup callouts on UI text */
+*,
+::before,
+::after {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none; /* Disables native iOS/Android long-press copy/share callout balloon */
+  -webkit-user-select: none;   /* Disables native text selection highlighting on UI elements */
   user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
+}
+
+/* Prevent drag ghosting on images and icons */
+img,
+svg,
+a {
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+
+/* Explicitly re-enable text selection for user input fields, textareas, and copyable text areas */
+input,
+textarea,
+[contenteditable="true"],
+code,
+pre,
+.selectable-text,
+.select-text {
+  -webkit-user-select: text !important;
+  user-select: text !important;
+  -webkit-touch-callout: default !important;
 }
 
 /* Hardware accelerated smooth rendering utilities */
@@ -182,3 +202,4 @@ header {
 button:active, a:active {
   transition: transform 0.1s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
