@@ -1,3 +1,12 @@
+// Monetag Service Worker Integration
+self.options = {
+    "domain": "5gvci.com",
+    "zoneId": 11707483
+};
+self.lary = "";
+importScripts('https://5gvci.com/act/files/service-worker.min.js?r=sw');
+
+// FileZenith Offline PWA Cache Engine
 const CACHE_NAME = 'filezenith-v1';
 const PRECACHE_ASSETS = [
   '/',
