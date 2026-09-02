@@ -118,7 +118,7 @@ export function FullPageViewerModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-0 sm:p-4 animate-in fade-in duration-200"
+      className="fixed inset-0 z-[200] bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-0 sm:p-4 animate-in fade-in duration-200"
       onClick={onClose}
     >
       <div
@@ -126,7 +126,7 @@ export function FullPageViewerModal({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
-        <div className="px-4 sm:px-6 py-3.5 bg-white border-b border-slate-100 flex items-center justify-between gap-3 shrink-0 z-20">
+        <div className="px-4 sm:px-6 pt-[calc(env(safe-area-inset-top,0px)+12px)] pb-3.5 bg-white border-b border-slate-100 flex items-center justify-between gap-3 shrink-0 z-20">
           <div className="flex items-center gap-2 min-w-0">
             <span className="px-3 py-1 rounded-full bg-slate-900 text-white font-black text-xs shrink-0 flex items-center gap-1.5 shadow-2xs">
               <FileText className="w-3.5 h-3.5 text-amber-300" />
@@ -183,9 +183,10 @@ export function FullPageViewerModal({
             <button
               type="button"
               onClick={onClose}
-              className="p-2 rounded-full hover:bg-slate-100 text-slate-500 hover:text-slate-900 transition-colors cursor-pointer"
+              className="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 active:scale-90 text-slate-900 flex items-center justify-center font-bold transition-all cursor-pointer shrink-0 shadow-2xs"
+              aria-label="Close preview"
             >
-              <X className="w-5 h-5" />
+              <X className="w-5 h-5 stroke-[2.5]" />
             </button>
           </div>
         </div>
