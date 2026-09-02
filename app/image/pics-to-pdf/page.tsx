@@ -192,6 +192,21 @@ export default function PicsToPDFPage() {
   const [isPageSizeModalOpen, setIsPageSizeModalOpen] = useState<boolean>(false);
   const [cropItem, setCropItem] = useState<MediaItem | null>(null);
 
+  // Lock body background scroll when preview popup is open on mobile
+  useEffect(() => {
+    if (isPreviewOpen || cropItem !== null || isPageSizeModalOpen) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+    };
+  }, [isPreviewOpen, cropItem, isPageSizeModalOpen]);
+
   const handleSaveCrop = (croppedUrl: string, savedPoints: Point[]) => {
     if (!cropItem) return;
     setItems((prev) =>
@@ -1239,7 +1254,7 @@ export default function PicsToPDFPage() {
             </div>
 
             {/* Seamless Single-Surface Vertical Document Reader (No Nested Boxes) */}
-            <div className="flex-1 overflow-y-auto bg-white p-3 sm:p-6 space-y-8 custom-scrollbar">
+            <div className="flex-1 overflow-y-auto overscroll-contain touch-pan-y bg-white p-3 sm:p-6 space-y-8 custom-scrollbar">
               {items.map((item, index) => {
                 const isRotated = Math.abs((item.rotation || 0) % 180) === 90;
 

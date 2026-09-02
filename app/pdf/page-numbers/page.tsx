@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ToolLayout } from '@/components/ToolLayout';
 import { FileUploader, FileItem } from '@/components/FileUploader';
 import { renderPDFPagesToImages } from '@/lib/pdf-engine';
@@ -49,6 +49,21 @@ export default function PDFPageNumbersPage() {
 
   // Preview Modal state
   const [previewPageIndex, setPreviewPageIndex] = useState<number | null>(null);
+
+  // Lock body scroll when preview modal is open on mobile
+  useEffect(() => {
+    if (previewPageIndex !== null) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+    };
+  }, [previewPageIndex]);
 
   // Handle file select and render page thumbnails
   const handleFilesSelected = async (selectedFiles: FileItem[]) => {

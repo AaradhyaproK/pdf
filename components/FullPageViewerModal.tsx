@@ -97,6 +97,17 @@ export function FullPageViewerModal({
     toast.success(`Downloaded Page ${currentPage.pageNumber}`);
   };
 
+  // Lock background body scroll when modal is open on mobile
+  useEffect(() => {
+    if (!isOpen) return;
+    document.body.style.overflow = 'hidden';
+    document.body.style.touchAction = 'none';
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+    };
+  }, [isOpen]);
+
   // Keyboard navigation
   useEffect(() => {
     if (!isOpen) return;
@@ -118,7 +129,7 @@ export function FullPageViewerModal({
 
   return (
     <div
-      className="fixed inset-0 z-[200] bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-0 sm:p-4 animate-in fade-in duration-200"
+      className="fixed inset-0 z-[200] bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-0 sm:p-4 animate-in fade-in duration-200 overscroll-none"
       onClick={onClose}
     >
       <div
@@ -218,7 +229,7 @@ export function FullPageViewerModal({
         </div>
 
         {/* Document Reader Surface */}
-        <div className="flex-1 overflow-y-auto bg-slate-50/50 p-3 sm:p-6 space-y-8 custom-scrollbar">
+        <div className="flex-1 overflow-y-auto overscroll-contain touch-pan-y bg-slate-50/50 p-3 sm:p-6 space-y-8 custom-scrollbar">
           {pages.map((p, idx) => {
             const pageRotation = ((p.rotation || 0) + (idx === currentIndex ? localRotation : 0)) % 360;
             const isRotated = Math.abs(pageRotation % 180) === 90;
