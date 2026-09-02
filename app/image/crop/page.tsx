@@ -16,7 +16,6 @@ import {
   Sliders,
   RefreshCw,
   Copy,
-  Sparkles,
   Maximize2,
 } from 'lucide-react';
 import { toast } from 'sonner';
@@ -81,6 +80,17 @@ export default function ImageCropPage() {
   const imageRef = useRef<HTMLImageElement>(null);
 
   const totalAngle = (stepRotation + straightenAngle) % 360;
+
+  // Compute scale factor to fill bounding box without blank sides when straightening angle is applied
+  const getScaleFill = useCallback(() => {
+    const w = naturalDimensions.width || 1000;
+    const h = naturalDimensions.height || 1000;
+    const radFine = (straightenAngle * Math.PI) / 180;
+    const absCos = Math.abs(Math.cos(radFine));
+    const absSin = Math.abs(Math.sin(radFine));
+    const ratio = Math.max(w, h) / Math.min(w, h);
+    return absCos + absSin * ratio;
+  }, [naturalDimensions, straightenAngle]);
 
   // Compute rotated composition dimensions
   const getRotatedDimensions = useCallback(() => {
@@ -275,7 +285,7 @@ export default function ImageCropPage() {
     };
   }, [activeHandle, getTargetRatio, getRotatedDimensions]);
 
-  // Crop Render & Canvas Export
+  // Crop Render & Canvas Export (Always operations directly on the original base image)
   const generateCrop = useCallback(() => {
     if (!imageSrc || !imageRef.current) return;
     const img = imageRef.current;
@@ -283,6 +293,7 @@ export default function ImageCropPage() {
     const naturalH = img.naturalHeight;
     if (!naturalW || !naturalH) return;
 
+    const scaleFill = getScaleFill();
     const rad = (totalAngle * Math.PI) / 180;
     const absCos = Math.abs(Math.cos(rad));
     const absSin = Math.abs(Math.sin(rad));
@@ -307,7 +318,7 @@ export default function ImageCropPage() {
     ctx.save();
     ctx.translate(rotW / 2 - cropX, rotH / 2 - cropY);
     ctx.rotate(rad);
-    ctx.scale(flipH ? -1 : 1, flipV ? -1 : 1);
+    ctx.scale((flipH ? -1 : 1) * scaleFill, (flipV ? -1 : 1) * scaleFill);
 
     ctx.drawImage(img, -naturalW / 2, -naturalH / 2, naturalW, naturalH);
     ctx.restore();
@@ -317,7 +328,7 @@ export default function ImageCropPage() {
     setCroppedOutputUrl(output);
     setCroppedDimensions({ width: cropW, height: cropH });
     toast.success(`Crop rendered (${cropW} × ${cropH} px)`);
-  }, [imageSrc, totalAngle, cropBox, flipH, flipV, exportFormat, exportQuality]);
+  }, [imageSrc, totalAngle, cropBox, flipH, flipV, exportFormat, exportQuality, getScaleFill]);
 
   // Copy image to clipboard
   const copyToClipboard = async () => {
@@ -343,6 +354,7 @@ export default function ImageCropPage() {
 
   const currentRes = liveOutputResolution();
   const { rotW, rotH } = getRotatedDimensions();
+  const scaleFill = getScaleFill();
 
   return (
     <ToolLayout
@@ -588,8 +600,8 @@ export default function ImageCropPage() {
               </div>
             </div>
 
-            {/* Interactive Canvas Preview Container */}
-            <div className="relative bg-slate-950 rounded-3xl p-4 sm:p-6 flex items-center justify-center overflow-hidden min-h-[380px] touch-none select-none border border-slate-800 shadow-2xl">
+            {/* Interactive Canvas Preview Container (No touch-none on container so page scrolling works smoothly) */}
+            <div className="relative bg-slate-950 rounded-3xl p-4 sm:p-6 flex items-center justify-center overflow-hidden min-h-[380px] select-none border border-slate-800 shadow-2xl">
               <div
                 ref={containerRef}
                 className="relative max-w-full max-h-[55vh] flex items-center justify-center select-none overflow-hidden rounded-xl"
@@ -598,15 +610,15 @@ export default function ImageCropPage() {
                   maxHeight: '55vh',
                 }}
               >
-                {/* Rotated Source Image */}
+                {/* Rotated Source Base Image with Auto-Fill Scale Factor */}
                 <img
                   ref={imageRef}
                   src={imageSrc}
-                  alt="Original Preview"
+                  alt="Original Base Preview"
                   onLoad={handleImageLoad}
                   className="pointer-events-none transition-transform duration-75 max-w-full max-h-full object-contain"
                   style={{
-                    transform: `rotate(${totalAngle}deg) scaleX(${flipH ? -1 : 1}) scaleY(${flipV ? -1 : 1})`,
+                    transform: `scale(${scaleFill}) rotate(${totalAngle}deg) scaleX(${flipH ? -1 : 1}) scaleY(${flipV ? -1 : 1})`,
                   }}
                 />
 
@@ -634,9 +646,9 @@ export default function ImageCropPage() {
                   }}
                 />
 
-                {/* Draggable Crop Box Container */}
+                {/* Draggable Crop Box Container (Touch action scoped strictly to handles) */}
                 <div
-                  className="absolute border-2 border-sky-400 bg-sky-400/10 shadow-2xl rounded-xs cursor-move touch-none z-20"
+                  className="absolute border-2 border-sky-400 bg-sky-400/10 shadow-2xl rounded-xs cursor-move z-20 touch-none"
                   style={{
                     left: `${cropBox.x}%`,
                     top: `${cropBox.y}%`,
@@ -894,4 +906,5 @@ export default function ImageCropPage() {
     </ToolLayout>
   );
 }
+
 
