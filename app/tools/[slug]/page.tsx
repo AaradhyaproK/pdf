@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { PRESET_REGISTRY } from '@/lib/presets-data';
 import { ExamResizerStudio } from '@/components/tools/ExamResizerStudio';
+import { AdSlot } from '@/components/AdSlot';
 import {
   ChevronRight,
   ShieldCheck,
@@ -164,6 +165,9 @@ export default async function ToolPresetPage({ params }: PageProps) {
             {preset.shortDescription} {preset.longDescription}
           </p>
         </div>
+
+        {/* Header Leaderboard Ad Slot */}
+        <AdSlot slotType="header-leaderboard" />
 
         {/* Interactive Studio Component */}
         <ExamResizerStudio {...preset} />

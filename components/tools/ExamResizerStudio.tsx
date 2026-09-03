@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { trackEvent } from '@/lib/analytics';
+import { AdSlot } from '@/components/AdSlot';
 
 export interface ExamResizerStudioProps {
   defaultTargetKB: number;
@@ -632,11 +633,8 @@ export function ExamResizerStudio({
       <canvas ref={canvasRef} className="hidden" />
 
       {/* Reserved Layout-Shift-Free Ad Container */}
-      <div
-        className="my-6 min-h-[250px] w-full rounded-2xl bg-slate-50 border border-dashed border-slate-200 flex items-center justify-center text-xs text-slate-400 font-bold select-none"
-        aria-hidden="true"
-      >
-        Ad Container
+      <div className="my-6 w-full">
+        <AdSlot slotType="post-download" />
       </div>
     </div>
   );

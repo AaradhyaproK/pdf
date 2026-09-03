@@ -7,6 +7,7 @@ import { LandingToolGrid } from '@/components/LandingToolGrid';
 import { HomepageTrustSection } from '@/components/HomepageTrustSection';
 import { HomepageFAQAccordion } from '@/components/HomepageFAQAccordion';
 import { HomepageBlogSection } from '@/components/HomepageBlogSection';
+import { HomepageGuidesCluster } from '@/components/HomepageGuidesCluster';
 import {
   CheckCircle2,
   ShieldCheck,
@@ -161,6 +162,9 @@ export default function HomePage() {
 
       {/* Mobile App-Centric High-Trust Features Grid Section */}
       <HomepageTrustSection />
+
+      {/* Guides & Knowledge Base Cluster Section */}
+      <HomepageGuidesCluster />
 
       {/* Latest Blog & Guides Showcase Section */}
       <HomepageBlogSection />
