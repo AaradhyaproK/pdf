@@ -31,6 +31,12 @@ import {
   Crop as CropIcon,
   Hash,
   FileCode,
+  Calendar,
+  Percent,
+  GraduationCap,
+  Zap,
+  Sparkles as SparklesIcon,
+  DollarSign,
 } from 'lucide-react';
 
 const PDF_TOOLS = [
@@ -61,10 +67,17 @@ const IMAGE_TOOLS = [
 ];
 
 const UTILITY_TOOLS = [
+  { name: 'Age Calculator & Birthday', slug: '/utility/age-calculator', desc: 'Years, months, days, seconds & zodiac', icon: Calendar, badge: '#1 Tool' },
+  { name: 'Percentage Calculator', slug: '/utility/percentage-calculator', desc: '% increase, discount, marks & ratio', icon: Percent, badge: 'Popular' },
+  { name: 'CGPA to Percentage', slug: '/utility/cgpa-to-percentage', desc: 'CBSE, Mumbai Univ, VTU, DU & SGPA', icon: GraduationCap, badge: 'College' },
+  { name: 'Word & Character Counter', slug: '/utility/word-counter', desc: 'Real-time text stats, reading time & SEO', icon: Type },
+  { name: 'Typing Speed Test', slug: '/utility/typing-speed-test', desc: 'Test WPM speed & share score on WhatsApp', icon: Zap, badge: 'Viral' },
+  { name: 'Fancy Text Generator', slug: '/utility/fancy-text-generator', desc: '30+ Unicode font styles & gaming tags', icon: SparklesIcon, badge: 'Fonts' },
+  { name: 'Password Generator', slug: '/utility/password-generator', desc: 'Generate strong passwords 100% offline', icon: Lock, badge: 'Secure' },
+  { name: 'Number to Words Converter', slug: '/utility/number-to-words', desc: 'Cheque & invoice amount words (Rupees/$)', icon: DollarSign, badge: 'Cheque' },
   { name: 'Base64 Encoder & Decoder', slug: '/utility/base64', desc: 'Convert files/images to Data URLs', icon: Code2, badge: 'New' },
-  { name: 'Markdown Editor & PDF', slug: '/utility/markdown-editor', desc: 'Live Markdown & PDF export', icon: FileText, badge: 'New' },
-  { name: 'QR Code Generator', slug: '/utility/qr-generator', desc: 'Create custom vector QR codes', icon: QrCode, badge: 'Custom' },
-  { name: 'Word & Character Counter', slug: '/utility/word-counter', desc: 'Real-time text stats & SEO density', icon: Type },
+  { name: 'Markdown Editor & PDF', slug: '/utility/markdown-editor', desc: 'Live Markdown preview & PDF export', icon: FileText, badge: 'New' },
+  { name: 'QR Code Generator', slug: '/utility/qr-generator', desc: 'Create custom QR codes with logo & colors', icon: QrCode, badge: 'Custom' },
   { name: 'JSON Formatter & CSV', slug: '/utility/json-formatter', desc: 'Beautify, validate & convert JSON', icon: Code2 },
 ];
 
@@ -138,9 +151,6 @@ export function MobileBottomNav() {
       t.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       t.desc.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
-  const isHomePage = pathname === '/' || pathname === '' || pathname === '/about';
-  if (!isHomePage) return null;
 
   return (
     <>
