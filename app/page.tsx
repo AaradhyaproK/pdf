@@ -6,6 +6,7 @@ import { AdSlot } from '@/components/AdSlot';
 import { LandingToolGrid } from '@/components/LandingToolGrid';
 import { HomepageTrustSection } from '@/components/HomepageTrustSection';
 import { HomepageFAQAccordion } from '@/components/HomepageFAQAccordion';
+import { HomepageBlogSection } from '@/components/HomepageBlogSection';
 import {
   CheckCircle2,
   ShieldCheck,
@@ -161,9 +162,11 @@ export default function HomePage() {
       {/* Mobile App-Centric High-Trust Features Grid Section */}
       <HomepageTrustSection />
 
+      {/* Latest Blog & Guides Showcase Section */}
+      <HomepageBlogSection />
+
       {/* Interactive Mobile-Optimized FAQ Accordion Section */}
       <HomepageFAQAccordion faqs={HOMEPAGE_FAQS} />
     </main>
   );
 }
-

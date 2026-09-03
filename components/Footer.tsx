@@ -134,6 +134,7 @@ export function Footer() {
                 <Link href="/utility/json-formatter" className="p-2 rounded-xl text-xs font-bold text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-all">JSON Formatter & CSV</Link>
                 <div className="border-t border-slate-100 my-1 pt-2">
                   <Link href="/security" className="p-2 rounded-xl text-xs font-black text-emerald-700 hover:text-indigo-600 block">100% Secure Serverless</Link>
+                  <Link href="/blog" className="p-2 rounded-xl text-xs font-black text-indigo-600 hover:text-indigo-700 block">Blog & Privacy Guides</Link>
                   <Link href="/privacy" className="p-2 rounded-xl text-xs font-black text-slate-900 hover:text-indigo-600 block">Privacy Policy</Link>
                   <Link href="/terms" className="p-2 rounded-xl text-xs font-black text-slate-900 hover:text-indigo-600 block">Terms of Service</Link>
                   <Link href="/about" className="p-2 rounded-xl text-xs font-bold text-slate-700 hover:text-indigo-600 block">About Us</Link>
@@ -220,6 +221,7 @@ export function Footer() {
                 </Link>
               </li>
               <li><Link href="/security" className="hover:text-indigo-600 font-bold text-emerald-700 transition-colors flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5 text-emerald-600" /> 100% Secure Serverless</Link></li>
+              <li><Link href="/blog" className="hover:text-indigo-600 font-bold text-slate-900 transition-colors">Blog & Guides</Link></li>
               <li><Link href="/privacy" className="hover:text-indigo-600 font-bold text-slate-900 transition-colors">Privacy Policy</Link></li>
               <li><Link href="/terms" className="hover:text-indigo-600 font-bold text-slate-900 transition-colors">Terms of Service</Link></li>
               <li><Link href="/about" className="hover:text-indigo-600 transition-colors">About Us</Link></li>

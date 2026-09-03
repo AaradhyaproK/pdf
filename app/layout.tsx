@@ -21,7 +21,10 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.filezenith.com'),
-  title: 'FileZenith - 100% Free Online PDF, Image & Utility Studio',
+  title: {
+    default: 'FileZenith — Free PDF & File Tools',
+    template: '%s | FileZenith',
+  },
   description: 'FileZenith is an all-in-one private online file studio. Compress PDF, edit documents, convert PNG to JPG, pics to PDF, remove background, and generate QR codes 100% privately inside your browser.',
   keywords: 'filezenith, file zenith, filezenith.com, pdf compressor, edit pdf online, merge pdf, pics to pdf, png to jpg, png to pdf, remove background, qr generator, client-side web tools',
   manifest: '/manifest.json',

@@ -31,6 +31,7 @@ import {
   Tablet,
   Globe,
   Sparkles,
+  BookOpen,
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -155,11 +156,18 @@ export default function AdminDashboardPage() {
               <span>Detailed Visitor Count</span>
             </Link>
             <Link
+              href="/admin/blog"
+              className="px-4 py-2 rounded-xl bg-purple-50 border border-purple-200 text-purple-800 font-extrabold text-xs flex items-center gap-1.5 hover:bg-purple-100 transition-colors shadow-2xs"
+            >
+              <BookOpen className="w-4 h-4 text-purple-600" />
+              <span>Blog Manager</span>
+            </Link>
+            <Link
               href="/admin/ads"
               className="px-4 py-2 rounded-xl bg-indigo-50 border border-indigo-100 text-indigo-700 font-bold text-xs flex items-center gap-1.5 hover:bg-indigo-100 transition-colors"
             >
               <DollarSign className="w-4 h-4" />
-              <span>Google Ads & ads.txt</span>
+              <span>Master Ads Console</span>
             </Link>
             <button
               onClick={handleLogout}

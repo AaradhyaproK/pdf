@@ -78,8 +78,7 @@ function AdsterraSidebarTallBanner({ sidebarKey, scriptUrl, containerId }: { sid
             padding: 0;
             width: 100%;
             height: 100%;
-            overflow-y: auto;
-            overflow-x: hidden;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;

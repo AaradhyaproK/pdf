@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { SEO_REGISTRY } from '@/lib/seo-config';
+import { getAllPosts } from '@/lib/blog';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.filezenith.com';
@@ -14,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     '',
     '/about',
+    '/blog',
     '/contact',
     '/download-app',
     '/privacy',
@@ -23,8 +25,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
-    priority: route === '' ? 1.0 : 0.7,
+    priority: route === '' ? 1.0 : route === '/blog' ? 0.8 : 0.7,
   }));
 
-  return [...staticRoutes, ...toolRoutes];
+  const blogPosts = getAllPosts();
+  const blogRoutes = blogPosts.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: new Date(post.date),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
+
+  return [...staticRoutes, ...toolRoutes, ...blogRoutes];
 }
