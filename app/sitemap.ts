@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { SEO_REGISTRY } from '@/lib/seo-config';
+import { PRESET_REGISTRY } from '@/lib/presets-data';
 import { getAllPosts } from '@/lib/blog';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -10,6 +11,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(),
     changeFrequency: 'daily' as const,
     priority: slug.includes('compress') || slug.includes('edit') || slug.includes('pics-to-pdf') ? 0.9 : 0.8,
+  }));
+
+  const presetRoutes = Object.keys(PRESET_REGISTRY).map((slug) => ({
+    url: `${baseUrl}/tools/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.9,
   }));
 
   const staticRoutes = [
@@ -36,5 +44,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...toolRoutes, ...blogRoutes];
+  return [...staticRoutes, ...toolRoutes, ...presetRoutes, ...blogRoutes];
 }
