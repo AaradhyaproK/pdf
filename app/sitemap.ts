@@ -2,10 +2,18 @@ import { MetadataRoute } from 'next';
 import { SEO_REGISTRY } from '@/lib/seo-config';
 import { PRESET_REGISTRY } from '@/lib/presets-data';
 import { GUIDE_REGISTRY } from '@/lib/guides-data';
+import { CATEGORY_REGISTRY } from '@/lib/categories-data';
 import { getAllPosts } from '@/lib/blog';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.filezenith.com';
+
+  const categoryRoutes = Object.keys(CATEGORY_REGISTRY).map((slug) => ({
+    url: `${baseUrl}/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.9,
+  }));
 
   const toolRoutes = Object.entries(SEO_REGISTRY).map(([slug]) => ({
     url: `${baseUrl}${slug}`,
@@ -52,5 +60,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...toolRoutes, ...presetRoutes, ...guideRoutes, ...blogRoutes];
+  return [...staticRoutes, ...categoryRoutes, ...toolRoutes, ...presetRoutes, ...guideRoutes, ...blogRoutes];
 }

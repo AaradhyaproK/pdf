@@ -650,6 +650,29 @@ export function LandingToolGrid() {
             );
           })}
         </div>
+
+        {/* Category Hubs Shortcut Links */}
+        <div className="flex items-center justify-center flex-wrap gap-2 pt-1 text-xs font-bold text-slate-600">
+          <span className="text-[11px] uppercase tracking-wider text-slate-400 font-extrabold mr-1">Category Hubs:</span>
+          <Link href="/image-tools" className="px-3 py-1 rounded-xl bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 border border-slate-200 transition-colors">
+            🖼️ Image Tools Hub
+          </Link>
+          <Link href="/pdf-tools" className="px-3 py-1 rounded-xl bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 border border-slate-200 transition-colors">
+            📄 PDF Tools Hub
+          </Link>
+          <Link href="/calculators" className="px-3 py-1 rounded-xl bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 border border-slate-200 transition-colors">
+            🧮 Calculators Hub
+          </Link>
+          <Link href="/text-tools" className="px-3 py-1 rounded-xl bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 border border-slate-200 transition-colors">
+            ✍️ Text Tools Hub
+          </Link>
+          <Link href="/developer-tools" className="px-3 py-1 rounded-xl bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 border border-slate-200 transition-colors">
+            💻 Developer Tools Hub
+          </Link>
+          <Link href="/ai-tools" className="px-3 py-1 rounded-xl bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 border border-slate-200 transition-colors">
+            ✨ AI Tools Hub
+          </Link>
+        </div>
       </div>
 
       {/* Grid Results Title Header */}
