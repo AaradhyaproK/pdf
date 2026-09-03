@@ -34,6 +34,11 @@ import {
   Crop,
   Hash,
   FileCode,
+  Calendar,
+  Percent,
+  GraduationCap,
+  DollarSign,
+  Zap,
 } from 'lucide-react';
 
 const PDF_TOOLS = [
@@ -66,10 +71,17 @@ const IMAGE_TOOLS = [
 ];
 
 const UTILITY_TOOLS = [
+  { name: 'Age Calculator & Birthday', slug: '/utility/age-calculator', desc: 'Years, months, days, seconds & zodiac', icon: Calendar, badge: '#1 Tool', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Percentage Calculator', slug: '/utility/percentage-calculator', desc: '% increase, discount, marks & ratio', icon: Percent, badge: 'Popular', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'CGPA to Percentage', slug: '/utility/cgpa-to-percentage', desc: 'CBSE, Mumbai Univ, VTU, DU & SGPA', icon: GraduationCap, badge: 'College', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Word & Character Counter', slug: '/utility/word-counter', desc: 'Real-time text stats, reading time & SEO', icon: Type, category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Typing Speed Test', slug: '/utility/typing-speed-test', desc: 'Test WPM speed & share score on WhatsApp', icon: Zap, badge: 'Viral', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Fancy Text Generator', slug: '/utility/fancy-text-generator', desc: '30+ Unicode font styles & gaming tags', icon: Sparkles, badge: 'Fonts', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Password Generator', slug: '/utility/password-generator', desc: 'Generate strong passwords 100% offline', icon: Lock, badge: 'Secure', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Number to Words Converter', slug: '/utility/number-to-words', desc: 'Cheque & invoice amount words (Rupees/$)', icon: DollarSign, badge: 'Cheque', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'Base64 Encoder & Decoder', slug: '/utility/base64', desc: 'Convert files/images to Data URLs', icon: Code2, badge: 'New', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'Markdown Editor & PDF', slug: '/utility/markdown-editor', desc: 'Live Markdown preview & PDF export', icon: FileText, badge: 'New', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'QR Code Generator', slug: '/utility/qr-generator', desc: 'Create custom QR codes with logo & colors', icon: QrCode, badge: 'Custom', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Word & Character Counter', slug: '/utility/word-counter', desc: 'Real-time text stats, reading time & SEO', icon: Type, category: 'utility', catLabel: 'Daily Utility' },
   { name: 'JSON Formatter & Validator', slug: '/utility/json-formatter', desc: 'Beautify, minify, and validate JSON data', icon: Code2, category: 'utility', catLabel: 'Daily Utility' },
 ];
 

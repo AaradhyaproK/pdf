@@ -129,6 +129,13 @@ export function Footer() {
             </button>
             {openSection === 'company' && (
               <div className="p-4 bg-white border-t border-slate-100 grid grid-cols-1 gap-2 animate-in fade-in duration-150">
+                <Link href="/utility/age-calculator" className="p-2 rounded-xl text-xs font-bold text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-all">Age Calculator & Birthday</Link>
+                <Link href="/utility/percentage-calculator" className="p-2 rounded-xl text-xs font-bold text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-all">Percentage Calculator</Link>
+                <Link href="/utility/cgpa-to-percentage" className="p-2 rounded-xl text-xs font-bold text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-all">CGPA to Percentage</Link>
+                <Link href="/utility/typing-speed-test" className="p-2 rounded-xl text-xs font-bold text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-all">Typing Speed Test (WPM)</Link>
+                <Link href="/utility/fancy-text-generator" className="p-2 rounded-xl text-xs font-bold text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-all">Fancy Text Generator</Link>
+                <Link href="/utility/password-generator" className="p-2 rounded-xl text-xs font-bold text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-all">Password Generator</Link>
+                <Link href="/utility/number-to-words" className="p-2 rounded-xl text-xs font-bold text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-all">Number to Words (Cheque)</Link>
                 <Link href="/utility/qr-generator" className="p-2 rounded-xl text-xs font-bold text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-all">QR Code Generator</Link>
                 <Link href="/utility/word-counter" className="p-2 rounded-xl text-xs font-bold text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-all">Word & Character Counter</Link>
                 <Link href="/utility/json-formatter" className="p-2 rounded-xl text-xs font-bold text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-all">JSON Formatter & CSV</Link>
@@ -208,9 +215,9 @@ export function Footer() {
           {/* Daily Quick Utilities & Company */}
           <div className="space-y-3">
             <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-900">
-              Company & Legal
+              Company & Utilities
             </h4>
-            <ul className="space-y-2.5 text-xs">
+            <ul className="space-y-2 text-xs">
               <li>
                 <Link
                   href="/download-app"
@@ -220,15 +227,17 @@ export function Footer() {
                   <span>Download Mobile App</span>
                 </Link>
               </li>
+              <li><Link href="/utility/age-calculator" className="hover:text-indigo-600 font-bold text-slate-900 transition-colors">Age Calculator & Birthday</Link></li>
+              <li><Link href="/utility/percentage-calculator" className="hover:text-indigo-600 transition-colors">Percentage Calculator</Link></li>
+              <li><Link href="/utility/cgpa-to-percentage" className="hover:text-indigo-600 transition-colors">CGPA to Percentage</Link></li>
+              <li><Link href="/utility/typing-speed-test" className="hover:text-indigo-600 transition-colors">Typing Speed Test (WPM)</Link></li>
+              <li><Link href="/utility/fancy-text-generator" className="hover:text-indigo-600 transition-colors">Fancy Text Generator</Link></li>
+              <li><Link href="/utility/password-generator" className="hover:text-indigo-600 transition-colors">Password Generator</Link></li>
+              <li><Link href="/utility/number-to-words" className="hover:text-indigo-600 transition-colors">Number to Words (Cheque)</Link></li>
               <li><Link href="/security" className="hover:text-indigo-600 font-bold text-emerald-700 transition-colors flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5 text-emerald-600" /> 100% Secure Serverless</Link></li>
               <li><Link href="/blog" className="hover:text-indigo-600 font-bold text-slate-900 transition-colors">Blog & Guides</Link></li>
-              <li><Link href="/privacy" className="hover:text-indigo-600 font-bold text-slate-900 transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/terms" className="hover:text-indigo-600 font-bold text-slate-900 transition-colors">Terms of Service</Link></li>
-              <li><Link href="/about" className="hover:text-indigo-600 transition-colors">About Us</Link></li>
-              <li><Link href="/contact" className="hover:text-indigo-600 transition-colors">Contact Support</Link></li>
-              <li><Link href="/utility/qr-generator" className="hover:text-indigo-600 transition-colors">QR Code Generator</Link></li>
-              <li><Link href="/utility/word-counter" className="hover:text-indigo-600 transition-colors">Word Counter & Density</Link></li>
-              <li><Link href="/utility/json-formatter" className="hover:text-indigo-600 transition-colors">JSON Formatter & CSV</Link></li>
+              <li><Link href="/privacy" className="hover:text-indigo-600 transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="hover:text-indigo-600 transition-colors">Terms of Service</Link></li>
             </ul>
           </div>
         </div>

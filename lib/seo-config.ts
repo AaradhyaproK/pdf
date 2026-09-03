@@ -1032,6 +1032,188 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { question: 'How do I convert SVG to transparent PNG in 4K resolution?', answer: 'Upload your SVG, set Resolution Scale to 4x or 8x, ensure Transparent background is selected, and click Convert.' },
       { question: 'Are vector graphic details preserved during conversion?', answer: 'Yes! Vector graphics scale infinitely before rasterization, ensuring 100% sharp edges at any scale factor.' }
     ]
+  },
+  '/utility/age-calculator': {
+    slug: '/utility/age-calculator',
+    title: 'Exact Online Age Calculator & Birthday Countdown',
+    metaTitle: 'Age Calculator Free Online - Exact Age in Years, Months, Days | FileZenith',
+    description: 'Calculate your exact age in years, months, weeks, days, hours, minutes, and seconds online free. Live next birthday countdown, astrological zodiac sign, and milestone age counters 100% privately.',
+    keywords: [
+      'age calculator online',
+      'exact age calculator in years months days',
+      'calculate age from date of birth',
+      'how old am I today calculator',
+      'chronological age calculator online free',
+      'next birthday countdown timer',
+      'zodiac sign calculator from date of birth',
+      'age difference calculator between two people',
+      'calculate age in seconds and minutes',
+      'ageasy age calculator online free'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Select Date of Birth', text: 'Choose your birth date, month, and year from the calendar selector.' },
+      { title: 'Choose Target Date (Optional)', text: 'Default is set to Today. You can select any custom target date to calculate past or future age.' },
+      { title: 'View Age & Milestones', text: 'Instantly view exact age breakdown, total days lived, next birthday countdown, and shareable stats.' }
+    ],
+    faqs: [
+      { question: 'How is exact age calculated in years, months, and days?', answer: 'FileZenith calculates calendar day offsets between your birth date and target date, adjusting for leap years and varying month lengths (28, 30, 31 days).' },
+      { question: 'Can I find out what day of the week I was born on?', answer: 'Yes! The tool automatically reveals the exact day of the week (Monday, Tuesday, etc.) you were born along with your Western and Chinese Zodiac signs.' },
+      { question: 'Is my birth date uploaded or tracked on any server?', answer: 'No. All calculations take place 100% locally inside your browser with absolute data privacy.' }
+    ]
+  },
+  '/utility/percentage-calculator': {
+    slug: '/utility/percentage-calculator',
+    title: 'All-in-One Online Percentage Calculator (Sales Tax, Discount & Marks)',
+    metaTitle: 'Percentage Calculator Online Free - % Increase, Sales Tax & Marks | FileZenith',
+    description: 'Calculate percentages, % increase/decrease, X is what % of Y, shopping discounts ($ / € / £ / ₹) with sales tax/VAT, and student exam marks percentage online free.',
+    keywords: [
+      'percentage calculator online',
+      'how to calculate percentage of a number',
+      'percentage increase decrease calculator',
+      'what percentage is X of Y',
+      'shopping discount calculator with tax',
+      'sales tax and vat percentage calculator',
+      'exam marks percentage calculator with grade',
+      'free online percent calculator worldwide'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Select Calculation Mode', text: 'Choose from 5 modes: % of Number, % Increase/Decrease, X is % of Y, Shopping Discount with Tax, or Exam Marks.' },
+      { title: 'Enter Numbers', text: 'Type your numerical values into the input fields.' },
+      { title: 'View Instant Result & Steps', text: 'Get real-time answers with visual progress indicators and 1-click copy options.' }
+    ],
+    faqs: [
+      { question: 'How do I calculate what percentage one number is of another?', answer: 'Divide the part (X) by the total (Y) and multiply by 100: (X / Y) × 100 = Percentage.' },
+      { question: 'Can I calculate shopping discounts with tax worldwide?', answer: 'Yes! Our discount calculator mode allows you to enter original price, discount %, and sales tax/VAT/GST % in any currency to get final payable price and total savings.' }
+    ]
+  },
+  '/utility/cgpa-to-percentage': {
+    slug: '/utility/cgpa-to-percentage',
+    title: 'CGPA to Percentage & GPA Converter (Worldwide & University)',
+    metaTitle: 'CGPA to Percentage Converter Free - CBSE, Mumbai Univ, VTU, DU & GPA | FileZenith',
+    description: 'Convert CGPA to Percentage online free for CBSE, Mumbai University, VTU, Delhi University, GTU, AKTU, SPPU, and global GPA scales. Multi-semester SGPA to CGPA accumulator.',
+    keywords: [
+      'cgpa to percentage converter',
+      'gpa to percentage converter worldwide',
+      'convert 10 point cgpa into percentage',
+      'convert 4.0 gpa to percentage',
+      'cbse cgpa to percentage calculator',
+      'mumbai university cgpa to percentage formula',
+      'vtu cgpa to percentage converter',
+      'du cgpa to percentage calculator',
+      'convert cgpa into percentage for job resume',
+      'multi semester sgpa to cgpa calculator'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Select University / Grading Standard', text: 'Choose CBSE (× 9.5), Mumbai Univ (10x-7.5), VTU, DU, or Custom Multiplier.' },
+      { title: 'Enter Your CGPA / SGPAs', text: 'Input your cumulative CGPA or individual semester SGPA scores.' },
+      { title: 'Get Percentage & Class Division', text: 'Instantly view official percentage, grade letter (O, A+, A), and class division (First Class with Distinction).' }
+    ],
+    faqs: [
+      { question: 'What is the official CBSE CGPA to Percentage formula?', answer: 'According to CBSE board guidelines, Multiply your overall CGPA by 9.5 to get the equivalent percentage (e.g. 8.0 CGPA × 9.5 = 76%).' },
+      { question: 'How to convert CGPA to Percentage for Mumbai University (MU)?', answer: 'For 10-point CBCS grading in Mumbai University: Percentage = (CGPA × 10) - 7.5.' }
+    ]
+  },
+  '/utility/typing-speed-test': {
+    slug: '/utility/typing-speed-test',
+    title: 'Online Typing Speed Test (WPM, Accuracy & CPM)',
+    metaTitle: 'Typing Speed Test Free Online - Measure WPM & Accuracy | FileZenith',
+    description: 'Test your typing speed (WPM), accuracy, and CPM online free. Practice 15s, 30s, 60s, or 2 min typing tests with real-time feedback and shareable score badges.',
+    keywords: [
+      'typing speed test online',
+      'wpm typing test 1 minute',
+      'free typing test online without login',
+      'words per minute test online free',
+      'check typing speed and accuracy',
+      'typing benchmark test online',
+      'viral whatsapp typing score test'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Select Test Duration & Mode', text: 'Choose 15s, 30s, 60s, or 120s test duration.' },
+      { title: 'Start Typing Words', text: 'Type the highlighted text as fast and accurately as possible. Mistakes are highlighted in red.' },
+      { title: 'View WPM & Share Score', text: 'Get instant Net WPM, Gross WPM, Accuracy %, and share your score card on WhatsApp.' }
+    ],
+    faqs: [
+      { question: 'What is considered a good typing speed (WPM)?', answer: 'The average typing speed is around 40 WPM. A speed of 60–70 WPM is considered fast, while professional typists often reach 80–100+ WPM.' },
+      { question: 'How is Net WPM calculated?', answer: 'Net WPM = (Total Typed Characters / 5 - Errors) / Time in Minutes.' }
+    ]
+  },
+  '/utility/fancy-text-generator': {
+    slug: '/utility/fancy-text-generator',
+    title: 'Fancy Text Generator & Cool Font Converter (Instagram, TikTok & Gaming)',
+    metaTitle: 'Fancy Text Generator Online Free - 30+ Stylish Unicode Fonts | FileZenith',
+    description: 'Generate fancy text, cool fonts, gothic letters, cursive, bold, upside down, and gaming nickname styles online free for Instagram bio, TikTok, WhatsApp, Twitter/X, and Free Fire.',
+    keywords: [
+      'fancy text generator',
+      'cool text generator online free',
+      'font generator for instagram bio',
+      'tiktok cool fonts generator',
+      'gothic font generator copy paste',
+      'cursive font generator online',
+      'discord twitter stylish nickname generator',
+      'free fire bgmi roblox gaming nickname tag',
+      'upside down text flip generator'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Type Your Text', text: 'Type any phrase, username, or message into the text box.' },
+      { title: 'Explore 30+ Unicode Font Styles', text: 'View live transformations across Gothic, Cursive, Bold, Double-Struck, Squares, and Symbol frames.' },
+      { title: '1-Click Copy & Share', text: 'Click Copy to copy any stylish text snippet directly to clipboard.' }
+    ],
+    faqs: [
+      { question: 'Will these fancy text fonts work on Instagram, TikTok, and gaming apps?', answer: 'Yes! All generated styles use official Unicode symbols compatible across iOS, Android, Windows, Mac, Instagram, TikTok, WhatsApp, Discord, and Free Fire.' }
+    ]
+  },
+  '/utility/password-generator': {
+    slug: '/utility/password-generator',
+    title: 'Secure Random Password Generator & Strength Meter',
+    metaTitle: 'Strong Password Generator Free Online - 100% Offline | FileZenith',
+    description: 'Generate strong, cryptographically secure passwords and memorable passphrases online free. 100% offline client-side safety with real-time entropy strength meter.',
+    keywords: [
+      'password generator online',
+      'strong random password generator free',
+      'memorable passphrase generator',
+      'password strength meter and entropy',
+      '100 percent offline password generator',
+      'random string generator online',
+      'secure password creator no upload'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Configure Options', text: 'Select password length (4-64 characters), uppercase, lowercase, numbers, symbols, or Passphrase mode.' },
+      { title: 'Generate Password', text: 'Click Generate to generate a fresh password using Web Crypto API.' },
+      { title: 'Check Strength & Copy', text: 'View entropy bits, time to crack estimation, and click Copy.' }
+    ],
+    faqs: [
+      { question: 'Are generated passwords saved or sent to any server?', answer: 'Never. All passwords are generated 100% locally in your browser memory using Web Crypto API.' }
+    ]
+  },
+  '/utility/number-to-words': {
+    slug: '/utility/number-to-words',
+    title: 'Number to Words Converter (USD $, EUR €, GBP £, INR ₹ & Cheques)',
+    metaTitle: 'Number to Words Converter Free - USD, EUR, GBP, INR & Cheques | FileZenith',
+    description: 'Convert numbers into words online free for bank cheques, invoices, contracts, and financial receipts. Supports International system (Millions & Billions) and Indian system (Lakhs & Crores) with USD, EUR, GBP, INR.',
+    keywords: [
+      'number to words converter',
+      'convert numbers to words online free',
+      'amount in words converter dollars euros pounds rupees',
+      'cheque amount to words converter',
+      'number to words international million billion',
+      'convert number to words in lakhs and crores',
+      'amount in words for gst invoice and receipt'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Enter Number Amount', text: 'Type any numerical amount (e.g. 150000 or 1,50,000).' },
+      { title: 'Select Numbering System & Currency', text: 'Choose International (Million/Billion - Global) or Indian (Lakh/Crore) and currency (USD, EUR, GBP, INR).' },
+      { title: 'Copy Words & Cheque Preview', text: 'Instantly view formatted text words and realistic bank cheque visual preview.' }
+    ],
+    faqs: [
+      { question: 'How is $ 150,000 written in words?', answer: 'In US Dollars: "One Hundred Fifty Thousand Dollars Only". In Indian Rupees: "One Lakh Fifty Thousand Rupees Only".' }
+    ]
   }
 };
 
