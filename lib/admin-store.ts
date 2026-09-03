@@ -26,10 +26,11 @@ export interface AdsManagerConfig {
   customSidebarCode?: string;
   customPostDownloadCode?: string;
 
-  // Support Developer Text Customizations
+  // Support Developer Text & Direct Link Customizations
   supportDevTextHeader: string;
   supportDevTextSidebar: string;
   supportDevTextPostDownload: string;
+  fallbackSupportUrl: string;
 
   // Google AdSense Settings
   publisherId: string;
@@ -60,6 +61,7 @@ const DEFAULT_ADS_CONFIG: AdsManagerConfig = {
   supportDevTextHeader: 'Support Developer by Clicking Ads • Keeps All Tools 100% Free',
   supportDevTextSidebar: 'Support Developer by Clicking Ads',
   supportDevTextPostDownload: 'Enjoyed Free Tools? Support Developer by Clicking Ads Below!',
+  fallbackSupportUrl: 'https://omg10.com/4/11707727',
   publisherId: 'ca-pub-9075710959353163',
   adSenseScriptEnabled: false,
   headerBannerEnabled: true,

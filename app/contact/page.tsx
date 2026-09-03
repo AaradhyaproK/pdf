@@ -99,6 +99,28 @@ export default function ContactPage() {
               </a>
             </div>
           </div>
+
+          {/* Support Developer Direct Link Card */}
+          <div className="p-4 sm:p-5 rounded-2xl bg-rose-50 border border-rose-200 shadow-2xs space-y-2">
+            <div className="flex items-center gap-2 text-rose-900 font-black text-xs sm:text-sm">
+              <Sparkles className="w-4 h-4 text-rose-600 shrink-0" />
+              <span>Support Developer</span>
+            </div>
+            <p className="text-xs text-rose-800 font-medium leading-relaxed">
+              Enjoying free tools? If ads are blocked or not loading, click below to support the developer &amp; keep all tools 100% free!
+            </p>
+            <div className="pt-1">
+              <a
+                href="https://omg10.com/4/11707727"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-extrabold text-xs shadow-xs transition-colors"
+              >
+                <span>Click Here to Support</span>
+                <ExternalLink className="w-3.5 h-3.5 text-white" />
+              </a>
+            </div>
+          </div>
         </div>
 
         {/* Contact Form */}
