@@ -25,10 +25,6 @@ export default function RemovePasswordPDFPage() {
       toast.error('Please upload a PDF file first.');
       return;
     }
-    if (!password) {
-      toast.error('Please enter the current password to unlock the PDF.');
-      return;
-    }
 
     setIsProcessing(true);
     try {
@@ -83,21 +79,21 @@ export default function RemovePasswordPDFPage() {
 
                 <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-amber-50 text-amber-800 text-xs font-black border border-amber-200 shadow-2xs">
                   <ShieldAlert className="w-3.5 h-3.5 text-amber-600" />
-                  Requires Current Password
+                  Password Optional
                 </span>
               </div>
 
               <div className="grid grid-cols-1 gap-4 max-w-md">
                 <div className="space-y-1.5">
                   <label className="text-xs font-black uppercase tracking-wider text-slate-900 flex items-center justify-between">
-                    <span>Current PDF Password</span>
+                    <span>Current PDF Password (Leave blank if unknown)</span>
                   </label>
                   <div className="relative">
                     <input
                       type={showPassword ? 'text' : 'password'}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Enter the password to unlock"
+                      placeholder="Enter the password (if required to open)"
                       className="w-full px-4 py-3 pr-10 rounded-xl border border-slate-300 bg-white text-slate-900 font-bold text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-2xs"
                     />
                     <button
@@ -114,7 +110,7 @@ export default function RemovePasswordPDFPage() {
 
               <button
                 onClick={handleRemovePassword}
-                disabled={isProcessing || !password}
+                disabled={isProcessing}
                 className="w-full py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 active:scale-[0.99] text-white font-black text-base shadow-lg shadow-indigo-500/20 disabled:opacity-40 transition-all cursor-pointer flex items-center justify-center gap-2"
               >
                 <Unlock className="w-5 h-5" />
