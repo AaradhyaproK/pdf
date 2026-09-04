@@ -217,16 +217,11 @@ export async function downloadSocialAsset(format: MediaFormat, title: string, so
       URL.revokeObjectURL(blobUrl);
       toast.success('Video downloaded successfully!');
       return;
+    } else {
+      const data = await res.json().catch(() => ({}));
+      toast.error(data.error || 'Failed to download video stream. The media could not be extracted.');
     }
   } catch {
-    //
+    toast.error('Network error while downloading the video.');
   }
-
-  // Direct iframe/anchor download trigger
-  const a = document.createElement('a');
-  a.href = proxyApiUrl;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
 }

@@ -81,8 +81,13 @@ export async function GET(request: Request) {
       },
     });
 
+    const contentType = mediaRes.headers.get('content-type') || '';
+    if (contentType.includes('text/html')) {
+      return NextResponse.json({ error: 'Video stream extraction failed or service unavailable.' }, { status: 500 });
+    }
+
     const headers = new Headers();
-    headers.set('Content-Type', 'video/mp4');
+    headers.set('Content-Type', contentType.includes('video') ? contentType : 'video/mp4');
     headers.set('Content-Disposition', `attachment; filename="${filename}"`);
 
     return new NextResponse(mediaRes.body, {

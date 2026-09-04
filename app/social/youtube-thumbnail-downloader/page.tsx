@@ -32,20 +32,15 @@ export default function YouTubeThumbnailDownloaderPage() {
     }
   };
 
-  const downloadThumbnail = async (imgUrl: string, filename: string) => {
-    try {
-      const res = await fetch(imgUrl);
-      const blob = await res.blob();
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      toast.success('Downloaded thumbnail image!');
-    } catch {
-      window.open(imgUrl, '_blank');
-    }
+  const downloadThumbnail = (imgUrl: string, filename: string) => {
+    const proxyUrl = `/api/download-image?url=${encodeURIComponent(imgUrl)}&filename=${encodeURIComponent(filename)}`;
+    const a = document.createElement('a');
+    a.href = proxyUrl;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    toast.success('Downloading thumbnail image...');
   };
 
   return (

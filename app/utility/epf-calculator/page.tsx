@@ -28,19 +28,25 @@ interface YearlyEPFRow {
 }
 
 export default function EPFCalculatorPage() {
-  const [basicSalary, setBasicSalary] = useState<number>(40000);
-  const [currentBalance, setCurrentBalance] = useState<number>(50000);
-  const [currentAge, setCurrentAge] = useState<number>(25);
-  const [retirementAge, setRetirementAge] = useState<number>(58);
+  const [basicSalary, setBasicSalary] = useState<number | ''>(40000);
+  const [currentBalance, setCurrentBalance] = useState<number | ''>(50000);
+  const [currentAge, setCurrentAge] = useState<number | ''>(25);
+  const [retirementAge, setRetirementAge] = useState<number | ''>(58);
   const [employeeContribRate, setEmployeeContribRate] = useState<number>(12);
-  const [interestRate, setInterestRate] = useState<number>(8.25);
+  const [interestRate, setInterestRate] = useState<number | ''>(8.25);
   const [annualIncrement, setAnnualIncrement] = useState<number>(5);
 
   const epfResults = useMemo(() => {
-    const tenureYears = Math.max(1, retirementAge - currentAge);
-    const monthlyInterestRate = interestRate / 100 / 12;
+    const numCurrentAge = Number(currentAge);
+    const numRetirementAge = Number(retirementAge);
+    const numInterestRate = Number(interestRate);
+    const numBasicSalary = Number(basicSalary);
+    const numCurrentBalance = Number(currentBalance);
 
-    let runningBalance = currentBalance;
+    const tenureYears = Math.max(1, numRetirementAge - numCurrentAge);
+    const monthlyInterestRate = numInterestRate / 100 / 12;
+
+    let runningBalance = numCurrentBalance;
     let totalEmployeeContrib = 0;
     let totalEmployerContrib = 0;
     let totalInterestEarned = 0;
@@ -49,7 +55,7 @@ export default function EPFCalculatorPage() {
 
     for (let y = 1; y <= tenureYears; y++) {
       const yearFactor = Math.pow(1 + annualIncrement / 100, y - 1);
-      const monthlyBasicYear = basicSalary * yearFactor;
+      const monthlyBasicYear = numBasicSalary * yearFactor;
 
       const monthlyEmp = monthlyBasicYear * (employeeContribRate / 100);
       const monthlyEps = Math.min(monthlyBasicYear * 0.0833, 1250);
@@ -77,7 +83,7 @@ export default function EPFCalculatorPage() {
 
       yearlySchedule.push({
         year: y,
-        age: currentAge + y,
+        age: numCurrentAge + y,
         monthlyBasic: Math.round(monthlyBasicYear),
         employeeContribAnnual: Math.round(empAnnual),
         employerContribAnnual: Math.round(emprAnnual),
@@ -107,7 +113,7 @@ export default function EPFCalculatorPage() {
   };
 
   const handleCopySummary = () => {
-    const text = `📊 EPF Retirement Growth Projection (EPFO 8.25%):\n• Monthly Basic: ${formatCurrency(basicSalary)}\n• Total Maturity Corpus at Age ${retirementAge}: ${formatCurrency(epfResults.totalAccumulated)}\n• Total Employee Contribution: ${formatCurrency(epfResults.totalEmployeeContrib)}\n• Total Employer EPF Contribution: ${formatCurrency(epfResults.totalEmployerContrib)}\n• Total Interest Earned: ${formatCurrency(epfResults.totalInterestEarned)}\nCalculate your EPF maturity on FileZenith: https://www.filezenith.com/utility/epf-calculator`;
+    const text = `📊 EPF Retirement Growth Projection (EPFO 8.25%):\n• Monthly Basic: ${formatCurrency(Number(basicSalary))}\n• Total Maturity Corpus at Age ${retirementAge}: ${formatCurrency(epfResults.totalAccumulated)}\n• Total Employee Contribution: ${formatCurrency(epfResults.totalEmployeeContrib)}\n• Total Employer EPF Contribution: ${formatCurrency(epfResults.totalEmployerContrib)}\n• Total Interest Earned: ${formatCurrency(epfResults.totalInterestEarned)}\nCalculate your EPF maturity on FileZenith: https://www.filezenith.com/utility/epf-calculator`;
     navigator.clipboard.writeText(text);
     toast.success('EPF calculation summary copied to clipboard!');
   };
@@ -142,12 +148,12 @@ export default function EPFCalculatorPage() {
             <div className="space-y-2">
               <label className="text-xs font-bold text-slate-700 uppercase flex items-center justify-between">
                 <span>Monthly Basic Salary + DA (₹)</span>
-                <span className="text-emerald-600 font-extrabold">{formatCurrency(basicSalary)}</span>
+                <span className="text-emerald-600 font-extrabold">{formatCurrency(Number(basicSalary))}</span>
               </label>
               <input
                 type="number"
                 value={basicSalary}
-                onChange={(e) => setBasicSalary(Math.max(1000, Number(e.target.value)))}
+                onChange={(e) => setBasicSalary(e.target.value === '' ? '' : Number(e.target.value))}
                 className="w-full p-3.5 rounded-2xl border border-slate-300 font-bold text-slate-900 focus:ring-2 focus:ring-emerald-500 focus:outline-none bg-slate-50 focus:bg-white"
               />
             </div>
@@ -156,12 +162,12 @@ export default function EPFCalculatorPage() {
             <div className="space-y-2">
               <label className="text-xs font-bold text-slate-700 uppercase flex items-center justify-between">
                 <span>Current EPF Balance (₹)</span>
-                <span className="text-emerald-600 font-extrabold">{formatCurrency(currentBalance)}</span>
+                <span className="text-emerald-600 font-extrabold">{formatCurrency(Number(currentBalance))}</span>
               </label>
               <input
                 type="number"
                 value={currentBalance}
-                onChange={(e) => setCurrentBalance(Math.max(0, Number(e.target.value)))}
+                onChange={(e) => setCurrentBalance(e.target.value === '' ? '' : Number(e.target.value))}
                 className="w-full p-3.5 rounded-2xl border border-slate-300 font-bold text-slate-900 focus:ring-2 focus:ring-emerald-500 focus:outline-none bg-slate-50 focus:bg-white"
               />
             </div>
@@ -173,7 +179,7 @@ export default function EPFCalculatorPage() {
                 <input
                   type="number"
                   value={currentAge}
-                  onChange={(e) => setCurrentAge(Math.max(18, Math.min(57, Number(e.target.value))))}
+                  onChange={(e) => setCurrentAge(e.target.value === '' ? '' : Number(e.target.value))}
                   className="w-full p-3.5 rounded-2xl border border-slate-300 font-bold text-slate-900 focus:ring-2 focus:ring-emerald-500 focus:outline-none bg-slate-50 focus:bg-white"
                 />
               </div>
@@ -182,7 +188,7 @@ export default function EPFCalculatorPage() {
                 <input
                   type="number"
                   value={retirementAge}
-                  onChange={(e) => setRetirementAge(Math.max(currentAge + 1, Number(e.target.value)))}
+                  onChange={(e) => setRetirementAge(e.target.value === '' ? '' : Number(e.target.value))}
                   className="w-full p-3.5 rounded-2xl border border-slate-300 font-bold text-slate-900 focus:ring-2 focus:ring-emerald-500 focus:outline-none bg-slate-50 focus:bg-white"
                 />
               </div>
@@ -232,7 +238,7 @@ export default function EPFCalculatorPage() {
                 type="number"
                 step="0.05"
                 value={interestRate}
-                onChange={(e) => setInterestRate(Number(e.target.value))}
+                onChange={(e) => setInterestRate(e.target.value === '' ? '' : Number(e.target.value))}
                 className="w-full p-3.5 rounded-2xl border border-slate-300 font-bold text-slate-900 focus:ring-2 focus:ring-emerald-500 focus:outline-none bg-slate-50 focus:bg-white"
               />
             </div>
