@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import {
@@ -44,6 +44,10 @@ import {
   Share2,
   Unlock,
   Table,
+  Timer,
+  Dices,
+  Palette,
+  Volume2,
 } from 'lucide-react';
 
 const PDF_TOOLS = [
@@ -65,6 +69,7 @@ const PDF_TOOLS = [
 
 const IMAGE_TOOLS = [
   { name: 'Image Cropper & Aspect', slug: '/image/crop', desc: 'Crop 1:1, 16:9, rotate & flip', icon: CropIcon, badge: 'New' },
+  { name: 'Color Palette Extractor', slug: '/image/color-palette-extractor', desc: 'Extract HEX color codes from photos', icon: Palette, badge: 'Design' },
   { name: 'SVG Vector Converter', slug: '/image/svg-converter', desc: 'Convert SVG to 2x/4x PNG/JPG', icon: FileCode, badge: 'New' },
   { name: 'Pics to PDF Converter', slug: '/image/pics-to-pdf', desc: 'Turn photos to PDF', icon: Camera, badge: 'Popular' },
   { name: 'PNG to JPG Converter', slug: '/image/png-to-jpg', desc: 'Convert PNG to JPG', icon: FileImage, badge: 'Bulk' },
@@ -77,6 +82,8 @@ const IMAGE_TOOLS = [
 ];
 
 const UTILITY_TOOLS = [
+  { name: 'Pomodoro Focus Timer', slug: '/utility/pomodoro-timer', desc: 'Custom intervals, day/night & chimes', icon: Timer, badge: 'Focus' },
+  { name: 'Spin the Wheel Decider', slug: '/utility/spin-the-wheel', desc: 'Random picker, custom names & elimination', icon: Dices, badge: 'Fun' },
   { name: 'Pages to Word (DOCX)', slug: '/utility/pages-to-word', desc: 'Convert Apple Pages to Word', icon: FileText, badge: 'Apple' },
   { name: 'Word to Pages Converter', slug: '/utility/word-to-pages', desc: 'Convert Word DOCX to Pages', icon: FileCode, badge: 'New' },
   { name: 'Numbers to Excel (XLSX)', slug: '/utility/numbers-to-excel', desc: 'Convert Numbers to Excel', icon: Table, badge: 'Apple' },
@@ -89,6 +96,8 @@ const UTILITY_TOOLS = [
   { name: 'Typing Speed Test (WPM Cert)', slug: '/utility/typing-speed-test', desc: 'Test WPM speed & export PNG certificate', icon: Zap, badge: 'Viral Cert' },
   { name: 'Fancy Text Generator', slug: '/utility/fancy-text-generator', desc: '30+ Unicode font styles & gaming tags', icon: SparklesIcon, badge: 'Fonts' },
   { name: 'Password Generator', slug: '/utility/password-generator', desc: 'Generate strong passwords 100% offline', icon: Lock, badge: 'Secure' },
+  { name: 'Text to Speech AI Voice', slug: '/utility/text-to-speech', desc: 'Convert text to natural speech audio', icon: Volume2, badge: 'Voice' },
+  { name: 'Glassmorphism Generator', slug: '/utility/glassmorphism-generator', desc: 'Generate sleek glass CSS blur styles', icon: SparklesIcon, badge: 'CSS' },
   { name: 'Number to Words Converter', slug: '/utility/number-to-words', desc: 'Cheque & invoice amount words (Rupees/$)', icon: DollarSign, badge: 'Cheque' },
   { name: 'EMI Loan Calculator', slug: '/utility/emi-calculator', desc: 'Home, car & personal loan monthly EMI', icon: DollarSign, badge: 'Loan' },
   { name: 'Income Tax Calculator', slug: '/utility/income-tax-calculator', desc: 'Old vs New Regime tax savings', icon: DollarSign, badge: 'Tax' },
@@ -106,6 +115,7 @@ const UTILITY_TOOLS = [
 ];
 
 const SOCIAL_TOOLS = [
+  { name: 'Instagram Caption Copier', slug: '/social/instagram-caption-copier', desc: 'Copy formatted bio captions & line breaks', icon: MessageSquare, badge: 'Viral' },
   { name: 'WhatsApp Direct Chat Launcher', slug: '/social/whatsapp-direct-chat', desc: 'Chat without saving phone numbers', icon: MessageSquare, badge: 'wa.me' },
   { name: 'YouTube 1080p Thumbnail DL', slug: '/social/youtube-thumbnail-downloader', desc: 'Download 1080p HD video cover images', icon: Camera, badge: 'Thumbnails' },
   { name: 'YouTube Tag Extractor', slug: '/social/youtube-tag-extractor', desc: 'Extract SEO tags from video URL', icon: Hash, badge: 'SEO' },
@@ -120,11 +130,43 @@ export function MobileBottomNav() {
   const [searchQuery, setSearchQuery] = useState('');
   const [inFooter, setInFooter] = useState(false);
 
+  // Drag tracking to prevent accidental clicks while scrolling on touch devices
+  const isDraggingRef = useRef(false);
+  const touchStartPos = useRef({ x: 0, y: 0 });
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    isDraggingRef.current = false;
+    touchStartPos.current = {
+      x: e.touches[0].clientX,
+      y: e.touches[0].clientY,
+    };
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    const dx = Math.abs(e.touches[0].clientX - touchStartPos.current.x);
+    const dy = Math.abs(e.touches[0].clientY - touchStartPos.current.y);
+    // If movement exceeds 6px, mark as drag/scroll gesture
+    if (dx > 6 || dy > 6) {
+      isDraggingRef.current = true;
+    }
+  };
+
   const handleSelectTool = (slug: string) => {
     setActiveDrawer(null);
     setSearchQuery('');
     router.push(slug);
   };
+
+  // Lock body scroll when drawer is open to prevent scroll conflicts
+  useEffect(() => {
+    if (activeDrawer) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [activeDrawer]);
 
   // Close drawer on page route change
   useEffect(() => {
@@ -189,21 +231,20 @@ export function MobileBottomNav() {
         <div className="md:hidden fixed inset-0 z-50 flex flex-col justify-end animate-in fade-in duration-200">
           {/* Touch Backdrop */}
           <div
-            className="fixed inset-0 bg-slate-950/30 backdrop-blur-md transition-opacity"
+            className="fixed inset-0 bg-slate-950/40 backdrop-blur-xs transition-opacity"
             onClick={() => setActiveDrawer(null)}
           />
 
           <div
-            className="relative liquid-glass-drawer rounded-t-3xl shadow-2xl border-t border-white/60 max-h-[80vh] flex flex-col overflow-hidden animate-in slide-in-from-bottom duration-300 z-10"
-            style={{ paddingBottom: 'calc(6rem + env(safe-area-inset-bottom, 0px))' }}
+            className="relative liquid-glass-drawer rounded-t-3xl shadow-2xl border-t border-white/60 max-h-[85dvh] h-[75dvh] flex flex-col overflow-hidden animate-in slide-in-from-bottom duration-300 z-10"
           >
             {/* Handlebar Pill */}
-            <div className="pt-3 pb-1 flex justify-center cursor-pointer" onClick={() => setActiveDrawer(null)}>
+            <div className="pt-3 pb-1 flex justify-center cursor-pointer shrink-0" onClick={() => setActiveDrawer(null)}>
               <div className="w-12 h-1.5 rounded-full bg-slate-300/80 shadow-xs" />
             </div>
 
             {/* Header */}
-            <div className="px-5 py-3 border-b border-slate-200/60 flex items-center justify-between">
+            <div className="px-5 py-3 border-b border-slate-200/60 flex items-center justify-between shrink-0">
               <div className="flex items-center gap-2">
                 <div className="p-2 rounded-xl bg-slate-900 text-white font-bold shadow-xs">
                   {activeDrawer === 'pdf' && <FileText className="w-4 h-4" />}
@@ -223,13 +264,14 @@ export function MobileBottomNav() {
               <button
                 onClick={() => setActiveDrawer(null)}
                 className="p-2 rounded-full bg-slate-100/80 text-slate-600 hover:bg-slate-200 active:scale-90 transition-all"
+                aria-label="Close tools drawer"
               >
                 <X className="w-4.5 h-4.5" />
               </button>
             </div>
 
             {/* Instant Search Bar inside Mobile Drawer */}
-            <div className="p-4 bg-slate-50/70 border-b border-slate-200/50 backdrop-blur-md">
+            <div className="p-4 bg-slate-50/70 border-b border-slate-200/50 backdrop-blur-md shrink-0">
               <div className="relative">
                 <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
@@ -250,8 +292,12 @@ export function MobileBottomNav() {
               </div>
             </div>
 
-            {/* Scrollable Tool List */}
-            <div className="p-4 space-y-2 overflow-y-auto max-h-[50vh]">
+            {/* Scrollable Tool List with touch drag safety & momentum scrolling */}
+            <div
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-4 space-y-2.5 pb-28 [touch-action:pan-y] [-webkit-overflow-scrolling:touch]"
+            >
               {filteredTools.length === 0 ? (
                 <div className="py-8 text-center text-xs text-slate-400 font-medium">
                   No tools found matching &quot;{searchQuery}&quot;
@@ -266,15 +312,15 @@ export function MobileBottomNav() {
                     <Link
                       key={tool.slug}
                       href={tool.slug}
-                      onPointerDown={(e) => {
-                        e.preventDefault();
-                        handleSelectTool(tool.slug);
-                      }}
                       onClick={(e) => {
-                        e.preventDefault();
+                        // Prevent navigation if the user was dragging/scrolling the list
+                        if (isDraggingRef.current) {
+                          e.preventDefault();
+                          return;
+                        }
                         handleSelectTool(tool.slug);
                       }}
-                      className="w-full text-left p-3 rounded-2xl bg-white/80 hover:bg-white active:bg-slate-100 border border-slate-200/70 flex items-center justify-between active:scale-[0.98] transition-all duration-150 shadow-2xs cursor-pointer"
+                      className="w-full text-left p-3 rounded-2xl bg-white/80 hover:bg-white active:bg-slate-100 border border-slate-200/70 flex items-center justify-between active:scale-[0.98] transition-all duration-150 shadow-2xs cursor-pointer select-none"
                     >
                       <div className="flex items-center gap-3 min-w-0">
                         <div className={`p-2.5 rounded-xl border shrink-0 ${iconStyle}`}>

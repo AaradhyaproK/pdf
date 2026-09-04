@@ -300,6 +300,26 @@ export function Navbar() {
     }, 400);
   };
 
+  // Drag tracking to prevent accidental clicks while scrolling on touch devices
+  const isDraggingRef = useRef(false);
+  const touchStartPos = useRef({ x: 0, y: 0 });
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    isDraggingRef.current = false;
+    touchStartPos.current = {
+      x: e.touches[0].clientX,
+      y: e.touches[0].clientY,
+    };
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    const dx = Math.abs(e.touches[0].clientX - touchStartPos.current.x);
+    const dy = Math.abs(e.touches[0].clientY - touchStartPos.current.y);
+    if (dx > 6 || dy > 6) {
+      isDraggingRef.current = true;
+    }
+  };
+
   useEffect(() => {
     if (searchOpen && window.innerWidth < 768) {
       document.body.style.overflow = 'hidden';
@@ -401,7 +421,11 @@ export function Navbar() {
             })}
           </div>
 
-          <div className="flex-1 overflow-y-auto p-3 space-y-2 pb-24 overscroll-contain">
+          <div
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            className="flex-1 overflow-y-auto p-3 space-y-2 pb-24 overscroll-contain [touch-action:pan-y] [-webkit-overflow-scrolling:touch]"
+          >
             {filteredTools.length === 0 ? (
               <div className="py-12 text-center space-y-2">
                 <div className="w-12 h-12 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto">
@@ -427,15 +451,14 @@ export function Navbar() {
                   <Link
                     key={tool.slug}
                     href={tool.slug}
-                    onPointerDown={(e) => {
-                      e.preventDefault();
-                      handleSelectTool(tool.slug);
-                    }}
                     onClick={(e) => {
-                      e.preventDefault();
+                      if (isDraggingRef.current) {
+                        e.preventDefault();
+                        return;
+                      }
                       handleSelectTool(tool.slug);
                     }}
-                    className="w-full text-left p-3 rounded-2xl bg-slate-50 hover:bg-slate-100 active:bg-slate-200/80 border border-slate-200/80 flex items-center justify-between active:scale-[0.98] transition-all cursor-pointer shadow-2xs group"
+                    className="w-full text-left p-3 rounded-2xl bg-slate-50 hover:bg-slate-100 active:bg-slate-200/80 border border-slate-200/80 flex items-center justify-between active:scale-[0.98] transition-all cursor-pointer shadow-2xs group select-none"
                   >
                     <div className="flex items-center gap-3 min-w-0">
                       <div
@@ -820,7 +843,11 @@ export function Navbar() {
                 })}
               </div>
 
-              <div className="p-2 space-y-1 max-h-[60vh] overflow-y-auto">
+              <div
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                className="p-2 space-y-1 max-h-[60vh] overflow-y-auto overscroll-contain [touch-action:pan-y] [-webkit-overflow-scrolling:touch]"
+              >
                 {filteredTools.length === 0 ? (
                   <div className="py-10 text-center space-y-2">
                     <div className="w-10 h-10 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto">
@@ -848,16 +875,15 @@ export function Navbar() {
                       <Link
                         key={tool.slug}
                         href={tool.slug}
-                        onPointerDown={(e) => {
-                          e.preventDefault();
-                          handleSelectTool(tool.slug);
-                        }}
                         onClick={(e) => {
-                          e.preventDefault();
+                          if (isDraggingRef.current) {
+                            e.preventDefault();
+                            return;
+                          }
                           handleSelectTool(tool.slug);
                         }}
                         onMouseEnter={() => setSelectedIndex(idx)}
-                        className={`p-2.5 rounded-2xl flex items-center justify-between transition-all duration-150 border cursor-pointer ${
+                        className={`p-2.5 rounded-2xl flex items-center justify-between transition-all duration-150 border cursor-pointer select-none ${
                           isSelected
                             ? 'bg-slate-900 text-white border-slate-900 shadow-md translate-x-1'
                             : 'hover:bg-slate-100/80 border-transparent text-slate-900'
