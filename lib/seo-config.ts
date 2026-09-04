@@ -860,7 +860,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { title: 'Download Processed Results', text: 'Preview your processed documents and images and download them directly to your device memory 100% privately.' }
     ],
     faqs: [
-      { question: 'What is the FileZenith Flagship All-in-One Studio?', answer: 'The All-in-One Studio is our unified master workspace where you can access and execute all 20+ PDF and image processing tools on one single interactive screen without switching pages.' },
+      { question: 'What is the FileZenith Flagship All-in-One Studio?', answer: 'The All-in-One Studio is our unified master workspace where you can access and execute all 50+ PDF and image processing tools on one single interactive screen without switching pages.' },
       { question: 'Are my uploaded files safe in the All-in-One Studio?', answer: 'Yes! All calculations, PDF rendering, OCR, and image processing run 100% client-side inside your web browser. Your files are never uploaded to any remote server.' }
     ]
   },

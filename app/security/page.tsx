@@ -109,7 +109,7 @@ const SECURITY_FAQS = [
   },
   {
     q: 'Do I need an account or subscription to access serverless file tools?',
-    a: 'No sign-up or registration is required. All 25+ PDF, image, and utility tools on FileZenith are 100% free with unlimited usage.',
+    a: 'No sign-up or registration is required. All 50+ PDF, image, and utility tools on FileZenith are 100% free with unlimited usage.',
   },
 ];
 
@@ -300,7 +300,7 @@ export default function SecurityPage() {
           Ready to experience 100% private document processing?
         </h3>
         <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto font-medium">
-          Your PDF is processed directly in your browser, helping keep your document processing private. Try all 20+ free tools now.
+          Your PDF is processed directly in your browser, helping keep your document processing private. Try all 50+ free tools now.
         </p>
         <Link
           href="/"

@@ -120,7 +120,7 @@ export default function FlagshipStudioPage() {
     <ToolLayout
       slug="/studio"
       title="Flagship All-in-One PDF & Image Studio"
-      subtitle="Access all 20+ PDF editing, compression, OCR, watermark, protection, conversion, passport maker, background removal, and resize tools at a glance on one single interactive page."
+      subtitle="Access all 50+ PDF editing, compression, OCR, watermark, protection, conversion, passport maker, background removal, and resize tools at a glance on one single interactive page."
       badgeText="Flagship All-in-One Suite"
     >
       <div className="max-w-6xl mx-auto space-y-10">
@@ -133,7 +133,7 @@ export default function FlagshipStudioPage() {
               <Sparkles className="w-3.5 h-3.5" /> Flagship All-in-One Master Workspace
             </span>
             <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
-              One Single Page. All 20+ Tools At A Glance.
+              One Single Page. All 50+ Tools At A Glance.
             </h2>
             <p className="text-slate-300 text-xs sm:text-sm max-w-2xl">
               Upload any document or image once and execute PDF compression, editing, OCR, format conversions, passport photos, and background removal seamlessly.

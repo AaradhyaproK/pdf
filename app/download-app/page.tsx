@@ -267,7 +267,7 @@ export default function DownloadAppPage() {
             <div className="p-3 rounded-2xl bg-sky-50 text-sky-600 border border-sky-100 w-fit">
               <Cpu className="w-6 h-6" />
             </div>
-            <h3 className="text-base font-black text-slate-900">All 20+ Tools Included</h3>
+            <h3 className="text-base font-black text-slate-900">All 50+ Tools Included</h3>
             <p className="text-xs text-slate-600 font-medium leading-relaxed">
               Full access to PDF compression, online editing, passport photo maker, AI background remover, batch image resizer, and QR generator.
             </p>

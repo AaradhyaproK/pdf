@@ -73,7 +73,7 @@ export default function AboutPage() {
           In an era where personal data leaks and cloud security breaches are increasingly common, file utility tools should not demand access to your confidential contracts, bank statements, ID photos, or tax filings.
         </p>
         <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-medium">
-          FileZenith proves that web browsers are powerful enough to execute complex document manipulations locally. We are committed to keeping our 20+ file tools free, accessible, and completely private for everyone.
+          FileZenith proves that web browsers are powerful enough to execute complex document manipulations locally. We are committed to keeping our 50+ file tools free, accessible, and completely private for everyone.
         </p>
       </section>
 
@@ -81,7 +81,7 @@ export default function AboutPage() {
       <div className="p-6 sm:p-8 rounded-3xl bg-indigo-50/60 border border-indigo-100 text-center space-y-3.5 shadow-2xs">
         <h3 className="text-lg sm:text-xl font-extrabold text-slate-900">Ready to try FileZenith tools?</h3>
         <p className="text-xs text-slate-600 max-w-md mx-auto font-medium">
-          Explore our suite of 20+ private PDF and image tools directly in your browser.
+          Explore our suite of 50+ private PDF and image tools directly in your browser.
         </p>
         <Link
           href="/"

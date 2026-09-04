@@ -254,7 +254,7 @@ export function Footer() {
                 </span>
               </h4>
               <p className="text-[11px] sm:text-xs text-slate-300 font-medium leading-normal">
-                Install web app to use all 20+ PDF & image tools offline anytime without cellular data or Wi-Fi.
+                Install web app to use all 50+ PDF & image tools offline anytime without cellular data or Wi-Fi.
               </p>
             </div>
           </div>

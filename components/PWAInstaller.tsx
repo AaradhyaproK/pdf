@@ -118,7 +118,7 @@ export function PWAInstaller() {
             <p className="text-[11px] text-slate-300 font-medium mt-0.5">
               {isIOS
                 ? 'Install on iPhone / iPad for instant offline PDF & photo editing.'
-                : 'Install web app to use all 20+ PDF & image tools offline anytime.'}
+                : 'Install web app to use all 50+ PDF & image tools offline anytime.'}
             </p>
           </div>
         </div>

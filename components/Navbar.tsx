@@ -331,7 +331,7 @@ export function Navbar() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search 20+ PDF, Image & Utility tools..."
+                placeholder="Search 50+ PDF, Image & Utility tools..."
                 className="w-full pl-9 pr-9 py-2 bg-slate-100 border border-slate-200 rounded-full text-xs font-semibold text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-slate-900/20 focus:border-slate-900 transition-all shadow-inner"
                 autoFocus
               />
@@ -746,7 +746,7 @@ export function Navbar() {
                 setSearchQuery(e.target.value);
                 if (!searchOpen) setSearchOpen(true);
               }}
-              placeholder="Search 20+ tools..."
+              placeholder="Search 50+ tools..."
               className="w-full pl-9 pr-14 py-1.5 bg-transparent text-xs font-semibold text-slate-900 placeholder:text-slate-400 focus:outline-none"
             />
             {searchQuery ? (

@@ -9,35 +9,62 @@
 - **PWA Offline Support**: Operates 100% offline as a Progressive Web App.
 
 ## PDF Studio Tools
-- [Edit PDF Online](https://www.filezenith.com/pdf/edit): Free interactive PDF editor to add text, whiteout content, draw, and sign PDF documents.
-- [Compress PDF](https://www.filezenith.com/pdf/compress): Reduce PDF file size 100% privately without quality loss.
-- [Compress PDF to 200KB](https://www.filezenith.com/pdf/compress-to-200kb): Target 200KB compression preset for job application and government web portals.
-- [Merge PDF](https://www.filezenith.com/pdf/merge): Combine multiple PDF documents into a single organized file.
-- [Split PDF](https://www.filezenith.com/pdf/split): Visual PDF page extractor with high-DPI page previews.
-- [Organize & Rotate PDF](https://www.filezenith.com/pdf/organize): Rotate, reorder, or delete individual PDF pages.
-- [PDF OCR Text Extractor](https://www.filezenith.com/pdf/ocr): Extract selectable text from scanned PDF documents locally using Tesseract.js.
-- [Watermark PDF](https://www.filezenith.com/pdf/watermark): Add custom text or image watermarks to PDF pages.
-- [Password Protect PDF](https://www.filezenith.com/pdf/protect): Encrypt PDF files with 128-bit AES password security.
-- [PDF to JPG / PNG](https://www.filezenith.com/pdf/to-image): Convert PDF pages to crisp high-resolution images.
+- [Edit PDF Online](https://www.filezenith.com/pdf/edit)
+- [Compress PDF](https://www.filezenith.com/pdf/compress)
+- [Compress PDF to 200KB](https://www.filezenith.com/pdf/compress-to-200kb)
+- [Merge PDF](https://www.filezenith.com/pdf/merge)
+- [Split PDF](https://www.filezenith.com/pdf/split)
+- [Organize & Rotate PDF](https://www.filezenith.com/pdf/organize)
+- [PDF OCR Text Extractor](https://www.filezenith.com/pdf/ocr)
+- [Watermark PDF](https://www.filezenith.com/pdf/watermark)
+- [Password Protect PDF](https://www.filezenith.com/pdf/protect)
+- [PDF to Image](https://www.filezenith.com/pdf/to-image)
+- [Add Page Numbers to PDF](https://www.filezenith.com/pdf/page-numbers)
 
 ## Image Studio Tools
-- [Pics to PDF](https://www.filezenith.com/image/pics-to-pdf): Convert photos, scans, and receipts into structured PDF documents.
-- [PNG to JPG Converter](https://www.filezenith.com/image/png-to-jpg): Convert PNG images to JPG with custom quality controls.
-- [PNG to PDF Converter](https://www.filezenith.com/image/png-to-pdf): Save PNG pictures directly as PDF files.
-- [JPG to PNG Converter](https://www.filezenith.com/image/jpg-to-png): Convert JPG images to PNG with transparency support.
-- [Compress Image (Target KB)](https://www.filezenith.com/image/compress): Target KB image compressor for 50KB, 100KB, and custom limits.
-- [Compress Image to 50KB](https://www.filezenith.com/image/compress-to-50kb): Shrink photos under 50KB for online forms.
-- [Compress Image to 100KB](https://www.filezenith.com/image/compress-to-100kb): Shrink photos under 100KB for application portals.
-- [Resize Image](https://www.filezenith.com/image/resize): Resize images by exact pixels or percentage ratio.
-- [Passport Photo Maker](https://www.filezenith.com/image/passport-maker): Crop photos to official 2x2 inch and 35x45mm passport/visa dimensions.
-- [AI Background Remover](https://www.filezenith.com/image/remove-background): Remove image backgrounds 100% in browser.
-- [Apple HEIC to JPG Converter](https://www.filezenith.com/image/convert-heic): Convert iPhone HEIC photos to JPG format.
-- [Image to PDF Converter](https://www.filezenith.com/image/to-pdf): Convert WEBP, BMP, and GIF images to PDF.
+- [Pics to PDF](https://www.filezenith.com/image/pics-to-pdf)
+- [PNG to JPG Converter](https://www.filezenith.com/image/png-to-jpg)
+- [PNG to PDF Converter](https://www.filezenith.com/image/png-to-pdf)
+- [JPG to PNG Converter](https://www.filezenith.com/image/jpg-to-png)
+- [Compress Image](https://www.filezenith.com/image/compress)
+- [Compress Image to 50KB](https://www.filezenith.com/image/compress-to-50kb)
+- [Compress Image to 100KB](https://www.filezenith.com/image/compress-to-100kb)
+- [Resize Image](https://www.filezenith.com/image/resize)
+- [Crop Image](https://www.filezenith.com/image/crop)
+- [Passport Photo Maker](https://www.filezenith.com/image/passport-maker)
+- [AI Background Remover](https://www.filezenith.com/image/remove-background)
+- [Apple HEIC to JPG Converter](https://www.filezenith.com/image/convert-heic)
+- [Image to PDF Converter](https://www.filezenith.com/image/to-pdf)
+- [Color Palette Extractor](https://www.filezenith.com/image/color-palette-extractor)
+- [SVG Converter](https://www.filezenith.com/image/svg-converter)
 
-## Daily Quick Utilities
-- [Vector QR Code Generator](https://www.filezenith.com/utility/qr-generator): Generate SVG and PNG QR codes with logos and colors.
-- [Word Counter & Keyword Analyzer](https://www.filezenith.com/utility/word-counter): Count words, characters, reading speed, and keyword density.
-- [JSON Formatter & CSV Converter](https://www.filezenith.com/utility/json-formatter): Format, validate, and convert JSON to CSV and YAML.
+## Utility Studio Tools
+- [Vector QR Code Generator](https://www.filezenith.com/utility/qr-generator)
+- [Word Counter](https://www.filezenith.com/utility/word-counter)
+- [JSON Formatter](https://www.filezenith.com/utility/json-formatter)
+- [Age Calculator](https://www.filezenith.com/utility/age-calculator)
+- [Base64 Encoder/Decoder](https://www.filezenith.com/utility/base64)
+- [BMI Calculator](https://www.filezenith.com/utility/bmi-calculator)
+- [Case Converter](https://www.filezenith.com/utility/case-converter)
+- [CGPA to Percentage](https://www.filezenith.com/utility/cgpa-to-percentage)
+- [EMI Calculator](https://www.filezenith.com/utility/emi-calculator)
+- [EPF Calculator](https://www.filezenith.com/utility/epf-calculator)
+- [Fancy Text Generator](https://www.filezenith.com/utility/fancy-text-generator)
+- [Glassmorphism Generator](https://www.filezenith.com/utility/glassmorphism-generator)
+- [GST Calculator](https://www.filezenith.com/utility/gst-calculator)
+- [Income Tax Calculator](https://www.filezenith.com/utility/income-tax-calculator)
+- [Love Calculator](https://www.filezenith.com/utility/love-calculator)
+- [Markdown Editor](https://www.filezenith.com/utility/markdown-editor)
+- [Number to Words](https://www.filezenith.com/utility/number-to-words)
+- [Password Generator](https://www.filezenith.com/utility/password-generator)
+- [Percentage Calculator](https://www.filezenith.com/utility/percentage-calculator)
+- [Pomodoro Timer](https://www.filezenith.com/utility/pomodoro-timer)
+- [Salary Calculator](https://www.filezenith.com/utility/salary-calculator)
+- [SIP Calculator](https://www.filezenith.com/utility/sip-calculator)
+- [Spin The Wheel](https://www.filezenith.com/utility/spin-the-wheel)
+- [Text Repeater](https://www.filezenith.com/utility/text-repeater)
+- [Text to Speech](https://www.filezenith.com/utility/text-to-speech)
+- [Typing Speed Test](https://www.filezenith.com/utility/typing-speed-test)
 
 ## Optional Reference
 - [Full LLM Manifest](https://www.filezenith.com/llms-full.txt): Detailed technical guide for AI models.

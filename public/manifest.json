@@ -31,7 +31,7 @@
     {
       "name": "Flagship All-in-One Studio",
       "short_name": "Studio",
-      "description": "Access all 20+ PDF & Image tools on one screen",
+      "description": "Access all 50+ PDF & Image tools on one screen",
       "url": "/studio",
       "icons": [{ "src": "/1.png", "sizes": "192x192" }]
     },

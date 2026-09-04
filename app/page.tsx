@@ -23,7 +23,7 @@ const HOMEPAGE_FAQS = [
   },
   {
     q: 'Is FileZenith really 100% free with no hidden fees or subscriptions?',
-    a: "Yes! FileZenith is 100% free forever. You don't need to register an account, enter a credit card, or pay any subscription fees to access all 25+ PDF, image, and utility tools with unlimited file sizes.",
+    a: "Yes! FileZenith is 100% free forever. You don't need to register an account, enter a credit card, or pay any subscription fees to access all 50+ PDF, image, and utility tools with unlimited file sizes.",
   },
   {
     q: 'Can I compress PDF files under 200KB for government job portals and college admissions?',
