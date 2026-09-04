@@ -93,6 +93,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full scroll-smooth light">
       <head>
+        <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Search FileZenith Tools" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

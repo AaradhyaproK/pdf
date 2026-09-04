@@ -136,6 +136,19 @@ export function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const q = params.get('q');
+      if (q) {
+        setSearchQuery(q);
+        setSearchOpen(true);
+        // Clean up the URL after opening search so it doesn't persist forever
+        window.history.replaceState({}, '', window.location.pathname);
+      }
+    }
+  }, []);
+
   const isActive = (path: string) => pathname?.startsWith(path);
 
   // Filter tools based on search query and category
