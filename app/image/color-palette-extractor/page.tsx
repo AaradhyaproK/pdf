@@ -404,28 +404,28 @@ export default function ColorPaletteExtractorPage() {
                     Active Color
                   </h3>
                   
-                  <div className="flex flex-col md:flex-row gap-6 items-center">
+                  <div className="flex flex-col gap-5">
                     <div 
-                      className="w-32 h-32 md:w-28 md:h-28 shrink-0 rounded-2xl shadow-inner ring-1 ring-black/10"
+                      className="w-full h-32 md:h-40 shrink-0 rounded-2xl shadow-inner ring-1 ring-black/10 transition-colors duration-500"
                       style={{ backgroundColor: activeColor }}
                     />
-                    <div className="flex-1 w-full space-y-2 overflow-hidden">
+                    <div className="w-full space-y-2">
                       
-                      <button onClick={() => copyToClipboard(activeColor.toUpperCase())} className="w-full flex items-center p-2.5 rounded-xl hover:bg-slate-50 border border-transparent hover:border-slate-200 transition-colors group">
-                        <span className="text-xs font-bold text-slate-400 w-10 shrink-0 text-left">HEX</span>
-                        <span className="font-mono font-bold text-slate-700 text-sm truncate flex-1 text-left px-2">{activeColor.toUpperCase()}</span>
+                      <button onClick={() => copyToClipboard(activeColor.toUpperCase())} className="w-full flex items-center p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-transparent hover:border-slate-200 transition-colors group">
+                        <span className="text-xs font-bold text-slate-400 w-12 shrink-0 text-left">HEX</span>
+                        <span className="font-mono font-bold text-slate-700 text-sm flex-1 text-left px-2 break-all">{activeColor.toUpperCase()}</span>
                         <Copy className="w-4 h-4 text-slate-300 group-hover:text-indigo-500 shrink-0" />
                       </button>
 
-                      <button onClick={() => copyToClipboard(hexToRgbStr(activeColor))} className="w-full flex items-center p-2.5 rounded-xl hover:bg-slate-50 border border-transparent hover:border-slate-200 transition-colors group">
-                        <span className="text-xs font-bold text-slate-400 w-10 shrink-0 text-left">RGB</span>
-                        <span className="font-mono font-bold text-slate-700 text-sm truncate flex-1 text-left px-2">{hexToRgbStr(activeColor)}</span>
+                      <button onClick={() => copyToClipboard(hexToRgbStr(activeColor))} className="w-full flex items-center p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-transparent hover:border-slate-200 transition-colors group">
+                        <span className="text-xs font-bold text-slate-400 w-12 shrink-0 text-left">RGB</span>
+                        <span className="font-mono font-bold text-slate-700 text-sm flex-1 text-left px-2 break-all">{hexToRgbStr(activeColor)}</span>
                         <Copy className="w-4 h-4 text-slate-300 group-hover:text-indigo-500 shrink-0" />
                       </button>
 
-                      <button onClick={() => copyToClipboard(hexToHslStr(activeColor))} className="w-full flex items-center p-2.5 rounded-xl hover:bg-slate-50 border border-transparent hover:border-slate-200 transition-colors group">
-                        <span className="text-xs font-bold text-slate-400 w-10 shrink-0 text-left">HSL</span>
-                        <span className="font-mono font-bold text-slate-700 text-sm truncate flex-1 text-left px-2">{hexToHslStr(activeColor)}</span>
+                      <button onClick={() => copyToClipboard(hexToHslStr(activeColor))} className="w-full flex items-center p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-transparent hover:border-slate-200 transition-colors group">
+                        <span className="text-xs font-bold text-slate-400 w-12 shrink-0 text-left">HSL</span>
+                        <span className="font-mono font-bold text-slate-700 text-sm flex-1 text-left px-2 break-all">{hexToHslStr(activeColor)}</span>
                         <Copy className="w-4 h-4 text-slate-300 group-hover:text-indigo-500 shrink-0" />
                       </button>
 
