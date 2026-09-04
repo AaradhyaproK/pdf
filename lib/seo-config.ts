@@ -1031,23 +1031,39 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       'pages to docx converter no email',
       'best pages to word converter online',
       'convert pages document to word editable',
-      'apple pages to word converter free'
+      'apple pages to word converter free',
+      'how to open .pages file on windows 10 11',
+      'open pages document in microsoft word',
+      'convert pages to docx without icloud',
+      'mac pages to word converter free online',
+      'extract text from apple pages file',
+      'view pages file on pc without mac',
+      'free pages to docx converter unlimited',
+      'batch convert pages to word docx',
+      'iwork pages to microsoft word converter',
+      'client side pages to word tool'
     ],
     category: 'utility',
     howToSteps: [
       { title: 'Upload Apple Pages (.pages) Document', text: 'Select or drag and drop your Apple Pages file into the client-side converter.' },
-      { title: 'Extract Document Content & Layout', text: 'FileZenith extracts the embedded QuickLook preview and XML text streams locally in browser memory.' },
+      { title: 'Extract Document Content & Layout', text: 'FileZenith unpacks the embedded QuickLook preview and XML text streams locally in browser memory.' },
       { title: 'Download Editable Word DOCX', text: 'Click Convert to Word to compile a clean Microsoft Word (.docx) file and download it immediately.' }
     ],
     faqs: [
       { question: 'Can I open and edit Apple Pages files on a Windows PC?', answer: 'Yes! FileZenith converts your .pages file into a standard Microsoft Word (.docx) document that opens seamlessly in Word, Google Docs, and LibreOffice on Windows, Mac, and Linux.' },
-      { question: 'Is my confidential Pages document uploaded to any server?', answer: 'No. FileZenith operates 100% client-side inside your browser. Your files never leave your device.' },
-      { question: 'Does this converter require an Apple Mac or iCloud account?', answer: 'No! You can convert Apple Pages documents directly from any web browser on Windows, Android, Chromebook, or Mac without needing an iCloud account.' }
+      { question: 'Is my confidential Pages document uploaded to any server?', answer: 'No. FileZenith operates 100% client-side inside your browser. Your confidential contracts, legal paperwork, and manuscripts never leave your device.' },
+      { question: 'Does this converter require an Apple Mac or iCloud account?', answer: 'No! You can convert Apple Pages documents directly from any web browser on Windows, Android, Chromebook, or Mac without needing an iCloud account or Apple ID.' },
+      { question: 'Why can\'t Windows open Apple Pages files by default?', answer: 'An Apple Pages file is not a single flat document; it is a zipped bundle containing Apple-specific index.xml or Protobuf archives and preview images. Microsoft Windows and Word cannot unpack this structure natively.' },
+      { question: 'Will the converted Word document be fully editable?', answer: 'Yes! The generated .docx document contains clean editable text, paragraphs, headings, and formatting ready to type, print, or edit in Microsoft Word.' },
+      { question: 'Can I convert older and newer Pages file formats?', answer: 'Yes! FileZenith supports both legacy XML-based Apple Pages packages and modern iWork Protobuf archives with embedded QuickLook previews.' },
+      { question: 'Is there any file size limit or watermarking?', answer: 'None at all. FileZenith is completely free, does not add any watermarks, and handles large documents directly in your browser memory.' }
     ],
     comparisonTable: [
       { feature: 'Device Requirement', omnitool: 'Any Device (Windows, Mac, Android, Linux)', standardCloud: 'Often Requires Mac or iCloud Login' },
       { feature: 'Privacy', omnitool: '100% In-Browser (Zero Cloud Uploads)', standardCloud: 'Uploaded to Remote Servers' },
-      { feature: 'Registration', omnitool: 'None (Instant Direct Download)', standardCloud: 'Requires Email or Account' }
+      { feature: 'Registration', omnitool: 'None (Instant Direct Download)', standardCloud: 'Requires Email or Account' },
+      { feature: 'Document Editing', omnitool: '100% Editable DOCX Output', standardCloud: 'Read-Only PDF Conversion Only' },
+      { feature: 'Cost', omnitool: '100% Free Forever (No Hidden Fees)', standardCloud: 'Paywalled After 1-2 Conversions' }
     ]
   },
   '/utility/word-to-pages': {
@@ -1063,7 +1079,17 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       'word to pages converter online',
       'save word document as pages file',
       'convert word file to pages on windows',
-      'free word to pages converter no limit'
+      'free word to pages converter no limit',
+      'open word document in apple pages',
+      'how to convert docx to pages on pc',
+      'word to apple pages converter online free',
+      'export docx to iwork pages',
+      'convert docx to pages for ipad mac',
+      'word to pages package converter client side',
+      'convert word file to pages without icloud',
+      'online docx to pages creator',
+      'open docx file on mac pages smoothly',
+      'fast word to pages converter private'
     ],
     category: 'utility',
     howToSteps: [
@@ -1072,12 +1098,20 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { title: 'Download Apple Pages Document', text: 'Download your .pages package to open smoothly on Mac, iPad, iPhone, and iCloud.' }
     ],
     faqs: [
-      { question: 'Can I convert Word documents to Pages on a Windows computer?', answer: 'Yes! FileZenith packages your Word document into an Apple Pages-compatible package directly on your Windows PC or Android device.' },
-      { question: 'Can I open the downloaded .pages file on an iPad or iPhone?', answer: 'Yes! The generated .pages package is designed for Apple iWork applications on iOS, iPadOS, and macOS.' }
+      { question: 'Can I convert Word documents to Pages on a Windows computer?', answer: 'Yes! FileZenith packages your Word (.docx) document into an Apple Pages-compatible package directly on your Windows PC, Android device, or Chromebook without needing macOS.' },
+      { question: 'Can I open the downloaded .pages file on an iPad or iPhone?', answer: 'Yes! The generated .pages package is structured for Apple iWork applications and opens smoothly on iOS, iPadOS, macOS, and iCloud Pages.' },
+      { question: 'Are my confidential documents uploaded to any server?', answer: 'No! FileZenith runs 100% client-side in your web browser. Your private contracts, academic papers, and letters never leave your local computer.' },
+      { question: 'Why convert a Word document to Apple Pages?', answer: 'Apple Pages offers clean typography, elegant document templates, and seamless iCloud collaboration for teams primarily working on Mac, iPad, and iPhone.' },
+      { question: 'Does it preserve paragraphs, headings, and formatting?', answer: 'Yes, the conversion engine extracts document text, structural breaks, headings, and styling to create a clean Pages container.' },
+      { question: 'Do I need an iCloud account or Mac computer?', answer: 'Not at all. You can generate Apple Pages documents directly from any standard web browser on Windows, Linux, or mobile devices.' },
+      { question: 'Are there limits on document pages or file size?', answer: 'No! Because processing is performed entirely using your device\'s local compute power, you can convert documents without server quotas.' }
     ],
     comparisonTable: [
       { feature: 'Mac Requirement', omnitool: 'No Mac Required (Works on Windows/PC)', standardCloud: 'Requires macOS or iCloud Login' },
-      { feature: 'Data Privacy', omnitool: '100% Client-Side In-Browser', standardCloud: 'Transmitted to Third-Party Servers' }
+      { feature: 'Data Privacy', omnitool: '100% Client-Side In-Browser', standardCloud: 'Transmitted to Third-Party Servers' },
+      { feature: 'Account Creation', omnitool: 'Instant Anonymous Conversion', standardCloud: 'Compulsory Sign-In' },
+      { feature: 'Watermarks', omnitool: 'Clean Apple Pages Output', standardCloud: 'Watermarked Sample Pages' },
+      { feature: 'Cost', omnitool: 'Free Forever', standardCloud: 'Credit-Based Paywalls' }
     ]
   },
   '/utility/numbers-to-excel': {
@@ -1093,7 +1127,17 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       'convert numbers spreadsheet to excel free',
       'best numbers to excel converter online',
       'numbers to xlsx converter without email',
-      'apple numbers to excel spreadsheet'
+      'apple numbers to excel spreadsheet',
+      'how to open numbers file on windows pc',
+      'open .numbers file in microsoft excel',
+      'numbers file converter to xlsx free',
+      'convert mac spreadsheet to excel windows',
+      'client side numbers to excel tool',
+      'iwork numbers to excel openxml converter',
+      'view numbers file on pc without icloud',
+      'extract data from apple numbers file',
+      'batch convert numbers to excel online',
+      'numbers to csv and xlsx converter free'
     ],
     category: 'utility',
     howToSteps: [
@@ -1102,19 +1146,27 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { title: 'Download Microsoft Excel (.xlsx) File', text: 'Click Convert to Excel to assemble an OpenXML .xlsx workbook and save it immediately.' }
     ],
     faqs: [
-      { question: 'How do I open an Apple Numbers file on Windows Excel?', answer: 'Simply upload your .numbers file to FileZenith. It converts your spreadsheet into a standard Microsoft Excel (.xlsx) file in seconds, 100% free.' },
-      { question: 'Will my financial formulas and numbers remain private?', answer: 'Yes, 100%. FileZenith converts spreadsheets locally in your browser memory. Your financial numbers and spreadsheets are never uploaded to any server.' }
+      { question: 'How do I open an Apple Numbers file on Windows Excel?', answer: 'Simply drop your .numbers file into FileZenith. Our client-side engine extracts the tabular data and builds an OpenXML Microsoft Excel (.xlsx) file that opens instantly in Windows Excel, Google Sheets, or LibreOffice.' },
+      { question: 'Will my financial formulas and numbers remain private?', answer: 'Yes, 100%. FileZenith converts spreadsheets locally in your browser memory. Your sensitive financial numbers, payroll, and spreadsheets are never uploaded to any remote server or cloud database.' },
+      { question: 'Why won\'t Apple Numbers files open directly in Microsoft Excel on Windows?', answer: 'Apple Numbers files (.numbers) are actually compressed Unix package folders containing proprietary Apple iWork Protobuf metadata and QuickLook previews, which Microsoft Excel cannot natively parse on Windows.' },
+      { question: 'Do I need an Apple ID, Mac, or iCloud account to convert?', answer: 'No! You can convert Apple Numbers files directly from Chrome, Edge, Firefox, or Brave on Windows, Android, Linux, or PC without needing an Apple ID or iCloud login.' },
+      { question: 'Can I convert multi-table Numbers sheets into Excel?', answer: 'Yes! FileZenith scans tables across sheets and compiles them into clean Excel worksheets, preserving row structures, numbers, headers, and text values.' },
+      { question: 'What versions of Excel can open the converted file?', answer: 'The generated .xlsx file is fully compliant with Microsoft Office 365, Excel 2007 through 2024, Google Sheets, LibreOffice Calc, and WPS Office.' },
+      { question: 'Is there any fee, watermark, or subscription required?', answer: 'None at all. FileZenith is 100% free forever, has zero watermarks, and never asks for an email address or credit card.' }
     ],
     comparisonTable: [
       { feature: 'Spreadsheet Privacy', omnitool: '100% Local (GDPR / HIPAA Compliant)', standardCloud: 'Cloud Processing' },
-      { feature: 'Windows Compatibility', omnitool: 'Instant .xlsx Output', standardCloud: 'Often Requires Cloud Account' }
+      { feature: 'Windows Compatibility', omnitool: 'Instant Native .xlsx Output', standardCloud: 'Often Requires iCloud Account' },
+      { feature: 'Registration / Email', omnitool: 'Zero Signup Needed', standardCloud: 'Requires Account or Email' },
+      { feature: 'File Size Restrictions', omnitool: 'Unlimited Local Capacity', standardCloud: 'Strict 10MB Cloud Limits' },
+      { feature: 'Cost', omnitool: 'Free Forever Without Watermarks', standardCloud: 'Monthly Subscription Upsells' }
     ]
   },
   '/utility/excel-to-numbers': {
     slug: '/utility/excel-to-numbers',
     title: 'Free Excel to Numbers Converter Online - Convert XLSX to NUMBERS',
     metaTitle: 'Excel to Numbers Converter Free Online - Convert XLSX to Apple Numbers | FileZenith',
-    description: 'Convert Microsoft Excel (.xlsx, .xls, .csv) spreadsheets to Apple Numbers (.numbers) format free online with 100% privacy. Create Numbers packages directly in your browser with zero uploads.',
+    description: 'Convert Microsoft Excel (.xlsx, .xls, .csv) spreadsheets to Apple Numbers (.numbers) format free online with 100% privacy. Open Excel workbooks on Mac, iPhone, and iPad seamlessly with zero uploads.',
     keywords: [
       'excel to numbers converter',
       'convert excel to numbers online free',
@@ -1123,7 +1175,17 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       'save excel as numbers file online',
       'convert xlsx to numbers on windows pc',
       'excel to apple numbers converter free',
-      'spreadsheet to numbers converter'
+      'spreadsheet to numbers converter',
+      'open excel in apple numbers',
+      'convert xlsx to numbers package',
+      'excel to numbers batch converter',
+      'how to open xlsx on ipad without excel',
+      'export excel to numbers mac format',
+      'client side excel to numbers tool',
+      'free xls to numbers converter',
+      'csv to apple numbers spreadsheet online',
+      'convert excel to iwork numbers free',
+      'convert spreadsheet for mac numbers app'
     ],
     category: 'utility',
     howToSteps: [
@@ -1132,12 +1194,20 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { title: 'Download Apple Numbers (.numbers) File', text: 'Download your .numbers package to open cleanly on Mac, iPhone, iPad, and Numbers for iCloud.' }
     ],
     faqs: [
-      { question: 'Can I convert Excel files to Numbers without using a Mac?', answer: 'Yes! FileZenith generates a compatible Apple Numbers (.numbers) package directly in your browser on Windows, Android, or Linux.' },
-      { question: 'Does it support multi-sheet workbooks and CSV files?', answer: 'Yes! It handles .xlsx, .xls, and .csv files with complete sheet preservation.' }
+      { question: 'Can I convert Excel files to Numbers without using a Mac?', answer: 'Yes! FileZenith generates a compatible Apple Numbers (.numbers) package directly in your browser on Windows, Android, Chromebook, or Linux without requiring macOS or iCloud.' },
+      { question: 'Does it support multi-sheet workbooks and CSV files?', answer: 'Yes! FileZenith handles .xlsx, .xls, and .csv files with complete sheet preservation, generating organized tables for each sheet.' },
+      { question: 'Can I open the converted Numbers file on an iPhone or iPad?', answer: 'Absolutely! The generated .numbers package is fully recognized by Apple Numbers on iOS, iPadOS, macOS, and iCloud for the web.' },
+      { question: 'Are my financial spreadsheets uploaded to your servers?', answer: 'Never. All conversion occurs 100% locally inside your browser memory using client-side JavaScript. Your confidential financial data and business models never leave your computer.' },
+      { question: 'Why do people convert Excel files to Apple Numbers?', answer: 'Apple Numbers provides sleek, canvas-based multi-table layouts, superior visual styling on iOS devices, and fluid touch navigation that many Mac and iPad users prefer over classic grid spreadsheets.' },
+      { question: 'Will formulas and cell formatting be preserved?', answer: 'Standard cell values, numbers, currency strings, dates, and tabular arrangements are converted directly into structured Numbers tables ready for immediate editing.' },
+      { question: 'Is there any file size limit or daily conversion quota?', answer: 'No! Because all processing runs locally on your device hardware, there are no artificial file size caps, queue delays, or daily usage limits.' }
     ],
     comparisonTable: [
-      { feature: 'Operating System', omnitool: 'Universal (Windows, Android, Mac, Linux)', standardCloud: 'Often Mac Only' },
-      { feature: 'Cost', omnitool: '100% Free Forever (No Watermarks)', standardCloud: 'Freemium / Paywalled' }
+      { feature: 'Operating System', omnitool: 'Universal (Windows, Mac, Android, Linux)', standardCloud: 'Often Mac Only' },
+      { feature: 'File Privacy', omnitool: '100% Local In-Browser (Zero Cloud Uploads)', standardCloud: 'Uploaded to Cloud Servers' },
+      { feature: 'Apple ID / iCloud', omnitool: 'None Needed (Direct In-Browser)', standardCloud: 'Requires iCloud Login' },
+      { feature: 'Watermarks & Limits', omnitool: '100% Free & Unlimited', standardCloud: 'Paywalled After 2 Files' },
+      { feature: 'Speed', omnitool: 'Instant Client-Side Compilation', standardCloud: 'Cloud Server Queue Latency' }
     ]
   },
   '/utility/base64': {
@@ -1708,6 +1778,40 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
     ],
     faqs: [
       { question: 'Is it safe to send WhatsApp messages without saving numbers?', answer: 'Yes, 100%. FileZenith uses official WhatsApp wa.me deep links. No phone numbers or messages are stored on any server.' }
+    ]
+  },
+  '/social/instagram-caption-copier': {
+    slug: '/social/instagram-caption-copier',
+    title: 'Free Instagram Caption Copier, Spacer & Hashtag Generator Online',
+    metaTitle: 'Instagram Caption Copier & Line Break Spacer Online Free | FileZenith',
+    description: 'Copy Instagram captions with clean line breaks, formatting spaces, and viral hashtags online free. Clean caption spacer, character counter, and instant 1-click clipboard copy.',
+    keywords: [
+      'instagram caption copier',
+      'instagram caption spacer online',
+      'copy instagram caption with line breaks',
+      'instagram text formatting tool',
+      'instagram caption generator free',
+      'clean line break for instagram',
+      'instagram caption character counter',
+      'viral hashtag generator for instagram',
+      'invisible line break instagram spacer',
+      'copy instagram text online free'
+    ],
+    category: 'social',
+    howToSteps: [
+      { title: 'Write or Paste Your Caption', text: 'Type your Instagram post or reel caption with paragraphs and line breaks.' },
+      { title: 'Format & Select Hashtag Presets', text: 'Add viral hashtags, clean up formatting, and ensure line breaks won\'t collapse.' },
+      { title: 'Copy to Clipboard', text: 'Click Copy Formatted Caption and paste directly into Instagram with flawless spacing.' }
+    ],
+    faqs: [
+      { question: 'How do I prevent Instagram from deleting my line breaks?', answer: 'Instagram automatically deletes standard blank lines. FileZenith inserts invisible formatting characters that preserve clean line breaks and paragraphs when pasted.' },
+      { question: 'What is the character limit for Instagram captions?', answer: 'Instagram allows up to 2,200 characters and up to 30 hashtags per post. FileZenith provides live character, word, and hashtag count indicators.' },
+      { question: 'Is this Instagram caption tool free to use?', answer: 'Yes! It is 100% free with no login or download required.' }
+    ],
+    comparisonTable: [
+      { feature: 'Line Break Preservation', omnitool: 'Invisible Unicode Spacing (Never Collapses)', standardCloud: 'Standard Returns (Often Deleted by IG)' },
+      { feature: 'Hashtag Presets', omnitool: 'Curated Viral & Niche Presets Included', standardCloud: 'Manual Typing Only' },
+      { feature: 'Privacy', omnitool: '100% Local (No Data Stored)', standardCloud: 'Requires Account / Tracked' }
     ]
   },
   '/utility/spin-the-wheel': {

@@ -21,27 +21,60 @@ export function SEOContent({ slug }: SEOContentProps) {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
 
-  // Internal Link Recommendations per category
-  const relatedTools =
-    tool.category === 'pdf'
-      ? [
-          { name: 'Compress PDF Online (Under 200KB)', slug: '/pdf/compress-to-200kb', desc: 'Reduce PDF file size for portal submissions.' },
-          { name: 'Merge PDF Files Free', slug: '/pdf/merge', desc: 'Combine multiple PDF documents into one.' },
-          { name: 'Convert PDF to Image (JPG/PNG)', slug: '/pdf/to-image', desc: 'Save PDF pages as high-resolution images.' },
-          { name: 'Interactive PDF Editor', slug: '/pdf/edit', desc: 'Add text, whiteout content, and draw annotations.' },
-        ]
+  // Determine dynamic file terminology for contextual SEO
+  const fileTerm =
+    slug.includes('excel') || slug.includes('numbers')
+      ? 'spreadsheet'
+      : slug.includes('word') || slug.includes('pages') || slug.includes('markdown')
+      ? 'document'
       : tool.category === 'image'
-      ? [
-          { name: 'Convert PNG to JPG Online', slug: '/image/png-to-jpg', desc: 'Bulk convert PNG images to JPG with custom quality.' },
-          { name: 'Turn Pics to PDF Document', slug: '/image/pics-to-pdf', desc: 'Combine photos, scans, and receipts into PDF.' },
-          { name: 'PNG to PDF Converter', slug: '/image/png-to-pdf', desc: 'Save PNG pictures directly as structured PDF.' },
-          { name: 'AI Image Background Remover', slug: '/image/remove-background', desc: 'Isolate subjects and export transparent PNG cutouts.' },
-        ]
-      : [
-          { name: 'Free Vector QR Code Generator', slug: '/utility/qr-generator', desc: 'Create SVG/PNG QR codes with custom logos.' },
-          { name: 'Word Counter & Density Analyzer', slug: '/utility/word-counter', desc: 'Count words, characters, reading speed, and SEO keywords.' },
-          { name: 'JSON Formatter & CSV Converter', slug: '/utility/json-formatter', desc: 'Validate, format, and convert JSON arrays to CSV/YAML.' },
-        ];
+      ? 'image'
+      : tool.category === 'pdf'
+      ? 'PDF'
+      : 'file';
+
+  const isIWorkOfficeTool = [
+    '/utility/excel-to-numbers',
+    '/utility/numbers-to-excel',
+    '/utility/word-to-pages',
+    '/utility/pages-to-word',
+  ].includes(slug);
+
+  const iWorkOfficeCluster = [
+    { name: 'Excel to Numbers Converter', slug: '/utility/excel-to-numbers', desc: 'Convert XLSX/CSV workbooks into Apple Numbers packages.' },
+    { name: 'Numbers to Excel Converter', slug: '/utility/numbers-to-excel', desc: 'Convert Apple Numbers spreadsheets to Microsoft Excel XLSX.' },
+    { name: 'Word to Pages Converter', slug: '/utility/word-to-pages', desc: 'Convert Word DOCX documents to Apple Pages packages.' },
+    { name: 'Pages to Word Converter', slug: '/utility/pages-to-word', desc: 'Convert Apple Pages files to editable Microsoft Word DOCX.' },
+  ];
+
+  // Internal Link Recommendations per category
+  const relatedTools = isIWorkOfficeTool
+    ? iWorkOfficeCluster
+        .filter((item) => item.slug !== slug)
+        .concat(
+          slug.includes('numbers') || slug.includes('excel')
+            ? [{ name: 'CSV to JSON / Formatter', slug: '/utility/json-formatter', desc: 'Convert spreadsheets and tabular records instantly.' }]
+            : [{ name: 'Word to PDF Converter', slug: '/pdf/word-to-pdf', desc: 'Save Word documents as high-quality PDF files.' }]
+        )
+    : tool.category === 'pdf'
+    ? [
+        { name: 'Compress PDF Online (Under 200KB)', slug: '/pdf/compress-to-200kb', desc: 'Reduce PDF file size for portal submissions.' },
+        { name: 'Merge PDF Files Free', slug: '/pdf/merge', desc: 'Combine multiple PDF documents into one.' },
+        { name: 'Convert PDF to Image (JPG/PNG)', slug: '/pdf/to-image', desc: 'Save PDF pages as high-resolution images.' },
+        { name: 'Interactive PDF Editor', slug: '/pdf/edit', desc: 'Add text, whiteout content, and draw annotations.' },
+      ]
+    : tool.category === 'image'
+    ? [
+        { name: 'Convert PNG to JPG Online', slug: '/image/png-to-jpg', desc: 'Bulk convert PNG images to JPG with custom quality.' },
+        { name: 'Turn Pics to PDF Document', slug: '/image/pics-to-pdf', desc: 'Combine photos, scans, and receipts into PDF.' },
+        { name: 'PNG to PDF Converter', slug: '/image/png-to-pdf', desc: 'Save PNG pictures directly as structured PDF.' },
+        { name: 'AI Image Background Remover', slug: '/image/remove-background', desc: 'Isolate subjects and export transparent PNG cutouts.' },
+      ]
+    : [
+        { name: 'Free Vector QR Code Generator', slug: '/utility/qr-generator', desc: 'Create SVG/PNG QR codes with custom logos.' },
+        { name: 'Word Counter & Density Analyzer', slug: '/utility/word-counter', desc: 'Count words, characters, reading speed, and SEO keywords.' },
+        { name: 'JSON Formatter & CSV Converter', slug: '/utility/json-formatter', desc: 'Validate, format, and convert JSON arrays to CSV/YAML.' },
+      ];
 
   return (
     <div className="w-full space-y-6 sm:space-y-10 mt-6 sm:mt-12 pt-6 sm:pt-10 border-t border-slate-200/80 text-slate-700">
@@ -66,10 +99,10 @@ export function SEOContent({ slug }: SEOContentProps) {
           </h2>
         </div>
         <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
-          {tool.description} FileZenith provides a 100% free, browser-native solution engineered specifically for office professionals, students, researchers, and freelancers who demand maximum document processing speed and absolute data privacy.
+          {tool.description} FileZenith provides a 100% free, browser-native solution engineered specifically for office professionals, students, researchers, and freelancers who demand maximum processing speed and absolute data privacy.
         </p>
         <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
-          Unlike traditional online file converters that require you to upload confidential documents to remote cloud servers, your PDF is processed directly in your browser, helping keep your document processing private. This means your files never leave your computer or phone, eliminating all cybersecurity risks with no daily file conversion caps.
+          Unlike traditional online file converters that require you to upload confidential files to remote cloud servers, your {fileTerm} is processed directly in your browser, helping keep your data private. This means your files never leave your computer or phone, eliminating all cybersecurity risks with no daily file conversion caps.
         </p>
       </section>
 
@@ -117,7 +150,7 @@ export function SEOContent({ slug }: SEOContentProps) {
               Why Choose FileZenith Browser Engine?
             </h2>
             <p className="text-xs sm:text-sm text-slate-500 font-medium">
-              See how FileZenith browser processing compares against standard cloud PDF converters.
+              See how FileZenith browser processing compares against standard cloud {fileTerm === 'PDF' ? 'PDF' : fileTerm === 'spreadsheet' ? 'spreadsheet' : fileTerm === 'image' ? 'image' : 'file'} converters.
             </p>
           </div>
 
@@ -169,7 +202,7 @@ export function SEOContent({ slug }: SEOContentProps) {
           </span>
         </div>
         <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-medium">
-          Unlike traditional web tools that upload your sensitive documents to remote servers over the internet, your PDF is processed directly in your browser, helping keep your document processing private. This guarantees absolute data privacy, instant local execution, and offline capability.
+          Unlike traditional web tools that upload your sensitive files to remote servers over the internet, your {fileTerm} is processed directly in your browser, helping keep your data private. This guarantees absolute data privacy, instant local execution, and offline capability.
         </p>
       </section>
 
