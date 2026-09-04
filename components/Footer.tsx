@@ -231,6 +231,8 @@ export function Footer() {
                   <span>Download Mobile App</span>
                 </Link>
               </li>
+              <li><Link href="/utility/pages-to-word" className="hover:text-indigo-600 font-bold text-slate-900 transition-colors">Pages to Word (DOCX)</Link></li>
+              <li><Link href="/utility/numbers-to-excel" className="hover:text-indigo-600 font-bold text-slate-900 transition-colors">Numbers to Excel (XLSX)</Link></li>
               <li><Link href="/utility/epf-calculator" className="hover:text-indigo-600 font-bold text-emerald-600 transition-colors">EPF Balance Growth Calculator</Link></li>
               <li><Link href="/social/whatsapp-direct-chat" className="hover:text-indigo-600 font-bold text-emerald-600 transition-colors">WhatsApp Direct Chat Launcher</Link></li>
               <li><Link href="/utility/age-calculator" className="hover:text-indigo-600 font-bold text-slate-900 transition-colors">Age Calculator & Birthday</Link></li>

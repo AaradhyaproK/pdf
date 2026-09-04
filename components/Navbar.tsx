@@ -50,6 +50,7 @@ import {
   Palette,
   Hexagon,
   Unlock,
+  Table,
 } from 'lucide-react';
 
 const PDF_TOOLS = [
@@ -86,6 +87,10 @@ const IMAGE_TOOLS = [
 ];
 
 const UTILITY_TOOLS = [
+  { name: 'Pages to Word (DOCX)', slug: '/utility/pages-to-word', desc: 'Convert Apple Pages to editable Word', icon: FileText, badge: 'Apple', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Word to Pages Converter', slug: '/utility/word-to-pages', desc: 'Convert Word DOCX to Apple Pages', icon: FileCode, badge: 'New', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Numbers to Excel (XLSX)', slug: '/utility/numbers-to-excel', desc: 'Convert Apple Numbers to Excel', icon: Table, badge: 'Apple', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Excel to Numbers Converter', slug: '/utility/excel-to-numbers', desc: 'Convert Excel workbook to Numbers', icon: Table, badge: 'New', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'Glassmorphism CSS Generator', slug: '/utility/glassmorphism-generator', desc: 'Frosted glass UI CSS maker', icon: Hexagon, badge: 'UI Tool', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'Free Text to Speech (TTS)', slug: '/utility/text-to-speech', desc: 'No-limit text to voice AI audio', icon: Volume2, badge: 'No Limit', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'Pomodoro Timer & Study Clock', slug: '/utility/pomodoro-timer', desc: 'Aesthetic 25m focus timer', icon: Brain, badge: 'Focus', category: 'utility', catLabel: 'Daily Utility' },

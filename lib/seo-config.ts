@@ -1018,6 +1018,128 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { feature: 'Cost & Subscriptions', omnitool: '100% Free Forever (No Credit Card)', standardCloud: 'Monthly Paywalls & Upsells' }
     ]
   },
+  '/utility/pages-to-word': {
+    slug: '/utility/pages-to-word',
+    title: 'Free Pages to Word Converter Online - Convert PAGES to DOCX',
+    metaTitle: 'Pages to Word Converter Free Online - Apple Pages to DOCX | FileZenith',
+    description: 'Convert Apple Pages (.pages) documents to Microsoft Word (.docx) free online with 100% privacy. Open and edit Pages files on Windows PC and Android with zero server uploads.',
+    keywords: [
+      'pages to word converter',
+      'convert pages to word online free',
+      'convert apple pages to docx',
+      'open pages file on windows without mac',
+      'pages to docx converter no email',
+      'best pages to word converter online',
+      'convert pages document to word editable',
+      'apple pages to word converter free'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Upload Apple Pages (.pages) Document', text: 'Select or drag and drop your Apple Pages file into the client-side converter.' },
+      { title: 'Extract Document Content & Layout', text: 'FileZenith extracts the embedded QuickLook preview and XML text streams locally in browser memory.' },
+      { title: 'Download Editable Word DOCX', text: 'Click Convert to Word to compile a clean Microsoft Word (.docx) file and download it immediately.' }
+    ],
+    faqs: [
+      { question: 'Can I open and edit Apple Pages files on a Windows PC?', answer: 'Yes! FileZenith converts your .pages file into a standard Microsoft Word (.docx) document that opens seamlessly in Word, Google Docs, and LibreOffice on Windows, Mac, and Linux.' },
+      { question: 'Is my confidential Pages document uploaded to any server?', answer: 'No. FileZenith operates 100% client-side inside your browser. Your files never leave your device.' },
+      { question: 'Does this converter require an Apple Mac or iCloud account?', answer: 'No! You can convert Apple Pages documents directly from any web browser on Windows, Android, Chromebook, or Mac without needing an iCloud account.' }
+    ],
+    comparisonTable: [
+      { feature: 'Device Requirement', omnitool: 'Any Device (Windows, Mac, Android, Linux)', standardCloud: 'Often Requires Mac or iCloud Login' },
+      { feature: 'Privacy', omnitool: '100% In-Browser (Zero Cloud Uploads)', standardCloud: 'Uploaded to Remote Servers' },
+      { feature: 'Registration', omnitool: 'None (Instant Direct Download)', standardCloud: 'Requires Email or Account' }
+    ]
+  },
+  '/utility/word-to-pages': {
+    slug: '/utility/word-to-pages',
+    title: 'Free Word to Pages Converter Online - Convert DOCX to PAGES',
+    metaTitle: 'Word to Pages Converter Free Online - Convert DOCX to Apple Pages | FileZenith',
+    description: 'Convert Microsoft Word (.docx) documents to Apple Pages (.pages) format free online with 100% privacy. Create Pages packages from Word documents directly in browser with zero uploads.',
+    keywords: [
+      'word to pages converter',
+      'convert word to pages online free',
+      'docx to pages converter without mac',
+      'convert docx to apple pages free',
+      'word to pages converter online',
+      'save word document as pages file',
+      'convert word file to pages on windows',
+      'free word to pages converter no limit'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Upload Microsoft Word (.docx) Document', text: 'Drag and drop your Word document into the local browser converter.' },
+      { title: 'Generate Apple Pages Container', text: 'FileZenith renders vector previews and packages an Apple Pages (.pages) package.' },
+      { title: 'Download Apple Pages Document', text: 'Download your .pages package to open smoothly on Mac, iPad, iPhone, and iCloud.' }
+    ],
+    faqs: [
+      { question: 'Can I convert Word documents to Pages on a Windows computer?', answer: 'Yes! FileZenith packages your Word document into an Apple Pages-compatible package directly on your Windows PC or Android device.' },
+      { question: 'Can I open the downloaded .pages file on an iPad or iPhone?', answer: 'Yes! The generated .pages package is designed for Apple iWork applications on iOS, iPadOS, and macOS.' }
+    ],
+    comparisonTable: [
+      { feature: 'Mac Requirement', omnitool: 'No Mac Required (Works on Windows/PC)', standardCloud: 'Requires macOS or iCloud Login' },
+      { feature: 'Data Privacy', omnitool: '100% Client-Side In-Browser', standardCloud: 'Transmitted to Third-Party Servers' }
+    ]
+  },
+  '/utility/numbers-to-excel': {
+    slug: '/utility/numbers-to-excel',
+    title: 'Free Numbers to Excel Converter Online - Convert NUMBERS to XLSX',
+    metaTitle: 'Numbers to Excel Converter Free Online - Apple Numbers to XLSX | FileZenith',
+    description: 'Convert Apple Numbers (.numbers) spreadsheets to Microsoft Excel (.xlsx) free online with 100% privacy. Open Numbers sheets on Windows PC directly in browser with zero server uploads.',
+    keywords: [
+      'numbers to excel converter',
+      'convert numbers to excel online free',
+      'apple numbers to xlsx converter',
+      'open numbers file in excel on windows',
+      'convert numbers spreadsheet to excel free',
+      'best numbers to excel converter online',
+      'numbers to xlsx converter without email',
+      'apple numbers to excel spreadsheet'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Upload Apple Numbers (.numbers) File', text: 'Drag and drop your Apple Numbers spreadsheet into the conversion workspace.' },
+      { title: 'Parse Spreadsheet Grid & Data', text: 'The client-side engine extracts tabular rows, columns, and data cells from the package.' },
+      { title: 'Download Microsoft Excel (.xlsx) File', text: 'Click Convert to Excel to assemble an OpenXML .xlsx workbook and save it immediately.' }
+    ],
+    faqs: [
+      { question: 'How do I open an Apple Numbers file on Windows Excel?', answer: 'Simply upload your .numbers file to FileZenith. It converts your spreadsheet into a standard Microsoft Excel (.xlsx) file in seconds, 100% free.' },
+      { question: 'Will my financial formulas and numbers remain private?', answer: 'Yes, 100%. FileZenith converts spreadsheets locally in your browser memory. Your financial numbers and spreadsheets are never uploaded to any server.' }
+    ],
+    comparisonTable: [
+      { feature: 'Spreadsheet Privacy', omnitool: '100% Local (GDPR / HIPAA Compliant)', standardCloud: 'Cloud Processing' },
+      { feature: 'Windows Compatibility', omnitool: 'Instant .xlsx Output', standardCloud: 'Often Requires Cloud Account' }
+    ]
+  },
+  '/utility/excel-to-numbers': {
+    slug: '/utility/excel-to-numbers',
+    title: 'Free Excel to Numbers Converter Online - Convert XLSX to NUMBERS',
+    metaTitle: 'Excel to Numbers Converter Free Online - Convert XLSX to Apple Numbers | FileZenith',
+    description: 'Convert Microsoft Excel (.xlsx, .xls, .csv) spreadsheets to Apple Numbers (.numbers) format free online with 100% privacy. Create Numbers packages directly in your browser with zero uploads.',
+    keywords: [
+      'excel to numbers converter',
+      'convert excel to numbers online free',
+      'xlsx to numbers converter without mac',
+      'convert excel to apple numbers spreadsheet',
+      'save excel as numbers file online',
+      'convert xlsx to numbers on windows pc',
+      'excel to apple numbers converter free',
+      'spreadsheet to numbers converter'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Upload Excel (.xlsx, .xls, .csv) File', text: 'Select or drop your spreadsheet file into the converter box.' },
+      { title: 'Build Apple Numbers Package', text: 'The engine parses workbook sheets and packages vector previews and table records.' },
+      { title: 'Download Apple Numbers (.numbers) File', text: 'Download your .numbers package to open cleanly on Mac, iPhone, iPad, and Numbers for iCloud.' }
+    ],
+    faqs: [
+      { question: 'Can I convert Excel files to Numbers without using a Mac?', answer: 'Yes! FileZenith generates a compatible Apple Numbers (.numbers) package directly in your browser on Windows, Android, or Linux.' },
+      { question: 'Does it support multi-sheet workbooks and CSV files?', answer: 'Yes! It handles .xlsx, .xls, and .csv files with complete sheet preservation.' }
+    ],
+    comparisonTable: [
+      { feature: 'Operating System', omnitool: 'Universal (Windows, Android, Mac, Linux)', standardCloud: 'Often Mac Only' },
+      { feature: 'Cost', omnitool: '100% Free Forever (No Watermarks)', standardCloud: 'Freemium / Paywalled' }
+    ]
+  },
   '/utility/base64': {
     slug: '/utility/base64',
     title: 'Base64 File & Image Encoder / Decoder Online',

@@ -266,6 +266,16 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
     intro: 'Tools designed to streamline daily tasks, protect password security, and format documents quickly.',
     subgroups: [
       {
+        title: 'Apple iWork & Office Document Conversion',
+        description: 'Convert between Apple Pages, Numbers, Microsoft Word, and Excel formats.',
+        tools: [
+          { name: 'Pages to Word Converter', slug: '/utility/pages-to-word', description: 'Convert Apple Pages (.pages) to Word (.docx).', isPopular: true, badge: 'Apple Tool' },
+          { name: 'Word to Pages Converter', slug: '/utility/word-to-pages', description: 'Convert Microsoft Word (.docx) to Apple Pages.', isPopular: true },
+          { name: 'Numbers to Excel Converter', slug: '/utility/numbers-to-excel', description: 'Convert Apple Numbers (.numbers) to Excel (.xlsx).', isPopular: true, badge: 'Apple Tool' },
+          { name: 'Excel to Numbers Converter', slug: '/utility/excel-to-numbers', description: 'Convert Excel spreadsheets to Apple Numbers.', isPopular: true }
+        ]
+      },
+      {
         title: 'Security & Utility Tools',
         description: 'Boost your personal and professional workflow.',
         tools: [
@@ -276,6 +286,8 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
       }
     ],
     popularTools: [
+      { name: 'Pages to Word Converter', slug: '/utility/pages-to-word', description: 'Open Apple Pages files in Word on Windows PC.' },
+      { name: 'Numbers to Excel Converter', slug: '/utility/numbers-to-excel', description: 'Convert Apple Numbers spreadsheets to Excel.' },
       { name: 'Password Generator', slug: '/utility/password-generator', description: 'Create strong passwords to protect your accounts.' },
       { name: 'QR Code Generator', slug: '/utility/qr-generator', description: 'Generate QR codes for instant mobile sharing.' }
     ],

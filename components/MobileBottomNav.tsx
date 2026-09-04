@@ -43,6 +43,7 @@ import {
   Video,
   Share2,
   Unlock,
+  Table,
 } from 'lucide-react';
 
 const PDF_TOOLS = [
@@ -76,6 +77,10 @@ const IMAGE_TOOLS = [
 ];
 
 const UTILITY_TOOLS = [
+  { name: 'Pages to Word (DOCX)', slug: '/utility/pages-to-word', desc: 'Convert Apple Pages to Word', icon: FileText, badge: 'Apple' },
+  { name: 'Word to Pages Converter', slug: '/utility/word-to-pages', desc: 'Convert Word DOCX to Pages', icon: FileCode, badge: 'New' },
+  { name: 'Numbers to Excel (XLSX)', slug: '/utility/numbers-to-excel', desc: 'Convert Numbers to Excel', icon: Table, badge: 'Apple' },
+  { name: 'Excel to Numbers Converter', slug: '/utility/excel-to-numbers', desc: 'Convert Excel to Numbers', icon: Table, badge: 'New' },
   { name: 'EPF Balance Growth Calculator', slug: '/utility/epf-calculator', desc: 'EPFO 8.25% retirement interest math', icon: Coins, badge: 'EPFO 8.25%' },
   { name: 'Age Calculator & Birthday', slug: '/utility/age-calculator', desc: 'Years, months, days, seconds & zodiac', icon: Calendar, badge: '#1 Tool' },
   { name: 'Percentage Calculator', slug: '/utility/percentage-calculator', desc: '% increase, discount, marks & ratio', icon: Percent, badge: 'Popular' },

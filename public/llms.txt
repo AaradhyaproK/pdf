@@ -67,6 +67,10 @@
 - [Text Repeater](https://www.filezenith.com/utility/text-repeater)
 - [Text to Speech](https://www.filezenith.com/utility/text-to-speech)
 - [Typing Speed Test](https://www.filezenith.com/utility/typing-speed-test)
+- [Pages to Word Converter](https://www.filezenith.com/utility/pages-to-word)
+- [Word to Pages Converter](https://www.filezenith.com/utility/word-to-pages)
+- [Numbers to Excel Converter](https://www.filezenith.com/utility/numbers-to-excel)
+- [Excel to Numbers Converter](https://www.filezenith.com/utility/excel-to-numbers)
 
 ## Optional Reference
 - [Full LLM Manifest](https://www.filezenith.com/llms-full.txt): Detailed technical guide for AI models.
