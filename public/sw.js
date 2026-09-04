@@ -7,13 +7,12 @@ self.lary = "";
 importScripts('https://5gvci.com/act/files/service-worker.min.js?r=sw');
 
 // FileZenith Offline PWA Cache Engine
-const CACHE_NAME = 'filezenith-v1';
+const CACHE_NAME = 'filezenith-v2';
 const PRECACHE_ASSETS = [
   '/',
   '/studio',
   '/manifest.json',
-  '/1.png',
-  '/logo.png',
+  '/filezenith-logo.png',
   '/pdf/compress',
   '/pdf/edit',
   '/image/pics-to-pdf',

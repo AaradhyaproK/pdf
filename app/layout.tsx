@@ -38,12 +38,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/1.png', sizes: 'any', type: 'image/png' },
-      { url: '/logo.png', sizes: 'any', type: 'image/png' },
+      { url: '/filezenith-logo.png', sizes: 'any', type: 'image/png' },
     ],
-    shortcut: '/1.png',
+    shortcut: '/filezenith-logo.png',
     apple: [
-      { url: '/1.png', sizes: '180x180', type: 'image/png' },
+      { url: '/filezenith-logo.png', sizes: '180x180', type: 'image/png' },
     ],
   },
   openGraph: {
@@ -52,13 +51,13 @@ export const metadata: Metadata = {
     url: 'https://www.filezenith.com',
     siteName: 'FileZenith',
     type: 'website',
-    images: [{ url: '/1.png' }],
+    images: [{ url: '/filezenith-logo.png' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'FileZenith - 100% Free Online PDF, Image & Utility Studio',
     description: 'All-in-one private online file tool suite. Zero server file uploads.',
-    images: ['/1.png'],
+    images: ['/filezenith-logo.png'],
   },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',

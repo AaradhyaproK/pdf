@@ -30,7 +30,7 @@ export function Footer() {
         <div className="sm:hidden p-5 rounded-3xl bg-slate-900 text-white space-y-3 border border-slate-800 shadow-md">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5">
-              <img src="/1.png" alt="FileZenith Logo" className="w-8 h-8 object-contain" />
+              <img src="/filezenith-logo.png" alt="FileZenith Logo" className="w-8 h-8 object-contain" />
               <span className="font-black text-lg text-white tracking-tight">FileZenith</span>
             </div>
             <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
@@ -159,7 +159,7 @@ export function Footer() {
           {/* Brand Column */}
           <div className="space-y-4 md:col-span-1">
             <div className="flex items-center gap-2">
-              <img src="/1.png" alt="FileZenith Logo" className="w-8 h-8 object-contain" />
+              <img src="/filezenith-logo.png" alt="FileZenith Logo" className="w-8 h-8 object-contain" />
               <span className="font-extrabold text-xl text-slate-900 tracking-tight">
                 FileZenith
               </span>

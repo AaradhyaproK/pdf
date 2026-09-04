@@ -47,7 +47,7 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-md space-y-6">
         <div className="text-center space-y-2">
           <Link href="/" className="inline-flex items-center gap-2.5 text-indigo-600 font-black text-xl tracking-tight">
-            <img src="/1.png" alt="FileZenith Logo" className="w-9 h-9 object-contain" />
+            <img src="/filezenith-logo.png" alt="FileZenith Logo" className="w-9 h-9 object-contain" />
             <span>FileZenith Admin</span>
           </Link>
           <h1 className="text-2xl font-black text-slate-900 tracking-tight">Admin Console Login</h1>

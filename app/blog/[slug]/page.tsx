@@ -116,7 +116,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       url: siteUrl,
       logo: {
         '@type': 'ImageObject',
-        url: `${siteUrl}/1.png`,
+        url: `${siteUrl}/filezenith-logo.png`,
       },
     },
     keywords: post.tags.join(', '),

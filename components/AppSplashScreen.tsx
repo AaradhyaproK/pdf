@@ -56,7 +56,7 @@ export function AppSplashScreen() {
           <div className="absolute -inset-3 bg-gradient-to-r from-rose-500 via-indigo-500 to-rose-500 rounded-3xl blur-xl opacity-40 animate-pulse" />
           <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-white p-3 shadow-2xl border border-slate-100 flex items-center justify-center">
             <Image
-              src="/1.png"
+              src="/filezenith-logo.png"
               alt="FileZenith Logo"
               width={96}
               height={96}

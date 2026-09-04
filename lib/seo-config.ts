@@ -1965,7 +1965,7 @@ export function generateToolMetadata(slug: string) {
       type: 'website',
       images: [
         {
-          url: `${siteUrl}/1.png`,
+          url: `${siteUrl}/filezenith-logo.png`,
           width: 512,
           height: 512,
           alt: tool.title
@@ -1976,7 +1976,7 @@ export function generateToolMetadata(slug: string) {
       card: 'summary_large_image',
       title: tool.metaTitle,
       description: tool.description,
-      images: [`${siteUrl}/1.png`]
+      images: [`${siteUrl}/filezenith-logo.png`]
     }
   };
 }
@@ -1993,7 +1993,7 @@ export function generateToolSchemas(slug: string) {
     '@type': 'Organization',
     'name': 'FileZenith',
     'url': siteUrl,
-    'logo': `${siteUrl}/1.png`,
+    'logo': `${siteUrl}/filezenith-logo.png`,
     'description': 'Free online PDF, image and utility tools. 100% client-side, zero server uploads.',
     'parentOrganization': {
       '@type': 'Organization',

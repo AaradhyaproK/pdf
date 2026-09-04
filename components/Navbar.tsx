@@ -505,7 +505,7 @@ export function Navbar() {
                 <ArrowLeft className="w-5 h-5 text-slate-900 stroke-[2.5]" />
               </button>
               <Link href="/" className="flex items-center gap-1.5 min-w-0 shrink active:scale-95 transition-transform">
-                <img src="/1.png" alt="FileZenith Logo" className="w-6 h-6 object-contain shrink-0" />
+                <img src="/filezenith-logo.png" alt="FileZenith Logo" className="w-6 h-6 object-contain shrink-0" />
                 <span className="font-black text-xs sm:text-sm text-slate-900 truncate tracking-tight">
                   FileZenith
                 </span>
@@ -514,7 +514,7 @@ export function Navbar() {
           ) : (
             <Link href="/" className="flex items-center gap-2 group shrink-0 active:scale-95 transition-transform duration-200">
               <img
-                src="/1.png"
+                src="/filezenith-logo.png"
                 alt="FileZenith Logo"
                 className={`object-contain transition-all duration-300 ${scrolled ? 'w-6 h-6' : 'w-7 h-7'}`}
               />
@@ -553,7 +553,7 @@ export function Navbar() {
       <div className="hidden md:flex max-w-7xl mx-auto px-6 lg:px-8 h-16 items-center justify-between gap-4">
         <Link href="/" className="flex items-center gap-2.5 group shrink-0 active:scale-95 transition-transform duration-200">
           <img
-            src="/1.png"
+            src="/filezenith-logo.png"
             alt="FileZenith Logo"
             className="w-9 h-9 object-contain group-hover:scale-105 transition-transform"
           />

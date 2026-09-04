@@ -110,7 +110,7 @@ export default function DownloadAppPage() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-slate-100">
             <div className="flex items-center gap-4 text-left">
               <div className="w-16 h-16 rounded-2xl bg-indigo-600 flex items-center justify-center text-white shrink-0 shadow-lg">
-                <img src="/1.png" alt="FileZenith App Icon" className="w-11 h-11 object-contain" />
+                <img src="/filezenith-logo.png" alt="FileZenith App Icon" className="w-11 h-11 object-contain" />
               </div>
               <div>
                 <h2 className="text-xl font-black text-slate-900 flex items-center gap-2">

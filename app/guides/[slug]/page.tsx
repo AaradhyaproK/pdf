@@ -50,13 +50,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: 'article',
       publishedTime: guide.publishedDate,
       authors: [guide.author],
-      images: [`${siteUrl}/1.png`],
+      images: [`${siteUrl}/filezenith-logo.png`],
     },
     twitter: {
       card: 'summary_large_image',
       title: guide.metaTitle,
       description: guide.metaDescription,
-      images: [`${siteUrl}/1.png`],
+      images: [`${siteUrl}/filezenith-logo.png`],
     },
   };
 }
@@ -88,7 +88,7 @@ export default async function GuidePage({ params }: PageProps) {
       name: 'FileZenith',
       logo: {
         '@type': 'ImageObject',
-        url: `${siteUrl}/1.png`,
+        url: `${siteUrl}/filezenith-logo.png`,
       },
     },
     datePublished: guide.publishedDate,

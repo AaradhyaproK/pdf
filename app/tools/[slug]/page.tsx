@@ -46,13 +46,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url: url,
       siteName: 'FileZenith',
       type: 'website',
-      images: [`${siteUrl}/1.png`],
+      images: [`${siteUrl}/filezenith-logo.png`],
     },
     twitter: {
       card: 'summary_large_image',
       title: preset.title,
       description: preset.metaDescription,
-      images: [`${siteUrl}/1.png`],
+      images: [`${siteUrl}/filezenith-logo.png`],
     },
   };
 }
