@@ -42,6 +42,7 @@ import {
   MessageSquare,
   Video,
   Share2,
+  Unlock,
 } from 'lucide-react';
 
 const PDF_TOOLS = [
@@ -55,6 +56,7 @@ const PDF_TOOLS = [
   { name: 'PDF OCR Text Extractor', slug: '/pdf/ocr', desc: 'Extract text via AI Wasm', icon: FileCheck, badge: 'AI Wasm' },
   { name: 'Watermark PDF', slug: '/pdf/watermark', desc: 'Add watermark overlay', icon: Stamp },
   { name: 'Password Protect PDF', slug: '/pdf/protect', desc: 'Encrypt PDF with password', icon: Lock },
+  { name: 'Remove PDF Password', slug: '/pdf/remove-password', desc: 'Unlock secured PDF', icon: Unlock, badge: 'Unlock' },
   { name: 'PDF to JPG / PNG', slug: '/pdf/to-image', desc: 'Convert PDF to images', icon: ImageIcon },
 ];
 

@@ -120,6 +120,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
           { name: 'Edit PDF Document', slug: '/pdf/edit', description: 'Add text, drawings, and annotations to PDF.' },
           { name: 'PDF OCR Text Extractor', slug: '/pdf/ocr', description: 'Extract selectable text from scanned PDF pages.', isPopular: true, badge: 'AI OCR' },
           { name: 'Password Protect PDF', slug: '/pdf/protect', description: 'Encrypt PDF files with password protection.' },
+          { name: 'Remove PDF Password', slug: '/pdf/remove-password', description: 'Unlock and remove password from PDF files.', isPopular: true, badge: 'Unlock' },
           { name: 'Watermark PDF', slug: '/pdf/watermark', description: 'Add text or logo watermarks to PDF.' },
           { name: 'PDF to Image Converter', slug: '/pdf/to-image', description: 'Convert PDF pages into high-res JPG/PNG images.' }
         ]

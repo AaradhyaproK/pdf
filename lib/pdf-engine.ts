@@ -470,6 +470,45 @@ export async function protectPDF(
 }
 
 /**
+ * Unprotects/Removes password from a PDF document.
+ */
+export async function unprotectPDF(file: File, password?: string): Promise<Uint8Array> {
+  const arrayBuffer = await file.arrayBuffer();
+  
+  // Use qpdf-wasm for decryption since pdf-lib does not support password decryption
+  const createQpdf = (await import('qpdf-wasm')).default;
+  const qpdf = await createQpdf({
+    locateFile: (path: string) => {
+      if (path.endsWith('.wasm')) return '/qpdf.wasm';
+      if (path.endsWith('.js')) return '/qpdf.js';
+      return path;
+    }
+  });
+
+  qpdf.FS.writeFile('input.pdf', new Uint8Array(arrayBuffer));
+
+  const args = [];
+  if (password) {
+    args.push(`--password=${password}`);
+  }
+  args.push('--decrypt', 'input.pdf', 'output.pdf');
+
+  try {
+    qpdf.callMain(args);
+  } catch (err: any) {
+    if (err?.name === 'ExitStatus' && err?.status === 0) {
+      // Program exited successfully, this is expected
+    } else {
+      console.error('QPDF Error:', err);
+      throw new Error('Failed to decrypt PDF. Please check if the password is correct.');
+    }
+  }
+
+  const outData = qpdf.FS.readFile('output.pdf');
+  return new Uint8Array(outData);
+}
+
+/**
  * Organizes, rotates, or deletes specific pages of a PDF document.
  */
 export async function organizePDFPages(

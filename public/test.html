@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test qpdf-wasm</title>
+</head>
+<body>
+  <script type="module">
+    import createQpdf from './qpdf.js';
+    createQpdf({
+      locateFile: (path) => {
+        if (path.endsWith('.wasm')) return '/qpdf.wasm';
+        if (path.endsWith('.js')) return '/qpdf.js';
+        return path;
+      }
+    }).then(qpdf => {
+      console.log('Loaded!', qpdf);
+      qpdf.FS.writeFile('input.pdf', new Uint8Array([1, 2, 3]));
+      qpdf.callMain(['--version']);
+    }).catch(e => {
+      console.error('Failed to load', e);
+    });
+  </script>
+</body>
+</html>

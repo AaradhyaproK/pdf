@@ -49,6 +49,7 @@ import {
   Volume2,
   Palette,
   Hexagon,
+  Unlock,
 } from 'lucide-react';
 
 const PDF_TOOLS = [
@@ -62,6 +63,7 @@ const PDF_TOOLS = [
   { name: 'PDF OCR Text Extractor', slug: '/pdf/ocr', desc: 'Extract editable text via AI Tesseract', icon: FileCheck, badge: 'AI Wasm', category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'Watermark PDF', slug: '/pdf/watermark', desc: 'Add text watermark overlays', icon: Stamp, category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'Password Protect PDF', slug: '/pdf/protect', desc: 'Encrypt PDF with password', icon: Lock, badge: 'Secure', category: 'pdf', catLabel: 'PDF Studio' },
+  { name: 'Remove PDF Password', slug: '/pdf/remove-password', desc: 'Unlock and remove password from PDF', icon: Unlock, badge: 'Unlock', category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'PDF to JPG / PNG', slug: '/pdf/to-image', desc: 'Convert PDF pages into high-res images', icon: FileImage, category: 'pdf', catLabel: 'PDF Studio' },
 ];
 

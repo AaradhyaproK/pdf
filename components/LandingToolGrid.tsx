@@ -48,6 +48,7 @@ import {
   Volume2,
   Palette,
   Hexagon,
+  Unlock,
 } from 'lucide-react';
 
 export interface ToolItem {
@@ -620,6 +621,20 @@ export const ALL_TOOLS: ToolItem[] = [
     tags: ['edit-security'],
     icon: Lock,
     badge: 'Secure',
+    colorClass: 'text-rose-600',
+    iconBgClass: 'bg-rose-50 text-rose-600 border-rose-100 group-hover:bg-rose-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-rose-600',
+    badgeStyle: 'bg-rose-50 text-rose-700 border-rose-200',
+  },
+  {
+    id: 'remove-password',
+    name: 'Remove PDF Password',
+    slug: '/pdf/remove-password',
+    desc: 'Unlock and remove password from protected PDF files.',
+    category: 'pdf',
+    tags: ['edit-security'],
+    icon: Unlock,
+    badge: 'Unlock',
     colorClass: 'text-rose-600',
     iconBgClass: 'bg-rose-50 text-rose-600 border-rose-100 group-hover:bg-rose-600 group-hover:text-white',
     hoverTitleClass: 'group-hover:text-rose-600',

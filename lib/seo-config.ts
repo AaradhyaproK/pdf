@@ -295,6 +295,34 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
     ]
   },
 
+  '/pdf/remove-password': {
+    slug: '/pdf/remove-password',
+    title: 'Unlock & Remove PDF Password Online',
+    metaTitle: 'Remove PDF Password Free Online - Unlock PDF | FileZenith',
+    description: 'Remove password from PDF free online in browser. Unlock secured PDF files 100% privately with zero server uploads. Remove PDF password now!',
+    keywords: [
+      'remove pdf password',
+      'remove pdf password free online',
+      'unlock pdf file no upload',
+      'remove password from pdf document online',
+      'unlock secured pdf free without registration',
+      'remove pdf encryption password fast'
+    ],
+    category: 'pdf',
+    howToSteps: [
+      { title: 'Upload Protected PDF', text: 'Select or drag and drop the secured PDF file you wish to unlock.' },
+      { title: 'Enter Current Password', text: 'Type the current password required to open the PDF document.' },
+      { title: 'Unlock & Download PDF', text: 'Click Unlock PDF to remove encryption locally and download your unlocked PDF file.' }
+    ],
+    faqs: [
+      { question: 'How do I remove a password from a PDF file for free online?', answer: 'Simply upload your protected PDF to FileZenith’s Remove Password tool, enter the current password, and click Unlock PDF to download your unprotected file.' },
+      { question: 'Is my password or document saved on any server?', answer: 'Never! FileZenith uses 100% client-side decryption. Your password and PDF file are processed locally inside your browser memory and are never transmitted over the internet.' },
+      { question: 'Do I need the original password to unlock the PDF?', answer: 'Yes. FileZenith requires the correct current password to decrypt and remove the security from the document. It is not a password cracker.' },
+      { question: 'Will the unlocked PDF retain its original quality?', answer: 'Yes! The decryption process simply removes the password lock without altering any text, images, or formatting in the PDF.' },
+      { question: 'Does this PDF password removal tool work on mobile devices?', answer: 'Yes! FileZenith Remove PDF Password works smoothly across Android smartphones, iPhones, iPads, MacBooks, and Windows laptops.' }
+    ]
+  },
+
   '/pdf/to-image': {
     slug: '/pdf/to-image',
     title: 'Convert PDF Pages to High-Res JPG or PNG',
