@@ -116,8 +116,8 @@ export default function ColorPaletteExtractorPage() {
     ctx?.drawImage(img, 0, 0, img.width, img.height);
 
     try {
-      const colorThiefModule = await import('colorthief');
-      const colorThief = colorThiefModule.getColor ? colorThiefModule : colorThiefModule.default;
+      const colorThiefModule: any = await import('colorthief');
+      const colorThief = colorThiefModule.default || colorThiefModule;
       
       const domColor = await colorThief.getColor(img);
       const palColors = await colorThief.getPalette(img, 8);
