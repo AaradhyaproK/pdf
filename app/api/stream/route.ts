@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import ytdl from '@distube/ytdl-core';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -15,57 +16,23 @@ export async function GET(request: Request) {
     const videoId = ytMatch[1];
     const cleanYtUrl = `https://www.youtube.com/watch?v=${videoId}`;
 
-    // 1. Try Piped Open API (High Speed YouTube Video Stream Proxy)
-    const pipedInstances = [
-      `https://pipedapi.kavin.rocks/streams/${videoId}`,
-      `https://piped-api.garudalinux.org/streams/${videoId}`,
-      `https://api.piped.privacydev.net/streams/${videoId}`,
-    ];
-
-    for (const pipedUrl of pipedInstances) {
+    try {
+      // Use @distube/ytdl-core to fetch stream url natively
+      const info = await ytdl.getInfo(cleanYtUrl);
+      
       try {
-        const pipedRes = await fetch(pipedUrl);
-        if (pipedRes.ok) {
-          const pipedData = await pipedRes.json();
-          if (pipedData.videoStreams && pipedData.videoStreams.length > 0) {
-            const mp4Stream = pipedData.videoStreams.find((s: any) => s.mimeType?.includes('mp4') && s.videoOnly === false)
-              || pipedData.videoStreams.find((s: any) => s.mimeType?.includes('mp4'))
-              || pipedData.videoStreams[0];
-            if (mp4Stream && mp4Stream.url) {
-              mediaUrl = mp4Stream.url;
-              break;
-            }
-          }
+        const format = ytdl.chooseFormat(info.formats, { quality: 'highest', filter: 'audioandvideo' });
+        if (format && format.url) {
+          mediaUrl = format.url;
         }
-      } catch {
-        //
-      }
-    }
-
-    // 2. Backup Cobalt Stream API
-    if (mediaUrl && !mediaUrl.includes('googlevideo.com') && !mediaUrl.includes('stream')) {
-      try {
-        const cobaltRes = await fetch('https://api.cobalt.tools/api/json', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            url: cleanYtUrl,
-            downloadMode: 'auto',
-            videoQuality: '720',
-          }),
-        });
-
-        if (cobaltRes.ok) {
-          const data = await cobaltRes.json();
-          if (data.url) mediaUrl = data.url;
-          else if (data.picker && data.picker.length > 0) mediaUrl = data.picker[0].url;
+      } catch (e) {
+        const formatVideo = ytdl.chooseFormat(info.formats, { quality: 'highestvideo' });
+        if (formatVideo && formatVideo.url) {
+          mediaUrl = formatVideo.url;
         }
-      } catch {
-        //
       }
+    } catch (err: any) {
+      console.error('ytdl error:', err);
     }
   }
 

@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@distube/ytdl-core": "^4.16.12",
     "@imgly/background-removal": "^1.7.0",
     "@tailwindcss/typography": "^0.5.20",
     "@types/qrcode": "^1.5.6",
