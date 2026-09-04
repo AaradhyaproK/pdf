@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { ToolLayout } from '@/components/ToolLayout';
 import { FileUploader, FileItem } from '@/components/FileUploader';
-import { unprotectPDF } from '@/lib/pdf-engine';
+import { unprotectPDF } from "@/lib/unprotect";;
 import { toast } from 'sonner';
 import { Download, Unlock, Eye, EyeOff, ShieldAlert, CheckCircle2 } from 'lucide-react';
 
