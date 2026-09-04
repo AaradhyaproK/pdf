@@ -114,6 +114,14 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
         ]
       },
       {
+        title: 'PDF & Office Document Conversion',
+        description: 'Convert between PDF and Microsoft Word DOCX formats with 100% privacy.',
+        tools: [
+          { name: 'PDF to Word Converter', slug: '/pdf/pdf-to-word', description: 'Convert PDF documents to editable Microsoft Word (.docx).', isPopular: true, badge: 'High RPM' },
+          { name: 'Word to PDF Converter', slug: '/pdf/word-to-pdf', description: 'Convert Word DOCX documents to high-precision PDF.', isPopular: true, badge: 'New' }
+        ]
+      },
+      {
         title: 'PDF Editing & Security',
         description: 'Edit PDF text, protect with passwords, watermark, and OCR text extraction.',
         tools: [
@@ -127,9 +135,10 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
       }
     ],
     popularTools: [
+      { name: 'PDF to Word Converter', slug: '/pdf/pdf-to-word', description: 'Convert PDF to editable Word DOCX 100% privately.' },
       { name: 'Merge PDF Files', slug: '/pdf/merge', description: 'Combine multiple PDF documents effortlessly.' },
       { name: 'Compress PDF to 200KB', slug: '/pdf/compress-to-200kb', description: 'Target 200KB PDF compressor for email and forms.' },
-      { name: 'PDF OCR Extractor', slug: '/pdf/ocr', description: 'Extract text from scanned PDFs directly in browser.' }
+      { name: 'Word to PDF Converter', slug: '/pdf/word-to-pdf', description: 'Convert Word documents to high-quality PDF.' }
     ],
     faqs: [
       { question: 'Is there a file size limit for merging or compressing PDFs?', answer: 'No! Because processing happens in your browser memory, you can process large PDFs without file size caps.' },

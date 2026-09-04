@@ -944,6 +944,80 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { question: 'Is my document sent to any external server?', answer: 'No, FileZenith processes PDF files 100% locally in your browser memory using WebAssembly pdf-lib engines.' }
     ]
   },
+  '/pdf/pdf-to-word': {
+    slug: '/pdf/pdf-to-word',
+    title: 'Free PDF to Word Converter Online - Convert PDF to DOCX',
+    metaTitle: 'PDF to Word Converter Free Online - Convert PDF to DOCX | FileZenith',
+    description: 'Convert PDF to editable Word (.docx) documents free online with 100% privacy. Preserves formatting, headings, paragraphs, and styles directly in browser with zero server uploads.',
+    keywords: [
+      'pdf to word converter',
+      'convert pdf to word online free',
+      'pdf to docx converter without email',
+      'free pdf to editable word converter',
+      'pdf to word converter without software',
+      'convert pdf to word document no watermark',
+      'best pdf to word converter online free',
+      'pdf to word converter 100% private no upload',
+      'convert pdf to docx editable text',
+      'pdf to word converter for mobile'
+    ],
+    category: 'pdf',
+    howToSteps: [
+      { title: 'Upload PDF Document', text: 'Select or drag and drop your PDF document into the client-side converter workspace.' },
+      { title: 'Choose Formatting & Typography Settings', text: 'Select whether to retain native headings, paragraphs, and styles or extract clean text flow, and choose your preferred output font.' },
+      { title: 'Convert & Download Word DOCX', text: 'Click Convert to Word to parse document tokens locally and instantly download your editable .docx file.' }
+    ],
+    faqs: [
+      { question: 'Is this PDF to Word converter 100% free with no email required?', answer: 'Yes! FileZenith PDF to Word converter is completely free to use with zero registration, no email submissions, and no watermarks.' },
+      { question: 'Can I edit the converted Word file in Microsoft Word or Google Docs?', answer: 'Yes! The generated output is a standard OpenXML (.docx) file that opens natively and cleanly in Microsoft Word, Google Docs, LibreOffice, and Pages.' },
+      { question: 'Are my confidential documents uploaded to any remote server?', answer: 'No! FileZenith operates entirely client-side inside your web browser using WebAssembly and local JavaScript. Your files never leave your device.' },
+      { question: 'Does this converter preserve headings, fonts, and page breaks?', answer: 'Yes! Our layout engine intelligently analyzes font metrics, line height delta, and page margins to map headings (H1, H2) and maintain original page breaks.' },
+      { question: 'Does it work on Android phones and iPhones?', answer: 'Yes! The converter is fully responsive and optimized for mobile touchscreens, tablets, laptops, and desktop computers.' }
+    ],
+    comparisonTable: [
+      { feature: 'Data Privacy', omnitool: '100% Client-Side (Zero Server Uploads)', standardCloud: 'Uploaded to Third-Party Cloud Servers' },
+      { feature: 'File Size Limits', omnitool: 'Unlimited (Browser Device Memory)', standardCloud: 'Restricted to 15MB - 50MB Tiers' },
+      { feature: 'Conversion Speed', omnitool: 'Instant Local Processing (No Network Bottleneck)', standardCloud: 'Delayed by Upload & Download Speeds' },
+      { feature: 'Account / Email Requirement', omnitool: 'None (Instant Direct Download)', standardCloud: 'Email Registration or Paywall Prompts' }
+    ]
+  },
+  '/pdf/word-to-pdf': {
+    slug: '/pdf/word-to-pdf',
+    title: 'Free Word to PDF Converter Online - Convert DOCX to PDF',
+    metaTitle: 'Word to PDF Converter Free Online - Convert DOCX to PDF | FileZenith',
+    description: 'Convert Microsoft Word (.docx) documents to PDF free online with 100% privacy. Customize paper format, margins, and page numbers directly in browser with zero server uploads.',
+    keywords: [
+      'word to pdf converter',
+      'convert word to pdf online free',
+      'docx to pdf converter free no email',
+      'convert word document to pdf without microsoft office',
+      'best word to pdf converter online',
+      'save docx as pdf online free',
+      'convert word to pdf no watermark no limit',
+      'word to pdf converter private zero upload',
+      'doc to pdf converter high quality',
+      'word to pdf converter mobile friendly'
+    ],
+    category: 'pdf',
+    howToSteps: [
+      { title: 'Upload Word (.docx) File', text: 'Drag and drop your Microsoft Word document into the secure local converter.' },
+      { title: 'Customize Layout & Page Settings', text: 'Select paper size (A4, Letter, Legal), margins, orientation, and toggle automatic page numbering footers.' },
+      { title: 'Generate & Save PDF File', text: 'Click Convert to PDF to render crisp vector text and download your PDF instantly.' }
+    ],
+    faqs: [
+      { question: 'Can I convert Word documents to PDF without Microsoft Office installed?', answer: 'Yes! FileZenith parses and renders DOCX documents directly inside your web browser without requiring Microsoft Office or any paid software.' },
+      { question: 'Is my Word document kept completely private?', answer: 'Absolutely. FileZenith uses 100% client-side WebAssembly rendering. Your document contents are never transmitted to any external server or third party.' },
+      { question: 'Can I choose different paper sizes like A4 or US Letter?', answer: 'Yes! You can choose between A4, US Letter, and Legal paper sizes, portrait or landscape orientation, and custom margins.' },
+      { question: 'Can I add automatic "Page X of Y" footers to the generated PDF?', answer: 'Yes, simply leave the Page Numbers option enabled, and FileZenith will automatically append clean, professional page numbers to your document.' },
+      { question: 'Does this Word to PDF converter work on smartphones and tablets?', answer: 'Yes, FileZenith is built with mobile-first responsive architecture and works seamlessly on mobile browsers, tablets, and desktop computers.' }
+    ],
+    comparisonTable: [
+      { feature: 'Privacy & Security', omnitool: '100% In-Browser (Zero Cloud Uploads)', standardCloud: 'Uploaded to Remote Servers' },
+      { feature: 'Watermarks', omnitool: 'Zero Watermarks (Clean Output)', standardCloud: 'Often Adds Watermarks on Free Plans' },
+      { feature: 'Paper Size Customization', omnitool: 'A4, Letter & Legal with Custom Margins', standardCloud: 'Fixed Default Paper Size' },
+      { feature: 'Cost & Subscriptions', omnitool: '100% Free Forever (No Credit Card)', standardCloud: 'Monthly Paywalls & Upsells' }
+    ]
+  },
   '/utility/base64': {
     slug: '/utility/base64',
     title: 'Base64 File & Image Encoder / Decoder Online',

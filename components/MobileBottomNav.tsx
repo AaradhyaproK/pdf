@@ -57,6 +57,8 @@ const PDF_TOOLS = [
   { name: 'Watermark PDF', slug: '/pdf/watermark', desc: 'Add watermark overlay', icon: Stamp },
   { name: 'Password Protect PDF', slug: '/pdf/protect', desc: 'Encrypt PDF with password', icon: Lock },
   { name: 'Remove PDF Password', slug: '/pdf/remove-password', desc: 'Unlock secured PDF', icon: Unlock, badge: 'Unlock' },
+  { name: 'PDF to Word (DOCX)', slug: '/pdf/pdf-to-word', desc: 'Convert PDF to editable Word', icon: FileText, badge: 'Popular' },
+  { name: 'Word to PDF Converter', slug: '/pdf/word-to-pdf', desc: 'Convert Word DOCX to PDF', icon: FileCode, badge: 'New' },
   { name: 'PDF to JPG / PNG', slug: '/pdf/to-image', desc: 'Convert PDF to images', icon: ImageIcon },
 ];
 

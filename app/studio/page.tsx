@@ -40,6 +40,8 @@ export const MASTER_TOOLS = [
   { id: 'ocr-pdf', name: 'PDF OCR Text Extractor', slug: '/pdf/ocr', desc: 'Extract editable text via AI Tesseract', icon: FileCheck, category: 'pdf', badge: 'AI Wasm' },
   { id: 'watermark-pdf', name: 'Watermark PDF', slug: '/pdf/watermark', desc: 'Add text watermark overlays', icon: Stamp, category: 'pdf' },
   { id: 'protect-pdf', name: 'Password Protect PDF', slug: '/pdf/protect', desc: 'Encrypt PDF with password', icon: Lock, category: 'pdf' },
+  { id: 'pdf-to-word', name: 'PDF to Word (DOCX)', slug: '/pdf/pdf-to-word', desc: 'Convert PDF to editable Word document', icon: FileText, category: 'pdf', badge: 'Popular' },
+  { id: 'word-to-pdf', name: 'Word to PDF Converter', slug: '/pdf/word-to-pdf', desc: 'Convert Word DOCX to crisp PDF', icon: FileText, category: 'pdf', badge: 'New' },
   { id: 'pdf-to-image', name: 'PDF to JPG / PNG', slug: '/pdf/to-image', desc: 'Convert PDF pages into high-res images', icon: ImageIcon, category: 'pdf' },
   { id: 'pics-to-pdf', name: 'Pics to PDF Converter', slug: '/image/pics-to-pdf', desc: 'Turn photos & scans into PDF', icon: Camera, category: 'image', badge: 'Popular' },
   { id: 'png-to-jpg', name: 'PNG to JPG Converter', slug: '/image/png-to-jpg', desc: 'Bulk convert PNG to JPG with background color', icon: FileImage, category: 'image', badge: 'Bulk' },

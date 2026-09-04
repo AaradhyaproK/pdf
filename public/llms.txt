@@ -20,6 +20,8 @@
 - [Password Protect PDF](https://www.filezenith.com/pdf/protect)
 - [PDF to Image](https://www.filezenith.com/pdf/to-image)
 - [Add Page Numbers to PDF](https://www.filezenith.com/pdf/page-numbers)
+- [PDF to Word Converter](https://www.filezenith.com/pdf/pdf-to-word)
+- [Word to PDF Converter](https://www.filezenith.com/pdf/word-to-pdf)
 
 ## Image Studio Tools
 - [Pics to PDF](https://www.filezenith.com/image/pics-to-pdf)

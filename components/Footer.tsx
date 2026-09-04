@@ -55,7 +55,7 @@ export function Footer() {
                   <FileText className="w-4 h-4" />
                 </div>
                 <span className="text-xs font-black uppercase tracking-wider text-slate-900">PDF Studio</span>
-                <span className="text-[10px] bg-rose-100 text-rose-700 font-extrabold px-2 py-0.5 rounded-full">10 Tools</span>
+                <span className="text-[10px] bg-rose-100 text-rose-700 font-extrabold px-2 py-0.5 rounded-full">12 Tools</span>
               </div>
               <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${openSection === 'pdf' ? 'rotate-180 text-rose-600' : ''}`} />
             </button>
@@ -65,6 +65,8 @@ export function Footer() {
                   <span>Edit PDF Online</span>
                   <span className="text-[9px] bg-rose-600 text-white px-2 py-0.5 rounded-full font-bold">Interactive</span>
                 </Link>
+                <Link href="/pdf/pdf-to-word" className="p-2 rounded-xl text-xs font-bold text-slate-700 hover:text-rose-600 hover:bg-slate-50 transition-all">PDF to Word (DOCX)</Link>
+                <Link href="/pdf/word-to-pdf" className="p-2 rounded-xl text-xs font-bold text-slate-700 hover:text-rose-600 hover:bg-slate-50 transition-all">Word to PDF Converter</Link>
                 <Link href="/pdf/compress" className="p-2 rounded-xl text-xs font-bold text-slate-700 hover:text-rose-600 hover:bg-slate-50 transition-all">Compress PDF (Auto)</Link>
                 <Link href="/pdf/compress-to-200kb" className="p-2 rounded-xl text-xs font-bold text-slate-700 hover:text-rose-600 hover:bg-slate-50 transition-all">Compress PDF to 200KB</Link>
                 <Link href="/pdf/merge" className="p-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-rose-600 hover:bg-slate-50 transition-all">Merge Multiple PDFs</Link>
@@ -179,6 +181,8 @@ export function Footer() {
             </h4>
             <ul className="space-y-2 text-xs">
               <li><Link href="/pdf/edit" className="hover:text-indigo-600 font-bold text-slate-900 transition-colors">Edit PDF Online</Link></li>
+              <li><Link href="/pdf/pdf-to-word" className="hover:text-indigo-600 font-bold text-slate-900 transition-colors">PDF to Word (DOCX)</Link></li>
+              <li><Link href="/pdf/word-to-pdf" className="hover:text-indigo-600 font-bold text-slate-900 transition-colors">Word to PDF Converter</Link></li>
               <li><Link href="/pdf/compress" className="hover:text-indigo-600 transition-colors">Compress PDF</Link></li>
               <li><Link href="/pdf/compress-to-200kb" className="hover:text-indigo-600 transition-colors">Compress PDF to 200KB</Link></li>
               <li><Link href="/pdf/merge" className="hover:text-indigo-600 transition-colors">Merge PDF</Link></li>
