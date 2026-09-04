@@ -702,47 +702,6 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
     ]
   },
 
-  '/social/instagram-downloader': {
-    slug: '/social/instagram-downloader',
-    title: 'Instagram Reels, Photos & Video Downloader',
-    metaTitle: 'Instagram Downloader Free - Download Reels, Posts & Photos HD | FileZenith',
-    description: 'Download Instagram Reels, video posts, photos, and IGTV media in high definition. 100% free, fast, zero account login.',
-    keywords: ['instagram video downloader', 'download instagram reels', 'instagram photo downloader', 'save insta post hd'],
-    category: 'social',
-    howToSteps: [
-      { title: 'Copy Instagram Post Link', text: 'Copy post or Reel link from Instagram app or web.' },
-      { title: 'Paste URL', text: 'Paste link into the Instagram downloader search box.' },
-      { title: 'Download Media', text: 'Choose HD Video MP4 or Full Quality Photo JPG download.' }
-    ],
-    faqs: [
-      { question: 'Can I download Instagram Reels videos?', answer: 'Yes! Easily download Instagram Reels in full HD quality.' },
-      { question: 'Do I need to log in to my Instagram account?', answer: 'No! Zero login or password required.' },
-      { question: 'Can I save carousel photo posts?', answer: 'Yes! Supports saving photos and multi-slide posts.' },
-      { question: 'Where are downloaded files saved?', answer: 'Files save directly to your browser default Downloads folder.' },
-      { question: 'Is it free?', answer: '100% free with no limits.' }
-    ]
-  },
-
-  '/social/instagram-reels-downloader': {
-    slug: '/social/instagram-reels-downloader',
-    title: 'Instagram Reels Downloader Online Free (HD MP4)',
-    metaTitle: 'Instagram Reels Downloader Online Free - Save Insta Reels Video | FileZenith',
-    description: 'Download Instagram Reels videos in 1080p HD MP4 format. Instant, private, 100% free.',
-    keywords: ['instagram reels downloader', 'download insta reels video', 'save instagram reels hd'],
-    category: 'social',
-    howToSteps: [
-      { title: 'Copy Reel Link', text: 'Copy Instagram Reel link.' },
-      { title: 'Paste URL', text: 'Paste into the download input.' },
-      { title: 'Save Reel', text: 'Download HD MP4 video file.' }
-    ],
-    faqs: [
-      { question: 'Is audio included in Reels download?', answer: 'Yes! Video and original audio track are included.' },
-      { question: 'Can I download private Reels?', answer: 'Only publicly shared Reels can be fetched.' },
-      { question: 'Is there a limit on downloads?', answer: 'No daily limits.' },
-      { question: 'Is this free?', answer: 'Yes, 100% free.' },
-      { question: 'Does it work on phone browsers?', answer: 'Yes, fully responsive on mobile.' }
-    ]
-  },
 
   '/social/twitter-downloader': {
     slug: '/social/twitter-downloader',
@@ -1475,8 +1434,180 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
     faqs: [
       { question: 'Why are tags important for YouTube SEO?', answer: 'Tags help YouTube search algorithms understand video content context, helping video ranking in search results and suggested videos.' }
     ]
+  },
+
+
+
+  '/utility/epf-calculator': {
+    slug: '/utility/epf-calculator',
+    title: 'EPF Calculator: EPFO Interest Rate & Growth Projection',
+    metaTitle: 'EPF Calculator 2026 - Calculate PF Balance & Interest | FileZenith',
+    description: 'Calculate your EPF (Employee Provident Fund) retirement balance using EPFO 8.25% interest rate. See employee vs employer contribution breakdown & annual increment projection.',
+    keywords: [
+      'epf calculator',
+      'pf balance growth calculator',
+      'epfo 8.25 interest rate calculator',
+      'provident fund maturity calculator',
+      'employee contribution vs employer epf eps',
+      'pf calculation formula with salary increment'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Enter Monthly Basic Salary', text: 'Input your monthly Basic Salary + Dearness Allowance (DA).' },
+      { title: 'Set EPF Contribution & Increment', text: 'Select employee contribution percentage (default 12%) and annual salary increment rate.' },
+      { title: 'View Retirement Corpus Breakdown', text: 'Analyze total EPF balance accumulated, total interest earned, and year-by-year schedule.' }
+    ],
+    faqs: [
+      { question: 'What is the current EPFO interest rate?', answer: 'The EPFO interest rate is 8.25% per annum, calculated monthly and compounded annually.' },
+      { question: 'How is employer contribution split between EPF and EPS?', answer: 'From the employer 12% contribution, 3.67% goes into your EPF account while 8.33% goes into EPS (Employee Pension Scheme up to Rs 1,250 cap).' }
+    ]
+  },
+
+
+  '/social/whatsapp-direct-chat': {
+    slug: '/social/whatsapp-direct-chat',
+    title: 'WhatsApp Direct Chat Launcher Without Saving Number',
+    metaTitle: 'WhatsApp Direct Chat Without Saving Number | FileZenith',
+    description: 'Send WhatsApp messages directly without saving phone numbers to your contacts. Instant wa.me link launcher, custom message generator & QR code scanner.',
+    keywords: [
+      'whatsapp direct chat without saving number',
+      'send whatsapp message without contact',
+      'wa.me direct link generator',
+      'whatsapp direct message online',
+      'whatsapp qr code generator for number'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Select Country Code & Number', text: 'Select country code (+91, +1, +44, etc.) and enter 10-digit mobile number.' },
+      { title: 'Add Optional Pre-filled Message', text: 'Type custom message text you want to auto-fill when opening chat.' },
+      { title: 'Launch Chat or Scan QR Code', text: 'Click Open in WhatsApp Web/App or scan instant QR code with mobile phone camera.' }
+    ],
+    faqs: [
+      { question: 'Is it safe to send WhatsApp messages without saving numbers?', answer: 'Yes, 100%. FileZenith uses official WhatsApp wa.me deep links. No phone numbers or messages are stored on any server.' }
+    ]
+  },
+  '/utility/spin-the-wheel': {
+    slug: '/utility/spin-the-wheel',
+    title: 'Random Name Picker & Spin the Wheel Online',
+    metaTitle: 'Free Random Name Picker Wheel | Spin the Wheel Online',
+    description: 'Enter names and spin the wheel to pick a random winner instantly. A free, 100% online random choice generator for teachers, giveaways, and decision making.',
+    keywords: [
+      'random name picker',
+      'spin the wheel online',
+      'random choice generator',
+      'wheel of names free',
+      'random picker wheel generator',
+      'giveaway winner picker'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Enter Names', text: 'Type or paste a list of names into the text box, one name per line.' },
+      { title: 'Spin the Wheel', text: 'Click the big "SPIN THE WHEEL" button to start the randomizer animation.' },
+      { title: 'Celebrate the Winner', text: 'The wheel will stop and instantly highlight the randomly selected winner with confetti!' }
+    ],
+    faqs: [
+      { question: 'Is this random name picker truly random?', answer: 'Yes! It uses a high-entropy pseudo-random number generator algorithm inside your browser to ensure a 100% fair and unbiased result every single spin.' },
+      { question: 'Does this tool save my names list?', answer: 'No. FileZenith tools are 100% client-side. The names you enter never leave your computer and are completely private.' }
+    ]
+  },
+  '/utility/pomodoro-timer': {
+    slug: '/utility/pomodoro-timer',
+    title: 'Pomodoro Timer Online & Study Clock',
+    metaTitle: 'Free Pomodoro Timer Online | Aesthetic Study Clock',
+    description: 'Boost your focus with this free, aesthetic Pomodoro timer. 25-minute study intervals, 5-minute short breaks, and long breaks with alarm sounds.',
+    keywords: [
+      'pomodoro timer online',
+      'study clock online',
+      'aesthetic pomodoro timer',
+      'tomato timer',
+      '25 minute timer',
+      'productivity timer'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Select a Mode', text: 'Choose between Pomodoro (25m), Short Break (5m), or Long Break (15m).' },
+      { title: 'Start the Timer', text: 'Click the Play button and focus entirely on your task.' },
+      { title: 'Take a Break', text: 'When the alarm sounds, switch to a break mode to rest and recharge.' }
+    ],
+    faqs: [
+      { question: 'What is the Pomodoro Technique?', answer: 'It is a time management method that breaks work into intervals, traditionally 25 minutes in length, separated by short breaks.' },
+      { question: 'Does this timer work in the background?', answer: 'Yes! Even if you switch tabs, the browser will continue counting down and will notify you when the time is up.' }
+    ]
+  },
+  '/utility/text-to-speech': {
+    slug: '/utility/text-to-speech',
+    title: 'Free Text to Speech (TTS) Online Generator | No Limits',
+    metaTitle: 'Free Text to Speech Online | Best AI Voice Generator No Limit',
+    description: 'Convert text to speech online free with human-like AI voices. No character limits, no sign-up required. Best free text to voice generator for YouTube, TikTok, and presentations.',
+    keywords: [
+      'free text to speech online no limit',
+      'text to voice generator free',
+      'ai text to speech free',
+      'convert text to audio free online',
+      'human sounding text to speech',
+      'text to speech reader'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Type or Paste Text', text: 'Enter the text you want to be read aloud in the provided text area.' },
+      { title: 'Select a Voice', text: 'Choose from dozens of natural-sounding languages and accents provided by your browser.' },
+      { title: 'Play Audio', text: 'Click Play to hear your text spoken instantly. Adjust the speed and pitch for custom voice effects.' }
+    ],
+    faqs: [
+      { question: 'Is this text to speech generator really free with no limits?', answer: 'Yes! It utilizes your native device Text-to-Speech engine, which means there are absolutely zero character limits and zero API costs. It is 100% free forever.' },
+      { question: 'Can I use these voices for YouTube or TikTok?', answer: 'Yes, because the voices are generated locally by your device OS (Windows, Mac, iOS, Android), you can use system audio recorders to capture the audio and use it in your videos.' }
+    ]
+  },
+  '/image/color-palette-extractor': {
+    slug: '/image/color-palette-extractor',
+    title: 'Image Color Picker & Palette Extractor Online',
+    metaTitle: 'Free Image Color Picker & Palette Extractor Online',
+    description: 'Extract color palettes from images instantly. Free online color picker from image tool. Find exact HEX codes and dominant colors from any photo.',
+    keywords: [
+      'image color picker online',
+      'extract color palette from image',
+      'color finder from image',
+      'find hex code from image',
+      'dominant color extractor',
+      'image to color palette generator'
+    ],
+    category: 'image',
+    howToSteps: [
+      { title: 'Upload Image', text: 'Drag and drop or browse to upload any photo (JPG, PNG, WebP).' },
+      { title: 'Extract Palette', text: 'The tool will automatically analyze the image and extract the top dominant colors into a cohesive palette.' },
+      { title: 'Pick Exact Pixel', text: 'Hover over the image and click to pick the exact HEX color code of any individual pixel.' }
+    ],
+    faqs: [
+      { question: 'Is my image uploaded to your servers?', answer: 'No! All color extraction and pixel analysis happens 100% locally in your browser. Your images are completely private.' },
+      { question: 'What color formats does this support?', answer: 'The tool extracts colors in standard HTML HEX codes (e.g. #FF0000) which you can click to copy instantly.' }
+    ]
+  },
+  '/utility/glassmorphism-generator': {
+    slug: '/utility/glassmorphism-generator',
+    title: 'Glassmorphism CSS Generator Online | Frosted Glass UI',
+    metaTitle: 'Free Glassmorphism CSS Generator Online | UI Design Tool',
+    description: 'Generate stunning glassmorphism CSS effects instantly. Free online frosted glass UI generator with blur, transparency, and shadow controls.',
+    keywords: [
+      'glassmorphism css generator',
+      'frosted glass css',
+      'glass ui generator online',
+      'css blur background generator',
+      'backdrop filter css generator',
+      'modern ui glass effect'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Adjust Blur', text: 'Slide the blur control to increase or decrease the frosted glass effect strength.' },
+      { title: 'Tune Transparency', text: 'Change the transparency and background color to match your UI design.' },
+      { title: 'Copy CSS', text: 'Once satisfied with the live preview, click Copy to get the cross-browser compatible CSS code.' }
+    ],
+    faqs: [
+      { question: 'Is glassmorphism supported in all browsers?', answer: 'Yes! The generated CSS uses both standard backdrop-filter and webkit prefixes to ensure maximum compatibility across Chrome, Safari, Edge, and Firefox.' },
+      { question: 'What is glassmorphism?', answer: 'It is a UI design trend that creates a "frosted glass" effect by blurring the background behind an element, giving a sense of depth and hierarchy.' }
+    ]
   }
 };
+
 
 
 export function generateToolMetadata(slug: string) {

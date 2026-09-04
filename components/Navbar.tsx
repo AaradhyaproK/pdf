@@ -39,6 +39,16 @@ import {
   GraduationCap,
   DollarSign,
   Zap,
+  Car,
+  Coins,
+  MessageSquare,
+  Video,
+  Share2,
+  Dices,
+  Brain,
+  Volume2,
+  Palette,
+  Hexagon,
 } from 'lucide-react';
 
 const PDF_TOOLS = [
@@ -56,6 +66,7 @@ const PDF_TOOLS = [
 ];
 
 const IMAGE_TOOLS = [
+  { name: 'Image Color Picker & Palette', slug: '/image/color-palette-extractor', desc: 'Extract hex colors from photos', icon: Palette, badge: 'Design', category: 'image', catLabel: 'Image Studio' },
   { name: 'Image Cropper & Aspect', slug: '/image/crop', desc: 'Crop 1:1, 16:9, 4:3, rotate & flip', icon: Crop, badge: 'New', category: 'image', catLabel: 'Image Studio' },
   { name: 'SVG Vector Converter', slug: '/image/svg-converter', desc: 'Convert SVG to 2x/4x PNG & JPG', icon: FileCode, badge: 'New', category: 'image', catLabel: 'Image Studio' },
   { name: 'Pics to PDF Converter', slug: '/image/pics-to-pdf', desc: 'Turn photos & scans into PDF', icon: Camera, badge: 'Popular', category: 'image', catLabel: 'Image Studio' },
@@ -71,11 +82,16 @@ const IMAGE_TOOLS = [
 ];
 
 const UTILITY_TOOLS = [
+  { name: 'Glassmorphism CSS Generator', slug: '/utility/glassmorphism-generator', desc: 'Frosted glass UI CSS maker', icon: Hexagon, badge: 'UI Tool', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Free Text to Speech (TTS)', slug: '/utility/text-to-speech', desc: 'No-limit text to voice AI audio', icon: Volume2, badge: 'No Limit', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Pomodoro Timer & Study Clock', slug: '/utility/pomodoro-timer', desc: 'Aesthetic 25m focus timer', icon: Brain, badge: 'Focus', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Spin the Wheel & Name Picker', slug: '/utility/spin-the-wheel', desc: 'Random winner picker with confetti', icon: Dices, badge: 'Viral Tool', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'EPF Balance Growth Calculator', slug: '/utility/epf-calculator', desc: 'EPFO 8.25% retirement interest math', icon: Coins, badge: 'EPFO 8.25%', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'Age Calculator & Birthday', slug: '/utility/age-calculator', desc: 'Years, months, days, seconds & zodiac', icon: Calendar, badge: '#1 Tool', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'Percentage Calculator', slug: '/utility/percentage-calculator', desc: '% increase, discount, marks & ratio', icon: Percent, badge: 'Popular', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'CGPA to Percentage', slug: '/utility/cgpa-to-percentage', desc: 'CBSE, Mumbai Univ, VTU, DU & SGPA', icon: GraduationCap, badge: 'College', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'Word & Character Counter', slug: '/utility/word-counter', desc: 'Real-time text stats, reading time & SEO', icon: Type, category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Typing Speed Test', slug: '/utility/typing-speed-test', desc: 'Test WPM speed & share score on WhatsApp', icon: Zap, badge: 'Viral', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Typing Speed Test (WPM Cert)', slug: '/utility/typing-speed-test', desc: 'Test WPM speed & export PNG certificate', icon: Zap, badge: 'Viral Cert', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'Fancy Text Generator', slug: '/utility/fancy-text-generator', desc: '30+ Unicode font styles & gaming tags', icon: Sparkles, badge: 'Fonts', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'Password Generator', slug: '/utility/password-generator', desc: 'Generate strong passwords 100% offline', icon: Lock, badge: 'Secure', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'Number to Words Converter', slug: '/utility/number-to-words', desc: 'Cheque & invoice amount words (Rupees/$)', icon: DollarSign, badge: 'Cheque', category: 'utility', catLabel: 'Daily Utility' },
@@ -88,20 +104,28 @@ const UTILITY_TOOLS = [
   { name: 'Text Case Converter', slug: '/utility/case-converter', desc: 'UPPER, lower, Title, camel & snake case', icon: Type, badge: 'Writing', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'Text Repeater (10k Times)', slug: '/utility/text-repeater', desc: 'Repeat text & emojis up to 10,000 times', icon: Sparkles, badge: 'Viral', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'Love Match Calculator', slug: '/utility/love-calculator', desc: 'Calculate love score & share on WhatsApp', icon: Sparkles, badge: 'Fun', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'YouTube 1080p Thumbnail Downloader', slug: '/social/youtube-thumbnail-downloader', desc: 'Download 1080p HD video cover images', icon: Smartphone, badge: 'Social', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'YouTube Tag Extractor', slug: '/social/youtube-tag-extractor', desc: 'Extract SEO tags & keywords from video URL', icon: Hash, badge: 'SEO', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'Base64 Encoder & Decoder', slug: '/utility/base64', desc: 'Convert files/images to Data URLs', icon: Code2, badge: 'New', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'Markdown Editor & PDF', slug: '/utility/markdown-editor', desc: 'Live Markdown preview & PDF export', icon: FileText, badge: 'New', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'QR Code Generator', slug: '/utility/qr-generator', desc: 'Create custom QR codes with logo & colors', icon: QrCode, badge: 'Custom', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'JSON Formatter & Validator', slug: '/utility/json-formatter', desc: 'Beautify, minify, and validate JSON data', icon: Code2, category: 'utility', catLabel: 'Daily Utility' },
 ];
 
-const ALL_SEARCHABLE_TOOLS = [...PDF_TOOLS, ...IMAGE_TOOLS, ...UTILITY_TOOLS];
+const SOCIAL_TOOLS = [
+  { name: 'WhatsApp Direct Chat Launcher', slug: '/social/whatsapp-direct-chat', desc: 'Chat without saving phone numbers', icon: MessageSquare, badge: 'wa.me', category: 'social', catLabel: 'Social Studio' },
+  { name: 'YouTube 1080p Thumbnail DL', slug: '/social/youtube-thumbnail-downloader', desc: 'Download 1080p HD video cover images', icon: Camera, badge: 'Thumbnails', category: 'social', catLabel: 'Social Studio' },
+  { name: 'YouTube Tag Extractor', slug: '/social/youtube-tag-extractor', desc: 'Extract SEO tags & keywords from video URL', icon: Hash, badge: 'SEO', category: 'social', catLabel: 'Social Studio' },
+  { name: 'YouTube Video Downloader', slug: '/social/youtube-downloader', desc: 'Download YouTube videos & MP3', icon: Video, category: 'social', catLabel: 'Social Studio' },
+  { name: 'YouTube Shorts Downloader', slug: '/social/youtube-shorts-downloader', desc: 'Download vertical Shorts videos', icon: Video, category: 'social', catLabel: 'Social Studio' },
+  { name: 'Twitter Video Downloader', slug: '/social/twitter-downloader', desc: 'Save Twitter / X video clips', icon: Download, category: 'social', catLabel: 'Social Studio' },
+  { name: 'LinkedIn Video Downloader', slug: '/social/linkedin-downloader', desc: 'Save LinkedIn posts & videos', icon: Download, category: 'social', catLabel: 'Social Studio' },
+];
+
+const ALL_SEARCHABLE_TOOLS = [...PDF_TOOLS, ...IMAGE_TOOLS, ...UTILITY_TOOLS, ...SOCIAL_TOOLS];
 
 export function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<'all' | 'pdf' | 'image' | 'utility'>('all');
+  const [selectedCategory, setSelectedCategory] = useState<'all' | 'pdf' | 'image' | 'utility' | 'social'>('all');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrolled, setScrolled] = useState(false);
   const [compressReadyInfo, setCompressReadyInfo] = useState<{ url: string; name: string } | null>(null);
@@ -329,6 +353,7 @@ export function Navbar() {
               { id: 'pdf', label: 'PDF Studio', count: PDF_TOOLS.length },
               { id: 'image', label: 'Image Studio', count: IMAGE_TOOLS.length },
               { id: 'utility', label: 'Utilities', count: UTILITY_TOOLS.length },
+              { id: 'social', label: 'Social Tools', count: SOCIAL_TOOLS.length },
             ].map((tab) => {
               const isTabActive = selectedCategory === tab.id;
               return (
@@ -614,7 +639,7 @@ export function Navbar() {
               <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:rotate-180 transition-transform duration-200" />
             </Link>
 
-            <div className="absolute top-full right-0 w-[860px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0 grid grid-cols-3 gap-2">
+            <div className="absolute top-full left-1/2 -ml-[430px] w-[860px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0 grid grid-cols-3 gap-2">
               <div className="col-span-3 px-3 py-1.5 flex items-center justify-between border-b border-slate-100 mb-1">
                 <Link href="/calculators" className="text-xs font-black uppercase tracking-wider text-slate-900 hover:text-indigo-600 flex items-center gap-1 transition-colors">
                   <span>Daily Utility Hubs →</span>
@@ -622,6 +647,57 @@ export function Navbar() {
                 <span className="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded-full font-bold border border-slate-200/80">Calculators & Tools</span>
               </div>
               {UTILITY_TOOLS.map((tool) => {
+                const Icon = tool.icon;
+                return (
+                  <Link
+                    key={tool.slug}
+                    href={tool.slug}
+                    className="p-2.5 rounded-2xl hover:bg-slate-100/80 transition-colors flex items-start gap-3 group/item border border-transparent hover:border-slate-200/80"
+                  >
+                    <div className="p-2 rounded-xl bg-slate-100 text-slate-800 group-hover/item:bg-slate-900 group-hover/item:text-white transition-colors shrink-0">
+                      <Icon className="w-4 h-4" />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-xs font-bold text-slate-900 transition-colors truncate">
+                          {tool.name}
+                        </span>
+                        {tool.badge && (
+                          <span className="text-[9px] font-black px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200/80 shrink-0">
+                            {tool.badge}
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-[11px] text-slate-500 truncate mt-0.5">{tool.desc}</p>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="relative group py-4">
+            <Link
+              href="/social/whatsapp-direct-chat"
+              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-all ${
+                isActive('/social')
+                  ? 'bg-slate-900/10 text-slate-900 font-extrabold border border-slate-900/15 backdrop-blur-sm'
+                  : 'hover:bg-slate-100 hover:text-slate-900'
+              }`}
+            >
+              <Share2 className="w-4 h-4 text-slate-700" />
+              <span>Social Tools</span>
+              <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:rotate-180 transition-transform duration-200" />
+            </Link>
+
+            <div className="absolute top-full right-0 w-[860px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0 grid grid-cols-3 gap-2">
+              <div className="col-span-3 px-3 py-1.5 flex items-center justify-between border-b border-slate-100 mb-1">
+                <Link href="/social/whatsapp-direct-chat" className="text-xs font-black uppercase tracking-wider text-slate-900 hover:text-indigo-600 flex items-center gap-1 transition-colors">
+                  <span>Social Media Tools Studio →</span>
+                </Link>
+                <span className="text-[10px] bg-pink-100 text-pink-700 px-2 py-0.5 rounded-full font-bold border border-pink-200">Reels & Chat Helpers</span>
+              </div>
+              {SOCIAL_TOOLS.map((tool) => {
                 const Icon = tool.icon;
                 return (
                   <Link
@@ -696,6 +772,7 @@ export function Navbar() {
                   { id: 'pdf', label: 'PDF Studio', count: PDF_TOOLS.length },
                   { id: 'image', label: 'Image Studio', count: IMAGE_TOOLS.length },
                   { id: 'utility', label: 'Utilities', count: UTILITY_TOOLS.length },
+                  { id: 'social', label: 'Social Tools', count: SOCIAL_TOOLS.length },
                 ].map((tab) => {
                   const isTabActive = selectedCategory === tab.id;
                   return (

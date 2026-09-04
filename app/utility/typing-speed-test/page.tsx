@@ -15,6 +15,9 @@ import {
   VolumeX,
   Trophy,
   Sparkles,
+  Award,
+  Download,
+  X,
 } from 'lucide-react';
 
 export default function TypingSpeedTestPage() {
@@ -27,7 +30,12 @@ export default function TypingSpeedTestPage() {
   const [isFinished, setIsFinished] = useState<boolean>(false);
 
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
+  const [showCertModal, setShowCertModal] = useState<boolean>(false);
+  const [candidateName, setCandidateName] = useState<string>('Alex Johnson');
+  const [certTheme, setCertTheme] = useState<'gold' | 'dark' | 'emerald' | 'indigo'>('gold');
+
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const certCanvasRef = useRef<HTMLCanvasElement>(null);
 
   // Initialize random text
   const initTest = (dur = duration) => {
@@ -137,12 +145,149 @@ export default function TypingSpeedTestPage() {
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
+  // Render Certificate on Canvas
+  const renderCertificate = () => {
+    const canvas = certCanvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    canvas.width = 1200;
+    canvas.height = 800;
+
+    // Background & Borders based on theme
+    let bgColor = '#fafaf9';
+    let primaryColor = '#d97706';
+    let textColor = '#1e293b';
+    let badgeBg = '#fef3c7';
+    let badgeText = '#92400e';
+
+    if (certTheme === 'dark') {
+      bgColor = '#0f172a';
+      primaryColor = '#38bdf8';
+      textColor = '#f8fafc';
+      badgeBg = '#0284c7';
+      badgeText = '#ffffff';
+    } else if (certTheme === 'emerald') {
+      bgColor = '#064e3b';
+      primaryColor = '#34d399';
+      textColor = '#ecfdf5';
+      badgeBg = '#059669';
+      badgeText = '#ffffff';
+    } else if (certTheme === 'indigo') {
+      bgColor = '#1e1b4b';
+      primaryColor = '#a78bfa';
+      textColor = '#f5f3ff';
+      badgeBg = '#6d28d9';
+      badgeText = '#ffffff';
+    }
+
+    ctx.fillStyle = bgColor;
+    ctx.fillRect(0, 0, 1200, 800);
+
+    // Outer & Inner Borders
+    ctx.strokeStyle = primaryColor;
+    ctx.lineWidth = 14;
+    ctx.strokeRect(30, 30, 1140, 740);
+
+    ctx.lineWidth = 2;
+    ctx.strokeRect(48, 48, 1104, 704);
+
+    // Certificate Header Title
+    ctx.fillStyle = primaryColor;
+    ctx.font = 'bold 24px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('FILEZENITH OFFICIAL CERTIFICATION BOARD', 600, 110);
+
+    ctx.fillStyle = textColor;
+    ctx.font = 'black 46px serif';
+    ctx.fillText('CERTIFICATE OF TYPING PROFICIENCY', 600, 175);
+
+    // Decorative Line
+    ctx.strokeStyle = primaryColor;
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(400, 205);
+    ctx.lineTo(800, 205);
+    ctx.stroke();
+
+    // Subtitle text
+    ctx.fillStyle = textColor;
+    ctx.font = '22px sans-serif';
+    ctx.fillText('This is to officially certify that', 600, 260);
+
+    // Candidate Name
+    ctx.fillStyle = primaryColor;
+    ctx.font = 'bold 52px serif';
+    ctx.fillText(candidateName || 'Alex Johnson', 600, 335);
+
+    // Underline for name
+    ctx.strokeStyle = primaryColor;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(350, 355);
+    ctx.lineTo(850, 355);
+    ctx.stroke();
+
+    // Description text
+    ctx.fillStyle = textColor;
+    ctx.font = '20px sans-serif';
+    ctx.fillText(
+      `has successfully completed the ${duration}-second standardized typing speed benchmark with outstanding results:`,
+      600,
+      410
+    );
+
+    // Score Pill Badge
+    ctx.fillStyle = badgeBg;
+    ctx.beginPath();
+    ctx.roundRect(350, 450, 500, 95, 20);
+    ctx.fill();
+
+    ctx.fillStyle = badgeText;
+    ctx.font = 'bold 44px sans-serif';
+    ctx.fillText(`${stats.netWPM} WPM`, 470, 512);
+
+    ctx.font = 'bold 24px sans-serif';
+    ctx.fillText(`Accuracy: ${stats.accuracy}%`, 720, 510);
+
+    // Footer Info & Verification Seal
+    const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    ctx.fillStyle = textColor;
+    ctx.font = '16px sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText(`Issued: ${today}`, 100, 680);
+    ctx.fillText(`Verification ID: FZ-WPM-${Math.floor(100000 + Math.random() * 900000)}`, 100, 710);
+
+    ctx.textAlign = 'right';
+    ctx.fillText('FileZenith Speed Evaluation Engine', 1100, 680);
+    ctx.font = 'italic 16px serif';
+    ctx.fillText('Authorized Digital Signature', 1100, 710);
+  };
+
+  useEffect(() => {
+    if (showCertModal) {
+      renderCertificate();
+    }
+  }, [showCertModal, candidateName, certTheme, stats]);
+
+  const handleDownloadCertificate = () => {
+    const canvas = certCanvasRef.current;
+    if (!canvas) return;
+    const url = canvas.toDataURL('image/png');
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `FileZenith_Typing_Certificate_${stats.netWPM}WPM.png`;
+    a.click();
+    toast.success('WPM Certificate downloaded in high resolution!');
+  };
+
   return (
     <ToolLayout
       slug="/utility/typing-speed-test"
-      title="Online Typing Speed Test (WPM & Accuracy)"
-      subtitle="Test your words per minute (WPM), typing accuracy, and CPM. Practice 15s, 30s, 60s, or 2 min typing benchmarks and share your score."
-      badgeText="Viral WPM Meter"
+      title="Online Typing Speed Test (WPM & Certificate Exporter)"
+      subtitle="Test your words per minute (WPM), accuracy, and CPM. Export official high-resolution PNG typing certificates with custom candidate name."
+      badgeText="Viral WPM Certificate"
     >
       <div className="space-y-6 pb-24 md:pb-6 text-slate-900">
         {/* Controls Toolbar */}
@@ -208,7 +353,9 @@ export default function TypingSpeedTestPage() {
 
           <div className="bg-white p-4 rounded-3xl border border-slate-200 shadow-sm text-center">
             <div className="text-[10px] font-black text-slate-500 uppercase">CPM / Errors</div>
-            <div className="text-2xl font-black text-indigo-600 tracking-tight">{stats.cpm} <span className="text-xs text-rose-500 font-bold">({stats.errors} err)</span></div>
+            <div className="text-2xl font-black text-indigo-600 tracking-tight">
+              {stats.cpm} <span className="text-xs text-rose-500 font-bold">({stats.errors} err)</span>
+            </div>
           </div>
         </div>
 
@@ -222,7 +369,10 @@ export default function TypingSpeedTestPage() {
             {targetText.split('').map((char, idx) => {
               let color = 'text-slate-400';
               if (idx < inputVal.length) {
-                color = inputVal[idx] === char ? 'text-emerald-600 bg-emerald-100/60 font-bold rounded' : 'text-white bg-rose-600 font-bold rounded';
+                color =
+                  inputVal[idx] === char
+                    ? 'text-emerald-600 bg-emerald-100/60 font-bold rounded'
+                    : 'text-white bg-rose-600 font-bold rounded';
               }
               const isCurrent = idx === inputVal.length && !isFinished;
               return (
@@ -241,7 +391,11 @@ export default function TypingSpeedTestPage() {
               value={inputVal}
               onChange={handleInputChange}
               disabled={isFinished}
-              placeholder={isFinished ? 'Test Completed! See score below or click Restart.' : 'Start typing here to trigger the timer automatically...'}
+              placeholder={
+                isFinished
+                  ? 'Test Completed! Click Export Certificate below or Restart.'
+                  : 'Start typing here to trigger the timer automatically...'
+              }
               className="w-full p-4 rounded-2xl border border-slate-300 bg-white font-mono text-base text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500 shadow-inner"
             />
           </div>
@@ -249,19 +403,29 @@ export default function TypingSpeedTestPage() {
 
         {/* Final Score Card on Finish */}
         {isFinished && (
-          <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white space-y-5 border border-slate-800 shadow-2xl animate-in zoom-in-95 duration-200">
-            <div className="flex items-center justify-between">
+          <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white space-y-6 border border-slate-800 shadow-2xl animate-in zoom-in-95 duration-200">
+            <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-2 text-amber-400 font-black text-sm uppercase tracking-wider">
-                <Trophy className="w-5 h-5 text-amber-400" /> Test Complete - Score Card
+                <Trophy className="w-5 h-5 text-amber-400" /> Test Complete - Score Summary
               </div>
-              <button
-                type="button"
-                onClick={handleShareWhatsApp}
-                className="px-4 py-2 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs flex items-center gap-2 shadow-md cursor-pointer active:scale-95"
-              >
-                <Share2 className="w-4 h-4" />
-                <span>Share Score on WhatsApp</span>
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setShowCertModal(true)}
+                  className="px-4 py-2 rounded-2xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs flex items-center gap-2 shadow-lg cursor-pointer active:scale-95 transition-all"
+                >
+                  <Award className="w-4 h-4" />
+                  <span>Generate WPM Certificate</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={handleShareWhatsApp}
+                  className="px-4 py-2 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs flex items-center gap-2 shadow-md cursor-pointer active:scale-95"
+                >
+                  <Share2 className="w-4 h-4" />
+                  <span>Share Score</span>
+                </button>
+              </div>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
@@ -295,6 +459,95 @@ export default function TypingSpeedTestPage() {
                 <RotateCcw className="w-4 h-4" />
                 <span>Try Again to Improve Score</span>
               </button>
+            </div>
+          </div>
+        )}
+
+        {/* WPM Certificate Export Modal */}
+        {showCertModal && (
+          <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+            <div className="bg-white max-w-4xl w-full rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl border border-slate-200 my-8">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div className="flex items-center gap-2 text-rose-600 font-black text-lg">
+                  <Award className="w-6 h-6" />
+                  <span>WPM Typing Certificate Exporter</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setShowCertModal(false)}
+                  className="p-2 rounded-full hover:bg-slate-100 text-slate-500 cursor-pointer"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Certificate Inputs & Theme Controls */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-slate-700 uppercase">Candidate Name</label>
+                  <input
+                    type="text"
+                    value={candidateName}
+                    onChange={(e) => setCandidateName(e.target.value)}
+                    placeholder="Enter your full name"
+                    className="w-full p-3 rounded-xl border border-slate-300 font-semibold text-slate-900 text-sm focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-slate-700 uppercase">Certificate Style Theme</label>
+                  <div className="grid grid-cols-4 gap-2">
+                    {[
+                      { id: 'gold', name: 'Gold' },
+                      { id: 'dark', name: 'Dark' },
+                      { id: 'emerald', name: 'Emerald' },
+                      { id: 'indigo', name: 'Indigo' },
+                    ].map((th) => (
+                      <button
+                        key={th.id}
+                        type="button"
+                        onClick={() => setCertTheme(th.id as any)}
+                        className={`py-2 rounded-xl text-xs font-black border transition-all cursor-pointer ${
+                          certTheme === th.id
+                            ? 'bg-rose-600 text-white border-rose-600 shadow-sm'
+                            : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                        }`}
+                      >
+                        {th.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Preview Canvas Container */}
+              <div className="flex justify-center border border-slate-200 rounded-2xl overflow-hidden bg-slate-900 p-2 shadow-inner">
+                <canvas ref={certCanvasRef} className="max-w-full h-auto rounded-xl shadow-lg" />
+              </div>
+
+              {/* Action Toolbar */}
+              <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
+                <div className="text-xs font-bold text-slate-500">
+                  High-res 1200x800 PNG • Instant Client-side Download
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setShowCertModal(false)}
+                    className="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs cursor-pointer"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleDownloadCertificate}
+                    className="px-6 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-black text-xs flex items-center gap-2 shadow-md cursor-pointer active:scale-95 transition-all"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>Download PNG Certificate</span>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         )}

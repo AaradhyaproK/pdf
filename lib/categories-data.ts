@@ -152,6 +152,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
         title: 'Popular Financial & Student Calculators',
         description: 'Calculators for loans, income tax, mutual funds, salary, GST, age, and marks.',
         tools: [
+          { name: 'EPF Balance Growth Calculator', slug: '/utility/epf-calculator', description: 'EPFO 8.25% retirement interest and maturity calculator.', isPopular: true, badge: 'EPFO 8.25%' },
           { name: 'Age Calculator', slug: '/utility/age-calculator', description: 'Calculate exact age in years, months, days, hours, and minutes.', isPopular: true, badge: '#1 Trending' },
           { name: 'Percentage Calculator', slug: '/utility/percentage-calculator', description: 'Calculate percentage difference, increase/decrease, and discount.', isPopular: true, badge: 'Daily Tool' },
           { name: 'CGPA to Percentage Calculator', slug: '/utility/cgpa-to-percentage', description: 'Convert CBSE, University CGPA/SGPA to percentage.', isPopular: true, badge: 'Student Tool' },

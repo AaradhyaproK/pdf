@@ -227,17 +227,15 @@ export function Footer() {
                   <span>Download Mobile App</span>
                 </Link>
               </li>
+              <li><Link href="/utility/epf-calculator" className="hover:text-indigo-600 font-bold text-emerald-600 transition-colors">EPF Balance Growth Calculator</Link></li>
+              <li><Link href="/social/whatsapp-direct-chat" className="hover:text-indigo-600 font-bold text-emerald-600 transition-colors">WhatsApp Direct Chat Launcher</Link></li>
               <li><Link href="/utility/age-calculator" className="hover:text-indigo-600 font-bold text-slate-900 transition-colors">Age Calculator & Birthday</Link></li>
               <li><Link href="/utility/percentage-calculator" className="hover:text-indigo-600 transition-colors">Percentage Calculator</Link></li>
               <li><Link href="/utility/cgpa-to-percentage" className="hover:text-indigo-600 transition-colors">CGPA to Percentage</Link></li>
               <li><Link href="/utility/typing-speed-test" className="hover:text-indigo-600 transition-colors">Typing Speed Test (WPM)</Link></li>
               <li><Link href="/utility/fancy-text-generator" className="hover:text-indigo-600 transition-colors">Fancy Text Generator</Link></li>
-              <li><Link href="/utility/password-generator" className="hover:text-indigo-600 transition-colors">Password Generator</Link></li>
-              <li><Link href="/utility/number-to-words" className="hover:text-indigo-600 transition-colors">Number to Words (Cheque)</Link></li>
               <li><Link href="/security" className="hover:text-indigo-600 font-bold text-emerald-700 transition-colors flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5 text-emerald-600" /> 100% Secure Serverless</Link></li>
-              <li><Link href="/blog" className="hover:text-indigo-600 font-bold text-slate-900 transition-colors">Blog & Guides</Link></li>
               <li><Link href="/privacy" className="hover:text-indigo-600 transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/terms" className="hover:text-indigo-600 transition-colors">Terms of Service</Link></li>
             </ul>
           </div>
         </div>

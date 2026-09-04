@@ -38,6 +38,16 @@ import {
   GraduationCap,
   DollarSign,
   Calculator,
+  Car,
+  Coins,
+  MessageSquare,
+  Video,
+  Share2,
+  Dices,
+  Brain,
+  Volume2,
+  Palette,
+  Hexagon,
 } from 'lucide-react';
 
 export interface ToolItem {
@@ -45,8 +55,8 @@ export interface ToolItem {
   name: string;
   slug: string;
   desc: string;
-  category: 'pdf' | 'image' | 'utility';
-  tags: ('organize' | 'compress' | 'convert-to' | 'convert-from' | 'edit-security' | 'image' | 'utility')[];
+  category: 'pdf' | 'image' | 'utility' | 'social';
+  tags: ('organize' | 'compress' | 'convert-to' | 'convert-from' | 'edit-security' | 'image' | 'utility' | 'social')[];
   icon: any;
   badge?: string;
   badgeStyle?: string;
@@ -57,6 +67,104 @@ export interface ToolItem {
 
 export const ALL_TOOLS: ToolItem[] = [
   // --- TOP HIGH TRAFFIC GETTERS (RANKED BY SEARCH VOLUME) ---
+  {
+    id: 'glassmorphism-generator',
+    name: 'Glassmorphism CSS Generator',
+    slug: '/utility/glassmorphism-generator',
+    desc: 'Design beautiful frosted glass UI effects and generate CSS instantly.',
+    category: 'utility',
+    tags: ['utility'],
+    icon: Hexagon,
+    badge: 'UI Tool',
+    colorClass: 'text-teal-600',
+    iconBgClass: 'bg-teal-50 text-teal-600 border-teal-100 group-hover:bg-teal-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-teal-600',
+    badgeStyle: 'bg-teal-50 text-teal-700 border-teal-200',
+  },
+  {
+    id: 'color-palette-extractor',
+    name: 'Image Color Picker & Palette',
+    slug: '/image/color-palette-extractor',
+    desc: 'Extract beautiful color palettes and pick exact HEX pixel colors from any image.',
+    category: 'image',
+    tags: ['image', 'utility'],
+    icon: Palette,
+    badge: 'Design',
+    colorClass: 'text-fuchsia-600',
+    iconBgClass: 'bg-fuchsia-50 text-fuchsia-600 border-fuchsia-100 group-hover:bg-fuchsia-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-fuchsia-600',
+    badgeStyle: 'bg-fuchsia-50 text-fuchsia-700 border-fuchsia-200',
+  },
+  {
+    id: 'text-to-speech',
+    name: 'Free Text to Speech (TTS) Audio',
+    slug: '/utility/text-to-speech',
+    desc: 'Convert text to natural-sounding human AI voices instantly with zero limits.',
+    category: 'utility',
+    tags: ['utility'],
+    icon: Volume2,
+    badge: 'No Limit',
+    colorClass: 'text-indigo-600',
+    iconBgClass: 'bg-indigo-50 text-indigo-600 border-indigo-100 group-hover:bg-indigo-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-indigo-600',
+    badgeStyle: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+  },
+  {
+    id: 'pomodoro-timer',
+    name: 'Pomodoro Timer & Study Clock',
+    slug: '/utility/pomodoro-timer',
+    desc: 'Boost focus with an aesthetic 25-minute Pomodoro timer, short breaks, and long breaks.',
+    category: 'utility',
+    tags: ['utility'],
+    icon: Brain,
+    badge: 'Focus',
+    colorClass: 'text-rose-600',
+    iconBgClass: 'bg-rose-50 text-rose-600 border-rose-100 group-hover:bg-rose-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-rose-600',
+    badgeStyle: 'bg-rose-50 text-rose-700 border-rose-200',
+  },
+  {
+    id: 'spin-the-wheel',
+    name: 'Spin the Wheel & Name Picker',
+    slug: '/utility/spin-the-wheel',
+    desc: 'Enter names and pick a random winner instantly with a spinning wheel and confetti.',
+    category: 'utility',
+    tags: ['utility'],
+    icon: Dices,
+    badge: 'Viral Tool',
+    colorClass: 'text-indigo-600',
+    iconBgClass: 'bg-indigo-50 text-indigo-600 border-indigo-100 group-hover:bg-indigo-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-indigo-600',
+    badgeStyle: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+  },
+  {
+    id: 'epf-calculator',
+    name: 'EPF / PF Balance Growth Calculator',
+    slug: '/utility/epf-calculator',
+    desc: 'EPFO 8.25% retirement maturity calculator with employee + employer breakdown schedule.',
+    category: 'utility',
+    tags: ['utility'],
+    icon: Coins,
+    badge: 'EPFO 8.25%',
+    colorClass: 'text-emerald-600',
+    iconBgClass: 'bg-emerald-50 text-emerald-600 border-emerald-100 group-hover:bg-emerald-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-emerald-600',
+    badgeStyle: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+  },
+  {
+    id: 'whatsapp-direct-chat',
+    name: 'WhatsApp Direct Chat Launcher',
+    slug: '/social/whatsapp-direct-chat',
+    desc: 'Send WhatsApp messages without saving numbers to phonebook + instant QR code scanner.',
+    category: 'social',
+    tags: ['social', 'utility'],
+    icon: MessageSquare,
+    badge: 'wa.me Direct',
+    colorClass: 'text-emerald-600',
+    iconBgClass: 'bg-emerald-50 text-emerald-600 border-emerald-100 group-hover:bg-emerald-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-emerald-600',
+    badgeStyle: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+  },
   {
     id: 'age-calculator',
     name: 'Age Calculator & Birthday Countdown',
@@ -707,7 +815,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
 ];
 
-type CategoryFilter = 'all' | 'organize' | 'compress' | 'convert-to' | 'convert-from' | 'edit-security' | 'image' | 'utility';
+type CategoryFilter = 'all' | 'organize' | 'compress' | 'convert-to' | 'convert-from' | 'edit-security' | 'image' | 'utility' | 'social';
 
 export function LandingToolGrid() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -740,6 +848,7 @@ export function LandingToolGrid() {
       'edit-security': ALL_TOOLS.filter((t) => t.tags.includes('edit-security')).length,
       image: ALL_TOOLS.filter((t) => t.tags.includes('image')).length,
       utility: ALL_TOOLS.filter((t) => t.tags.includes('utility')).length,
+      social: ALL_TOOLS.filter((t) => t.tags.includes('social')).length,
     };
   }, []);
 
@@ -781,6 +890,7 @@ export function LandingToolGrid() {
             { id: 'edit-security', label: 'Edit & Security', count: categoryCounts['edit-security'] },
             { id: 'image', label: 'Image Studio', count: categoryCounts.image },
             { id: 'utility', label: 'Daily Utilities', count: categoryCounts.utility },
+            { id: 'social', label: 'Social & Chat Tools', count: categoryCounts.social },
           ].map((pill) => {
             const isActive = activeFilter === pill.id;
             return (
