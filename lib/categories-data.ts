@@ -149,19 +149,26 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
     intro: 'Instant, precise, mobile-friendly calculators for students, job applicants, business owners, and daily tasks.',
     subgroups: [
       {
-        title: 'Popular Daily & Student Calculators',
-        description: 'Calculators designed for age calculation, exam scores, and discount math.',
+        title: 'Popular Financial & Student Calculators',
+        description: 'Calculators for loans, income tax, mutual funds, salary, GST, age, and marks.',
         tools: [
           { name: 'Age Calculator', slug: '/utility/age-calculator', description: 'Calculate exact age in years, months, days, hours, and minutes.', isPopular: true, badge: '#1 Trending' },
           { name: 'Percentage Calculator', slug: '/utility/percentage-calculator', description: 'Calculate percentage difference, increase/decrease, and discount.', isPopular: true, badge: 'Daily Tool' },
-          { name: 'CGPA to Percentage Calculator', slug: '/utility/cgpa-to-percentage', description: 'Convert CBSE, University CGPA/SGPA to percentage.', isPopular: true, badge: 'Student Tool' }
+          { name: 'CGPA to Percentage Calculator', slug: '/utility/cgpa-to-percentage', description: 'Convert CBSE, University CGPA/SGPA to percentage.', isPopular: true, badge: 'Student Tool' },
+          { name: 'EMI Loan Calculator', slug: '/utility/emi-calculator', description: 'Calculate home, car, and personal loan monthly EMI with schedule.', isPopular: true, badge: 'High RPM' },
+          { name: 'Income Tax Calculator (Old vs New)', slug: '/utility/income-tax-calculator', description: 'Compare Old vs New Tax Regime savings for FY 2024-25 / FY 2025-26.', isPopular: true, badge: 'Tax Season' },
+          { name: 'SIP Mutual Fund Calculator', slug: '/utility/sip-calculator', description: 'Calculate future wealth compounding returns for monthly SIP investments.', isPopular: true, badge: 'Wealth' },
+          { name: 'CTC to In-Hand Salary Calculator', slug: '/utility/salary-calculator', description: 'Calculate monthly take-home salary after PF, PT, and TDS.', isPopular: true, badge: 'Salary' },
+          { name: 'GST Calculator', slug: '/utility/gst-calculator', description: 'Add or remove GST tax for 5%, 12%, 18%, 28% slabs.', isPopular: true, badge: 'Tax Tool' },
+          { name: 'BMI Calculator', slug: '/utility/bmi-calculator', description: 'Calculate Body Mass Index and ideal weight target.', isPopular: true, badge: 'Health' }
         ]
       }
     ],
     popularTools: [
-      { name: 'Age Calculator', slug: '/utility/age-calculator', description: 'Find your exact age down to days and minutes for job eligibility.' },
-      { name: 'Percentage Calculator', slug: '/utility/percentage-calculator', description: 'Quick marks percentage and discount math.' },
-      { name: 'CGPA to Percentage', slug: '/utility/cgpa-to-percentage', description: 'Convert university CGPA to percentage for job forms.' }
+      { name: 'EMI Loan Calculator', slug: '/utility/emi-calculator', description: 'Calculate monthly EMI loan repayments.' },
+      { name: 'Income Tax Calculator', slug: '/utility/income-tax-calculator', description: 'Compare Old vs New Tax Regime.' },
+      { name: 'Age Calculator', slug: '/utility/age-calculator', description: 'Find your exact age down to days and minutes.' },
+      { name: 'Percentage Calculator', slug: '/utility/percentage-calculator', description: 'Quick marks percentage and discount math.' }
     ],
     faqs: [
       { question: 'How is CGPA to Percentage calculated?', answer: 'Most Indian boards (CBSE/AICTE) use the standard formula: Percentage = CGPA × 9.5.' },

@@ -79,6 +79,17 @@ const UTILITY_TOOLS = [
   { name: 'Fancy Text Generator', slug: '/utility/fancy-text-generator', desc: '30+ Unicode font styles & gaming tags', icon: Sparkles, badge: 'Fonts', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'Password Generator', slug: '/utility/password-generator', desc: 'Generate strong passwords 100% offline', icon: Lock, badge: 'Secure', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'Number to Words Converter', slug: '/utility/number-to-words', desc: 'Cheque & invoice amount words (Rupees/$)', icon: DollarSign, badge: 'Cheque', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'EMI Loan Calculator', slug: '/utility/emi-calculator', desc: 'Home, car & personal loan monthly EMI math', icon: DollarSign, badge: 'Loan', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Income Tax Calculator', slug: '/utility/income-tax-calculator', desc: 'Old vs New Regime tax savings FY 2024-25', icon: DollarSign, badge: 'Tax', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'SIP Mutual Fund Calculator', slug: '/utility/sip-calculator', desc: 'Compounding growth for monthly mutual funds', icon: DollarSign, badge: 'Wealth', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'CTC to In-Hand Salary Calculator', slug: '/utility/salary-calculator', desc: 'Monthly take-home salary after EPF & TDS', icon: DollarSign, badge: 'Salary', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'GST Tax Calculator', slug: '/utility/gst-calculator', desc: 'Add or Remove GST 5%, 12%, 18%, 28%', icon: Percent, badge: 'B2B', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'BMI & Health Calculator', slug: '/utility/bmi-calculator', desc: 'Body Mass Index & ideal weight range', icon: Zap, badge: 'Health', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Text Case Converter', slug: '/utility/case-converter', desc: 'UPPER, lower, Title, camel & snake case', icon: Type, badge: 'Writing', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Text Repeater (10k Times)', slug: '/utility/text-repeater', desc: 'Repeat text & emojis up to 10,000 times', icon: Sparkles, badge: 'Viral', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Love Match Calculator', slug: '/utility/love-calculator', desc: 'Calculate love score & share on WhatsApp', icon: Sparkles, badge: 'Fun', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'YouTube 1080p Thumbnail Downloader', slug: '/social/youtube-thumbnail-downloader', desc: 'Download 1080p HD video cover images', icon: Smartphone, badge: 'Social', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'YouTube Tag Extractor', slug: '/social/youtube-tag-extractor', desc: 'Extract SEO tags & keywords from video URL', icon: Hash, badge: 'SEO', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'Base64 Encoder & Decoder', slug: '/utility/base64', desc: 'Convert files/images to Data URLs', icon: Code2, badge: 'New', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'Markdown Editor & PDF', slug: '/utility/markdown-editor', desc: 'Live Markdown preview & PDF export', icon: FileText, badge: 'New', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'QR Code Generator', slug: '/utility/qr-generator', desc: 'Create custom QR codes with logo & colors', icon: QrCode, badge: 'Custom', category: 'utility', catLabel: 'Daily Utility' },
@@ -501,8 +512,8 @@ export function Navbar() {
               <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:rotate-180 transition-transform duration-200" />
             </Link>
 
-            <div className="absolute top-full left-0 w-[580px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0 grid grid-cols-2 gap-2">
-              <div className="col-span-2 px-3 py-1.5 flex items-center justify-between border-b border-slate-100 mb-1">
+            <div className="absolute top-full left-0 w-[860px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0 grid grid-cols-3 gap-2">
+              <div className="col-span-3 px-3 py-1.5 flex items-center justify-between border-b border-slate-100 mb-1">
                 <Link href="/pdf-tools" className="text-xs font-black uppercase tracking-wider text-slate-900 hover:text-indigo-600 flex items-center gap-1 transition-colors">
                   <span>PDF Studio Hub →</span>
                 </Link>
@@ -552,8 +563,8 @@ export function Navbar() {
               <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:rotate-180 transition-transform duration-200" />
             </Link>
 
-            <div className="absolute top-full left-0 w-[580px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0 grid grid-cols-2 gap-2">
-              <div className="col-span-2 px-3 py-1.5 flex items-center justify-between border-b border-slate-100 mb-1">
+            <div className="absolute top-full left-0 w-[860px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0 grid grid-cols-3 gap-2">
+              <div className="col-span-3 px-3 py-1.5 flex items-center justify-between border-b border-slate-100 mb-1">
                 <Link href="/image-tools" className="text-xs font-black uppercase tracking-wider text-slate-900 hover:text-indigo-600 flex items-center gap-1 transition-colors">
                   <span>Image Studio Hub →</span>
                 </Link>
@@ -603,8 +614,8 @@ export function Navbar() {
               <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:rotate-180 transition-transform duration-200" />
             </Link>
 
-            <div className="absolute top-full right-0 w-[580px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0 grid grid-cols-2 gap-2">
-              <div className="col-span-2 px-3 py-1.5 flex items-center justify-between border-b border-slate-100 mb-1">
+            <div className="absolute top-full right-0 w-[860px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0 grid grid-cols-3 gap-2">
+              <div className="col-span-3 px-3 py-1.5 flex items-center justify-between border-b border-slate-100 mb-1">
                 <Link href="/calculators" className="text-xs font-black uppercase tracking-wider text-slate-900 hover:text-indigo-600 flex items-center gap-1 transition-colors">
                   <span>Daily Utility Hubs →</span>
                 </Link>

@@ -1214,8 +1214,270 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
     faqs: [
       { question: 'How is $ 150,000 written in words?', answer: 'In US Dollars: "One Hundred Fifty Thousand Dollars Only". In Indian Rupees: "One Lakh Fifty Thousand Rupees Only".' }
     ]
+  },
+
+  '/utility/emi-calculator': {
+    slug: '/utility/emi-calculator',
+    title: 'Home Loan, Car Loan & Personal Loan EMI Calculator',
+    metaTitle: 'EMI Calculator Online Free - Home, Car & Personal Loan | FileZenith',
+    description: 'Calculate monthly EMI for home loans, car loans, and personal loans free online. View complete yearly amortization schedule, interest breakdown, and repayment charts.',
+    keywords: [
+      'emi calculator',
+      'home loan emi calculator online free',
+      'car loan emi calculator india',
+      'personal loan emi calculation formula',
+      'loan amortization schedule calculator',
+      'monthly loan payment calculator',
+      'sbi hdfc icici loan emi calculator'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Enter Loan Amount', text: 'Input principal loan amount (e.g. ₹25,000,000 or $50,000).' },
+      { title: 'Set Interest Rate & Tenure', text: 'Adjust annual interest rate percentage and tenure duration in years or months.' },
+      { title: 'View EMI & Breakdown', text: 'Instantly view monthly EMI, total interest payable, and annual repayment table.' }
+    ],
+    faqs: [
+      { question: 'How is monthly EMI calculated?', answer: 'EMI is calculated using the formula: E = P × r × (1 + r)^n / ((1 + r)^n - 1), where P is principal, r is monthly interest rate, and n is total tenure in months.' },
+      { question: 'Does FileZenith EMI calculator work for all banks?', answer: 'Yes! It provides precise mathematical loan schedules suitable for SBI, HDFC, ICICI, Axis, Bajaj Finserv, and international banks.' }
+    ]
+  },
+
+  '/utility/income-tax-calculator': {
+    slug: '/utility/income-tax-calculator',
+    title: 'Income Tax Calculator (Old vs New Regime FY 2024-25 & FY 2025-26)',
+    metaTitle: 'Income Tax Calculator Old vs New Regime FY 2024-25 | FileZenith',
+    description: 'Compare Income Tax under Old vs New Tax Regime for FY 2024-25 / FY 2025-26 free online. Calculate tax slab savings with Section 80C, 80D, HRA & standard deduction.',
+    keywords: [
+      'income tax calculator india',
+      'income tax calculator old vs new regime',
+      'income tax calculator fy 2024-25 fy 2025-26',
+      'calculate income tax slab rates',
+      'section 80c 80d hra tax savings calculator',
+      'new tax regime standard deduction 75000'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Enter Gross Annual Salary', text: 'Input your total annual income or CTC.' },
+      { title: 'Add Tax Deductions', text: 'Specify Section 80C, 80D health insurance, HRA, and home loan interest if comparing Old Regime.' },
+      { title: 'Compare Regimes Instantly', text: 'View side-by-side tax comparison showing exact tax savings and recommended regime.' }
+    ],
+    faqs: [
+      { question: 'What is the standard deduction in New Tax Regime for FY 2024-25?', answer: 'The standard deduction for salaried individuals in the New Tax Regime is ₹75,000.' },
+      { question: 'Which tax regime is better for me?', answer: 'FileZenith automatically calculates both regimes side-by-side based on your deductions and highlights which regime saves you more money.' }
+    ]
+  },
+
+  '/utility/sip-calculator': {
+    slug: '/utility/sip-calculator',
+    title: 'SIP Mutual Fund Calculator & Wealth Growth Return',
+    metaTitle: 'SIP Calculator Online Free - Mutual Fund Wealth Growth | FileZenith',
+    description: 'Calculate future returns on monthly Mutual Fund Systematic Investment Plans (SIP) free online. Compare invested amount vs estimated wealth gain with visual charts.',
+    keywords: [
+      'sip calculator',
+      'mutual fund sip calculator online free',
+      'systematic investment plan return calculator',
+      'calculate sip wealth growth 10 years 20 years',
+      'sip calculator with return rate charts',
+      'zerodha groww angelone sip calculator'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Enter Monthly SIP Amount', text: 'Set monthly contribution amount (e.g. ₹5,000 or $100).' },
+      { title: 'Select Expected Return Rate', text: 'Choose expected annual return percentage (e.g. 12% to 15% for mutual funds).' },
+      { title: 'Set Investment Tenure', text: 'Select investment duration in years to see total compounding growth.' }
+    ],
+    faqs: [
+      { question: 'What is a good expected return rate for equity mutual funds in India?', answer: 'Equity mutual funds in India historically yield an average CAGR of 12% to 15% over 5-10 year horizons.' }
+    ]
+  },
+
+  '/utility/salary-calculator': {
+    slug: '/utility/salary-calculator',
+    title: 'CTC to In-Hand Take-Home Salary Calculator',
+    metaTitle: 'CTC to In-Hand Salary Calculator India Free | FileZenith',
+    description: 'Calculate monthly take-home salary from annual CTC free online. View deductions breakdown for Employee PF, Professional Tax, and estimated TDS.',
+    keywords: [
+      'ctc to in hand salary calculator',
+      'take home salary calculator india',
+      'gross to net salary calculator',
+      'pf professional tax tds deduction calculator',
+      'annual ctc to monthly take home salary'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Enter Annual CTC', text: 'Type your total offer CTC package amount.' },
+      { title: 'Set Bonus & PF Options', text: 'Specify annual variable bonus and Provident Fund opt-in status.' },
+      { title: 'View Take-Home Breakdown', text: 'Get exact estimated monthly credit in bank account after all deductions.' }
+    ],
+    faqs: [
+      { question: 'How much CTC is deducted for EPF?', answer: '12% of Basic salary (up to ₹15,000 statutory cap or actual basic) is contributed to Employee Provident Fund.' }
+    ]
+  },
+
+  '/utility/gst-calculator': {
+    slug: '/utility/gst-calculator',
+    title: 'GST Calculator (Add GST or Remove GST Tax)',
+    metaTitle: 'GST Calculator Online Free - Exclusive & Inclusive Tax | FileZenith',
+    description: 'Calculate GST online free for 5%, 12%, 18%, and 28% slab rates. Instantly calculate GST Exclusive (Add GST) or GST Inclusive (Remove GST) with CGST and SGST split.',
+    keywords: [
+      'gst calculator',
+      'calculate gst online free',
+      'gst calculator add remove gst',
+      'gst inclusive exclusive calculator',
+      'cgst sgst split tax calculator',
+      'gst rate 18 percent 12 percent 5 percent'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Enter Amount', text: 'Input net price or gross total bill amount.' },
+      { title: 'Select GST Tax Rate', text: 'Choose slab rate (5%, 12%, 18%, 28%, or custom).' },
+      { title: 'Choose Mode', text: 'Select Add GST (Exclusive) or Remove GST (Inclusive) to get net, tax, and CGST/SGST amounts.' }
+    ],
+    faqs: [
+      { question: 'How do I remove GST from a total bill amount?', answer: 'Select "Remove GST (Inclusive)" mode. The formula used is Net Amount = Total Amount × 100 / (100 + GST Rate).' }
+    ]
+  },
+
+  '/utility/bmi-calculator': {
+    slug: '/utility/bmi-calculator',
+    title: 'BMI Calculator & Ideal Body Weight Range',
+    metaTitle: 'BMI Calculator Free Online - Check Body Mass Index | FileZenith',
+    description: 'Calculate Body Mass Index (BMI) and ideal weight range free online. Get instant health category feedback (Underweight, Normal, Overweight, Obese) for men, women, and adults.',
+    keywords: [
+      'bmi calculator',
+      'body mass index calculator free online',
+      'calculate bmi for men women adults',
+      'ideal weight calculator height weight chart',
+      'bmi chart underweight overweight obese range'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Enter Weight', text: 'Input weight in kilograms (kg) or pounds (lbs).' },
+      { title: 'Enter Height', text: 'Input height in centimeters (cm) or feet/inches.' },
+      { title: 'View BMI Score & Advice', text: 'Instantly view your BMI score, category badge, and ideal healthy weight target.' }
+    ],
+    faqs: [
+      { question: 'What is a healthy BMI range?', answer: 'A BMI between 18.5 and 24.9 is considered normal and healthy for adults.' }
+    ]
+  },
+
+  '/utility/case-converter': {
+    slug: '/utility/case-converter',
+    title: 'Text Case Converter (UPPERCASE, lowercase, Title Case, camelCase)',
+    metaTitle: 'Case Converter Online Free - UPPERCASE, lowercase, Title Case | FileZenith',
+    description: 'Convert text case online free. Switch between UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case, and kebab-case instantly with 1-click copy.',
+    keywords: [
+      'case converter',
+      'text case converter online free',
+      'uppercase to lowercase converter',
+      'title case converter',
+      'camelcase snake_case kebab-case converter',
+      'sentence case text formatting tool'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Paste Your Text', text: 'Paste text into the input workspace.' },
+      { title: 'Click Desired Case', text: 'Select UPPERCASE, lowercase, Title Case, Sentence case, camelCase, or snake_case.' },
+      { title: 'Copy Formatted Text', text: 'Click Copy to clipboard or download formatted text file.' }
+    ],
+    faqs: [
+      { question: 'Can I convert code variable names into camelCase or snake_case?', answer: 'Yes! Our developer-ready case converter handles space-separated and special character strings cleanly.' }
+    ]
+  },
+
+  '/utility/text-repeater': {
+    slug: '/utility/text-repeater',
+    title: 'Text Repeater (Repeat Words Up to 10,000 Times)',
+    metaTitle: 'Text Repeater Online Free - Repeat Text 10,000 Times | FileZenith',
+    description: 'Repeat text, words, emojis, or messages up to 10,000 times online free. Add spaces, new lines, or custom separators for WhatsApp messages and creative posts.',
+    keywords: [
+      'text repeater',
+      'text repeater 10000 times free online',
+      'repeat text online whatsapp',
+      'repeat words string generator',
+      'emoji repeater tool free'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Enter Text or Emoji', text: 'Type word, phrase, or emoji to repeat.' },
+      { title: 'Set Repeat Count', text: 'Choose repetition count (1 to 10,000 times).' },
+      { title: 'Choose Separator & Copy', text: 'Toggle space or new line separator and click Copy to clipboard.' }
+    ],
+    faqs: [
+      { question: 'Is there a limit on text repetition count?', answer: 'FileZenith supports repeating text up to 10,000 times in browser memory without lagging.' }
+    ]
+  },
+
+  '/utility/love-calculator': {
+    slug: '/utility/love-calculator',
+    title: 'Love Calculator & Name Match Compatibility',
+    metaTitle: 'Love Calculator Online Free - Check Love Match Percentage | FileZenith',
+    description: 'Calculate love compatibility match percentage between two names online free. Generate cute shareable love score cards for WhatsApp and social media.',
+    keywords: [
+      'love calculator',
+      'love calculator by name free online',
+      'love percentage match test',
+      'relationship name compatibility check',
+      'love calculator whatsapp score share'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Enter Your Name', text: 'Input first name.' },
+      { title: 'Enter Partner Name', text: 'Input partner or crush name.' },
+      { title: 'Calculate & Share', text: 'Click Calculate Match to reveal percentage score and share result card on WhatsApp!' }
+    ],
+    faqs: [
+      { question: 'Is the Love Calculator accurate?', answer: 'This tool is built for fun, entertainment, and social sharing between friends and couples!' }
+    ]
+  },
+
+  '/social/youtube-thumbnail-downloader': {
+    slug: '/social/youtube-thumbnail-downloader',
+    title: 'YouTube Thumbnail Downloader (1080p Full HD & 4K Image Grabber)',
+    metaTitle: 'YouTube Thumbnail Downloader Free - Download HD 1080p Cover | FileZenith',
+    description: 'Download YouTube video cover thumbnail images free in 1080p Full HD (MaxRes), HD (640p), HQ, and MQ quality. Preview and save YouTube thumbnails instantly.',
+    keywords: [
+      'youtube thumbnail downloader',
+      'download youtube video thumbnail hd 1080p',
+      'get youtube thumbnail image free',
+      'youtube thumbnail saver maxresdefault',
+      'youtube video cover photo downloader'
+    ],
+    category: 'social',
+    howToSteps: [
+      { title: 'Paste YouTube URL', text: 'Paste any YouTube video or Shorts link (e.g. https://www.youtube.com/watch?v=...)' },
+      { title: 'Preview Resolutions', text: 'View 1080p MaxRes, 640p HD, and 480p HQ thumbnails.' },
+      { title: 'Download Image', text: 'Click Download HD Thumbnail to save high-res JPG directly to device memory.' }
+    ],
+    faqs: [
+      { question: 'How do I download a YouTube thumbnail in 1080p max resolution?', answer: 'Just paste the YouTube URL. FileZenith automatically fetches the maxresdefault.jpg file directly from YouTube servers.' }
+    ]
+  },
+
+  '/social/youtube-tag-extractor': {
+    slug: '/social/youtube-tag-extractor',
+    title: 'YouTube Tag Extractor & Video Keyword Finder',
+    metaTitle: 'YouTube Tag Extractor Free - Extract Tags from Video URL | FileZenith',
+    description: 'Extract hidden SEO tags, keywords, titles, and video descriptions from any YouTube video free online. Boost your YouTube SEO ranking with top tags.',
+    keywords: [
+      'youtube tag extractor',
+      'extract tags from youtube video url',
+      'find youtube video keywords free',
+      'youtube video tags viewer online',
+      'youtube video seo tags generator'
+    ],
+    category: 'social',
+    howToSteps: [
+      { title: 'Paste YouTube URL', text: 'Paste video link into the search bar.' },
+      { title: 'Extract Tags', text: 'Click Extract Tags to inspect video SEO keywords.' },
+      { title: 'Copy Tags', text: 'Click Copy All Tags to copy comma-separated tag list for your YouTube Studio upload.' }
+    ],
+    faqs: [
+      { question: 'Why are tags important for YouTube SEO?', answer: 'Tags help YouTube search algorithms understand video content context, helping video ranking in search results and suggested videos.' }
+    ]
   }
 };
+
 
 export function generateToolMetadata(slug: string) {
   const tool = SEO_REGISTRY[slug];

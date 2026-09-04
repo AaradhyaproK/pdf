@@ -1101,4 +1101,461 @@ export const TYPING_TEST_PARAGRAPHS = [
   "Innovation distinguishes between a leader and a follower. Simple, elegant design combined with client-side browser execution creates high performance web experiences for every user."
 ];
 
+/* ==========================================================================
+   8. FINANCIAL & TAX UTILITIES ENGINE
+   ========================================================================== */
+
+export interface EMIResult {
+  monthlyEMI: number;
+  totalInterest: number;
+  totalPayment: number;
+  principal: number;
+  monthlyRate: number;
+  tenureMonths: number;
+  schedule: { year: number; principalPaid: number; interestPaid: number; balance: number }[];
+}
+
+export function calculateEMI(principal: number, annualInterestRate: number, tenureMonths: number): EMIResult {
+  const p = Math.max(0, principal);
+  const r = Math.max(0, annualInterestRate / 12 / 100);
+  const n = Math.max(1, tenureMonths);
+
+  let emi = 0;
+  if (r === 0) {
+    emi = p / n;
+  } else {
+    emi = (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  }
+
+  const monthlyEMI = Math.round(emi);
+  const totalPayment = Math.round(monthlyEMI * n);
+  const totalInterest = Math.max(0, totalPayment - p);
+
+  // Amortization Yearly Breakdown
+  const schedule: { year: number; principalPaid: number; interestPaid: number; balance: number }[] = [];
+  let currentBalance = p;
+  const numYears = Math.ceil(n / 12);
+
+  for (let year = 1; year <= numYears; year++) {
+    let yearPrincipal = 0;
+    let yearInterest = 0;
+    const monthsInYear = year === numYears && n % 12 !== 0 ? n % 12 : 12;
+
+    for (let m = 0; m < monthsInYear; m++) {
+      const interestForMonth = currentBalance * r;
+      const principalForMonth = Math.min(currentBalance, monthlyEMI - interestForMonth);
+      yearInterest += interestForMonth;
+      yearPrincipal += principalForMonth;
+      currentBalance = Math.max(0, currentBalance - principalForMonth);
+    }
+
+    schedule.push({
+      year,
+      principalPaid: Math.round(yearPrincipal),
+      interestPaid: Math.round(yearInterest),
+      balance: Math.round(currentBalance)
+    });
+  }
+
+  return {
+    monthlyEMI,
+    totalInterest,
+    totalPayment,
+    principal: p,
+    monthlyRate: r,
+    tenureMonths: n,
+    schedule
+  };
+}
+
+export interface IncomeTaxResult {
+  grossIncome: number;
+  totalDeductionsOld: number;
+  taxableIncomeOld: number;
+  taxableIncomeNew: number;
+  taxOldRegime: number;
+  taxNewRegime: number;
+  cessOld: number;
+  cessNew: number;
+  totalTaxOld: number;
+  totalTaxNew: number;
+  recommendedRegime: 'NEW' | 'OLD';
+  taxSavings: number;
+}
+
+export function calculateIncomeTax(
+  grossIncome: number,
+  deductions80C: number = 0,
+  deductions80D: number = 0,
+  hraExemption: number = 0,
+  otherDeductions: number = 0
+): IncomeTaxResult {
+  const income = Math.max(0, grossIncome);
+  const stdDeductionOld = 50000;
+  const stdDeductionNew = 75000; // FY 2024-25 / FY 2025-26 Budget update
+
+  // OLD REGIME CALCULATION
+  const totalDeductionsOld = stdDeductionOld + Math.min(150000, deductions80C) + Math.min(100000, deductions80D) + Math.max(0, hraExemption) + Math.max(0, otherDeductions);
+  const taxableIncomeOld = Math.max(0, income - totalDeductionsOld);
+
+  let taxOld = 0;
+  if (taxableIncomeOld > 1000000) {
+    taxOld = 112500 + (taxableIncomeOld - 1000000) * 0.30;
+  } else if (taxableIncomeOld > 500000) {
+    taxOld = 12500 + (taxableIncomeOld - 500000) * 0.20;
+  } else if (taxableIncomeOld > 250000) {
+    taxOld = (taxableIncomeOld - 250000) * 0.05;
+  }
+
+  // Rebate u/s 87A for Old Regime if taxable <= 5L
+  if (taxableIncomeOld <= 500000) {
+    taxOld = 0;
+  }
+
+  const cessOld = Math.round(taxOld * 0.04);
+  const totalTaxOld = Math.round(taxOld + cessOld);
+
+  // NEW REGIME CALCULATION (FY 2024-25 slabs)
+  const taxableIncomeNew = Math.max(0, income - stdDeductionNew);
+  let taxNew = 0;
+
+  if (taxableIncomeNew > 1500000) {
+    taxNew = 150000 + (taxableIncomeNew - 1500000) * 0.30;
+  } else if (taxableIncomeNew > 1200000) {
+    taxNew = 90000 + (taxableIncomeNew - 1200000) * 0.20;
+  } else if (taxableIncomeNew > 900000) {
+    taxNew = 45000 + (taxableIncomeNew - 900000) * 0.15;
+  } else if (taxableIncomeNew > 600000) {
+    taxNew = 15000 + (taxableIncomeNew - 600000) * 0.10;
+  } else if (taxableIncomeNew > 300000) {
+    taxNew = (taxableIncomeNew - 300000) * 0.05;
+  }
+
+  // Rebate u/s 87A for New Regime if taxable <= 7L
+  if (taxableIncomeNew <= 700000) {
+    taxNew = 0;
+  }
+
+  const cessNew = Math.round(taxNew * 0.04);
+  const totalTaxNew = Math.round(taxNew + cessNew);
+
+  const recommendedRegime = totalTaxNew <= totalTaxOld ? 'NEW' : 'OLD';
+  const taxSavings = Math.abs(totalTaxOld - totalTaxNew);
+
+  return {
+    grossIncome: income,
+    totalDeductionsOld,
+    taxableIncomeOld,
+    taxableIncomeNew,
+    taxOldRegime: Math.round(taxOld),
+    taxNewRegime: Math.round(taxNew),
+    cessOld,
+    cessNew,
+    totalTaxOld,
+    totalTaxNew,
+    recommendedRegime,
+    taxSavings
+  };
+}
+
+export interface SIPResult {
+  investedAmount: number;
+  estimatedReturns: number;
+  totalValue: number;
+  monthlyInvestment: number;
+  annualRate: number;
+  years: number;
+}
+
+export function calculateSIP(monthlyInvestment: number, expectedReturnRate: number, durationYears: number): SIPResult {
+  const p = Math.max(0, monthlyInvestment);
+  const i = Math.max(0, expectedReturnRate / 12 / 100);
+  const n = Math.max(1, durationYears * 12);
+
+  const investedAmount = Math.round(p * n);
+  let totalValue = 0;
+
+  if (i === 0) {
+    totalValue = investedAmount;
+  } else {
+    totalValue = Math.round(p * ((Math.pow(1 + i, n) - 1) / i) * (1 + i));
+  }
+
+  const estimatedReturns = Math.max(0, totalValue - investedAmount);
+
+  return {
+    investedAmount,
+    estimatedReturns,
+    totalValue,
+    monthlyInvestment: p,
+    annualRate: expectedReturnRate,
+    years: durationYears
+  };
+}
+
+export interface SalaryResult {
+  monthlyGross: number;
+  monthlyTakeHome: number;
+  monthlyPFEmployee: number;
+  monthlyPFEmployer: number;
+  monthlyProfessionalTax: number;
+  monthlyEstTDS: number;
+  annualTakeHome: number;
+  annualCTC: number;
+}
+
+export function calculateTakeHomeSalary(
+  annualCTC: number,
+  bonusAnnual: number = 0,
+  pfOpted: boolean = true,
+  metroCity: boolean = true
+): SalaryResult {
+  const ctc = Math.max(0, annualCTC);
+  const bonus = Math.max(0, bonusAnnual);
+  const baseSal = Math.max(0, ctc - bonus);
+  const monthlyGross = Math.round(baseSal / 12);
+
+  // Employee PF (12% of Basic, assumed Basic = 50% of CTC)
+  const monthlyBasic = Math.round(monthlyGross * 0.5);
+  const pfMonthly = pfOpted ? Math.round(Math.min(monthlyBasic, 15000) * 0.12) : 0;
+  const profTaxMonthly = 200; // Standard PT in India (~₹200/month)
+
+  // Estimated Tax TDS (Using New Regime default)
+  const taxInfo = calculateIncomeTax(ctc);
+  const monthlyTDS = Math.round(taxInfo.totalTaxNew / 12);
+
+  const monthlyTakeHome = Math.max(0, monthlyGross - pfMonthly - profTaxMonthly - monthlyTDS);
+
+  return {
+    monthlyGross,
+    monthlyTakeHome,
+    monthlyPFEmployee: pfMonthly,
+    monthlyPFEmployer: pfMonthly,
+    monthlyProfessionalTax: profTaxMonthly,
+    monthlyEstTDS: monthlyTDS,
+    annualTakeHome: monthlyTakeHome * 12,
+    annualCTC: ctc
+  };
+}
+
+export interface GSTResult {
+  netAmount: number;
+  gstAmount: number;
+  totalAmount: number;
+  cgst: number;
+  sgst: number;
+  rate: number;
+  isInclusive: boolean;
+}
+
+export function calculateGST(amount: number, ratePercent: number, isInclusive: boolean = false): GSTResult {
+  const amt = Math.max(0, amount);
+  const rate = Math.max(0, ratePercent);
+
+  let netAmount = 0;
+  let gstAmount = 0;
+  let totalAmount = 0;
+
+  if (isInclusive) {
+    totalAmount = amt;
+    netAmount = (amt * 100) / (100 + rate);
+    gstAmount = totalAmount - netAmount;
+  } else {
+    netAmount = amt;
+    gstAmount = (amt * rate) / 100;
+    totalAmount = netAmount + gstAmount;
+  }
+
+  const cgst = gstAmount / 2;
+  const sgst = gstAmount / 2;
+
+  return {
+    netAmount: Math.round(netAmount * 100) / 100,
+    gstAmount: Math.round(gstAmount * 100) / 100,
+    totalAmount: Math.round(totalAmount * 100) / 100,
+    cgst: Math.round(cgst * 100) / 100,
+    sgst: Math.round(sgst * 100) / 100,
+    rate,
+    isInclusive
+  };
+}
+
+export interface BMIResult {
+  bmi: number;
+  category: 'Underweight' | 'Normal Weight' | 'Overweight' | 'Obese';
+  color: string;
+  idealWeightMinKg: number;
+  idealWeightMaxKg: number;
+  healthAdvice: string;
+}
+
+export function calculateBMIDetailed(weightKg: number, heightCm: number): BMIResult {
+  const w = Math.max(1, weightKg);
+  const hM = Math.max(0.1, heightCm / 100);
+  const bmiRaw = w / (hM * hM);
+  const bmi = Math.round(bmiRaw * 10) / 10;
+
+  // Ideal weight range for height (BMI 18.5 - 24.9)
+  const idealWeightMinKg = Math.round(18.5 * hM * hM * 10) / 10;
+  const idealWeightMaxKg = Math.round(24.9 * hM * hM * 10) / 10;
+
+  let category: BMIResult['category'] = 'Normal Weight';
+  let color = 'text-emerald-600 bg-emerald-50 border-emerald-200';
+  let healthAdvice = 'Your BMI is within the healthy range. Maintain a balanced diet and regular physical activity.';
+
+  if (bmi < 18.5) {
+    category = 'Underweight';
+    color = 'text-amber-600 bg-amber-50 border-amber-200';
+    healthAdvice = 'Your BMI is below normal range. Consider increasing daily caloric intake with nutrient-rich foods.';
+  } else if (bmi >= 25 && bmi < 29.9) {
+    category = 'Overweight';
+    color = 'text-orange-600 bg-orange-50 border-orange-200';
+    healthAdvice = 'Your BMI is above healthy range. Focus on portion control, regular exercise, and active lifestyle.';
+  } else if (bmi >= 30) {
+    category = 'Obese';
+    color = 'text-rose-600 bg-rose-50 border-rose-200';
+    healthAdvice = 'Your BMI indicates obesity. Consult a healthcare provider for personalized diet and fitness guidance.';
+  }
+
+  return {
+    bmi,
+    category,
+    color,
+    idealWeightMinKg,
+    idealWeightMaxKg,
+    healthAdvice
+  };
+}
+
+export function convertTextCase(text: string, mode: 'upper' | 'lower' | 'title' | 'camel' | 'snake' | 'kebab' | 'sentence'): string {
+  if (!text) return '';
+  switch (mode) {
+    case 'upper':
+      return text.toUpperCase();
+    case 'lower':
+      return text.toLowerCase();
+    case 'title':
+      return text.toLowerCase().replace(/(?:^|\s|-|_)\S/g, (m) => m.toUpperCase());
+    case 'camel':
+      return text
+        .replace(/(?:^\w|[A-Z]|\b\w)/g, (letter, index) =>
+          index === 0 ? letter.toLowerCase() : letter.toUpperCase()
+        )
+        .replace(/\s+/g, '');
+    case 'snake':
+      return text
+        .trim()
+        .toLowerCase()
+        .replace(/[\s\-_]+/g, '_');
+    case 'kebab':
+      return text
+        .trim()
+        .toLowerCase()
+        .replace(/[\s\-_]+/g, '-');
+    case 'sentence':
+      return text.toLowerCase().replace(/(^\s*\w|[.!?]\s*\w)/g, (c) => c.toUpperCase());
+    default:
+      return text;
+  }
+}
+
+export function repeatText(text: string, count: number, separator: string = ' ', addNewline: boolean = false): string {
+  if (!text) return '';
+  const times = Math.min(10000, Math.max(1, count));
+  const delimiter = addNewline ? '\n' : separator;
+  return Array(times).fill(text).join(delimiter);
+}
+
+export interface DetailedLoveMatch {
+  overallScore: number;
+  emotionalChemistry: number;
+  zodiacMatch: number;
+  vibeCompatibility: number;
+  soulmateTag: string;
+  badgeColor: string;
+  statusHeadline: string;
+  bestDateIdea: string;
+  relationshipSuperpower: string;
+}
+
+export function calculateLovePercentage(
+  name1: string,
+  name2: string,
+  zodiac1?: string,
+  zodiac2?: string,
+  stage?: string,
+  vibe1?: string,
+  vibe2?: string
+): DetailedLoveMatch {
+  const n1 = name1.trim().toLowerCase();
+  const n2 = name2.trim().toLowerCase();
+  if (!n1 || !n2) {
+    return {
+      overallScore: 0,
+      emotionalChemistry: 0,
+      zodiacMatch: 0,
+      vibeCompatibility: 0,
+      soulmateTag: 'Enter Names',
+      badgeColor: 'bg-slate-100 text-slate-700',
+      statusHeadline: 'Enter both names to calculate match!',
+      bestDateIdea: 'A cozy evening coffee date.',
+      relationshipSuperpower: 'Mutual laughter & good vibes.'
+    };
+  }
+
+  let combined = n1 + n2 + (zodiac1 || '') + (zodiac2 || '') + (stage || '') + (vibe1 || '') + (vibe2 || '');
+  let sum = 0;
+  for (let i = 0; i < combined.length; i++) {
+    sum += combined.charCodeAt(i) * (i + 1);
+  }
+
+  // Deterministic calculation in 68% - 99% range for uplifting fun match experience
+  const overallScore = 68 + (sum % 32);
+  const emotionalChemistry = Math.min(99, Math.max(65, 60 + ((sum * 3) % 40)));
+  const zodiacMatch = Math.min(99, Math.max(70, 70 + ((sum * 7) % 30)));
+  const vibeCompatibility = vibe1 === vibe2 ? 98 : Math.min(99, Math.max(65, 65 + ((sum * 5) % 35)));
+
+  let soulmateTag = 'Written in the Stars ✨';
+  let badgeColor = 'from-rose-500 to-pink-600';
+  let statusHeadline = 'A Match Made in Heaven! 💖';
+  let bestDateIdea = 'Sunset stargazing, deep conversations & favorite music.';
+  let relationshipSuperpower = 'Unbreakable emotional trust & magnetic attraction.';
+
+  if (overallScore >= 95) {
+    soulmateTag = 'Twin Flame Energy 🔥';
+    statusHeadline = 'Unstoppable Power Couple! 👑';
+    bestDateIdea = 'Spontaneous weekend getaway or cozy rooftop stargazing.';
+    relationshipSuperpower = 'Telepathic understanding & electric chemistry.';
+  } else if (overallScore >= 88) {
+    soulmateTag = 'Soulmate Level 💕';
+    statusHeadline = 'Deep Harmony & Enduring Love! 💖';
+    bestDateIdea = 'Candlelight dinner followed by late night drive & ice cream.';
+    relationshipSuperpower = 'Effortless laughter and constant support.';
+  } else if (overallScore >= 78) {
+    soulmateTag = 'Cute & Charming Pair 🌸';
+    statusHeadline = 'Strong Connection & Mutual Support! 💞';
+    bestDateIdea = 'Exploring a vibrant night market & trying new street food.';
+    relationshipSuperpower = 'Playful banter & mutual respect.';
+  } else {
+    soulmateTag = 'Exciting Adventure Ahead 🚀';
+    statusHeadline = 'Promising Connection! Full of Spark! ⚡';
+    bestDateIdea = 'Fun arcade game night or coffee & book store tour.';
+    relationshipSuperpower = 'Inspiring each other to try new things.';
+  }
+
+  return {
+    overallScore,
+    emotionalChemistry,
+    zodiacMatch,
+    vibeCompatibility,
+    soulmateTag,
+    badgeColor,
+    statusHeadline,
+    bestDateIdea,
+    relationshipSuperpower
+  };
+}
+
+
+
 
