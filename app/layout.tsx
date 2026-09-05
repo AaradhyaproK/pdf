@@ -5,7 +5,6 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { CookieConsent } from '@/components/CookieConsent';
 import { AnalyticsTracker } from '@/components/AnalyticsTracker';
-import { GoogleAdSenseScript } from '@/components/GoogleAdSenseScript';
 import { Toaster } from 'sonner';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -93,13 +92,17 @@ export default function RootLayout({
       <head>
         <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Search FileZenith Tools" />
         <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9075710959353163"
+          crossOrigin="anonymous"
+        />
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body className={`${inter.className} min-h-full flex flex-col bg-slate-50/70 text-slate-900 antialiased`}>
         <AppSplashScreen />
-        <GoogleAdSenseScript />
         <CloudflareAnalytics />
         <AnalyticsTracker />
         <Navbar />
