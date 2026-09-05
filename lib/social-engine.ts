@@ -42,15 +42,23 @@ export async function parseSocialMediaURL(inputUrl: string): Promise<ParsedSocia
     let thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
 
     try {
-      const noembedRes = await fetch(`https://noembed.com/embed?url=${encodeURIComponent(cleanUrl)}`);
-      if (noembedRes.ok) {
-        const data = await noembedRes.json();
+      const oembedRes = await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(cleanUrl)}&format=json`);
+      if (oembedRes.ok) {
+        const data = await oembedRes.json();
         if (data.title) title = data.title;
-        if (data.author_name) author = `@${data.author_name.replace(/\s+/g, '')}`;
+        if (data.author_name) author = data.author_name;
         if (data.thumbnail_url) thumbnailUrl = data.thumbnail_url;
+      } else {
+        const noembedRes = await fetch(`https://noembed.com/embed?url=${encodeURIComponent(cleanUrl)}`);
+        if (noembedRes.ok) {
+          const data = await noembedRes.json();
+          if (data.title) title = data.title;
+          if (data.author_name) author = data.author_name;
+          if (data.thumbnail_url) thumbnailUrl = data.thumbnail_url;
+        }
       }
     } catch {
-      //
+      // ignore network errors for metadata fetching
     }
 
     return {
@@ -63,9 +71,11 @@ export async function parseSocialMediaURL(inputUrl: string): Promise<ParsedSocia
       videoId,
       duration: isShorts ? 'Shorts' : 'Full HD',
       formats: [
-        { quality: '1080p Full HD Video (MP4)', format: 'mp4', sizeLabel: 'HD Stream', downloadUrl: cleanUrl },
-        { quality: '720p HD Video (MP4)', format: 'mp4', sizeLabel: 'Standard MP4', downloadUrl: cleanUrl },
-        { quality: '320kbps Audio Track (MP3)', format: 'mp3', sizeLabel: 'High Quality MP3', downloadUrl: cleanUrl },
+        { quality: '1080p Full HD Video (MP4)', format: 'mp4', sizeLabel: '1080p Full HD', downloadUrl: cleanUrl },
+        { quality: '720p HD Video (MP4)', format: 'mp4', sizeLabel: '720p HD', downloadUrl: cleanUrl },
+        { quality: '480p SD Video (MP4)', format: 'mp4', sizeLabel: '480p SD', downloadUrl: cleanUrl },
+        { quality: '360p Fast Video (MP4)', format: 'mp4', sizeLabel: '360p Fast', downloadUrl: cleanUrl },
+        { quality: '320kbps Audio Track (MP3)', format: 'mp3', sizeLabel: 'High Quality Audio', downloadUrl: cleanUrl },
         { quality: 'HD Cover Thumbnail (4K JPG)', format: 'jpg', sizeLabel: 'MaxRes Photo', downloadUrl: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` },
       ],
     };
@@ -166,7 +176,7 @@ export async function parseSocialMediaURL(inputUrl: string): Promise<ParsedSocia
 /**
  * Triggers 100% direct in-app video stream file download & logs event to Firestore.
  */
-export async function downloadSocialAsset(format: MediaFormat, title: string, sourceUrl?: string) {
+export async function downloadSocialAsset(format: MediaFormat, title: string, sourceUrl?: string): Promise<boolean> {
   const sanitizedTitle = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40);
   const filename = `${sanitizedTitle}-${format.quality.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.${format.format}`;
 
@@ -176,8 +186,13 @@ export async function downloadSocialAsset(format: MediaFormat, title: string, so
   // 1. Direct HD Cover Photo Download (JPG/PNG)
   if (format.format === 'jpg' || format.format === 'png') {
     if (format.downloadUrl && format.downloadUrl.startsWith('http')) {
+      const toastId = toast.loading('Downloading cover thumbnail...');
       try {
-        const res = await fetch(format.downloadUrl);
+        let res = await fetch(format.downloadUrl);
+        // Fallback for YouTube maxres thumbnail if not available
+        if (!res.ok && format.downloadUrl.includes('maxresdefault.jpg')) {
+          res = await fetch(format.downloadUrl.replace('maxresdefault.jpg', 'hqdefault.jpg'));
+        }
         if (res.ok) {
           const blob = await res.blob();
           const blobUrl = URL.createObjectURL(blob);
@@ -188,20 +203,24 @@ export async function downloadSocialAsset(format: MediaFormat, title: string, so
           a.click();
           document.body.removeChild(a);
           URL.revokeObjectURL(blobUrl);
-          toast.success('HD Cover photo downloaded!');
-          return;
+          toast.success('HD Cover photo downloaded successfully!', { id: toastId });
+          return true;
+        } else {
+          toast.error('Could not download cover thumbnail.', { id: toastId });
+          return false;
         }
       } catch {
-        //
+        toast.error('Failed to download cover thumbnail.', { id: toastId });
+        return false;
       }
     }
   }
 
   // 2. Direct In-App Media Download via Next.js Proxy API (/api/stream)
   const targetUrl = sourceUrl || format.downloadUrl;
-  const proxyApiUrl = `/api/stream?url=${encodeURIComponent(targetUrl)}&filename=${encodeURIComponent(filename)}`;
+  const proxyApiUrl = `/api/stream?url=${encodeURIComponent(targetUrl)}&filename=${encodeURIComponent(filename)}&format=${encodeURIComponent(format.format)}&quality=${encodeURIComponent(format.quality)}`;
 
-  toast.info('Downloading MP4 video file directly...');
+  const toastId = toast.loading(`Processing & preparing ${format.quality}... Please wait a few seconds.`);
 
   try {
     const res = await fetch(proxyApiUrl);
@@ -215,13 +234,15 @@ export async function downloadSocialAsset(format: MediaFormat, title: string, so
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(blobUrl);
-      toast.success('Video downloaded successfully!');
-      return;
+      toast.success(`${format.format.toUpperCase()} downloaded successfully!`, { id: toastId });
+      return true;
     } else {
       const data = await res.json().catch(() => ({}));
-      toast.error(data.error || 'Failed to download video stream. The media could not be extracted.');
+      toast.error(data.error || 'Failed to download video stream. The media could not be extracted.', { id: toastId });
+      return false;
     }
   } catch {
-    toast.error('Network error while downloading the video.');
+    toast.error('Network error while downloading the media file.', { id: toastId });
+    return false;
   }
 }

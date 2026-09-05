@@ -2,13 +2,14 @@
 
 import { useState } from 'react';
 import { ToolLayout } from '@/components/ToolLayout';
-import { parseSocialMediaURL, downloadSocialAsset, ParsedSocialMedia } from '@/lib/social-engine';
+import { parseSocialMediaURL, downloadSocialAsset, ParsedSocialMedia, MediaFormat } from '@/lib/social-engine';
 import { toast } from 'sonner';
-import { Download, Video, Music, Image as ImageIcon, Link as LinkIcon, Sparkles } from 'lucide-react';
+import { Download, Video, Music, Image as ImageIcon, Link as LinkIcon, Sparkles, Loader2 } from 'lucide-react';
 
 export default function YouTubeDownloaderPage() {
   const [url, setUrl] = useState('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
   const [isProcessing, setIsProcessing] = useState(false);
+  const [downloadingQuality, setDownloadingQuality] = useState<string | null>(null);
   const [parsedData, setParsedData] = useState<ParsedSocialMedia | null>(null);
 
   const handleFetchMedia = async () => {
@@ -29,11 +30,21 @@ export default function YouTubeDownloaderPage() {
     }
   };
 
+  const handleDownload = async (format: MediaFormat) => {
+    if (!parsedData || downloadingQuality) return;
+    setDownloadingQuality(format.quality);
+    try {
+      await downloadSocialAsset(format, parsedData.title, parsedData.sourceUrl);
+    } finally {
+      setDownloadingQuality(null);
+    }
+  };
+
   return (
     <ToolLayout
       slug="/social/youtube-downloader"
       title="YouTube Video & Shorts Downloader (1080p, MP4 & MP3)"
-      subtitle="Download YouTube videos, Shorts, and MP3 audio in 1080p Full HD. Fast, free, 100% private client-side URL extraction."
+      subtitle="Download YouTube videos, Shorts, and MP3 audio in 1080p Full HD. Fast, free, 100% direct high-speed video processing."
     >
       <div className="space-y-6">
         <div className="space-y-3">
@@ -56,10 +67,19 @@ export default function YouTubeDownloaderPage() {
             <button
               onClick={handleFetchMedia}
               disabled={isProcessing}
-              className="px-6 py-3.5 rounded-2xl bg-rose-600 hover:bg-rose-700 active:scale-95 text-white font-extrabold text-sm shadow-md shadow-rose-500/20 transition-all flex items-center justify-center gap-2 min-h-[48px] cursor-pointer"
+              className="px-6 py-3.5 rounded-2xl bg-rose-600 hover:bg-rose-700 active:scale-95 text-white font-extrabold text-sm shadow-md shadow-rose-500/20 transition-all flex items-center justify-center gap-2 min-h-[48px] cursor-pointer disabled:opacity-60"
             >
-              <Sparkles className="w-4 h-4 text-rose-200" />
-              <span>{isProcessing ? 'Fetching Streams...' : 'Fetch Download Links'}</span>
+              {isProcessing ? (
+                <>
+                  <Loader2 className="w-4 h-4 text-rose-200 animate-spin" />
+                  <span>Fetching Streams...</span>
+                </>
+              ) : (
+                <>
+                  <Sparkles className="w-4 h-4 text-rose-200" />
+                  <span>Fetch Download Links</span>
+                </>
+              )}
             </button>
           </div>
         </div>
@@ -80,7 +100,7 @@ export default function YouTubeDownloaderPage() {
                   {parsedData.title}
                 </h3>
                 <p className="text-xs text-slate-500">
-                  Author: <strong className="text-slate-800">{parsedData.author}</strong> • Duration: {parsedData.duration}
+                  Author: <strong className="text-slate-800">{parsedData.author}</strong> • Quality: {parsedData.duration}
                 </p>
               </div>
             </div>
@@ -91,34 +111,54 @@ export default function YouTubeDownloaderPage() {
               </h4>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {parsedData.formats.map((format, idx) => (
-                  <div
-                    key={idx}
-                    className="p-4 bg-white border border-slate-200 rounded-2xl shadow-xs hover:border-rose-300 flex items-center justify-between gap-3 transition-all"
-                  >
-                    <div className="flex items-center gap-3 min-w-0">
-                      <div className={`p-2.5 rounded-xl ${format.format === 'mp4' ? 'bg-rose-50 text-rose-600' : format.format === 'mp3' ? 'bg-purple-50 text-purple-600' : 'bg-sky-50 text-sky-600'}`}>
-                        {format.format === 'mp4' ? <Video className="w-5 h-5" /> : format.format === 'mp3' ? <Music className="w-5 h-5" /> : <ImageIcon className="w-5 h-5" />}
-                      </div>
-                      <div className="min-w-0">
-                        <p className="text-xs sm:text-sm font-bold text-slate-900 truncate">
-                          {format.quality}
-                        </p>
-                        <p className="text-[11px] text-slate-400">
-                          Format: {format.format.toUpperCase()} • {format.sizeLabel}
-                        </p>
-                      </div>
-                    </div>
+                {parsedData.formats.map((format, idx) => {
+                  const isCurrentDownloading = downloadingQuality === format.quality;
 
-                    <button
-                      onClick={() => downloadSocialAsset(format, parsedData.title, parsedData.sourceUrl)}
-                      className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-rose-600 text-white font-bold text-xs shrink-0 flex items-center gap-1.5 transition-colors shadow-xs"
+                  return (
+                    <div
+                      key={idx}
+                      className="p-4 bg-white border border-slate-200 rounded-2xl shadow-xs hover:border-rose-300 flex items-center justify-between gap-3 transition-all"
                     >
-                      <Download className="w-3.5 h-3.5" />
-                      <span>Download</span>
-                    </button>
-                  </div>
-                ))}
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className={`p-2.5 rounded-xl ${format.format === 'mp4' ? 'bg-rose-50 text-rose-600' : format.format === 'mp3' ? 'bg-purple-50 text-purple-600' : 'bg-sky-50 text-sky-600'}`}>
+                          {format.format === 'mp4' ? <Video className="w-5 h-5" /> : format.format === 'mp3' ? <Music className="w-5 h-5" /> : <ImageIcon className="w-5 h-5" />}
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-xs sm:text-sm font-bold text-slate-900 truncate">
+                            {format.quality}
+                          </p>
+                          <p className="text-[11px] text-slate-400">
+                            Format: {format.format.toUpperCase()} • {format.sizeLabel}
+                          </p>
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={() => handleDownload(format)}
+                        disabled={downloadingQuality !== null}
+                        className={`px-4 py-2 rounded-xl font-bold text-xs shrink-0 flex items-center gap-1.5 transition-all shadow-xs ${
+                          isCurrentDownloading
+                            ? 'bg-rose-600 text-white animate-pulse'
+                            : downloadingQuality !== null
+                            ? 'bg-slate-200 text-slate-400 cursor-not-allowed'
+                            : 'bg-slate-900 hover:bg-rose-600 text-white cursor-pointer'
+                        }`}
+                      >
+                        {isCurrentDownloading ? (
+                          <>
+                            <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                            <span>Downloading...</span>
+                          </>
+                        ) : (
+                          <>
+                            <Download className="w-3.5 h-3.5" />
+                            <span>Download</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
