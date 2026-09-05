@@ -1,0 +1,71 @@
+---
+title: "How to Resize Signature Online (10KB to 20KB & Clean B&W Thresholding)"
+description: "Learn how to scan, clean background paper shadows, and resize signature images to 10KB–20KB for online government and exam forms."
+date: "2026-09-02"
+tags: ["Guides", "Signature Resizer", "Black & White", "10-20KB"]
+tool: "/tools/signature-resizer-10-to-20kb"
+image: "/blog/exam-guide.jpg"
+---
+
+When applying for government jobs, academic admissions, or banking accounts online, applicants are almost always required to upload a digital signature weighted strictly between **10KB and 20KB**.
+
+A frequent challenge occurs when candidates sign on paper and snap a photograph using their smartphone: the resulting image contains dark gray paper shadows, uneven lighting, and weighs anywhere between 2MB and 6MB. Submitting a raw camera shot usually triggers portal rejection or illegible ink reproduction on admit cards.
+
+This guide demonstrates how to capture, crop, clean, and resize your signature to under 20KB with pure white background and crisp dark ink.
+
+---
+
+## Best Practices for Capturing Your Signature
+
+To produce the cleanest digital signature:
+- **Paper:** Use an unruled, clean, smooth white sheet of paper. Avoid lined notebook pages or tinted notepads.
+- **Pen:** Use a bold black or dark blue ballpoint or gel pen. Avoid light blue, red, or green inks.
+- **Framing:** Keep signature centered with roughly 1 to 2 centimeters of white clearance around all edges.
+- **Lighting:** Take the photo directly from above under even overhead lighting, avoiding phone shadows cast over the signature paper.
+
+---
+
+## 3-Step Signature Cleanup & Resizing Process
+
+### Step 1: Crop Unnecessary White Space
+Crop closely around the signature strokes, leaving a balanced 10% to 15% margin around the perimeter. Typical aspect ratios for signatures range from 2:1 to 3:1 (e.g. 4.0 cm × 2.0 cm or 140 × 60 px).
+
+### Step 2: Apply Magic Black & White Luminance Thresholding
+In [FileZenith's Signature Resizer Studio](/tools/signature-resizer-10-to-20kb), the client-side engine calculates the photometric luminance of every pixel using standard perceptual weighting:
+
+$$L = 0.299R + 0.587G + 0.114B$$
+
+Any paper shadow pixels with luminance above the adaptive threshold are converted to pure white (#FFFFFF), while ink stroke pixels are darkened to deep black (#000000). The result is studio-grade scanner quality in real-time.
+
+### Step 3: Compress to 10KB–20KB
+Export the cleaned signature as a standard JPEG. The tool automatically ensures the file size falls comfortably inside the 12KB to 18KB window.
+
+---
+
+## Common Mistakes to Avoid
+
+- **Signing on Ruled Paper:** Horizontal notebook lines intersect with pen strokes, making signature extraction messy.
+- **Using Red or Light Ink:** Official exam boards reject non-black/non-dark-blue signatures.
+- **Leaving Massive White Borders:** Failing to crop causes the actual signature to appear microscopic on the final admit card.
+
+---
+
+## Frequently Asked Questions (FAQ)
+
+### Can I upload a signature signed with blue pen?
+Most government exam portals (such as SSC, UPSC, and IBPS) accept dark blue or black ink. However, black ink is strongly recommended because it offers maximum optical contrast against white backgrounds. Avoid light blue ink.
+
+### What are the exact dimensions for an SSC or Railway signature?
+SSC and Railway recruitment portals typically require signatures measuring **4.0 cm width × 2.0 cm height** (approx 400 × 200 pixels) or 140 × 60 pixels, with a file size between 10KB and 20KB.
+
+### Why does my uploaded signature look blurry on the preview screen?
+If you did not crop the image before resizing, downscaling compresses the entire sheet of paper, making your signature lines thin and faded. Crop closely around the ink strokes first.
+
+---
+
+## Related Tools & Guides
+
+- [Signature Resizer (10KB to 20KB)](/tools/signature-resizer-10-to-20kb) — Fast signature dimension and KB compressor.
+- [Clean B&W Signature Tool](/tools/clean-black-white-signature) — Instant paper shadow remover and contrast enhancer.
+- [How to Compress Image to 20KB](/blog/how-to-compress-image-to-20kb) — 20KB image compression tutorial.
+- [SSC Photo & Signature Requirements](/blog/ssc-photo-size-requirements) — Official SSC guidelines.

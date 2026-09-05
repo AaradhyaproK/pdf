@@ -1,0 +1,65 @@
+---
+title: "How to Compress Image to 100KB for Certificates & Document Scans"
+description: "Learn how to compress scanned certificates, mark sheets, ID cards, and photographs to under 100KB without blurring text readability."
+date: "2026-09-02"
+tags: ["Guides", "Document Scans", "100KB", "Certificates"]
+tool: "/tools/compress-image-to-100kb"
+image: "/blog/exam-guide.jpg"
+---
+
+Document upload portals for university admissions, state government scholarship schemes, UPSC OTR registration, and Aadhaar or PAN card updates often specify a **100KB maximum file limit** for supporting certificates and document scans.
+
+Unlike photographs, compressing scanned documents requires extra care. If aggressive compression is applied indiscriminately, small printed text, roll numbers, percentage marks, and authorized signatures become blurry and illegible, leading to document rejection during verification.
+
+This guide details how to compress certificates to under 100KB while preserving pristine typography and text clarity.
+
+---
+
+## Why Text Blurs During Document Compression
+
+Document scans feature high contrast edges between dark ink and light paper. Standard JPEG compression uses discrete cosine transform (DCT) frequency quantization, which tends to discard high-frequency detail first.
+
+When quality is dialed down too aggressively on a low-resolution scan, ringing artifacts (halos around letters) and blockiness ruin readability. The solution is to maintain a **sufficiently wide pixel canvas (at least 1000px to 1200px width)** while letting the encoder optimize flat paper areas.
+
+---
+
+## 3-Step Guide: Compress Certificates Under 100KB
+
+### Step 1: Scan or Photograph in Bright, Flat Light
+Take a straight-down, well-lit photo of your marksheet or certificate without shadows falling across the page. Crop away table surfaces and extraneous backgrounds.
+
+### Step 2: Keep Resolution at 1000px to 1400px Width
+Never downscale a document scan to 400px wide. Keep the width between 1000px and 1400px so small printed numbers (such as grade points and dates of birth) retain sufficient pixel density.
+
+### Step 3: Run Smart Browser Compression
+Use our client-side [Compress Image to 100KB Tool](/tools/compress-image-to-100kb). The engine applies moderate JPEG compression (0.72–0.85 quality) to flat areas of the document, bringing total file size safely below 100KB (e.g. 85KB–95KB) while preserving sharp, legible letters.
+
+---
+
+## Common Mistakes to Avoid
+
+- **Saving as High-Density 24-bit PNG:** PNG format retains every uncompressed pixel, causing scanned certificates to balloon to 1MB–3MB. Always export document scans as JPEG for 100KB limits.
+- **Cropping Away Official Seals or Signatures:** Ensure the issuing authority stamp and signature are fully visible inside the cropped frame.
+- **Downscaling Width Below 800 Pixels:** Sub-800px document scans frequently fail automated OCR or human manual verification.
+
+---
+
+## Frequently Asked Questions (FAQ)
+
+### Can university mark sheets compressed to 100KB be read clearly?
+Yes. If you maintain a canvas width of around 1000px to 1200px and compress using FileZenith's JPEG optimization engine, all numbers, grade letters, and dates remain crisp and easily readable.
+
+### What should I do if my portal requires a PDF under 100KB instead of an image?
+You can convert your compressed JPEG image into a compact PDF using our [Pics to PDF Converter](/image/pics-to-pdf) or compress an existing PDF with the [Compress PDF](/pdf/compress) tool.
+
+### Is my Aadhaar or certificate data secure on FileZenith?
+Absolutely. All compression and rendering occurs locally within your browser's private JavaScript runtime. No certificate data or identity scans are ever transferred to our servers.
+
+---
+
+## Related Tools & Guides
+
+- [Compress Image to 100KB Tool](/tools/compress-image-to-100kb) — Fast 100KB client-side document compressor.
+- [UPSC Photo Resizer](/tools/upsc-photo-resizer) — Official UPSC OTR photo and signature format tool.
+- [How to Reduce Image Size Without Losing Quality](/blog/how-to-reduce-image-size-without-losing-quality) — Perceptual compression techniques.
+- [How to Compress Image to 50KB](/blog/how-to-compress-image-to-50kb) — 50KB compression tutorial for job forms.

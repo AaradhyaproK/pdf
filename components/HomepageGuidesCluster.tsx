@@ -23,13 +23,21 @@ export function HomepageGuidesCluster() {
               Learn exact specs for SSC, UPSC, NEET, Railway, and banking portals, plus how to compress photos without losing visual quality.
             </p>
           </div>
+
+          <Link
+            href="/blog"
+            className="px-5 py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-xs transition-all flex items-center gap-2 shrink-0 group active:scale-95"
+          >
+            <span>Explore All Guides & Specs</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {guides.map((g) => (
             <Link
               key={g.slug}
-              href={`/guides/${g.slug}`}
+              href={`/blog/${g.slug}`}
               className="p-5 rounded-2xl bg-slate-50/70 border border-slate-200 hover:border-emerald-500 hover:bg-white hover:shadow-md transition-all group flex flex-col justify-between space-y-3"
             >
               <div className="space-y-2">

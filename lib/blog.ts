@@ -38,13 +38,22 @@ export function extractFaqsFromContent(content: string): BlogFaq[] {
   const parts = content.split(/## (?:Frequently Asked Questions|FAQ)/i);
   if (parts.length < 2) return faqs;
 
-  const faqSection = parts[1];
+  // Only take content up to the next ## heading or horizontal rule divider
+  const faqSection = parts[1].split(/\n## |\n---/)[0];
   const blocks = faqSection.split(/### /g).slice(1);
 
   blocks.forEach((block) => {
     const lines = block.trim().split('\n');
     const q = lines[0].replace(/[*#]/g, '').trim();
-    const a = lines.slice(1).join(' ').replace(/[*#]/g, '').trim();
+    let a = lines.slice(1).join(' ').trim();
+
+    // Clean markdown formatting for Google Rich Results Schema
+    a = a
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Convert [link text](url) -> link text
+      .replace(/[*_#`]/g, '') // Strip markdown formatting symbols
+      .replace(/\s+/g, ' ') // Collapse extra whitespace
+      .trim();
+
     if (q && a) {
       faqs.push({ q, a });
     }

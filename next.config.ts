@@ -33,6 +33,16 @@ const nextConfig: NextConfig = {
         destination: '/image/convert-heic',
         permanent: true,
       },
+      {
+        source: '/guides/:slug',
+        destination: '/blog/:slug',
+        permanent: true,
+      },
+      {
+        source: '/guides',
+        destination: '/blog',
+        permanent: true,
+      },
     ];
   },
 };

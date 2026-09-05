@@ -61,6 +61,9 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       url: postUrl,
       siteName: 'FileZenith',
       publishedTime: post.date,
+      modifiedTime: post.date,
+      authors: ['https://www.filezenith.com/about'],
+      section: post.tags[0] || 'Guides',
       tags: post.tags,
       images: [
         {
@@ -92,18 +95,24 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const postUrl = `${siteUrl}/blog/${post.slug}`;
   const imageUrl = `${siteUrl}${post.image || '/blog/pdf-compression.jpg'}`;
 
-  // Article JSON-LD Schema
+  // Article / BlogPosting JSON-LD Schema
   const articleJsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': ['Article', 'BlogPosting'],
     headline: post.title,
     description: post.description,
     image: [imageUrl],
     datePublished: post.date,
     dateModified: post.date,
+    inLanguage: 'en-US',
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': postUrl,
+    },
+    isPartOf: {
+      '@type': 'Blog',
+      '@id': `${siteUrl}/blog`,
+      name: 'FileZenith Guides & Knowledge Hub',
     },
     author: {
       '@type': 'Organization',
@@ -120,6 +129,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       },
     },
     keywords: post.tags.join(', '),
+    articleSection: post.tags[0] || 'Guides',
+    wordCount: post.content.split(/\s+/).length,
   };
 
   // Breadcrumb List JSON-LD Schema

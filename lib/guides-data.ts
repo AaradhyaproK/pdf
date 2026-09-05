@@ -76,8 +76,8 @@ export const GUIDE_REGISTRY: Record<string, GuideConfig> = {
       { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Format signature 10KB-20KB.' }
     ],
     relatedGuides: [
-      { name: 'How to Resize Signature Online', slug: '/guides/how-to-resize-signature-online', desc: 'Complete guide for signature cleanup.' },
-      { name: 'JPEG vs PNG for Forms', slug: '/guides/jpeg-vs-png-for-online-forms', desc: 'Compare formats for application portals.' }
+      { name: 'How to Resize Signature Online', slug: '/blog/how-to-resize-signature-online', desc: 'Complete guide for signature cleanup.' },
+      { name: 'JPEG vs PNG for Forms', slug: '/blog/jpeg-vs-png-for-online-forms', desc: 'Compare formats for application portals.' }
     ]
   },
 
@@ -114,8 +114,8 @@ export const GUIDE_REGISTRY: Record<string, GuideConfig> = {
       { name: 'IBPS & SBI Photo Resizer', slug: '/tools/ibps-sbi-photo-resizer', desc: 'Bank exam photo 200x230 px.' }
     ],
     relatedGuides: [
-      { name: 'SSC Photo Requirements Guide', slug: '/guides/ssc-photo-size-requirements', desc: 'Official SSC photo rules.' },
-      { name: 'Photo Size & File Size Explained', slug: '/guides/photo-size-and-file-size-explained', desc: 'Understand KB vs Pixels.' }
+      { name: 'SSC Photo Requirements Guide', slug: '/blog/ssc-photo-size-requirements', desc: 'Official SSC photo rules.' },
+      { name: 'Photo Size & File Size Explained', slug: '/blog/photo-size-and-file-size-explained', desc: 'Understand KB vs Pixels.' }
     ]
   },
 
@@ -147,7 +147,7 @@ export const GUIDE_REGISTRY: Record<string, GuideConfig> = {
       { name: 'UPSC Photo Resizer', slug: '/tools/upsc-photo-resizer', desc: 'UPSC OTR photo tool.' }
     ],
     relatedGuides: [
-      { name: 'Reduce Image Size Without Quality Loss', slug: '/guides/how-to-reduce-image-size-without-losing-quality', desc: 'Optimization techniques.' }
+      { name: 'Reduce Image Size Without Quality Loss', slug: '/blog/how-to-reduce-image-size-without-losing-quality', desc: 'Optimization techniques.' }
     ]
   },
 
@@ -184,7 +184,7 @@ export const GUIDE_REGISTRY: Record<string, GuideConfig> = {
       { name: 'Photo Name & Date Generator', slug: '/tools/photo-name-date-generator', desc: 'Add name & DOP stamp.' }
     ],
     relatedGuides: [
-      { name: 'How to Compress Image to 50KB', slug: '/guides/how-to-compress-image-to-50kb', desc: '50KB compression tutorial.' }
+      { name: 'How to Compress Image to 50KB', slug: '/blog/how-to-compress-image-to-50kb', desc: '50KB compression tutorial.' }
     ]
   },
 
@@ -221,7 +221,7 @@ export const GUIDE_REGISTRY: Record<string, GuideConfig> = {
       { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Resize to 10-20KB.' }
     ],
     relatedGuides: [
-      { name: 'How to Compress Image to 20KB', slug: '/guides/how-to-compress-image-to-20kb', desc: 'Compress signature 20KB.' }
+      { name: 'How to Compress Image to 20KB', slug: '/blog/how-to-compress-image-to-20kb', desc: 'Compress signature 20KB.' }
     ]
   },
 
@@ -256,7 +256,7 @@ export const GUIDE_REGISTRY: Record<string, GuideConfig> = {
       { name: 'Compress Image to 20KB', slug: '/tools/compress-image-to-20kb', desc: 'Convert & compress JPEG.' }
     ],
     relatedGuides: [
-      { name: 'Photo Size & File Size Explained', slug: '/guides/photo-size-and-file-size-explained', desc: 'Understand file specs.' }
+      { name: 'Photo Size & File Size Explained', slug: '/blog/photo-size-and-file-size-explained', desc: 'Understand file specs.' }
     ]
   },
 
@@ -291,7 +291,7 @@ export const GUIDE_REGISTRY: Record<string, GuideConfig> = {
       { name: 'SSC Photo Resizer', slug: '/tools/ssc-photo-resizer', desc: '3.5x4.5 cm resizer.' }
     ],
     relatedGuides: [
-      { name: 'How to Resize Photo for Online Application', slug: '/guides/how-to-resize-photo-for-online-application', desc: 'Step-by-step resizing.' }
+      { name: 'How to Resize Photo for Online Application', slug: '/blog/how-to-resize-photo-for-online-application', desc: 'Step-by-step resizing.' }
     ]
   },
 
@@ -323,7 +323,7 @@ export const GUIDE_REGISTRY: Record<string, GuideConfig> = {
       { name: 'Compress Image to 100KB', slug: '/tools/compress-image-to-100kb', desc: '100KB target tool.' }
     ],
     relatedGuides: [
-      { name: 'How to Compress Image to 20KB', slug: '/guides/how-to-compress-image-to-20kb', desc: '20KB guide.' }
+      { name: 'How to Compress Image to 20KB', slug: '/blog/how-to-compress-image-to-20kb', desc: '20KB guide.' }
     ]
   },
 
@@ -361,7 +361,7 @@ export const GUIDE_REGISTRY: Record<string, GuideConfig> = {
       { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Format SSC signature.' }
     ],
     relatedGuides: [
-      { name: 'How to Compress Image to 50KB', slug: '/guides/how-to-compress-image-to-50kb', desc: '50KB compression guide.' }
+      { name: 'How to Compress Image to 50KB', slug: '/blog/how-to-compress-image-to-50kb', desc: '50KB compression guide.' }
     ]
   },
 
@@ -397,7 +397,7 @@ export const GUIDE_REGISTRY: Record<string, GuideConfig> = {
       { name: 'UPSC Photo Resizer Tool', slug: '/tools/upsc-photo-resizer', desc: 'Format UPSC photo 350x350.' }
     ],
     relatedGuides: [
-      { name: 'How to Resize Photo for Online Application', slug: '/guides/how-to-resize-photo-for-online-application', desc: 'Resizing guide.' }
+      { name: 'How to Resize Photo for Online Application', slug: '/blog/how-to-resize-photo-for-online-application', desc: 'Resizing guide.' }
     ]
   },
 
@@ -432,7 +432,7 @@ export const GUIDE_REGISTRY: Record<string, GuideConfig> = {
       { name: 'NEET Photo Resizer Tool', slug: '/tools/neet-photo-resizer', desc: 'Format NEET photos.' }
     ],
     relatedGuides: [
-      { name: 'How to Compress Image to 100KB', slug: '/guides/how-to-compress-image-to-100kb', desc: '100KB guide.' }
+      { name: 'How to Compress Image to 100KB', slug: '/blog/how-to-compress-image-to-100kb', desc: '100KB guide.' }
     ]
   },
 
@@ -467,7 +467,7 @@ export const GUIDE_REGISTRY: Record<string, GuideConfig> = {
       { name: 'RRB Railway Photo Resizer', slug: '/tools/rrb-railway-photo-resizer', desc: 'Format RRB photo.' }
     ],
     relatedGuides: [
-      { name: 'How to Compress Image to 50KB', slug: '/guides/how-to-compress-image-to-50kb', desc: '50KB guide.' }
+      { name: 'How to Compress Image to 50KB', slug: '/blog/how-to-compress-image-to-50kb', desc: '50KB guide.' }
     ]
   }
 };

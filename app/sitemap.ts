@@ -1,7 +1,6 @@
 import { MetadataRoute } from 'next';
 import { SEO_REGISTRY } from '@/lib/seo-config';
 import { PRESET_REGISTRY } from '@/lib/presets-data';
-import { GUIDE_REGISTRY } from '@/lib/guides-data';
 import { CATEGORY_REGISTRY } from '@/lib/categories-data';
 import { getAllPosts } from '@/lib/blog';
 
@@ -29,13 +28,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  const guideRoutes = Object.keys(GUIDE_REGISTRY).map((slug) => ({
-    url: `${baseUrl}/guides/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: 0.8,
-  }));
-
   const staticRoutes = [
     '',
     '/about',
@@ -56,9 +48,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const blogRoutes = blogPosts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.date),
-    changeFrequency: 'monthly' as const,
-    priority: 0.7,
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
   }));
 
-  return [...staticRoutes, ...categoryRoutes, ...toolRoutes, ...presetRoutes, ...guideRoutes, ...blogRoutes];
+  return [...staticRoutes, ...categoryRoutes, ...toolRoutes, ...presetRoutes, ...blogRoutes];
 }

@@ -1,0 +1,81 @@
+---
+title: "Photo Dimensions (Pixels/CM) vs File Size (KB/MB) Explained"
+description: "Demystifying pixels, centimeters, DPI, KB, and MB for online form photo uploads. Learn how resolution impacts file weight and how to meet strict requirements."
+date: "2026-09-02"
+tags: ["Guides", "Image Specs", "Resolution", "File Size"]
+tool: "/tools/ssc-photo-resizer"
+image: "/blog/exam-guide.jpg"
+---
+
+Application notifications frequently include technical requirement specifications such as:
+
+> *"Photograph must be 3.5 cm × 4.5 cm, 200 to 300 DPI, between 20 KB and 50 KB in JPG format."*
+
+For many applicants, this combination of physical measurements (centimeters), digital resolution (pixels and DPI), and digital storage weight (kilobytes) is confusing. Why can a 3.5 cm photo be 5 megabytes? And why does resizing the dimensions affect the file size?
+
+This guide breaks down each technical parameter simply and clearly so you never encounter photo upload errors again.
+
+---
+
+## 1. Physical Dimensions (Centimeters / Inches)
+
+Physical dimensions indicate how large the printed image will appear on a paper admit card or identity badge.
+- Standard passport photos in India and the UK measure **3.5 cm wide by 4.5 cm high**.
+- In the United States, standard passport photos measure **2 inches × 2 inches** (5.1 cm × 5.1 cm).
+
+Because computer screens do not measure in centimeters, these physical dimensions are converted into digital pixels using **DPI (Dots Per Inch)**.
+
+---
+
+## 2. DPI & Pixel Resolution (Width × Height)
+
+**DPI** specifies how many dots of ink or pixels fit into a single inch (1 inch = 2.54 cm).
+- At **300 DPI** (standard print quality):
+  - 3.5 cm ≈ 1.378 inches × 300 DPI ≈ 413 pixels
+  - 4.5 cm ≈ 1.772 inches × 300 DPI ≈ 531 pixels
+  - Standard passport dimensions: **413 × 531 pixels**.
+- At **200 DPI**:
+  - Dimensions equal approximately **275 × 354 pixels**.
+
+---
+
+## 3. Digital File Size (KB vs MB)
+
+Digital file weight measures how much data the image occupies on a hard drive or server:
+- 1 Megabyte (MB) = 1024 Kilobytes (KB)
+- Modern smartphone cameras shoot pictures at 12 to 48 megapixels, producing files between **3 MB and 10 MB** (3,000 KB to 10,000 KB).
+- When a government portal asks for **20KB to 50KB**, you must reduce the file's digital weight by over **98%**.
+
+---
+
+## How Dimensions and File Size Interact
+
+File size is governed by two key variables:
+```
+File Size ≈ (Pixel Width × Pixel Height) × Compression Quality
+```
+
+1. **Downscaling Dimensions:** Reducing an image from 4000 × 3000 pixels (12 megapixels) to 413 × 531 pixels (0.2 megapixels) cuts 98% of the data immediately before any quality reduction.
+2. **Adjusting Compression:** Fine-tuning the JPEG compression factor allows you to land precisely at 35KB or 45KB without visible pixelation.
+
+---
+
+## Frequently Asked Questions (FAQ)
+
+### If I reduce pixel dimensions, will file size decrease automatically?
+Yes. Decreasing pixel width and height removes redundant pixel information, which dramatically shrinks file size in KB even before adjusting compression sliders.
+
+### What is the difference between 200 DPI and 300 DPI for online uploads?
+For purely digital on-screen display, DPI is just metadata; the actual pixel dimensions (width and height) dictate how the image renders. However, setting 300 DPI ensures crisp printing on physical exam admit cards.
+
+### How do I check my photo's current dimensions and KB size?
+You can drop your file into [FileZenith's SSC Photo Resizer](/tools/ssc-photo-resizer). The tool instantly reports your image's exact width, height, aspect ratio, and KB size.
+
+---
+
+## Related Tools & Guides
+
+- [SSC Photo Resizer](/tools/ssc-photo-resizer) — Format photos to exact pixel and KB dimensions.
+- [Compress Image to 50KB](/tools/compress-image-to-50kb) — Target 50KB file size with zero quality loss.
+- [How to Resize Photo for Online Application](/blog/how-to-resize-photo-for-online-application) — Complete step-by-step tutorial.
+- [JPEG vs PNG for Online Forms](/blog/jpeg-vs-png-for-online-forms) — Compare file formats.
