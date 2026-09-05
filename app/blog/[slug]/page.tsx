@@ -18,6 +18,8 @@ import {
   BookOpen,
   Share2,
   FileText,
+  ListOrdered,
+  CheckCircle2,
 } from 'lucide-react';
 
 export const revalidate = 86400; // 24 hours ISR
@@ -25,6 +27,64 @@ export const revalidate = 86400; // 24 hours ISR
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
 }
+
+export interface TocHeading {
+  id: string;
+  text: string;
+}
+
+function extractHeadings(content: string): TocHeading[] {
+  const headings: TocHeading[] = [];
+  const lines = content.split('\n');
+  for (const line of lines) {
+    const h2Match = line.match(/^##\s+(.+)$/);
+    if (h2Match) {
+      const text = h2Match[1].replace(/[*_`]/g, '').trim();
+      const id = text
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/\s+/g, '-');
+      headings.push({ id, text });
+    }
+  }
+  return headings;
+}
+
+const mdxCustomComponents = {
+  h2: ({ children, ...props }: React.ComponentPropsWithoutRef<'h2'>) => {
+    const raw = typeof children === 'string' ? children : String(children || '');
+    const id = raw
+      .toLowerCase()
+      .replace(/[*_`]/g, '')
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-');
+    return (
+      <h2 id={id} className="scroll-mt-24 group flex items-center justify-between border-b border-slate-100 pb-2" {...props}>
+        <span>{children}</span>
+        <a
+          href={`#${id}`}
+          className="opacity-0 group-hover:opacity-100 text-indigo-400 hover:text-indigo-600 transition-opacity text-sm ml-2 font-normal"
+          aria-label="Direct section link"
+        >
+          #
+        </a>
+      </h2>
+    );
+  },
+  h3: ({ children, ...props }: React.ComponentPropsWithoutRef<'h3'>) => {
+    const raw = typeof children === 'string' ? children : String(children || '');
+    const id = raw
+      .toLowerCase()
+      .replace(/[*_`]/g, '')
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-');
+    return (
+      <h3 id={id} className="scroll-mt-24" {...props}>
+        {children}
+      </h3>
+    );
+  },
+};
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
@@ -116,8 +176,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     },
     author: {
       '@type': 'Organization',
-      name: 'FileZenith Tech Team',
-      url: siteUrl,
+      name: 'FileZenith Document Standards & Editorial Board',
+      url: `${siteUrl}/about`,
+    },
+    reviewedBy: {
+      '@type': 'Organization',
+      name: 'FileZenith Compliance & Standards Review Board',
+      url: `${siteUrl}/about`,
     },
     publisher: {
       '@type': 'Organization',
@@ -172,6 +237,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       },
     })),
   } : null;
+
+  const headings = extractHeadings(post.content);
 
   return (
     <main className="min-h-screen bg-slate-50/70 pt-4 sm:pt-6 pb-28 sm:pb-20 px-3 sm:px-6 lg:px-8">
@@ -251,12 +318,34 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               )}
             </header>
 
+            {/* E-E-A-T Editorial Reviewer & Fact-Check Badge */}
+            <div className="p-4 sm:p-5 rounded-3xl bg-slate-900 text-white space-y-2 border border-slate-800 shadow-md">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800/80 pb-2.5">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center justify-center shrink-0">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-black text-white">Reviewed by FileZenith Editorial Board</p>
+                    <p className="text-[10px] text-slate-400 font-medium">Fact-Checked for Official 2026-27 Notification Standards</p>
+                  </div>
+                </div>
+                <span className="text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-400/30">
+                  E-E-A-T Verified
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-300 leading-relaxed font-medium">
+                Dimensions, file size rules, and accepted formats are verified against current SSC, UPSC, NTA, and State PSC guidelines. Zero-server guarantee: images and signatures are processed locally inside your web browser.
+              </p>
+            </div>
+
             {/* HD Banner Cover Image */}
             {post.image && (
               <div className="relative w-full h-64 sm:h-96 rounded-3xl overflow-hidden shadow-sm border border-slate-200/80 bg-slate-900">
                 <img
                   src={post.image}
                   alt={post.title}
+                  loading="eager"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -286,10 +375,35 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </div>
             )}
 
-            {/* Main MDX Content Renderer */}
+            {/* Table of Contents / Quick Jump Sitelinks */}
+            {headings.length > 0 && (
+              <nav aria-label="Table of Contents" className="p-5 sm:p-6 rounded-3xl bg-indigo-50/70 border border-indigo-100 shadow-2xs space-y-3">
+                <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-indigo-900">
+                  <ListOrdered className="w-4 h-4 text-indigo-600" />
+                  <span>Table of Contents (Jump to Section)</span>
+                </div>
+                <ol className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-bold text-slate-700">
+                  {headings.map((h, idx) => (
+                    <li key={h.id}>
+                      <a
+                        href={`#${h.id}`}
+                        className="p-2.5 rounded-xl bg-white hover:bg-indigo-600 hover:text-white border border-slate-200/70 transition-all flex items-center gap-2 group shadow-2xs"
+                      >
+                        <span className="w-5 h-5 rounded-lg bg-indigo-100 group-hover:bg-indigo-500 group-hover:text-white text-indigo-700 flex items-center justify-center text-[10px] shrink-0 font-extrabold">
+                          {idx + 1}
+                        </span>
+                        <span className="truncate">{h.text}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </nav>
+            )}
+
+            {/* Main MDX Content Renderer with Custom Anchor Components */}
             <div className="bg-white p-6 sm:p-12 rounded-3xl border border-slate-200/90 shadow-2xs">
               <div className="prose prose-lg prose-slate max-w-none text-slate-800 prose-headings:text-slate-900 prose-headings:font-black prose-headings:tracking-tight prose-p:text-slate-700 prose-p:leading-relaxed prose-p:font-medium prose-li:text-slate-700 prose-strong:text-slate-900 prose-strong:font-black prose-code:text-indigo-600 prose-code:bg-indigo-50 prose-code:px-2 prose-code:py-1 prose-code:rounded-lg prose-code:before:content-none prose-code:after:content-none prose-a:text-indigo-600 prose-a:font-extrabold hover:prose-a:text-indigo-700 prose-img:rounded-3xl prose-hr:border-slate-200">
-                <MDXRemote source={post.content} />
+                <MDXRemote source={post.content} components={mdxCustomComponents} />
               </div>
             </div>
 
@@ -302,6 +416,28 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
           {/* Sticky Sidebar Column (4 cols) */}
           <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-20 self-start">
+            {/* Quick Navigation: Table of Contents in Sidebar */}
+            {headings.length > 0 && (
+              <div className="bg-white border border-slate-200/90 rounded-3xl p-5 shadow-2xs space-y-3">
+                <div className="flex items-center gap-2 text-slate-900 font-extrabold text-xs uppercase tracking-wider border-b border-slate-100 pb-2.5">
+                  <ListOrdered className="w-4 h-4 text-indigo-600" />
+                  <span>On This Page</span>
+                </div>
+                <ul className="space-y-1.5 text-xs font-semibold text-slate-600">
+                  {headings.map((h) => (
+                    <li key={h.id}>
+                      <a
+                        href={`#${h.id}`}
+                        className="block py-1 px-2.5 rounded-lg hover:bg-indigo-50 hover:text-indigo-700 transition-colors truncate"
+                      >
+                        {h.text}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             {/* Popular Tools Quick Navigation Card */}
             <div className="bg-white border border-slate-200/90 rounded-3xl p-6 shadow-2xs space-y-4">
               <div className="flex items-center gap-2.5 text-slate-900 font-extrabold text-sm border-b border-slate-100 pb-3">

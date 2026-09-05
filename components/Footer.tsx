@@ -231,6 +231,15 @@ export function Footer() {
                   <span>Download Mobile App</span>
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/blog"
+                  className="hover:text-indigo-600 font-bold text-indigo-600 transition-colors flex items-center gap-1.5"
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                  <span>Guides & Exam Blog</span>
+                </Link>
+              </li>
               <li><Link href="/utility/pages-to-word" className="hover:text-indigo-600 font-bold text-slate-900 transition-colors">Pages to Word (DOCX)</Link></li>
               <li><Link href="/utility/numbers-to-excel" className="hover:text-indigo-600 font-bold text-slate-900 transition-colors">Numbers to Excel (XLSX)</Link></li>
               <li><Link href="/utility/epf-calculator" className="hover:text-indigo-600 font-bold text-emerald-600 transition-colors">EPF Balance Growth Calculator</Link></li>
@@ -278,6 +287,8 @@ export function Footer() {
         <div className="border-t border-slate-200/80 pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-center sm:text-left">
           <p>© {new Date().getFullYear()} FileZenith. Product of <a href="https://www.snab.co.in/" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-600 font-bold underline text-slate-800">Snab</a>. All rights reserved.</p>
           <div className="flex flex-wrap items-center justify-center gap-3.5 text-slate-500 font-semibold text-[11px] sm:text-xs">
+            <Link href="/blog" className="hover:text-indigo-600 font-bold text-indigo-600 transition-colors">Guides &amp; Blog</Link>
+            <span>&bull;</span>
             <Link href="/privacy" className="hover:text-indigo-600 transition-colors">Privacy Policy</Link>
             <span>&bull;</span>
             <Link href="/terms" className="hover:text-indigo-600 transition-colors">Terms of Service</Link>
