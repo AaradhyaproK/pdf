@@ -92,32 +92,6 @@ function AdsterraLeaderboardBanner({ adKey, supportUrl }: { adKey: string; suppo
             }
           }
         </style>
-      </head>
-      <body>
-        <div id="ad-box">
-          <script type="text/javascript">
-            atOptions = {
-              'key' : '${key}',
-              'format' : 'iframe',
-              'height' : 90,
-              'width' : 728,
-              'params' : {}
-            };
-          </script>
-          <script type="text/javascript" src="https://www.highrevenueformat.com/${key}/invoke.js" onerror="showFallback()"></script>
-        </div>
-
-        <a id="fallback-box" href="${targetUrl}" target="_blank" rel="noopener noreferrer">
-          <div style="display:flex; align-items:center; gap:10px;">
-            <span style="font-size:22px;">❤️</span>
-            <div style="text-align:left;">
-              <div class="fallback-title" style="font-size:13px; font-weight:900; color:#881337;">If Ads Are Blocked or Not Loading: Support Developer</div>
-              <div class="fallback-sub" style="font-size:11px; font-weight:600; color:#be123c; margin-top:2px;">Click here to visit our sponsor link & keep tools 100% free!</div>
-            </div>
-          </div>
-          <div class="fallback-btn">Click to Support →</div>
-        </a>
-
         <script type="text/javascript">
           var adLoaded = false;
           function showFallback() {
@@ -148,6 +122,8 @@ function AdsterraLeaderboardBanner({ adKey, supportUrl }: { adKey: string; suppo
             }
             return false;
           }
+          window.showFallback = showFallback;
+          window.detectAd = detectAd;
           var pollTimer = setInterval(function() {
             if (detectAd()) { clearInterval(pollTimer); }
           }, 400);
@@ -156,6 +132,31 @@ function AdsterraLeaderboardBanner({ adKey, supportUrl }: { adKey: string; suppo
             if (!detectAd()) { showFallback(); }
           }, 3500);
         </script>
+      </head>
+      <body>
+        <div id="ad-box">
+          <script type="text/javascript">
+            atOptions = {
+              'key' : '${key}',
+              'format' : 'iframe',
+              'height' : 90,
+              'width' : 728,
+              'params' : {}
+            };
+          </script>
+          <script type="text/javascript" src="https://www.highrevenueformat.com/${key}/invoke.js" onerror="window.showFallback && window.showFallback()"></script>
+        </div>
+
+        <a id="fallback-box" href="${targetUrl}" target="_blank" rel="noopener noreferrer">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <span style="font-size:22px;">❤️</span>
+            <div style="text-align:left;">
+              <div class="fallback-title" style="font-size:13px; font-weight:900; color:#881337;">If Ads Are Blocked or Not Loading: Support Developer</div>
+              <div class="fallback-sub" style="font-size:11px; font-weight:600; color:#be123c; margin-top:2px;">Click here to visit our sponsor link & keep tools 100% free!</div>
+            </div>
+          </div>
+          <div class="fallback-btn">Click to Support →</div>
+        </a>
       </body>
     </html>
   `;
@@ -251,31 +252,6 @@ function AdsterraSidebarTallBanner({ sidebarKey, scriptUrl, containerId, support
             background: #be123c;
           }
         </style>
-      </head>
-      <body>
-        <div id="ad-box">
-          <script type="text/javascript">
-            atOptions = {
-              'key' : '${key}',
-              'format' : 'iframe',
-              'height' : 250,
-              'width' : 300,
-              'params' : {}
-            };
-          </script>
-          <script type="text/javascript" src="https://www.highrevenueformat.com/${key}/invoke.js" onerror="showFallback()"></script>
-          <div id="${cId}"></div>
-          <script async="async" data-cfasync="false" src="${script}" onerror="showFallback()"></script>
-        </div>
-
-        <a id="fallback-box" href="${targetUrl}" target="_blank" rel="noopener noreferrer">
-          <div style="font-size:42px; margin-bottom:12px;">❤️</div>
-          <div style="font-size:17px; font-weight:900; color:#881337;">If Ads Are Blocked:</div>
-          <div style="font-size:15px; font-weight:800; color:#9f1239; margin-top:2px;">Support Developer</div>
-          <div style="font-size:12px; font-weight:600; color:#be123c; margin-top:8px; max-width:240px; line-height:1.4;">Click here to visit our sponsor link & keep all tools 100% free!</div>
-          <div class="fallback-btn">Click to Support Developer →</div>
-        </a>
-
         <script type="text/javascript">
           var adLoaded = false;
           function showFallback() {
@@ -304,6 +280,8 @@ function AdsterraSidebarTallBanner({ sidebarKey, scriptUrl, containerId, support
             if (media.length > 0) { adLoaded = true; return true; }
             return false;
           }
+          window.showFallback = showFallback;
+          window.detectAd = detectAd;
           var pollTimer = setInterval(function() {
             if (detectAd()) { clearInterval(pollTimer); }
           }, 400);
@@ -312,6 +290,30 @@ function AdsterraSidebarTallBanner({ sidebarKey, scriptUrl, containerId, support
             if (!detectAd()) { showFallback(); }
           }, 3500);
         </script>
+      </head>
+      <body>
+        <div id="ad-box">
+          <script type="text/javascript">
+            atOptions = {
+              'key' : '${key}',
+              'format' : 'iframe',
+              'height' : 250,
+              'width' : 300,
+              'params' : {}
+            };
+          </script>
+          <script type="text/javascript" src="https://www.highrevenueformat.com/${key}/invoke.js" onerror="window.showFallback && window.showFallback()"></script>
+          <div id="${cId}"></div>
+          <script async="async" data-cfasync="false" src="${script}" onerror="window.showFallback && window.showFallback()"></script>
+        </div>
+
+        <a id="fallback-box" href="${targetUrl}" target="_blank" rel="noopener noreferrer">
+          <div style="font-size:42px; margin-bottom:12px;">❤️</div>
+          <div style="font-size:17px; font-weight:900; color:#881337;">If Ads Are Blocked:</div>
+          <div style="font-size:15px; font-weight:800; color:#9f1239; margin-top:2px;">Support Developer</div>
+          <div style="font-size:12px; font-weight:600; color:#be123c; margin-top:8px; max-width:240px; line-height:1.4;">Click here to visit our sponsor link & keep all tools 100% free!</div>
+          <div class="fallback-btn">Click to Support Developer →</div>
+        </a>
       </body>
     </html>
   `;
@@ -410,24 +412,6 @@ function AdsterraContainerBanner({ scriptUrl, containerId, supportUrl }: { scrip
             }
           }
         </style>
-      </head>
-      <body>
-        <div id="ad-box">
-          <div id="${cId}"></div>
-          <script async="async" data-cfasync="false" src="${script}" onerror="showFallback()"></script>
-        </div>
-
-        <a id="fallback-box" href="${targetUrl}" target="_blank" rel="noopener noreferrer">
-          <div style="display:flex; align-items:center; gap:16px;">
-            <span style="font-size:32px;">❤️</span>
-            <div style="text-align:left;">
-              <div style="font-size:15px; font-weight:900; color:#881337;">If Ads Are Blocked or Not Loading</div>
-              <div style="font-size:12px; font-weight:600; color:#be123c; margin-top:3px;">Click here to visit our sponsor link & support the developer to keep tools free!</div>
-            </div>
-          </div>
-          <div class="fallback-btn">Click to Support →</div>
-        </a>
-
         <script type="text/javascript">
           var adLoaded = false;
           function showFallback() {
@@ -457,6 +441,8 @@ function AdsterraContainerBanner({ scriptUrl, containerId, supportUrl }: { scrip
             }
             return false;
           }
+          window.showFallback = showFallback;
+          window.detectAd = detectAd;
           var pollTimer = setInterval(function() {
             if (detectAd()) { clearInterval(pollTimer); }
           }, 400);
@@ -465,6 +451,23 @@ function AdsterraContainerBanner({ scriptUrl, containerId, supportUrl }: { scrip
             if (!detectAd()) { showFallback(); }
           }, 3500);
         </script>
+      </head>
+      <body>
+        <div id="ad-box">
+          <div id="${cId}"></div>
+          <script async="async" data-cfasync="false" src="${script}" onerror="window.showFallback && window.showFallback()"></script>
+        </div>
+
+        <a id="fallback-box" href="${targetUrl}" target="_blank" rel="noopener noreferrer">
+          <div style="display:flex; align-items:center; gap:16px;">
+            <span style="font-size:32px;">❤️</span>
+            <div style="text-align:left;">
+              <div style="font-size:15px; font-weight:900; color:#881337;">If Ads Are Blocked or Not Loading</div>
+              <div style="font-size:12px; font-weight:600; color:#be123c; margin-top:3px;">Click here to visit our sponsor link & support the developer to keep tools free!</div>
+            </div>
+          </div>
+          <div class="fallback-btn">Click to Support →</div>
+        </a>
       </body>
     </html>
   `;
@@ -496,20 +499,12 @@ function CustomAdEmbed({ code, height = 250, supportUrl }: { code: string; heigh
           #fallback-box { display: none; width: 100%; height: 100%; background: #fff1f2; border: 1px solid #fecdd3; border-radius: 16px; align-items: center; justify-content: center; text-decoration: none; flex-direction: column; padding: 12px; box-sizing: border-box; text-align: center; }
           .fallback-btn { background: #e11d48; color: #ffffff; padding: 8px 16px; border-radius: 12px; font-size: 12px; font-weight: 800; margin-top: 6px; }
         </style>
-      </head>
-      <body>
-        <div id="ad-box" style="width:100%; height:100%; display:flex; justify-content:center; align-items:center;">
-          ${code}
-        </div>
-        <a id="fallback-box" href="${targetUrl}" target="_blank" rel="noopener noreferrer">
-          <div style="font-size:12px; font-weight:900; color:#881337;">❤️ Support Developer</div>
-          <div style="font-size:11px; font-weight:600; color:#be123c; margin-top:2px;">Click here to visit our sponsor link & keep tools 100% free!</div>
-          <div class="fallback-btn">Click Here to Support →</div>
-        </a>
         <script type="text/javascript">
           function showFallback() {
-            document.getElementById('ad-box').style.display = 'none';
-            document.getElementById('fallback-box').style.display = 'flex';
+            var adBox = document.getElementById('ad-box');
+            var fbBox = document.getElementById('fallback-box');
+            if (adBox) adBox.style.display = 'none';
+            if (fbBox) fbBox.style.display = 'flex';
           }
           function checkAd() {
             var adBox = document.getElementById('ad-box');
@@ -539,9 +534,21 @@ function CustomAdEmbed({ code, height = 250, supportUrl }: { code: string; heigh
               showFallback();
             }
           }
+          window.showFallback = showFallback;
+          window.checkAd = checkAd;
           setTimeout(checkAd, 1500);
           setTimeout(checkAd, 3500);
         </script>
+      </head>
+      <body>
+        <div id="ad-box" style="width:100%; height:100%; display:flex; justify-content:center; align-items:center;">
+          ${code}
+        </div>
+        <a id="fallback-box" href="${targetUrl}" target="_blank" rel="noopener noreferrer">
+          <div style="font-size:12px; font-weight:900; color:#881337;">❤️ Support Developer</div>
+          <div style="font-size:11px; font-weight:600; color:#be123c; margin-top:2px;">Click here to visit our sponsor link & keep tools 100% free!</div>
+          <div class="fallback-btn">Click Here to Support →</div>
+        </a>
       </body>
     </html>
   `;
