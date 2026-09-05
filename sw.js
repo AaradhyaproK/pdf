@@ -1,6 +1,4 @@
-self.options = {
-    "domain": "5gvci.com",
-    "zoneId": 11707483
-}
-self.lary = ""
-importScripts('https://5gvci.com/act/files/service-worker.min.js?r=sw')
+// FileZenith Service Worker
+// Third-party ad scripts completely removed for Google AdSense compliance.
+self.addEventListener('install', () => self.skipWaiting());
+self.addEventListener('activate', () => self.clients.claim());

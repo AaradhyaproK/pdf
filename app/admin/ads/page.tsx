@@ -28,7 +28,7 @@ export default function AdminAdsPage() {
   const router = useRouter();
   const [config, setConfig] = useState<AdsManagerConfig | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [activeTab, setActiveTab] = useState<'provider' | 'adsterra' | 'custom' | 'badges' | 'adsense' | 'slots' | 'adstxt'>('provider');
+  const [activeTab, setActiveTab] = useState<'provider' | 'adsense' | 'badges' | 'slots' | 'custom' | 'adstxt'>('provider');
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -70,7 +70,7 @@ export default function AdminAdsPage() {
             </Link>
             <div>
               <h1 className="text-base font-black text-slate-900 leading-tight">Master Ads Management Console</h1>
-              <p className="text-xs text-slate-500 font-medium">Control Adsterra, AdSense, Custom Codes, Badges & Slot Toggles</p>
+              <p className="text-xs text-slate-500 font-medium">Control Google AdSense, Custom Codes, Badges & Slot Toggles</p>
             </div>
           </div>
 
@@ -99,13 +99,13 @@ export default function AdminAdsPage() {
           </button>
 
           <button
-            onClick={() => setActiveTab('adsterra')}
+            onClick={() => setActiveTab('adsense')}
             className={`px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 whitespace-nowrap ${
-              activeTab === 'adsterra' ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
+              activeTab === 'adsense' ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
             }`}
           >
-            <Sparkles className="w-4 h-4" />
-            <span>2. Adsterra Keys</span>
+            <DollarSign className="w-4 h-4 text-emerald-500" />
+            <span>2. Google AdSense (Active)</span>
           </button>
 
           <button
@@ -160,7 +160,7 @@ export default function AdminAdsPage() {
         </div>
 
         {/* Tab 1: Ad Network Provider Selection */}
-        {(activeTab === 'provider' || activeTab === 'adsterra') && (
+        {activeTab === 'provider' && (
           <div className="p-6 bg-white border border-slate-200/80 rounded-3xl shadow-xs space-y-6">
             <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
               <div className="p-2.5 rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-100">
@@ -172,36 +172,10 @@ export default function AdminAdsPage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <label
                 className={`p-5 rounded-2xl border cursor-pointer transition-all flex flex-col justify-between space-y-3 ${
-                  config.adProvider === 'adsterra' ? 'border-indigo-600 bg-indigo-50/50 ring-2 ring-indigo-600/20' : 'border-slate-200 bg-slate-50 hover:bg-slate-100/80'
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <span className="font-extrabold text-sm text-slate-900 flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-amber-500" />
-                    Adsterra Ads
-                  </span>
-                  <input
-                    type="radio"
-                    name="adProvider"
-                    checked={config.adProvider === 'adsterra'}
-                    onChange={() => setConfig({ ...config, adProvider: 'adsterra' })}
-                    className="w-4 h-4 text-indigo-600"
-                  />
-                </div>
-                <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                  High CPM CPM network with 728x90, 300x250, and Native Container banners.
-                </p>
-                <span className="text-[10px] font-extrabold uppercase tracking-wider text-indigo-700 bg-indigo-100/80 px-2.5 py-1 rounded-full w-max">
-                  Recommended Active
-                </span>
-              </label>
-
-              <label
-                className={`p-5 rounded-2xl border cursor-pointer transition-all flex flex-col justify-between space-y-3 ${
-                  config.adProvider === 'adsense' ? 'border-indigo-600 bg-indigo-50/50 ring-2 ring-indigo-600/20' : 'border-slate-200 bg-slate-50 hover:bg-slate-100/80'
+                  config.adProvider === 'adsense' ? 'border-emerald-600 bg-emerald-50/50 ring-2 ring-emerald-600/20' : 'border-slate-200 bg-slate-50 hover:bg-slate-100/80'
                 }`}
               >
                 <div className="flex items-center justify-between">
@@ -213,15 +187,15 @@ export default function AdminAdsPage() {
                     type="radio"
                     name="adProvider"
                     checked={config.adProvider === 'adsense'}
-                    onChange={() => setConfig({ ...config, adProvider: 'adsense' })}
-                    className="w-4 h-4 text-indigo-600"
+                    onChange={() => setConfig({ ...config, adProvider: 'adsense', adSenseScriptEnabled: true })}
+                    className="w-4 h-4 text-emerald-600"
                   />
                 </div>
                 <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                  Official Google AdSense auto-ads & responsive display units.
+                  Official Google AdSense auto-ads &amp; responsive display units. 100% compliant with Google policies.
                 </p>
-                <span className="text-[10px] font-extrabold uppercase tracking-wider text-emerald-700 bg-emerald-100/80 px-2.5 py-1 rounded-full w-max">
-                  AdSense Account
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-emerald-800 bg-emerald-100 px-2.5 py-1 rounded-full w-max">
+                  Primary &amp; Recommended Active
                 </span>
               </label>
 
@@ -254,76 +228,7 @@ export default function AdminAdsPage() {
           </div>
         )}
 
-        {/* Tab 2: Adsterra Configuration */}
-        {(activeTab === 'provider' || activeTab === 'adsterra') && (
-          <div className="p-6 bg-white border border-slate-200/80 rounded-3xl shadow-xs space-y-6">
-            <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
-              <div className="p-2.5 rounded-xl bg-amber-50 text-amber-600 border border-amber-100">
-                <Sparkles className="w-5 h-5" />
-              </div>
-              <div>
-                <h2 className="text-lg font-black text-slate-900">Adsterra Script Keys & Container Configuration</h2>
-                <p className="text-xs text-slate-500 font-medium">Update keys for your Adsterra Leaderboard, Sidebar, and Native Container banners.</p>
-              </div>
-            </div>
 
-            <div className="space-y-4">
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                  Top Header Leaderboard Adsterra Key (728x90)
-                </label>
-                <input
-                  type="text"
-                  value={config.adsterraHeaderKey}
-                  onChange={(e) => setConfig({ ...config, adsterraHeaderKey: e.target.value })}
-                  placeholder="1f0ffa4c1356415c0882b66a415fa778"
-                  className="w-full px-4 py-3 rounded-2xl border border-slate-300 bg-slate-50 text-slate-900 font-mono font-bold text-sm focus:outline-none focus:border-indigo-600"
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                  Sticky Sidebar Adsterra Key (300x250)
-                </label>
-                <input
-                  type="text"
-                  value={config.adsterraSidebarKey}
-                  onChange={(e) => setConfig({ ...config, adsterraSidebarKey: e.target.value })}
-                  placeholder="ae79652e11f3a4d27e0103e1bbfa3b96"
-                  className="w-full px-4 py-3 rounded-2xl border border-slate-300 bg-slate-50 text-slate-900 font-mono font-bold text-sm focus:outline-none focus:border-indigo-600"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                    Native Container Script URL
-                  </label>
-                  <input
-                    type="text"
-                    value={config.adsterraContainerScript}
-                    onChange={(e) => setConfig({ ...config, adsterraContainerScript: e.target.value })}
-                    placeholder="https://pl31153051.profitableratecpmnetwork.com/1c9f44a13215d061cf2fa93f0e7157ff/invoke.js"
-                    className="w-full px-4 py-3 rounded-2xl border border-slate-300 bg-slate-50 text-slate-900 font-mono text-xs focus:outline-none focus:border-indigo-600"
-                  />
-                </div>
-
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                    Native Container Element ID
-                  </label>
-                  <input
-                    type="text"
-                    value={config.adsterraContainerId}
-                    onChange={(e) => setConfig({ ...config, adsterraContainerId: e.target.value })}
-                    placeholder="container-1c9f44a13215d061cf2fa93f0e7157ff"
-                    className="w-full px-4 py-3 rounded-2xl border border-slate-300 bg-slate-50 text-slate-900 font-mono text-xs focus:outline-none focus:border-indigo-600"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
 
         {/* Tab 3: Policy-Compliant Banner Copy & Ad Labels */}
         {(activeTab === 'badges' || activeTab === 'provider') && (
@@ -447,13 +352,21 @@ export default function AdminAdsPage() {
                 </button>
               </div>
 
-              <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/60 flex items-center justify-between">
+              <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/60 flex items-center justify-between opacity-60">
                 <div>
-                  <p className="text-xs font-bold text-slate-900">Monetag Banner Script</p>
-                  <p className="text-[11px] text-slate-500 font-medium">Auto-inject Monetag script tag in head.</p>
+                  <div className="flex items-center gap-1.5">
+                    <p className="text-xs font-bold text-slate-900">Monetag Scripts</p>
+                    <span className="text-[9px] bg-amber-100 text-amber-800 font-bold px-1.5 py-0.5 rounded">Disabled for AdSense</span>
+                  </div>
+                  <p className="text-[11px] text-slate-500 font-medium">Permanently disabled to guarantee Google AdSense policy approval.</p>
                 </div>
-                <button onClick={() => setConfig({ ...config, monetagEnabled: !config.monetagEnabled })}>
-                  {config.monetagEnabled ? <ToggleRight className="w-8 h-8 text-indigo-600" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
+                <button
+                  type="button"
+                  onClick={() => {
+                    toast.info('Monetag is disabled to ensure Google AdSense approval.');
+                  }}
+                >
+                  <ToggleLeft className="w-8 h-8 text-slate-300" />
                 </button>
               </div>
             </div>

@@ -68,7 +68,6 @@ import { CloudflareAnalytics } from '@/components/CloudflareAnalytics';
 import { MobileBottomNav } from '@/components/MobileBottomNav';
 import { PWAInstaller } from '@/components/PWAInstaller';
 import { AppSplashScreen } from '@/components/AppSplashScreen';
-import { MonetagAdScript } from '@/components/MonetagAdScript';
 
 export default function RootLayout({
   children,
@@ -100,7 +99,6 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} min-h-full flex flex-col bg-slate-50/70 text-slate-900 antialiased`}>
         <AppSplashScreen />
-        <MonetagAdScript />
         <GoogleAdSenseScript />
         <CloudflareAnalytics />
         <AnalyticsTracker />

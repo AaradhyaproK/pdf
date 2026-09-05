@@ -51,11 +51,11 @@ export interface AdsManagerConfig {
 export type GoogleAdsConfig = AdsManagerConfig;
 
 const DEFAULT_ADS_CONFIG: AdsManagerConfig = {
-  adProvider: 'adsterra',
-  adsterraHeaderKey: '1f0ffa4c1356415c0882b66a415fa778',
-  adsterraSidebarKey: 'ae79652e11f3a4d27e0103e1bbfa3b96',
-  adsterraContainerScript: 'https://pl31153051.profitableratecpmnetwork.com/1c9f44a13215d061cf2fa93f0e7157ff/invoke.js',
-  adsterraContainerId: 'container-1c9f44a13215d061cf2fa93f0e7157ff',
+  adProvider: 'adsense',
+  adsterraHeaderKey: '',
+  adsterraSidebarKey: '',
+  adsterraContainerScript: '',
+  adsterraContainerId: '',
   customHeaderCode: '',
   customSidebarCode: '',
   customPostDownloadCode: '',
@@ -65,11 +65,11 @@ const DEFAULT_ADS_CONFIG: AdsManagerConfig = {
   fallbackSupportUrl: '/',
   adLabelText: 'Advertisement',
   publisherId: 'ca-pub-9075710959353163',
-  adSenseScriptEnabled: false,
+  adSenseScriptEnabled: true,
   headerBannerEnabled: true,
   toolInFeedEnabled: true,
   sidebarEnabled: true,
-  monetagEnabled: true,
+  monetagEnabled: false,
   bottomStickyEnabled: true,
   adsTxtContent: `google.com, pub-9075710959353163, DIRECT, f08c47fec0942fa0`,
 };
@@ -80,22 +80,17 @@ export async function getAdsConfigFromFirestore(): Promise<AdsManagerConfig> {
     const docRef = doc(db, 'admin_settings', 'ads_config');
     const snap = await getDoc(docRef);
     if (snap.exists()) {
-      return { ...DEFAULT_ADS_CONFIG, ...(snap.data() as AdsManagerConfig) };
+      const data = snap.data() as AdsManagerConfig;
+      if (data.adProvider === 'adsterra') data.adProvider = 'adsense';
+      data.adSenseScriptEnabled = true;
+      data.monetagEnabled = false;
+      return { ...DEFAULT_ADS_CONFIG, ...data };
     }
   } catch {
     //
   }
 
-  if (typeof window !== 'undefined') {
-    try {
-      const saved = localStorage.getItem('omnitool_ads_config');
-      if (saved) return { ...DEFAULT_ADS_CONFIG, ...JSON.parse(saved) };
-    } catch {
-      //
-    }
-  }
-
-  return DEFAULT_ADS_CONFIG;
+  return getAdsConfig();
 }
 
 // 2. Save Ads Config
@@ -120,7 +115,12 @@ export function getAdsConfig(): AdsManagerConfig {
   if (typeof window === 'undefined') return DEFAULT_ADS_CONFIG;
   try {
     const saved = localStorage.getItem('omnitool_ads_config');
-    return saved ? { ...DEFAULT_ADS_CONFIG, ...JSON.parse(saved) } : DEFAULT_ADS_CONFIG;
+    if (!saved) return DEFAULT_ADS_CONFIG;
+    const parsed = JSON.parse(saved);
+    if (parsed.adProvider === 'adsterra') parsed.adProvider = 'adsense';
+    parsed.adSenseScriptEnabled = true;
+    parsed.monetagEnabled = false;
+    return { ...DEFAULT_ADS_CONFIG, ...parsed };
   } catch {
     return DEFAULT_ADS_CONFIG;
   }
