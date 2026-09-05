@@ -1497,13 +1497,13 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/utility/income-tax-calculator': {
     slug: '/utility/income-tax-calculator',
-    title: 'Income Tax Calculator (Old vs New Regime FY 2024-25 & FY 2025-26)',
-    metaTitle: 'Income Tax Calculator Old vs New Regime FY 2024-25 | FileZenith',
-    description: 'Compare Income Tax under Old vs New Tax Regime for FY 2024-25 / FY 2025-26 free online. Calculate tax slab savings with Section 80C, 80D, HRA & standard deduction.',
+    title: 'Income Tax Calculator (Old vs New Regime FY 2026-27)',
+    metaTitle: 'Income Tax Calculator Old vs New Regime FY 2026-27 | FileZenith',
+    description: 'Compare Income Tax under Old vs New Tax Regime for FY 2026-27 (AY 2027-28) free online. Calculate tax slab savings with Section 80C, 80D, HRA & standard deduction.',
     keywords: [
       'income tax calculator india',
       'income tax calculator old vs new regime',
-      'income tax calculator fy 2024-25 fy 2025-26',
+      'income tax calculator fy 2026-27',
       'calculate income tax slab rates',
       'section 80c 80d hra tax savings calculator',
       'new tax regime standard deduction 75000'
@@ -1515,7 +1515,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { title: 'Compare Regimes Instantly', text: 'View side-by-side tax comparison showing exact tax savings and recommended regime.' }
     ],
     faqs: [
-      { question: 'What is the standard deduction in New Tax Regime for FY 2024-25?', answer: 'The standard deduction for salaried individuals in the New Tax Regime is ₹75,000.' },
+      { question: 'What is the standard deduction in New Tax Regime for FY 2026-27?', answer: 'The standard deduction for salaried individuals in the New Tax Regime is ₹75,000.' },
       { question: 'Which tax regime is better for me?', answer: 'FileZenith automatically calculates both regimes side-by-side based on your deductions and highlights which regime saves you more money.' }
     ]
   },
@@ -1932,6 +1932,260 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
     faqs: [
       { question: 'Is glassmorphism supported in all browsers?', answer: 'Yes! The generated CSS uses both standard backdrop-filter and webkit prefixes to ensure maximum compatibility across Chrome, Safari, Edge, and Firefox.' },
       { question: 'What is glassmorphism?', answer: 'It is a UI design trend that creates a "frosted glass" effect by blurring the background behind an element, giving a sense of depth and hierarchy.' }
+    ]
+  },
+
+  '/tools/aadhaar-card-print': {
+    slug: '/tools/aadhaar-card-print',
+    title: 'Aadhaar Card Print Tool (e-Aadhaar to A4 & PVC Card)',
+    metaTitle: 'Aadhaar Card Print Tool Online (A4 & PVC Ready) | FileZenith',
+    description: 'Crop and print e-Aadhaar PDF or scanned card on A4 paper and PVC card (exact 85.6x54 mm). 100% private in-browser password decryption, zero server uploads, 1-click print-ready A4 PDF for cyber cafes.',
+    keywords: [
+      'aadhaar card print tool',
+      'eaadhaar to pvc card print',
+      'aadhaar card crop and print a4',
+      'aadhaar card print online',
+      'aadhaar card exact size 85.6x54 mm',
+      'print eaadhaar pdf without password',
+      'aadhaar card print action file photoshop alternative',
+      'print aadhaar card front and back on single page',
+      'aadhaar card lamination size 65x95',
+      'eaadhaar pdf password format',
+      'aadhaar card a4 size print cyber cafe',
+      'print pvc aadhaar card at home',
+      'sarkari aadhaar card print tool',
+      'crop aadhaar card front and back online'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Upload e-Aadhaar PDF or Images', text: 'Select your downloaded e-Aadhaar PDF or upload front and back photo scans.' },
+      { title: 'Enter Password if Protected', text: 'First 4 letters of name in CAPITAL + 4-digit birth year (e.g. ANIL1995).' },
+      { title: 'Select Layout & Print', text: 'Choose A4 Sheet or PVC card size, then click Print Now or Download Print-Ready PDF.' }
+    ],
+    faqs: [
+      { question: 'What is the password for e-Aadhaar PDF?', answer: 'The password is the first 4 letters of your name in capital letters followed by your birth year YYYY (e.g. SURE1990).' },
+      { question: 'What is the exact physical card size of Aadhaar?', answer: 'The standard card matches ISO/IEC 7810 ID-1 standard: exactly 85.60 mm x 53.98 mm (3.37 in x 2.125 in).' },
+      { question: 'Is my Aadhaar card uploaded to any server?', answer: 'No! All processing runs 100% locally inside your browser using HTML5 Canvas. Zero data is sent to any server.' },
+      { question: 'How do cyber cafes print 5 copies of Aadhaar on one A4 sheet?', answer: 'Choose "5 Copies (Cyber Cafe Batch Sheet)" layout to print 5 duplicate cards on a single A4 photo sheet to save paper and lamination cost.' },
+      { question: 'Why should I print at 100% scale instead of Fit to Page?', answer: 'Printing at 100% scale preserves the exact 85.60 mm x 53.98 mm physical size required for standard 65x95 mm lamination film pouches.' }
+    ]
+  },
+
+  '/govt-job-tools': {
+    slug: '/govt-job-tools',
+    title: 'Free Govt Job Exam Resizers & Official ID Print Tools',
+    metaTitle: 'Govt Job Photo & Signature Resizers, e-Aadhaar Print | FileZenith',
+    description: '100% Free online Govt Exam photo & signature resizers. Format SSC 20-50KB, UPSC OTR 350x350, Signature 10-20KB, NEET postcard, and print e-Aadhaar on A4 & PVC cards.',
+    keywords: [
+      'govt job exam resizers',
+      'sarkari result photo resizer',
+      'ssc photo resizer 20 to 50kb',
+      'signature resizer 10 to 20kb',
+      'upsc otr photo resizer',
+      'neet photo resizer',
+      'aadhaar card print tool',
+      'photo name and date generator',
+      'ibps photo signature resizer',
+      'railway rrb photo compressor',
+      'online form photo size converter 20kb 50kb',
+      'sarkari exam photo and signature maker'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Select Exam or ID Tool', text: 'Choose from SSC, UPSC, Signature 10-20KB, NEET, or Aadhaar print tool.' },
+      { title: 'Upload Photo or Document', text: 'Upload your photograph, signature scan, or e-Aadhaar PDF.' },
+      { title: 'Apply Automatic Formatting & Download', text: 'Our binary-search engine formats exact dimensions and KB limits for instant 1-click download.' }
+    ],
+    faqs: [
+      { question: 'Are my photos and signatures uploaded to any server?', answer: 'Never! All FileZenith tools run 100% locally inside your web browser memory. Zero server uploads.' },
+      { question: 'Which exam portals are supported?', answer: 'We support SSC (CGL, CHSL, MTS, GD), UPSC Civil Services OTR, NTA NEET UG, IBPS Banking, Railway RRB, and State PSC portals.' },
+      { question: 'What is the standard photo size for government job forms?', answer: 'Most Indian portals mandate 3.5cm x 4.5cm dimensions and file size between 20KB and 50KB in JPEG format.' }
+    ]
+  },
+
+  '/tools/ssc-photo-resizer': {
+    slug: '/tools/ssc-photo-resizer',
+    title: 'SSC Photo Resizer (20 to 50KB with Name & Date) Free',
+    metaTitle: 'SSC Photo Resizer (20 to 50KB with Name & Date) | FileZenith',
+    description: 'Resize SSC CGL, CHSL, MTS, GD Constable & CPO photo to 20KB - 50KB with candidate name and date of photo (DOP) stamp. 3.5cm x 4.5cm (413x531 px) format 100% free & secure.',
+    keywords: [
+      'ssc photo resizer 20 to 50kb',
+      'ssc photo resizer 20 to 50 kb online free',
+      'ssc photo and signature size converter',
+      'ssc cgl photo resizer 2026',
+      'ssc chsl photo resizer 20kb to 50kb',
+      'ssc photo with name and date maker',
+      'ssc photo size in cm 3.5 x 4.5',
+      'how to reduce photo size for ssc form',
+      'ssc gd photo compressor',
+      'ssc mts photo resizer online free',
+      'ssc stenographer photo dimension',
+      'sarkari result ssc photo resizer',
+      'ssc photo upload size in pixels 413x531',
+      'compress photo to 20 to 50 kb for ssc',
+      'ssc cpo si photo size 20 to 50 kb',
+      'ssc photo name date format editor',
+      'photo with name and date for ssc online form',
+      'ssc photo 20 to 50 kb mobile me kaise banaye',
+      'ssc live photo alternative upload',
+      'ssc photo date of photo dop maker',
+      'sarkari result photo resizer 20 to 50 kb',
+      'ssc exam photo compressor online'
+    ],
+    category: 'image',
+    howToSteps: [
+      { title: 'Upload Passport Photo', text: 'Select a clean, front-facing passport photograph with both ears and shoulders visible.' },
+      { title: 'Add Candidate Name & Date Stamp', text: 'Check the Name & Date option, type candidate name in CAPITAL LETTERS and select Date of Photo (DOP).' },
+      { title: 'Compress to 20-50KB & Download', text: 'Adjust target size slider to ~45KB and click Download to save your verified JPEG image.' }
+    ],
+    faqs: [
+      { question: 'Will SSC reject my application if the photo is without Name and Date?', answer: 'Certain SSC notices mandate Candidate Name and Date of Photo (DOP) printed at the bottom. Adding Name and DOP eliminates verification disputes.' },
+      { question: 'What are the exact pixel dimensions for SSC photo and signature?', answer: 'Official SSC photo dimensions are 3.5 cm × 4.5 cm (413 × 531 pixels at 300 DPI). SSC signature is 4.0 cm × 2.0 cm (140 × 60 pixels) weighted 10KB to 20KB.' },
+      { question: 'How to compress SSC photo to 20 to 50 KB on mobile?', answer: 'Upload your phone photo to FileZenith. Our canvas engine automatically crops to 3.5x4.5cm and optimizes file size to ~45KB in 1 click.' }
+    ]
+  },
+
+  '/tools/signature-resizer-10-to-20kb': {
+    slug: '/tools/signature-resizer-10-to-20kb',
+    title: 'Signature Resizer 10 to 20KB Online Free (Magic B&W Clean)',
+    metaTitle: 'Signature Resizer 10 to 20KB Online Free | FileZenith',
+    description: 'Resize signature to 10KB - 20KB online free for SSC CGL, IBPS PO/Clerk, SBI, Railway RRB, and State PSCs. Magic B&W cleanup removes shadows and yellow paper tint. 100% private in-browser.',
+    keywords: [
+      'signature resizer 10 to 20kb',
+      'signature resize 10 to 20 kb online',
+      'signature resize 10 to 20 kb online free',
+      'signature size converter for online application',
+      'reduce signature size in kb free',
+      'signature photo resizer 140x60',
+      'convert signature to black and white online',
+      'make signature background white',
+      'signature compressor 10kb 20kb for ibps sbi',
+      'signature resizer for ssc cgl chsl',
+      'online signature crop and resize',
+      'sarkari result signature resizer',
+      'how to reduce signature size to 10kb 20kb',
+      'signature resize 10 to 20 kb in mobile phone',
+      'signature size 10 to 20 kb online converter jpg',
+      'signature 10 se 20 kb me kaise kare',
+      'upsc signature resizer 10 to 20 kb',
+      'rrb railway signature resize 10kb to 20kb',
+      'signature background white remover for exam form',
+      'magic black and white signature enhancer',
+      'signature size reducer below 20kb free'
+    ],
+    category: 'image',
+    howToSteps: [
+      { title: 'Upload Signature Scan or Mobile Photo', text: 'Sign with black/blue pen on white paper and upload the image.' },
+      { title: 'Enable Magic B&W Cleanup', text: 'Toggle Magic B&W to eliminate paper shadows, yellow tone, and grain.' },
+      { title: 'Set Target 10-20KB & Download', text: 'Set slider between 10KB and 20KB (recommended: 18KB) and click Download.' }
+    ],
+    faqs: [
+      { question: 'Why does online job portal reject my signature upload?', answer: 'Portals reject signatures exceeding 20KB, falling below 10KB, or having low-contrast gray backgrounds. FileZenith fixes all three automatically.' },
+      { question: 'What is Magic B&W Signature Cleanup?', answer: 'It applies real-time luminance thresholding to convert paper shadows and yellow mobile tint to pure white while preserving crisp black pen ink.' },
+      { question: 'What are the official pixel dimensions for signature in online applications?', answer: 'Most portals specify 140 × 60 pixels or a 2:1 aspect ratio (400 × 200 pixels). Our tool locks this ratio so your signature never stretches.' }
+    ]
+  },
+
+  '/tools/upsc-photo-resizer': {
+    slug: '/tools/upsc-photo-resizer',
+    title: 'UPSC Photo & Signature Resizer (20 to 300KB, 350x350 OTR)',
+    metaTitle: 'UPSC Photo & Signature Resizer (OTR Guidelines) | FileZenith',
+    description: 'Resize UPSC Civil Services IAS, CDS, NDA & OTR photo and signature to 20KB - 300KB. 350x350 px (1:1 square) format with candidate name and date stamp free online.',
+    keywords: [
+      'upsc photo resizer 20 to 300kb',
+      'upsc otr photo resizer 350x350',
+      'upsc otr photo and signature size converter',
+      'upsc photo size 350x350 pixels',
+      'upsc photo date and name stamp generator',
+      'upsc signature resizer 20 to 300 kb',
+      'upsc cse photo upload guidelines',
+      'upsc otr photo rejected solution',
+      'upsc photo 10 days old rule',
+      'upsc online application photo format',
+      'upsc photo compressor',
+      'sarkari result upsc photo maker',
+      'upsc civil services photo and signature resizer',
+      'upsc ias photo size converter',
+      'upsc nda cds photo resizer 350x350',
+      'upsc photo square 1:1 ratio resizer',
+      'upsc otr photo dimension not matching error fix'
+    ],
+    category: 'image',
+    howToSteps: [
+      { title: 'Upload Passport Photo', text: 'Select high-resolution color passport photo.' },
+      { title: 'Enter Name & Date (10-Day Rule)', text: 'Add candidate name and photo date within 10 days of application start.' },
+      { title: 'Download 350x350 px Square JPEG', text: 'Click Download for instant 350x350 px UPSC OTR compliant file.' }
+    ],
+    faqs: [
+      { question: 'What is the 10-day date rule for UPSC photograph?', answer: 'The photograph must not be more than 10 days old from the commencement of the online application process, with candidate name and date stamped at bottom.' },
+      { question: 'What are the exact pixel and file size limits for UPSC OTR?', answer: 'Minimum 350 × 350 pixels up to 1000 × 1000 pixels (1:1 square) with file size strictly between 20 KB and 300 KB.' }
+    ]
+  },
+
+  '/tools/neet-photo-resizer': {
+    slug: '/tools/neet-photo-resizer',
+    title: 'NTA NEET Photo Resizer 2026 (Passport & Postcard 4x6)',
+    metaTitle: 'NTA NEET UG Photo Resizer (Passport & Postcard) | FileZenith',
+    description: 'Resize NTA NEET UG Passport photo (10KB - 200KB) and Postcard photo (4x6 inch, 50KB - 300KB) with Candidate Name & Date of Photo (DOP) stamp. 100% free, white background compliant.',
+    keywords: [
+      'neet photo resizer online',
+      'neet postcard size photo 4x6 converter',
+      'neet passport size photo 10 to 200 kb',
+      'neet postcard photo size in cm',
+      'neet photo with name and date generator dop',
+      'nta neet photo background white',
+      'neet 2026 application form photo size',
+      'neet signature resizer 4 to 30 kb',
+      'neet postcard photo maker',
+      'neet photo size 4x6 inch compressor',
+      'sarkari result neet photo resizer',
+      'neet 4x6 postcard photo size in pixels 1200x1800',
+      'nta neet passport photo size 3.5 x 4.5 cm',
+      'neet candidate name and date photo editor',
+      'neet postcard photo 50 to 300 kb converter'
+    ],
+    category: 'image',
+    howToSteps: [
+      { title: 'Upload White Background Photo', text: 'Select front-facing photo with at least 80% face coverage showing ears.' },
+      { title: 'Add Candidate Name & DOP Stamp', text: 'Type candidate full name and date of photo taking.' },
+      { title: 'Choose Passport or Postcard & Download', text: 'Select Passport (10-200KB) or Postcard 4x6 (50-300KB) and download.' }
+    ],
+    faqs: [
+      { question: 'What is the difference between NEET Passport and Postcard photo?', answer: 'Passport photo (3.5x4.5cm, 10-200KB) is for admit card; Postcard photo (4x6 inch, 50-300KB) is pasted on attendance sheet at exam hall.' },
+      { question: 'Is pure white background mandatory for NEET photo?', answer: 'Yes! NTA strictly requires a solid white background. Blue, red, or patterned backgrounds cause rejection.' }
+    ]
+  },
+
+  '/tools/photo-name-date-generator': {
+    slug: '/tools/photo-name-date-generator',
+    title: 'Photo Name & Date Generator Online Free (DOP Stamp)',
+    metaTitle: 'Photo Name & Date Stamp Generator | FileZenith',
+    description: 'Add Candidate Name and Date of Photo (DOP) on passport photo online free. Auto-generates standard bottom white bar with bold uppercase text for SSC, UPSC, NEET, and State PSC forms.',
+    keywords: [
+      'photo name and date generator online free',
+      'add name and date on photo for ssc form',
+      'passport size photo with name and date maker',
+      'date of photo dop editor online',
+      'put name and date on photo online',
+      'photo date generator for govt exam',
+      'candidate name on photo generator',
+      'ssc photo name date format',
+      'neet photo name and date generator',
+      'sarkari photo name date maker',
+      'photo par name aur date kaise dale online',
+      'dop stamp maker for passport photo',
+      'photo name date editor for sarkari result',
+      'add candidate name on photo without photoshop'
+    ],
+    category: 'image',
+    howToSteps: [
+      { title: 'Upload Passport Photo', text: 'Upload any standard front-facing passport photo.' },
+      { title: 'Type Candidate Name & Select DOP', text: 'Enter name in CAPITAL letters and select date of photo taking within last 3 months.' },
+      { title: 'Download Stamped Photo', text: 'Download official photo with crisp bottom name and date bar.' }
+    ],
+    faqs: [
+      { question: 'Should I write Date of Birth (DOB) or Date of Photo (DOP)?', answer: 'Always write Date of Photo (DOP) unless the official notification explicitly asks for Date of Birth.' },
+      { question: 'Does candidate name need to be in uppercase capital letters?', answer: 'Yes, government recruitment boards mandate uppercase letters for optical clarity.' }
     ]
   }
 };

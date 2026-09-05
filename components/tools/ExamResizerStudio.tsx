@@ -19,7 +19,6 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { trackEvent } from '@/lib/analytics';
-import { AdSlot } from '@/components/AdSlot';
 
 export interface ExamResizerStudioProps {
   defaultTargetKB: number;
@@ -571,56 +570,56 @@ export function ExamResizerStudio({
         )}
       </div>
 
-      {/* Output Side-by-Side Preview & Download Card */}
+      {/* Output Side-by-Side Preview & Download Card (Day-mode clean styling) */}
       {photoFile && outputUrl && (
-        <div className="bg-slate-900 text-white p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl space-y-6 animate-in zoom-in-95 duration-200">
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
+        <div className="bg-white text-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-md space-y-6 animate-in zoom-in-95 duration-200">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-4">
             <div className="space-y-0.5">
-              <span className="text-xs font-black uppercase text-emerald-400 flex items-center gap-1.5">
-                <Sparkles className="w-4 h-4" /> Output Ready for Upload
+              <span className="text-xs font-black uppercase text-emerald-700 flex items-center gap-1.5">
+                <Sparkles className="w-4 h-4 text-emerald-600" /> Output Ready for Official Portal
               </span>
-              <p className="text-xs text-slate-400 font-medium">
+              <p className="text-xs text-slate-500 font-medium">
                 Dimensions: {outputDimensions.width} × {outputDimensions.height} px
               </p>
             </div>
 
             <div className="flex items-center gap-3">
               <div className="text-right">
-                <span className="text-xs text-slate-400 block">Original: {originalSizeKB} KB</span>
-                <span className="text-sm font-black text-emerald-400 block">
+                <span className="text-xs text-slate-400 block font-medium">Original: {originalSizeKB} KB</span>
+                <span className="text-sm font-black text-emerald-700 block">
                   Compressed: {outputKB} KB
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Center Canvas Graphic Preview */}
-          <div className="flex justify-center p-4 bg-slate-950/80 rounded-2xl border border-slate-800 min-h-[220px] items-center relative">
+          {/* Center Canvas Graphic Preview (Clean light surface) */}
+          <div className="flex justify-center p-6 bg-slate-50/80 rounded-2xl border border-slate-200/80 min-h-[220px] items-center relative">
             {isProcessing ? (
-              <div className="flex flex-col items-center gap-2 text-indigo-400 py-8">
+              <div className="flex flex-col items-center gap-2 text-indigo-600 py-8">
                 <RefreshCw className="w-6 h-6 animate-spin" />
-                <span className="text-xs font-bold">Compressing Image...</span>
+                <span className="text-xs font-bold">Compressing Image to Specification...</span>
               </div>
             ) : (
               <img
                 src={outputUrl}
                 alt="Processed Exam Output"
-                className="max-h-[300px] object-contain rounded shadow-lg border border-slate-700"
+                className="max-h-[300px] object-contain rounded-xl shadow-md border border-slate-200 bg-white"
               />
             )}
           </div>
 
           {/* Download Action Bar */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
-            <div className="flex items-center gap-2 text-xs font-extrabold text-emerald-400 bg-emerald-950/60 border border-emerald-800/80 px-3.5 py-2 rounded-xl">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            <div className="flex items-center gap-2 text-xs font-extrabold text-emerald-800 bg-emerald-50 border border-emerald-200 px-3.5 py-2.5 rounded-xl">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
               <span>{outputKB <= targetKB ? 'Verified Under KB Limit' : 'Optimized Best Quality'}</span>
             </div>
 
             <button
               type="button"
               onClick={handleDownload}
-              className="w-full sm:w-auto min-h-[48px] px-8 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white font-black text-sm flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer focus:ring-2 focus:ring-white"
+              className="w-full sm:w-auto min-h-[48px] px-8 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-black text-sm flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/20 transition-all cursor-pointer focus:ring-2 focus:ring-indigo-500"
             >
               <Download className="w-4 h-4 text-white" />
               <span>Download filezenith-{slug}.jpg</span>
@@ -631,11 +630,6 @@ export function ExamResizerStudio({
 
       {/* Hidden Offscreen Canvas Element */}
       <canvas ref={canvasRef} className="hidden" />
-
-      {/* Reserved Layout-Shift-Free Ad Container */}
-      <div className="my-6 w-full">
-        <AdSlot slotType="post-download" />
-      </div>
     </div>
   );
 }

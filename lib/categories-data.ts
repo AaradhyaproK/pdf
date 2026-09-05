@@ -29,6 +29,7 @@ export interface CategoryConfig {
   popularTools: CategoryToolItem[];
   faqs: Array<{ question: string; answer: string }>;
   relatedCategories: CategoryLinkItem[];
+  keywords?: string[];
 }
 
 export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
@@ -69,6 +70,18 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
           { name: 'Passport Photo Maker', slug: '/image/passport-maker', description: 'Create 3.5x4.5cm passport photos.', isPopular: true, badge: 'Official Format' },
           { name: 'Pics to PDF Converter', slug: '/image/pics-to-pdf', description: 'Convert multiple photos into a single PDF.' },
           { name: 'PNG to PDF Converter', slug: '/image/png-to-pdf', description: 'Convert PNG graphics into PDF document.' }
+        ]
+      },
+      {
+        title: 'Govt Job Exam Resizers & ID Tools',
+        description: 'Specialized 100% in-browser photo, signature, and ID card tools for Indian recruitment portals.',
+        tools: [
+          { name: 'Aadhaar Card Print Tool (A4 & PVC)', slug: '/tools/aadhaar-card-print', description: 'Crop and print e-Aadhaar on A4 sheet & PVC card (85.6x54 mm).', isPopular: true, badge: 'A4 & PVC' },
+          { name: 'SSC Photo Resizer (20-50KB)', slug: '/tools/ssc-photo-resizer', description: 'Format SSC CGL, CHSL, MTS photo with Name & Date stamp.', isPopular: true, badge: 'SSC 20-50KB' },
+          { name: 'Signature Resizer 10 to 20KB', slug: '/tools/signature-resizer-10-to-20kb', description: 'Resize signature to 10-20KB with Magic B&W cleanup.', isPopular: true, badge: '10-20KB' },
+          { name: 'UPSC Photo Resizer', slug: '/tools/upsc-photo-resizer', description: '350x350 px OTR square photo format with Name & Date.', badge: 'UPSC OTR' },
+          { name: 'NEET Photo Resizer', slug: '/tools/neet-photo-resizer', description: 'NEET passport & postcard 4"x6" photo with DOP stamp.', badge: 'NEET UG' },
+          { name: 'Photo Name & Date Generator', slug: '/tools/photo-name-date-generator', description: 'Overlay candidate full name and date on passport photos.', badge: 'Name & Date' }
         ]
       }
     ],
@@ -167,7 +180,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
           { name: 'Percentage Calculator', slug: '/utility/percentage-calculator', description: 'Calculate percentage difference, increase/decrease, and discount.', isPopular: true, badge: 'Daily Tool' },
           { name: 'CGPA to Percentage Calculator', slug: '/utility/cgpa-to-percentage', description: 'Convert CBSE, University CGPA/SGPA to percentage.', isPopular: true, badge: 'Student Tool' },
           { name: 'EMI Loan Calculator', slug: '/utility/emi-calculator', description: 'Calculate home, car, and personal loan monthly EMI with schedule.', isPopular: true, badge: 'High RPM' },
-          { name: 'Income Tax Calculator (Old vs New)', slug: '/utility/income-tax-calculator', description: 'Compare Old vs New Tax Regime savings for FY 2024-25 / FY 2025-26.', isPopular: true, badge: 'Tax Season' },
+          { name: 'Income Tax Calculator (Old vs New)', slug: '/utility/income-tax-calculator', description: 'Compare Old vs New Tax Regime savings for FY 2026-27.', isPopular: true, badge: 'Tax Season' },
           { name: 'SIP Mutual Fund Calculator', slug: '/utility/sip-calculator', description: 'Calculate future wealth compounding returns for monthly SIP investments.', isPopular: true, badge: 'Wealth' },
           { name: 'CTC to In-Hand Salary Calculator', slug: '/utility/salary-calculator', description: 'Calculate monthly take-home salary after PF, PT, and TDS.', isPopular: true, badge: 'Salary' },
           { name: 'GST Calculator', slug: '/utility/gst-calculator', description: 'Add or remove GST tax for 5%, 12%, 18%, 28% slabs.', isPopular: true, badge: 'Tax Tool' },
@@ -327,6 +340,85 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
     relatedCategories: [
       { name: 'Image Tools', slug: '/image-tools', desc: 'Image compression and conversion.' },
       { name: 'PDF Tools', slug: '/pdf-tools', desc: 'Merge and split PDF files.' }
+    ]
+  },
+
+  'govt-job-tools': {
+    slug: 'govt-job-tools',
+    title: 'Free Govt Job Exam Resizers & ID Tools: SSC, UPSC, Aadhaar Card Print',
+    metaTitle: 'Govt Job Photo & Signature Resizers, e-Aadhaar Print | FileZenith',
+    metaDescription: '100% Free online Govt Exam photo & signature resizers. Format SSC 20-50KB, UPSC OTR 350x350, Signature 10-20KB, NEET postcard, and print e-Aadhaar on A4 & PVC cards.',
+    h1: 'Govt Job Exam Resizers & Official ID Print Tools',
+    intro: 'Format passport photos, signatures, and ID cards for Indian recruitment portals and official identity prints directly in your web browser with 100% client-side privacy.',
+    subgroups: [
+      {
+        title: 'Govt Exam Photo & Signature Resizers',
+        description: 'Exact dimensions, byte limits (KB), and formats for SSC, UPSC, IBPS, and State PSC recruitment portals.',
+        tools: [
+          { name: 'SSC Photo Resizer (20-50KB)', slug: '/tools/ssc-photo-resizer', description: 'Format SSC CGL, CHSL, MTS 3.5x4.5cm photo with Name & Date stamp.', isPopular: true, badge: 'SSC 20-50KB' },
+          { name: 'Signature Resizer 10 to 20KB', slug: '/tools/signature-resizer-10-to-20kb', description: 'Resize signature to 10-20KB with Magic B&W cleanup.', isPopular: true, badge: '10-20KB' },
+          { name: 'UPSC Photo Resizer', slug: '/tools/upsc-photo-resizer', description: '350x350 px OTR square photo format with Name & Date.', isPopular: true, badge: 'UPSC OTR' },
+          { name: 'NEET Photo Resizer', slug: '/tools/neet-photo-resizer', description: 'NEET passport & postcard 4"x6" photo with DOP stamp.', badge: 'NEET UG' },
+          { name: 'Photo Name & Date Generator', slug: '/tools/photo-name-date-generator', description: 'Overlay candidate full name and date on passport photos.', badge: 'Name & Date' },
+          { name: 'Compress Image to 50KB', slug: '/image/compress-to-50kb', description: 'General passport photo compressor under 50KB.', badge: 'Target 50KB' },
+          { name: 'Compress Image to 20KB', slug: '/tools/compress-image-to-20kb', description: 'Compress signature & photo under 20KB.', badge: 'Target 20KB' },
+          { name: 'Passport Photo Maker', slug: '/image/passport-maker', description: 'Crop to standard 3.5x4.5cm official passport photo.', badge: '3.5x4.5cm' }
+        ]
+      },
+      {
+        title: 'Official ID Printing & Document Tools',
+        description: 'Tools for cyber cafes, CSC centers, and citizens to prepare ID cards and forms.',
+        tools: [
+          { name: 'Aadhaar Card Print Tool (A4 & PVC)', slug: '/tools/aadhaar-card-print', description: 'Crop and print e-Aadhaar on A4 sheet & PVC card (85.6x54 mm).', isPopular: true, badge: 'A4 & PVC' },
+          { name: 'Compress PDF to 200KB', slug: '/pdf/compress-to-200kb', description: 'Reduce document size under 200KB for portal uploads.', isPopular: true, badge: 'Form Preset' },
+          { name: 'Pics to PDF Converter', slug: '/image/pics-to-pdf', description: 'Combine marksheets and certificates into single PDF.', badge: 'Documents' },
+          { name: 'Password Protect PDF', slug: '/pdf/protect', description: 'Encrypt documents before sharing.', badge: 'Secure' },
+          { name: 'Remove PDF Password', slug: '/pdf/remove-password', description: 'Unlock encrypted PDF documents offline.' }
+        ]
+      }
+    ],
+    popularTools: [
+      { name: 'Aadhaar Card Print Tool', slug: '/tools/aadhaar-card-print', description: 'Print e-Aadhaar on A4 sheet or PVC card.' },
+      { name: 'SSC Photo Resizer (20-50KB)', slug: '/tools/ssc-photo-resizer', description: '3.5x4.5cm photo with candidate name & date.' },
+      { name: 'Signature Resizer 10 to 20KB', slug: '/tools/signature-resizer-10-to-20kb', description: 'Clean signature with Magic B&W cleanup.' },
+      { name: 'UPSC Photo Resizer', slug: '/tools/upsc-photo-resizer', description: 'Square 350x350 px photo for UPSC OTR.' }
+    ],
+    faqs: [
+      { question: 'Why do government job portals have strict photo and signature KB limits?', answer: 'Portals like SSC, UPSC, and IBPS receive millions of applications. Strict file size limits (20-50KB for photos, 10-20KB for signatures) prevent server overload and ensure quick document verification during exams.' },
+      { question: 'Will my SSC application be rejected without candidate name and date on the photo?', answer: 'Certain SSC notifications explicitly mandate that the photograph must contain the candidate full name and Date of Photo (DOP) printed clearly at the bottom. Our tool allows you to easily stamp both with one click.' },
+      { question: 'What is the standard Aadhaar card size for A4 and PVC printing?', answer: 'The standard size of an Aadhaar card is 85.60 mm in width by 53.98 mm in height (ISO/IEC 7810 ID-1 standard). Our tool formats e-Aadhaar cards to these exact physical dimensions.' },
+      { question: 'Are any of my photos, signatures, or Aadhaar documents stored on your server?', answer: 'No! All FileZenith tools run 100% client-side in your browser using HTML5 Canvas and WebAssembly. Your biometric data, signature, and sensitive documents never touch any server.' }
+    ],
+    relatedCategories: [
+      { name: 'Image Tools', slug: '/image-tools', desc: 'Compress, crop, and convert images.' },
+      { name: 'PDF Tools', slug: '/pdf-tools', desc: 'Merge, split, and compress PDFs.' },
+      { name: 'Daily Utilities', slug: '/calculators', desc: 'Age, tax, and salary calculators.' }
+    ],
+    keywords: [
+      'sarkari result photo resizer',
+      'govt job exam photo resizer 20 to 50 kb',
+      'signature resizer 10 to 20 kb online free',
+      'ssc cgl photo and signature resizer',
+      'ssc chsl photo resizer 20kb to 50kb',
+      'upsc otr 350x350 photo converter',
+      'neet passport and postcard photo resizer 4x6',
+      'photo name and date generator dop maker',
+      'eaadhaar a4 pvc card print tool',
+      'ibps po clerk photo signature compressor',
+      'railway rrb photo resizer 30 to 50 kb',
+      'bpsc teacher photo signature size converter',
+      'online form photo size reducer 20kb to 50kb',
+      'passport size photo with name and date for sarkari result',
+      'convert signature to black and white online',
+      'photo signature joiner online free',
+      'pan card photo resizer 213x213',
+      'aadhaar card print action file photoshop alternative',
+      'print 5 copies of aadhaar card on a4 paper cyber cafe',
+      'ssc photo 3.5 x 4.5 cm in pixels 413x531',
+      'signature size 140x60 pixels 10 to 20 kb',
+      'upsc photo 10 days old date stamp',
+      'gate signature resizer 560x160',
+      'free photo compressor for all government exams'
     ]
   }
 };

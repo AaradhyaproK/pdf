@@ -18,14 +18,14 @@ export default function IncomeTaxCalculatorPage() {
   }, [grossIncome, deductions80C, deductions80D, hra]);
 
   const handleShareWhatsApp = () => {
-    const msg = `📊 Income Tax Comparison (FY 2024-25 / FY 2025-26):\nGross Salary: ₹${grossIncome.toLocaleString('en-IN')}\nNew Regime Tax: ₹${taxData.totalTaxNew.toLocaleString('en-IN')}\nOld Regime Tax: ₹${taxData.totalTaxOld.toLocaleString('en-IN')}\n💡 ${taxData.recommendedRegime === 'NEW' ? 'New Tax Regime saves you ₹' + taxData.taxSavings.toLocaleString('en-IN') : 'Old Tax Regime saves you ₹' + taxData.taxSavings.toLocaleString('en-IN')}\nCalculate your tax savings on FileZenith: https://www.filezenith.com/utility/income-tax-calculator`;
+    const msg = `📊 Income Tax Comparison (FY 2026-27 / AY 2027-28):\nGross Salary: ₹${grossIncome.toLocaleString('en-IN')}\nNew Regime Tax: ₹${taxData.totalTaxNew.toLocaleString('en-IN')}\nOld Regime Tax: ₹${taxData.totalTaxOld.toLocaleString('en-IN')}\n💡 ${taxData.recommendedRegime === 'NEW' ? 'New Tax Regime saves you ₹' + taxData.taxSavings.toLocaleString('en-IN') : 'Old Tax Regime saves you ₹' + taxData.taxSavings.toLocaleString('en-IN')}\nCalculate your tax savings on FileZenith: https://www.filezenith.com/utility/income-tax-calculator`;
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
   return (
     <ToolLayout
       slug="/utility/income-tax-calculator"
-      title="Income Tax Calculator (Old vs New Tax Regime FY 2024-25 & FY 2025-26)"
+      title="Income Tax Calculator (Old vs New Tax Regime FY 2026-27)"
       subtitle="Compare Income Tax liability side-by-side under Old Regime vs New Regime. Calculate deductions and maximize your tax savings."
       badgeText="Tax Season"
     >
@@ -105,7 +105,7 @@ export default function IncomeTaxCalculatorPage() {
           {/* New Tax Regime Card */}
           <div className={`p-6 rounded-3xl border ${taxData.recommendedRegime === 'NEW' ? 'bg-emerald-50/70 border-emerald-300 ring-2 ring-emerald-500' : 'bg-white border-slate-200'} space-y-4 shadow-md`}>
             <div className="flex justify-between items-center">
-              <h4 className="text-base font-black text-slate-900">New Tax Regime (FY 2024-25)</h4>
+              <h4 className="text-base font-black text-slate-900">New Tax Regime (FY 2026-27)</h4>
               {taxData.recommendedRegime === 'NEW' && (
                 <span className="px-3 py-1 bg-emerald-600 text-white text-xs font-extrabold rounded-full">Lowest Tax</span>
               )}
@@ -139,7 +139,7 @@ export default function IncomeTaxCalculatorPage() {
           {/* Old Tax Regime Card */}
           <div className={`p-6 rounded-3xl border ${taxData.recommendedRegime === 'OLD' ? 'bg-emerald-50/70 border-emerald-300 ring-2 ring-emerald-500' : 'bg-white border-slate-200'} space-y-4 shadow-md`}>
             <div className="flex justify-between items-center">
-              <h4 className="text-base font-black text-slate-900">Old Tax Regime</h4>
+              <h4 className="text-base font-black text-slate-900">Old Tax Regime (FY 2026-27)</h4>
               {taxData.recommendedRegime === 'OLD' && (
                 <span className="px-3 py-1 bg-emerald-600 text-white text-xs font-extrabold rounded-full">Lowest Tax</span>
               )}

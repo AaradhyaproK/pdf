@@ -1192,7 +1192,7 @@ export function calculateIncomeTax(
 ): IncomeTaxResult {
   const income = Math.max(0, grossIncome);
   const stdDeductionOld = 50000;
-  const stdDeductionNew = 75000; // FY 2024-25 / FY 2025-26 Budget update
+  const stdDeductionNew = 75000; // FY 2026-27 Budget update
 
   // OLD REGIME CALCULATION
   const totalDeductionsOld = stdDeductionOld + Math.min(150000, deductions80C) + Math.min(100000, deductions80D) + Math.max(0, hraExemption) + Math.max(0, otherDeductions);
@@ -1215,18 +1215,18 @@ export function calculateIncomeTax(
   const cessOld = Math.round(taxOld * 0.04);
   const totalTaxOld = Math.round(taxOld + cessOld);
 
-  // NEW REGIME CALCULATION (FY 2024-25 slabs)
+  // NEW REGIME CALCULATION (FY 2026-27 slabs)
   const taxableIncomeNew = Math.max(0, income - stdDeductionNew);
   let taxNew = 0;
 
   if (taxableIncomeNew > 1500000) {
-    taxNew = 150000 + (taxableIncomeNew - 1500000) * 0.30;
+    taxNew = 140000 + (taxableIncomeNew - 1500000) * 0.30;
   } else if (taxableIncomeNew > 1200000) {
-    taxNew = 90000 + (taxableIncomeNew - 1200000) * 0.20;
-  } else if (taxableIncomeNew > 900000) {
-    taxNew = 45000 + (taxableIncomeNew - 900000) * 0.15;
-  } else if (taxableIncomeNew > 600000) {
-    taxNew = 15000 + (taxableIncomeNew - 600000) * 0.10;
+    taxNew = 80000 + (taxableIncomeNew - 1200000) * 0.20;
+  } else if (taxableIncomeNew > 1000000) {
+    taxNew = 50000 + (taxableIncomeNew - 1000000) * 0.15;
+  } else if (taxableIncomeNew > 700000) {
+    taxNew = 20000 + (taxableIncomeNew - 700000) * 0.10;
   } else if (taxableIncomeNew > 300000) {
     taxNew = (taxableIncomeNew - 300000) * 0.05;
   }

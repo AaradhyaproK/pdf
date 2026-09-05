@@ -50,6 +50,7 @@ import {
   Hexagon,
   Unlock,
   Table,
+  Printer,
 } from 'lucide-react';
 
 export interface ToolItem {
@@ -58,7 +59,7 @@ export interface ToolItem {
   slug: string;
   desc: string;
   category: 'pdf' | 'image' | 'utility' | 'social';
-  tags: ('organize' | 'compress' | 'convert-to' | 'convert-from' | 'edit-security' | 'image' | 'utility' | 'social')[];
+  tags: ('organize' | 'compress' | 'convert-to' | 'convert-from' | 'edit-security' | 'image' | 'utility' | 'social' | 'exam')[];
   icon: any;
   badge?: string;
   badgeStyle?: string;
@@ -69,6 +70,90 @@ export interface ToolItem {
 
 export const ALL_TOOLS: ToolItem[] = [
   // --- TOP HIGH TRAFFIC GETTERS (RANKED BY SEARCH VOLUME) ---
+  {
+    id: 'aadhaar-card-print',
+    name: 'Aadhaar Card Print Tool (A4 & PVC)',
+    slug: '/tools/aadhaar-card-print',
+    desc: 'Crop and print e-Aadhaar PDF on A4 sheet & PVC card (exact 85.6x54 mm).',
+    category: 'utility',
+    tags: ['utility', 'exam'],
+    icon: Printer,
+    badge: 'A4 & PVC',
+    colorClass: 'text-rose-600',
+    iconBgClass: 'bg-rose-50 text-rose-600 border-rose-100 group-hover:bg-rose-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-rose-600',
+    badgeStyle: 'bg-rose-50 text-rose-700 border-rose-200',
+  },
+  {
+    id: 'ssc-photo-resizer',
+    name: 'SSC Photo Resizer (20 to 50KB)',
+    slug: '/tools/ssc-photo-resizer',
+    desc: 'Resize SSC CGL, CHSL, MTS photo (3.5x4.5cm, 20-50KB) with Name & Date stamp.',
+    category: 'image',
+    tags: ['image', 'compress', 'exam'],
+    icon: UserCheck,
+    badge: 'SSC 20-50KB',
+    colorClass: 'text-indigo-600',
+    iconBgClass: 'bg-indigo-50 text-indigo-600 border-indigo-100 group-hover:bg-indigo-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-indigo-600',
+    badgeStyle: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+  },
+  {
+    id: 'signature-resizer-10-to-20kb',
+    name: 'Signature Resizer 10 to 20KB',
+    slug: '/tools/signature-resizer-10-to-20kb',
+    desc: 'Resize signature to 10KB-20KB for govt job portals with Magic B&W cleanup.',
+    category: 'image',
+    tags: ['image', 'compress', 'exam'],
+    icon: Stamp,
+    badge: '10-20KB Sig',
+    colorClass: 'text-indigo-600',
+    iconBgClass: 'bg-indigo-50 text-indigo-600 border-indigo-100 group-hover:bg-indigo-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-indigo-600',
+    badgeStyle: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+  },
+  {
+    id: 'upsc-photo-resizer',
+    name: 'UPSC Photo & Signature Resizer',
+    slug: '/tools/upsc-photo-resizer',
+    desc: 'Resize UPSC IAS, CDS, NDA photo (350x350 px, 20-300KB) with Name & Date stamp.',
+    category: 'image',
+    tags: ['image', 'compress', 'exam'],
+    icon: UserCheck,
+    badge: 'UPSC OTR',
+    colorClass: 'text-indigo-600',
+    iconBgClass: 'bg-indigo-50 text-indigo-600 border-indigo-100 group-hover:bg-indigo-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-indigo-600',
+    badgeStyle: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+  },
+  {
+    id: 'neet-photo-resizer',
+    name: 'NEET Photo Resizer (Passport & Postcard)',
+    slug: '/tools/neet-photo-resizer',
+    desc: 'Format NEET UG passport (10-200KB) & postcard 4"x6" photo with Name & DOP.',
+    category: 'image',
+    tags: ['image', 'compress', 'exam'],
+    icon: UserCheck,
+    badge: 'NEET UG',
+    colorClass: 'text-indigo-600',
+    iconBgClass: 'bg-indigo-50 text-indigo-600 border-indigo-100 group-hover:bg-indigo-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-indigo-600',
+    badgeStyle: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+  },
+  {
+    id: 'photo-name-date-generator',
+    name: 'Photo Name & Date Stamp Generator',
+    slug: '/tools/photo-name-date-generator',
+    desc: 'Add candidate name and date of photo (DOP) bar on passport photos online.',
+    category: 'image',
+    tags: ['image', 'exam'],
+    icon: Calendar,
+    badge: 'Name & Date',
+    colorClass: 'text-indigo-600',
+    iconBgClass: 'bg-indigo-50 text-indigo-600 border-indigo-100 group-hover:bg-indigo-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-indigo-600',
+    badgeStyle: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+  },
   {
     id: 'glassmorphism-generator',
     name: 'Glassmorphism CSS Generator',
@@ -353,7 +438,7 @@ export const ALL_TOOLS: ToolItem[] = [
     id: 'income-tax-calculator',
     name: 'Income Tax Calculator (Old vs New)',
     slug: '/utility/income-tax-calculator',
-    desc: 'Compare Old vs New Tax Regime for FY 2024-25 & FY 2025-26 with 80C & HRA deductions.',
+    desc: 'Compare Old vs New Tax Regime for FY 2026-27 with 80C & HRA deductions.',
     category: 'utility',
     tags: ['utility'],
     icon: DollarSign,
@@ -915,7 +1000,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
 ];
 
-type CategoryFilter = 'all' | 'organize' | 'compress' | 'convert-to' | 'convert-from' | 'edit-security' | 'image' | 'utility' | 'social';
+type CategoryFilter = 'all' | 'organize' | 'compress' | 'convert-to' | 'convert-from' | 'edit-security' | 'image' | 'utility' | 'social' | 'exam';
 
 export function LandingToolGrid() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -949,6 +1034,7 @@ export function LandingToolGrid() {
       image: ALL_TOOLS.filter((t) => t.tags.includes('image')).length,
       utility: ALL_TOOLS.filter((t) => t.tags.includes('utility')).length,
       social: ALL_TOOLS.filter((t) => t.tags.includes('social')).length,
+      exam: ALL_TOOLS.filter((t) => t.tags.includes('exam')).length,
     };
   }, []);
 
@@ -983,6 +1069,7 @@ export function LandingToolGrid() {
         <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-2 scrollbar-none flex-nowrap sm:flex-wrap sm:justify-center sm:overflow-visible px-1">
           {[
             { id: 'all', label: 'All Tools', count: categoryCounts.all },
+            { id: 'exam', label: 'Exam & Govt Forms', count: categoryCounts.exam },
             { id: 'organize', label: 'Merge & Organize', count: categoryCounts.organize },
             { id: 'compress', label: 'Compress & Optimize', count: categoryCounts.compress },
             { id: 'convert-to', label: 'Convert to PDF', count: categoryCounts['convert-to'] },
@@ -1065,6 +1152,13 @@ export function LandingToolGrid() {
               <Sparkles className="w-3.5 h-3.5 text-purple-600 group-hover:text-white transition-colors" />
               <span>AI Tools</span>
             </Link>
+            <Link
+              href="/govt-job-tools"
+              className="px-3 py-1.5 rounded-full bg-white text-slate-700 hover:bg-slate-900 hover:text-white border border-slate-200/90 shadow-2xs text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer group active:scale-95 shrink-0"
+            >
+              <UserCheck className="w-3.5 h-3.5 text-rose-600 group-hover:text-white transition-colors" />
+              <span>Govt Job & ID Tools</span>
+            </Link>
           </div>
         </div>
       </div>
@@ -1088,6 +1182,8 @@ export function LandingToolGrid() {
               ? 'Edit & Security'
               : activeFilter === 'image'
               ? 'Image Studio'
+              : activeFilter === 'exam'
+              ? 'Exam & Govt Job Form Resizers'
               : 'Daily Utilities'}
           </h2>
         </div>

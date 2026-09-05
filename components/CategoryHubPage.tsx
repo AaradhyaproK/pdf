@@ -236,6 +236,24 @@ export function CategoryHubPage({ category }: { category: CategoryConfig }) {
                 </details>
               ))}
             </div>
+
+            {category.keywords && category.keywords.length > 0 && (
+              <div className="pt-4 border-t border-slate-100">
+                <span className="text-[11px] font-black uppercase tracking-wider text-slate-400 block mb-2.5">
+                  High Search Volume Portal Queries:
+                </span>
+                <div className="flex flex-wrap gap-1.5">
+                  {category.keywords.map((kw, i) => (
+                    <span
+                      key={i}
+                      className="px-2.5 py-1 rounded-full bg-slate-100 border border-slate-200/80 text-[11px] font-bold text-slate-600 hover:text-indigo-600 transition-colors"
+                    >
+                      {kw}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
           </section>
         )}
 

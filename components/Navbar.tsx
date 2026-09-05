@@ -51,6 +51,7 @@ import {
   Hexagon,
   Unlock,
   Table,
+  Printer,
 } from 'lucide-react';
 
 const PDF_TOOLS = [
@@ -84,6 +85,12 @@ const IMAGE_TOOLS = [
   { name: 'AI Background Remover', slug: '/image/remove-background', desc: 'Remove photo backgrounds 100% locally', icon: Scissors, badge: 'AI Wasm', category: 'image', catLabel: 'Image Studio' },
   { name: 'Apple HEIC to JPG', slug: '/image/convert-heic', desc: 'Convert iPhone HEIC photos to JPG', icon: Smartphone, category: 'image', catLabel: 'Image Studio' },
   { name: 'Resize Image (Pixels / %)', slug: '/image/resize', desc: 'Resize image dimensions cleanly', icon: Sliders, category: 'image', catLabel: 'Image Studio' },
+  { name: 'SSC Photo Resizer (20-50KB)', slug: '/tools/ssc-photo-resizer', desc: 'SSC CGL, CHSL 3.5x4.5cm with Name/Date', icon: UserCheck, badge: 'SSC 20-50KB', category: 'image', catLabel: 'Image Studio' },
+  { name: 'Signature Resizer 10 to 20KB', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Clean signature with Magic B&W for forms', icon: Stamp, badge: '10-20KB', category: 'image', catLabel: 'Image Studio' },
+  { name: 'Aadhaar Card Print Tool', slug: '/tools/aadhaar-card-print', desc: 'Crop & print e-Aadhaar on A4 & PVC (85.6x54mm)', icon: Printer, badge: 'A4 & PVC', category: 'image', catLabel: 'Image Studio' },
+  { name: 'UPSC Photo Resizer', slug: '/tools/upsc-photo-resizer', desc: 'UPSC IAS, CDS 350x350 px (20-300KB)', icon: UserCheck, badge: 'UPSC OTR', category: 'image', catLabel: 'Image Studio' },
+  { name: 'NEET Photo Resizer', slug: '/tools/neet-photo-resizer', desc: 'NEET passport & postcard 4"x6" with DOP stamp', icon: UserCheck, badge: 'NEET UG', category: 'image', catLabel: 'Image Studio' },
+  { name: 'Photo Name & Date Generator', slug: '/tools/photo-name-date-generator', desc: 'Add candidate name & DOP bar to photo', icon: Calendar, badge: 'Name & Date', category: 'image', catLabel: 'Image Studio' },
 ];
 
 const UTILITY_TOOLS = [
@@ -105,7 +112,7 @@ const UTILITY_TOOLS = [
   { name: 'Password Generator', slug: '/utility/password-generator', desc: 'Generate strong passwords 100% offline', icon: Lock, badge: 'Secure', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'Number to Words Converter', slug: '/utility/number-to-words', desc: 'Cheque & invoice amount words (Rupees/$)', icon: DollarSign, badge: 'Cheque', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'EMI Loan Calculator', slug: '/utility/emi-calculator', desc: 'Home, car & personal loan monthly EMI math', icon: DollarSign, badge: 'Loan', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Income Tax Calculator', slug: '/utility/income-tax-calculator', desc: 'Old vs New Regime tax savings FY 2024-25', icon: DollarSign, badge: 'Tax', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Income Tax Calculator', slug: '/utility/income-tax-calculator', desc: 'Old vs New Regime tax savings FY 2026-27', icon: DollarSign, badge: 'Tax', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'SIP Mutual Fund Calculator', slug: '/utility/sip-calculator', desc: 'Compounding growth for monthly mutual funds', icon: DollarSign, badge: 'Wealth', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'CTC to In-Hand Salary Calculator', slug: '/utility/salary-calculator', desc: 'Monthly take-home salary after EPF & TDS', icon: DollarSign, badge: 'Salary', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'GST Tax Calculator', slug: '/utility/gst-calculator', desc: 'Add or Remove GST 5%, 12%, 18%, 28%', icon: Percent, badge: 'B2B', category: 'utility', catLabel: 'Daily Utility' },
@@ -720,6 +727,7 @@ export function Navbar() {
               })}
             </div>
           </div>
+
 
           <div className="relative group py-4">
             <Link
