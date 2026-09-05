@@ -79,8 +79,10 @@ export function ToolLayout({
               </motion.div>
             )}
 
-            {/* Post-Download In-Feed Ad Slot */}
-            <AdSlot slotType="post-download" />
+            {/* Post-Download In-Feed Ad Slot (Strictly >= 25px clear margin to prevent accidental clicks) */}
+            <div className="pt-4 sm:pt-6">
+              <AdSlot slotType="post-download" />
+            </div>
 
             {/* Explore Related FileZenith Tools */}
             <RelatedToolsSection currentSlug={slug} />

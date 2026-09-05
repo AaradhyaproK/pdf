@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { trackAdImpression, getAdsConfig, getAdsConfigFromFirestore, AdsManagerConfig } from '@/lib/admin-store';
-import { Heart, ExternalLink } from 'lucide-react';
 
 export interface AdSlotProps {
   slotType: 'header-leaderboard' | 'sticky-sidebar' | 'post-download';
@@ -10,7 +9,7 @@ export interface AdSlotProps {
   className?: string;
 }
 
-const DEFAULT_SUPPORT_URL = 'https://omg10.com/4/11707727';
+const DEFAULT_SUPPORT_URL = '/';
 
 // 728x90 Leaderboard Banner with In-Window Fallback if Blocked
 function AdsterraLeaderboardBanner({ adKey, supportUrl }: { adKey: string; supportUrl: string }) {
@@ -47,8 +46,8 @@ function AdsterraLeaderboardBanner({ adKey, supportUrl }: { adKey: string; suppo
             width: 100%;
             max-width: 728px;
             height: 90px;
-            background: #fff1f2;
-            border: 1px solid #fecdd3;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
             border-radius: 16px;
             align-items: center;
             justify-content: space-between;
@@ -58,11 +57,11 @@ function AdsterraLeaderboardBanner({ adKey, supportUrl }: { adKey: string; suppo
             transition: all 0.2s ease;
           }
           #fallback-box:hover {
-            background: #ffe4e6;
-            border-color: #fda4af;
+            background: #f1f5f9;
+            border-color: #cbd5e1;
           }
           .fallback-btn {
-            background: #e11d48;
+            background: #4f46e5;
             color: #ffffff;
             padding: 9px 16px;
             border-radius: 12px;
@@ -72,7 +71,7 @@ function AdsterraLeaderboardBanner({ adKey, supportUrl }: { adKey: string; suppo
             transition: background 0.2s;
           }
           .fallback-btn:hover {
-            background: #be123c;
+            background: #4338ca;
           }
           @media (max-width: 520px) {
             #fallback-box {
@@ -147,15 +146,15 @@ function AdsterraLeaderboardBanner({ adKey, supportUrl }: { adKey: string; suppo
           <script type="text/javascript" src="https://www.highrevenueformat.com/${key}/invoke.js" onerror="window.showFallback && window.showFallback()"></script>
         </div>
 
-        <a id="fallback-box" href="${targetUrl}" target="_blank" rel="noopener noreferrer">
-          <div style="display:flex; align-items:center; gap:10px;">
-            <span style="font-size:22px;">❤️</span>
+        <a id="fallback-box" href="${targetUrl}" target="_self">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <span style="font-size:22px;">⚡</span>
             <div style="text-align:left;">
-              <div class="fallback-title" style="font-size:13px; font-weight:900; color:#881337;">If Ads Are Blocked or Not Loading: Support Developer</div>
-              <div class="fallback-sub" style="font-size:11px; font-weight:600; color:#be123c; margin-top:2px;">Click here to visit our sponsor link & keep tools 100% free!</div>
+              <div class="fallback-title" style="font-size:13px; font-weight:900; color:#0f172a;">Fast, Private, In-Browser File Tools</div>
+              <div class="fallback-sub" style="font-size:11px; font-weight:600; color:#64748b; margin-top:2px;">100% client-side memory execution with zero server file uploads.</div>
             </div>
           </div>
-          <div class="fallback-btn">Click to Support →</div>
+          <div class="fallback-btn">Explore Free Tools →</div>
         </a>
       </body>
     </html>
@@ -220,8 +219,8 @@ function AdsterraSidebarTallBanner({ sidebarKey, scriptUrl, containerId, support
             width: 100%;
             height: 100%;
             min-height: 480px;
-            background: #fff1f2;
-            border: 1px solid #fecdd3;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
             border-radius: 24px;
             flex-direction: column;
             align-items: center;
@@ -233,23 +232,23 @@ function AdsterraSidebarTallBanner({ sidebarKey, scriptUrl, containerId, support
             transition: all 0.2s ease;
           }
           #fallback-box:hover {
-            background: #ffe4e6;
-            border-color: #fda4af;
+            background: #f1f5f9;
+            border-color: #cbd5e1;
             transform: translateY(-1px);
           }
           .fallback-btn {
-            background: #e11d48;
+            background: #4f46e5;
             color: #ffffff;
             padding: 12px 22px;
             border-radius: 14px;
             font-size: 13px;
             font-weight: 800;
             margin-top: 18px;
-            box-shadow: 0 4px 12px rgba(225,29,72,0.25);
+            box-shadow: 0 4px 12px rgba(79,70,229,0.25);
             transition: background 0.2s;
           }
           .fallback-btn:hover {
-            background: #be123c;
+            background: #4338ca;
           }
         </style>
         <script type="text/javascript">
@@ -307,12 +306,12 @@ function AdsterraSidebarTallBanner({ sidebarKey, scriptUrl, containerId, support
           <script async="async" data-cfasync="false" src="${script}" onerror="window.showFallback && window.showFallback()"></script>
         </div>
 
-        <a id="fallback-box" href="${targetUrl}" target="_blank" rel="noopener noreferrer">
-          <div style="font-size:42px; margin-bottom:12px;">❤️</div>
-          <div style="font-size:17px; font-weight:900; color:#881337;">If Ads Are Blocked:</div>
-          <div style="font-size:15px; font-weight:800; color:#9f1239; margin-top:2px;">Support Developer</div>
-          <div style="font-size:12px; font-weight:600; color:#be123c; margin-top:8px; max-width:240px; line-height:1.4;">Click here to visit our sponsor link & keep all tools 100% free!</div>
-          <div class="fallback-btn">Click to Support Developer →</div>
+        <a id="fallback-box" href="${targetUrl}" target="_self">
+          <div style="font-size:42px; margin-bottom:12px;">🛡️</div>
+          <div style="font-size:16px; font-weight:900; color:#0f172a;">Fast, Private, In-Browser Tools</div>
+          <div style="font-size:13px; font-weight:700; color:#475569; margin-top:4px;">100% Client-Side Studio</div>
+          <div style="font-size:12px; font-weight:500; color:#64748b; margin-top:8px; max-width:240px; line-height:1.4;">All conversion engines execute strictly in your device browser with zero file uploads.</div>
+          <div class="fallback-btn">Explore All Tools →</div>
         </a>
       </body>
     </html>
@@ -374,8 +373,8 @@ function AdsterraContainerBanner({ scriptUrl, containerId, supportUrl }: { scrip
             max-width: 800px;
             height: 100%;
             min-height: 200px;
-            background: #fff1f2;
-            border: 1px solid #fecdd3;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
             border-radius: 20px;
             align-items: center;
             justify-content: space-between;
@@ -385,22 +384,22 @@ function AdsterraContainerBanner({ scriptUrl, containerId, supportUrl }: { scrip
             transition: all 0.2s ease;
           }
           #fallback-box:hover {
-            background: #ffe4e6;
-            border-color: #fda4af;
+            background: #f1f5f9;
+            border-color: #cbd5e1;
           }
           .fallback-btn {
-            background: #e11d48;
+            background: #4f46e5;
             color: #ffffff;
             padding: 11px 22px;
             border-radius: 14px;
             font-size: 13px;
             font-weight: 800;
             white-space: nowrap;
-            box-shadow: 0 4px 12px rgba(225,29,72,0.2);
+            box-shadow: 0 4px 12px rgba(79,70,229,0.2);
             transition: background 0.2s;
           }
           .fallback-btn:hover {
-            background: #be123c;
+            background: #4338ca;
           }
           @media (max-width: 580px) {
             #fallback-box {
@@ -458,15 +457,15 @@ function AdsterraContainerBanner({ scriptUrl, containerId, supportUrl }: { scrip
           <script async="async" data-cfasync="false" src="${script}" onerror="window.showFallback && window.showFallback()"></script>
         </div>
 
-        <a id="fallback-box" href="${targetUrl}" target="_blank" rel="noopener noreferrer">
+        <a id="fallback-box" href="${targetUrl}" target="_self">
           <div style="display:flex; align-items:center; gap:16px;">
-            <span style="font-size:32px;">❤️</span>
+            <span style="font-size:32px;">⚡</span>
             <div style="text-align:left;">
-              <div style="font-size:15px; font-weight:900; color:#881337;">If Ads Are Blocked or Not Loading</div>
-              <div style="font-size:12px; font-weight:600; color:#be123c; margin-top:3px;">Click here to visit our sponsor link & support the developer to keep tools free!</div>
+              <div style="font-size:15px; font-weight:900; color:#0f172a;">Fast, Private, In-Browser File Tools</div>
+              <div style="font-size:12px; font-weight:500; color:#64748b; margin-top:3px;">Process PDFs, images, and documents 100% privately in device memory.</div>
             </div>
           </div>
-          <div class="fallback-btn">Click to Support →</div>
+          <div class="fallback-btn">Explore Free Tools →</div>
         </a>
       </body>
     </html>
@@ -496,8 +495,8 @@ function CustomAdEmbed({ code, height = 250, supportUrl }: { code: string; heigh
         <meta charset="utf-8">
         <style>
           html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; display: flex; justify-content: center; align-items: center; background: transparent; font-family: system-ui, -apple-system, sans-serif; }
-          #fallback-box { display: none; width: 100%; height: 100%; background: #fff1f2; border: 1px solid #fecdd3; border-radius: 16px; align-items: center; justify-content: center; text-decoration: none; flex-direction: column; padding: 12px; box-sizing: border-box; text-align: center; }
-          .fallback-btn { background: #e11d48; color: #ffffff; padding: 8px 16px; border-radius: 12px; font-size: 12px; font-weight: 800; margin-top: 6px; }
+          #fallback-box { display: none; width: 100%; height: 100%; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; align-items: center; justify-content: center; text-decoration: none; flex-direction: column; padding: 12px; box-sizing: border-box; text-align: center; }
+          .fallback-btn { background: #4f46e5; color: #ffffff; padding: 8px 16px; border-radius: 12px; font-size: 12px; font-weight: 800; margin-top: 6px; }
         </style>
         <script type="text/javascript">
           function showFallback() {
@@ -544,10 +543,10 @@ function CustomAdEmbed({ code, height = 250, supportUrl }: { code: string; heigh
         <div id="ad-box" style="width:100%; height:100%; display:flex; justify-content:center; align-items:center;">
           ${code}
         </div>
-        <a id="fallback-box" href="${targetUrl}" target="_blank" rel="noopener noreferrer">
-          <div style="font-size:12px; font-weight:900; color:#881337;">❤️ Support Developer</div>
-          <div style="font-size:11px; font-weight:600; color:#be123c; margin-top:2px;">Click here to visit our sponsor link & keep tools 100% free!</div>
-          <div class="fallback-btn">Click Here to Support →</div>
+        <a id="fallback-box" href="${targetUrl}" target="_self">
+          <div style="font-size:13px; font-weight:900; color:#0f172a;">Fast, Private, In-Browser File Tools</div>
+          <div style="font-size:11px; font-weight:500; color:#64748b; margin-top:2px;">100% client-side file tools with zero server file uploads.</div>
+          <div class="fallback-btn">Explore Free Tools →</div>
         </a>
       </body>
     </html>
@@ -590,30 +589,20 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
   if (slotType === 'post-download' && !config.toolInFeedEnabled) return null;
 
   const supportUrl = config.fallbackSupportUrl || DEFAULT_SUPPORT_URL;
-  const headerBadge = config.supportDevTextHeader || 'Support Developer by Clicking Ads • Keeps All Tools 100% Free';
-  const sidebarBadge = config.supportDevTextSidebar || 'Support Developer by Clicking Ads';
-  const postDownloadBadge = config.supportDevTextPostDownload || 'Enjoyed Free Tools? Support Developer by Clicking Ads Below!';
+
+  // Google AdSense Policy Compliance:
+  // Publishers may ONLY label ad blocks with "Advertisement" or "Sponsored" (or blank).
+  // Any text encouraging clicks is strictly prohibited.
+  const adLabel = config.adLabelText !== undefined ? config.adLabelText : 'Advertisement';
 
   if (slotType === 'header-leaderboard') {
     return (
-      <div className={`w-full flex flex-col items-center justify-center my-3 sm:my-5 ${className}`}>
-        <a
-          href={supportUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-full flex items-center justify-center gap-1.5 mb-2 group cursor-pointer"
-          title="Click to Support Developer"
-        >
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+      <div className={`w-full flex flex-col items-center justify-center my-7 sm:my-8 ${className}`}>
+        {adLabel && (
+          <span className="text-[10px] tracking-widest uppercase text-slate-400 font-semibold mb-2 block select-none text-center">
+            {adLabel}
           </span>
-          <span className="text-[11px] sm:text-xs uppercase tracking-wider text-rose-700 font-extrabold flex items-center gap-1.5 bg-rose-50 hover:bg-rose-100 border border-rose-200 px-4 py-1.5 rounded-full shadow-2xs group-hover:scale-102 transition-all">
-            <Heart className="w-3.5 h-3.5 text-rose-600 fill-rose-600 animate-pulse" />
-            {headerBadge}
-            <ExternalLink className="w-3 h-3 text-rose-500 ml-0.5" />
-          </span>
-        </a>
+        )}
         <div className="w-full min-h-[105px] bg-white border border-slate-200/90 rounded-2xl p-2 sm:p-3 shadow-2xs flex items-center justify-center">
           {config.adProvider === 'adsense' || clientAdId ? (
             <ins
@@ -635,24 +624,12 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
 
   if (slotType === 'sticky-sidebar') {
     return (
-      <div className={`w-full flex flex-col items-center my-4 sticky top-20 ${className}`}>
-        <a
-          href={supportUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-full flex items-center justify-center gap-1.5 mb-2 px-1 group cursor-pointer"
-          title="Click to Support Developer"
-        >
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+      <div className={`w-full flex flex-col items-center my-7 sm:my-8 sticky top-24 ${className}`}>
+        {adLabel && (
+          <span className="text-[10px] tracking-widest uppercase text-slate-400 font-semibold mb-2 block select-none text-center">
+            {adLabel}
           </span>
-          <span className="text-[11px] uppercase tracking-wider text-rose-700 font-extrabold flex items-center gap-1.5 bg-rose-50 hover:bg-rose-100 border border-rose-200 px-3.5 py-1 rounded-full shadow-2xs group-hover:scale-102 transition-all">
-            <Heart className="w-3.5 h-3.5 text-rose-600 fill-rose-600" />
-            {sidebarBadge}
-            <ExternalLink className="w-3 h-3 text-rose-500 ml-0.5" />
-          </span>
-        </a>
+        )}
         <div className="w-full min-h-[550px] bg-white border border-slate-200/90 rounded-3xl p-3 sm:p-4 flex flex-col items-center justify-start text-center shadow-2xs">
           {config.adProvider === 'adsense' || clientAdId ? (
             <ins
@@ -676,39 +653,32 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
     );
   }
 
-  // Post-Download / In-Feed Banner Slot
+  // Post-Download / In-Feed Banner Slot (Enforces strict >= 25px clear margin from interactive buttons)
   return (
-    <div className={`w-full bg-white border border-slate-200/90 rounded-3xl p-4 sm:p-5 shadow-2xs flex flex-col items-center justify-center text-center ${className}`}>
-      <a
-        href={supportUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="w-full flex items-center justify-center gap-1.5 mb-2 group cursor-pointer"
-        title="Click to Support Developer"
-      >
-        <span className="text-[11px] uppercase tracking-wider text-rose-700 font-extrabold flex items-center gap-1.5 bg-rose-50 hover:bg-rose-100 border border-rose-200 px-3.5 py-1 rounded-full shadow-2xs group-hover:scale-102 transition-all">
-          <Heart className="w-3.5 h-3.5 text-rose-600 fill-rose-600 animate-pulse" />
-          {postDownloadBadge}
-          <ExternalLink className="w-3 h-3 text-rose-500 ml-0.5" />
+    <div className={`w-full my-8 sm:my-10 flex flex-col items-center justify-center ${className}`}>
+      {adLabel && (
+        <span className="text-[10px] tracking-widest uppercase text-slate-400 font-semibold mb-2 block select-none text-center">
+          {adLabel}
         </span>
-      </a>
-
-      {config.adProvider === 'adsense' || clientAdId ? (
-        <ins
-          className="adsbygoogle"
-          style={{ display: 'block', width: '100%', height: '100%' }}
-          data-ad-client={clientAdId || config.publisherId}
-          data-ad-slot="1122334455"
-        />
-      ) : config.adProvider === 'custom' && config.customPostDownloadCode ? (
-        <CustomAdEmbed code={config.customPostDownloadCode} height={250} supportUrl={supportUrl} />
-      ) : (
-        <AdsterraContainerBanner
-          scriptUrl={config.adsterraContainerScript}
-          containerId={config.adsterraContainerId}
-          supportUrl={supportUrl}
-        />
       )}
+      <div className="w-full bg-white border border-slate-200/90 rounded-3xl p-4 sm:p-5 shadow-2xs flex flex-col items-center justify-center text-center">
+        {config.adProvider === 'adsense' || clientAdId ? (
+          <ins
+            className="adsbygoogle"
+            style={{ display: 'block', width: '100%', height: '100%' }}
+            data-ad-client={clientAdId || config.publisherId}
+            data-ad-slot="1122334455"
+          />
+        ) : config.adProvider === 'custom' && config.customPostDownloadCode ? (
+          <CustomAdEmbed code={config.customPostDownloadCode} height={250} supportUrl={supportUrl} />
+        ) : (
+          <AdsterraContainerBanner
+            scriptUrl={config.adsterraContainerScript}
+            containerId={config.adsterraContainerId}
+            supportUrl={supportUrl}
+          />
+        )}
+      </div>
     </div>
   );
 }

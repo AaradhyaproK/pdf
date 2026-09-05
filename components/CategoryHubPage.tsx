@@ -205,8 +205,10 @@ export function CategoryHubPage({ category }: { category: CategoryConfig }) {
           </section>
         )}
 
-        {/* Mid-Page Ad Slot */}
-        <AdSlot slotType="post-download" />
+        {/* Mid-Page Ad Slot (Strictly >= 25px clear margin to prevent accidental clicks) */}
+        <div className="py-4 sm:py-6">
+          <AdSlot slotType="post-download" />
+        </div>
 
         {/* Collapsible FAQ Section */}
         {category.faqs && category.faqs.length > 0 && (

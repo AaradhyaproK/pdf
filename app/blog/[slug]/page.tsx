@@ -407,8 +407,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </div>
             </div>
 
-            {/* In-Feed Banner Ad Slot */}
-            <AdSlot slotType="post-download" />
+            {/* In-Feed Banner Ad Slot (Strictly >= 25px clear margin to prevent accidental clicks) */}
+            <div className="pt-6">
+              <AdSlot slotType="post-download" />
+            </div>
 
             {/* Related Tools Showcase */}
             <RelatedToolsSection currentSlug={post.tool || '/pdf/compress'} />

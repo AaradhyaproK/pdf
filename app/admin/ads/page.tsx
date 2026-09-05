@@ -114,8 +114,8 @@ export default function AdminAdsPage() {
               activeTab === 'badges' ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
             }`}
           >
-            <Heart className="w-4 h-4" />
-            <span>3. Support Badges Text</span>
+            <ShieldCheck className="w-4 h-4" />
+            <span>3. Ad Labels & Banner Copy</span>
           </button>
 
           <button
@@ -325,52 +325,77 @@ export default function AdminAdsPage() {
           </div>
         )}
 
-        {/* Tab 3: Support Developer Badges Customization */}
+        {/* Tab 3: Policy-Compliant Banner Copy & Ad Labels */}
         {(activeTab === 'badges' || activeTab === 'provider') && (
           <div className="p-6 bg-white border border-slate-200/80 rounded-3xl shadow-xs space-y-6">
             <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
-              <div className="p-2.5 rounded-xl bg-rose-50 text-rose-600 border border-rose-100">
-                <Heart className="w-5 h-5" />
+              <div className="p-2.5 rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-100">
+                <ShieldCheck className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-lg font-black text-slate-900">Support Developer Badges Text Customization</h2>
-                <p className="text-xs text-slate-500 font-medium">Customize the callout text displayed above banner slots.</p>
+                <h2 className="text-lg font-black text-slate-900">Policy-Compliant Ad Labels & Banner Copy</h2>
+                <p className="text-xs text-slate-500 font-medium">Google AdSense strictly requires neutral labels (&quot;Advertisement&quot; or &quot;Sponsored&quot;) and prohibits click-encouragement phrases.</p>
               </div>
             </div>
 
             <div className="space-y-4">
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                  Top Header Banner Support Text
+                  Ad Slot Identifier Label (AdSense Allowed: &quot;Advertisement&quot; or &quot;Sponsored&quot;)
+                </label>
+                <div className="grid grid-cols-3 gap-3">
+                  {(['Advertisement', 'Sponsored', ''] as const).map((lbl) => (
+                    <button
+                      key={lbl}
+                      type="button"
+                      onClick={() => setConfig({ ...config, adLabelText: lbl })}
+                      className={`p-3 rounded-2xl border text-xs font-bold transition-all ${
+                        (config.adLabelText ?? 'Advertisement') === lbl
+                          ? 'border-indigo-600 bg-indigo-50 text-indigo-900 ring-2 ring-indigo-600/20'
+                          : 'border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100'
+                      }`}
+                    >
+                      {lbl || '(None / Blank)'}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                  Top Header Neutral Banner Copy
                 </label>
                 <input
                   type="text"
                   value={config.supportDevTextHeader}
                   onChange={(e) => setConfig({ ...config, supportDevTextHeader: e.target.value })}
+                  placeholder="Fast, private, in-browser file tools."
                   className="w-full px-4 py-3 rounded-2xl border border-slate-300 bg-slate-50 text-slate-900 font-bold text-sm focus:outline-none focus:border-indigo-600"
                 />
               </div>
 
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                  Sidebar Banner Support Text
+                  Sidebar Neutral Banner Copy
                 </label>
                 <input
                   type="text"
                   value={config.supportDevTextSidebar}
                   onChange={(e) => setConfig({ ...config, supportDevTextSidebar: e.target.value })}
+                  placeholder="Fast, private, in-browser file tools."
                   className="w-full px-4 py-3 rounded-2xl border border-slate-300 bg-slate-50 text-slate-900 font-bold text-sm focus:outline-none focus:border-indigo-600"
                 />
               </div>
 
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                  Post-Download / In-Feed Support Text
+                  Post-Download / In-Feed Neutral Copy
                 </label>
                 <input
                   type="text"
                   value={config.supportDevTextPostDownload}
                   onChange={(e) => setConfig({ ...config, supportDevTextPostDownload: e.target.value })}
+                  placeholder="Fast, private, in-browser file tools."
                   className="w-full px-4 py-3 rounded-2xl border border-slate-300 bg-slate-50 text-slate-900 font-bold text-sm focus:outline-none focus:border-indigo-600"
                 />
               </div>

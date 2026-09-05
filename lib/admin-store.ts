@@ -26,11 +26,12 @@ export interface AdsManagerConfig {
   customSidebarCode?: string;
   customPostDownloadCode?: string;
 
-  // Support Developer Text & Direct Link Customizations
+  // Policy-Compliant Banner Copy & Labeling Customizations
   supportDevTextHeader: string;
   supportDevTextSidebar: string;
   supportDevTextPostDownload: string;
   fallbackSupportUrl: string;
+  adLabelText?: 'Advertisement' | 'Sponsored' | '';
 
   // Google AdSense Settings
   publisherId: string;
@@ -58,10 +59,11 @@ const DEFAULT_ADS_CONFIG: AdsManagerConfig = {
   customHeaderCode: '',
   customSidebarCode: '',
   customPostDownloadCode: '',
-  supportDevTextHeader: 'Support Developer by Clicking Ads • Keeps All Tools 100% Free',
-  supportDevTextSidebar: 'Support Developer by Clicking Ads',
-  supportDevTextPostDownload: 'Enjoyed Free Tools? Support Developer by Clicking Ads Below!',
-  fallbackSupportUrl: 'https://omg10.com/4/11707727',
+  supportDevTextHeader: 'Fast, private, in-browser file tools.',
+  supportDevTextSidebar: 'Fast, private, in-browser file tools.',
+  supportDevTextPostDownload: 'Fast, private, in-browser file tools.',
+  fallbackSupportUrl: '/',
+  adLabelText: 'Advertisement',
   publisherId: 'ca-pub-9075710959353163',
   adSenseScriptEnabled: false,
   headerBannerEnabled: true,

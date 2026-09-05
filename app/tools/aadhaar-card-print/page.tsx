@@ -222,8 +222,8 @@ export default function AadhaarCardPrintPage() {
             {/* Aadhaar Print Studio Component */}
             <AadhaarPrintStudio />
 
-            {/* In-Feed Post-Download Ad Unit */}
-            <div className="w-full">
+            {/* In-Feed Post-Download Ad Unit (Strictly >= 25px clear margin to prevent accidental clicks) */}
+            <div className="w-full pt-4 sm:pt-6">
               <AdSlot slotType="post-download" />
             </div>
 

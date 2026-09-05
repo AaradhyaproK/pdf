@@ -204,8 +204,8 @@ export default async function ToolPresetPage({ params }: PageProps) {
             {/* Interactive Studio Component */}
             <ExamResizerStudio {...preset} />
 
-            {/* In-Feed Post Download Ad Slot */}
-            <div className="w-full">
+            {/* In-Feed Post Download Ad Slot (Strictly >= 25px clear margin to prevent accidental clicks) */}
+            <div className="w-full pt-4 sm:pt-6">
               <AdSlot slotType="post-download" />
             </div>
 

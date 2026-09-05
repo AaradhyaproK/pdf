@@ -2014,7 +2014,7 @@ export default function PDFEditPage() {
           </div>
         </div>
 
-        {/* Bottom Download Action Bar (Positioned directly above "Sponsored Offer" ad box in both mobile & desktop views) */}
+        {/* Bottom Download Action Bar */}
         <div className="bg-white rounded-2xl border border-slate-200/90 shadow-md p-3.5 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-900 mt-3 sm:mt-4">
           <div className="flex items-center gap-3 text-left w-full sm:w-auto">
             <div className="p-2.5 sm:p-3 rounded-2xl bg-emerald-50 text-emerald-600 shrink-0">
