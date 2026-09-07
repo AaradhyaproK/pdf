@@ -21,14 +21,29 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.filezenith.com'),
   title: {
-    default: 'FileZenith — Free PDF & File Tools',
+    default: 'FileZenith — Free PDF, Image & Online Utility Tools',
     template: '%s | FileZenith',
   },
   description: 'FileZenith is an all-in-one private online file studio. Compress PDF, edit documents, convert PNG to JPG, pics to PDF, remove background, and generate QR codes 100% privately inside your browser.',
-  keywords: 'filezenith, file zenith, filezenith.com, pdf compressor, edit pdf online, merge pdf, pics to pdf, png to jpg, png to pdf, remove background, qr generator, client-side web tools',
+  keywords: 'filezenith, file zenith, filezenith.com, pdf compressor, edit pdf online, merge pdf, pics to pdf, png to jpg, png to pdf, remove background, qr generator, client-side web tools, compress pdf to 200kb, ssc photo resizer, signature resizer',
+  authors: [{ name: 'FileZenith Editorial Board', url: 'https://www.filezenith.com/about' }],
+  creator: 'FileZenith',
+  publisher: 'FileZenith',
+  category: 'technology',
   manifest: '/manifest.json',
   alternates: {
     canonical: '/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
   appleWebApp: {
     capable: true,
@@ -49,8 +64,16 @@ export const metadata: Metadata = {
     description: 'All-in-one private online file tool suite. Zero server file uploads. 100% Free & Secure.',
     url: 'https://www.filezenith.com',
     siteName: 'FileZenith',
+    locale: 'en_US',
     type: 'website',
-    images: [{ url: '/filezenith-logo.png' }],
+    images: [
+      {
+        url: '/filezenith-logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'FileZenith Free Online PDF, Image & Utility Studio',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',

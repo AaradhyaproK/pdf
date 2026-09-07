@@ -13,6 +13,8 @@ import {
   CheckCircle2,
   Lock,
   Grid,
+  BookOpen,
+  Clock,
 } from 'lucide-react';
 
 export function CategoryHubPage({ category }: { category: CategoryConfig }) {
@@ -72,6 +74,100 @@ export function CategoryHubPage({ category }: { category: CategoryConfig }) {
       },
     })),
   };
+
+  const categoryArticles =
+    category.slug === 'pdf'
+      ? [
+          {
+            title: 'How to Compress PDF to 200KB Online Free',
+            desc: 'Step-by-step instructions to compress PDFs for government and university portals.',
+            url: '/blog/how-to-compress-pdf-to-200kb-online',
+            tag: 'Portal Guide',
+            readTime: '5 min read',
+          },
+          {
+            title: 'How to Convert Scanned PDF to Editable Word',
+            desc: 'Convert scanned PDF documents into editable Word .docx files with OCR.',
+            url: '/blog/how-to-convert-scanned-pdf-to-editable-word',
+            tag: 'OCR Tutorial',
+            readTime: '6 min read',
+          },
+          {
+            title: 'How to Remove Password from PDF Permanently',
+            desc: 'Unlock encrypted bank statements, salary slips, and e-Aadhaar PDFs safely.',
+            url: '/blog/how-to-remove-password-from-pdf',
+            tag: 'Security Guide',
+            readTime: '5 min read',
+          },
+          {
+            title: 'How to Merge Multiple PDF Files Free',
+            desc: 'Combine separate document pages into a single organized master PDF.',
+            url: '/blog/how-to-merge-pdf-files-free',
+            tag: 'Workflow',
+            readTime: '4 min read',
+          },
+        ]
+      : category.slug === 'image'
+      ? [
+          {
+            title: 'The Ultimate Passport Size Photo Maker Guide',
+            desc: 'Official 2x2" and 3.5x4.5cm specs, white background rules, and form criteria.',
+            url: '/blog/passport-size-photo-maker-guide',
+            tag: 'Biometric Specs',
+            readTime: '6 min read',
+          },
+          {
+            title: 'How to Remove Background from Image Free in HD',
+            desc: 'In-browser AI neural segmentation with transparent PNG exports and no watermarks.',
+            url: '/blog/how-to-remove-background-from-image-free',
+            tag: 'AI Cutout',
+            readTime: '5 min read',
+          },
+          {
+            title: 'How to Compress Image to Under 20KB for Portals',
+            desc: 'Keep signatures and applicant photos sharp under strict upload ceilings.',
+            url: '/blog/how-to-compress-image-to-20kb',
+            tag: 'Exam Forms',
+            readTime: '4 min read',
+          },
+          {
+            title: 'How to Resize Signature Online for Exams',
+            desc: 'Format digital signatures for SSC, UPSC, and state PSC job portals.',
+            url: '/blog/how-to-resize-signature-online',
+            tag: 'Signature Tips',
+            readTime: '4 min read',
+          },
+        ]
+      : [
+          {
+            title: 'How to Calculate Home & Car Loan EMI Accurately',
+            desc: 'Principal reduction, interest amortizations, and early payoff strategies.',
+            url: '/blog/emi-calculator-guide',
+            tag: 'Finance Guide',
+            readTime: '4 min read',
+          },
+          {
+            title: 'Calculate Exact Age for Competitive Exam Eligibility',
+            desc: 'Check age cut-off dates for civil services and state recruitment portals.',
+            url: '/blog/age-calculator-india',
+            tag: 'Govt Exams',
+            readTime: '4 min read',
+          },
+          {
+            title: 'JPEG vs PNG for Online Applications: Which to Pick',
+            desc: 'Compare compression efficiency and compatibility for web uploads.',
+            url: '/guides/jpeg-vs-png-for-online-forms',
+            tag: 'File Specs',
+            readTime: '3 min read',
+          },
+          {
+            title: 'Photo Dimensions vs File Size Explained',
+            desc: 'Understand DPI, pixel dimensions, and compression artifacts.',
+            url: '/guides/photo-size-and-file-size-explained',
+            tag: 'Explainer',
+            readTime: '3 min read',
+          },
+        ];
 
   return (
     <main className="min-h-screen bg-slate-50/50 py-8 px-4 sm:px-6 lg:px-8 text-slate-900">
@@ -256,6 +352,58 @@ export function CategoryHubPage({ category }: { category: CategoryConfig }) {
                 </div>
               </div>
             )}
+          </section>
+        )}
+
+        {/* Category Step-by-Step Guides & Articles */}
+        {categoryArticles.length > 0 && (
+          <section className="space-y-4 pt-4 border-t border-slate-200">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <BookOpen className="w-5 h-5 text-indigo-600" />
+                <h2 className="text-base sm:text-lg font-black text-slate-900">
+                  Step-by-Step Guides & Helpful Tutorials
+                </h2>
+              </div>
+              <Link
+                href="/blog"
+                className="text-xs font-black text-indigo-600 hover:text-indigo-800 flex items-center gap-1"
+              >
+                <span>All Articles</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {categoryArticles.map((art, idx) => (
+                <Link
+                  key={idx}
+                  href={art.url}
+                  className="p-5 rounded-2xl bg-white border border-slate-200 hover:border-indigo-400 shadow-xs hover:shadow-md transition-all group flex flex-col justify-between space-y-3"
+                >
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between gap-1">
+                      <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-700">
+                        {art.tag}
+                      </span>
+                      <span className="text-[10px] font-medium text-slate-400 flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        {art.readTime}
+                      </span>
+                    </div>
+                    <h3 className="font-extrabold text-xs sm:text-sm text-slate-900 group-hover:text-indigo-600 transition-colors line-clamp-2 leading-snug">
+                      {art.title}
+                    </h3>
+                    <p className="text-[11px] text-slate-500 font-medium line-clamp-2 leading-relaxed">
+                      {art.desc}
+                    </p>
+                  </div>
+                  <div className="pt-2 flex items-center text-[10px] font-black text-indigo-600 group-hover:underline">
+                    <span>Read Guide &rarr;</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </section>
         )}
 

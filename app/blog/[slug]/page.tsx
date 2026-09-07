@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import remarkGfm from 'remark-gfm';
 import { getAllPosts, getPostBySlug } from '@/lib/blog';
 import { AdSlot } from '@/components/AdSlot';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
@@ -84,6 +85,38 @@ const mdxCustomComponents = {
       </h3>
     );
   },
+  table: ({ children, ...props }: React.ComponentPropsWithoutRef<'table'>) => (
+    <div className="w-full my-6 overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-xs">
+      <table className="w-full border-collapse text-left text-xs sm:text-sm my-0" {...props}>
+        {children}
+      </table>
+    </div>
+  ),
+  thead: ({ children, ...props }: React.ComponentPropsWithoutRef<'thead'>) => (
+    <thead className="bg-slate-50 border-b border-slate-200 text-slate-900 uppercase text-[11px] font-black tracking-wider" {...props}>
+      {children}
+    </thead>
+  ),
+  tbody: ({ children, ...props }: React.ComponentPropsWithoutRef<'tbody'>) => (
+    <tbody className="divide-y divide-slate-100 text-slate-700 font-medium" {...props}>
+      {children}
+    </tbody>
+  ),
+  tr: ({ children, ...props }: React.ComponentPropsWithoutRef<'tr'>) => (
+    <tr className="hover:bg-slate-50/80 transition-colors" {...props}>
+      {children}
+    </tr>
+  ),
+  th: ({ children, ...props }: React.ComponentPropsWithoutRef<'th'>) => (
+    <th className="py-3.5 px-4 font-black text-slate-900 whitespace-nowrap" {...props}>
+      {children}
+    </th>
+  ),
+  td: ({ children, ...props }: React.ComponentPropsWithoutRef<'td'>) => (
+    <td className="py-3.5 px-4 leading-relaxed whitespace-normal align-top text-slate-700" {...props}>
+      {children}
+    </td>
+  ),
 };
 
 export async function generateStaticParams() {
@@ -113,6 +146,17 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     keywords: post.tags.join(', '),
     alternates: {
       canonical: postUrl,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large' as const,
+        'max-snippet': -1,
+      },
     },
     openGraph: {
       title: post.title,
@@ -318,24 +362,25 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               )}
             </header>
 
-            {/* E-E-A-T Editorial Reviewer & Fact-Check Badge */}
-            <div className="p-4 sm:p-5 rounded-3xl bg-slate-900 text-white space-y-2 border border-slate-800 shadow-md">
-              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800/80 pb-2.5">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center justify-center shrink-0">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            {/* E-E-A-T Editorial Reviewer & Fact-Check Badge (Day Mode Styled) */}
+            <div className="p-4 sm:p-5 rounded-3xl bg-gradient-to-br from-emerald-50/70 via-white to-slate-50 border border-emerald-200/80 shadow-2xs space-y-2.5">
+              <div className="flex flex-wrap items-center justify-between gap-2.5 border-b border-emerald-100 pb-2.5">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 border border-emerald-200 flex items-center justify-center shrink-0 shadow-2xs">
+                    <CheckCircle2 className="w-4.5 h-4.5 text-emerald-600" />
                   </div>
                   <div>
-                    <p className="text-xs font-black text-white">Reviewed by FileZenith Editorial Board</p>
-                    <p className="text-[10px] text-slate-400 font-medium">Fact-Checked for Official 2026-27 Notification Standards</p>
+                    <p className="text-xs sm:text-sm font-black text-slate-900">Reviewed by FileZenith Editorial Board</p>
+                    <p className="text-[10px] sm:text-[11px] text-emerald-700 font-bold">Fact-Checked for Official 2026-27 Notification Standards</p>
                   </div>
                 </div>
-                <span className="text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-400/30">
-                  E-E-A-T Verified
+                <span className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200/80 shadow-2xs tracking-wider">
+                  <ShieldCheck className="w-3 h-3 text-emerald-600" />
+                  <span>E-E-A-T Verified</span>
                 </span>
               </div>
-              <p className="text-[11px] text-slate-300 leading-relaxed font-medium">
-                Dimensions, file size rules, and accepted formats are verified against current SSC, UPSC, NTA, and State PSC guidelines. Zero-server guarantee: images and signatures are processed locally inside your web browser.
+              <p className="text-xs text-slate-600 leading-relaxed font-medium">
+                Dimensions, file size rules, and accepted formats are verified against current SSC, UPSC, NTA, and State PSC guidelines. <span className="font-bold text-slate-800">Zero-server guarantee:</span> images and signatures are processed locally inside your web browser.
               </p>
             </div>
 
@@ -403,7 +448,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {/* Main MDX Content Renderer with Custom Anchor Components */}
             <div className="bg-white p-6 sm:p-12 rounded-3xl border border-slate-200/90 shadow-2xs">
               <div className="prose prose-lg prose-slate max-w-none text-slate-800 prose-headings:text-slate-900 prose-headings:font-black prose-headings:tracking-tight prose-p:text-slate-700 prose-p:leading-relaxed prose-p:font-medium prose-li:text-slate-700 prose-strong:text-slate-900 prose-strong:font-black prose-code:text-indigo-600 prose-code:bg-indigo-50 prose-code:px-2 prose-code:py-1 prose-code:rounded-lg prose-code:before:content-none prose-code:after:content-none prose-a:text-indigo-600 prose-a:font-extrabold hover:prose-a:text-indigo-700 prose-img:rounded-3xl prose-hr:border-slate-200">
-                <MDXRemote source={post.content} components={mdxCustomComponents} />
+                <MDXRemote
+                  source={post.content}
+                  components={mdxCustomComponents}
+                  options={{
+                    mdxOptions: {
+                      remarkPlugins: [remarkGfm],
+                    },
+                  }}
+                />
               </div>
             </div>
 

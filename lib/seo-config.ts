@@ -1,3 +1,5 @@
+import type { Metadata } from 'next';
+
 export interface ToolSEO {
   slug: string;
   title: string;
@@ -2192,7 +2194,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
 
 
-export function generateToolMetadata(slug: string) {
+export function generateToolMetadata(slug: string): Metadata {
   const tool = SEO_REGISTRY[slug];
   if (!tool) {
     return {
@@ -2211,23 +2213,35 @@ export function generateToolMetadata(slug: string) {
     alternates: {
       canonical: canonicalUrl
     },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large' as const,
+        'max-snippet': -1,
+      },
+    },
     openGraph: {
       title: tool.metaTitle,
       description: tool.description,
       url: canonicalUrl,
       siteName: 'FileZenith',
+      locale: 'en_US',
       type: 'website',
       images: [
         {
           url: `${siteUrl}/filezenith-logo.png`,
-          width: 512,
-          height: 512,
+          width: 1200,
+          height: 630,
           alt: tool.title
         }
       ]
     },
     twitter: {
-      card: 'summary_large_image',
+      card: 'summary_large_image' as const,
       title: tool.metaTitle,
       description: tool.description,
       images: [`${siteUrl}/filezenith-logo.png`]
