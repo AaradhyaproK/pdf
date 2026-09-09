@@ -184,12 +184,12 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
           </span>
         )}
         <div className="w-full min-h-[105px] bg-white border border-slate-200/90 rounded-2xl p-2 sm:p-3 shadow-2xs flex items-center justify-center">
-          {config.adProvider === 'adsense' || clientAdId ? (
+          {clientAdId ? (
             <ins
               className="adsbygoogle"
               style={{ display: 'block', width: '100%', height: '100%' }}
-              data-ad-client={clientAdId || config.publisherId}
-              data-ad-slot="1234567890"
+              data-ad-client={config.publisherId}
+              data-ad-slot={clientAdId}
               data-ad-format="auto"
             />
           ) : config.adProvider === 'custom' && config.customHeaderCode ? (
@@ -211,12 +211,12 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
           </span>
         )}
         <div className="w-full min-h-[550px] bg-white border border-slate-200/90 rounded-3xl p-3 sm:p-4 flex flex-col items-center justify-start text-center shadow-2xs">
-          {config.adProvider === 'adsense' || clientAdId ? (
+          {clientAdId ? (
             <ins
               className="adsbygoogle"
               style={{ display: 'block', width: '100%', height: '100%' }}
-              data-ad-client={clientAdId || config.publisherId}
-              data-ad-slot="0987654321"
+              data-ad-client={config.publisherId}
+              data-ad-slot={clientAdId}
             />
           ) : config.adProvider === 'custom' && config.customSidebarCode ? (
             <CustomAdEmbed code={config.customSidebarCode} height={530} />
@@ -237,12 +237,12 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
         </span>
       )}
       <div className="w-full bg-white border border-slate-200/90 rounded-3xl p-4 sm:p-5 shadow-2xs flex flex-col items-center justify-center text-center">
-        {config.adProvider === 'adsense' || clientAdId ? (
+        {clientAdId ? (
           <ins
             className="adsbygoogle"
             style={{ display: 'block', width: '100%', height: '100%' }}
-            data-ad-client={clientAdId || config.publisherId}
-            data-ad-slot="1122334455"
+            data-ad-client={config.publisherId}
+            data-ad-slot={clientAdId}
           />
         ) : config.adProvider === 'custom' && config.customPostDownloadCode ? (
           <CustomAdEmbed code={config.customPostDownloadCode} height={250} />
