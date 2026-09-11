@@ -64,14 +64,14 @@ const DEFAULT_ADS_CONFIG: AdsManagerConfig = {
   supportDevTextPostDownload: 'Fast, private, in-browser file tools.',
   fallbackSupportUrl: '/',
   adLabelText: 'Advertisement',
-  publisherId: 'ca-pub-9075710959353163',
+  publisherId: 'ca-pub-1291898061670715',
   adSenseScriptEnabled: true,
   headerBannerEnabled: true,
   toolInFeedEnabled: true,
   sidebarEnabled: true,
   monetagEnabled: false,
   bottomStickyEnabled: true,
-  adsTxtContent: `google.com, pub-9075710959353163, DIRECT, f08c47fec0942fa0`,
+  adsTxtContent: `google.com, pub-1291898061670715, DIRECT, f08c47fec0942fa0`,
 };
 
 // 1. Get Ads Config

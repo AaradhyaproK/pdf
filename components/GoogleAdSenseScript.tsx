@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Script from 'next/script';
 import { getAdsConfig, GoogleAdsConfig } from '@/lib/admin-store';
 
-const DEFAULT_PUB_ID = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID || 'ca-pub-9075710959353163';
+const DEFAULT_PUB_ID = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID || 'ca-pub-1291898061670715';
 
 export function GoogleAdSenseScript() {
   const [config, setConfig] = useState<GoogleAdsConfig | null>(null);
