@@ -47,6 +47,10 @@ const DEFAULT_POST_IMAGES: Record<string, string> = {
   'photo-size-and-file-size-explained': '/blog/image-compression.jpg',
   'emi-calculator-guide': '/blog/emi-calculator.jpg',
   'age-calculator-india': '/blog/age-calculator.jpg',
+  'how-to-convert-heic-to-jpg-free': '/blog/heic-to-jpg.webp',
+  'how-to-convert-jpg-to-pdf-online': '/blog/jpg-to-pdf.webp',
+  'how-to-calculate-sip-returns-wealth-guide': '/blog/sip-calculator.webp',
+  'cgpa-to-percentage-conversion-guide': '/blog/cgpa-calculator.webp',
 };
 
 // Helper function to extract FAQs for Google FAQPage Schema
