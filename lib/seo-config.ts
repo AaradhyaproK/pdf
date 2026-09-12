@@ -1840,6 +1840,84 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { question: 'Does this tool save my names list?', answer: 'No. FileZenith tools are 100% client-side. The names you enter never leave your computer and are completely private.' }
     ]
   },
+  '/utility/coin-flip': {
+    slug: '/utility/coin-flip',
+    title: 'Coin Flip Online | 3D Heads or Tails Coin Toss Simulator',
+    metaTitle: 'Coin Flip Online | Free 3D Heads or Tails Simulator',
+    description: 'Flip a coin online with realistic 3D physics and sounds. Toss 1 to 4 coins at once for heads or tails, yes or no decisions, or custom bets. 100% free and unbiased.',
+    keywords: [
+      'coin flip',
+      'flip a coin online',
+      'heads or tails simulator',
+      'toss a coin online',
+      'coin toss generator',
+      'flip coin 3d',
+      'yes or no coin flip'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Choose Number of Coins & Mode', text: 'Select how many coins you want to toss (1 to 4) and choose classic Heads/Tails, Yes/No, or Custom labels.' },
+      { title: 'Flip the Coin', text: 'Click the Flip button, click directly on the coin, or press Spacebar to trigger a realistic 3D spin.' },
+      { title: 'View Flips & Streaks', text: 'Inspect the resulting heads or tails, track your live win percentages, and review your roll history.' }
+    ],
+    faqs: [
+      { question: 'Is the coin flip completely fair and random?', answer: 'Yes. The coin flip uses JavaScript crypto-grade pseudo-random number generation, ensuring each toss has an exact 50/50 probability with zero bias.' },
+      { question: 'Can I flip multiple coins at once?', answer: 'Yes! You can toss 1, 2, 3, or 4 coins simultaneously to quickly settle multi-person decisions or probability tests.' },
+      { question: 'Does this coin flip simulator make sound?', answer: 'Yes, it features realistic metallic coin toss and landing clink sound effects synthesized via the Web Audio API, with an instant mute toggle.' }
+    ]
+  },
+  '/utility/dice-roller': {
+    slug: '/utility/dice-roller',
+    title: 'Dice Roller Online | Roll 1 to 12 Dice (3D Physics & RPG)',
+    metaTitle: 'Dice Roller Online | Free 3D Roll the Dice Simulator',
+    description: 'Roll dice online with authentic 3D tumbling physics and rattle sounds. Roll 1 to 12 standard D6 dice or polyhedral RPG dice (D4, D8, D10, D12, D20, D100). 100% free.',
+    keywords: [
+      'dice roller',
+      'roll the dice online',
+      'roll a die',
+      'virtual dice roller',
+      'online d6 roller',
+      'dnd dice roller',
+      'random dice generator'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Pick Number of Dice & Type', text: 'Select how many dice to roll (1 to 12) and choose standard 6-sided dice (D6) or RPG polyhedral dice (D4 through D100).' },
+      { title: 'Roll or Freeze', text: 'Click "Roll Dice" or press Spacebar. You can also click any individual die to "Hold / Freeze" it while re-rolling the rest.' },
+      { title: 'Check Total & Breakdown', text: 'Review the total sum, individual dice values, highest/lowest rolls, and historical roll records.' }
+    ],
+    faqs: [
+      { question: 'How fair is the online dice roller?', answer: 'Every roll is calculated using secure cryptographic browser randomization, making each face equally likely with authentic mathematical probability.' },
+      { question: 'Can I hold/lock dice between rolls?', answer: 'Yes! Click any die to freeze its value (perfect for games like Yahtzee, Farkle, or tabletop board games).' },
+      { question: 'Does this roller support tabletop RPG dice?', answer: 'Yes, you can easily toggle between standard D6 dice and polyhedral dice sets including D4, D6, D8, D10, D12, D20, and D100.' }
+    ]
+  },
+  '/utility/random-number-picker': {
+    slug: '/utility/random-number-picker',
+    title: 'Random Number Picker & Generator Online',
+    metaTitle: 'Free Random Number Picker Online | Unbiased RNG Tool',
+    description: 'Generate truly random numbers online between any minimum and maximum. Pick single or multiple unique numbers without duplicates, lottery sets, and PINs. 100% free.',
+    keywords: [
+      'random number picker',
+      'random number generator',
+      'pick a random number',
+      'rng online',
+      'random number generator no duplicates',
+      'lottery number picker',
+      'number randomizer'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Set Min & Max Range', text: 'Enter your desired minimum and maximum values (e.g. 1 to 100) or pick a quick preset.' },
+      { title: 'Select Quantity & Uniqueness', text: 'Choose how many numbers to generate and toggle whether duplicates are allowed or unique numbers only.' },
+      { title: 'Generate & Copy', text: 'Click Generate to trigger the digital roller animation. Copy the generated list or download as TXT/CSV.' }
+    ],
+    faqs: [
+      { question: 'Can I generate unique numbers with no repeats?', answer: 'Yes! Enable the "Unique numbers only" toggle and the generator guarantees no duplicate numbers will appear in your set.' },
+      { question: 'What is the maximum range supported?', answer: 'You can generate numbers from negative billions to positive billions, and generate up to 1,000 numbers in a single draw.' },
+      { question: 'Can I export the generated numbers?', answer: 'Yes, with one click you can copy the full list to your clipboard or download it as a plain text (.txt) or spreadsheet (.csv) file.' }
+    ]
+  },
   '/utility/pomodoro-timer': {
     slug: '/utility/pomodoro-timer',
     title: 'Pomodoro Timer Online & Study Clock',

@@ -84,6 +84,9 @@ const IMAGE_TOOLS = [
 const UTILITY_TOOLS = [
   { name: 'Pomodoro Focus Timer', slug: '/utility/pomodoro-timer', desc: 'Custom intervals, day/night & chimes', icon: Timer, badge: 'Focus' },
   { name: 'Spin the Wheel Decider', slug: '/utility/spin-the-wheel', desc: 'Random picker, custom names & elimination', icon: Dices, badge: 'Fun' },
+  { name: 'Coin Flip 3D Simulator', slug: '/utility/coin-flip', desc: '3D heads or tails toss & decision maker', icon: Coins, badge: '3D Toss' },
+  { name: 'Roll the Dice (1-12)', slug: '/utility/dice-roller', desc: 'Virtual dice roller with 3D physics', icon: Dices, badge: 'Dice' },
+  { name: 'Random Number Picker', slug: '/utility/random-number-picker', desc: 'Pick random numbers without duplicates', icon: Hash, badge: 'RNG' },
   { name: 'Pages to Word (DOCX)', slug: '/utility/pages-to-word', desc: 'Convert Apple Pages to Word', icon: FileText, badge: 'Apple' },
   { name: 'Word to Pages Converter', slug: '/utility/word-to-pages', desc: 'Convert Word DOCX to Pages', icon: FileCode, badge: 'New' },
   { name: 'Numbers to Excel (XLSX)', slug: '/utility/numbers-to-excel', desc: 'Convert Numbers to Excel', icon: Table, badge: 'Apple' },

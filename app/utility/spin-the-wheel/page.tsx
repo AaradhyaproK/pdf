@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { ToolLayout } from '@/components/ToolLayout';
+import { RandomSuiteNav } from '@/components/RandomSuiteNav';
 import { toast } from 'sonner';
 import confetti from 'canvas-confetti';
 import {
@@ -362,6 +363,7 @@ export default function SpinTheWheelPage() {
       subtitle="Free online random choice generator. Enter names, spin the wheel, and pick a random winner instantly."
       badgeText="Wheel Spinner"
     >
+      {!isFullscreen && <RandomSuiteNav currentSlug="/utility/spin-the-wheel" />}
       <div
         ref={containerRef}
         className={`transition-all duration-300 relative select-none ${
