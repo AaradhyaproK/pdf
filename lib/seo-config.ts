@@ -1836,8 +1836,11 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { title: 'Celebrate the Winner', text: 'The wheel will stop and instantly highlight the randomly selected winner with confetti!' }
     ],
     faqs: [
-      { question: 'Is this random name picker truly random?', answer: 'Yes! It uses a high-entropy pseudo-random number generator algorithm inside your browser to ensure a 100% fair and unbiased result every single spin.' },
-      { question: 'Does this tool save my names list?', answer: 'No. FileZenith tools are 100% client-side. The names you enter never leave your computer and are completely private.' }
+      { question: 'Is this random name picker truly random?', answer: 'Yes! It uses a cryptographic pseudo-random number generator (Web Crypto API / Mersenne Twister PRNG) directly inside your browser to ensure a 100% fair and unbiased result every single spin.' },
+      { question: 'Does this tool save my names list?', answer: 'No. FileZenith tools are 100% client-side and privacy-friendly. The names you enter never leave your computer, are never uploaded to any remote server, and are completely private.' },
+      { question: 'Can I remove the winning name after each spin?', answer: 'Yes! When a winner is selected, an instant "Remove Winner" button appears on the celebration banner so you can eliminate contestants round-by-round for raffles and classroom drawings.' },
+      { question: 'How many names can I put in the wheel?', answer: 'You can enter anywhere from 2 up to over 500 names. The wheel dynamically calculates slice angles and font scaling to keep all entries crisp and readable.' },
+      { question: 'Can I use this wheel for giveaways on YouTube, Instagram, or Twitch?', answer: 'Absolutely! Streamers, teachers, and content creators love FileZenith Spin the Wheel because it has full-screen mode, celebration confetti, sound effects, and Day/Night mode, making it perfect for live streaming.' }
     ]
   },
   '/utility/coin-flip': {
@@ -1852,7 +1855,10 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       'toss a coin online',
       'coin toss generator',
       'flip coin 3d',
-      'yes or no coin flip'
+      'yes or no coin flip',
+      'best of 3 coin flip',
+      'probability of heads or tails',
+      'flip a coin 100 times'
     ],
     category: 'utility',
     howToSteps: [
@@ -1861,9 +1867,12 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { title: 'View Flips & Streaks', text: 'Inspect the resulting heads or tails, track your live win percentages, and review your roll history.' }
     ],
     faqs: [
-      { question: 'Is the coin flip completely fair and random?', answer: 'Yes. The coin flip uses JavaScript crypto-grade pseudo-random number generation, ensuring each toss has an exact 50/50 probability with zero bias.' },
-      { question: 'Can I flip multiple coins at once?', answer: 'Yes! You can toss 1, 2, 3, or 4 coins simultaneously to quickly settle multi-person decisions or probability tests.' },
-      { question: 'Does this coin flip simulator make sound?', answer: 'Yes, it features realistic metallic coin toss and landing clink sound effects synthesized via the Web Audio API, with an instant mute toggle.' }
+      { question: 'Is this online coin flip truly 50/50 fair?', answer: 'Yes. FileZenith uses client-side cryptographic random numbers (Math.random backed by OS entropy pools) guaranteeing an exact 50.0% theoretical probability for Heads and 50.0% for Tails without mechanical bias.' },
+      { question: 'What is the Gambler’s Fallacy in coin flips?', answer: 'The Gambler’s Fallacy is the mistaken belief that past flips influence future flips. Even if you flip Heads 10 times in a row, the 11th flip still has an exact 50% chance of being Heads and 50% chance of Tails.' },
+      { question: 'Can I play Best of 3 (Bo3) or Best of 5 (Bo5)?', answer: 'Yes! Use the built-in Best-of-3 and Best-of-5 tournament modes. The tool automatically tracks rounds, displays the score, and crowns the ultimate champion with celebratory confetti.' },
+      { question: 'What is the probability of flipping 10 Heads in a row?', answer: 'The mathematical probability of flipping 10 consecutive Heads is (1/2)^10, which equals 1 in 1,024 (or approximately 0.0977%). You can test this using our instant 100-flip simulation mode!' },
+      { question: 'Can I customize the coin faces for personal decisions?', answer: 'Yes! You can switch from Heads/Tails to Yes/No, or type custom labels like "Pizza vs Burger", "Option A vs Option B", or team names for sports matches.' },
+      { question: 'Can I flip multiple coins at once?', answer: 'Yes, you can toss 1, 2, 3, or 4 coins simultaneously to quickly settle multi-person decisions or calculate joint binomial probability.' }
     ]
   },
   '/utility/dice-roller': {
@@ -1878,7 +1887,10 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       'virtual dice roller',
       'online d6 roller',
       'dnd dice roller',
-      'random dice generator'
+      'random dice generator',
+      'yahtzee dice roller',
+      'monopoly dice roller',
+      'roll 2d6 online'
     ],
     category: 'utility',
     howToSteps: [
@@ -1887,9 +1899,12 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { title: 'Check Total & Breakdown', text: 'Review the total sum, individual dice values, highest/lowest rolls, and historical roll records.' }
     ],
     faqs: [
-      { question: 'How fair is the online dice roller?', answer: 'Every roll is calculated using secure cryptographic browser randomization, making each face equally likely with authentic mathematical probability.' },
-      { question: 'Can I hold/lock dice between rolls?', answer: 'Yes! Click any die to freeze its value (perfect for games like Yahtzee, Farkle, or tabletop board games).' },
-      { question: 'Does this roller support tabletop RPG dice?', answer: 'Yes, you can easily toggle between standard D6 dice and polyhedral dice sets including D4, D6, D8, D10, D12, D20, and D100.' }
+      { question: 'What are the odds of rolling a 7 with two dice?', answer: 'Rolling a sum of 7 with two 6-sided dice (2d6) is the most likely outcome, with 6 out of 36 combinations (1+6, 2+5, 3+4, 4+3, 5+2, 6+1), giving an exact probability of 16.67% (1 in 6).' },
+      { question: 'What does "Snake Eyes" mean in dice rolling?', answer: 'Snake Eyes is the slang term for rolling a pair of ones (1 and 1) on two six-sided dice, yielding a total of 2. The probability of rolling Snake Eyes is 1 in 36 (2.78%).' },
+      { question: 'Can I hold / lock dice between rolls for Yahtzee?', answer: 'Yes! Simply click on any die face to "Hold" it (indicated with a lock badge). When you click Roll again, only the unfrozen dice will tumble, making it ideal for Yahtzee and Farkle.' },
+      { question: 'Does this roller support Monopoly and Catan rules?', answer: 'Yes! Select 2 Dice and the tool automatically detects Monopoly Doubles (e.g. 4-4 or 6-6) and highlights Catan resource numbers like the Lucky 6, 8, and the Robber 7.' },
+      { question: 'Does it support D&D tabletop RPG polyhedral dice?', answer: 'Yes, it provides complete polyhedral dice sets for Dungeons & Dragons, Pathfinder, and tabletop RPGs: D4, D6, D8, D10, D12, D20, and D100, including D20 Advantage and Disadvantage rolls.' },
+      { question: 'Are online virtual dice as fair as physical dice?', answer: 'Online virtual dice are often significantly fairer than cheap plastic physical dice, which frequently have air pockets and imperfect weight distributions that bias certain faces.' }
     ]
   },
   '/utility/random-number-picker': {
@@ -1904,7 +1919,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       'rng online',
       'random number generator no duplicates',
       'lottery number picker',
-      'number randomizer'
+      'number randomizer',
+      'giveaway winner picker number',
+      'pin code generator'
     ],
     category: 'utility',
     howToSteps: [
@@ -1913,9 +1930,11 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { title: 'Generate & Copy', text: 'Click Generate to trigger the digital roller animation. Copy the generated list or download as TXT/CSV.' }
     ],
     faqs: [
-      { question: 'Can I generate unique numbers with no repeats?', answer: 'Yes! Enable the "Unique numbers only" toggle and the generator guarantees no duplicate numbers will appear in your set.' },
-      { question: 'What is the maximum range supported?', answer: 'You can generate numbers from negative billions to positive billions, and generate up to 1,000 numbers in a single draw.' },
-      { question: 'Can I export the generated numbers?', answer: 'Yes, with one click you can copy the full list to your clipboard or download it as a plain text (.txt) or spreadsheet (.csv) file.' }
+      { question: 'How can I pick a random winner for a raffle or giveaway?', answer: 'Assign each entrant a ticket number (e.g., 1 to 250). Set the Minimum to 1, Maximum to 250, Quantity to 1 (or the number of winners you need), enable "Unique numbers only", and click Generate!' },
+      { question: 'Can I generate unique numbers with no duplicates?', answer: 'Yes! Just keep the "Unique Numbers Only (No duplicates)" toggle enabled. The Fisher-Yates shuffle algorithm ensures every drawn number is completely distinct.' },
+      { question: 'Can I generate numbers for official lotteries like Powerball and 6/49?', answer: 'Yes! Quick presets are built right into the header: 6/49 Lottery (picks 6 unique numbers from 1 to 49), Powerball main numbers, 4-digit security PINs, and 6-digit OTP codes.' },
+      { question: 'How is randomness generated in this tool?', answer: 'FileZenith utilizes high-entropy pseudo-random number generation algorithms natively supported in your browser, ensuring uniform statistical distribution across your chosen range.' },
+      { question: 'Can I export the random numbers to Excel or CSV?', answer: 'Yes, with a single click you can copy all generated numbers directly to your clipboard, or export them as a .CSV spreadsheet or plain .TXT document.' }
     ]
   },
   '/utility/pomodoro-timer': {

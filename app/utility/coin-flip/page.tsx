@@ -13,12 +13,16 @@ import {
   Sparkles,
   History,
   Trash2,
-  Settings2,
+  Share2,
+  Copy,
+  Zap,
+  Swords,
   CheckCircle2,
-  HelpCircle,
 } from 'lucide-react';
 
 type DecisionMode = 'heads-tails' | 'yes-no' | 'custom';
+type CurrencyTheme = 'gold' | 'dollar' | 'rupee' | 'euro' | 'btc';
+type MatchMode = 'standard' | 'bo3' | 'bo5';
 
 interface FlipHistoryItem {
   id: string;
@@ -27,11 +31,35 @@ interface FlipHistoryItem {
   labels: { heads: string; tails: string };
 }
 
+const PRESET_DECISIONS = [
+  { name: '🍕 Food', heads: 'Pizza', tails: 'Burger' },
+  { name: '🏋️ Activity', heads: 'Workout', tails: 'Rest Day' },
+  { name: '🎮 Priority', heads: 'Study / Work', tails: 'Gaming' },
+  { name: '🎬 Evening', heads: 'Watch Movie', tails: 'Sleep Early' },
+  { name: '☕ Drink', heads: 'Coffee', tails: 'Tea' },
+  { name: '💸 Money', heads: 'Buy It', tails: 'Save Money' },
+  { name: '🎭 Dare', heads: 'Truth', tails: 'Dare' },
+];
+
+const CURRENCIES: Record<CurrencyTheme, { name: string; symbol: string; iconLabel: string }> = {
+  gold: { name: 'Classic Gold', symbol: '★', iconLabel: 'LIBERTY' },
+  dollar: { name: 'US Quarter ($)', symbol: '$', iconLabel: 'IN GOD WE TRUST' },
+  rupee: { name: 'Indian Rupee (₹)', symbol: '₹', iconLabel: 'SATYAMEVA JAYATE' },
+  euro: { name: 'Euro (€)', symbol: '€', iconLabel: 'EUROPE' },
+  btc: { name: 'Bitcoin (₿)', symbol: '₿', iconLabel: 'DECENTRALIZED' },
+};
+
 export default function CoinFlipPage() {
   const [numCoins, setNumCoins] = useState<number>(1);
   const [mode, setMode] = useState<DecisionMode>('heads-tails');
+  const [currency, setCurrency] = useState<CurrencyTheme>('gold');
   const [customHeads, setCustomHeads] = useState('Option A');
   const [customTails, setCustomTails] = useState('Option B');
+
+  // Match / Tournament mode
+  const [matchMode, setMatchMode] = useState<MatchMode>('standard');
+  const [boScores, setBoScores] = useState<{ heads: number; tails: number }>({ heads: 0, tails: 0 });
+  const [matchWinner, setMatchWinner] = useState<string | null>(null);
 
   const [isFlipping, setIsFlipping] = useState(false);
   const [rotations, setRotations] = useState<number[]>([0, 0, 0, 0]);
@@ -49,7 +77,7 @@ export default function CoinFlipPage() {
 
   const [history, setHistory] = useState<FlipHistoryItem[]>([]);
 
-  // Sound generator via Web Audio API (100% offline & instant)
+  // Web Audio sound generator
   const playSound = useCallback((type: 'flip' | 'land') => {
     if (!soundEnabled) return;
     try {
@@ -70,7 +98,6 @@ export default function CoinFlipPage() {
         osc.start();
         osc.stop(ctx.currentTime + 0.2);
       } else {
-        // Metallic clink sound
         const osc1 = ctx.createOscillator();
         const osc2 = ctx.createOscillator();
         const gain = ctx.createGain();
@@ -119,11 +146,9 @@ export default function CoinFlipPage() {
       const result: 'heads' | 'tails' = isHeads ? 'heads' : 'tails';
       newResults.push(result);
 
-      // Add minimum 5 full spins (1800deg) + target face angle
-      const spins = 5 + Math.floor(Math.random() * 3); // 5, 6 or 7 full flips
+      const spins = 5 + Math.floor(Math.random() * 3);
       const currentRot = newRotations[i] || 0;
       const baseNext = currentRot + spins * 360;
-      // heads: rotation % 360 === 0; tails: rotation % 360 === 180
       const targetRemainder = result === 'heads' ? 0 : 180;
       const currentRemainder = baseNext % 360;
       const adjust = (targetRemainder - currentRemainder + 360) % 360;
@@ -132,13 +157,11 @@ export default function CoinFlipPage() {
 
     setRotations(newRotations);
 
-    // After animation finishes (900ms)
     setTimeout(() => {
       setCoinResults(newResults);
       setIsFlipping(false);
       playSound('land');
 
-      // Update statistics
       let headsCount = 0;
       let tailsCount = 0;
       newResults.forEach((res) => {
@@ -146,12 +169,12 @@ export default function CoinFlipPage() {
         else tailsCount++;
       });
 
+      // Update statistics
       setStats((prev) => {
         const nextTotal = prev.total + numCoins;
         const nextHeads = prev.heads + headsCount;
         const nextTails = prev.tails + tailsCount;
 
-        // Streak check for single coin mode
         let nextStreak = prev.currentStreakCount;
         let nextStreakSide = prev.currentStreakSide;
         if (numCoins === 1) {
@@ -173,6 +196,27 @@ export default function CoinFlipPage() {
         };
       });
 
+      // Best of 3 / 5 tournament logic
+      if (matchMode !== 'standard' && numCoins === 1) {
+        const roundWinner = newResults[0];
+        const targetWins = matchMode === 'bo3' ? 2 : 3;
+
+        setBoScores((prev) => {
+          const nextH = roundWinner === 'heads' ? prev.heads + 1 : prev.heads;
+          const nextT = roundWinner === 'tails' ? prev.tails + 1 : prev.tails;
+
+          if (nextH >= targetWins) {
+            setMatchWinner(getLabel('heads'));
+            confetti({ particleCount: 70, spread: 80, origin: { y: 0.55 } });
+          } else if (nextT >= targetWins) {
+            setMatchWinner(getLabel('tails'));
+            confetti({ particleCount: 70, spread: 80, origin: { y: 0.55 } });
+          }
+
+          return { heads: nextH, tails: nextT };
+        });
+      }
+
       // Format summary
       let outcomeStr = '';
       if (numCoins === 1) {
@@ -191,7 +235,7 @@ export default function CoinFlipPage() {
       };
       setHistory((prev) => [historyItem, ...prev.slice(0, 24)]);
 
-      // Confetti celebration if 3+ streak in single flip or all matching in multi-flip
+      // Confetti celebration if 3+ streak or all matching
       if ((numCoins === 1 && stats.currentStreakCount >= 3) || (numCoins > 1 && (headsCount === numCoins || tailsCount === numCoins))) {
         confetti({
           particleCount: 40,
@@ -200,9 +244,9 @@ export default function CoinFlipPage() {
         });
       }
     }, 950);
-  }, [isFlipping, numCoins, rotations, getLabel, playSound, stats.currentStreakCount]);
+  }, [isFlipping, numCoins, rotations, getLabel, playSound, matchMode, stats.currentStreakCount]);
 
-  // Spacebar keyboard shortcut to flip
+  // Spacebar keyboard shortcut
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.code === 'Space') {
@@ -216,6 +260,43 @@ export default function CoinFlipPage() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [flipCoins]);
 
+  // Instant 100 Flips Simulation (Viral Crowd Magnet)
+  const run100Flips = () => {
+    let h = 0;
+    let t = 0;
+    for (let i = 0; i < 100; i++) {
+      if (Math.random() < 0.5) h++;
+      else t++;
+    }
+
+    setStats((prev) => ({
+      total: prev.total + 100,
+      heads: prev.heads + h,
+      tails: prev.tails + t,
+      currentStreakCount: 0,
+      currentStreakSide: null,
+    }));
+
+    toast.success(`⚡ 100 Flips Simulated: ${h} ${getLabel('heads')} (${h}%) vs ${t} ${getLabel('tails')} (${t}%)!`, {
+      duration: 4000,
+    });
+  };
+
+  const shareResult = () => {
+    if (!lastOutcome) {
+      toast.info('Flip the coin first to share result!');
+      return;
+    }
+    const text = `🪙 Coin Flip Result: ${lastOutcome}! Toss yours at https://www.filezenith.com/utility/coin-flip`;
+    navigator.clipboard.writeText(text);
+    toast.success('Result copied to clipboard! Share on WhatsApp or X.');
+  };
+
+  const resetTournament = () => {
+    setBoScores({ heads: 0, tails: 0 });
+    setMatchWinner(null);
+  };
+
   const resetStats = () => {
     setStats({
       total: 0,
@@ -225,17 +306,19 @@ export default function CoinFlipPage() {
       currentStreakSide: null,
     });
     setHistory([]);
+    resetTournament();
     toast.success('Stats & history reset');
   };
 
   const headsPercentage = stats.total > 0 ? Math.round((stats.heads / stats.total) * 100) : 50;
   const tailsPercentage = stats.total > 0 ? 100 - headsPercentage : 50;
+  const currentCurr = CURRENCIES[currency];
 
   return (
     <ToolLayout
       slug="/utility/coin-flip"
       title="Coin Flip Online"
-      subtitle="Free 3D coin toss simulator with realistic physics, custom decision labels, sound effects, and streak stats."
+      subtitle="Free 3D coin toss simulator with realistic physics, custom decision labels, best-of tournaments, and instant 100-flip simulations."
       badgeText="3D Coin Simulator"
     >
       <div className="w-full space-y-6">
@@ -270,6 +353,24 @@ export default function CoinFlipPage() {
               </div>
             </div>
 
+            {/* Currency Style */}
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className="text-xs font-bold text-slate-500 mr-1">Style:</span>
+              {(Object.keys(CURRENCIES) as CurrencyTheme[]).map((c) => (
+                <button
+                  key={c}
+                  onClick={() => setCurrency(c)}
+                  className={`px-2 py-1 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                    currency === c
+                      ? 'bg-amber-100 text-amber-900 font-black ring-1 ring-amber-300'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  }`}
+                >
+                  {CURRENCIES[c].symbol} {CURRENCIES[c].name.split(' ')[0]}
+                </button>
+              ))}
+            </div>
+
             {/* Sound & Action Toggles */}
             <div className="flex items-center gap-2">
               <button
@@ -300,39 +401,86 @@ export default function CoinFlipPage() {
             </div>
           </div>
 
-          {/* Decision Modes */}
-          <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-100">
-            <span className="text-xs font-bold text-slate-500 mr-1">Decision Mode:</span>
-            <button
-              onClick={() => setMode('heads-tails')}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                mode === 'heads-tails'
-                  ? 'bg-amber-100 text-amber-900 font-black ring-1 ring-amber-300'
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-              }`}
-            >
-              🪙 Heads / Tails
-            </button>
-            <button
-              onClick={() => setMode('yes-no')}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                mode === 'yes-no'
-                  ? 'bg-emerald-100 text-emerald-900 font-black ring-1 ring-emerald-300'
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-              }`}
-            >
-              ✅ Yes / No
-            </button>
-            <button
-              onClick={() => setMode('custom')}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                mode === 'custom'
-                  ? 'bg-indigo-100 text-indigo-900 font-black ring-1 ring-indigo-300'
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-              }`}
-            >
-              ✏️ Custom Labels
-            </button>
+          {/* Quick Viral Decision Presets */}
+          <div className="pt-2 border-t border-slate-100">
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+              <span className="text-xs font-black uppercase tracking-wider text-slate-400 shrink-0 mr-1">
+                Presets:
+              </span>
+              {PRESET_DECISIONS.map((p, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => {
+                    setMode('custom');
+                    setCustomHeads(p.heads);
+                    setCustomTails(p.tails);
+                    toast.success(`Preset applied: ${p.heads} vs ${p.tails}`);
+                  }}
+                  className="px-2.5 py-1 rounded-xl bg-slate-100 hover:bg-indigo-50 hover:text-indigo-700 text-xs font-bold text-slate-700 transition-colors shrink-0 cursor-pointer"
+                >
+                  {p.name}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Decision Modes & Tournament Mode */}
+          <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-100">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-xs font-bold text-slate-500 mr-1">Decision Mode:</span>
+              <button
+                onClick={() => setMode('heads-tails')}
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                  mode === 'heads-tails'
+                    ? 'bg-amber-100 text-amber-900 font-black ring-1 ring-amber-300'
+                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                }`}
+              >
+                🪙 Heads / Tails
+              </button>
+              <button
+                onClick={() => setMode('yes-no')}
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                  mode === 'yes-no'
+                    ? 'bg-emerald-100 text-emerald-900 font-black ring-1 ring-emerald-300'
+                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                }`}
+              >
+                ✅ Yes / No
+              </button>
+              <button
+                onClick={() => setMode('custom')}
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                  mode === 'custom'
+                    ? 'bg-indigo-100 text-indigo-900 font-black ring-1 ring-indigo-300'
+                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                }`}
+              >
+                ✏️ Custom
+              </button>
+            </div>
+
+            {/* Tournament Selector */}
+            <div className="flex items-center gap-1.5">
+              <Swords className="w-3.5 h-3.5 text-rose-500" />
+              <span className="text-xs font-bold text-slate-500">Series:</span>
+              {(['standard', 'bo3', 'bo5'] as MatchMode[]).map((m) => (
+                <button
+                  key={m}
+                  onClick={() => {
+                    setMatchMode(m);
+                    resetTournament();
+                  }}
+                  className={`px-2.5 py-1 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                    matchMode === m
+                      ? 'bg-rose-100 text-rose-800 font-black ring-1 ring-rose-300'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  }`}
+                >
+                  {m === 'standard' ? 'Normal' : m.toUpperCase()}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Custom Labels Inputs */}
@@ -344,10 +492,10 @@ export default function CoinFlipPage() {
                 </label>
                 <input
                   type="text"
-                  maxLength={16}
+                  maxLength={18}
                   value={customHeads}
                   onChange={(e) => setCustomHeads(e.target.value)}
-                  placeholder="e.g. Option A, Team 1"
+                  placeholder="e.g. Pizza, Workout"
                   className="w-full px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-bold focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none"
                 />
               </div>
@@ -357,20 +505,50 @@ export default function CoinFlipPage() {
                 </label>
                 <input
                   type="text"
-                  maxLength={16}
+                  maxLength={18}
                   value={customTails}
                   onChange={(e) => setCustomTails(e.target.value)}
-                  placeholder="e.g. Option B, Team 2"
+                  placeholder="e.g. Burger, Rest Day"
                   className="w-full px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-bold focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none"
                 />
               </div>
+            </div>
+          )}
+
+          {/* Tournament Match Score Banner */}
+          {matchMode !== 'standard' && (
+            <div className="p-3 rounded-2xl bg-rose-50 border border-rose-200/80 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <span className="text-xs font-black uppercase text-rose-700">
+                  {matchMode.toUpperCase()} Tournament:
+                </span>
+                <span className="text-sm font-black text-slate-800">
+                  {getLabel('heads')}: {boScores.heads} — {getLabel('tails')}: {boScores.tails}
+                </span>
+                <span className="text-[11px] font-bold text-rose-600">
+                  (First to {matchMode === 'bo3' ? 2 : 3} wins)
+                </span>
+              </div>
+              {matchWinner && (
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-black text-amber-600 flex items-center gap-1">
+                    <Trophy className="w-3.5 h-3.5" /> Winner: {matchWinner}!
+                  </span>
+                  <button
+                    onClick={resetTournament}
+                    className="text-[11px] font-bold underline text-slate-600 hover:text-slate-900 cursor-pointer"
+                  >
+                    Play Again
+                  </button>
+                </div>
+              )}
             </div>
           )}
         </div>
 
         {/* 3D Coin Stage Area */}
         <div className="p-6 sm:p-12 rounded-3xl bg-gradient-to-br from-amber-500/10 via-yellow-500/5 to-indigo-500/10 border border-amber-200/60 shadow-inner flex flex-col items-center justify-center min-h-[360px] relative overflow-hidden">
-          {/* Background Ambient Glow */}
+          {/* Ambient Glow */}
           <div className="absolute w-72 h-72 rounded-full bg-amber-400/20 blur-3xl pointer-events-none -top-10" />
 
           {/* Outcome Announcement */}
@@ -393,7 +571,7 @@ export default function CoinFlipPage() {
             )}
           </div>
 
-          {/* Coins Grid (1 to 4 coins) */}
+          {/* Coins Grid */}
           <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 perspective-[1200px] my-2">
             {Array.from({ length: numCoins }).map((_, idx) => {
               const rotation = rotations[idx] || 0;
@@ -424,18 +602,20 @@ export default function CoinFlipPage() {
                     >
                       <div className="w-full h-full rounded-full border-2 border-dashed border-amber-600/60 flex flex-col items-center justify-center p-2 bg-gradient-to-tr from-amber-400 to-yellow-200 shadow-inner">
                         <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-amber-700/40 flex items-center justify-center bg-amber-500/20 mb-1 shadow-inner">
-                          <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-amber-900" />
+                          <span className="text-xl sm:text-2xl font-black text-amber-950">
+                            {currentCurr.symbol}
+                          </span>
                         </div>
                         <span className="font-black text-xs sm:text-sm text-amber-950 uppercase tracking-widest px-1 line-clamp-2 drop-shadow-xs">
                           {getLabel('heads')}
                         </span>
-                        <span className="text-[9px] font-extrabold text-amber-800/80 tracking-widest mt-0.5">
-                          ★ LIBERTY ★
+                        <span className="text-[8px] font-extrabold text-amber-800/80 tracking-widest mt-0.5">
+                          {currentCurr.iconLabel}
                         </span>
                       </div>
                     </div>
 
-                    {/* TAILS FACE (Rotated 180deg) */}
+                    {/* TAILS FACE */}
                     <div
                       className="absolute inset-0 rounded-full border-4 border-amber-400 shadow-2xl flex flex-col items-center justify-center p-3 text-center bg-gradient-to-br from-amber-500 via-yellow-500 to-amber-600 ring-4 ring-amber-600/40"
                       style={{
@@ -451,21 +631,20 @@ export default function CoinFlipPage() {
                         <span className="font-black text-xs sm:text-sm text-amber-950 uppercase tracking-widest px-1 line-clamp-2 drop-shadow-xs">
                           {getLabel('tails')}
                         </span>
-                        <span className="text-[9px] font-extrabold text-amber-900/80 tracking-widest mt-0.5">
-                          ★ IN LUCK WE TRUST ★
+                        <span className="text-[8px] font-extrabold text-amber-900/80 tracking-widest mt-0.5">
+                          ★ 1 UNIT ★
                         </span>
                       </div>
                     </div>
                   </div>
 
-                  {/* Coin Drop Shadow */}
+                  {/* Drop Shadow */}
                   <div
                     className={`w-28 sm:w-36 h-3 bg-amber-900/20 rounded-full blur-sm transition-all duration-300 ${
                       isFlipping ? 'scale-75 opacity-40 translate-y-2' : 'scale-100 opacity-80'
                     }`}
                   />
 
-                  {/* Sub-label for individual coin when multi-coin */}
                   {numCoins > 1 && !isFlipping && (
                     <span className="text-xs font-black px-2.5 py-0.5 rounded-full bg-white/90 border border-slate-200 text-slate-700 shadow-2xs">
                       Coin {idx + 1}: {getLabel(result)}
@@ -476,20 +655,43 @@ export default function CoinFlipPage() {
             })}
           </div>
 
-          {/* Big Flip Button */}
-          <button
-            onClick={flipCoins}
-            disabled={isFlipping}
-            className="mt-8 group relative px-10 py-4 sm:px-14 sm:py-4.5 rounded-full bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-slate-950 font-black text-base sm:text-lg shadow-[0_10px_30px_-5px_rgba(245,158,11,0.5)] hover:shadow-[0_15px_40px_-5px_rgba(245,158,11,0.7)] hover:scale-105 active:scale-95 transition-all disabled:opacity-50 disabled:hover:scale-100 cursor-pointer overflow-hidden"
-          >
-            <span className="relative flex items-center justify-center gap-2">
-              <RotateCcw className={`w-5 h-5 ${isFlipping ? 'animate-spin' : ''}`} />
-              <span>{isFlipping ? 'FLIPPING...' : 'FLIP COIN'}</span>
-              <span className="text-[10px] uppercase font-bold text-amber-950/70 ml-1 px-1.5 py-0.5 rounded bg-black/10 hidden sm:inline">
-                Space
+          {/* Action Buttons: Big Flip, 100 Flips, Share */}
+          <div className="flex flex-wrap items-center justify-center gap-3 mt-8 z-10">
+            <button
+              onClick={flipCoins}
+              disabled={isFlipping}
+              className="group relative px-10 py-4 sm:px-14 sm:py-4.5 rounded-full bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-slate-950 font-black text-base sm:text-lg shadow-[0_10px_30px_-5px_rgba(245,158,11,0.5)] hover:shadow-[0_15px_40px_-5px_rgba(245,158,11,0.7)] hover:scale-105 active:scale-95 transition-all disabled:opacity-50 disabled:hover:scale-100 cursor-pointer overflow-hidden"
+            >
+              <span className="relative flex items-center justify-center gap-2">
+                <RotateCcw className={`w-5 h-5 ${isFlipping ? 'animate-spin' : ''}`} />
+                <span>{isFlipping ? 'FLIPPING...' : 'FLIP COIN'}</span>
+                <span className="text-[10px] uppercase font-bold text-amber-950/70 ml-1 px-1.5 py-0.5 rounded bg-black/10 hidden sm:inline">
+                  Space
+                </span>
               </span>
-            </span>
-          </button>
+            </button>
+
+            {/* Instant 100 Flips (Viral Feature) */}
+            <button
+              onClick={run100Flips}
+              className="px-4 py-3.5 rounded-full bg-white/90 hover:bg-white text-slate-800 border border-slate-200/90 font-bold text-xs shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer"
+              title="Simulate 100 tosses instantly to test mathematical probability"
+            >
+              <Zap className="w-4 h-4 text-amber-500" />
+              <span>100 Flips</span>
+            </button>
+
+            {/* Share Result */}
+            {lastOutcome && (
+              <button
+                onClick={shareResult}
+                className="px-4 py-3.5 rounded-full bg-white/90 hover:bg-white text-slate-800 border border-slate-200/90 font-bold text-xs shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer"
+              >
+                <Share2 className="w-4 h-4 text-indigo-600" />
+                <span>Share</span>
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Live Statistics & Streaks */}

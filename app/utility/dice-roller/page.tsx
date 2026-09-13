@@ -12,15 +12,15 @@ import {
   History,
   Trash2,
   Lock,
-  Unlock,
   Dices,
   Sparkles,
   Trophy,
-  Layers,
+  Share2,
+  Zap,
+  Flame,
 } from 'lucide-react';
 
 type DiceType = 'd6' | 'd4' | 'd8' | 'd10' | 'd12' | 'd20' | 'd100';
-
 type DiceTheme = 'ivory' | 'ruby' | 'onyx' | 'emerald' | 'purple';
 
 interface DieState {
@@ -36,6 +36,7 @@ interface RollHistoryItem {
   sum: number;
   timestamp: string;
   diceType: DiceType;
+  specialBadge?: string;
 }
 
 const THEMES: Record<DiceTheme, { name: string; bg: string; border: string; pip: string; shadow: string; heldBg: string }> = {
@@ -98,6 +99,8 @@ export default function DiceRollerPage() {
   const [isRolling, setIsRolling] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
 
+  const [specialCallout, setSpecialCallout] = useState<string | null>(null);
+
   const [dice, setDice] = useState<DieState[]>([
     { id: 1, value: 3, isHeld: false, rotation: 0 },
     { id: 2, value: 4, isHeld: false, rotation: 0 },
@@ -105,7 +108,6 @@ export default function DiceRollerPage() {
 
   const [history, setHistory] = useState<RollHistoryItem[]>([]);
 
-  // Adjust dice array size when numDice changes
   useEffect(() => {
     setDice((prev) => {
       if (prev.length === numDice) return prev;
@@ -126,7 +128,6 @@ export default function DiceRollerPage() {
     });
   }, [numDice, diceType]);
 
-  // Web Audio synth for realistic dice rattling and bouncing
   const playRollSound = useCallback(() => {
     if (!soundEnabled) return;
     try {
@@ -134,7 +135,6 @@ export default function DiceRollerPage() {
       if (!AudioCtx) return;
       const ctx = new AudioCtx();
 
-      // Simulate 4 successive dice impacts
       const times = [0, 0.08, 0.18, 0.28, 0.4];
       times.forEach((t) => {
         const osc = ctx.createOscillator();
@@ -164,14 +164,52 @@ export default function DiceRollerPage() {
     );
   };
 
+  // Crowd-magnet: Detect game combinations (Monopoly doubles, Yahtzee, Catan, Craps, D&D Nat 20)
+  const detectGameCombo = (values: number[], type: DiceType): string | null => {
+    if (type === 'd20' && values.length === 1) {
+      if (values[0] === 20) return '🔥 CRITICAL HIT! (NAT 20)';
+      if (values[0] === 1) return '💀 CRITICAL FAIL! (NAT 1)';
+    }
+
+    if (type === 'd6') {
+      // 2 Dice combos
+      if (values.length === 2) {
+        if (values[0] === values[1]) {
+          if (values[0] === 1) return '🐍 Snake Eyes! (Double 1s)';
+          if (values[0] === 6) return '🎲 Boxcars! (Double 6s)';
+          return `🎉 DOUBLES! (${values[0]} & ${values[1]})`;
+        }
+        const sum = values[0] + values[1];
+        if (sum === 7) return '⚡ Lucky 7! (Catan Robber / Craps)';
+        if (sum === 11) return '✨ Yo-leven 11! (Craps Win)';
+      }
+
+      // 5 Dice Yahtzee combos
+      if (values.length === 5) {
+        const counts: Record<number, number> = {};
+        values.forEach((v) => { counts[v] = (counts[v] || 0) + 1; });
+        const freqs = Object.values(counts);
+
+        if (freqs.includes(5)) return '🏆 YAHTZEE! (All 5 Matching!)';
+        if (freqs.includes(4)) return '🌟 4 of a Kind!';
+        if (freqs.includes(3) && freqs.includes(2)) return '🏠 Full House!';
+
+        const sorted = Array.from(new Set(values)).sort((a, b) => a - b);
+        if (sorted.length === 5 && (sorted[4] - sorted[0] === 4)) return '🌈 Large Straight!';
+      }
+    }
+
+    return null;
+  };
+
   const rollDice = useCallback(() => {
     if (isRolling) return;
     setIsRolling(true);
+    setSpecialCallout(null);
     playRollSound();
 
     const maxVal = DICE_MAX[diceType];
 
-    // Rapid intermediate tumbling rolls
     const interval = setInterval(() => {
       setDice((prev) =>
         prev.map((d) =>
@@ -186,7 +224,6 @@ export default function DiceRollerPage() {
       );
     }, 60);
 
-    // Final outcome
     setTimeout(() => {
       clearInterval(interval);
       const finalDice = dice.map((d) => {
@@ -204,26 +241,25 @@ export default function DiceRollerPage() {
       const rollValues = finalDice.map((d) => d.value);
       const totalSum = rollValues.reduce((a, b) => a + b, 0);
 
-      // Record History
+      const combo = detectGameCombo(rollValues, diceType);
+      if (combo) {
+        setSpecialCallout(combo);
+        confetti({
+          particleCount: combo.includes('YAHTZEE') || combo.includes('CRITICAL') ? 80 : 40,
+          spread: 70,
+          origin: { y: 0.6 },
+        });
+      }
+
       const item: RollHistoryItem = {
         id: Math.random().toString(36).substring(2, 9),
         diceValues: rollValues,
         sum: totalSum,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
         diceType,
+        specialBadge: combo || undefined,
       };
       setHistory((prev) => [item, ...prev.slice(0, 24)]);
-
-      // Confetti celebration if all dice are maximum or matching in D6
-      const allMax = rollValues.every((v) => v === maxVal);
-      const allMatching = rollValues.length > 1 && rollValues.every((v) => v === rollValues[0]);
-      if (allMax || allMatching) {
-        confetti({
-          particleCount: 50,
-          spread: 70,
-          origin: { y: 0.6 },
-        });
-      }
     }, 650);
   }, [isRolling, dice, diceType, playRollSound]);
 
@@ -241,63 +277,73 @@ export default function DiceRollerPage() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [rollDice]);
 
+  // Instant 100 Rolls Simulation (Crowd Magnet)
+  const run100Rolls = () => {
+    const maxVal = DICE_MAX[diceType];
+    let sum = 0;
+    for (let i = 0; i < 100; i++) {
+      for (let j = 0; j < numDice; j++) {
+        sum += Math.floor(Math.random() * maxVal) + 1;
+      }
+    }
+    const avg = (sum / (100 * numDice)).toFixed(2);
+    const expected = ((maxVal + 1) / 2).toFixed(2);
+    toast.success(`⚡ 100 Rolls Simulated! Average roll per die: ${avg} (Theoretical Expected: ${expected})`, {
+      duration: 4500,
+    });
+  };
+
+  const shareRoll = () => {
+    const rollValues = dice.map((d) => d.value).join(', ');
+    const text = `🎲 Rolled ${totalSum} [${rollValues}] on FileZenith 3D Dice Roller! Roll yours at https://www.filezenith.com/utility/dice-roller`;
+    navigator.clipboard.writeText(text);
+    toast.success('Roll result copied to clipboard! Share on Discord, WhatsApp or X.');
+  };
+
+  const applyGamePreset = (type: DiceType, count: number, presetName: string) => {
+    setDiceType(type);
+    setNumDice(count);
+    toast.success(`Applied preset: ${presetName}`);
+  };
+
   const totalSum = dice.reduce((acc, d) => acc + d.value, 0);
   const highestValue = Math.max(...dice.map((d) => d.value));
   const lowestValue = Math.min(...dice.map((d) => d.value));
   const averageValue = (totalSum / (dice.length || 1)).toFixed(1);
 
-  // Render authentic D6 pip layout
   const renderPips = (val: number, currentTheme: DiceTheme) => {
     const pipColor = THEMES[currentTheme].pip;
 
-    // Standard D6 faces layout
     return (
       <div className="w-full h-full p-2 sm:p-3 grid grid-cols-3 grid-rows-3 items-center justify-items-center">
-        {/* Pip 1: Top-Left */}
         <div className="w-full h-full flex items-center justify-center">
           {(val === 2 || val === 3 || val === 4 || val === 5 || val === 6) && (
             <div className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${pipColor}`} />
           )}
         </div>
-
-        {/* Pip 2: Top-Center */}
         <div className="w-full h-full flex items-center justify-center" />
-
-        {/* Pip 3: Top-Right */}
         <div className="w-full h-full flex items-center justify-center">
           {(val === 4 || val === 5 || val === 6) && (
             <div className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${pipColor}`} />
           )}
         </div>
-
-        {/* Pip 4: Middle-Left */}
         <div className="w-full h-full flex items-center justify-center">
           {val === 6 && <div className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${pipColor}`} />}
         </div>
-
-        {/* Pip 5: Center */}
         <div className="w-full h-full flex items-center justify-center">
           {(val === 1 || val === 3 || val === 5) && (
             <div className={`w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 rounded-full ${pipColor}`} />
           )}
         </div>
-
-        {/* Pip 6: Middle-Right */}
         <div className="w-full h-full flex items-center justify-center">
           {val === 6 && <div className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${pipColor}`} />}
         </div>
-
-        {/* Pip 7: Bottom-Left */}
         <div className="w-full h-full flex items-center justify-center">
           {(val === 4 || val === 5 || val === 6) && (
             <div className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${pipColor}`} />
           )}
         </div>
-
-        {/* Pip 8: Bottom-Center */}
         <div className="w-full h-full flex items-center justify-center" />
-
-        {/* Pip 9: Bottom-Right */}
         <div className="w-full h-full flex items-center justify-center">
           {(val === 2 || val === 3 || val === 4 || val === 5 || val === 6) && (
             <div className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${pipColor}`} />
@@ -311,7 +357,7 @@ export default function DiceRollerPage() {
     <ToolLayout
       slug="/utility/dice-roller"
       title="Dice Roller Online"
-      subtitle="Free 3D virtual dice rolling simulator. Roll 1 to 12 dice with tumbling physics, sound effects, freeze/hold features, and tabletop RPG options."
+      subtitle="Free 3D virtual dice rolling simulator. Roll 1 to 12 dice with tumbling physics, sound effects, freeze/hold features, and game presets."
       badgeText="3D Dice Simulator"
     >
       <div className="w-full space-y-6">
@@ -373,9 +419,54 @@ export default function DiceRollerPage() {
             </div>
           </div>
 
+          {/* Viral Game Presets Bar */}
+          <div className="pt-2 border-t border-slate-100">
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+              <span className="text-xs font-black uppercase tracking-wider text-slate-400 shrink-0 mr-1">
+                Game Presets:
+              </span>
+              <button
+                onClick={() => applyGamePreset('d6', 2, 'Monopoly (2d6)')}
+                className="px-2.5 py-1 rounded-xl bg-slate-100 hover:bg-rose-50 hover:text-rose-700 text-xs font-bold text-slate-700 transition-colors shrink-0 cursor-pointer"
+              >
+                🎩 Monopoly (2d6)
+              </button>
+              <button
+                onClick={() => applyGamePreset('d6', 2, 'Catan (2d6)')}
+                className="px-2.5 py-1 rounded-xl bg-slate-100 hover:bg-amber-50 hover:text-amber-700 text-xs font-bold text-slate-700 transition-colors shrink-0 cursor-pointer"
+              >
+                🌾 Catan (2d6)
+              </button>
+              <button
+                onClick={() => applyGamePreset('d6', 5, 'Yahtzee (5d6)')}
+                className="px-2.5 py-1 rounded-xl bg-slate-100 hover:bg-purple-50 hover:text-purple-700 text-xs font-bold text-slate-700 transition-colors shrink-0 cursor-pointer"
+              >
+                🎲 Yahtzee (5d6)
+              </button>
+              <button
+                onClick={() => applyGamePreset('d6', 2, 'Craps (2d6)')}
+                className="px-2.5 py-1 rounded-xl bg-slate-100 hover:bg-rose-50 hover:text-rose-700 text-xs font-bold text-slate-700 transition-colors shrink-0 cursor-pointer"
+              >
+                🎰 Craps (2d6)
+              </button>
+              <button
+                onClick={() => applyGamePreset('d20', 1, 'D&D D20')}
+                className="px-2.5 py-1 rounded-xl bg-slate-100 hover:bg-indigo-50 hover:text-indigo-700 text-xs font-bold text-slate-700 transition-colors shrink-0 cursor-pointer"
+              >
+                ⚔️ D&D D20
+              </button>
+              <button
+                onClick={() => applyGamePreset('d20', 2, 'D&D Advantage (2d20)')}
+                className="px-2.5 py-1 rounded-xl bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 text-xs font-bold text-slate-700 transition-colors shrink-0 cursor-pointer"
+              >
+                🛡️ D&D Advantage (2d20)
+              </button>
+            </div>
+          </div>
+
           {/* Dice Types & Theme Selectors */}
-          <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-100">
-            {/* Dice Types (D6, D4, D8, D10, D12, D20, D100) */}
+          <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-100">
+            {/* Dice Types */}
             <div className="flex items-center gap-1.5 flex-wrap">
               <span className="text-xs font-bold text-slate-500 mr-1">Type:</span>
               {(['d6', 'd4', 'd8', 'd10', 'd12', 'd20', 'd100'] as DiceType[]).map((t) => (
@@ -418,22 +509,31 @@ export default function DiceRollerPage() {
           {/* Ambient Glow */}
           <div className="absolute w-80 h-80 rounded-full bg-rose-400/20 blur-3xl pointer-events-none -top-10" />
 
-          {/* Sum Display Header */}
-          <div className="min-h-[50px] flex items-center justify-center mb-6">
+          {/* Sum & Special Combo Announcement */}
+          <div className="min-h-[50px] flex flex-col items-center justify-center mb-6 gap-2">
             {!isRolling ? (
-              <div className="animate-in zoom-in-95 duration-200 px-6 py-2 rounded-full bg-white/95 border-2 border-rose-400 shadow-xl flex items-center gap-3">
-                <span className="text-xs font-black uppercase tracking-wider text-slate-500">
-                  Total Roll:
-                </span>
-                <span className="text-2xl sm:text-3xl font-black bg-gradient-to-r from-rose-600 to-red-700 bg-clip-text text-transparent">
-                  {totalSum}
-                </span>
-                {numDice > 1 && (
-                  <span className="text-[11px] font-bold text-slate-400 border-l pl-2.5">
-                    Avg: {averageValue}
+              <>
+                <div className="animate-in zoom-in-95 duration-200 px-6 py-2 rounded-full bg-white/95 border-2 border-rose-400 shadow-xl flex items-center gap-3">
+                  <span className="text-xs font-black uppercase tracking-wider text-slate-500">
+                    Total Roll:
                   </span>
+                  <span className="text-2xl sm:text-3xl font-black bg-gradient-to-r from-rose-600 to-red-700 bg-clip-text text-transparent">
+                    {totalSum}
+                  </span>
+                  {numDice > 1 && (
+                    <span className="text-[11px] font-bold text-slate-400 border-l pl-2.5">
+                      Avg: {averageValue}
+                    </span>
+                  )}
+                </div>
+
+                {specialCallout && (
+                  <div className="animate-in bounce-in duration-300 px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-500 to-rose-600 text-white text-xs font-black shadow-md flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>{specialCallout}</span>
+                  </div>
                 )}
-              </div>
+              </>
             ) : (
               <span className="text-sm font-black uppercase tracking-widest text-rose-700 animate-pulse">
                 Rolling dice...
@@ -495,7 +595,6 @@ export default function DiceRollerPage() {
                     )}
                   </div>
 
-                  {/* Individual Die Footer label */}
                   <span className="text-[10px] font-bold text-slate-500">
                     {die.isHeld ? 'Held' : 'Tap to Hold'}
                   </span>
@@ -504,20 +603,41 @@ export default function DiceRollerPage() {
             })}
           </div>
 
-          {/* Big Roll Button */}
-          <button
-            onClick={rollDice}
-            disabled={isRolling}
-            className="mt-8 group relative px-10 py-4 sm:px-14 sm:py-4.5 rounded-full bg-gradient-to-r from-rose-600 via-red-600 to-rose-700 text-white font-black text-base sm:text-lg shadow-[0_10px_30px_-5px_rgba(225,29,72,0.5)] hover:shadow-[0_15px_40px_-5px_rgba(225,29,72,0.7)] hover:scale-105 active:scale-95 transition-all disabled:opacity-50 disabled:hover:scale-100 cursor-pointer overflow-hidden"
-          >
-            <span className="relative flex items-center justify-center gap-2">
-              <RotateCcw className={`w-5 h-5 ${isRolling ? 'animate-spin' : ''}`} />
-              <span>{isRolling ? 'ROLLING...' : 'ROLL THE DICE'}</span>
-              <span className="text-[10px] uppercase font-bold text-white/70 ml-1 px-1.5 py-0.5 rounded bg-black/20 hidden sm:inline">
-                Space
+          {/* Action Buttons: Roll, 100 Rolls, Share */}
+          <div className="flex flex-wrap items-center justify-center gap-3 mt-8 z-10">
+            <button
+              onClick={rollDice}
+              disabled={isRolling}
+              className="group relative px-10 py-4 sm:px-14 sm:py-4.5 rounded-full bg-gradient-to-r from-rose-600 via-red-600 to-rose-700 text-white font-black text-base sm:text-lg shadow-[0_10px_30px_-5px_rgba(225,29,72,0.5)] hover:shadow-[0_15px_40px_-5px_rgba(225,29,72,0.7)] hover:scale-105 active:scale-95 transition-all disabled:opacity-50 disabled:hover:scale-100 cursor-pointer overflow-hidden"
+            >
+              <span className="relative flex items-center justify-center gap-2">
+                <RotateCcw className={`w-5 h-5 ${isRolling ? 'animate-spin' : ''}`} />
+                <span>{isRolling ? 'ROLLING...' : 'ROLL THE DICE'}</span>
+                <span className="text-[10px] uppercase font-bold text-white/70 ml-1 px-1.5 py-0.5 rounded bg-black/20 hidden sm:inline">
+                  Space
+                </span>
               </span>
-            </span>
-          </button>
+            </button>
+
+            {/* Instant 100 Rolls */}
+            <button
+              onClick={run100Rolls}
+              className="px-4 py-3.5 rounded-full bg-white/90 hover:bg-white text-slate-800 border border-slate-200/90 font-bold text-xs shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer"
+              title="Simulate 100 dice rolls instantly"
+            >
+              <Zap className="w-4 h-4 text-amber-500" />
+              <span>100 Rolls</span>
+            </button>
+
+            {/* Share Roll */}
+            <button
+              onClick={shareRoll}
+              className="px-4 py-3.5 rounded-full bg-white/90 hover:bg-white text-slate-800 border border-slate-200/90 font-bold text-xs shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer"
+            >
+              <Share2 className="w-4 h-4 text-rose-600" />
+              <span>Share</span>
+            </button>
+          </div>
         </div>
 
         {/* Stats Row */}
@@ -579,6 +699,11 @@ export default function DiceRollerPage() {
                   <span className="text-[11px] font-black text-rose-600">
                     = {item.sum}
                   </span>
+                  {item.specialBadge && (
+                    <span className="text-[9px] font-black px-1.5 py-0.5 rounded bg-amber-100 text-amber-900">
+                      {item.specialBadge}
+                    </span>
+                  )}
                 </div>
               ))}
             </div>
