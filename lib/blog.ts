@@ -51,6 +51,9 @@ const DEFAULT_POST_IMAGES: Record<string, string> = {
   'how-to-convert-jpg-to-pdf-online': '/blog/jpg-to-pdf.webp',
   'how-to-calculate-sip-returns-wealth-guide': '/blog/sip-calculator.webp',
   'cgpa-to-percentage-conversion-guide': '/blog/cgpa-calculator.webp',
+  'aadhaar-card-print-size-guide': '/blog/aadhaar-card-print.webp',
+  'old-vs-new-tax-regime-calculator-guide': '/blog/income-tax-calculator.webp',
+  'ctc-to-in-hand-salary-calculator-guide': '/blog/salary-calculator.webp',
 };
 
 // Helper function to extract FAQs for Google FAQPage Schema
