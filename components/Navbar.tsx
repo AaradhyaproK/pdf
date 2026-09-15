@@ -66,12 +66,21 @@ const PDF_TOOLS = [
   { name: 'Watermark PDF', slug: '/pdf/watermark', desc: 'Add text watermark overlays', icon: Stamp, category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'Password Protect PDF', slug: '/pdf/protect', desc: 'Encrypt PDF with password', icon: Lock, badge: 'Secure', category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'Remove PDF Password', slug: '/pdf/remove-password', desc: 'Unlock and remove password from PDF', icon: Unlock, badge: 'Unlock', category: 'pdf', catLabel: 'PDF Studio' },
+  { name: 'Compress PDF to 100KB', slug: '/pdf/compress-to-100kb', desc: 'Reduce PDF under 100KB for exam & govt portals', icon: Minimize2, badge: '100KB', category: 'pdf', catLabel: 'PDF Studio', keywords: ['compress pdf to 100kb', '100kb', 'sarkari', 'upsc', 'ssc', 'marksheet'] },
+  { name: 'Compress PDF to 1MB', slug: '/pdf/compress-to-1mb', desc: 'Compress multi-page PDF under 1MB for email attachments', icon: Minimize2, badge: '1MB', category: 'pdf', catLabel: 'PDF Studio', keywords: ['compress pdf to 1mb', '1mb', 'email', 'attachment', 'admission'] },
   { name: 'PDF to Word (DOCX)', slug: '/pdf/pdf-to-word', desc: 'Convert PDF to editable Word document', icon: FileText, badge: 'Popular', category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'Word to PDF Converter', slug: '/pdf/word-to-pdf', desc: 'Convert Word DOCX to crisp PDF', icon: FileCode, badge: 'New', category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'PDF to JPG / PNG', slug: '/pdf/to-image', desc: 'Convert PDF pages into high-res images', icon: FileImage, category: 'pdf', catLabel: 'PDF Studio' },
 ];
 
 const IMAGE_TOOLS = [
+  { name: 'WebP to JPG Converter', slug: '/image/webp-to-jpg', desc: 'Convert WebP images to JPG with white background fill', icon: FileImage, badge: 'Bulk', category: 'image', catLabel: 'Image Studio', keywords: ['webp to jpg', 'webp', 'jpeg', 'convert webp', 'save webp as jpg'] },
+  { name: 'JPG to WebP Converter', slug: '/image/jpg-to-webp', desc: 'Convert JPG/PNG to modern WebP (up to 80% smaller)', icon: Zap, badge: 'Web Vitals', category: 'image', catLabel: 'Image Studio', keywords: ['jpg to webp', 'png to webp', 'webp', 'compress', 'speed', 'core web vitals'] },
+  { name: 'Railway RRB Photo Resizer', slug: '/tools/railway-rrb-photo-resizer', desc: 'RRB NTPC, ALP, Group D 20-50KB photo resizer (320x240 px)', icon: UserCheck, badge: 'RRB 20-50KB', category: 'image', catLabel: 'Image Studio', keywords: ['railway', 'rrb', 'ntpc', 'alp', 'group d', 'technician', 'railway photo resizer'] },
+  { name: 'IBPS Photo Resizer', slug: '/tools/ibps-photo-resizer', desc: 'IBPS PO, Clerk, RRB 200x230 px (20-50KB) photo resizer', icon: UserCheck, badge: 'IBPS 20-50KB', category: 'image', catLabel: 'Image Studio', keywords: ['ibps', 'po', 'clerk', 'bank', 'thumb impression', 'handwritten declaration'] },
+  { name: 'SBI PO Photo Resizer', slug: '/tools/sbi-po-photo-resizer', desc: 'SBI PO & Clerk photo and signature resizer (20-50KB)', icon: UserCheck, badge: 'SBI PO', category: 'image', catLabel: 'Image Studio', keywords: ['sbi', 'sbi po', 'sbi clerk', 'junior associate', 'state bank'] },
+  { name: 'JEE Main Photo Resizer', slug: '/tools/jee-photo-resizer', desc: 'JEE Main & Advanced 10-200KB photo resizer with DOP stamp', icon: UserCheck, badge: 'JEE 10-200KB', category: 'image', catLabel: 'Image Studio', keywords: ['jee', 'jee main', 'jee advanced', 'nta', 'dop', 'engineering', 'iit'] },
+  { name: 'CUET Photo Resizer', slug: '/tools/cuet-photo-resizer', desc: 'CUET UG/PG 10-200KB photo & signature resizer', icon: UserCheck, badge: 'CUET NTA', category: 'image', catLabel: 'Image Studio', keywords: ['cuet', 'cuet ug', 'cuet pg', 'nta', 'entrance', 'university'] },
   { name: 'Image Color Picker & Palette', slug: '/image/color-palette-extractor', desc: 'Extract hex colors from photos', icon: Palette, badge: 'Design', category: 'image', catLabel: 'Image Studio' },
   { name: 'Image Cropper & Aspect', slug: '/image/crop', desc: 'Crop 1:1, 16:9, 4:3, rotate & flip', icon: Crop, badge: 'New', category: 'image', catLabel: 'Image Studio' },
   { name: 'SVG Vector Converter', slug: '/image/svg-converter', desc: 'Convert SVG to 2x/4x PNG & JPG', icon: FileCode, badge: 'New', category: 'image', catLabel: 'Image Studio' },
@@ -94,6 +103,9 @@ const IMAGE_TOOLS = [
 ];
 
 const UTILITY_TOOLS = [
+  { name: 'Electricity Bill Calculator', slug: '/utility/electricity-bill-calculator', desc: 'Calculate monthly electricity bill with state tariff slabs & subsidies', icon: DollarSign, badge: 'State Slabs', category: 'utility', catLabel: 'Daily Utility', keywords: ['electricity', 'bill', 'bijli', 'power', 'kwh', 'msedcl', 'bses', 'uppcl', 'bescom', 'tangedco', 'subsidy', 'ac'] },
+  { name: 'URL Encoder & Decoder', slug: '/utility/url-encoder-decoder', desc: 'Encode or decode URLs and inspect query parameters', icon: FileCode, badge: 'RFC 3986', category: 'utility', catLabel: 'Daily Utility', keywords: ['url encode', 'url decode', 'urlencoder', 'urldecoder', 'percent encoding', 'encodeuricomponent', 'decodeuri'] },
+  { name: 'Hash Generator (MD5 / SHA)', slug: '/utility/hash-generator', desc: 'Generate MD5, SHA-1, SHA-256 and verify file checksums', icon: Hash, badge: 'Checksum', category: 'utility', catLabel: 'Daily Utility', keywords: ['hash', 'md5', 'sha256', 'sha1', 'sha512', 'checksum', 'digest'] },
   { name: 'Pages to Word (DOCX)', slug: '/utility/pages-to-word', desc: 'Convert Apple Pages to editable Word', icon: FileText, badge: 'Apple', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'Word to Pages Converter', slug: '/utility/word-to-pages', desc: 'Convert Word DOCX to Apple Pages', icon: FileCode, badge: 'New', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'Numbers to Excel (XLSX)', slug: '/utility/numbers-to-excel', desc: 'Convert Apple Numbers to Excel', icon: Table, badge: 'Apple', category: 'utility', catLabel: 'Daily Utility' },
@@ -179,7 +191,8 @@ export function Navbar() {
       t.name.toLowerCase().includes(q) ||
       t.desc.toLowerCase().includes(q) ||
       t.slug.toLowerCase().includes(q) ||
-      (t.badge && t.badge.toLowerCase().includes(q));
+      (t.badge && t.badge.toLowerCase().includes(q)) ||
+      (Boolean((t as any).keywords) && (t as any).keywords.some((k: string) => k.toLowerCase().includes(q)));
 
     return matchesCategory && matchesQuery;
   });

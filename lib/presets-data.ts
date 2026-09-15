@@ -955,5 +955,353 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
       'aadhaar card size in cm for print 8.56 x 5.398',
       'epson canon printer aadhaar print scale 100 percent'
     ]
+  },
+
+  'railway-rrb-photo-resizer': {
+    slug: 'railway-rrb-photo-resizer',
+    portalName: 'Railway Recruitment Board (RRB NTPC, ALP, Group D)',
+    defaultTargetKB: 45,
+    minKB: 20,
+    maxKB: 50,
+    fixedWidth: 320,
+    fixedHeight: 240,
+    title: 'Railway RRB Photo Resizer Online (20 to 50KB) Free | FileZenith',
+    metaTitle: 'Railway RRB Photo Resizer Online (20-50KB) | FileZenith',
+    metaDescription: 'Resize photo for Railway RRB NTPC, Group D, ALP, and Technician forms to 20KB - 50KB (320x240 px, 35x45 mm). 100% private in-browser, free instant download.',
+    h1: 'Railway RRB Photo Resizer (RRB NTPC, ALP, Group D & Tech)',
+    shortDescription: 'Resize and crop passport photos to exact 20KB–50KB (320×240 px) for Indian Railway RRB recruitment online portals.',
+    longDescription: 'Indian Railways (RRB NTPC, Group D, Assistant Loco Pilot - ALP, Technician, and RPF) requires recent color passport photos with plain white or light background, file weight strictly between 20KB and 50KB (or 30–50KB depending on notification), and aspect ratio 320×240 pixels (35mm × 45mm). Our client-side canvas engine compresses your photo with precision binary search so your application is never rejected.',
+    targetSize: '20 KB to 50 KB',
+    minimumSize: '20 KB',
+    maximumSize: '50 KB',
+    width: '320 px (35 mm)',
+    height: '240 px (45 mm)',
+    allowedFormats: ['JPG', 'JPEG'],
+    instructions: [
+      'Upload a recent clear front-facing color photograph with light/white background.',
+      'Ensure both ears and face are clearly visible with neutral expression.',
+      'Canvas auto-crops to RRB 320×240 pixel aspect ratio and optimizes size to ~45 KB.',
+      'Click Download to save your official RRB-compliant JPG file.'
+    ],
+    requirements: [
+      'File size must strictly remain between 20 KB and 50 KB (portal rejects files outside this range).',
+      'Resolution: 320 × 240 pixels in standard JPEG format.',
+      'Background must be white or very light color.',
+      'No caps, goggles, masks, or heavy shadows on face.'
+    ],
+    tips: [
+      'Take photo in daylight against a white wall for best results.',
+      'For Railway signature upload, use our Signature Resizer (10KB–20KB).',
+      'Do not take a photo of an old printed photo; use a digital mobile selfie with rear camera.'
+    ],
+    officialGuidelines: 'RRB Centralised Employment Notices (CEN) require scanned color passport photograph taken within the last 6 months, 320x240 pixels, 20-50 KB file size in JPG/JPEG format with clear facial features.',
+    lastVerifiedDate: 'Verified September 2026',
+    faq: [
+      { question: 'What is the exact photo size for Railway RRB online applications?', answer: 'Official RRB specifications require 320 × 240 pixels (35mm × 45mm) in JPG/JPEG format, with file weight between 20 KB and 50 KB.' },
+      { question: 'Why does RRB portal reject my uploaded photo?', answer: 'Common rejection causes include file size below 20KB or above 50KB, dark backgrounds, wearing caps/spectacles with glare, or skewed aspect ratios. Our tool locks the aspect ratio and enforces the exact file size target.' },
+      { question: 'What is the signature file size requirement for Railway RRB?', answer: 'RRB requires signatures on white paper in black/blue ink, file size 10 KB to 20 KB in JPG format with 140×60 pixels dimensions.' },
+      { question: 'Is my photo uploaded to any server?', answer: 'No! All processing runs 100% locally inside your web browser. Your photo is completely private.' }
+    ],
+    relatedTools: [
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Format RRB signature scan.' },
+      { name: 'Compress Image to 50KB', slug: '/tools/compress-image-to-50kb', desc: 'Compress image under 50KB.' },
+      { name: 'Aadhaar Card Print Tool', slug: '/tools/aadhaar-card-print', desc: 'Aadhaar print for exam day.' }
+    ],
+    keywords: [
+      'railway rrb photo resizer',
+      'rrb photo resizer 20 to 50kb',
+      'railway photo size 20 to 50 kb',
+      'rrb ntpc photo resizer online',
+      'rrb alp photo size converter',
+      'rrb group d photo dimension',
+      'railway recruitment board photo resize online free',
+      'rrb technician photo resizer',
+      'railway photo signature resizer'
+    ]
+  },
+
+  'ibps-photo-resizer': {
+    slug: 'ibps-photo-resizer',
+    portalName: 'Institute of Banking Personnel Selection (IBPS)',
+    defaultTargetKB: 45,
+    minKB: 20,
+    maxKB: 50,
+    fixedWidth: 200,
+    fixedHeight: 230,
+    title: 'IBPS Photo Resizer Online (20 to 50KB, 200x230 px) Free | FileZenith',
+    metaTitle: 'IBPS Photo Resizer Online (20-50KB) | FileZenith',
+    metaDescription: 'Resize photo for IBPS PO, IBPS Clerk, RRB Office Assistant, and SO online applications to 20KB - 50KB (200x230 px). 100% client-side free tool.',
+    h1: 'IBPS Photo Resizer (IBPS PO, Clerk, RRB & SO)',
+    shortDescription: 'Format and resize passport photos to 20KB–50KB (200×230 px) strictly matching official IBPS guidelines.',
+    longDescription: 'IBPS (Institute of Banking Personnel Selection) conducts major banking recruitments including IBPS PO, IBPS Clerk, IBPS SO, and IBPS RRB Gramin Bank. The portal strictly mandates passport photo size between 20KB and 50KB, dimensions 200 × 230 pixels (4.5cm × 3.5cm) with light/white background.',
+    targetSize: '20 KB to 50 KB',
+    minimumSize: '20 KB',
+    maximumSize: '50 KB',
+    width: '200 px (3.5 cm)',
+    height: '230 px (4.5 cm)',
+    allowedFormats: ['JPG', 'JPEG'],
+    instructions: [
+      'Upload recent color passport photo with white or light background.',
+      'Canvas auto-locks to 200×230 px aspect ratio and calculates size target ~45KB.',
+      'Click Download to save your official IBPS ready photograph.'
+    ],
+    requirements: [
+      'File size: 20 KB to 50 KB strictly.',
+      'Dimensions: 200 × 230 pixels.',
+      'Format: JPG or JPEG format.',
+      'Light colored, preferably white background with straight face looking at camera.'
+    ],
+    tips: [
+      'For IBPS left thumb impression, use 20–50KB JPEG target.',
+      'For IBPS handwritten declaration, resize between 50KB and 100KB.',
+      'For IBPS signature, format strictly between 10KB and 20KB.'
+    ],
+    officialGuidelines: 'Official IBPS recruitment handbook: 200 x 230 pixels, 20KB to 50KB size, light background, clear view of eyes and face without caps/colored glasses.',
+    lastVerifiedDate: 'Verified September 2026',
+    faq: [
+      { question: 'What is the required photo size for IBPS PO and Clerk?', answer: 'IBPS mandates dimensions of 200 × 230 pixels (width × height) and a file weight between 20 KB and 50 KB in JPG format.' },
+      { question: 'What are the dimensions for IBPS signature and thumb impression?', answer: 'IBPS signature must be 140 × 60 pixels (10–20 KB). Left thumb impression must be 240 × 240 pixels (20–50 KB). Handwritten declaration must be 50–100 KB.' },
+      { question: 'Is this IBPS photo resizer free and secure?', answer: 'Yes, 100% free with zero registration. All resizing happens on your device using client-side JavaScript, ensuring complete confidentiality.' }
+    ],
+    relatedTools: [
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Format IBPS signature.' },
+      { name: 'Compress Image to 50KB', slug: '/tools/compress-image-to-50kb', desc: 'Compress image under 50KB.' },
+      { name: 'Compress Image to 100KB', slug: '/tools/compress-image-to-100kb', desc: 'Handwritten declaration (50-100KB).' }
+    ],
+    keywords: [
+      'ibps photo resizer',
+      'ibps photo resizer 20 to 50kb',
+      'ibps photo size 200x230',
+      'ibps po photo signature resizer',
+      'ibps clerk photo resizer online free',
+      'ibps rrb photo resize in kb',
+      'bank exam photo compressor 20 to 50kb',
+      'ibps left thumb impression resizer'
+    ]
+  },
+
+  'sbi-po-photo-resizer': {
+    slug: 'sbi-po-photo-resizer',
+    portalName: 'State Bank of India (SBI PO & Clerk)',
+    defaultTargetKB: 45,
+    minKB: 20,
+    maxKB: 50,
+    fixedWidth: 200,
+    fixedHeight: 230,
+    title: 'SBI PO & Clerk Photo Resizer Online (20 to 50KB) Free | FileZenith',
+    metaTitle: 'SBI PO / Clerk Photo Resizer (20-50KB, 200x230) | FileZenith',
+    metaDescription: 'Resize photo and signature for SBI PO and SBI Clerk recruitment. Format to exact 20KB - 50KB (200x230 pixels) in seconds. 100% private in-browser tool.',
+    h1: 'SBI PO & Clerk Photo Resizer (20 to 50KB, 200x230 px)',
+    shortDescription: 'Format passport photos for SBI PO, SBI Clerk (Junior Associate), and CBO applications to 20KB–50KB.',
+    longDescription: 'State Bank of India (SBI) online application portal requires candidates to upload a recent color passport photograph sized 20KB to 50KB with dimensions of 200 × 230 pixels, white background, and crisp facial details.',
+    targetSize: '20 KB to 50 KB',
+    minimumSize: '20 KB',
+    maximumSize: '50 KB',
+    width: '200 px',
+    height: '230 px',
+    allowedFormats: ['JPG', 'JPEG'],
+    instructions: [
+      'Upload your passport photo scan or smartphone photo.',
+      'Check alignment to ensure face occupies 70-80% of frame.',
+      'Download the resized 20–50 KB JPG ready for the SBI portal.'
+    ],
+    requirements: [
+      'File weight between 20 KB and 50 KB.',
+      'Pixel dimensions: 200 × 230 pixels.',
+      'Clear white or light-colored background.'
+    ],
+    tips: [
+      'SBI signature must be 10KB to 20KB in black ink.',
+      'Avoid glare on eyeglasses or shadows behind ears.'
+    ],
+    officialGuidelines: 'State Bank of India recruitment notification mandates 200x230 pixels passport photo, 20-50 KB file weight, strictly in JPG/JPEG format.',
+    lastVerifiedDate: 'Verified September 2026',
+    faq: [
+      { question: 'What is SBI PO photo file size limit?', answer: 'The photo must be between 20 KB and 50 KB with dimensions of 200 × 230 pixels.' },
+      { question: 'Does SBI allow photos taken with a smartphone?', answer: 'Yes, as long as it has good lighting, a plain white background, and clear contrast.' }
+    ],
+    relatedTools: [
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Format SBI signature.' },
+      { name: 'IBPS Photo Resizer', slug: '/tools/ibps-photo-resizer', desc: 'IBPS exam photo resizer.' }
+    ],
+    keywords: [
+      'sbi po photo resizer',
+      'sbi clerk photo size 20 to 50 kb',
+      'sbi po photo and signature resize online',
+      'sbi junior associate photo resizer',
+      'sbi recruitment photo size 200x230'
+    ]
+  },
+
+  'jee-photo-resizer': {
+    slug: 'jee-photo-resizer',
+    portalName: 'NTA JEE Main & JEE Advanced',
+    defaultTargetKB: 120,
+    minKB: 10,
+    maxKB: 200,
+    fixedWidth: 400,
+    fixedHeight: 500,
+    allowNameDate: true,
+    title: 'JEE Main Photo Resizer 2026 (10 to 200KB with Name & Date) | FileZenith',
+    metaTitle: 'JEE Main Photo Resizer 2026 (10-200KB) | FileZenith',
+    metaDescription: 'Resize photo for JEE Main & JEE Advanced 2026 to 10KB - 200KB (3.5x4.5cm, 80% face coverage, white background) with candidate Name and Date stamp. 100% free.',
+    h1: 'JEE Main Photo Resizer (10 to 200KB with Name & Date)',
+    shortDescription: 'Format passport photo for NTA JEE Main & Advanced with 80% face coverage, white background, and candidate name/DOP stamp.',
+    longDescription: 'National Testing Agency (NTA) JEE Main requires a recent passport photo (10KB to 200KB) with 80% face coverage against a white background, without mask or caps. Many candidates also require Candidate Name and Date of Photograph (DOP) printed at the bottom. Our tool crops, resizes, and optionally overlays your name and date bar in compliance with NTA JEE guidelines.',
+    targetSize: '10 KB to 200 KB',
+    minimumSize: '10 KB',
+    maximumSize: '200 KB',
+    width: '3.5 cm (400 px)',
+    height: '4.5 cm (500 px)',
+    allowedFormats: ['JPG', 'JPEG'],
+    instructions: [
+      'Upload a recent clear photo with plain white background showing 80% face coverage.',
+      'Toggle "Add Name & Date" if required and enter your full name and photograph date.',
+      'Adjust the compression slider between 10 KB and 200 KB (recommended: ~100–120 KB).',
+      'Download your verified NTA JEE ready JPG photograph.'
+    ],
+    requirements: [
+      'File size strictly between 10 KB and 200 KB.',
+      'Format: JPG / JPEG.',
+      '80% face coverage showing ears clearly against a pure white background.',
+      'Spectacles allowed only if used regularly; no tinted glasses, goggles, or caps.'
+    ],
+    tips: [
+      'NTA signature requirement: 4 KB to 30 KB in JPG format on white paper with black pen.',
+      'Ensure the date of photo is recent (within 6 months of JEE notification).'
+    ],
+    officialGuidelines: 'NTA JEE Main Information Bulletin mandates 10 KB to 200 KB passport photograph in JPG format with 80% face coverage against white background, ears visible.',
+    lastVerifiedDate: 'Verified September 2026',
+    faq: [
+      { question: 'What is the photo size requirement for JEE Main 2026?', answer: 'NTA JEE Main requires passport photos to be between 10 KB and 200 KB in JPG/JPEG format, with 80% face coverage against a white background.' },
+      { question: 'Is name and date of photo mandatory on JEE Main photo?', answer: 'While plain white background photos are accepted, NTA strongly advises having the candidate’s name and date of photograph printed at the bottom to avoid identity disputes.' },
+      { question: 'What is the signature file size for JEE Main?', answer: 'The signature must be between 4 KB and 30 KB in JPG format, signed with black pen on white paper.' },
+      { question: 'What is the postcard photo size for JEE Main?', answer: 'If required for center verification, the 4"×6" postcard photo file size must be between 10 KB and 200 KB.' }
+    ],
+    relatedTools: [
+      { name: 'CUET Photo Resizer', slug: '/tools/cuet-photo-resizer', desc: 'CUET UG/PG photo resizer.' },
+      { name: 'NEET Photo Resizer', slug: '/tools/neet-photo-resizer', desc: 'NEET passport & postcard size.' },
+      { name: 'Signature Resizer 10 to 20KB', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Signature resizer.' },
+      { name: 'Aadhaar Card Print Tool', slug: '/tools/aadhaar-card-print', desc: 'Print Aadhaar for exam center.' }
+    ],
+    keywords: [
+      'jee photo resizer',
+      'jee main photo size 10 to 200 kb',
+      'jee main photo resizer online',
+      'nta jee photo size 3.5x4.5 cm',
+      'jee main photo name and date generator',
+      'jee advanced photo resize online free',
+      'jee main signature resizer 4 to 30 kb',
+      'sarkari result jee photo resizer',
+      'jee photo compressor 10 to 200kb'
+    ]
+  },
+
+  'cuet-photo-resizer': {
+    slug: 'cuet-photo-resizer',
+    portalName: 'NTA CUET UG / PG Portal',
+    defaultTargetKB: 120,
+    minKB: 10,
+    maxKB: 200,
+    fixedWidth: 400,
+    fixedHeight: 500,
+    allowNameDate: true,
+    title: 'CUET Photo Resizer 2026 (10 to 200KB) Online Free | FileZenith',
+    metaTitle: 'CUET Photo Resizer 2026 (10-200KB) | FileZenith',
+    metaDescription: 'Resize photo and signature for CUET UG and CUET PG 2026 online application to 10KB - 200KB. 80% face coverage, white background, optional name and date stamp.',
+    h1: 'CUET Photo Resizer 2026 (CUET UG & PG)',
+    shortDescription: 'Format passport photos for Common University Entrance Test (CUET) to 10KB–200KB with 80% face visibility.',
+    longDescription: 'National Testing Agency (NTA) mandates that CUET candidates upload passport size photographs between 10KB and 200KB, with clear 80% face coverage against a white background. Our browser-based tool resizes, crops, and optimizes your photo instantly without server uploads.',
+    targetSize: '10 KB to 200 KB',
+    minimumSize: '10 KB',
+    maximumSize: '200 KB',
+    width: '3.5 cm (400 px)',
+    height: '4.5 cm (500 px)',
+    allowedFormats: ['JPG', 'JPEG'],
+    instructions: [
+      'Upload recent photograph with pure white background.',
+      'Check that ears and face are clearly visible without caps or sunglasses.',
+      'Adjust compression to target ~100–120 KB.',
+      'Download the formatted JPEG ready for the NTA CUET portal.'
+    ],
+    requirements: [
+      'File size: 10 KB to 200 KB in JPG format.',
+      '80% face coverage on white background.',
+      'Signature: 4 KB to 30 KB.'
+    ],
+    tips: [
+      'Avoid shadows under chin or ears by facing a daylight window.',
+      'Use black ink for signature scan.'
+    ],
+    officialGuidelines: 'NTA CUET Information Bulletin: Recent passport photograph (10 KB to 200 KB) in JPG/JPEG format, 80% face coverage against white background.',
+    lastVerifiedDate: 'Verified September 2026',
+    faq: [
+      { question: 'What is the photo size requirement for CUET 2026?', answer: 'NTA specifies 10 KB to 200 KB for passport size photo and 4 KB to 30 KB for candidate signature in JPG format.' },
+      { question: 'Can I upload a smartphone selfie for CUET?', answer: 'Yes, if taken against a plain white wall with sharp focus and even lighting.' }
+    ],
+    relatedTools: [
+      { name: 'JEE Photo Resizer', slug: '/tools/jee-photo-resizer', desc: 'JEE Main photo resizer.' },
+      { name: 'NEET Photo Resizer', slug: '/tools/neet-photo-resizer', desc: 'NEET photo resizer.' },
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Signature tool.' }
+    ],
+    keywords: [
+      'cuet photo resizer',
+      'cuet photo size 10 to 200 kb',
+      'nta cuet ug photo resizer 2026',
+      'cuet pg photo size converter',
+      'cuet signature resizer 4 to 30 kb',
+      'common university entrance test photo resize'
+    ]
+  },
+
+  'jee-cuet-photo-resizer': {
+    slug: 'jee-cuet-photo-resizer',
+    portalName: 'NTA Entrance Exam Portal (JEE Main, Advanced & CUET)',
+    defaultTargetKB: 120,
+    minKB: 10,
+    maxKB: 200,
+    fixedWidth: 400,
+    fixedHeight: 500,
+    allowNameDate: true,
+    title: 'JEE & CUET Photo Resizer Online (10 to 200KB) Free | FileZenith',
+    metaTitle: 'JEE & CUET Photo Resizer (10-200KB NTA Format) | FileZenith',
+    metaDescription: 'Resize photos for NTA JEE Main, JEE Advanced, and CUET UG/PG applications to 10KB - 200KB. 80% face coverage, white background, optional DOP name and date stamp.',
+    h1: 'NTA JEE & CUET Photo Resizer (10 to 200KB)',
+    shortDescription: 'Unified photo resizer for NTA JEE Main, JEE Advanced, and CUET UG/PG entrance exams.',
+    longDescription: 'National Testing Agency (NTA) enforces standardized photo requirements across JEE Main and CUET: 10KB to 200KB file size, 80% face coverage, white background, and optional candidate name & date of photo (DOP). Our tool provides 1-click preset formatting.',
+    targetSize: '10 KB to 200 KB',
+    minimumSize: '10 KB',
+    maximumSize: '200 KB',
+    width: '3.5 cm (400 px)',
+    height: '4.5 cm (500 px)',
+    allowedFormats: ['JPG', 'JPEG'],
+    instructions: [
+      'Upload your passport photo scan or portrait.',
+      'Optionally enable Name & Date bar at bottom.',
+      'Download NTA-compliant 10–200KB JPEG file.'
+    ],
+    requirements: [
+      '10 KB to 200 KB file size.',
+      '80% facial coverage on white background.'
+    ],
+    tips: [
+      'Signature: 4 KB to 30 KB with black pen on white paper.'
+    ],
+    officialGuidelines: 'NTA guidelines for JEE and CUET: 10-200 KB JPG passport photo with 80% face coverage against white background.',
+    lastVerifiedDate: 'Verified September 2026',
+    faq: [
+      { question: 'Can the same photo be used for both JEE Main and CUET?', answer: 'Yes! Both JEE and CUET are conducted by NTA and share the exact same photo specifications (10–200 KB, 80% face coverage on white background).' }
+    ],
+    relatedTools: [
+      { name: 'JEE Photo Resizer', slug: '/tools/jee-photo-resizer', desc: 'JEE Main photo tool.' },
+      { name: 'CUET Photo Resizer', slug: '/tools/cuet-photo-resizer', desc: 'CUET photo tool.' },
+      { name: 'NEET Photo Resizer', slug: '/tools/neet-photo-resizer', desc: 'NEET photo tool.' }
+    ],
+    keywords: [
+      'jee cuet photo resizer',
+      'nta entrance exam photo resize 10 to 200 kb',
+      'jee main cuet photo resizer online',
+      'nta photo resizer 2026'
+    ]
   }
 };

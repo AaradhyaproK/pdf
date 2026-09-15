@@ -2286,6 +2286,227 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { question: 'Should I write Date of Birth (DOB) or Date of Photo (DOP)?', answer: 'Always write Date of Photo (DOP) unless the official notification explicitly asks for Date of Birth.' },
       { question: 'Does candidate name need to be in uppercase capital letters?', answer: 'Yes, government recruitment boards mandate uppercase letters for optical clarity.' }
     ]
+  },
+
+  '/image/webp-to-jpg': {
+    slug: '/image/webp-to-jpg',
+    title: 'Free WebP to JPG Converter Online',
+    metaTitle: 'WebP to JPG Converter Online Free | FileZenith',
+    description: 'Convert WebP to JPG online free in seconds. Bulk convert multiple WebP images to high quality JPEG with custom quality slider and white background fill. 100% private in-browser.',
+    keywords: [
+      'webp to jpg',
+      'convert webp to jpg online free',
+      'webp to jpg converter',
+      'bulk webp to jpg converter',
+      'save webp as jpg',
+      'change webp to jpg',
+      'how to convert webp to jpg',
+      'free webp to jpeg converter without software',
+      'google webp to jpg high quality'
+    ],
+    category: 'image',
+    howToSteps: [
+      { title: 'Upload WebP Files', text: 'Select or drag-and-drop one or multiple .webp files into the upload workspace.' },
+      { title: 'Choose Quality & Background', text: 'Adjust the JPEG compression quality slider and choose a background fill color for transparent images.' },
+      { title: 'Convert & Download JPG', text: 'Click Convert to JPG and download individual files or all converted images at once.' }
+    ],
+    faqs: [
+      { question: 'How can I convert WebP images to JPG for free?', answer: 'Upload your WebP images to FileZenith WebP to JPG converter, adjust the output quality slider, and click Convert. Your images are converted instantly in your browser without uploading to any server.' },
+      { question: 'What happens to transparent WebP images when converted to JPG?', answer: 'Since standard JPG format does not support alpha transparency, FileZenith automatically fills transparent areas with clean white (or your chosen background color) to prevent black artifacts.' },
+      { question: 'Can I convert multiple WebP images at once?', answer: 'Yes! Our batch converter supports uploading multiple WebP files simultaneously with bulk download options.' },
+      { question: 'Is my data secure when converting images on FileZenith?', answer: 'Absolutely. All image decoding and canvas encoding runs locally inside your browser using HTML5 Canvas. Your photos never leave your device.' }
+    ],
+    comparisonTable: [
+      { feature: 'Client-Side Privacy', omnitool: '100% In-Browser (Zero Server Upload)', standardCloud: 'Uploaded to Unknown Cloud Servers' },
+      { feature: 'Bulk Conversion Limit', omnitool: 'Unlimited (Device Memory Bound)', standardCloud: 'Paywall after 2–5 Files' },
+      { feature: 'Transparency Fill', omnitool: 'Smart Background Color Selection', standardCloud: 'Often Turns Black or Corrupted' },
+      { feature: 'Speed', omnitool: 'Instant Hardware Canvas Rendering', standardCloud: 'Slow Network Upload & Download' }
+    ]
+  },
+
+  '/image/jpg-to-webp': {
+    slug: '/image/jpg-to-webp',
+    title: 'Free JPG to WebP Converter Online',
+    metaTitle: 'JPG to WebP Converter Online Free | FileZenith',
+    description: 'Convert JPG, JPEG & PNG to modern WebP format online free. Shrink image file size by up to 80% while preserving crystal-clear quality for faster website speed and Core Web Vitals.',
+    keywords: [
+      'jpg to webp',
+      'convert jpg to webp online free',
+      'jpeg to webp converter',
+      'compress jpg to webp',
+      'bulk jpg to webp converter',
+      'turn jpg into webp',
+      'webp image format converter',
+      'convert png to webp for seo',
+      'reduce image size with webp'
+    ],
+    category: 'image',
+    howToSteps: [
+      { title: 'Upload JPG or PNG Images', text: 'Select or drag-and-drop JPEG or PNG images into the converter box.' },
+      { title: 'Select WebP Compression Quality', text: 'Set your preferred quality level (85% recommended for high fidelity with maximum compression).' },
+      { title: 'Download WebP Images', text: 'Download individual WebP files or all converted files with instant payload savings.' }
+    ],
+    faqs: [
+      { question: 'Why should I convert JPG images to WebP?', answer: 'WebP is Google’s modern image format that provides superior lossless and lossy compression. WebP images are typically 30% to 80% smaller than equivalent JPEGs, dramatically accelerating page load times and boosting SEO scores.' },
+      { question: 'Will converting JPG to WebP lose visual quality?', answer: 'No! At 80% to 90% quality, WebP is visually indistinguishable from high-resolution JPEG while cutting file weight in half.' },
+      { question: 'Are WebP images supported across modern browsers?', answer: 'Yes, over 97% of modern web browsers worldwide (Google Chrome, Safari, Apple iOS, Firefox, Edge, Android) support WebP natively.' }
+    ],
+    comparisonTable: [
+      { feature: 'Compression Efficiency', omnitool: 'Up to 80% Smaller than JPEG', standardCloud: 'Standard JPEG re-compression only' },
+      { feature: 'Zero Server Upload', omnitool: '100% In-Browser Execution', standardCloud: 'Uploads images to third-party servers' },
+      { feature: 'SEO Optimization', omnitool: 'Core Web Vitals & LCP Ready', standardCloud: 'Basic file conversion' }
+    ]
+  },
+
+  '/utility/url-encoder-decoder': {
+    slug: '/utility/url-encoder-decoder',
+    title: 'Free URL Encoder & Decoder Online',
+    metaTitle: 'URL Encoder & Decoder Online Free | FileZenith',
+    description: 'Encode or decode URLs, URI parameters, and percent-encoded query strings online free. Features RFC 3986 compliance, query parameter inspector table, and 100% browser privacy.',
+    keywords: [
+      'url encoder decoder',
+      'url encode online',
+      'url decoder online free',
+      'percent encoding online',
+      'encodeuricomponent online',
+      'decode url string',
+      'url parameter encoder decoder',
+      'rfc 3986 url encode',
+      'developer url tool'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Choose Mode', text: 'Select URL Encoder or URL Decoder from the top tab.' },
+      { title: 'Enter Text or URL', text: 'Paste your URL, query string, or plain text into the input field.' },
+      { title: 'Copy Result or Inspect Params', text: 'Instantly copy the converted string or inspect broken-down query parameters in the table below.' }
+    ],
+    faqs: [
+      { question: 'What is the difference between encodeURI and encodeURIComponent?', answer: 'encodeURI is designed for complete URLs and does not encode characters that have special meaning in a URL (like ://, ?, &, and #). encodeURIComponent encodes everything, including slashes and query delimiters, making it suitable for encoding individual parameter values.' },
+      { question: 'What is percent-encoding in URLs?', answer: 'Percent-encoding is a mechanism for encoding special or non-ASCII characters in Uniform Resource Identifiers (URIs) using a "%" followed by two hexadecimal digits representing the character code.' },
+      { question: 'Are my query strings or secret tokens uploaded to any server?', answer: 'Never! All URL encoding and decoding happens 100% locally in your browser with zero network transmission.' }
+    ]
+  },
+
+  '/utility/hash-generator': {
+    slug: '/utility/hash-generator',
+    title: 'Free MD5 & SHA Hash Generator Online',
+    metaTitle: 'MD5 & SHA Hash Generator & Checksum Verifier | FileZenith',
+    description: 'Generate cryptographic MD5, SHA-1, SHA-256, SHA-384, and SHA-512 hashes for text and binary files in real-time. Verify file checksums with 100% in-browser Web Crypto privacy.',
+    keywords: [
+      'md5 hash generator',
+      'sha256 generator online',
+      'file checksum verifier online free',
+      'sha512 hash generator',
+      'sha1 generator',
+      'calculate md5 checksum online',
+      'hash text online',
+      'verify file integrity checksum'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Select Text or File Mode', text: 'Choose whether you want to hash a text string or calculate the checksum of a downloaded file.' },
+      { title: 'Input Text or Drop File', text: 'Type your message or drag and drop your file into the secure workspace.' },
+      { title: 'Inspect & Compare Checksums', text: 'View MD5, SHA-1, SHA-256, SHA-384, and SHA-512 hashes simultaneously, or paste an expected hash to verify file integrity.' }
+    ],
+    faqs: [
+      { question: 'How do I verify if a downloaded file has not been tampered with?', answer: 'Drop your downloaded file into the File Checksum tab, then paste the official SHA-256 or MD5 hash provided by the vendor into the Checksum Verifier. FileZenith will instantly show a green match confirmation if the file is genuine.' },
+      { question: 'Is SHA-256 more secure than MD5?', answer: 'Yes, significantly! MD5 produces a 128-bit hash and is vulnerable to collision attacks, making it suitable only for non-security checksums. SHA-256 generates a 256-bit cryptographic digest and is the global standard for digital security, blockchain, and SSL certificates.' },
+      { question: 'Does hashing large files upload my documents to external servers?', answer: 'No. FileZenith uses the browser’s native Web Crypto API and local array buffer streaming. Your files are hashed directly on your computer without uploading a single byte.' }
+    ],
+    comparisonTable: [
+      { feature: 'Algorithm Support', omnitool: 'MD5, SHA-1, SHA-256, SHA-384, SHA-512', standardCloud: 'Often only MD5 or SHA-1' },
+      { feature: 'File Integrity Verifier', omnitool: 'Built-in Instant Hash Match Detector', standardCloud: 'Manual visual inspection' },
+      { feature: 'Data Privacy', omnitool: '100% Client-Side Web Crypto', standardCloud: 'Uploads whole file to cloud' }
+    ]
+  },
+
+  '/pdf/compress-to-100kb': {
+    slug: '/pdf/compress-to-100kb',
+    title: 'Compress PDF to 100KB Online Free',
+    metaTitle: 'Compress PDF to 100KB Free Online | FileZenith',
+    description: 'Compress PDF file size under 100KB online free. Ideal for Sarkari job portals, UPSC, SSC, state PSC marks cards, certificates, and ID uploads with zero server uploads.',
+    keywords: [
+      'compress pdf to 100kb',
+      'reduce pdf size to 100kb online free',
+      'pdf compressor under 100kb for government portal',
+      'compress pdf to 100kb online without losing quality',
+      'shrink pdf file size under 100kb in mobile',
+      'free pdf size reducer below 100kb for sarkari exam',
+      'marksheet pdf compressor 100kb'
+    ],
+    category: 'pdf',
+    howToSteps: [
+      { title: 'Upload PDF Document', text: 'Select or drag and drop your document into the 100KB compressor workspace.' },
+      { title: 'Check 100KB Target Preset', text: 'The target is locked to 100KB by default, or you can adjust the slider between 25KB and 300KB.' },
+      { title: 'Download Compressed PDF', text: 'Click Compress PDF to run the in-browser optimization and download your verified file.' }
+    ],
+    faqs: [
+      { question: 'How can I compress a PDF under 100KB for government application forms?', answer: 'Upload your document to FileZenith Compress PDF to 100KB tool, verify the target size is set to 100KB, and click Compress. The canvas resampler will optimize image layers and metadata to fit strictly below 100KB.' },
+      { question: 'Will marksheet text and roll numbers remain readable at 100KB?', answer: 'Yes! Our algorithm balances JPEG compression and resolution scaling to preserve maximum text contrast and stamp legibility even below 100KB.' },
+      { question: 'Is there a limit on how many PDFs I can compress to 100KB?', answer: 'None at all. FileZenith is 100% free with unlimited document compression and zero watermark.' }
+    ]
+  },
+
+  '/pdf/compress-to-1mb': {
+    slug: '/pdf/compress-to-1mb',
+    title: 'Compress PDF to 1MB Online Free',
+    metaTitle: 'Compress PDF to 1MB Free Online | FileZenith',
+    description: 'Compress large PDF documents to under 1MB online free. Optimized for email attachments, university submissions, bank statements, and online applications with zero quality compromise.',
+    keywords: [
+      'compress pdf to 1mb',
+      'reduce pdf size to 1mb online free',
+      'compress pdf under 1mb for email attachment',
+      'shrink large pdf to 1mb',
+      'pdf compressor 1mb online',
+      'reduce multi page pdf to 1mb'
+    ],
+    category: 'pdf',
+    howToSteps: [
+      { title: 'Select Large PDF File', text: 'Drag and drop your multi-page PDF document into the upload area.' },
+      { title: 'Set Target to 1MB', text: 'Choose 1MB (1024KB) or adjust between 500KB and 2MB.' },
+      { title: 'Download Optimized PDF', text: 'Click Compress PDF and download your optimized document ready for emailing.' }
+    ],
+    faqs: [
+      { question: 'Why do email systems and portals require PDFs under 1MB?', answer: 'Many corporate email servers, banking portals, and university application portals enforce a strict 1MB attachment limit to prevent database bloat. FileZenith allows you to shrink heavy multi-page documents under 1MB easily.' },
+      { question: 'Can I compress a 20MB or 50MB PDF down to 1MB?', answer: 'Yes, if the PDF contains scanned photos or high-DPI images, our canvas engine resamples image streams to bring the total file weight under 1MB.' }
+    ]
+  },
+
+  '/utility/electricity-bill-calculator': {
+    slug: '/utility/electricity-bill-calculator',
+    title: 'Electricity Bill Calculator (Slab Tariff & Appliance Power)',
+    metaTitle: 'Electricity Bill Calculator Online (India & Global) | FileZenith',
+    description: 'Calculate your monthly electricity bill online with state-wise tariff slabs (Maharashtra MSEDCL, Delhi BSES with subsidy, UPPCL, BESCOM, TANGEDCO) and home appliance power consumption estimator.',
+    keywords: [
+      'electricity bill calculator',
+      'bijli bill calculator online',
+      'calculate electricity bill per unit',
+      'msedcl bill calculator maharashtra',
+      'delhi bses electricity bill calculator subsidy',
+      'uppcl electricity bill calculator',
+      'appliance power consumption calculator',
+      'kwh electricity cost calculator',
+      'calculate power consumption of ac and fridge',
+      'electricity slab rate calculator india'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Choose Mode & State', text: 'Select whether to calculate by monthly kWh units or by home appliances, and choose your state electricity board (e.g. MSEDCL, Delhi BSES, UPPCL).' },
+      { title: 'Input Units or Appliance Usage', text: 'Adjust the monthly units slider, or enter appliance quantity and daily operating hours.' },
+      { title: 'Review Bill & Share', text: 'View exact slab-wise energy charges, fixed charges, taxes, and government subsidies, and copy or share the summary via WhatsApp.' }
+    ],
+    faqs: [
+      { question: 'How is an electricity bill calculated using slab rates?', answer: 'In progressive slab billing, consumed units are divided across rate tiers. For example, the first 100 units may be charged at ₹5/unit, the next 200 units at ₹8/unit, and units above 300 at ₹12/unit, plus fixed charges and state electricity duty.' },
+      { question: 'How does the Delhi government electricity subsidy work?', answer: 'In Delhi (BSES & TPDDL), domestic consumers using up to 200 units per month receive a 100% subsidy (₹0 bill). Consumers using between 201 and 400 units receive a 50% discount on energy charges up to a maximum of ₹800 per month.' },
+      { question: 'How do I calculate electricity consumption for an AC or refrigerator?', answer: 'Multiply appliance wattage by hours of usage per day and divide by 1000 to get daily kWh (units). For example, a 1500W AC running 8 hours per day consumes (1500 × 8) / 1000 = 12 units (kWh) per day, or ~360 units per month.' },
+      { question: 'Can I factor in solar rooftop net metering?', answer: 'Yes! Simply enter your monthly solar rooftop generation in the Solar Net Metering field, and the calculator automatically subtracts generated units from your grid consumption before calculating tariff slabs.' }
+    ],
+    comparisonTable: [
+      { feature: 'State Slab Presets', omnitool: 'MSEDCL, BSES Delhi, UPPCL, BESCOM, TANGEDCO, Gujarat', standardCloud: 'Generic flat rate only' },
+      { feature: 'Subsidy Support', omnitool: 'Delhi 200/400-Unit Subsidy Rules Integrated', standardCloud: 'No subsidy calculations' },
+      { feature: 'Appliance Breakdown', omnitool: 'Interactive AC, Fridge, Fan, Geyser Wattage Estimator', standardCloud: 'Requires manual unit entry' },
+      { feature: 'WhatsApp Sharing', omnitool: '1-Click Formatted Summary Sharing', standardCloud: 'None' }
+    ]
   }
 };
 

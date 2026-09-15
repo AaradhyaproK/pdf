@@ -62,12 +62,21 @@ const PDF_TOOLS = [
   { name: 'Watermark PDF', slug: '/pdf/watermark', desc: 'Add watermark overlay', icon: Stamp },
   { name: 'Password Protect PDF', slug: '/pdf/protect', desc: 'Encrypt PDF with password', icon: Lock },
   { name: 'Remove PDF Password', slug: '/pdf/remove-password', desc: 'Unlock secured PDF', icon: Unlock, badge: 'Unlock' },
+  { name: 'Compress PDF to 100KB', slug: '/pdf/compress-to-100kb', desc: 'Target 100KB for exam & govt portals', icon: Minimize2, badge: '100KB' },
+  { name: 'Compress PDF to 1MB', slug: '/pdf/compress-to-1mb', desc: 'Compress multi-page PDF under 1MB', icon: Minimize2, badge: '1MB' },
   { name: 'PDF to Word (DOCX)', slug: '/pdf/pdf-to-word', desc: 'Convert PDF to editable Word', icon: FileText, badge: 'Popular' },
   { name: 'Word to PDF Converter', slug: '/pdf/word-to-pdf', desc: 'Convert Word DOCX to PDF', icon: FileCode, badge: 'New' },
   { name: 'PDF to JPG / PNG', slug: '/pdf/to-image', desc: 'Convert PDF to images', icon: ImageIcon },
 ];
 
 const IMAGE_TOOLS = [
+  { name: 'WebP to JPG Converter', slug: '/image/webp-to-jpg', desc: 'Convert WebP to JPG format', icon: FileImage, badge: 'Bulk' },
+  { name: 'JPG to WebP Converter', slug: '/image/jpg-to-webp', desc: 'Convert JPG/PNG to modern WebP', icon: Zap, badge: 'Fast Web' },
+  { name: 'Railway RRB Photo Resizer', slug: '/tools/railway-rrb-photo-resizer', desc: 'RRB NTPC, ALP, Group D 20-50KB photo', icon: UserCheck, badge: 'RRB 20-50KB' },
+  { name: 'IBPS Photo Resizer', slug: '/tools/ibps-photo-resizer', desc: 'IBPS PO, Clerk, RRB 20-50KB photo', icon: UserCheck, badge: 'IBPS 20-50KB' },
+  { name: 'SBI PO Photo Resizer', slug: '/tools/sbi-po-photo-resizer', desc: 'SBI PO & Clerk photo & signature', icon: UserCheck, badge: 'SBI PO' },
+  { name: 'JEE Main Photo Resizer', slug: '/tools/jee-photo-resizer', desc: 'JEE 10-200KB photo resizer with DOP', icon: UserCheck, badge: 'JEE 10-200KB' },
+  { name: 'CUET Photo Resizer', slug: '/tools/cuet-photo-resizer', desc: 'CUET UG/PG 10-200KB photo & signature', icon: UserCheck, badge: 'CUET NTA' },
   { name: 'Image Cropper & Aspect', slug: '/image/crop', desc: 'Crop 1:1, 16:9, rotate & flip', icon: CropIcon, badge: 'New' },
   { name: 'Color Palette Extractor', slug: '/image/color-palette-extractor', desc: 'Extract HEX color codes from photos', icon: Palette, badge: 'Design' },
   { name: 'SVG Vector Converter', slug: '/image/svg-converter', desc: 'Convert SVG to 2x/4x PNG/JPG', icon: FileCode, badge: 'New' },
@@ -82,6 +91,9 @@ const IMAGE_TOOLS = [
 ];
 
 const UTILITY_TOOLS = [
+  { name: 'Electricity Bill Calculator', slug: '/utility/electricity-bill-calculator', desc: 'Calculate electricity bill with state slabs', icon: DollarSign, badge: 'State Slabs' },
+  { name: 'URL Encoder & Decoder', slug: '/utility/url-encoder-decoder', desc: 'Encode or decode URLs and params', icon: FileCode, badge: 'RFC 3986' },
+  { name: 'Hash Generator (MD5 / SHA)', slug: '/utility/hash-generator', desc: 'Generate MD5, SHA-256 and checksums', icon: Hash, badge: 'Checksum' },
   { name: 'Pomodoro Focus Timer', slug: '/utility/pomodoro-timer', desc: 'Custom intervals, day/night & chimes', icon: Timer, badge: 'Focus' },
   { name: 'Spin the Wheel Decider', slug: '/utility/spin-the-wheel', desc: 'Random picker, custom names & elimination', icon: Dices, badge: 'Fun' },
   { name: 'Coin Flip 3D Simulator', slug: '/utility/coin-flip', desc: '3D heads or tails toss & decision maker', icon: Coins, badge: '3D Toss' },
@@ -221,11 +233,16 @@ export function MobileBottomNav() {
     return [];
   };
 
-  const filteredTools = getToolsForCategory().filter(
-    (t) =>
-      t.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      t.desc.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredTools = getToolsForCategory().filter((t) => {
+    const q = searchQuery.toLowerCase().trim();
+    if (!q) return true;
+    return (
+      t.name.toLowerCase().includes(q) ||
+      t.desc.toLowerCase().includes(q) ||
+      t.slug.toLowerCase().includes(q) ||
+      (t.badge && t.badge.toLowerCase().includes(q))
+    );
+  });
 
   return (
     <>

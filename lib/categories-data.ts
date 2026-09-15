@@ -55,6 +55,8 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
         title: 'Image Conversion Tools',
         description: 'Convert between popular raster and vector image formats.',
         tools: [
+          { name: 'WebP to JPG Converter', slug: '/image/webp-to-jpg', description: 'Convert WebP images to JPG format.', isPopular: true, badge: 'Popular' },
+          { name: 'JPG to WebP Converter', slug: '/image/jpg-to-webp', description: 'Convert JPG/PNG images to modern WebP.', isPopular: true, badge: 'Fast Web' },
           { name: 'PNG to JPG Converter', slug: '/image/png-to-jpg', description: 'Convert PNG images to JPG with white background.', isPopular: true },
           { name: 'JPG to PNG Converter', slug: '/image/jpg-to-png', description: 'Convert JPG photos to PNG format.' },
           { name: 'HEIC to JPG Converter', slug: '/image/convert-heic', description: 'Convert iPhone HEIC photos to JPG.', isPopular: true, badge: 'iOS Photo' },
@@ -78,6 +80,11 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
         tools: [
           { name: 'Aadhaar Card Print Tool (A4 & PVC)', slug: '/tools/aadhaar-card-print', description: 'Crop and print e-Aadhaar on A4 sheet & PVC card (85.6x54 mm).', isPopular: true, badge: 'A4 & PVC' },
           { name: 'SSC Photo Resizer (20-50KB)', slug: '/tools/ssc-photo-resizer', description: 'Format SSC CGL, CHSL, MTS photo with Name & Date stamp.', isPopular: true, badge: 'SSC 20-50KB' },
+          { name: 'Railway RRB Photo Resizer', slug: '/tools/railway-rrb-photo-resizer', description: 'RRB NTPC, ALP, Group D 20-50KB photo resizer.', isPopular: true, badge: 'RRB 20-50KB' },
+          { name: 'IBPS Photo Resizer', slug: '/tools/ibps-photo-resizer', description: 'IBPS PO, Clerk, RRB 200x230 px photo resizer.', isPopular: true, badge: 'IBPS 20-50KB' },
+          { name: 'SBI PO Photo Resizer', slug: '/tools/sbi-po-photo-resizer', description: 'SBI PO & Clerk photo & signature resizer.', badge: 'SBI PO' },
+          { name: 'JEE Main Photo Resizer', slug: '/tools/jee-photo-resizer', description: 'JEE Main & Advanced 10-200KB photo resizer with DOP.', isPopular: true, badge: 'JEE 10-200KB' },
+          { name: 'CUET Photo Resizer', slug: '/tools/cuet-photo-resizer', description: 'CUET UG/PG 10-200KB photo & signature resizer.', badge: 'CUET NTA' },
           { name: 'Signature Resizer 10 to 20KB', slug: '/tools/signature-resizer-10-to-20kb', description: 'Resize signature to 10-20KB with Magic B&W cleanup.', isPopular: true, badge: '10-20KB' },
           { name: 'UPSC Photo Resizer', slug: '/tools/upsc-photo-resizer', description: '350x350 px OTR square photo format with Name & Date.', badge: 'UPSC OTR' },
           { name: 'NEET Photo Resizer', slug: '/tools/neet-photo-resizer', description: 'NEET passport & postcard 4"x6" photo with DOP stamp.', badge: 'NEET UG' },
@@ -123,7 +130,9 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
         description: 'Reduce PDF file size for email attachments and portal uploads.',
         tools: [
           { name: 'Compress PDF', slug: '/pdf/compress', description: 'Compress PDF file size without quality loss.', isPopular: true, badge: 'Popular' },
-          { name: 'Compress PDF to 200KB', slug: '/pdf/compress-to-200kb', description: 'Target 200KB PDF compressor for application forms.', isPopular: true, badge: 'Target 200KB' }
+          { name: 'Compress PDF to 100KB', slug: '/pdf/compress-to-100kb', description: 'Target 100KB PDF compressor for sarkari exam forms.', isPopular: true, badge: 'Target 100KB' },
+          { name: 'Compress PDF to 200KB', slug: '/pdf/compress-to-200kb', description: 'Target 200KB PDF compressor for application forms.', isPopular: true, badge: 'Target 200KB' },
+          { name: 'Compress PDF to 1MB', slug: '/pdf/compress-to-1mb', description: 'Compress large PDF under 1MB for email attachments.', isPopular: true, badge: 'Target 1MB' }
         ]
       },
       {
@@ -175,6 +184,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
         title: 'Popular Financial & Student Calculators',
         description: 'Calculators for loans, income tax, mutual funds, salary, GST, age, and marks.',
         tools: [
+          { name: 'Electricity Bill Calculator', slug: '/utility/electricity-bill-calculator', description: 'Calculate monthly electricity bill with state tariff slabs & subsidies.', isPopular: true, badge: 'State Slabs' },
           { name: 'EPF Balance Growth Calculator', slug: '/utility/epf-calculator', description: 'EPFO 8.25% retirement interest and maturity calculator.', isPopular: true, badge: 'EPFO 8.25%' },
           { name: 'Age Calculator', slug: '/utility/age-calculator', description: 'Calculate exact age in years, months, days, hours, and minutes.', isPopular: true, badge: '#1 Trending' },
           { name: 'Percentage Calculator', slug: '/utility/percentage-calculator', description: 'Calculate percentage difference, increase/decrease, and discount.', isPopular: true, badge: 'Daily Tool' },
@@ -250,6 +260,8 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
         title: 'Encoding & Formatting Utilities',
         description: 'Fast, secure utilities for web developers and programmers.',
         tools: [
+          { name: 'URL Encoder / Decoder', slug: '/utility/url-encoder-decoder', description: 'Encode or decode URLs and inspect query parameters.', isPopular: true, badge: 'RFC 3986' },
+          { name: 'Hash Generator (MD5 / SHA)', slug: '/utility/hash-generator', description: 'Generate MD5, SHA-256 and verify file checksums.', isPopular: true, badge: 'Checksum' },
           { name: 'Base64 Encoder / Decoder', slug: '/utility/base64', description: 'Encode or decode text and binary data into Base64 format.', isPopular: true },
           { name: 'JSON Formatter & Validator', slug: '/utility/json-formatter', description: 'Format, beautify, minify, and validate JSON data.', isPopular: true, badge: 'Popular' },
           { name: 'QR Code Generator', slug: '/utility/qr-generator', description: 'Create customizable QR codes for URLs, WiFi, and text.', isPopular: true, badge: 'Custom QR' }

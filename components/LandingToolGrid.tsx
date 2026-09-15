@@ -127,6 +127,146 @@ export const ALL_TOOLS: ToolItem[] = [
     badgeStyle: 'bg-indigo-50 text-indigo-700 border-indigo-200',
   },
   {
+    id: 'railway-rrb-photo-resizer',
+    name: 'Railway RRB Photo Resizer (20 to 50KB)',
+    slug: '/tools/railway-rrb-photo-resizer',
+    desc: 'Resize photo (320x240 px, 20-50KB) for RRB NTPC, Group D, ALP, and Technician.',
+    category: 'image',
+    tags: ['image', 'compress', 'exam'],
+    icon: UserCheck,
+    badge: 'RRB 20-50KB',
+    colorClass: 'text-indigo-600',
+    iconBgClass: 'bg-indigo-50 text-indigo-600 border-indigo-100 group-hover:bg-indigo-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-indigo-600',
+    badgeStyle: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+  },
+  {
+    id: 'ibps-photo-resizer',
+    name: 'IBPS / SBI PO Photo Resizer (20 to 50KB)',
+    slug: '/tools/ibps-photo-resizer',
+    desc: 'Format passport photos to 200x230 px (20-50KB) for IBPS PO, Clerk, and SBI.',
+    category: 'image',
+    tags: ['image', 'compress', 'exam'],
+    icon: UserCheck,
+    badge: 'IBPS 20-50KB',
+    colorClass: 'text-indigo-600',
+    iconBgClass: 'bg-indigo-50 text-indigo-600 border-indigo-100 group-hover:bg-indigo-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-indigo-600',
+    badgeStyle: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+  },
+  {
+    id: 'jee-photo-resizer',
+    name: 'JEE / CUET Photo Resizer (10 to 200KB)',
+    slug: '/tools/jee-photo-resizer',
+    desc: 'Format passport photo (3.5x4.5cm, 10-200KB, 80% face) with DOP stamp for NTA JEE & CUET.',
+    category: 'image',
+    tags: ['image', 'compress', 'exam'],
+    icon: UserCheck,
+    badge: 'JEE & CUET',
+    colorClass: 'text-indigo-600',
+    iconBgClass: 'bg-indigo-50 text-indigo-600 border-indigo-100 group-hover:bg-indigo-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-indigo-600',
+    badgeStyle: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+  },
+  {
+    id: 'webp-to-jpg',
+    name: 'WebP to JPG Converter',
+    slug: '/image/webp-to-jpg',
+    desc: 'Bulk convert Google WebP images to high quality JPG with custom background fill.',
+    category: 'image',
+    tags: ['image', 'convert-to'],
+    icon: FileImage,
+    badge: 'High Traffic',
+    colorClass: 'text-indigo-600',
+    iconBgClass: 'bg-indigo-50 text-indigo-600 border-indigo-100 group-hover:bg-indigo-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-indigo-600',
+    badgeStyle: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+  },
+  {
+    id: 'jpg-to-webp',
+    name: 'JPG to WebP Converter',
+    slug: '/image/jpg-to-webp',
+    desc: 'Convert JPG/PNG to next-gen WebP to shrink image size up to 80% for web speed.',
+    category: 'image',
+    tags: ['image', 'compress', 'convert-to'],
+    icon: Zap,
+    badge: 'Core Vitals',
+    colorClass: 'text-emerald-600',
+    iconBgClass: 'bg-emerald-50 text-emerald-600 border-emerald-100 group-hover:bg-emerald-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-emerald-600',
+    badgeStyle: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+  },
+  {
+    id: 'compress-pdf-to-100kb',
+    name: 'Compress PDF to 100KB',
+    slug: '/pdf/compress-to-100kb',
+    desc: 'Reduce PDF document file size under 100KB for government and sarkari exam portals.',
+    category: 'pdf',
+    tags: ['compress', 'exam'],
+    icon: Minimize2,
+    badge: 'Target 100KB',
+    colorClass: 'text-blue-600',
+    iconBgClass: 'bg-blue-50 text-blue-600 border-blue-100 group-hover:bg-blue-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-blue-600',
+    badgeStyle: 'bg-blue-50 text-blue-700 border-blue-200',
+  },
+  {
+    id: 'compress-pdf-to-1mb',
+    name: 'Compress PDF to 1MB',
+    slug: '/pdf/compress-to-1mb',
+    desc: 'Compress large multi-page PDF documents under 1MB for email attachments and uploads.',
+    category: 'pdf',
+    tags: ['compress'],
+    icon: Minimize2,
+    badge: 'Target 1MB',
+    colorClass: 'text-blue-600',
+    iconBgClass: 'bg-blue-50 text-blue-600 border-blue-100 group-hover:bg-blue-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-blue-600',
+    badgeStyle: 'bg-blue-50 text-blue-700 border-blue-200',
+  },
+  {
+    id: 'electricity-bill-calculator',
+    name: 'Electricity Bill Calculator',
+    slug: '/utility/electricity-bill-calculator',
+    desc: 'Calculate monthly electricity bill with state tariff slabs (MSEDCL, Delhi BSES, UPPCL, BESCOM) & appliances.',
+    category: 'utility',
+    tags: ['utility'],
+    icon: Calculator,
+    badge: 'State Slabs',
+    colorClass: 'text-amber-600',
+    iconBgClass: 'bg-amber-50 text-amber-600 border-amber-100 group-hover:bg-amber-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-amber-600',
+    badgeStyle: 'bg-amber-50 text-amber-700 border-amber-200',
+  },
+  {
+    id: 'url-encoder-decoder',
+    name: 'URL Encoder & Decoder',
+    slug: '/utility/url-encoder-decoder',
+    desc: 'Encode, decode URLs and URI query strings with RFC 3986 support and query parameter inspector.',
+    category: 'utility',
+    tags: ['utility'],
+    icon: Code2,
+    badge: 'RFC 3986',
+    colorClass: 'text-violet-600',
+    iconBgClass: 'bg-violet-50 text-violet-600 border-violet-100 group-hover:bg-violet-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-violet-600',
+    badgeStyle: 'bg-violet-50 text-violet-700 border-violet-200',
+  },
+  {
+    id: 'hash-generator',
+    name: 'Hash Generator (MD5 / SHA-256)',
+    slug: '/utility/hash-generator',
+    desc: 'Generate MD5, SHA-1, SHA-256, SHA-512 hashes for text and binary files in real-time.',
+    category: 'utility',
+    tags: ['utility'],
+    icon: Hash,
+    badge: 'Checksum',
+    colorClass: 'text-slate-600',
+    iconBgClass: 'bg-slate-50 text-slate-600 border-slate-100 group-hover:bg-slate-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-slate-600',
+    badgeStyle: 'bg-slate-50 text-slate-700 border-slate-200',
+  },
+  {
     id: 'neet-photo-resizer',
     name: 'NEET Photo Resizer (Passport & Postcard)',
     slug: '/tools/neet-photo-resizer',
@@ -1050,16 +1190,18 @@ export function LandingToolGrid() {
 
   const filteredTools = useMemo(() => {
     return ALL_TOOLS.filter((tool) => {
-      const matchesFilter =
-        activeFilter === 'all' ? true : tool.tags.includes(activeFilter as any);
-
       const q = searchQuery.toLowerCase().trim();
+      // When searching, search across all tools; otherwise filter by active category pill
+      const matchesFilter =
+        q ? true : (activeFilter === 'all' ? true : tool.tags.includes(activeFilter as any));
+
       const matchesSearch =
         !q ||
         tool.name.toLowerCase().includes(q) ||
         tool.desc.toLowerCase().includes(q) ||
         tool.slug.toLowerCase().includes(q) ||
-        (tool.badge && tool.badge.toLowerCase().includes(q));
+        (tool.badge && tool.badge.toLowerCase().includes(q)) ||
+        (Boolean((tool as any).keywords) && (tool as any).keywords.some((k: string) => k.toLowerCase().includes(q)));
 
       return matchesFilter && matchesSearch;
     });
