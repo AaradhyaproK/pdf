@@ -54,6 +54,8 @@ const DEFAULT_POST_IMAGES: Record<string, string> = {
   'aadhaar-card-print-size-guide': '/blog/aadhaar-card-print.webp',
   'old-vs-new-tax-regime-calculator-guide': '/blog/income-tax-calculator.webp',
   'ctc-to-in-hand-salary-calculator-guide': '/blog/salary-calculator.webp',
+  'ibps-sbi-po-photo-signature-guidelines': '/blog/ibps-sbi-po-photo-guide.jpg',
+  'how-to-calculate-electricity-bill-from-meter-reading': '/blog/electricity-bill-guide.jpg',
 };
 
 // Helper function to extract FAQs for Google FAQPage Schema
