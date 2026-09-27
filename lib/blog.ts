@@ -56,6 +56,8 @@ const DEFAULT_POST_IMAGES: Record<string, string> = {
   'ctc-to-in-hand-salary-calculator-guide': '/blog/salary-calculator.webp',
   'ibps-sbi-po-photo-signature-guidelines': '/blog/ibps-sbi-po-photo-guide.jpg',
   'how-to-calculate-electricity-bill-from-meter-reading': '/blog/electricity-bill-guide.jpg',
+  'jee-main-cuet-photo-signature-requirements': '/blog/jee-cuet-photo-guide.jpg',
+  'how-to-compress-pdf-to-100kb-without-losing-quality': '/blog/compress-pdf-100kb-guide.jpg',
 };
 
 // Helper function to extract FAQs for Google FAQPage Schema
