@@ -6,7 +6,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat&logo=typescript)](https://www.typescriptlang.org/)
 [![WebAssembly](https://img.shields.io/badge/Engine-WebAssembly%20%2B%20Canvas%20GPU-purple?style=flat)](https://www.filezenith.com)
 [![Privacy](https://img.shields.io/badge/Privacy-100%25%20In--Browser%20(Zero%20Uploads)-emerald?style=flat)](https://www.filezenith.com/security)
-[![License](https://img.shields.io/badge/License-MIT-amber.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-Proprietary%20(All%20Rights%20Reserved)-red.svg)](LICENSE)
 
 **[FileZenith](https://www.filezenith.com)** is an all-in-one private online file studio engineered with Next.js 16, TypeScript, WebAssembly, and Canvas GPU acceleration. Unlike traditional file conversion sites that upload your sensitive documents to remote servers, **FileZenith executes 100% of its file processing locally inside your browser's RAM.**
 
@@ -80,4 +80,6 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to view the 
 
 ## 📄 License
 
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+This software is **Proprietary & Confidential**. All rights reserved. Copyright &copy; 2026 [Aaradhya Pathak](https://github.com/AaradhyaproK). 
+
+Unauthorized copying, cloning, distribution, or commercial deployment of this codebase or its algorithms is strictly prohibited. See the [LICENSE](LICENSE) file for complete legal terms.
