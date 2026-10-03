@@ -1217,10 +1217,10 @@ export default function PDFEditPage() {
   return (
     <ToolLayout
       slug="/pdf/edit"
-      title="Interactive PDF Editor"
+      title="Edit PDF Online (Interactive PDF Editor)"
       subtitle="Auto-detect existing text to erase and edit in matching font size, or drag manually to erase & type replacement text live on page."
       badgeText="Seamless Whiteout & Authentic Text Engine"
-      noCardWrapper={true}
+      noCardWrapper={Boolean(file)}
     >
       {!file ? (
         <div className="max-w-2xl mx-auto p-8 sm:p-12 border-2 border-dashed border-slate-300 hover:border-indigo-500 rounded-3xl bg-white shadow-sm transition-all text-center space-y-4 my-6">

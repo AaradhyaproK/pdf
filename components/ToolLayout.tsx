@@ -14,6 +14,7 @@ export interface ToolLayoutProps {
   subtitle?: string;
   badgeText?: string;
   noCardWrapper?: boolean;
+  hideTitle?: boolean;
   children: ReactNode;
 }
 
@@ -23,6 +24,7 @@ export function ToolLayout({
   subtitle,
   badgeText = '100% Client-Side Engine',
   noCardWrapper = false,
+  hideTitle = false,
   children,
 }: ToolLayoutProps) {
   // Live Visitor Real-Time Heartbeat Registration
@@ -50,8 +52,8 @@ export function ToolLayout({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 items-start">
           {/* Main Content Workspace */}
           <div className="lg:col-span-8 space-y-3 sm:space-y-6 min-w-0">
-            {/* Tool Header Title & Subtitle Container (Skipped on noCardWrapper when not needed) */}
-            {title && !noCardWrapper && (
+            {/* Tool Header Title & Subtitle Container */}
+            {title && !hideTitle && (
               <div className="p-3.5 sm:p-0 rounded-2xl sm:rounded-none bg-white sm:bg-transparent border sm:border-none border-slate-200/90 sm:shadow-none shadow-2xs space-y-1.5 sm:space-y-2">
                 <h1 className="text-lg sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-snug sm:leading-tight">
                   {title}

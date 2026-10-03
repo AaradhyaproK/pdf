@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { matchTool, rankToolsForSearch, isPicsToPdfQuery } from '@/lib/tool-search';
 import {
   FileText,
   Image as ImageIcon,
@@ -70,10 +71,12 @@ const PDF_TOOLS = [
   { name: 'Compress PDF to 1MB', slug: '/pdf/compress-to-1mb', desc: 'Compress multi-page PDF under 1MB for email attachments', icon: Minimize2, badge: '1MB', category: 'pdf', catLabel: 'PDF Studio', keywords: ['compress pdf to 1mb', '1mb', 'email', 'attachment', 'admission'] },
   { name: 'PDF to Word (DOCX)', slug: '/pdf/pdf-to-word', desc: 'Convert PDF to editable Word document', icon: FileText, badge: 'Popular', category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'Word to PDF Converter', slug: '/pdf/word-to-pdf', desc: 'Convert Word DOCX to crisp PDF', icon: FileCode, badge: 'New', category: 'pdf', catLabel: 'PDF Studio' },
-  { name: 'PDF to JPG / PNG', slug: '/pdf/to-image', desc: 'Convert PDF pages into high-res images', icon: FileImage, category: 'pdf', catLabel: 'PDF Studio' },
+  { name: 'PDF to JPG / PNG', slug: '/pdf/to-image', desc: 'Convert PDF pages into high-res images', icon: FileImage, category: 'pdf', catLabel: 'PDF Studio', keywords: ['pdf to jpg', 'pdf to png', 'pdf to image', 'convert pdf to jpg'] },
+  { name: 'Pics to PDF (JPG to PDF)', slug: '/image/pics-to-pdf', desc: 'Convert JPG, PNG, photos & camera scans into PDF', icon: Camera, badge: 'Popular', category: 'pdf', catLabel: 'PDF Studio', keywords: ['jpg to pdf', 'jpeg to pdf', 'png to pdf', 'image to pdf', 'images to pdf', 'photo to pdf', 'photos to pdf', 'pics to pdf', 'pictures to pdf', 'pic to pdf', 'picture to pdf', 'convert photo to pdf', 'convert jpg to pdf', 'convert png to pdf', 'jpg2pdf', 'png2pdf', 'jpeg2pdf', 'scan to pdf', 'heic to pdf', 'webp to pdf', 'photo pdf', 'jpg pdf', 'png pdf', 'camera to pdf'] },
 ];
 
 const IMAGE_TOOLS = [
+  { name: 'Pics to PDF (JPG to PDF)', slug: '/image/pics-to-pdf', desc: 'Turn photos, scans, JPG, PNG & WebP into a clean PDF', icon: Camera, badge: 'Popular', category: 'image', catLabel: 'Image Studio', keywords: ['jpg to pdf', 'jpeg to pdf', 'png to pdf', 'image to pdf', 'images to pdf', 'photo to pdf', 'photos to pdf', 'pics to pdf', 'pictures to pdf', 'pic to pdf', 'picture to pdf', 'convert photo to pdf', 'convert jpg to pdf', 'convert png to pdf', 'jpg2pdf', 'png2pdf', 'jpeg2pdf', 'scan to pdf', 'heic to pdf', 'webp to pdf', 'photo pdf', 'jpg pdf', 'png pdf', 'camera to pdf'] },
   { name: 'WebP to JPG Converter', slug: '/image/webp-to-jpg', desc: 'Convert WebP images to JPG with white background fill', icon: FileImage, badge: 'Bulk', category: 'image', catLabel: 'Image Studio', keywords: ['webp to jpg', 'webp', 'jpeg', 'convert webp', 'save webp as jpg'] },
   { name: 'JPG to WebP Converter', slug: '/image/jpg-to-webp', desc: 'Convert JPG/PNG to modern WebP (up to 80% smaller)', icon: Zap, badge: 'Web Vitals', category: 'image', catLabel: 'Image Studio', keywords: ['jpg to webp', 'png to webp', 'webp', 'compress', 'speed', 'core web vitals'] },
   { name: 'Railway RRB Photo Resizer', slug: '/tools/railway-rrb-photo-resizer', desc: 'RRB NTPC, ALP, Group D 20-50KB photo resizer (320x240 px)', icon: UserCheck, badge: 'RRB 20-50KB', category: 'image', catLabel: 'Image Studio', keywords: ['railway', 'rrb', 'ntpc', 'alp', 'group d', 'technician', 'railway photo resizer'] },
@@ -84,7 +87,6 @@ const IMAGE_TOOLS = [
   { name: 'Image Color Picker & Palette', slug: '/image/color-palette-extractor', desc: 'Extract hex colors from photos', icon: Palette, badge: 'Design', category: 'image', catLabel: 'Image Studio' },
   { name: 'Image Cropper & Aspect', slug: '/image/crop', desc: 'Crop 1:1, 16:9, 4:3, rotate & flip', icon: Crop, badge: 'New', category: 'image', catLabel: 'Image Studio' },
   { name: 'SVG Vector Converter', slug: '/image/svg-converter', desc: 'Convert SVG to 2x/4x PNG & JPG', icon: FileCode, badge: 'New', category: 'image', catLabel: 'Image Studio' },
-  { name: 'Pics to PDF Converter', slug: '/image/pics-to-pdf', desc: 'Turn photos & scans into PDF', icon: Camera, badge: 'Popular', category: 'image', catLabel: 'Image Studio' },
   { name: 'PNG to JPG Converter', slug: '/image/png-to-jpg', desc: 'Convert PNG to JPG with background color', icon: FileImage, badge: 'Bulk', category: 'image', catLabel: 'Image Studio' },
   { name: 'JPG to PNG Converter', slug: '/image/jpg-to-png', desc: 'Lossless quality JPG to PNG conversion', icon: FileImage, category: 'image', catLabel: 'Image Studio' },
   { name: 'Compress Image (Target KB)', slug: '/image/compress', desc: 'Compress to <20KB, <50KB, <100KB', icon: Minimize2, badge: 'Target KB', category: 'image', catLabel: 'Image Studio' },
@@ -182,20 +184,24 @@ export function Navbar() {
 
   const isActive = (path: string) => pathname?.startsWith(path);
 
-  // Filter tools based on search query and category
-  const filteredTools = ALL_SEARCHABLE_TOOLS.filter((t) => {
-    const matchesCategory = selectedCategory === 'all' || t.category === selectedCategory;
+  // Filter tools based on search query and category with smart ranking & deduplication
+  const filteredTools = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
-    const matchesQuery =
-      !q ||
-      t.name.toLowerCase().includes(q) ||
-      t.desc.toLowerCase().includes(q) ||
-      t.slug.toLowerCase().includes(q) ||
-      (t.badge && t.badge.toLowerCase().includes(q)) ||
-      (Boolean((t as any).keywords) && (t as any).keywords.some((k: string) => k.toLowerCase().includes(q)));
+    const isImageToPdf = isPicsToPdfQuery(q);
 
-    return matchesCategory && matchesQuery;
-  });
+    // When 'all' category is chosen, deduplicate tools by slug
+    const baseTools =
+      selectedCategory === 'all'
+        ? ALL_SEARCHABLE_TOOLS.filter(
+            (tool, index, self) => index === self.findIndex((t) => t.slug === tool.slug)
+          )
+        : ALL_SEARCHABLE_TOOLS.filter(
+            (t) => t.category === selectedCategory || (isImageToPdf && t.slug === '/image/pics-to-pdf')
+          );
+
+    const matches = baseTools.filter((t) => matchTool(t, q));
+    return rankToolsForSearch(matches, q);
+  }, [searchQuery, selectedCategory]);
 
   // Track scroll position
   useEffect(() => {
@@ -414,7 +420,7 @@ export function Navbar() {
 
           <div className="p-2.5 bg-slate-50 border-b border-slate-200/60 flex items-center gap-1.5 overflow-x-auto no-scrollbar shrink-0">
             {[
-              { id: 'all', label: 'All Tools', count: ALL_SEARCHABLE_TOOLS.length },
+              { id: 'all', label: 'All Tools', count: ALL_SEARCHABLE_TOOLS.filter((tool, idx, self) => idx === self.findIndex((t) => t.slug === tool.slug)).length },
               { id: 'pdf', label: 'PDF Studio', count: PDF_TOOLS.length },
               { id: 'image', label: 'Image Studio', count: IMAGE_TOOLS.length },
               { id: 'utility', label: 'Utilities', count: UTILITY_TOOLS.length },
@@ -502,11 +508,21 @@ export function Navbar() {
                         <p className="text-[11px] text-slate-500 truncate mt-0.5 font-medium">{tool.desc}</p>
                       </div>
                     </div>
-                    {tool.badge && (
-                      <span className="text-[9px] font-black px-2 py-0.5 rounded-full bg-white text-slate-700 border border-slate-200 shrink-0 ml-2 shadow-2xs">
-                        {tool.badge}
-                      </span>
-                    )}
+                    {(() => {
+                      const isRecommended = isPicsToPdfQuery(searchQuery) && tool.slug === '/image/pics-to-pdf';
+                      const badgeText = isRecommended ? 'Recommended' : tool.badge;
+                      return badgeText ? (
+                        <span
+                          className={`text-[9px] font-black px-2 py-0.5 rounded-full shrink-0 ml-2 shadow-2xs border ${
+                            isRecommended
+                              ? 'bg-emerald-500 text-white border-emerald-600 animate-pulse'
+                              : 'bg-white text-slate-700 border-slate-200'
+                          }`}
+                        >
+                          {badgeText}
+                        </span>
+                      ) : null;
+                    })()}
                   </Link>
                 );
               })
@@ -837,7 +853,7 @@ export function Navbar() {
             <div className="absolute top-full right-0 mt-2 w-[480px] lg:w-[540px] bg-white/95 backdrop-blur-2xl border border-slate-200/90 rounded-3xl shadow-2xl z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-150">
               <div className="p-3 bg-slate-50/80 border-b border-slate-200/70 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
                 {[
-                  { id: 'all', label: 'All Tools', count: ALL_SEARCHABLE_TOOLS.length },
+                  { id: 'all', label: 'All Tools', count: ALL_SEARCHABLE_TOOLS.filter((tool, idx, self) => idx === self.findIndex((t) => t.slug === tool.slug)).length },
                   { id: 'pdf', label: 'PDF Studio', count: PDF_TOOLS.length },
                   { id: 'image', label: 'Image Studio', count: IMAGE_TOOLS.length },
                   { id: 'utility', label: 'Utilities', count: UTILITY_TOOLS.length },
@@ -936,17 +952,23 @@ export function Navbar() {
                               >
                                 {tool.name}
                               </span>
-                              {tool.badge && (
-                                <span
-                                  className={`text-[9px] font-black px-1.5 py-0.2 rounded shrink-0 border ${
-                                    isSelected
-                                      ? 'bg-white/20 text-white border-white/30'
-                                      : 'bg-slate-100 text-slate-700 border-slate-200'
-                                  }`}
-                                >
-                                  {tool.badge}
-                                </span>
-                              )}
+                              {(() => {
+                                const isRecommended = isPicsToPdfQuery(searchQuery) && tool.slug === '/image/pics-to-pdf';
+                                const badgeText = isRecommended ? 'Recommended' : tool.badge;
+                                return badgeText ? (
+                                  <span
+                                    className={`text-[9px] font-black px-1.5 py-0.2 rounded shrink-0 border ${
+                                      isRecommended
+                                        ? 'bg-emerald-500 text-white border-emerald-600 animate-pulse'
+                                        : isSelected
+                                        ? 'bg-white/20 text-white border-white/30'
+                                        : 'bg-slate-100 text-slate-700 border-slate-200'
+                                    }`}
+                                  >
+                                    {badgeText}
+                                  </span>
+                                ) : null;
+                              })()}
                             </div>
                             <p
                               className={`text-[11px] truncate mt-0.5 font-medium ${

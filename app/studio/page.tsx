@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { ToolLayout } from '@/components/ToolLayout';
 import { toast } from 'sonner';
+import { matchTool, rankToolsForSearch, isPicsToPdfQuery } from '@/lib/tool-search';
 import {
   Edit3,
   Minimize2,
@@ -43,16 +44,16 @@ export const MASTER_TOOLS = [
   { id: 'pdf-to-word', name: 'PDF to Word (DOCX)', slug: '/pdf/pdf-to-word', desc: 'Convert PDF to editable Word document', icon: FileText, category: 'pdf', badge: 'Popular' },
   { id: 'word-to-pdf', name: 'Word to PDF Converter', slug: '/pdf/word-to-pdf', desc: 'Convert Word DOCX to crisp PDF', icon: FileText, category: 'pdf', badge: 'New' },
   { id: 'pdf-to-image', name: 'PDF to JPG / PNG', slug: '/pdf/to-image', desc: 'Convert PDF pages into high-res images', icon: ImageIcon, category: 'pdf' },
-  { id: 'pics-to-pdf', name: 'Pics to PDF Converter', slug: '/image/pics-to-pdf', desc: 'Turn photos & scans into PDF', icon: Camera, category: 'image', badge: 'Popular' },
+  { id: 'pics-to-pdf', name: 'Pics to PDF (JPG / PNG to PDF)', slug: '/image/pics-to-pdf', desc: 'Turn photos, scans, JPG & PNG into PDF', icon: Camera, category: 'image', badge: 'Popular', keywords: ['jpg to pdf', 'jpeg to pdf', 'png to pdf', 'image to pdf', 'photo to pdf', 'photos to pdf', 'pics to pdf', 'pic to pdf', 'convert photo to pdf', 'convert jpg to pdf', 'jpg2pdf'] },
   { id: 'png-to-jpg', name: 'PNG to JPG Converter', slug: '/image/png-to-jpg', desc: 'Bulk convert PNG to JPG with background color', icon: FileImage, category: 'image', badge: 'Bulk' },
-  { id: 'png-to-pdf', name: 'PNG to PDF Converter', slug: '/image/png-to-pdf', desc: 'Combine PNG images into a PDF document', icon: FileText, category: 'image' },
+  { id: 'png-to-pdf', name: 'PNG to PDF Converter', slug: '/image/png-to-pdf', desc: 'Combine PNG images into a PDF document', icon: FileText, category: 'image', keywords: ['png to pdf', 'png2pdf', 'image to pdf'] },
   { id: 'jpg-to-png', name: 'JPG to PNG Converter', slug: '/image/jpg-to-png', desc: 'Lossless quality JPG to PNG conversion', icon: FileImage, category: 'image' },
   { id: 'compress-img', name: 'Compress Image (Target KB)', slug: '/image/compress', desc: 'Compress to <20KB, <50KB, <100KB', icon: Minimize2, category: 'image', badge: 'Target KB' },
   { id: 'passport-maker', name: 'Passport Photo Maker', slug: '/image/passport-maker', desc: 'Crop to US, UK, Schengen & India specs', icon: UserCheck, category: 'image', badge: 'Presets' },
   { id: 'remove-bg', name: 'AI Background Remover', slug: '/image/remove-background', desc: 'Remove photo backgrounds 100% locally', icon: Scissors, category: 'image', badge: 'AI' },
   { id: 'heic-to-jpg', name: 'Apple HEIC to JPG', slug: '/image/convert-heic', desc: 'Convert iPhone HEIC photos to JPG', icon: Smartphone, category: 'image' },
   { id: 'resize-img', name: 'Resize Image (Pixels / %)', slug: '/image/resize', desc: 'Resize image dimensions cleanly', icon: ImageIcon, category: 'image' },
-  { id: 'to-pdf', name: 'Image to PDF Converter', slug: '/image/to-pdf', desc: 'Combine JPG, PNG, WebP into PDF', icon: FileText, category: 'image' },
+  { id: 'to-pdf', name: 'Image to PDF Converter', slug: '/image/pics-to-pdf', desc: 'Combine JPG, PNG, WebP into PDF', icon: FileText, category: 'image', keywords: ['jpg to pdf', 'png to pdf', 'image to pdf'] },
 ];
 
 export default function FlagshipStudioPage() {
@@ -63,11 +64,16 @@ export default function FlagshipStudioPage() {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
 
-  const filteredTools = MASTER_TOOLS.filter((tool) => {
-    const matchesCategory = activeCategory === 'all' || tool.category === activeCategory;
-    const matchesQuery = tool.name.toLowerCase().includes(searchQuery.toLowerCase()) || tool.desc.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesQuery;
-  });
+  const filteredTools = useMemo(() => {
+    const isImageToPdf = isPicsToPdfQuery(searchQuery);
+    const categoryTools = MASTER_TOOLS.filter((tool) => {
+      if (activeCategory === 'all') return true;
+      if (isImageToPdf && (tool.id === 'pics-to-pdf' || tool.id === 'to-pdf')) return true;
+      return tool.category === activeCategory;
+    });
+    const matches = categoryTools.filter((tool) => matchTool(tool, searchQuery));
+    return rankToolsForSearch(matches, searchQuery);
+  }, [activeCategory, searchQuery]);
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selected = Array.from(e.target.files || []);
@@ -248,11 +254,17 @@ export default function FlagshipStudioPage() {
                         <Icon className="w-5 h-5" />
                       </div>
 
-                      {tool.badge && (
-                        <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">
-                          {tool.badge}
-                        </span>
-                      )}
+                      {(() => {
+                        const isRecommended = isPicsToPdfQuery(searchQuery) && (tool.id === 'pics-to-pdf' || tool.id === 'to-pdf');
+                        const badgeText = isRecommended ? 'Recommended' : tool.badge;
+                        return badgeText ? (
+                          <span className={`text-[10px] font-black px-2 py-0.5 rounded-full ${
+                            isRecommended ? 'bg-emerald-500 text-white animate-pulse' : 'bg-slate-100 text-slate-700'
+                          }`}>
+                            {badgeText}
+                          </span>
+                        ) : null;
+                      })()}
                     </div>
 
                     <div>

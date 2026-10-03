@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
+import { matchTool, rankToolsForSearch, isPicsToPdfQuery } from '@/lib/tool-search';
 import {
   FileText,
   Edit3,
@@ -66,6 +67,7 @@ export interface ToolItem {
   colorClass: string;
   iconBgClass: string;
   hoverTitleClass: string;
+  keywords?: string[];
 }
 
 export const ALL_TOOLS: ToolItem[] = [
@@ -1008,9 +1010,9 @@ export const ALL_TOOLS: ToolItem[] = [
   // --- IMAGE TOOLS (Sky Blue Theme) ---
   {
     id: 'pics-to-pdf',
-    name: 'Pics to PDF',
+    name: 'Pics to PDF (JPG / PNG to PDF)',
     slug: '/image/pics-to-pdf',
-    desc: 'Convert photos & scans into a single clean PDF.',
+    desc: 'Convert JPG, PNG, photos & camera scans into a single clean PDF.',
     category: 'image',
     tags: ['convert-to', 'image'],
     icon: Camera,
@@ -1019,6 +1021,32 @@ export const ALL_TOOLS: ToolItem[] = [
     iconBgClass: 'bg-sky-50 text-sky-600 border-sky-100 group-hover:bg-sky-600 group-hover:text-white',
     hoverTitleClass: 'group-hover:text-sky-600',
     badgeStyle: 'bg-sky-50 text-sky-700 border-sky-200',
+    keywords: [
+      'jpg to pdf',
+      'jpeg to pdf',
+      'png to pdf',
+      'image to pdf',
+      'images to pdf',
+      'photo to pdf',
+      'photos to pdf',
+      'pic to pdf',
+      'pics to pdf',
+      'picture to pdf',
+      'pictures to pdf',
+      'convert photo to pdf',
+      'convert jpg to pdf',
+      'convert png to pdf',
+      'jpg2pdf',
+      'png2pdf',
+      'jpeg2pdf',
+      'scan to pdf',
+      'camera to pdf',
+      'heic to pdf',
+      'webp to pdf',
+      'photo pdf',
+      'jpg pdf',
+      'png pdf',
+    ],
   },
   {
     id: 'png-to-jpg',
@@ -1189,22 +1217,15 @@ export function LandingToolGrid() {
   const [activeFilter, setActiveFilter] = useState<CategoryFilter>('all');
 
   const filteredTools = useMemo(() => {
-    return ALL_TOOLS.filter((tool) => {
-      const q = searchQuery.toLowerCase().trim();
-      // When searching, search across all tools; otherwise filter by active category pill
-      const matchesFilter =
-        q ? true : (activeFilter === 'all' ? true : tool.tags.includes(activeFilter as any));
+    const q = searchQuery.toLowerCase().trim();
+    if (!q) {
+      return activeFilter === 'all'
+        ? ALL_TOOLS
+        : ALL_TOOLS.filter((tool) => tool.tags.includes(activeFilter as any));
+    }
 
-      const matchesSearch =
-        !q ||
-        tool.name.toLowerCase().includes(q) ||
-        tool.desc.toLowerCase().includes(q) ||
-        tool.slug.toLowerCase().includes(q) ||
-        (tool.badge && tool.badge.toLowerCase().includes(q)) ||
-        (Boolean((tool as any).keywords) && (tool as any).keywords.some((k: string) => k.toLowerCase().includes(q)));
-
-      return matchesFilter && matchesSearch;
-    });
+    const matches = ALL_TOOLS.filter((tool) => matchTool(tool, q));
+    return rankToolsForSearch(matches, q);
   }, [searchQuery, activeFilter]);
 
   const categoryCounts = useMemo(() => {
@@ -1389,6 +1410,7 @@ export function LandingToolGrid() {
           >
             {filteredTools.map((tool) => {
               const IconComp = tool.icon;
+              const isRecommended = isPicsToPdfQuery(searchQuery) && tool.id === 'pics-to-pdf';
               return (
                 <motion.div
                   key={tool.id}
@@ -1397,7 +1419,11 @@ export function LandingToolGrid() {
                 >
                   <Link
                     href={tool.slug}
-                    className="group relative bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-xl hover:border-rose-300 transition-all duration-200 flex flex-col justify-between space-y-3 sm:space-y-4 h-full"
+                    className={`group relative bg-white border ${
+                      isRecommended
+                        ? 'border-emerald-300 ring-2 ring-emerald-400/25 shadow-lg'
+                        : 'border-slate-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.04)]'
+                    } rounded-2xl sm:rounded-3xl p-4 sm:p-6 hover:shadow-xl hover:border-rose-300 transition-all duration-200 flex flex-col justify-between space-y-3 sm:space-y-4 h-full`}
                   >
                     <div className="space-y-3 sm:space-y-4">
                       {/* Top Row: Icon Container & Badge */}
@@ -1408,15 +1434,25 @@ export function LandingToolGrid() {
                           <IconComp className="w-5 h-5 sm:w-6 sm:h-6 transition-transform group-hover:scale-110" />
                         </div>
 
-                        {tool.badge && (
-                          <span
-                            className={`px-2 py-0.5 sm:px-2.5 sm:py-0.5 rounded-full text-[9px] sm:text-[10px] font-extrabold tracking-tight border shrink-0 ${
-                              tool.badgeStyle || 'bg-slate-100 text-slate-700 border-slate-200'
-                            }`}
-                          >
-                            {tool.badge}
-                          </span>
-                        )}
+                        {(() => {
+                          if (isRecommended) {
+                            return (
+                              <span className="px-2 py-0.5 sm:px-2.5 sm:py-0.5 rounded-full text-[9px] sm:text-[10px] font-extrabold tracking-tight border shrink-0 bg-emerald-50 text-emerald-700 border-emerald-300 shadow-xs flex items-center gap-1 animate-pulse">
+                                <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-emerald-600" />
+                                Recommended
+                              </span>
+                            );
+                          }
+                          return tool.badge ? (
+                            <span
+                              className={`px-2 py-0.5 sm:px-2.5 sm:py-0.5 rounded-full text-[9px] sm:text-[10px] font-extrabold tracking-tight border shrink-0 ${
+                                tool.badgeStyle || 'bg-slate-100 text-slate-700 border-slate-200'
+                              }`}
+                            >
+                              {tool.badge}
+                            </span>
+                          ) : null;
+                        })()}
                       </div>
 
                       {/* Title & Description */}

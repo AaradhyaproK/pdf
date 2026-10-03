@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { matchTool, rankToolsForSearch, isPicsToPdfQuery } from '@/lib/tool-search';
 import {
   Home,
   FileText,
@@ -67,6 +68,7 @@ const PDF_TOOLS = [
   { name: 'PDF to Word (DOCX)', slug: '/pdf/pdf-to-word', desc: 'Convert PDF to editable Word', icon: FileText, badge: 'Popular' },
   { name: 'Word to PDF Converter', slug: '/pdf/word-to-pdf', desc: 'Convert Word DOCX to PDF', icon: FileCode, badge: 'New' },
   { name: 'PDF to JPG / PNG', slug: '/pdf/to-image', desc: 'Convert PDF to images', icon: ImageIcon },
+  { name: 'Pics to PDF (JPG to PDF)', slug: '/image/pics-to-pdf', desc: 'Turn photos, JPG & PNG to PDF', icon: Camera, badge: 'Popular', keywords: ['jpg to pdf', 'jpeg to pdf', 'png to pdf', 'image to pdf', 'photo to pdf', 'photos to pdf', 'pics to pdf', 'pic to pdf', 'convert photo to pdf', 'convert jpg to pdf', 'jpg2pdf', 'png2pdf'] },
 ];
 
 const IMAGE_TOOLS = [
@@ -80,7 +82,7 @@ const IMAGE_TOOLS = [
   { name: 'Image Cropper & Aspect', slug: '/image/crop', desc: 'Crop 1:1, 16:9, rotate & flip', icon: CropIcon, badge: 'New' },
   { name: 'Color Palette Extractor', slug: '/image/color-palette-extractor', desc: 'Extract HEX color codes from photos', icon: Palette, badge: 'Design' },
   { name: 'SVG Vector Converter', slug: '/image/svg-converter', desc: 'Convert SVG to 2x/4x PNG/JPG', icon: FileCode, badge: 'New' },
-  { name: 'Pics to PDF Converter', slug: '/image/pics-to-pdf', desc: 'Turn photos to PDF', icon: Camera, badge: 'Popular' },
+  { name: 'Pics to PDF (JPG to PDF)', slug: '/image/pics-to-pdf', desc: 'Turn photos, JPG & PNG to PDF', icon: Camera, badge: 'Popular', keywords: ['jpg to pdf', 'jpeg to pdf', 'png to pdf', 'image to pdf', 'photo to pdf', 'photos to pdf', 'pics to pdf', 'pic to pdf', 'convert photo to pdf', 'convert jpg to pdf', 'jpg2pdf', 'png2pdf'] },
   { name: 'PNG to JPG Converter', slug: '/image/png-to-jpg', desc: 'Convert PNG to JPG', icon: FileImage, badge: 'Bulk' },
   { name: 'JPG to PNG Converter', slug: '/image/jpg-to-png', desc: 'Lossless quality converter', icon: FileImage },
   { name: 'Compress Image (Target KB)', slug: '/image/compress', desc: 'Compress to <50KB, <100KB', icon: Minimize2, badge: 'Target KB' },
@@ -233,16 +235,13 @@ export function MobileBottomNav() {
     return [];
   };
 
-  const filteredTools = getToolsForCategory().filter((t) => {
+  const filteredTools = useMemo(() => {
+    const rawTools = getToolsForCategory();
     const q = searchQuery.toLowerCase().trim();
-    if (!q) return true;
-    return (
-      t.name.toLowerCase().includes(q) ||
-      t.desc.toLowerCase().includes(q) ||
-      t.slug.toLowerCase().includes(q) ||
-      (t.badge && t.badge.toLowerCase().includes(q))
-    );
-  });
+    if (!q) return rawTools;
+    const matches = rawTools.filter((t) => matchTool(t, q));
+    return rankToolsForSearch(matches, q);
+  }, [activeDrawer, searchQuery]);
 
   return (
     <>
@@ -355,11 +354,17 @@ export function MobileBottomNav() {
                           </p>
                         </div>
                       </div>
-                      {tool.badge && (
-                        <span className={`text-[9px] font-black px-2 py-0.5 rounded-full border shrink-0 ${badgeStyle}`}>
-                          {tool.badge}
-                        </span>
-                      )}
+                      {(() => {
+                        const isRecommended = isPicsToPdfQuery(searchQuery) && tool.slug === '/image/pics-to-pdf';
+                        const badgeText = isRecommended ? 'Recommended' : tool.badge;
+                        return badgeText ? (
+                          <span className={`text-[9px] font-black px-2 py-0.5 rounded-full border shrink-0 ${
+                            isRecommended ? 'bg-emerald-50 text-emerald-700 border-emerald-300 animate-pulse' : badgeStyle
+                          }`}>
+                            {badgeText}
+                          </span>
+                        ) : null;
+                      })()}
                     </Link>
                   );
                 })
