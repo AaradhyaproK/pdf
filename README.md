@@ -75,6 +75,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to view the 
 * **Architect & Developer:** [Aaradhya Pathak](https://github.com/AaradhyaproK)
 * **Website:** [https://www.filezenith.com](https://www.filezenith.com)
 * **Sibling FinTech Project:** [FeeKit](https://www.usefeekit.com)
+* **Inquiries & Partnerships:** [hello@snab.co.in](mailto:hello@snab.co.in)
 
 ---
 
@@ -82,4 +83,4 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to view the 
 
 This software is **Proprietary & Confidential**. All rights reserved. Copyright &copy; 2026 [Aaradhya Pathak](https://github.com/AaradhyaproK). 
 
-Unauthorized copying, cloning, distribution, or commercial deployment of this codebase or its algorithms is strictly prohibited. See the [LICENSE](LICENSE) file for complete legal terms.
+Unauthorized copying, cloning, distribution, or commercial deployment of this codebase or its algorithms is strictly prohibited. For licensing inquiries, contact [hello@snab.co.in](mailto:hello@snab.co.in). See the [LICENSE](LICENSE) file for complete legal terms.
