@@ -147,10 +147,6 @@ const SOCIAL_TOOLS = [
   { name: 'WhatsApp Direct Chat Launcher', slug: '/social/whatsapp-direct-chat', desc: 'Chat without saving phone numbers', icon: MessageSquare, badge: 'wa.me', category: 'social', catLabel: 'Social Studio' },
   { name: 'YouTube 1080p Thumbnail DL', slug: '/social/youtube-thumbnail-downloader', desc: 'Download 1080p HD video cover images', icon: Camera, badge: 'Thumbnails', category: 'social', catLabel: 'Social Studio' },
   { name: 'YouTube Tag Extractor', slug: '/social/youtube-tag-extractor', desc: 'Extract SEO tags & keywords from video URL', icon: Hash, badge: 'SEO', category: 'social', catLabel: 'Social Studio' },
-  { name: 'YouTube Video Downloader', slug: '/social/youtube-downloader', desc: 'Download YouTube videos & MP3', icon: Video, category: 'social', catLabel: 'Social Studio' },
-  { name: 'YouTube Shorts Downloader', slug: '/social/youtube-shorts-downloader', desc: 'Download vertical Shorts videos', icon: Video, category: 'social', catLabel: 'Social Studio' },
-  { name: 'Twitter Video Downloader', slug: '/social/twitter-downloader', desc: 'Save Twitter / X video clips', icon: Download, category: 'social', catLabel: 'Social Studio' },
-  { name: 'LinkedIn Video Downloader', slug: '/social/linkedin-downloader', desc: 'Save LinkedIn posts & videos', icon: Download, category: 'social', catLabel: 'Social Studio' },
 ];
 
 const ALL_SEARCHABLE_TOOLS = [...PDF_TOOLS, ...IMAGE_TOOLS, ...UTILITY_TOOLS, ...SOCIAL_TOOLS];
