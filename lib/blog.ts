@@ -58,6 +58,8 @@ const DEFAULT_POST_IMAGES: Record<string, string> = {
   'how-to-calculate-electricity-bill-from-meter-reading': '/blog/electricity-bill-guide.jpg',
   'jee-main-cuet-photo-signature-requirements': '/blog/jee-cuet-photo-guide.jpg',
   'how-to-compress-pdf-to-100kb-without-losing-quality': '/blog/compress-pdf-100kb-guide.jpg',
+  'how-to-convert-webp-to-jpg-online-free': '/blog/image-compression.jpg',
+  'how-to-compress-pdf-to-1mb-without-losing-quality': '/blog/compress-pdf-100kb-guide.jpg',
 };
 
 // Helper function to extract FAQs for Google FAQPage Schema
