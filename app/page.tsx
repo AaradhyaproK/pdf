@@ -114,12 +114,21 @@ export default function HomePage() {
       {/* Desktop Hero Banner Section (Hidden on Mobile for App Dashboard View) */}
       <section className="hidden sm:block relative overflow-hidden pt-12 pb-12 px-4 sm:px-6 lg:px-8 border-b border-slate-200/80 bg-white">
         <div className="max-w-4xl mx-auto text-center space-y-5 relative z-10">
-          <div className="inline-flex items-center gap-2">
+          <div className="inline-flex flex-wrap items-center justify-center gap-2">
             <PrivacyBadge />
             <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-rose-50 text-rose-700 text-xs font-extrabold border border-rose-200">
               <Sparkles className="w-3.5 h-3.5 text-rose-600" />
               100% Free Mobile & Desktop Studio
             </span>
+            <a
+              href="https://www.producthunt.com/products/filezenith?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-filezenith"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 hover:bg-amber-100 text-amber-900 text-xs font-black border border-amber-200 transition-all hover:scale-105 shadow-2xs"
+            >
+              <span className="text-orange-600 font-black">▲</span>
+              <span>Featured on Product Hunt</span>
+            </a>
           </div>
 
           {/* High-Contrast Bold Headline */}
@@ -146,6 +155,24 @@ export default function HomePage() {
               <ShieldCheck className="w-4 h-4 text-rose-600" />
               Zero Cloud Upload Risk
             </span>
+          </div>
+
+          {/* Official Product Hunt Embed Badge */}
+          <div className="pt-3 flex items-center justify-center">
+            <a
+              href="https://www.producthunt.com/products/filezenith?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-filezenith"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block hover:opacity-95 transition-all hover:scale-105"
+            >
+              <img
+                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1271104&theme=light&t=1791285270103"
+                alt="FileZenith - 100% private in-browser PDF, image & document studio | Product Hunt"
+                width={250}
+                height={54}
+                className="w-[230px] sm:w-[250px] h-auto rounded-xl shadow-xs border border-slate-200/80"
+              />
+            </a>
           </div>
         </div>
       </section>
