@@ -58,7 +58,7 @@ export function HomepageTrustSection() {
           <p className="text-xs sm:text-base text-slate-600 font-medium leading-relaxed max-w-xl mx-auto">
             Traditional cloud PDF tools upload your sensitive documents to remote servers. FileZenith executes 100% of conversions directly on your local device.
           </p>
-          <div className="pt-1">
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/security"
               className="inline-flex items-center gap-1.5 text-xs font-extrabold text-indigo-600 hover:text-indigo-800 hover:underline"
@@ -66,6 +66,21 @@ export function HomepageTrustSection() {
               <span>Learn about 100% Secure Serverless processing</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
+            <span className="hidden sm:inline text-slate-300">•</span>
+            <a
+              href="https://www.producthunt.com/products/filezenith?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-filezenith"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block hover:opacity-95 transition-opacity"
+            >
+              <img
+                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1271104&theme=light&t=1791285270103"
+                alt="FileZenith - 100% private in-browser PDF, image & document studio | Product Hunt"
+                width={250}
+                height={54}
+                className="w-[190px] sm:w-[210px] h-auto rounded-lg shadow-2xs"
+              />
+            </a>
           </div>
         </div>
 

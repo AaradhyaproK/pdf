@@ -40,6 +40,22 @@ export function Footer() {
           <p className="text-xs text-slate-300 leading-relaxed font-medium">
             100% Free Client-Side PDF & Image Studio. All conversion engines execute strictly in your device memory with zero server file uploads.
           </p>
+          <div className="pt-1 flex items-center justify-start">
+            <a
+              href="https://www.producthunt.com/products/filezenith?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-filezenith"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block hover:opacity-95 transition-opacity"
+            >
+              <img
+                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1271104&theme=light&t=1791285270103"
+                alt="FileZenith - 100% private in-browser PDF, image & document studio | Product Hunt"
+                width={250}
+                height={54}
+                className="w-[190px] h-auto rounded-lg"
+              />
+            </a>
+          </div>
         </div>
 
         {/* Mobile Accordion Nav Links (< sm) */}
@@ -171,6 +187,24 @@ export function Footer() {
             <div className="flex items-center gap-2 text-xs text-emerald-700 bg-emerald-50 border border-emerald-200/80 px-3 py-1.5 rounded-full w-fit font-semibold">
               <ShieldCheck className="w-4 h-4 text-emerald-600" />
               <span>Zero Server Guaranteed</span>
+            </div>
+
+            {/* Product Hunt Featured Badge */}
+            <div className="pt-1">
+              <a
+                href="https://www.producthunt.com/products/filezenith?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-filezenith"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block hover:opacity-95 transition-opacity"
+              >
+                <img
+                  src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1271104&theme=light&t=1791285270103"
+                  alt="FileZenith - 100% private in-browser PDF, image & document studio | Product Hunt"
+                  width={250}
+                  height={54}
+                  className="w-[200px] h-auto rounded-lg shadow-2xs"
+                />
+              </a>
             </div>
           </div>
 
