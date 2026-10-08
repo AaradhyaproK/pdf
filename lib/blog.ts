@@ -60,6 +60,7 @@ const DEFAULT_POST_IMAGES: Record<string, string> = {
   'how-to-compress-pdf-to-100kb-without-losing-quality': '/blog/compress-pdf-100kb-guide.jpg',
   'how-to-convert-webp-to-jpg-online-free': '/blog/image-compression.jpg',
   'how-to-compress-pdf-to-1mb-without-losing-quality': '/blog/compress-pdf-100kb-guide.jpg',
+  'how-to-compress-pdf-to-50kb-online': '/blog/compress-pdf-100kb-guide.jpg',
 };
 
 // Helper function to extract FAQs for Google FAQPage Schema
