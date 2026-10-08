@@ -44,6 +44,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/download-app',
     '/privacy',
     '/security',
+    '/studio',
     '/terms',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
