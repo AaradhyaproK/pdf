@@ -266,7 +266,7 @@ export default function AboutPage() {
           </div>
           <div className="flex items-center gap-2.5">
             <Mail className="w-4 h-4 text-indigo-400 shrink-0" />
-            <span>Official Inquiries: contact@snab.co.in</span>
+            <a href="mailto:hello@snab.co.in" className="hover:text-white transition-colors">Official Inquiries: hello@snab.co.in</a>
           </div>
         </div>
       </section>
