@@ -84,6 +84,10 @@ export async function getAdsConfigFromFirestore(): Promise<AdsManagerConfig> {
       if (data.adProvider === 'adsterra') data.adProvider = 'adsense';
       data.adSenseScriptEnabled = true;
       data.monetagEnabled = false;
+      data.headerBannerEnabled = true;
+      data.sidebarEnabled = true;
+      data.toolInFeedEnabled = true;
+      data.bottomStickyEnabled = true;
       return { ...DEFAULT_ADS_CONFIG, ...data };
     }
   } catch {

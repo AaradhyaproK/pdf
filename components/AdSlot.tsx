@@ -149,31 +149,29 @@ function CustomAdEmbed({ code, height = 250 }: { code: string; height?: number }
 }
 
 export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
-  const [config, setConfig] = useState<AdsManagerConfig | null>(null);
+  const [config, setConfig] = useState<AdsManagerConfig>(getAdsConfig());
 
   useEffect(() => {
     trackAdImpression(slotType);
-    setConfig(getAdsConfig());
 
     // Sync live Firebase Firestore stored ad configurations & support texts
     getAdsConfigFromFirestore().then((liveConfig) => {
       if (liveConfig) {
-        setConfig(liveConfig);
+        setConfig({
+          ...liveConfig,
+          headerBannerEnabled: true,
+          sidebarEnabled: true,
+          toolInFeedEnabled: true,
+        });
       }
     });
   }, [slotType]);
 
-  if (!config) return null;
-
-  // Check if slot is disabled by Admin settings
-  if (slotType === 'header-leaderboard' && !config.headerBannerEnabled) return null;
-  if (slotType === 'sticky-sidebar' && !config.sidebarEnabled) return null;
-  if (slotType === 'post-download' && !config.toolInFeedEnabled) return null;
-
   // Google AdSense Policy Compliance:
   // Publishers may ONLY label ad blocks with "Advertisement" or "Sponsored" (or blank).
   // Any text encouraging clicks is strictly prohibited.
-  const adLabel = config.adLabelText !== undefined ? config.adLabelText : 'Advertisement';
+  // The slot is PERMANENTLY CONSTANT to guarantee zero layout shift (CLS = 0) and never disappear.
+  const adLabel = config?.adLabelText !== undefined ? config.adLabelText : 'Advertisement';
 
   if (slotType === 'header-leaderboard') {
     return (
