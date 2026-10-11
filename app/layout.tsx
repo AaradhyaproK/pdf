@@ -144,7 +144,6 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.className} min-h-full flex flex-col bg-slate-50/70 text-slate-900 antialiased`}>
-        <AppSplashScreen />
         <CloudflareAnalytics />
         <AnalyticsTracker />
         <Navbar />
