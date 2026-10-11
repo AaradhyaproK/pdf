@@ -14,6 +14,7 @@ import {
   ExternalLink,
   BookOpen,
   Lock,
+  Globe,
 } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -42,8 +43,14 @@ export default function AboutPage() {
         '@type': 'Person',
         name: 'Aaradhya Pathak',
         jobTitle: 'Founder & Principal Software Engineer',
-        url: 'https://github.com/AaradhyaproK',
-        sameAs: ['https://github.com/AaradhyaproK'],
+        url: 'https://aaradhyadev.vercel.app',
+        email: 'aaradhya1774@gmail.com',
+        sameAs: [
+          'https://aaradhyadev.vercel.app',
+          'https://www.linkedin.com/in/aaradhyapathak17',
+          'https://x.com/aaradhya1774',
+          'https://github.com/AaradhyaproK',
+        ],
       },
       parentOrganization: {
         '@type': 'Organization',
@@ -106,33 +113,78 @@ export default function AboutPage() {
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
               Aaradhya is a software engineer based in Nashik, Maharashtra, India. Frustrated by online converters that gatekeep file processing behind subscription paywalls or secretly store sensitive citizen files on third-party cloud buckets, he architected FileZenith from the ground up using client-side WebAssembly, HTML5 Canvas, and modern Web Crypto standards.
             </p>
-            <div className="pt-1 flex flex-wrap items-center justify-center md:justify-start gap-3 text-xs font-bold">
+            <div className="pt-2 flex flex-wrap items-center justify-center md:justify-start gap-2.5 text-xs font-bold">
+              {/* Portfolio */}
+              <a
+                href="https://aaradhyadev.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200/80 transition-all hover:scale-105 shadow-2xs"
+              >
+                <Globe className="w-3.5 h-3.5 text-indigo-600" />
+                <span>aaradhyadev.vercel.app</span>
+                <ExternalLink className="w-3 h-3 text-indigo-400" />
+              </a>
+
+              {/* LinkedIn */}
+              <a
+                href="https://www.linkedin.com/in/aaradhyapathak17"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#0077b5]/10 hover:bg-[#0077b5]/20 text-[#0077b5] border border-[#0077b5]/30 transition-all hover:scale-105 shadow-2xs"
+              >
+                <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                </svg>
+                <span>LinkedIn</span>
+                <ExternalLink className="w-3 h-3 opacity-60" />
+              </a>
+
+              {/* X / Twitter */}
+              <a
+                href="https://x.com/aaradhya1774"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white border border-slate-700 transition-all hover:scale-105 shadow-2xs"
+              >
+                <svg className="w-3 h-3 fill-current" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+                <span>@aaradhya1774</span>
+                <ExternalLink className="w-3 h-3 opacity-60" />
+              </a>
+
+              {/* GitHub */}
               <a
                 href="https://github.com/AaradhyaproK"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 transition-all hover:scale-105 shadow-2xs"
               >
                 <Code2 className="w-3.5 h-3.5 text-slate-700" />
-                <span>GitHub Profile</span>
+                <span>GitHub</span>
                 <ExternalLink className="w-3 h-3 text-slate-400" />
               </a>
+
+              {/* Personal Email */}
+              <a
+                href="mailto:aaradhya1774@gmail.com"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 transition-all hover:scale-105 shadow-2xs"
+              >
+                <Mail className="w-3.5 h-3.5 text-rose-600" />
+                <span>aaradhya1774@gmail.com</span>
+              </a>
+
+              {/* Snab Studio */}
               <a
                 href="https://www.snab.co.in"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 transition-all hover:scale-105 shadow-2xs"
               >
-                <Award className="w-3.5 h-3.5 text-slate-700" />
+                <Award className="w-3.5 h-3.5 text-amber-600" />
                 <span>Snab Studio</span>
-                <ExternalLink className="w-3 h-3 text-slate-400" />
-              </a>
-              <a
-                href="mailto:contact@snab.co.in"
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 transition-colors"
-              >
-                <Mail className="w-3.5 h-3.5 text-indigo-600" />
-                <span>contact@snab.co.in</span>
+                <ExternalLink className="w-3 h-3 text-amber-500" />
               </a>
             </div>
           </div>
