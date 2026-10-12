@@ -44,9 +44,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
   '/pdf/compress': {
     slug: '/pdf/compress',
-    title: 'Smart Online PDF Compressor',
-    metaTitle: 'Compress PDF Free Online - Reduce File Size | FileZenith',
-    description: 'Compress PDF free online without quality loss. Reduce PDF file size 100% privately in browser with zero server uploads. Shrink your PDF file now!',
+    title: 'Compress PDF Online Free — Reduce File Size Without Quality Loss',
+    metaTitle: 'Compress PDF Online Free — Reduce PDF Size (Lossless & Fast)',
+    description: 'Compress PDF files online for free without losing quality. Shrink large PDFs up to 80% privately in browser. Zero server upload, unlimited & instant.',
     keywords: [
       'compress pdf',
       'compress pdf online free without losing quality',
@@ -78,9 +78,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/pdf/compress-to-200kb': {
     slug: '/pdf/compress-to-200kb',
-    title: 'Reduce PDF File Size Under 200KB Online',
-    metaTitle: 'Compress PDF to 200KB Free Online | FileZenith',
-    description: 'Compress PDF to 200KB free online for job & government forms. 100% private zero server uploads. Shrink your PDF file size under 200KB in seconds!',
+    title: 'Compress PDF to 200KB Free Online — Form & Job Application Reducer',
+    metaTitle: 'Compress PDF to 200KB Free Online — Exact Size for Forms',
+    description: 'Compress PDF under 200KB online free for SSC, UPSC, and government job portals. Keep text crisp with 100% private in-browser compression. Zero upload.',
     keywords: [
       'compress pdf to 200kb',
       'reduce pdf size to 200kb online free',
@@ -106,9 +106,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/pdf/merge': {
     slug: '/pdf/merge',
-    title: 'Combine Multiple PDF Files Online',
-    metaTitle: 'Merge PDF Files Free Online - Combine PDFs | FileZenith',
-    description: 'Merge PDF files free online in seconds. Combine multiple PDF documents into one single organized file 100% privately. Try FileZenith PDF Merger now!',
+    title: 'Merge PDF Online Free — Combine Multiple PDF Files in Seconds',
+    metaTitle: 'Merge PDF Online Free — Combine Multiple PDF Files',
+    description: 'Merge PDF files online free in seconds. Combine multiple PDF documents into one single organized file 100% privately. Zero server upload, fast & unlimited.',
     keywords: [
       'merge pdf',
       'merge pdf files free online',
@@ -384,9 +384,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/image/compress-to-50kb': {
     slug: '/image/compress-to-50kb',
-    title: 'Reduce Photo & Image Size Under 50KB Online',
-    metaTitle: 'Compress Image to 50KB Free Online | FileZenith',
-    description: 'Compress image to 50KB free online for job & government portal uploads. 100% private zero server uploads. Shrink your photo size under 50KB in seconds!',
+    title: 'Compress Image to 50KB Free Online — Exact Photo Reducer for Forms',
+    metaTitle: 'Compress Image to 50KB Free Online — Exact Size for Forms',
+    description: 'Compress image under 50KB online free for SSC, UPSC, and government portal uploads. Keep facial details and signature crisp with 100% private in-browser compression.',
     keywords: [
       'compress image to 50kb',
       'reduce photo size to 50kb online free',
@@ -412,9 +412,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/image/compress-to-100kb': {
     slug: '/image/compress-to-100kb',
-    title: 'Compress Image to 100KB Online Free',
-    metaTitle: 'Compress Image to 100KB Online Free | FileZenith',
-    description: 'Quickly resize and compress images under 100KB for job applications, identity cards, and website optimization.',
+    title: 'Compress Image to 100KB Online Free — Fast Photo Reducer for ID & Forms',
+    metaTitle: 'Compress Image to 100KB Online Free — Fast Photo Reducer',
+    description: 'Compress and resize photos under 100KB online for job applications, identity cards, and website uploads. 100% private, instant & lossless in-browser.',
     keywords: ['compress image to 100kb', 'photo size reducer 100kb', 'image compress under 100kb'],
     category: 'image',
     howToSteps: [
@@ -489,9 +489,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/image/remove-background': {
     slug: '/image/remove-background',
-    title: 'AI Image Background Remover (Transparent PNG)',
-    metaTitle: 'Remove Background from Image Free Online - AI | FileZenith',
-    description: 'Remove background from image free online in seconds. Isolate subjects & make PNG backgrounds transparent 100% privately with zero server uploads. Try FileZenith now!',
+    title: 'Remove Background from Image Free — AI Cutout Online (No Watermark)',
+    metaTitle: 'Remove Background from Image Free — AI Cutout (No Watermark)',
+    description: 'Remove image background automatically with free AI cutout. Download HD transparent PNGs instantly with zero server upload & no watermarks. 100% free.',
     keywords: [
       'remove background',
       'remove background from image free online',
@@ -862,9 +862,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
   '/pdf/pdf-to-word': {
     slug: '/pdf/pdf-to-word',
-    title: 'Free PDF to Word Converter Online - Convert PDF to DOCX',
-    metaTitle: 'PDF to Word Converter Free Online - Convert PDF to DOCX | FileZenith',
-    description: 'Convert PDF to editable Word (.docx) documents free online with 100% privacy. Preserves formatting, headings, paragraphs, and styles directly in browser with zero server uploads.',
+    title: 'PDF to Word Converter — Convert PDF to Editable DOCX Online Free',
+    metaTitle: 'PDF to Word Converter — Convert PDF to Editable DOCX (100% Free)',
+    description: 'Convert PDF to editable Word (.docx) free online. Preserves formatting, tables and paragraphs with zero server upload. No signup or email required.',
     keywords: [
       'pdf to word converter',
       'convert pdf to word online free',
@@ -899,9 +899,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
   '/pdf/word-to-pdf': {
     slug: '/pdf/word-to-pdf',
-    title: 'Free Word to PDF Converter Online - Convert DOCX to PDF',
-    metaTitle: 'Word to PDF Converter Free Online - Convert DOCX to PDF | FileZenith',
-    description: 'Convert Microsoft Word (.docx) documents to PDF free online with 100% privacy. Customize paper format, margins, and page numbers directly in browser with zero server uploads.',
+    title: 'Word to PDF Converter — Convert DOCX to PDF Online Free',
+    metaTitle: 'Word to PDF Converter — Convert DOCX to PDF (100% Free & Fast)',
+    description: 'Convert Word (.docx) to PDF free online without Microsoft Office. Preserves formatting, tables & fonts. 100% private browser conversion with zero upload.',
     keywords: [
       'word to pdf converter',
       'convert word to pdf online free',
@@ -936,9 +936,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
   '/utility/pages-to-word': {
     slug: '/utility/pages-to-word',
-    title: 'Free Pages to Word Converter Online - Convert PAGES to DOCX',
-    metaTitle: 'Pages to Word Converter Free Online - Apple Pages to DOCX | FileZenith',
-    description: 'Convert Apple Pages (.pages) documents to Microsoft Word (.docx) free online with 100% privacy. Open and edit Pages files on Windows PC and Android with zero server uploads.',
+    title: 'Pages to Word Converter — Convert Apple Pages to DOCX Free Online',
+    metaTitle: 'Pages to Word Converter — Convert Apple Pages to DOCX (Free & Fast)',
+    description: 'Convert Apple Pages (.pages) to Word (.docx) free online. Open and edit Pages documents on Windows PC with zero server upload. 100% private & instant.',
     keywords: [
       'pages to word converter',
       'convert pages to word online free',
@@ -984,9 +984,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
   '/utility/word-to-pages': {
     slug: '/utility/word-to-pages',
-    title: 'Free Word to Pages Converter Online - Convert DOCX to PAGES',
-    metaTitle: 'Word to Pages Converter Free Online - Convert DOCX to Apple Pages | FileZenith',
-    description: 'Convert Microsoft Word (.docx) documents to Apple Pages (.pages) format free online with 100% privacy. Create Pages packages from Word documents directly in browser with zero uploads.',
+    title: 'Word to Pages Converter — Convert DOCX to Pages Online Free',
+    metaTitle: 'Word to Pages Converter — Convert DOCX to Pages Free (100% Private)',
+    description: 'Convert Word (.docx) to Apple Pages (.pages) free online. 100% private in-browser conversion with zero file upload. Works on PC, Mac & iPad instantly.',
     keywords: [
       'word to pages converter',
       'convert word to pages online free',
@@ -2018,9 +2018,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/tools/ssc-photo-resizer': {
     slug: '/tools/ssc-photo-resizer',
-    title: 'SSC Photo Resizer (20 to 50KB with Name & Date) Free',
-    metaTitle: 'SSC Photo Resizer (20 to 50KB with Name & Date) | FileZenith',
-    description: 'Resize SSC CGL, CHSL, MTS, GD Constable & CPO photo to 20KB - 50KB with candidate name and date of photo (DOP) stamp. 3.5cm x 4.5cm (413x531 px) format 100% free & secure.',
+    title: 'SSC Photo Resizer (20 to 50KB with Name & Date Stamp) Free',
+    metaTitle: 'SSC Photo Resizer 20 to 50KB Online (Name & Date Stamp Free)',
+    description: 'Resize photo for SSC CGL, CHSL, MTS & GD forms to exact 20KB-50KB with candidate name and date stamp. 3.5x4.5cm format, 100% compliant & free.',
     keywords: [
       'ssc photo resizer 20 to 50kb',
       'ssc photo resizer 20 to 50 kb online free',
@@ -2060,9 +2060,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/tools/signature-resizer-10-to-20kb': {
     slug: '/tools/signature-resizer-10-to-20kb',
-    title: 'Signature Resizer 10 to 20KB Online Free (Magic B&W Clean)',
-    metaTitle: 'Signature Resizer 10 to 20KB Online Free | FileZenith',
-    description: 'Resize signature to 10KB - 20KB online free for SSC CGL, IBPS PO/Clerk, SBI, Railway RRB, and State PSCs. Magic B&W cleanup removes shadows and yellow paper tint. 100% private in-browser.',
+    title: 'Signature Resizer 10 to 20KB Online Free (B&W Clean)',
+    metaTitle: 'Signature Resizer 10 to 20KB Online Free — SSC, IBPS, UPSC',
+    description: 'Resize signature to exact 10KB - 20KB online free for SSC, IBPS, SBI, and government forms. Auto B&W cleanup removes shadows & yellow paper tint instantly.',
     keywords: [
       'signature resizer 10 to 20kb',
       'signature resize 10 to 20 kb online',
@@ -2430,16 +2430,25 @@ export function generateToolMetadata(slug: string): Metadata {
   const tool = SEO_REGISTRY[slug];
   if (!tool) {
     return {
-      title: 'FileZenith - 100% Client-Side PDF, Image, Social & Utility Tools',
-      description: 'All-in-one 100% private web tools for PDF compression, image resizing, background removal, social media video downloader, QR code generation, and utilities.'
+      title: {
+        absolute: 'FileZenith — Free PDF, Image & Online Utility Tools',
+      },
+      description: 'All-in-one 100% private web tools for PDF compression, image resizing, background removal, document conversion, and utilities.'
     };
   }
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.filezenith.com';
   const canonicalUrl = `${siteUrl}${slug}`;
 
+  // Ensure clean single brand suffix and avoid duplicate "| FileZenith | FileZenith" from template inheritance
+  const rawTitle = tool.metaTitle || tool.title;
+  const cleanTitle = rawTitle.replace(/\s*\|\s*FileZenith.*$/i, '').trim();
+  const absoluteTitle = `${cleanTitle} | FileZenith`;
+
   return {
-    title: tool.metaTitle,
+    title: {
+      absolute: absoluteTitle,
+    },
     description: tool.description,
     keywords: tool.keywords.join(', '),
     alternates: {
@@ -2457,26 +2466,26 @@ export function generateToolMetadata(slug: string): Metadata {
       },
     },
     openGraph: {
-      title: tool.metaTitle,
+      title: absoluteTitle,
       description: tool.description,
       url: canonicalUrl,
       siteName: 'FileZenith',
-      locale: 'en_US',
+      locale: 'en_IN',
       type: 'website',
       images: [
         {
-          url: `${siteUrl}/filezenith-logo.png`,
+          url: `${siteUrl}/filezenith-og.png`,
           width: 1200,
           height: 630,
-          alt: tool.title
+          alt: cleanTitle
         }
       ]
     },
     twitter: {
       card: 'summary_large_image' as const,
-      title: tool.metaTitle,
+      title: absoluteTitle,
       description: tool.description,
-      images: [`${siteUrl}/filezenith-logo.png`]
+      images: [`${siteUrl}/filezenith-og.png`]
     }
   };
 }
