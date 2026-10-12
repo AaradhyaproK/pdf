@@ -291,7 +291,7 @@ export default function AboutPage() {
             href="/"
             className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-white hover:bg-slate-50 text-slate-800 font-extrabold text-xs shadow-xs border border-slate-200/80 transition-all active:scale-95"
           >
-            <span>Explore All 50+ Tools</span>
+            <span>Explore All 80+ Tools</span>
           </Link>
         </div>
       </div>
