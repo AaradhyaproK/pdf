@@ -17,9 +17,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   // --- PDF Studio ---
   '/pdf/edit': {
     slug: '/pdf/edit',
-    title: 'Free Interactive Online PDF Editor',
-    metaTitle: 'Edit PDF Online Free - Add Text & Sign | FileZenith',
-    description: 'Edit PDF online free directly in your browser. Add text, erase content, draw annotations & sign documents 100% privately. Try FileZenith PDF Editor now!',
+    title: 'Edit PDF Online Free — Add Text, Whiteout & Sign (No Signup)',
+    metaTitle: 'Edit PDF Online Free — Add Text, Whiteout & Sign (100% Free)',
+    description: 'Edit PDF online free directly in your browser. Add text, erase content with whiteout, draw annotations & sign documents 100% privately. Zero server upload.',
     keywords: [
       'edit pdf online',
       'free online pdf editor no sign up',
@@ -134,9 +134,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/pdf/split': {
     slug: '/pdf/split',
-    title: 'Separate & Extract PDF Pages Online',
-    metaTitle: 'Split PDF Pages Free Online - Extract Pages | FileZenith',
-    description: 'Split PDF pages free online in seconds. Extract specific page ranges or separate single PDF pages 100% privately. Try FileZenith PDF Splitter now!',
+    title: 'Split PDF Pages Online Free — Extract Pages in Seconds',
+    metaTitle: 'Split PDF Pages Free Online — Extract PDF Pages Instantly',
+    description: 'Split PDF pages free online in seconds. Extract specific page ranges or separate single PDF pages 100% privately in browser. Zero server upload, no limits.',
     keywords: [
       'split pdf',
       'split pdf pages free online',
@@ -162,9 +162,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/pdf/organize': {
     slug: '/pdf/organize',
-    title: 'Visual PDF Page Organizer & Rotator',
-    metaTitle: 'Organize PDF Pages Free Online - Rotate & Reorder | FileZenith',
-    description: 'Organize PDF pages free online in seconds. Rotate upside-down pages, delete unwanted pages, and reorder document structure 100% privately. Try FileZenith now!',
+    title: 'Organize PDF Pages Free — Rotate, Reorder & Delete Pages',
+    metaTitle: 'Organize PDF Pages Free Online — Rotate & Reorder PDF',
+    description: 'Organize PDF pages free online in seconds. Rotate sideways pages, delete unwanted pages, and reorder document structure 100% privately with zero server upload.',
     keywords: [
       'organize pdf',
       'organize pdf pages free online',
@@ -190,9 +190,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/pdf/ocr': {
     slug: '/pdf/ocr',
-    title: 'Free Multilingual PDF OCR & Text Extractor (Hindi, Marathi, English & 50+ Languages)',
-    metaTitle: 'PDF OCR Online Free - Hindi, Marathi, English & 50+ Languages Text Extractor | FileZenith',
-    description: 'Free PDF OCR Online. Extract editable text from scanned PDFs & images in Hindi (हिंदी), Marathi (मराठी), English, Spanish, French, German, Arabic, Chinese & 50+ popular languages. 100% private browser AI OCR with zero server uploads.',
+    title: 'Free PDF OCR & Text Extractor Online (Hindi, English & 50+ Languages)',
+    metaTitle: 'PDF OCR Online Free — Extract Text from Scanned PDF (AI OCR)',
+    description: 'Extract editable text from scanned PDFs & images free online. Supports English, Hindi, Marathi & 50+ languages. 100% private in-browser AI OCR with zero upload.',
     keywords: [
       'pdf ocr',
       'pdf ocr online free text extractor',
@@ -243,9 +243,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/pdf/watermark': {
     slug: '/pdf/watermark',
-    title: 'Add Custom Text & Logo Watermarks to PDF',
-    metaTitle: 'Watermark PDF Free Online - Add Text & Logo | FileZenith',
-    description: 'Watermark PDF free online in browser. Stamp text or image logos on PDF pages 100% privately with zero server file uploads. Try FileZenith Watermark now!',
+    title: 'Watermark PDF Online Free — Add Text & Logo Stamp in Seconds',
+    metaTitle: 'Watermark PDF Free Online — Add Text & Logo Stamp (Private)',
+    description: 'Add custom text or image logo watermarks to PDF free online. Adjust transparency, angle & position 100% privately in browser with zero server uploads.',
     keywords: [
       'watermark pdf',
       'watermark pdf online free',
@@ -271,8 +271,8 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/pdf/protect': {
     slug: '/pdf/protect',
-    title: 'Encrypt PDF Files with Password Online',
-    metaTitle: 'Password Protect PDF Free Online - Encrypt PDF | FileZenith',
+    title: 'Password Protect PDF Free Online — Encrypt PDF with 128-Bit AES',
+    metaTitle: 'Password Protect PDF Free Online — 128-Bit Encryption (Safe)',
     description: 'Password protect PDF free online in browser. Encrypt PDF files with 128-bit security 100% privately with zero server uploads. Protect your PDF now!',
     keywords: [
       'password protect pdf',
@@ -299,8 +299,8 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/pdf/remove-password': {
     slug: '/pdf/remove-password',
-    title: 'Unlock & Remove PDF Password Online',
-    metaTitle: 'Remove PDF Password Free Online - Unlock PDF | FileZenith',
+    title: 'Unlock PDF Password Online Free — Remove PDF Restrictions',
+    metaTitle: 'Unlock PDF Password Free Online — Remove PDF Restrictions',
     description: 'Remove password from PDF free online in browser. Unlock secured PDF files 100% privately with zero server uploads. Remove PDF password now!',
     keywords: [
       'remove pdf password',
@@ -327,9 +327,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/pdf/to-image': {
     slug: '/pdf/to-image',
-    title: 'Convert PDF Pages to High-Res JPG or PNG',
-    metaTitle: 'Convert PDF to JPG/PNG Free Online - PDF to Image | FileZenith',
-    description: 'Convert PDF to JPG or PNG free online in seconds. Export PDF pages into high-resolution images 100% privately with zero server file uploads. Try FileZenith now!',
+    title: 'Convert PDF to JPG or PNG Online Free — High-Res Images',
+    metaTitle: 'Convert PDF to JPG/PNG Free Online — High-Res Image Extractor',
+    description: 'Convert PDF to JPG or PNG free online in seconds. Export PDF pages into crisp high-resolution images 100% privately in browser with zero uploads.',
     keywords: [
       'pdf to jpg',
       'convert pdf to jpg free online',
@@ -433,9 +433,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/image/resize': {
     slug: '/image/resize',
-    title: 'Resize Image Dimensions in Pixels & Percentage',
-    metaTitle: 'Resize Image Free Online - Change Photo Dimensions | FileZenith',
-    description: 'Resize image free online in seconds. Change photo width and height in pixels or percentage 100% privately with zero server file uploads. Try FileZenith now!',
+    title: 'Resize Image Online Free — Change Photo Pixels & Dimensions',
+    metaTitle: 'Resize Image Free Online — Change Photo Dimensions & Pixels',
+    description: 'Resize image free online in seconds. Change photo width and height in pixels or percentage 100% privately in browser. Zero server upload, lock aspect ratio.',
     keywords: [
       'resize image',
       'resize image online free in pixels',
@@ -461,9 +461,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/image/passport-maker': {
     slug: '/image/passport-maker',
-    title: 'Free Passport & Visa Photo Maker',
-    metaTitle: 'Passport Photo Maker Free Online - US, India, Schengen | FileZenith',
-    description: 'Passport photo maker free online in browser. Crop photos to official US, India, Schengen & UK passport size standards 100% privately. Try FileZenith now!',
+    title: 'Free Passport & Visa Photo Maker Online (India, US & Schengen)',
+    metaTitle: 'Passport Photo Maker Free Online — India, US & Visa Formats',
+    description: 'Passport photo maker free online in browser. Crop photos to official US (2x2), India (3.5x4.5cm), Schengen & UK passport size standards 100% privately.',
     keywords: [
       'passport photo maker',
       'passport photo maker free online',
@@ -517,9 +517,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/image/convert-heic': {
     slug: '/image/convert-heic',
-    title: 'Convert Apple iPhone HEIC Photos to JPG',
-    metaTitle: 'HEIC to JPG Converter Free Online - Batch iPhone Photos | FileZenith',
-    description: 'Convert HEIC to JPG free online in seconds. Turn Apple iPhone .heic & .heif photos into universal JPG images 100% privately with zero server uploads. Try FileZenith now!',
+    title: 'Convert Apple iPhone HEIC Photos to JPG Online Free',
+    metaTitle: 'HEIC to JPG Converter Free Online — Batch Convert iPhone Photos',
+    description: 'Convert HEIC to JPG free online in seconds. Turn Apple iPhone .heic & .heif photos into universal JPG images 100% privately in browser. Zero server upload, batch convert.',
     keywords: [
       'heic to jpg',
       'heic to jpg converter free online',
@@ -545,9 +545,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/image/to-pdf': {
     slug: '/image/to-pdf',
-    title: 'Convert JPG & PNG Images to PDF Online',
-    metaTitle: 'Image to PDF Converter Free Online - Convert Images | FileZenith',
-    description: 'Convert image to PDF free online in seconds. Combine JPG, PNG & WebP photos into one structured PDF document 100% privately with zero server uploads. Try FileZenith now!',
+    title: 'Convert JPG & PNG Images to PDF Online Free',
+    metaTitle: 'Image to PDF Converter Free Online — JPG & PNG to PDF (Instant)',
+    description: 'Convert images to PDF free online in seconds. Combine JPG, PNG & WebP photos into one structured PDF document 100% privately with zero server upload. Free & fast.',
     keywords: [
       'image to pdf',
       'image to pdf converter free online',
@@ -573,9 +573,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/image/png-to-jpg': {
     slug: '/image/png-to-jpg',
-    title: 'Convert PNG Images to High-Quality JPG Format',
-    metaTitle: 'PNG to JPG Converter Free Online - Convert Images | FileZenith',
-    description: 'Convert PNG to JPG free online in seconds. Turn PNG graphics & transparent images into compact JPG photos 100% privately with zero server uploads. Try FileZenith now!',
+    title: 'Convert PNG Images to High-Quality JPG Format Online',
+    metaTitle: 'PNG to JPG Converter Free Online — Batch Convert Transparent PNG',
+    description: 'Convert PNG to JPG free online in seconds. Turn PNG graphics & transparent images into compact JPG photos 100% privately with zero server upload. Batch convert free.',
     keywords: [
       'png to jpg',
       'png to jpg converter free online',
@@ -601,9 +601,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/image/png-to-pdf': {
     slug: '/image/png-to-pdf',
-    title: 'Combine & Convert PNG Images to PDF',
-    metaTitle: 'PNG to PDF Converter Free Online - Convert PNG to PDF | FileZenith',
-    description: 'Convert PNG to PDF free online in seconds. Combine PNG screenshots, transparent graphics & images into one PDF 100% privately with zero server uploads. Try FileZenith now!',
+    title: 'Combine & Convert PNG Images to PDF Online Free',
+    metaTitle: 'PNG to PDF Converter Free Online — Combine PNG Images into PDF',
+    description: 'Convert PNG to PDF free online in seconds. Combine PNG screenshots, transparent graphics & images into one PDF 100% privately in browser with zero uploads.',
     keywords: [
       'png to pdf',
       'png to pdf converter free online',
@@ -629,9 +629,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/image/pics-to-pdf': {
     slug: '/image/pics-to-pdf',
-    title: 'Free Pics & Image to PDF Converter (JPG, PNG, WebP & Photos to PDF)',
-    metaTitle: 'Pics & Image to PDF Converter Free Online - JPG, PNG, WebP to PDF | FileZenith',
-    description: 'Convert JPG, PNG, WebP, HEIC & gallery photos to PDF free online. Combine multiple pictures, screenshots & scanned document pages into a single PDF 100% privately in browser with zero server uploads.',
+    title: 'Free Pics & Image to PDF Converter Online (JPG, PNG & Photos)',
+    metaTitle: 'Pics to PDF Converter Free Online — Convert Photos to PDF (Instant)',
+    description: 'Convert JPG, PNG, WebP & gallery photos to PDF free online. Combine multiple pictures & screenshots into a single PDF 100% privately in browser with zero uploads.',
     keywords: [
       'pics to pdf',
       'jpg to pdf',
@@ -692,9 +692,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   // --- Daily Quick Utilities ---
   '/utility/qr-generator': {
     slug: '/utility/qr-generator',
-    title: 'Free QR Code Generator with Logo - Wi-Fi, URL, WhatsApp & VCard',
-    metaTitle: 'Free QR Code Generator with Logo - Wi-Fi, URL, WhatsApp, VCard & Vector SVG | FileZenith',
-    description: 'Generate custom QR codes free online for URLs, Wi-Fi networks, WhatsApp direct chats, contact cards & text. Embed center PNG logo, pick custom color themes, and export HD PNG & vector SVG 100% privately.',
+    title: 'Free QR Code Generator with Logo Online (URL, Wi-Fi & SVG)',
+    metaTitle: 'Free QR Code Generator with Logo — Custom URL, Wi-Fi & Vector SVG',
+    description: 'Create custom QR codes with center logo free online. Generate Wi-Fi, URL, WhatsApp & VCard QR codes. Download HD PNG & vector SVG with zero server upload.',
     keywords: [
       'qr code generator',
       'qr code generator with logo free',
@@ -731,9 +731,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/utility/word-counter': {
     slug: '/utility/word-counter',
-    title: 'Real-Time Word & Character Counter Online',
-    metaTitle: 'Word Counter Free Online - Count Words & Characters | FileZenith',
-    description: 'Word counter free online in browser. Count words, characters, sentences, paragraphs & keyword density 100% privately with zero server uploads. Try FileZenith now!',
+    title: 'Word Counter Online Free — Real-Time Word & Character Count',
+    metaTitle: 'Word Counter Free Online — Count Words, Characters & Sentences',
+    description: 'Word counter free online in browser. Count words, characters, sentences, paragraphs & reading time in real-time. 100% private, no text uploaded to server.',
     keywords: [
       'word counter',
       'word counter free online',
@@ -759,9 +759,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/utility/json-formatter': {
     slug: '/utility/json-formatter',
-    title: 'JSON Formatter, Validator & CSV Converter',
-    metaTitle: 'JSON Formatter & Validator Free Online - Prettify & CSV | FileZenith',
-    description: 'JSON formatter free online in browser. Prettify, minify, validate syntax & convert JSON arrays to CSV 100% privately with zero server uploads. Try FileZenith now!',
+    title: 'JSON Formatter & Validator Online Free — Prettify & Convert CSV',
+    metaTitle: 'JSON Formatter & Validator Free Online — Prettify, Minify & CSV',
+    description: 'JSON formatter free online in browser. Prettify, minify, validate syntax & convert JSON arrays to CSV 100% privately with zero server upload. Instant & secure.',
     keywords: [
       'json formatter',
       'json formatter online free validator',
@@ -1032,9 +1032,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
   '/utility/numbers-to-excel': {
     slug: '/utility/numbers-to-excel',
-    title: 'Free Numbers to Excel Converter Online - Convert NUMBERS to XLSX',
-    metaTitle: 'Numbers to Excel Converter Free Online - Apple Numbers to XLSX | FileZenith',
-    description: 'Convert Apple Numbers (.numbers) spreadsheets to Microsoft Excel (.xlsx) free online with 100% privacy. Open Numbers sheets on Windows PC directly in browser with zero server uploads.',
+    title: 'Numbers to Excel Converter — Convert Apple Numbers to XLSX Free',
+    metaTitle: 'Numbers to Excel Converter — Convert Apple Numbers to XLSX (Free)',
+    description: 'Convert Apple Numbers (.numbers) spreadsheets to Excel (.xlsx) free online. Open Numbers sheets on Windows PC directly in browser with zero server upload.',
     keywords: [
       'numbers to excel converter',
       'convert numbers to excel online free',
@@ -1080,9 +1080,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
   '/utility/excel-to-numbers': {
     slug: '/utility/excel-to-numbers',
-    title: 'Free Excel to Numbers Converter Online - Convert XLSX to NUMBERS',
-    metaTitle: 'Excel to Numbers Converter Free Online - Convert XLSX to Apple Numbers | FileZenith',
-    description: 'Convert Microsoft Excel (.xlsx, .xls, .csv) spreadsheets to Apple Numbers (.numbers) format free online with 100% privacy. Open Excel workbooks on Mac, iPhone, and iPad seamlessly with zero uploads.',
+    title: 'Excel to Numbers Converter — Convert XLSX to Apple Numbers Free',
+    metaTitle: 'Excel to Numbers Converter — Convert XLSX to Apple Numbers (Free)',
+    description: 'Convert Microsoft Excel (.xlsx, .csv) to Apple Numbers (.numbers) free online. 100% private in-browser spreadsheet conversion with zero server upload.',
     keywords: [
       'excel to numbers converter',
       'convert excel to numbers online free',
@@ -1204,9 +1204,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
   '/utility/age-calculator': {
     slug: '/utility/age-calculator',
-    title: 'Exact Online Age Calculator & Birthday Countdown',
-    metaTitle: 'Age Calculator Free Online - Exact Age in Years, Months, Days | FileZenith',
-    description: 'Calculate your exact age in years, months, weeks, days, hours, minutes, and seconds online free. Live next birthday countdown, astrological zodiac sign, and milestone age counters 100% privately.',
+    title: 'Exact Online Age Calculator & Birthday Countdown Free',
+    metaTitle: 'Age Calculator Free Online — Exact Age in Years, Months & Days',
+    description: 'Calculate your exact age in years, months, days, hours, and seconds free online. Live next birthday countdown, zodiac sign & milestones with 100% privacy.',
     keywords: [
       'age calculator online',
       'exact age calculator in years months days',
@@ -1233,9 +1233,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
   '/utility/percentage-calculator': {
     slug: '/utility/percentage-calculator',
-    title: 'All-in-One Online Percentage Calculator (Sales Tax, Discount & Marks)',
-    metaTitle: 'Percentage Calculator Online Free - % Increase, Sales Tax & Marks | FileZenith',
-    description: 'Calculate percentages, % increase/decrease, X is what % of Y, shopping discounts ($ / € / £ / ₹) with sales tax/VAT, and student exam marks percentage online free.',
+    title: 'All-in-One Online Percentage Calculator Free',
+    metaTitle: 'Percentage Calculator Online Free — % Increase, Marks & Sales Tax',
+    description: 'Calculate percentages, % increase/decrease, X is what % of Y, shopping discounts with sales tax/VAT, and student exam marks percentage free online.',
     keywords: [
       'percentage calculator online',
       'how to calculate percentage of a number',
@@ -1259,9 +1259,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
   '/utility/cgpa-to-percentage': {
     slug: '/utility/cgpa-to-percentage',
-    title: 'CGPA to Percentage & GPA Converter (Worldwide & University)',
-    metaTitle: 'CGPA to Percentage Converter Free - CBSE, Mumbai Univ, VTU, DU & GPA | FileZenith',
-    description: 'Convert CGPA to Percentage online free for CBSE, Mumbai University, VTU, Delhi University, GTU, AKTU, SPPU, and global GPA scales. Multi-semester SGPA to CGPA accumulator.',
+    title: 'CGPA to Percentage Converter Free Online (CBSE & Universities)',
+    metaTitle: 'CGPA to Percentage Calculator — CBSE, Mumbai Univ, VTU & DU (Free)',
+    description: 'Convert CGPA to percentage online free for CBSE, Mumbai University, VTU, Delhi University, GTU, AKTU, and global GPA scales. Instant multi-semester calculator.',
     keywords: [
       'cgpa to percentage converter',
       'gpa to percentage converter worldwide',
@@ -1387,9 +1387,9 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/utility/emi-calculator': {
     slug: '/utility/emi-calculator',
-    title: 'Home Loan, Car Loan & Personal Loan EMI Calculator',
-    metaTitle: 'EMI Calculator Online Free - Home, Car & Personal Loan | FileZenith',
-    description: 'Calculate monthly EMI for home loans, car loans, and personal loans free online. View complete yearly amortization schedule, interest breakdown, and repayment charts.',
+    title: 'Home Loan, Car Loan & Personal Loan EMI Calculator Online',
+    metaTitle: 'EMI Calculator Online — Home, Car & Personal Loan EMI (Free)',
+    description: 'Calculate monthly EMI for home loans, car loans, and personal loans free online. View complete yearly amortization schedule, interest breakdown & payoff charts.',
     keywords: [
       'emi calculator',
       'home loan emi calculator online free',
@@ -1413,8 +1413,8 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/utility/income-tax-calculator': {
     slug: '/utility/income-tax-calculator',
-    title: 'Income Tax Calculator (Old vs New Regime FY 2026-27)',
-    metaTitle: 'Income Tax Calculator Old vs New Regime FY 2026-27 | FileZenith',
+    title: 'Income Tax Calculator Online (Old vs New Regime FY 2026-27)',
+    metaTitle: 'Income Tax Calculator FY 2026-27 — New vs Old Regime Tax Comparison',
     description: 'Compare Income Tax under Old vs New Tax Regime for FY 2026-27 (AY 2027-28) free online. Calculate tax slab savings with Section 80C, 80D, HRA & standard deduction.',
     keywords: [
       'income tax calculator india',
@@ -1438,8 +1438,8 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/utility/sip-calculator': {
     slug: '/utility/sip-calculator',
-    title: 'SIP Mutual Fund Calculator & Wealth Growth Return',
-    metaTitle: 'SIP Calculator Online Free - Mutual Fund Wealth Growth | FileZenith',
+    title: 'SIP Mutual Fund Calculator Online — Compounding Wealth Growth',
+    metaTitle: 'SIP Calculator Online — Mutual Fund Wealth & Return Calculator (Free)',
     description: 'Calculate future returns on monthly Mutual Fund Systematic Investment Plans (SIP) free online. Compare invested amount vs estimated wealth gain with visual charts.',
     keywords: [
       'sip calculator',
@@ -1462,8 +1462,8 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/utility/salary-calculator': {
     slug: '/utility/salary-calculator',
-    title: 'CTC to In-Hand Take-Home Salary Calculator',
-    metaTitle: 'CTC to In-Hand Salary Calculator India Free | FileZenith',
+    title: 'CTC to In-Hand Take-Home Salary Calculator India Online',
+    metaTitle: 'CTC to In-Hand Salary Calculator India — Monthly Take-Home (Free)',
     description: 'Calculate monthly take-home salary from annual CTC free online. View deductions breakdown for Employee PF, Professional Tax, and estimated TDS.',
     keywords: [
       'ctc to in hand salary calculator',
@@ -1485,8 +1485,8 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/utility/gst-calculator': {
     slug: '/utility/gst-calculator',
-    title: 'GST Calculator (Add GST or Remove GST Tax)',
-    metaTitle: 'GST Calculator Online Free - Exclusive & Inclusive Tax | FileZenith',
+    title: 'GST Calculator Online (Add or Remove GST 5%, 12%, 18%, 28%)',
+    metaTitle: 'GST Calculator Online Free — Add or Remove GST (5%, 12%, 18%, 28%)',
     description: 'Calculate GST online free for 5%, 12%, 18%, and 28% slab rates. Instantly calculate GST Exclusive (Add GST) or GST Inclusive (Remove GST) with CGST and SGST split.',
     keywords: [
       'gst calculator',
