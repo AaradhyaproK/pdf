@@ -84,6 +84,9 @@ export const metadata: Metadata = {
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',
   },
+  other: {
+    'google-adsense-account': 'ca-pub-1291898061670715',
+  },
 };
 
 import { CloudflareAnalytics } from '@/components/CloudflareAnalytics';
