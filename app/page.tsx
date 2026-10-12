@@ -40,17 +40,32 @@ const HOMEPAGE_FAQS = [
 ];
 
 export const metadata: Metadata = {
-  title: 'FileZenith - 100% Free Online PDF, Image & Utility Studio',
-  description: 'FileZenith is an all-in-one private online file studio. Compress PDF, edit documents, convert PNG to JPG, pics to PDF, remove background, and generate QR codes 100% privately inside your browser.',
+  title: 'FileZenith — 100% Free Online PDF, Image & Utility Studio',
+  description: 'All-in-one private online file studio with 80+ tools. Compress PDF, convert images, resize exam photos, and calculate EMI/SIP/GST — 100% free, zero server upload.',
   alternates: {
     canonical: 'https://www.filezenith.com/',
   },
   openGraph: {
-    title: 'FileZenith - 100% Free Online PDF, Image & Utility Studio',
-    description: 'All-in-one private online file tool suite. Zero server file uploads. 100% Free & Secure.',
-    url: 'https://www.filezenith.com/',
+    title: 'FileZenith — 100% Free Online PDF, Image & Utility Studio',
+    description: 'All-in-one private online file studio with 80+ tools. Compress PDF, convert images, resize exam photos, and calculate EMI/SIP/GST — 100% free, zero server upload.',
+    url: 'https://www.filezenith.com',
     siteName: 'FileZenith',
+    images: [
+      {
+        url: 'https://www.filezenith.com/filezenith-og.png',
+        width: 1200,
+        height: 630,
+        alt: 'FileZenith — Free PDF and Image Tools',
+      },
+    ],
+    locale: 'en_IN',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'FileZenith — 100% Free Online PDF, Image & Utility Studio',
+    description: 'All-in-one private online file studio. 80+ tools. Zero server upload.',
+    images: ['https://www.filezenith.com/filezenith-og.png'],
   },
 };
 
