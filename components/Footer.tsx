@@ -333,6 +333,10 @@ export function Footer() {
             <span>&bull;</span>
             <Link href="/contact" className="hover:text-indigo-600 transition-colors">Contact</Link>
             <span>&bull;</span>
+            <Link href="/editorial-policy" className="hover:text-indigo-600 transition-colors">Editorial Policy</Link>
+            <span>&bull;</span>
+            <Link href="/affiliate-disclosure" className="hover:text-indigo-600 transition-colors">Affiliate Disclosure</Link>
+            <span>&bull;</span>
             <Link href="/privacy" className="hover:text-indigo-600 transition-colors">Privacy Policy</Link>
             <span>&bull;</span>
             <Link href="/terms" className="hover:text-indigo-600 transition-colors">Terms</Link>
