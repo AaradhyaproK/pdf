@@ -7,6 +7,7 @@ import remarkGfm from 'remark-gfm';
 import { getAllPosts, getPostBySlug } from '@/lib/blog';
 import { AdSlot } from '@/components/AdSlot';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
+import { AuthorBio } from '@/components/blog/AuthorBio';
 import {
   ArrowLeft,
   Clock,
@@ -144,6 +145,9 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     title: post.title,
     description: post.description,
     keywords: post.tags.join(', '),
+    authors: [{ name: 'Aaradhya Pathak', url: `${siteUrl}/about` }],
+    creator: 'Aaradhya Pathak',
+    publisher: 'Snab Innovations',
     alternates: {
       canonical: postUrl,
     },
@@ -219,19 +223,25 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       name: 'FileZenith Guides & Knowledge Hub',
     },
     author: {
-      '@type': 'Organization',
-      name: 'FileZenith Document Standards & Editorial Board',
+      '@type': 'Person',
+      name: 'Aaradhya Pathak',
+      jobTitle: 'Full-Stack Developer & Digital Tools Creator',
+      worksFor: {
+        '@type': 'Organization',
+        name: 'Snab Innovations',
+      },
       url: `${siteUrl}/about`,
     },
     reviewedBy: {
-      '@type': 'Organization',
-      name: 'FileZenith Compliance & Standards Review Board',
+      '@type': 'Person',
+      name: 'Aaradhya Pathak',
+      jobTitle: 'Full-Stack Developer & Digital Tools Creator',
       url: `${siteUrl}/about`,
     },
     publisher: {
       '@type': 'Organization',
-      name: 'FileZenith',
-      url: siteUrl,
+      name: 'Snab Innovations',
+      url: 'https://snab.co.in',
       logo: {
         '@type': 'ImageObject',
         url: `${siteUrl}/filezenith-logo.png`,
@@ -347,6 +357,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 {post.description}
               </p>
 
+              {/* Author Byline & Verification Bio */}
+              <AuthorBio post={post} />
+
               {post.tags.length > 0 && (
                 <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-slate-100">
                   {post.tags.map((tag) => (
@@ -370,8 +383,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     <CheckCircle2 className="w-4.5 h-4.5 text-emerald-600" />
                   </div>
                   <div>
-                    <p className="text-xs sm:text-sm font-black text-slate-900">Reviewed by FileZenith Editorial Board</p>
-                    <p className="text-[10px] sm:text-[11px] text-emerald-700 font-bold">Fact-Checked for Official 2026-27 Notification Standards</p>
+                    <p className="text-xs sm:text-sm font-black text-slate-900">Authored &amp; Verified by Aaradhya Pathak</p>
+                    <p className="text-[10px] sm:text-[11px] text-emerald-700 font-bold">Founder, Snab Innovations · Fact-Checked for Official 2026-27 Notification Standards</p>
                   </div>
                 </div>
                 <span className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200/80 shadow-2xs tracking-wider">

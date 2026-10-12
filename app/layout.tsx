@@ -26,9 +26,9 @@ export const metadata: Metadata = {
   },
   description: 'FileZenith is an all-in-one private online file studio. Compress PDF, edit documents, convert PNG to JPG, pics to PDF, remove background, and generate QR codes 100% privately inside your browser.',
   keywords: 'filezenith, file zenith, filezenith.com, pdf compressor, edit pdf online, merge pdf, pics to pdf, png to jpg, png to pdf, remove background, qr generator, client-side web tools, compress pdf to 200kb, ssc photo resizer, signature resizer',
-  authors: [{ name: 'FileZenith Editorial Board', url: 'https://www.filezenith.com/about' }],
-  creator: 'FileZenith',
-  publisher: 'FileZenith',
+  authors: [{ name: 'Aaradhya Pathak', url: 'https://www.filezenith.com/about' }],
+  creator: 'Aaradhya Pathak',
+  publisher: 'Snab Innovations',
   category: 'technology',
   manifest: '/manifest.json',
   alternates: {
