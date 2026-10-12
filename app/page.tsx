@@ -118,9 +118,8 @@ export default function HomePage() {
     <main className="min-h-screen bg-slate-50/70">
       {/* Inject Structured Data Schemas */}
       {JSON_LD_SCHEMAS.map((schema, idx) => (
-        <Script
+        <script
           key={idx}
-          id={`homepage-json-ld-${idx}`}
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
