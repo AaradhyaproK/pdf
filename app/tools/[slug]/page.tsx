@@ -43,15 +43,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const ogImageUrl = `${siteUrl}/api/og?title=${encodeURIComponent(preset.h1)}&category=${encodeURIComponent('Govt Exam Tools')}&desc=${encodeURIComponent(preset.shortDescription)}&badge=${encodeURIComponent(preset.targetSize + ' Compliant')}`;
 
+  const cleanTitle = preset.title.replace(/\s*\|\s*FileZenith$/i, '');
+
   return {
-    title: preset.title,
+    title: cleanTitle,
     description: preset.metaDescription,
     keywords: preset.keywords,
     alternates: {
       canonical: url,
     },
     openGraph: {
-      title: preset.title,
+      title: `${cleanTitle} | FileZenith`,
       description: preset.metaDescription,
       url: url,
       siteName: 'FileZenith',
