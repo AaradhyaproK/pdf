@@ -41,7 +41,7 @@ function getRelatedGuidesAndArticles(slug: string, category: string): ArticleRec
       {
         title: 'SSC CGL/CHSL PDF 200KB Preset',
         desc: 'Pre-configured compression target for Staff Selection Commission.',
-        url: '/presets/ssc-pdf-200kb',
+        url: '/pdf/compress-to-200kb',
         badge: 'Official Preset',
         readTime: 'Direct Tool',
         type: 'preset'

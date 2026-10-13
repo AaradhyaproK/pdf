@@ -60,6 +60,21 @@ const nextConfig: NextConfig = {
         destination: '/blog',
         permanent: true,
       },
+      {
+        source: '/presets/ssc-pdf-200kb',
+        destination: '/pdf/compress-to-200kb',
+        permanent: true,
+      },
+      {
+        source: '/presets/upsc-pdf-300kb',
+        destination: '/pdf/compress-to-200kb',
+        permanent: true,
+      },
+      {
+        source: '/presets/:slug',
+        destination: '/tools/:slug',
+        permanent: true,
+      },
     ];
   },
 };
