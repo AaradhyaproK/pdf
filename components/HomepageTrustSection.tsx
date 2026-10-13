@@ -68,17 +68,17 @@ export function HomepageTrustSection() {
             </Link>
             <span className="hidden sm:inline text-slate-300">•</span>
             <a
-              href="https://www.producthunt.com/products/filezenith?utm_source=badge-follow&utm_medium=badge&utm_source=badge-filezenith"
+              href="https://www.producthunt.com/products/filezenith/reviews/new?utm_source=badge-product_review&utm_medium=badge&utm_source=badge-filezenith"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block hover:opacity-95 transition-opacity"
             >
               <img
-                src="https://api.producthunt.com/widgets/embed-image/v1/follow.svg?product_id=1336391&theme=dark"
+                src="https://api.producthunt.com/widgets/embed-image/v1/product_review.svg?product_id=1336391&theme=light"
                 alt="FileZenith - 100% private in-browser PDF, image & document studio | Product Hunt"
+                style={{ width: '250px', height: '54px' }}
                 width={250}
                 height={54}
-                style={{ width: '250px', height: '54px' }}
                 className="w-[190px] sm:w-[210px] h-auto rounded-lg shadow-2xs"
               />
             </a>
