@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { TOOL_DEEP_DIVES } from './tool-deep-dives';
 
 export interface ToolSEO {
   slug: string;
@@ -2491,6 +2492,11 @@ export function generateToolMetadata(slug: string): Metadata {
 }
 
 export function getCompleteToolFaqs(tool: ToolSEO): Array<{ question: string; answer: string }> {
+  const deepDive = TOOL_DEEP_DIVES[tool.slug];
+  if (deepDive && deepDive.faqs && deepDive.faqs.length >= 8) {
+    return deepDive.faqs;
+  }
+
   const existing = tool.faqs || [];
   if (existing.length >= 8) {
     return existing;

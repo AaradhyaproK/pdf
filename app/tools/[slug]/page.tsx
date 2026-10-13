@@ -20,7 +20,9 @@ import {
   Info,
   Check,
   X as XIcon,
+  BookOpen,
 } from 'lucide-react';
+import { TOOL_DEEP_DIVES } from '@/lib/tool-deep-dives';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -131,10 +133,14 @@ export default async function ToolPresetPage({ params }: PageProps) {
   };
 
   // 4. FAQPage Schema
+  const fullSlug = `/tools/${slug}`;
+  const deepDive = TOOL_DEEP_DIVES[fullSlug];
+  const activeFaqs = deepDive?.faqs || preset.faq;
+
   const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: preset.faq.map((item) => ({
+    mainEntity: activeFaqs.map((item) => ({
       '@type': 'Question',
       name: item.question,
       acceptedAnswer: {
@@ -348,6 +354,51 @@ export default async function ToolPresetPage({ params }: PageProps) {
               </section>
             )}
 
+            {/* Comprehensive In-Depth Editorial Guide (800+ Words for Superior SEO & E-E-A-T) */}
+            {deepDive && (
+              <section className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xs space-y-6 text-slate-700">
+                <div className="border-b border-slate-100 pb-4 space-y-1">
+                  <div className="flex items-center gap-2 text-indigo-600 text-xs font-black uppercase tracking-wider">
+                    <BookOpen className="w-4 h-4 shrink-0" />
+                    <span>{deepDive.badge}</span>
+                  </div>
+                  <h2 className="text-lg sm:text-2xl font-black text-slate-900 leading-snug">
+                    {deepDive.heading}
+                  </h2>
+                  <p className="text-xs sm:text-sm text-slate-500 font-medium leading-relaxed">
+                    {deepDive.subheading}
+                  </p>
+                </div>
+
+                <div className="space-y-6 text-xs sm:text-sm leading-relaxed font-medium">
+                  {deepDive.sections.map((sec, sIdx) => (
+                    <div key={sIdx} className="space-y-2.5">
+                      <h3 className="text-sm sm:text-base font-extrabold text-slate-900 flex items-center gap-2">
+                        <span className="w-6 h-6 rounded-lg bg-indigo-50 text-indigo-600 font-black text-xs flex items-center justify-center shrink-0">
+                          {sIdx + 1}
+                        </span>
+                        <span>{sec.title}</span>
+                      </h3>
+                      {sec.paragraphs.map((p, pIdx) => (
+                        <p key={pIdx} className="text-slate-600 leading-relaxed">
+                          {p}
+                        </p>
+                      ))}
+                      {sec.bullets && sec.bullets.length > 0 && (
+                        <ul className="list-disc pl-5 space-y-1.5 text-slate-600">
+                          {sec.bullets.map((b, bIdx) => (
+                            <li key={bIdx} className="leading-relaxed">
+                              {b}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
             {/* Collapsible Goldmine FAQ Section */}
             <section className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xs space-y-4">
               <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
@@ -358,7 +409,7 @@ export default async function ToolPresetPage({ params }: PageProps) {
               </div>
 
               <div className="space-y-3">
-                {preset.faq.map((item, idx) => (
+                {activeFaqs.map((item, idx) => (
                   <details
                     key={idx}
                     className="group border border-slate-200 rounded-2xl p-4 cursor-pointer transition-all bg-slate-50/50 hover:bg-slate-50"

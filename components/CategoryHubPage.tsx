@@ -4,6 +4,7 @@ import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { CategoryConfig, CategoryToolItem } from '@/lib/categories-data';
+import { TOOL_DEEP_DIVES } from '@/lib/tool-deep-dives';
 import { AdSlot } from '@/components/AdSlot';
 import {
   ChevronRight,
@@ -246,6 +247,55 @@ function FaqAccordion({
 
 // In-Depth Authoritative Guide & Technical Manual (800+ Words for Superior SEO & E-E-A-T)
 function CategoryDeepDiveGuide({ category }: { category: CategoryConfig }) {
+  const categorySlug = category.slug.startsWith('/') ? category.slug : `/${category.slug}`;
+  const deepDive = TOOL_DEEP_DIVES[categorySlug];
+
+  if (deepDive) {
+    return (
+      <section className="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-10 shadow-2xs space-y-8 text-slate-700">
+        <div className="border-b border-slate-100 pb-5 space-y-1.5">
+          <div className="flex items-center gap-2 text-indigo-600 text-xs font-black uppercase tracking-wider">
+            <BookOpen className="w-4 h-4 shrink-0" />
+            <span>{deepDive.badge}</span>
+          </div>
+          <h2 className="text-xl sm:text-3xl font-black text-slate-900 leading-snug">
+            {deepDive.heading}
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-500 font-medium leading-relaxed">
+            {deepDive.subheading}
+          </p>
+        </div>
+
+        <div className="space-y-8 text-xs sm:text-sm leading-relaxed font-medium">
+          {deepDive.sections.map((sec, sIdx) => (
+            <div key={sIdx} className="space-y-3">
+              <h3 className="text-base sm:text-lg font-black text-slate-900 flex items-center gap-2.5">
+                <span className="w-7 h-7 rounded-xl bg-indigo-600 text-white font-black text-xs flex items-center justify-center shrink-0 shadow-xs">
+                  {sIdx + 1}
+                </span>
+                <span>{sec.title}</span>
+              </h3>
+              {sec.paragraphs.map((p, pIdx) => (
+                <p key={pIdx} className="text-slate-600 leading-relaxed">
+                  {p}
+                </p>
+              ))}
+              {sec.bullets && sec.bullets.length > 0 && (
+                <ul className="list-disc pl-5 space-y-2 text-slate-600">
+                  {sec.bullets.map((b, bIdx) => (
+                    <li key={bIdx} className="leading-relaxed">
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
+
   const categoryName = category.title.split(':')[0].trim();
 
   return (
@@ -1081,9 +1131,15 @@ export function CategoryHubPage({ category }: { category: CategoryConfig }) {
         <CategoryDeepDiveGuide category={category} />
 
         {/* Collapsible FAQ Section with FAQPage Schema — JS Accordion for instant response */}
-        {category.faqs && category.faqs.length > 0 && (
-          <FaqAccordion faqs={category.faqs} keywords={category.keywords} />
-        )}
+        {(() => {
+          const categorySlug = category.slug.startsWith('/') ? category.slug : `/${category.slug}`;
+          const deepDive = TOOL_DEEP_DIVES[categorySlug];
+          const activeFaqs = deepDive?.faqs || category.faqs;
+          if (activeFaqs && activeFaqs.length > 0) {
+            return <FaqAccordion faqs={activeFaqs} keywords={category.keywords} />;
+          }
+          return null;
+        })()}
 
         {/* Step-by-Step Guides & Articles */}
         {categoryArticles.length > 0 && (
