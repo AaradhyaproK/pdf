@@ -41,6 +41,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const siteUrl = 'https://www.filezenith.com';
   const url = `${siteUrl}/tools/${slug}`;
 
+  const ogImageUrl = `${siteUrl}/api/og?title=${encodeURIComponent(preset.h1)}&category=${encodeURIComponent('Govt Exam Tools')}&desc=${encodeURIComponent(preset.shortDescription)}&badge=${encodeURIComponent(preset.targetSize + ' Compliant')}`;
+
   return {
     title: preset.title,
     description: preset.metaDescription,
@@ -54,13 +56,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url: url,
       siteName: 'FileZenith',
       type: 'website',
-      images: [`${siteUrl}/filezenith-logo.png`],
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: preset.h1,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: preset.title,
       description: preset.metaDescription,
-      images: [`${siteUrl}/filezenith-logo.png`],
+      images: [ogImageUrl],
     },
   };
 }

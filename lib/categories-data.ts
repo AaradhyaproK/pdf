@@ -1,3 +1,5 @@
+import type { Metadata } from 'next';
+
 export interface CategoryToolItem {
   name: string;
   slug: string;
@@ -932,3 +934,43 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
     ]
   }
 };
+
+export function getCategoryMetadata(slug: string): Metadata {
+  const category = CATEGORY_REGISTRY[slug];
+  if (!category) return {};
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.filezenith.com';
+  const url = `${siteUrl}/${slug}`;
+  const ogImageUrl = `${siteUrl}/api/og?title=${encodeURIComponent(category.h1 || category.title)}&category=${encodeURIComponent('Tool Directory')}&desc=${encodeURIComponent(category.metaDescription)}&badge=${encodeURIComponent('All-In-One Studio')}`;
+
+  return {
+    title: {
+      absolute: category.metaTitle,
+    },
+    description: category.metaDescription,
+    keywords: category.keywords,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title: category.metaTitle,
+      description: category.metaDescription,
+      url: url,
+      siteName: 'FileZenith',
+      type: 'website',
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: category.metaTitle,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: category.metaTitle,
+      description: category.metaDescription,
+      images: [ogImageUrl],
+    },
+  };
+}

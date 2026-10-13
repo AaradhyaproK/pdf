@@ -1,25 +1,10 @@
 import { Metadata } from 'next';
-import { CATEGORY_REGISTRY } from '@/lib/categories-data';
+import { CATEGORY_REGISTRY, getCategoryMetadata } from '@/lib/categories-data';
 import { CategoryHubPage } from '@/components/CategoryHubPage';
 
 const category = CATEGORY_REGISTRY['pdf-tools'];
 
-export const metadata: Metadata = {
-  title: {
-    absolute: category.metaTitle,
-  },
-  description: category.metaDescription,
-  alternates: {
-    canonical: 'https://www.filezenith.com/pdf-tools',
-  },
-  openGraph: {
-    title: category.metaTitle,
-    description: category.metaDescription,
-    url: 'https://www.filezenith.com/pdf-tools',
-    siteName: 'FileZenith',
-    type: 'website',
-  },
-};
+export const metadata: Metadata = getCategoryMetadata('pdf-tools');
 
 export default function PdfDirectoryHubPage() {
   return <CategoryHubPage category={category} />;

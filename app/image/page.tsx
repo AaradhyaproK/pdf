@@ -1,25 +1,10 @@
 import { Metadata } from 'next';
-import { CATEGORY_REGISTRY } from '@/lib/categories-data';
+import { CATEGORY_REGISTRY, getCategoryMetadata } from '@/lib/categories-data';
 import { CategoryHubPage } from '@/components/CategoryHubPage';
 
 const category = CATEGORY_REGISTRY['image-tools'];
 
-export const metadata: Metadata = {
-  title: {
-    absolute: category.metaTitle,
-  },
-  description: category.metaDescription,
-  alternates: {
-    canonical: 'https://www.filezenith.com/image-tools',
-  },
-  openGraph: {
-    title: category.metaTitle,
-    description: category.metaDescription,
-    url: 'https://www.filezenith.com/image-tools',
-    siteName: 'FileZenith',
-    type: 'website',
-  },
-};
+export const metadata: Metadata = getCategoryMetadata('image-tools');
 
 export default function ImageDirectoryHubPage() {
   return <CategoryHubPage category={category} />;

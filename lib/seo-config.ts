@@ -2446,49 +2446,60 @@ export function generateToolMetadata(slug: string): Metadata {
   const cleanTitle = rawTitle.replace(/\s*\|\s*FileZenith.*$/i, '').trim();
   const absoluteTitle = `${cleanTitle} | FileZenith`;
 
-  return {
-    title: {
-      absolute: absoluteTitle,
-    },
-    description: tool.description,
-    keywords: tool.keywords.join(', '),
-    alternates: {
-      canonical: canonicalUrl
-    },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
+    const categoryLabel =
+      tool.category === 'pdf'
+        ? 'PDF Studio'
+        : tool.category === 'image'
+        ? 'Image Studio'
+        : tool.category === 'social'
+        ? 'Social Media Tools'
+        : 'Online Utilities';
+
+    const ogImageUrl = `${siteUrl}/api/og?title=${encodeURIComponent(cleanTitle)}&category=${encodeURIComponent(categoryLabel)}&desc=${encodeURIComponent(tool.description)}&badge=${encodeURIComponent('100% Client-Side Engine')}`;
+
+    return {
+      title: {
+        absolute: absoluteTitle,
+      },
+      description: tool.description,
+      keywords: tool.keywords.join(', '),
+      alternates: {
+        canonical: canonicalUrl
+      },
+      robots: {
         index: true,
         follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large' as const,
-        'max-snippet': -1,
+        googleBot: {
+          index: true,
+          follow: true,
+          'max-video-preview': -1,
+          'max-image-preview': 'large' as const,
+          'max-snippet': -1,
+        },
       },
-    },
-    openGraph: {
-      title: absoluteTitle,
-      description: tool.description,
-      url: canonicalUrl,
-      siteName: 'FileZenith',
-      locale: 'en_IN',
-      type: 'website',
-      images: [
-        {
-          url: `${siteUrl}/filezenith-og.png`,
-          width: 1200,
-          height: 630,
-          alt: cleanTitle
-        }
-      ]
-    },
-    twitter: {
-      card: 'summary_large_image' as const,
-      title: absoluteTitle,
-      description: tool.description,
-      images: [`${siteUrl}/filezenith-og.png`]
-    }
-  };
+      openGraph: {
+        title: absoluteTitle,
+        description: tool.description,
+        url: canonicalUrl,
+        siteName: 'FileZenith',
+        locale: 'en_IN',
+        type: 'website',
+        images: [
+          {
+            url: ogImageUrl,
+            width: 1200,
+            height: 630,
+            alt: cleanTitle
+          }
+        ]
+      },
+      twitter: {
+        card: 'summary_large_image' as const,
+        title: absoluteTitle,
+        description: tool.description,
+        images: [ogImageUrl]
+      }
+    };
 }
 
 export function getCompleteToolFaqs(tool: ToolSEO): Array<{ question: string; answer: string }> {

@@ -56,14 +56,21 @@ export const metadata: Metadata = {
     url: 'https://www.filezenith.com/tools/aadhaar-card-print',
     siteName: 'FileZenith',
     type: 'website',
-    images: ['https://www.filezenith.com/filezenith-logo.png'],
+    images: [
+      {
+        url: 'https://www.filezenith.com/api/og?title=Aadhaar%20Card%20Print%20Tool&category=ID%20Card%20Studio&desc=Crop%20and%20print%20e-Aadhaar%20PDF%20on%20A4%20and%20PVC%20card%20(85.6x54mm).%20100%25%20private%20in-browser.',
+        width: 1200,
+        height: 630,
+        alt: 'Aadhaar Card Print Tool Online',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Aadhaar Card Print Tool Online (e-Aadhaar to A4 & PVC Card) | FileZenith',
     description:
       'Crop and print e-Aadhaar PDF or scanned card on A4 paper and PVC card (exact 85.6x54 mm). 100% client-side privacy.',
-    images: ['https://www.filezenith.com/filezenith-logo.png'],
+    images: ['https://www.filezenith.com/api/og?title=Aadhaar%20Card%20Print%20Tool&category=ID%20Card%20Studio&desc=Crop%20and%20print%20e-Aadhaar%20PDF%20on%20A4%20and%20PVC%20card%20(85.6x54mm).%20100%25%20private%20in-browser.'],
   },
 };
 

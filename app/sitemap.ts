@@ -61,5 +61,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }));
 
-  return [...staticRoutes, ...categoryRoutes, ...toolRoutes, ...presetRoutes, ...guideRoutes, ...blogRoutes];
+  const allRoutes = [...staticRoutes, ...categoryRoutes, ...toolRoutes, ...presetRoutes, ...guideRoutes, ...blogRoutes];
+
+  // Deduplicate by URL (preserving higher priority)
+  const routeMap = new Map<string, MetadataRoute.Sitemap[number]>();
+  for (const item of allRoutes) {
+    const existing = routeMap.get(item.url);
+    if (!existing || (item.priority ?? 0) > (existing.priority ?? 0)) {
+      routeMap.set(item.url, item);
+    }
+  }
+
+  return Array.from(routeMap.values());
 }
