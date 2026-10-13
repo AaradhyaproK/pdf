@@ -135,13 +135,13 @@ export default function HomePage() {
               100% Free Mobile & Desktop Studio
             </span>
             <a
-              href="https://www.producthunt.com/products/filezenith?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-filezenith"
+              href="https://www.producthunt.com/products/filezenith?utm_source=badge-follow&utm_medium=badge&utm_source=badge-filezenith"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 hover:bg-amber-100 text-amber-900 text-xs font-black border border-amber-200 transition-all hover:scale-105 shadow-2xs"
             >
               <span className="text-orange-600 font-black">▲</span>
-              <span>Featured on Product Hunt</span>
+              <span>Find us on Product Hunt</span>
             </a>
           </div>
 
@@ -174,17 +174,18 @@ export default function HomePage() {
           {/* Official Product Hunt Embed Badge */}
           <div className="pt-3 flex items-center justify-center">
             <a
-              href="https://www.producthunt.com/products/filezenith?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-filezenith"
+              href="https://www.producthunt.com/products/filezenith?utm_source=badge-follow&utm_medium=badge&utm_source=badge-filezenith"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block hover:opacity-95 transition-all hover:scale-105"
             >
               <img
-                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1271104&theme=light&t=1791285270103"
+                src="https://api.producthunt.com/widgets/embed-image/v1/follow.svg?product_id=1336391&theme=dark"
                 alt="FileZenith - 100% private in-browser PDF, image & document studio | Product Hunt"
                 width={250}
                 height={54}
-                className="w-[230px] sm:w-[250px] h-auto rounded-xl shadow-xs border border-slate-200/80"
+                style={{ width: '250px', height: '54px' }}
+                className="w-[230px] sm:w-[250px] h-[50px] sm:h-[54px] rounded-xl shadow-xs"
               />
             </a>
           </div>

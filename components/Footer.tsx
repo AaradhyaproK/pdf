@@ -47,17 +47,18 @@ export function Footer() {
               <span>hello@snab.co.in</span>
             </a>
             <a
-              href="https://www.producthunt.com/products/filezenith?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-filezenith"
+              href="https://www.producthunt.com/products/filezenith?utm_source=badge-follow&utm_medium=badge&utm_source=badge-filezenith"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block hover:opacity-95 transition-opacity"
             >
               <img
-                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1271104&theme=light&t=1791285270103"
+                src="https://api.producthunt.com/widgets/embed-image/v1/follow.svg?product_id=1336391&theme=dark"
                 alt="FileZenith - 100% private in-browser PDF, image & document studio | Product Hunt"
-                width={180}
-                height={40}
-                className="w-[150px] h-auto rounded-lg"
+                width={250}
+                height={54}
+                style={{ width: '180px', height: '39px' }}
+                className="w-[180px] h-auto rounded-lg shadow-xs"
               />
             </a>
           </div>
@@ -193,20 +194,21 @@ export function Footer() {
               </a>
             </div>
 
-            {/* Product Hunt Featured Badge */}
+            {/* Product Hunt Follow Badge */}
             <div className="pt-1">
               <a
-                href="https://www.producthunt.com/products/filezenith?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-filezenith"
+                href="https://www.producthunt.com/products/filezenith?utm_source=badge-follow&utm_medium=badge&utm_source=badge-filezenith"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block hover:opacity-95 transition-opacity"
               >
                 <img
-                  src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1271104&theme=light&t=1791285270103"
+                  src="https://api.producthunt.com/widgets/embed-image/v1/follow.svg?product_id=1336391&theme=dark"
                   alt="FileZenith - 100% private in-browser PDF, image & document studio | Product Hunt"
                   width={250}
                   height={54}
-                  className="w-[195px] h-auto rounded-lg shadow-2xs border border-slate-200/70"
+                  style={{ width: '250px', height: '54px' }}
+                  className="w-[220px] sm:w-[250px] h-auto rounded-lg shadow-xs border border-slate-700/60"
                 />
               </a>
             </div>
