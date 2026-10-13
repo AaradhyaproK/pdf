@@ -53,6 +53,7 @@ import {
   Unlock,
   Table,
   Printer,
+  Menu,
 } from 'lucide-react';
 
 const PDF_TOOLS = [
@@ -158,12 +159,39 @@ export function Navbar() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrolled, setScrolled] = useState(false);
   const [compressReadyInfo, setCompressReadyInfo] = useState<{ url: string; name: string } | null>(null);
+  const [activeDropdown, setActiveDropdown] = useState<'pdf' | 'image' | 'utility' | 'social' | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const navContainerRef = useRef<HTMLElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const desktopSearchInputRef = useRef<HTMLInputElement>(null);
   const searchContainerRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const router = useRouter();
+
+  const closeDropdown = () => {
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    setActiveDropdown(null);
+  };
+
+  const closeAllNavbars = () => {
+    closeDropdown();
+    setIsMobileMenuOpen(false);
+    setSearchOpen(false);
+  };
+
+  const handleMouseEnter = (dropdown: 'pdf' | 'image' | 'utility' | 'social') => {
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    setActiveDropdown(dropdown);
+  };
+
+  const handleMouseLeave = () => {
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    closeTimeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 150);
+  };
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -178,7 +206,13 @@ export function Navbar() {
     }
   }, []);
 
-  const isActive = (path: string) => pathname?.startsWith(path);
+  const isActive = (path: string) => {
+    if (path === '/pdf') return pathname?.startsWith('/pdf') || pathname === '/pdf-tools';
+    if (path === '/image') return pathname?.startsWith('/image') || pathname === '/image-tools';
+    if (path === '/utility') return pathname?.startsWith('/utility') || pathname === '/utility-tools';
+    if (path === '/social') return pathname?.startsWith('/social') || pathname === '/social-tools';
+    return pathname?.startsWith(path);
+  };
 
   // Filter tools based on search query and category with smart ranking & deduplication
   const filteredTools = useMemo(() => {
@@ -226,15 +260,28 @@ export function Navbar() {
     };
   }, []);
 
-  // Reset search & state on route navigation
+  // Reset search, dropdowns & state on route navigation
   useEffect(() => {
-    setSearchOpen(false);
+    closeAllNavbars();
     setSearchQuery('');
     setSelectedIndex(0);
     setCompressReadyInfo(null);
   }, [pathname]);
 
-  // Global Keyboard Shortcut (⌘K / Ctrl+K to toggle search, ESC to close)
+  // Click outside listener to auto-close any open desktop dropdown
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (navContainerRef.current && !navContainerRef.current.contains(e.target as Node)) {
+        closeDropdown();
+      }
+    };
+    if (activeDropdown) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [activeDropdown]);
+
+  // Global Keyboard Shortcut (⌘K / Ctrl+K to toggle search, ESC to close all)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
@@ -253,7 +300,7 @@ export function Navbar() {
           return next;
         });
       } else if (e.key === 'Escape') {
-        setSearchOpen(false);
+        closeAllNavbars();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -312,8 +359,7 @@ export function Navbar() {
       document.activeElement.blur();
     }
 
-    setSearchOpen(false);
-    setSearchQuery('');
+    closeAllNavbars();
     if (typeof window !== 'undefined') {
       document.body.style.overflow = '';
     }
@@ -346,7 +392,7 @@ export function Navbar() {
   };
 
   useEffect(() => {
-    if (searchOpen && window.innerWidth < 768) {
+    if ((searchOpen || isMobileMenuOpen) && window.innerWidth < 768) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
@@ -354,7 +400,7 @@ export function Navbar() {
     return () => {
       document.body.style.overflow = '';
     };
-  }, [searchOpen]);
+  }, [searchOpen, isMobileMenuOpen]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -370,6 +416,7 @@ export function Navbar() {
 
   return (
     <header
+      ref={navContainerRef}
       className={`sticky top-0 inset-x-0 z-50 w-full transition-all duration-300 pt-[env(safe-area-inset-top,0px)] ${
         scrolled
           ? 'bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-xs'
@@ -573,7 +620,10 @@ export function Navbar() {
             )}
 
             <button
-              onClick={() => setSearchOpen(true)}
+              onClick={() => {
+                setSearchOpen(true);
+                setIsMobileMenuOpen(false);
+              }}
               className="px-3 py-1.5 flex items-center gap-1.5 text-slate-800 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 border border-slate-200/90 rounded-full active:scale-95 transition-all cursor-pointer shrink-0 shadow-xs"
               aria-label="Search tools"
               title="Search Tools"
@@ -581,6 +631,201 @@ export function Navbar() {
               <Search className="w-4 h-4 text-slate-800 stroke-[2.2]" />
               <span className="text-xs font-extrabold tracking-tight text-slate-800">Search</span>
             </button>
+
+            <button
+              onClick={() => {
+                setIsMobileMenuOpen((prev) => !prev);
+                setSearchOpen(false);
+              }}
+              className={`w-8 h-8 rounded-full flex items-center justify-center transition-all cursor-pointer border shrink-0 ${
+                isMobileMenuOpen
+                  ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
+                  : 'bg-slate-100 text-slate-800 hover:bg-slate-200 border-slate-200/90'
+              }`}
+              aria-label="Toggle menu"
+              title="Navigation Menu"
+            >
+              {isMobileMenuOpen ? <X className="w-4 h-4 stroke-[2.5]" /> : <Menu className="w-4 h-4 stroke-[2.2]" />}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Mobile Drawer Menu (Accessible from Navbar on Mobile) */}
+      {isMobileMenuOpen && !searchOpen && (
+        <div className="md:hidden fixed inset-x-0 top-[52px] bottom-0 z-40 bg-white/98 backdrop-blur-2xl border-b border-slate-200 shadow-2xl overflow-y-auto overscroll-contain p-4 pb-28 animate-in slide-in-from-top-2 duration-200 space-y-4">
+          <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div>
+              <p className="text-xs font-black text-slate-900 uppercase tracking-wider">Navigation Menu</p>
+              <p className="text-[11px] text-slate-500 font-medium">Browse 80+ tools across 4 studios</p>
+            </div>
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="p-1.5 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 cursor-pointer"
+              aria-label="Close menu"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* PDF Studio Mobile Card */}
+          <div className="p-3.5 rounded-2xl bg-slate-50/80 border border-slate-200/80 space-y-2.5">
+            <div className="flex items-center justify-between">
+              <Link
+                href="/pdf-tools"
+                onClick={closeAllNavbars}
+                className="flex items-center gap-2 group cursor-pointer"
+              >
+                <div className="p-2 rounded-xl bg-rose-50 text-rose-600 border border-rose-100">
+                  <FileText className="w-4 h-4" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-black text-slate-900 group-hover:text-rose-600 transition-colors">
+                    PDF Studio
+                  </h4>
+                  <p className="text-[10px] text-slate-500 font-medium">Merge, compress, edit & OCR</p>
+                </div>
+              </Link>
+              <Link
+                href="/pdf-tools"
+                onClick={closeAllNavbars}
+                className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-white text-rose-600 border border-rose-200 shadow-2xs hover:bg-rose-50"
+              >
+                Open Hub →
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 gap-1.5 pt-1 border-t border-slate-200/50">
+              {PDF_TOOLS.slice(0, 6).map((tool) => (
+                <Link
+                  key={tool.slug}
+                  href={tool.slug}
+                  onClick={closeAllNavbars}
+                  className="p-2 rounded-xl bg-white hover:bg-slate-100 border border-slate-200/70 text-[11px] font-bold text-slate-800 truncate block active:scale-98 transition-all"
+                >
+                  {tool.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Image Studio Mobile Card */}
+          <div className="p-3.5 rounded-2xl bg-slate-50/80 border border-slate-200/80 space-y-2.5">
+            <div className="flex items-center justify-between">
+              <Link
+                href="/image-tools"
+                onClick={closeAllNavbars}
+                className="flex items-center gap-2 group cursor-pointer"
+              >
+                <div className="p-2 rounded-xl bg-sky-50 text-sky-600 border border-sky-100">
+                  <ImageIcon className="w-4 h-4" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-black text-slate-900 group-hover:text-sky-600 transition-colors">
+                    Image Studio
+                  </h4>
+                  <p className="text-[10px] text-slate-500 font-medium">Compress, convert & passport photos</p>
+                </div>
+              </Link>
+              <Link
+                href="/image-tools"
+                onClick={closeAllNavbars}
+                className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-white text-sky-600 border border-sky-200 shadow-2xs hover:bg-sky-50"
+              >
+                Open Hub →
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 gap-1.5 pt-1 border-t border-slate-200/50">
+              {IMAGE_TOOLS.slice(0, 6).map((tool) => (
+                <Link
+                  key={tool.slug}
+                  href={tool.slug}
+                  onClick={closeAllNavbars}
+                  className="p-2 rounded-xl bg-white hover:bg-slate-100 border border-slate-200/70 text-[11px] font-bold text-slate-800 truncate block active:scale-98 transition-all"
+                >
+                  {tool.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Daily Utilities Mobile Card */}
+          <div className="p-3.5 rounded-2xl bg-slate-50/80 border border-slate-200/80 space-y-2.5">
+            <div className="flex items-center justify-between">
+              <Link
+                href="/utility-tools"
+                onClick={closeAllNavbars}
+                className="flex items-center gap-2 group cursor-pointer"
+              >
+                <div className="p-2 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100">
+                  <Wrench className="w-4 h-4" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-black text-slate-900 group-hover:text-emerald-600 transition-colors">
+                    Daily Utilities
+                  </h4>
+                  <p className="text-[10px] text-slate-500 font-medium">Bills, EMI, Age, QR & Converters</p>
+                </div>
+              </Link>
+              <Link
+                href="/utility-tools"
+                onClick={closeAllNavbars}
+                className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-white text-emerald-600 border border-emerald-200 shadow-2xs hover:bg-emerald-50"
+              >
+                Open Hub →
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 gap-1.5 pt-1 border-t border-slate-200/50">
+              {UTILITY_TOOLS.slice(0, 6).map((tool) => (
+                <Link
+                  key={tool.slug}
+                  href={tool.slug}
+                  onClick={closeAllNavbars}
+                  className="p-2 rounded-xl bg-white hover:bg-slate-100 border border-slate-200/70 text-[11px] font-bold text-slate-800 truncate block active:scale-98 transition-all"
+                >
+                  {tool.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Social Tools Mobile Card */}
+          <div className="p-3.5 rounded-2xl bg-slate-50/80 border border-slate-200/80 space-y-2.5">
+            <div className="flex items-center justify-between">
+              <Link
+                href="/social-tools"
+                onClick={closeAllNavbars}
+                className="flex items-center gap-2 group cursor-pointer"
+              >
+                <div className="p-2 rounded-xl bg-pink-50 text-pink-600 border border-pink-100">
+                  <Share2 className="w-4 h-4" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-black text-slate-900 group-hover:text-pink-600 transition-colors">
+                    Social Tools
+                  </h4>
+                  <p className="text-[10px] text-slate-500 font-medium">WhatsApp direct, YouTube covers</p>
+                </div>
+              </Link>
+              <Link
+                href="/social-tools"
+                onClick={closeAllNavbars}
+                className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-white text-pink-600 border border-pink-200 shadow-2xs hover:bg-pink-50"
+              >
+                Open Hub →
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 gap-1.5 pt-1 border-t border-slate-200/50">
+              {SOCIAL_TOOLS.map((tool) => (
+                <Link
+                  key={tool.slug}
+                  href={tool.slug}
+                  onClick={closeAllNavbars}
+                  className="p-2 rounded-xl bg-white hover:bg-slate-100 border border-slate-200/70 text-[11px] font-bold text-slate-800 truncate block active:scale-98 transition-all"
+                >
+                  {tool.name}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       )}
@@ -603,10 +848,16 @@ export function Navbar() {
         </Link>
 
         <nav className="flex items-center gap-1 text-sm font-semibold text-slate-700">
-          <div className="relative group py-4">
+          {/* PDF Studio */}
+          <div
+            className="relative py-4"
+            onMouseEnter={() => handleMouseEnter('pdf')}
+            onMouseLeave={handleMouseLeave}
+          >
             <Link
-              href="/pdf/compress"
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-all ${
+              href="/pdf-tools"
+              onClick={closeAllNavbars}
+              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-all cursor-pointer ${
                 isActive('/pdf')
                   ? 'bg-slate-900/10 text-slate-900 font-extrabold border border-slate-900/15 backdrop-blur-sm'
                   : 'hover:bg-slate-100 hover:text-slate-900'
@@ -614,12 +865,26 @@ export function Navbar() {
             >
               <FileText className="w-4 h-4 text-slate-700" />
               <span>PDF Studio</span>
-              <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:rotate-180 transition-transform duration-200" />
+              <ChevronDown
+                className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${
+                  activeDropdown === 'pdf' ? 'rotate-180 text-slate-900' : ''
+                }`}
+              />
             </Link>
 
-            <div className="absolute top-full left-0 w-[860px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0 grid grid-cols-3 gap-2">
+            <div
+              className={`absolute top-full left-0 w-[860px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-4 transition-all duration-200 grid grid-cols-3 gap-2 ${
+                activeDropdown === 'pdf'
+                  ? 'opacity-100 visible translate-y-0 pointer-events-auto'
+                  : 'opacity-0 invisible translate-y-2 pointer-events-none'
+              }`}
+            >
               <div className="col-span-3 px-3 py-1.5 flex items-center justify-between border-b border-slate-100 mb-1">
-                <Link href="/pdf-tools" className="text-xs font-black uppercase tracking-wider text-slate-900 hover:text-indigo-600 flex items-center gap-1 transition-colors">
+                <Link
+                  href="/pdf-tools"
+                  onClick={closeAllNavbars}
+                  className="text-xs font-black uppercase tracking-wider text-slate-900 hover:text-indigo-600 flex items-center gap-1 transition-colors cursor-pointer"
+                >
                   <span>PDF Studio Hub →</span>
                 </Link>
                 <span className="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded-full font-bold border border-slate-200/80">100% Private</span>
@@ -630,7 +895,8 @@ export function Navbar() {
                   <Link
                     key={tool.slug}
                     href={tool.slug}
-                    className="p-2.5 rounded-2xl hover:bg-slate-100/80 transition-colors flex items-start gap-3 group/item border border-transparent hover:border-slate-200/80"
+                    onClick={closeAllNavbars}
+                    className="p-2.5 rounded-2xl hover:bg-slate-100/80 transition-colors flex items-start gap-3 group/item border border-transparent hover:border-slate-200/80 cursor-pointer"
                   >
                     <div className="p-2 rounded-xl bg-slate-100 text-slate-800 group-hover/item:bg-slate-900 group-hover/item:text-white transition-colors shrink-0">
                       <Icon className="w-4 h-4" />
@@ -654,10 +920,16 @@ export function Navbar() {
             </div>
           </div>
 
-          <div className="relative group py-4">
+          {/* Image Studio */}
+          <div
+            className="relative py-4"
+            onMouseEnter={() => handleMouseEnter('image')}
+            onMouseLeave={handleMouseLeave}
+          >
             <Link
-              href="/image/compress"
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-all ${
+              href="/image-tools"
+              onClick={closeAllNavbars}
+              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-all cursor-pointer ${
                 isActive('/image')
                   ? 'bg-slate-900/10 text-slate-900 font-extrabold border border-slate-900/15 backdrop-blur-sm'
                   : 'hover:bg-slate-100 hover:text-slate-900'
@@ -665,12 +937,26 @@ export function Navbar() {
             >
               <ImageIcon className="w-4 h-4 text-slate-700" />
               <span>Image Studio</span>
-              <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:rotate-180 transition-transform duration-200" />
+              <ChevronDown
+                className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${
+                  activeDropdown === 'image' ? 'rotate-180 text-slate-900' : ''
+                }`}
+              />
             </Link>
 
-            <div className="absolute top-full left-0 w-[860px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0 grid grid-cols-3 gap-2">
+            <div
+              className={`absolute top-full left-0 w-[860px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-4 transition-all duration-200 grid grid-cols-3 gap-2 ${
+                activeDropdown === 'image'
+                  ? 'opacity-100 visible translate-y-0 pointer-events-auto'
+                  : 'opacity-0 invisible translate-y-2 pointer-events-none'
+              }`}
+            >
               <div className="col-span-3 px-3 py-1.5 flex items-center justify-between border-b border-slate-100 mb-1">
-                <Link href="/image-tools" className="text-xs font-black uppercase tracking-wider text-slate-900 hover:text-indigo-600 flex items-center gap-1 transition-colors">
+                <Link
+                  href="/image-tools"
+                  onClick={closeAllNavbars}
+                  className="text-xs font-black uppercase tracking-wider text-slate-900 hover:text-indigo-600 flex items-center gap-1 transition-colors cursor-pointer"
+                >
                   <span>Image Studio Hub →</span>
                 </Link>
                 <span className="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded-full font-bold border border-slate-200/80">Fast Canvas AI</span>
@@ -681,7 +967,8 @@ export function Navbar() {
                   <Link
                     key={tool.slug}
                     href={tool.slug}
-                    className="p-2.5 rounded-2xl hover:bg-slate-100/80 transition-colors flex items-start gap-3 group/item border border-transparent hover:border-slate-200/80"
+                    onClick={closeAllNavbars}
+                    className="p-2.5 rounded-2xl hover:bg-slate-100/80 transition-colors flex items-start gap-3 group/item border border-transparent hover:border-slate-200/80 cursor-pointer"
                   >
                     <div className="p-2 rounded-xl bg-slate-100 text-slate-800 group-hover/item:bg-slate-900 group-hover/item:text-white transition-colors shrink-0">
                       <Icon className="w-4 h-4" />
@@ -705,10 +992,16 @@ export function Navbar() {
             </div>
           </div>
 
-          <div className="relative group py-4">
+          {/* Daily Utilities */}
+          <div
+            className="relative py-4"
+            onMouseEnter={() => handleMouseEnter('utility')}
+            onMouseLeave={handleMouseLeave}
+          >
             <Link
-              href="/utility/qr-generator"
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-all ${
+              href="/utility-tools"
+              onClick={closeAllNavbars}
+              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-all cursor-pointer ${
                 isActive('/utility')
                   ? 'bg-slate-900/10 text-slate-900 font-extrabold border border-slate-900/15 backdrop-blur-sm'
                   : 'hover:bg-slate-100 hover:text-slate-900'
@@ -716,13 +1009,27 @@ export function Navbar() {
             >
               <Wrench className="w-4 h-4 text-slate-700" />
               <span>Daily Utilities</span>
-              <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:rotate-180 transition-transform duration-200" />
+              <ChevronDown
+                className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${
+                  activeDropdown === 'utility' ? 'rotate-180 text-slate-900' : ''
+                }`}
+              />
             </Link>
 
-            <div className="absolute top-full left-1/2 -ml-[430px] w-[860px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0 grid grid-cols-3 gap-2">
+            <div
+              className={`absolute top-full left-1/2 -ml-[430px] w-[860px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-4 transition-all duration-200 grid grid-cols-3 gap-2 ${
+                activeDropdown === 'utility'
+                  ? 'opacity-100 visible translate-y-0 pointer-events-auto'
+                  : 'opacity-0 invisible translate-y-2 pointer-events-none'
+              }`}
+            >
               <div className="col-span-3 px-3 py-1.5 flex items-center justify-between border-b border-slate-100 mb-1">
-                <Link href="/calculators" className="text-xs font-black uppercase tracking-wider text-slate-900 hover:text-indigo-600 flex items-center gap-1 transition-colors">
-                  <span>Daily Utility Hubs →</span>
+                <Link
+                  href="/utility-tools"
+                  onClick={closeAllNavbars}
+                  className="text-xs font-black uppercase tracking-wider text-slate-900 hover:text-indigo-600 flex items-center gap-1 transition-colors cursor-pointer"
+                >
+                  <span>Daily Utility Studio Hub →</span>
                 </Link>
                 <span className="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded-full font-bold border border-slate-200/80">Calculators & Tools</span>
               </div>
@@ -732,7 +1039,8 @@ export function Navbar() {
                   <Link
                     key={tool.slug}
                     href={tool.slug}
-                    className="p-2.5 rounded-2xl hover:bg-slate-100/80 transition-colors flex items-start gap-3 group/item border border-transparent hover:border-slate-200/80"
+                    onClick={closeAllNavbars}
+                    className="p-2.5 rounded-2xl hover:bg-slate-100/80 transition-colors flex items-start gap-3 group/item border border-transparent hover:border-slate-200/80 cursor-pointer"
                   >
                     <div className="p-2 rounded-xl bg-slate-100 text-slate-800 group-hover/item:bg-slate-900 group-hover/item:text-white transition-colors shrink-0">
                       <Icon className="w-4 h-4" />
@@ -756,11 +1064,16 @@ export function Navbar() {
             </div>
           </div>
 
-
-          <div className="relative group py-4">
+          {/* Social Tools */}
+          <div
+            className="relative py-4"
+            onMouseEnter={() => handleMouseEnter('social')}
+            onMouseLeave={handleMouseLeave}
+          >
             <Link
-              href="/social/whatsapp-direct-chat"
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-all ${
+              href="/social-tools"
+              onClick={closeAllNavbars}
+              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-all cursor-pointer ${
                 isActive('/social')
                   ? 'bg-slate-900/10 text-slate-900 font-extrabold border border-slate-900/15 backdrop-blur-sm'
                   : 'hover:bg-slate-100 hover:text-slate-900'
@@ -768,12 +1081,26 @@ export function Navbar() {
             >
               <Share2 className="w-4 h-4 text-slate-700" />
               <span>Social Tools</span>
-              <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:rotate-180 transition-transform duration-200" />
+              <ChevronDown
+                className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${
+                  activeDropdown === 'social' ? 'rotate-180 text-slate-900' : ''
+                }`}
+              />
             </Link>
 
-            <div className="absolute top-full right-0 w-[860px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0 grid grid-cols-3 gap-2">
+            <div
+              className={`absolute top-full right-0 w-[860px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-4 transition-all duration-200 grid grid-cols-3 gap-2 ${
+                activeDropdown === 'social'
+                  ? 'opacity-100 visible translate-y-0 pointer-events-auto'
+                  : 'opacity-0 invisible translate-y-2 pointer-events-none'
+              }`}
+            >
               <div className="col-span-3 px-3 py-1.5 flex items-center justify-between border-b border-slate-100 mb-1">
-                <Link href="/social/whatsapp-direct-chat" className="text-xs font-black uppercase tracking-wider text-slate-900 hover:text-indigo-600 flex items-center gap-1 transition-colors">
+                <Link
+                  href="/social-tools"
+                  onClick={closeAllNavbars}
+                  className="text-xs font-black uppercase tracking-wider text-slate-900 hover:text-indigo-600 flex items-center gap-1 transition-colors cursor-pointer"
+                >
                   <span>Social Media Tools Studio →</span>
                 </Link>
                 <span className="text-[10px] bg-pink-100 text-pink-700 px-2 py-0.5 rounded-full font-bold border border-pink-200">Reels & Chat Helpers</span>
@@ -784,7 +1111,8 @@ export function Navbar() {
                   <Link
                     key={tool.slug}
                     href={tool.slug}
-                    className="p-2.5 rounded-2xl hover:bg-slate-100/80 transition-colors flex items-start gap-3 group/item border border-transparent hover:border-slate-200/80"
+                    onClick={closeAllNavbars}
+                    className="p-2.5 rounded-2xl hover:bg-slate-100/80 transition-colors flex items-start gap-3 group/item border border-transparent hover:border-slate-200/80 cursor-pointer"
                   >
                     <div className="p-2 rounded-xl bg-slate-100 text-slate-800 group-hover/item:bg-slate-900 group-hover/item:text-white transition-colors shrink-0">
                       <Icon className="w-4 h-4" />

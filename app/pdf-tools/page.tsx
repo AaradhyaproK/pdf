@@ -5,7 +5,9 @@ import { CategoryHubPage } from '@/components/CategoryHubPage';
 const category = CATEGORY_REGISTRY['pdf-tools'];
 
 export const metadata: Metadata = {
-  title: category.metaTitle,
+  title: {
+    absolute: category.metaTitle,
+  },
   description: category.metaDescription,
   alternates: {
     canonical: 'https://www.filezenith.com/pdf-tools',
@@ -16,6 +18,11 @@ export const metadata: Metadata = {
     url: 'https://www.filezenith.com/pdf-tools',
     siteName: 'FileZenith',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: category.metaTitle,
+    description: category.metaDescription,
   },
 };
 

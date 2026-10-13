@@ -5,7 +5,9 @@ import { CategoryHubPage } from '@/components/CategoryHubPage';
 const category = CATEGORY_REGISTRY['ai-tools'];
 
 export const metadata: Metadata = {
-  title: category.metaTitle,
+  title: {
+    absolute: category.metaTitle,
+  },
   description: category.metaDescription,
   alternates: {
     canonical: 'https://www.filezenith.com/ai-tools',

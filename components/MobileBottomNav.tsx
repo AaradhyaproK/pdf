@@ -264,21 +264,41 @@ export function MobileBottomNav() {
 
             {/* Header */}
             <div className="px-5 py-3 border-b border-slate-200/60 flex items-center justify-between shrink-0">
-              <div className="flex items-center gap-2">
-                <div className="p-2 rounded-xl bg-slate-900 text-white font-bold shadow-xs">
+              <Link
+                href={
+                  activeDrawer === 'pdf'
+                    ? '/pdf-tools'
+                    : activeDrawer === 'image'
+                    ? '/image-tools'
+                    : '/utility-tools'
+                }
+                onClick={() => {
+                  setActiveDrawer(null);
+                  setSearchQuery('');
+                }}
+                className="flex items-center gap-2 group cursor-pointer"
+              >
+                <div className="p-2 rounded-xl bg-slate-900 text-white font-bold shadow-xs group-hover:scale-105 transition-transform">
                   {activeDrawer === 'pdf' && <FileText className="w-4 h-4" />}
                   {activeDrawer === 'image' && <ImageIcon className="w-4 h-4" />}
                   {activeDrawer === 'utility' && <Wrench className="w-4 h-4" />}
                 </div>
                 <div>
-                  <h3 className="text-sm font-black text-slate-900 capitalize tracking-tight">
-                    {activeDrawer === 'pdf' ? 'PDF Studio Tools' : activeDrawer === 'image' ? 'Image Studio Tools' : 'Daily Quick Utilities'}
+                  <h3 className="text-sm font-black text-slate-900 capitalize tracking-tight group-hover:text-indigo-600 transition-colors flex items-center gap-1.5">
+                    <span>
+                      {activeDrawer === 'pdf'
+                        ? 'PDF Studio Tools'
+                        : activeDrawer === 'image'
+                        ? 'Image Studio Tools'
+                        : 'Daily Quick Utilities'}
+                    </span>
+                    <span className="text-[10px] text-indigo-600 font-extrabold group-hover:translate-x-0.5 transition-transform">→ Hub</span>
                   </h3>
                   <p className="text-[10px] text-slate-500 font-semibold flex items-center gap-1">
-                    <ShieldCheck className="w-3 h-3 text-emerald-600" /> 100% Client-Side Wasm
+                    <ShieldCheck className="w-3 h-3 text-emerald-600" /> 100% Client-Side • Tap to Open Hub
                   </p>
                 </div>
-              </div>
+              </Link>
 
               <button
                 onClick={() => setActiveDrawer(null)}

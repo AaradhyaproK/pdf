@@ -93,6 +93,7 @@ import { CloudflareAnalytics } from '@/components/CloudflareAnalytics';
 import { MobileBottomNav } from '@/components/MobileBottomNav';
 import { PWAInstaller } from '@/components/PWAInstaller';
 import { AppSplashScreen } from '@/components/AppSplashScreen';
+import { NavigationProgressBar } from '@/components/NavigationProgressBar';
 
 export default function RootLayout({
   children,
@@ -146,6 +147,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.className} min-h-full flex flex-col bg-slate-50/70 text-slate-900 antialiased`}>
+        <NavigationProgressBar />
         <CloudflareAnalytics />
         <AnalyticsTracker />
         <Navbar />

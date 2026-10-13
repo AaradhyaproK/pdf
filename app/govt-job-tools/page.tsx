@@ -5,7 +5,9 @@ import { CategoryHubPage } from '@/components/CategoryHubPage';
 const category = CATEGORY_REGISTRY['govt-job-tools'];
 
 export const metadata: Metadata = {
-  title: category.metaTitle,
+  title: {
+    absolute: category.metaTitle,
+  },
   description: category.metaDescription,
   keywords: category.keywords,
   alternates: {

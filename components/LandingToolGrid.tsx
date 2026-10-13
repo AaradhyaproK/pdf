@@ -1348,6 +1348,20 @@ export function LandingToolGrid() {
               <span>PDF Tools</span>
             </Link>
             <Link
+              href="/utility"
+              className="px-3 py-1.5 rounded-full bg-white text-slate-700 hover:bg-slate-900 hover:text-white border border-slate-200/90 shadow-2xs text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer group active:scale-95 shrink-0"
+            >
+              <Calculator className="w-3.5 h-3.5 text-emerald-600 group-hover:text-white transition-colors" />
+              <span>Daily Utilities</span>
+            </Link>
+            <Link
+              href="/social"
+              className="px-3 py-1.5 rounded-full bg-white text-slate-700 hover:bg-slate-900 hover:text-white border border-slate-200/90 shadow-2xs text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer group active:scale-95 shrink-0"
+            >
+              <Share2 className="w-3.5 h-3.5 text-pink-600 group-hover:text-white transition-colors" />
+              <span>Social Tools</span>
+            </Link>
+            <Link
               href="/calculators"
               className="px-3 py-1.5 rounded-full bg-white text-slate-700 hover:bg-slate-900 hover:text-white border border-slate-200/90 shadow-2xs text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer group active:scale-95 shrink-0"
             >
