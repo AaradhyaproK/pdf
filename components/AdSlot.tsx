@@ -70,19 +70,19 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
 
   if (slotType === 'header-leaderboard') {
     return (
-      <div className={`w-full flex flex-col items-center justify-center my-6 sm:my-8 ${className}`}>
+      <div className={`w-full flex-col items-center justify-center my-4 sm:my-6 hidden [&:has(iframe)]:flex ${className}`}>
         {adLabel && (
-          <span className="text-[10px] tracking-widest uppercase text-slate-400 font-semibold mb-2 block select-none text-center">
+          <span className="text-[10px] tracking-widest uppercase text-slate-400 font-semibold mb-1.5 block select-none text-center">
             {adLabel}
           </span>
         )}
-        <div className="w-full max-w-[728px] min-h-[90px] bg-slate-50/40 border border-slate-200/60 rounded-2xl p-1 flex items-center justify-center overflow-hidden shadow-2xs">
+        <div className="w-full max-w-[728px] flex items-center justify-center overflow-hidden">
           {config.adProvider === 'custom' && config.customHeaderCode ? (
             <CustomAdEmbed code={config.customHeaderCode} height={90} />
           ) : (
             <ins
               className="adsbygoogle"
-              style={{ display: 'block', width: '100%', minHeight: '90px' }}
+              style={{ display: 'block', width: '100%' }}
               data-ad-client={publisherId}
               data-ad-slot={clientAdId}
               data-ad-format="auto"
@@ -96,19 +96,19 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
 
   if (slotType === 'sticky-sidebar') {
     return (
-      <div className={`w-full flex flex-col items-center my-6 sm:my-8 sticky top-24 ${className}`}>
+      <div className={`w-full flex-col items-center my-4 hidden [&:has(iframe)]:flex ${className}`}>
         {adLabel && (
-          <span className="text-[10px] tracking-widest uppercase text-slate-400 font-semibold mb-2 block select-none text-center">
+          <span className="text-[10px] tracking-widest uppercase text-slate-400 font-semibold mb-1.5 block select-none text-center">
             {adLabel}
           </span>
         )}
-        <div className="w-full max-w-[300px] min-h-[500px] sm:min-h-[600px] bg-slate-50/40 border border-slate-200/60 rounded-3xl p-1 flex flex-col items-center justify-center text-center overflow-hidden shadow-2xs">
+        <div className="w-full max-w-[300px] flex flex-col items-center justify-center text-center overflow-hidden">
           {config.adProvider === 'custom' && config.customSidebarCode ? (
             <CustomAdEmbed code={config.customSidebarCode} height={600} />
           ) : (
             <ins
               className="adsbygoogle"
-              style={{ display: 'block', width: '100%', minHeight: '500px' }}
+              style={{ display: 'block', width: '100%' }}
               data-ad-client={publisherId}
               data-ad-slot={clientAdId}
               data-ad-format="auto"
@@ -122,19 +122,19 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
 
   // Post-Download / In-Feed Banner Slot
   return (
-    <div className={`w-full my-6 sm:my-8 flex flex-col items-center justify-center ${className}`}>
+    <div className={`w-full my-4 sm:my-6 flex-col items-center justify-center hidden [&:has(iframe)]:flex ${className}`}>
       {adLabel && (
-        <span className="text-[10px] tracking-widest uppercase text-slate-400 font-semibold mb-2 block select-none text-center">
+        <span className="text-[10px] tracking-widest uppercase text-slate-400 font-semibold mb-1.5 block select-none text-center">
           {adLabel}
         </span>
       )}
-      <div className="w-full max-w-4xl min-h-[120px] bg-slate-50/40 border border-slate-200/60 rounded-3xl p-1 flex items-center justify-center overflow-hidden shadow-2xs">
+      <div className="w-full max-w-4xl flex items-center justify-center overflow-hidden">
         {config.adProvider === 'custom' && config.customPostDownloadCode ? (
           <CustomAdEmbed code={config.customPostDownloadCode} height={120} />
         ) : (
           <ins
             className="adsbygoogle"
-            style={{ display: 'block', width: '100%', minHeight: '120px' }}
+            style={{ display: 'block', width: '100%' }}
             data-ad-client={publisherId}
             data-ad-slot={clientAdId}
             data-ad-format="auto"

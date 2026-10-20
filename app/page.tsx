@@ -125,9 +125,9 @@ export default function HomePage() {
         />
       ))}
 
-      {/* Desktop Hero Banner Section (Hidden on Mobile for App Dashboard View) */}
-      <section className="hidden sm:block relative overflow-hidden pt-12 pb-12 px-4 sm:px-6 lg:px-8 border-b border-slate-200/80 bg-white">
-        <div className="max-w-4xl mx-auto text-center space-y-5 relative z-10">
+      {/* Authority Hero Banner Section (Visible on Mobile & Desktop for SEO & User Trust) */}
+      <section className="block relative overflow-hidden pt-8 sm:pt-12 pb-8 sm:pb-12 px-4 sm:px-6 lg:px-8 border-b border-slate-200/80 bg-white">
+        <div className="max-w-4xl mx-auto text-center space-y-4 sm:space-y-5 relative z-10">
           <div className="inline-flex flex-wrap items-center justify-center gap-2">
             <PrivacyBadge />
             <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-rose-50 text-rose-700 text-xs font-extrabold border border-rose-200">
@@ -146,12 +146,12 @@ export default function HomePage() {
           </div>
 
           {/* High-Contrast Bold Headline */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-tight">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-tight">
             Every tool you need to work with <span className="text-rose-600">PDFs</span> & <span className="text-sky-600">Images</span>, in one place
           </h1>
 
           {/* Crisp Subtitle */}
-          <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-medium">
+          <p className="text-sm sm:text-base lg:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-medium">
             100% FREE! Merge, split, compress, convert, edit, protect, and OCR your files. Your PDF is processed directly in your browser, helping keep your document processing private.
           </p>
 

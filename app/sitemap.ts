@@ -2,7 +2,6 @@ import { MetadataRoute } from 'next';
 import { SEO_REGISTRY } from '@/lib/seo-config';
 import { PRESET_REGISTRY } from '@/lib/presets-data';
 import { CATEGORY_REGISTRY } from '@/lib/categories-data';
-import { GUIDE_REGISTRY } from '@/lib/guides-data';
 import { getAllPosts } from '@/lib/blog';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -27,13 +26,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.9,
-  }));
-
-  const guideRoutes = Object.keys(GUIDE_REGISTRY).map((slug) => ({
-    url: `${baseUrl}/guides/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: 0.85,
   }));
 
   const staticRoutes = [
@@ -61,7 +53,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }));
 
-  const allRoutes = [...staticRoutes, ...categoryRoutes, ...toolRoutes, ...presetRoutes, ...guideRoutes, ...blogRoutes];
+  const allRoutes = [...staticRoutes, ...categoryRoutes, ...toolRoutes, ...presetRoutes, ...blogRoutes];
 
   // Deduplicate by URL (preserving higher priority)
   const routeMap = new Map<string, MetadataRoute.Sitemap[number]>();

@@ -191,3 +191,9 @@ button:active, a:active {
   transition: transform 0.1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* AdSense Quality Compliance: Collapse unfilled AdSense units completely so no empty space or broken border displays */
+ins.adsbygoogle[data-ad-status="unfilled"] {
+  display: none !important;
+}
+
+

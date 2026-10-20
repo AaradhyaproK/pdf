@@ -54,6 +54,7 @@ import {
   Table,
   Printer,
   Menu,
+  BookOpen,
 } from 'lucide-react';
 
 const PDF_TOOLS = [
@@ -827,6 +828,64 @@ export function Navbar() {
               ))}
             </div>
           </div>
+
+          {/* Guides & Blog Mobile Card */}
+          <div className="p-3.5 rounded-2xl bg-indigo-50/70 border border-indigo-200/80 space-y-2.5">
+            <div className="flex items-center justify-between">
+              <Link
+                href="/blog"
+                onClick={closeAllNavbars}
+                className="flex items-center gap-2 group cursor-pointer"
+              >
+                <div className="p-2 rounded-xl bg-indigo-100 text-indigo-700 border border-indigo-200">
+                  <BookOpen className="w-4 h-4" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-black text-slate-900 group-hover:text-indigo-600 transition-colors">
+                    Guides &amp; Tutorials
+                  </h4>
+                  <p className="text-[10px] text-slate-500 font-medium">37+ step-by-step exam &amp; file guides</p>
+                </div>
+              </Link>
+              <Link
+                href="/blog"
+                onClick={closeAllNavbars}
+                className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-white text-indigo-600 border border-indigo-200 shadow-2xs hover:bg-indigo-50"
+              >
+                Read All →
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 gap-1.5 pt-1 border-t border-indigo-100">
+              <Link
+                href="/blog/how-to-compress-image-to-20kb"
+                onClick={closeAllNavbars}
+                className="p-2 rounded-xl bg-white hover:bg-indigo-50 border border-indigo-100 text-[11px] font-bold text-slate-800 truncate block active:scale-98 transition-all"
+              >
+                Compress Image to 20KB
+              </Link>
+              <Link
+                href="/blog/how-to-compress-pdf-to-200kb-online"
+                onClick={closeAllNavbars}
+                className="p-2 rounded-xl bg-white hover:bg-indigo-50 border border-indigo-100 text-[11px] font-bold text-slate-800 truncate block active:scale-98 transition-all"
+              >
+                Compress PDF to 200KB
+              </Link>
+              <Link
+                href="/blog/passport-size-photo-maker-guide"
+                onClick={closeAllNavbars}
+                className="p-2 rounded-xl bg-white hover:bg-indigo-50 border border-indigo-100 text-[11px] font-bold text-slate-800 truncate block active:scale-98 transition-all"
+              >
+                Passport Photo Specs
+              </Link>
+              <Link
+                href="/blog/rrb-ntpc-photo-signature-guidelines-2026"
+                onClick={closeAllNavbars}
+                className="p-2 rounded-xl bg-white hover:bg-indigo-50 border border-indigo-100 text-[11px] font-bold text-slate-800 truncate block active:scale-98 transition-all"
+              >
+                RRB NTPC Photo Guide
+              </Link>
+            </div>
+          </div>
         </div>
       )}
 
@@ -1135,6 +1194,20 @@ export function Navbar() {
               })}
             </div>
           </div>
+
+          {/* Guides & Blog Direct Link */}
+          <Link
+            href="/blog"
+            onClick={closeAllNavbars}
+            className={`flex items-center gap-1.5 px-3 py-2 rounded-xl transition-all cursor-pointer ${
+              isActive('/blog')
+                ? 'bg-slate-900/10 text-slate-900 font-extrabold border border-slate-900/15 backdrop-blur-sm'
+                : 'hover:bg-slate-100 hover:text-slate-900'
+            }`}
+          >
+            <BookOpen className="w-4 h-4 text-slate-700" />
+            <span>Guides &amp; Blog</span>
+          </Link>
         </nav>
 
         <div ref={searchContainerRef} className="relative flex items-center w-64 lg:w-80">
