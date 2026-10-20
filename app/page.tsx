@@ -126,8 +126,21 @@ export default function HomePage() {
       ))}
 
       {/* Authority Hero Banner Section (Visible on Mobile & Desktop for SEO & User Trust) */}
-      <section className="block relative overflow-hidden pt-8 sm:pt-12 pb-8 sm:pb-12 px-4 sm:px-6 lg:px-8 border-b border-slate-200/80 bg-white">
-        <div className="max-w-4xl mx-auto text-center space-y-4 sm:space-y-5 relative z-10">
+      <section className="block relative overflow-hidden pt-10 sm:pt-16 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 border-b border-slate-200/80 bg-slate-50">
+        {/* 3D Floating Ecosystem Background Artwork */}
+        <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
+          <img
+            src="/bging.webp"
+            alt="FileZenith In-Browser File Studio"
+            className="w-full h-full object-cover object-center scale-[1.02] transform-gpu"
+          />
+          {/* Precision Center-Vignette: Keeps center text razor-sharp while showcasing colorful 3D file icons on flanks */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(255,255,255,0.75)_0%,_rgba(255,255,255,0.40)_50%,_rgba(255,255,255,0.15)_100%)]" />
+          {/* Seamless bottom fade transition into the page canvas */}
+          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/50 to-transparent" />
+        </div>
+
+        <div className="max-w-4xl mx-auto text-center space-y-4 sm:space-y-6 relative z-10">
           <div className="inline-flex flex-wrap items-center justify-center gap-2">
             <PrivacyBadge />
             <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-rose-50 text-rose-700 text-xs font-extrabold border border-rose-200">

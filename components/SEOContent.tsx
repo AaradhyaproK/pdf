@@ -379,7 +379,7 @@ function ToolDeepDiveEditorial({ tool, fileTerm }: { tool: ToolSEO; fileTerm: st
                 <span className="w-6 h-6 rounded-lg bg-indigo-50 text-indigo-600 font-black text-xs flex items-center justify-center shrink-0">
                   {sIdx + 1}
                 </span>
-                <span>{sec.title}</span>
+                <span>{sec.title.replace(/^\d+[\.\)]\s*/, '')}</span>
               </h3>
               {sec.paragraphs.map((p, pIdx) => (
                 <p key={pIdx} className="text-slate-600 leading-relaxed">

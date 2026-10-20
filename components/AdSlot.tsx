@@ -76,12 +76,26 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
 
     const checkFilled = () => {
       const ins = container.querySelector('ins.adsbygoogle');
-      const hasIframe = !!container.querySelector('iframe');
-      const status = ins?.getAttribute('data-ad-status');
-      if (hasIframe || status === 'filled') {
+      if (!ins) return;
+
+      const status = ins.getAttribute('data-ad-status');
+      if (status === 'filled') {
         setIsAdFilled(true);
-      } else if (status === 'unfilled') {
+        return;
+      }
+      if (status === 'unfilled') {
         setIsAdFilled(false);
+        return;
+      }
+
+      // Check for real rendered ad iframe with affirmative height
+      const iframe = container.querySelector('iframe');
+      if (iframe) {
+        const h = iframe.offsetHeight || parseInt(iframe.getAttribute('height') || '0', 10);
+        if (h > 20) {
+          setIsAdFilled(true);
+          return;
+        }
       }
     };
 
@@ -95,14 +109,18 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
       childList: true,
       subtree: true,
       attributes: true,
-      attributeFilter: ['data-ad-status', 'data-adsbygoogle-status'],
+      attributeFilter: ['data-ad-status', 'data-adsbygoogle-status', 'style'],
     });
 
-    return () => observer.disconnect();
+    const timer = setTimeout(checkFilled, 1500);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(timer);
+    };
   }, [slotType, config.adProvider]);
 
   const publisherId = config?.publisherId || 'ca-pub-1291898061670715';
-  const adLabel = config?.adLabelText !== undefined ? config.adLabelText : 'Advertisement';
 
   if (slotType === 'header-leaderboard') {
     return (
@@ -110,19 +128,10 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
         ref={containerRef}
         className={`w-full max-w-[728px] mx-auto flex flex-col items-center justify-center transition-all duration-300 ${
           isAdFilled
-            ? 'my-6 sm:my-8 opacity-100'
-            : 'h-0 min-h-0 m-0 p-0 overflow-hidden opacity-0 has-[iframe]:h-auto has-[iframe]:my-6 has-[iframe]:sm:my-8 has-[iframe]:overflow-visible has-[iframe]:opacity-100'
+            ? 'my-6 sm:my-8 opacity-100 overflow-visible'
+            : 'h-0 min-h-0 m-0 p-0 overflow-hidden opacity-0 pointer-events-none has-[ins[data-ad-status="filled"]]:h-auto has-[ins[data-ad-status="filled"]]:my-6 has-[ins[data-ad-status="filled"]]:sm:my-8 has-[ins[data-ad-status="filled"]]:opacity-100 has-[ins[data-ad-status="filled"]]:overflow-visible has-[ins[data-ad-status="filled"]]:pointer-events-auto'
         } ${className}`}
       >
-        {adLabel && (
-          <span
-            className={`text-[10px] tracking-widest uppercase text-slate-400 font-semibold mb-1.5 select-none text-center ${
-              isAdFilled ? 'block' : 'hidden group-has-[iframe]:block'
-            }`}
-          >
-            {adLabel}
-          </span>
-        )}
         <div className="w-full flex items-center justify-center overflow-hidden">
           {config.adProvider === 'custom' && config.customHeaderCode ? (
             <CustomAdEmbed code={config.customHeaderCode} height={90} />
@@ -147,19 +156,10 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
         ref={containerRef}
         className={`w-full max-w-[300px] mx-auto flex flex-col items-center justify-center text-center transition-all duration-300 ${
           isAdFilled
-            ? 'my-4 opacity-100'
-            : 'h-0 min-h-0 m-0 p-0 overflow-hidden opacity-0 has-[iframe]:h-auto has-[iframe]:my-4 has-[iframe]:overflow-visible has-[iframe]:opacity-100'
+            ? 'my-4 opacity-100 overflow-visible'
+            : 'h-0 min-h-0 m-0 p-0 overflow-hidden opacity-0 pointer-events-none has-[ins[data-ad-status="filled"]]:h-auto has-[ins[data-ad-status="filled"]]:my-4 has-[ins[data-ad-status="filled"]]:opacity-100 has-[ins[data-ad-status="filled"]]:overflow-visible has-[ins[data-ad-status="filled"]]:pointer-events-auto'
         } ${className}`}
       >
-        {adLabel && (
-          <span
-            className={`text-[10px] tracking-widest uppercase text-slate-400 font-semibold mb-1.5 select-none text-center ${
-              isAdFilled ? 'block' : 'hidden group-has-[iframe]:block'
-            }`}
-          >
-            {adLabel}
-          </span>
-        )}
         <div className="w-full flex flex-col items-center justify-center text-center overflow-hidden">
           {config.adProvider === 'custom' && config.customSidebarCode ? (
             <CustomAdEmbed code={config.customSidebarCode} height={600} />
@@ -184,19 +184,10 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
       ref={containerRef}
       className={`w-full max-w-4xl mx-auto flex flex-col items-center justify-center transition-all duration-300 ${
         isAdFilled
-          ? 'my-6 sm:my-8 opacity-100'
-          : 'h-0 min-h-0 m-0 p-0 overflow-hidden opacity-0 has-[iframe]:h-auto has-[iframe]:my-6 has-[iframe]:sm:my-8 has-[iframe]:overflow-visible has-[iframe]:opacity-100'
+          ? 'my-6 sm:my-8 opacity-100 overflow-visible'
+          : 'h-0 min-h-0 m-0 p-0 overflow-hidden opacity-0 pointer-events-none has-[ins[data-ad-status="filled"]]:h-auto has-[ins[data-ad-status="filled"]]:my-6 has-[ins[data-ad-status="filled"]]:sm:my-8 has-[ins[data-ad-status="filled"]]:opacity-100 has-[ins[data-ad-status="filled"]]:overflow-visible has-[ins[data-ad-status="filled"]]:pointer-events-auto'
       } ${className}`}
     >
-      {adLabel && (
-        <span
-          className={`text-[10px] tracking-widest uppercase text-slate-400 font-semibold mb-1.5 select-none text-center ${
-            isAdFilled ? 'block' : 'hidden group-has-[iframe]:block'
-          }`}
-        >
-          {adLabel}
-        </span>
-      )}
       <div className="w-full flex items-center justify-center overflow-hidden">
         {config.adProvider === 'custom' && config.customPostDownloadCode ? (
           <CustomAdEmbed code={config.customPostDownloadCode} height={120} />

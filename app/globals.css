@@ -196,4 +196,73 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
   display: none !important;
 }
 
+/* Print Optimization: Clean 1-Page Physical ID & Studio Print Output */
+@media print {
+  @page {
+    size: auto;
+    margin: 0mm;
+  }
+
+  html,
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  /* Hide header, footer, navigation chrome, sidebars, buttons, ad slots, and floating widgets */
+  header,
+  footer,
+  nav,
+  aside,
+  button,
+  input,
+  select,
+  [role="button"],
+  ins.adsbygoogle,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Strip preview desk background, outer gray wrapper, and inner shadows from the printable canvas */
+  #printable-aadhaar-canvas {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    display: block !important;
+  }
+
+  #printable-aadhaar-canvas > div {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  #printable-aadhaar-canvas canvas {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    margin: 0 auto !important;
+    box-shadow: none !important;
+    border: none !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+}
+
+
 

@@ -932,50 +932,55 @@ export function Navbar() {
             </Link>
 
             <div
-              className={`absolute top-full left-0 w-[860px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-4 transition-all duration-200 grid grid-cols-3 gap-2 ${
+              className={`absolute top-full left-0 w-[880px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-3.5 transition-all duration-200 max-h-[calc(100vh-80px)] flex flex-col z-50 ${
                 activeDropdown === 'pdf'
                   ? 'opacity-100 visible translate-y-0 pointer-events-auto'
                   : 'opacity-0 invisible translate-y-2 pointer-events-none'
               }`}
             >
-              <div className="col-span-3 px-3 py-1.5 flex items-center justify-between border-b border-slate-100 mb-1">
+              <div className="px-3 py-2 flex items-center justify-between border-b border-slate-100 shrink-0 mb-1.5">
                 <Link
                   href="/pdf-tools"
                   onClick={closeAllNavbars}
-                  className="text-xs font-black uppercase tracking-wider text-slate-900 hover:text-indigo-600 flex items-center gap-1 transition-colors cursor-pointer"
+                  className="text-xs font-black uppercase tracking-wider text-slate-900 hover:text-indigo-600 flex items-center gap-1.5 transition-colors cursor-pointer"
                 >
+                  <FileText className="w-4 h-4 text-rose-600" />
                   <span>PDF Studio Hub →</span>
                 </Link>
-                <span className="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded-full font-bold border border-slate-200/80">100% Private</span>
+                <span className="text-[10px] bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-full font-bold border border-slate-200/80">
+                  {PDF_TOOLS.length} Tools • 100% Private
+                </span>
               </div>
-              {PDF_TOOLS.map((tool) => {
-                const Icon = tool.icon;
-                return (
-                  <Link
-                    key={tool.slug}
-                    href={tool.slug}
-                    onClick={closeAllNavbars}
-                    className="p-2.5 rounded-2xl hover:bg-slate-100/80 transition-colors flex items-start gap-3 group/item border border-transparent hover:border-slate-200/80 cursor-pointer"
-                  >
-                    <div className="p-2 rounded-xl bg-slate-100 text-slate-800 group-hover/item:bg-slate-900 group-hover/item:text-white transition-colors shrink-0">
-                      <Icon className="w-4 h-4" />
-                    </div>
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-1.5">
-                        <span className="text-xs font-bold text-slate-900 transition-colors truncate">
-                          {tool.name}
-                        </span>
-                        {tool.badge && (
-                          <span className="text-[9px] font-black px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200/80 shrink-0">
-                            {tool.badge}
-                          </span>
-                        )}
+              <div className="overflow-y-auto overscroll-contain pr-1 pb-2 grid grid-cols-3 gap-1.5">
+                {PDF_TOOLS.map((tool) => {
+                  const Icon = tool.icon;
+                  return (
+                    <Link
+                      key={tool.slug}
+                      href={tool.slug}
+                      onClick={closeAllNavbars}
+                      className="p-2 rounded-xl hover:bg-slate-100/90 transition-all flex items-center gap-2.5 group/item border border-transparent hover:border-slate-200/80 cursor-pointer"
+                    >
+                      <div className="p-1.5 rounded-lg bg-slate-100 text-slate-800 group-hover/item:bg-slate-900 group-hover/item:text-white transition-colors shrink-0">
+                        <Icon className="w-3.5 h-3.5" />
                       </div>
-                      <p className="text-[11px] text-slate-500 truncate mt-0.5">{tool.desc}</p>
-                    </div>
-                  </Link>
-                );
-              })}
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xs font-bold text-slate-900 transition-colors truncate">
+                            {tool.name}
+                          </span>
+                          {tool.badge && (
+                            <span className="text-[9px] font-black px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200/80 shrink-0">
+                              {tool.badge}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-[10.5px] text-slate-500 truncate leading-tight mt-0.5">{tool.desc}</p>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
           </div>
 
@@ -1004,50 +1009,55 @@ export function Navbar() {
             </Link>
 
             <div
-              className={`absolute top-full left-0 w-[860px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-4 transition-all duration-200 grid grid-cols-3 gap-2 ${
+              className={`absolute top-full left-0 w-[880px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-3.5 transition-all duration-200 max-h-[calc(100vh-80px)] flex flex-col z-50 ${
                 activeDropdown === 'image'
                   ? 'opacity-100 visible translate-y-0 pointer-events-auto'
                   : 'opacity-0 invisible translate-y-2 pointer-events-none'
               }`}
             >
-              <div className="col-span-3 px-3 py-1.5 flex items-center justify-between border-b border-slate-100 mb-1">
+              <div className="px-3 py-2 flex items-center justify-between border-b border-slate-100 shrink-0 mb-1.5">
                 <Link
                   href="/image-tools"
                   onClick={closeAllNavbars}
-                  className="text-xs font-black uppercase tracking-wider text-slate-900 hover:text-indigo-600 flex items-center gap-1 transition-colors cursor-pointer"
+                  className="text-xs font-black uppercase tracking-wider text-slate-900 hover:text-indigo-600 flex items-center gap-1.5 transition-colors cursor-pointer"
                 >
+                  <ImageIcon className="w-4 h-4 text-rose-600" />
                   <span>Image Studio Hub →</span>
                 </Link>
-                <span className="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded-full font-bold border border-slate-200/80">Fast Canvas AI</span>
+                <span className="text-[10px] bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-full font-bold border border-slate-200/80">
+                  {IMAGE_TOOLS.length} Tools • Fast Canvas AI
+                </span>
               </div>
-              {IMAGE_TOOLS.map((tool) => {
-                const Icon = tool.icon;
-                return (
-                  <Link
-                    key={tool.slug}
-                    href={tool.slug}
-                    onClick={closeAllNavbars}
-                    className="p-2.5 rounded-2xl hover:bg-slate-100/80 transition-colors flex items-start gap-3 group/item border border-transparent hover:border-slate-200/80 cursor-pointer"
-                  >
-                    <div className="p-2 rounded-xl bg-slate-100 text-slate-800 group-hover/item:bg-slate-900 group-hover/item:text-white transition-colors shrink-0">
-                      <Icon className="w-4 h-4" />
-                    </div>
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-1.5">
-                        <span className="text-xs font-bold text-slate-900 transition-colors truncate">
-                          {tool.name}
-                        </span>
-                        {tool.badge && (
-                          <span className="text-[9px] font-black px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200/80 shrink-0">
-                            {tool.badge}
-                          </span>
-                        )}
+              <div className="overflow-y-auto overscroll-contain pr-1 pb-2 grid grid-cols-3 gap-1.5">
+                {IMAGE_TOOLS.map((tool) => {
+                  const Icon = tool.icon;
+                  return (
+                    <Link
+                      key={tool.slug}
+                      href={tool.slug}
+                      onClick={closeAllNavbars}
+                      className="p-2 rounded-xl hover:bg-slate-100/90 transition-all flex items-center gap-2.5 group/item border border-transparent hover:border-slate-200/80 cursor-pointer"
+                    >
+                      <div className="p-1.5 rounded-lg bg-slate-100 text-slate-800 group-hover/item:bg-slate-900 group-hover/item:text-white transition-colors shrink-0">
+                        <Icon className="w-3.5 h-3.5" />
                       </div>
-                      <p className="text-[11px] text-slate-500 truncate mt-0.5">{tool.desc}</p>
-                    </div>
-                  </Link>
-                );
-              })}
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xs font-bold text-slate-900 transition-colors truncate">
+                            {tool.name}
+                          </span>
+                          {tool.badge && (
+                            <span className="text-[9px] font-black px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200/80 shrink-0">
+                              {tool.badge}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-[10.5px] text-slate-500 truncate leading-tight mt-0.5">{tool.desc}</p>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
           </div>
 
@@ -1076,50 +1086,55 @@ export function Navbar() {
             </Link>
 
             <div
-              className={`absolute top-full left-1/2 -ml-[430px] w-[860px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-4 transition-all duration-200 grid grid-cols-3 gap-2 ${
+              className={`absolute top-full left-1/2 -ml-[440px] w-[880px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-3.5 transition-all duration-200 max-h-[calc(100vh-80px)] flex flex-col z-50 ${
                 activeDropdown === 'utility'
                   ? 'opacity-100 visible translate-y-0 pointer-events-auto'
                   : 'opacity-0 invisible translate-y-2 pointer-events-none'
               }`}
             >
-              <div className="col-span-3 px-3 py-1.5 flex items-center justify-between border-b border-slate-100 mb-1">
+              <div className="px-3 py-2 flex items-center justify-between border-b border-slate-100 shrink-0 mb-1.5">
                 <Link
                   href="/utility-tools"
                   onClick={closeAllNavbars}
-                  className="text-xs font-black uppercase tracking-wider text-slate-900 hover:text-indigo-600 flex items-center gap-1 transition-colors cursor-pointer"
+                  className="text-xs font-black uppercase tracking-wider text-slate-900 hover:text-indigo-600 flex items-center gap-1.5 transition-colors cursor-pointer"
                 >
+                  <Wrench className="w-4 h-4 text-rose-600" />
                   <span>Daily Utility Studio Hub →</span>
                 </Link>
-                <span className="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded-full font-bold border border-slate-200/80">Calculators & Tools</span>
+                <span className="text-[10px] bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-full font-bold border border-slate-200/80">
+                  {UTILITY_TOOLS.length} Calculators & Tools
+                </span>
               </div>
-              {UTILITY_TOOLS.map((tool) => {
-                const Icon = tool.icon;
-                return (
-                  <Link
-                    key={tool.slug}
-                    href={tool.slug}
-                    onClick={closeAllNavbars}
-                    className="p-2.5 rounded-2xl hover:bg-slate-100/80 transition-colors flex items-start gap-3 group/item border border-transparent hover:border-slate-200/80 cursor-pointer"
-                  >
-                    <div className="p-2 rounded-xl bg-slate-100 text-slate-800 group-hover/item:bg-slate-900 group-hover/item:text-white transition-colors shrink-0">
-                      <Icon className="w-4 h-4" />
-                    </div>
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-1.5">
-                        <span className="text-xs font-bold text-slate-900 transition-colors truncate">
-                          {tool.name}
-                        </span>
-                        {tool.badge && (
-                          <span className="text-[9px] font-black px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200/80 shrink-0">
-                            {tool.badge}
-                          </span>
-                        )}
+              <div className="overflow-y-auto overscroll-contain pr-1 pb-2 grid grid-cols-3 gap-1.5">
+                {UTILITY_TOOLS.map((tool) => {
+                  const Icon = tool.icon;
+                  return (
+                    <Link
+                      key={tool.slug}
+                      href={tool.slug}
+                      onClick={closeAllNavbars}
+                      className="p-2 rounded-xl hover:bg-slate-100/90 transition-all flex items-center gap-2.5 group/item border border-transparent hover:border-slate-200/80 cursor-pointer"
+                    >
+                      <div className="p-1.5 rounded-lg bg-slate-100 text-slate-800 group-hover/item:bg-slate-900 group-hover/item:text-white transition-colors shrink-0">
+                        <Icon className="w-3.5 h-3.5" />
                       </div>
-                      <p className="text-[11px] text-slate-500 truncate mt-0.5">{tool.desc}</p>
-                    </div>
-                  </Link>
-                );
-              })}
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xs font-bold text-slate-900 transition-colors truncate">
+                            {tool.name}
+                          </span>
+                          {tool.badge && (
+                            <span className="text-[9px] font-black px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200/80 shrink-0">
+                              {tool.badge}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-[10.5px] text-slate-500 truncate leading-tight mt-0.5">{tool.desc}</p>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
           </div>
 
@@ -1148,50 +1163,53 @@ export function Navbar() {
             </Link>
 
             <div
-              className={`absolute top-full right-0 w-[860px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-4 transition-all duration-200 grid grid-cols-3 gap-2 ${
+              className={`absolute top-full right-0 w-[880px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-3.5 transition-all duration-200 max-h-[calc(100vh-80px)] flex flex-col z-50 ${
                 activeDropdown === 'social'
                   ? 'opacity-100 visible translate-y-0 pointer-events-auto'
                   : 'opacity-0 invisible translate-y-2 pointer-events-none'
               }`}
             >
-              <div className="col-span-3 px-3 py-1.5 flex items-center justify-between border-b border-slate-100 mb-1">
+              <div className="px-3 py-2 flex items-center justify-between border-b border-slate-100 shrink-0 mb-1.5">
                 <Link
                   href="/social-tools"
                   onClick={closeAllNavbars}
-                  className="text-xs font-black uppercase tracking-wider text-slate-900 hover:text-indigo-600 flex items-center gap-1 transition-colors cursor-pointer"
+                  className="text-xs font-black uppercase tracking-wider text-slate-900 hover:text-indigo-600 flex items-center gap-1.5 transition-colors cursor-pointer"
                 >
+                  <Share2 className="w-4 h-4 text-rose-600" />
                   <span>Social Media Tools Studio →</span>
                 </Link>
-                <span className="text-[10px] bg-pink-100 text-pink-700 px-2 py-0.5 rounded-full font-bold border border-pink-200">Reels & Chat Helpers</span>
+                <span className="text-[10px] bg-pink-100 text-pink-700 px-2.5 py-0.5 rounded-full font-bold border border-pink-200">Reels & Chat Helpers</span>
               </div>
-              {SOCIAL_TOOLS.map((tool) => {
-                const Icon = tool.icon;
-                return (
-                  <Link
-                    key={tool.slug}
-                    href={tool.slug}
-                    onClick={closeAllNavbars}
-                    className="p-2.5 rounded-2xl hover:bg-slate-100/80 transition-colors flex items-start gap-3 group/item border border-transparent hover:border-slate-200/80 cursor-pointer"
-                  >
-                    <div className="p-2 rounded-xl bg-slate-100 text-slate-800 group-hover/item:bg-slate-900 group-hover/item:text-white transition-colors shrink-0">
-                      <Icon className="w-4 h-4" />
-                    </div>
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-1.5">
-                        <span className="text-xs font-bold text-slate-900 transition-colors truncate">
-                          {tool.name}
-                        </span>
-                        {tool.badge && (
-                          <span className="text-[9px] font-black px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200/80 shrink-0">
-                            {tool.badge}
-                          </span>
-                        )}
+              <div className="overflow-y-auto overscroll-contain pr-1 pb-2 grid grid-cols-3 gap-1.5">
+                {SOCIAL_TOOLS.map((tool) => {
+                  const Icon = tool.icon;
+                  return (
+                    <Link
+                      key={tool.slug}
+                      href={tool.slug}
+                      onClick={closeAllNavbars}
+                      className="p-2 rounded-xl hover:bg-slate-100/90 transition-all flex items-center gap-2.5 group/item border border-transparent hover:border-slate-200/80 cursor-pointer"
+                    >
+                      <div className="p-1.5 rounded-lg bg-slate-100 text-slate-800 group-hover/item:bg-slate-900 group-hover/item:text-white transition-colors shrink-0">
+                        <Icon className="w-3.5 h-3.5" />
                       </div>
-                      <p className="text-[11px] text-slate-500 truncate mt-0.5">{tool.desc}</p>
-                    </div>
-                  </Link>
-                );
-              })}
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xs font-bold text-slate-900 transition-colors truncate">
+                            {tool.name}
+                          </span>
+                          {tool.badge && (
+                            <span className="text-[9px] font-black px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200/80 shrink-0">
+                              {tool.badge}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-[10.5px] text-slate-500 truncate leading-tight mt-0.5">{tool.desc}</p>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
           </div>
 

@@ -383,6 +383,33 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
     ]
   },
 
+  '/image/compress-to-20kb': {
+    slug: '/image/compress-to-20kb',
+    title: 'Compress Image to 20KB Online Free — Signature & Photo Reducer for Forms',
+    metaTitle: 'Compress Image to 20KB Free Online — Signature & Photo Reducer',
+    description: 'Compress image or signature under 20KB online free for SSC, UPSC, IBPS, and state recruitment portal uploads. 100% private in-browser compression.',
+    keywords: [
+      'compress image to 20kb',
+      'compress signature to 20kb online free',
+      'reduce photo size to 20kb online',
+      'jpg compressor under 20kb for govt exams',
+      'shrink signature file size below 20kb',
+      'photo size reducer under 20kb no upload'
+    ],
+    category: 'image',
+    howToSteps: [
+      { title: 'Upload Signature or Photo', text: 'Select or drag your JPG/PNG image into the compressor dropzone.' },
+      { title: 'Auto-Calculate 20KB Threshold', text: 'The binary search engine scales quality and dimensions to hit < 20KB.' },
+      { title: 'Download Compliant File', text: 'Click Download to save your 20KB-compliant image ready for exam submission.' }
+    ],
+    faqs: [
+      { question: 'How can I compress my signature or photo under 20KB for free?', answer: 'Upload your image to FileZenith’s Compress Image to 20KB tool and click Compress. The client-side engine iteratively optimizes quality and dimensions to guarantee a file size under 20KB.' },
+      { question: 'Will my signature remain legible and sharp below 20KB?', answer: 'Yes! Our algorithm preserves stroke contrast and line sharpness while eliminating bloated metadata, ensuring crisp readability on application portals.' },
+      { question: 'Is it safe to upload government ID signatures to this tool?', answer: 'Yes, 100%. FileZenith executes entirely inside your browser RAM. Your signatures and photos are never uploaded to any remote server.' },
+      { question: 'Which exams require photos and signatures under 20KB?', answer: 'Major portals including SSC (CGL, CHSL, MTS), UPSC, IBPS Banking, RRB Railways, and state PSCs require signatures between 10KB and 20KB.' }
+    ]
+  },
+
   '/image/compress-to-50kb': {
     slug: '/image/compress-to-50kb',
     title: 'Compress Image to 50KB Free Online — Exact Photo Reducer for Forms',

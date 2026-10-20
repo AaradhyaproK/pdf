@@ -135,7 +135,7 @@ export default function AadhaarCardPrintPage() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-50/50 py-8 sm:py-12 text-slate-900">
+    <main className="min-h-screen bg-slate-50/50 py-8 sm:py-12 text-slate-900 print:bg-white print:p-0 print:m-0 print:min-h-0">
       {/* Inject JSON-LD Schemas */}
       <script
         type="application/ld+json"
@@ -150,9 +150,9 @@ export default function AadhaarCardPrintPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-8 print:p-0 print:m-0 print:max-w-none print:space-y-0">
         {/* Breadcrumb */}
-        <nav className="flex items-center text-xs font-bold text-slate-500 gap-1.5 overflow-x-auto whitespace-nowrap">
+        <nav className="flex items-center text-xs font-bold text-slate-500 gap-1.5 overflow-x-auto whitespace-nowrap print:hidden">
           <Link href="/" className="hover:text-indigo-600 transition-colors">
             Home
           </Link>
@@ -165,7 +165,7 @@ export default function AadhaarCardPrintPage() {
         </nav>
 
         {/* Hero Header */}
-        <header className="space-y-3">
+        <header className="space-y-3 print:hidden">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 border border-rose-200 text-rose-700 text-xs font-black uppercase tracking-wider">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Cyber Cafe & CSC Print Ready • Exact ISO ID-1 Standard</span>
@@ -181,24 +181,24 @@ export default function AadhaarCardPrintPage() {
         </header>
 
         {/* Top Header Leaderboard Ad Slot */}
-        <div className="w-full">
+        <div className="w-full print:hidden">
           <AdSlot slotType="header-leaderboard" />
         </div>
 
         {/* 2-Column Responsive Layout (Main Studio + Sticky Sidebar) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start print:block print:p-0 print:m-0">
           {/* Main Studio Area (8 Cols) */}
-          <div className="lg:col-span-8 space-y-8">
+          <div className="lg:col-span-8 space-y-8 print:block print:p-0 print:m-0 print:w-full print:space-y-0">
             {/* Aadhaar Print Studio Component */}
             <AadhaarPrintStudio />
 
             {/* In-Feed Post-Download Ad Unit (Strictly >= 25px clear margin to prevent accidental clicks) */}
-            <div className="w-full pt-4 sm:pt-6">
+            <div className="w-full pt-4 sm:pt-6 print:hidden">
               <AdSlot slotType="post-download" />
             </div>
 
             {/* Standard ID-1 Physical Dimensions Table */}
-            <section className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+            <section className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6 print:hidden">
               <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                 <h2 className="text-base sm:text-lg font-black text-slate-900 flex items-center gap-2">
                   <Printer className="w-5 h-5 text-rose-600" />
@@ -282,7 +282,7 @@ export default function AadhaarCardPrintPage() {
             </section>
 
             {/* Privacy Guarantee Card */}
-            <section className="bg-emerald-50/70 border border-emerald-200 p-6 sm:p-8 rounded-3xl space-y-3">
+            <section className="bg-emerald-50/70 border border-emerald-200 p-6 sm:p-8 rounded-3xl space-y-3 print:hidden">
               <div className="flex items-center gap-3">
                 <ShieldCheck className="w-6 h-6 text-emerald-700 shrink-0" />
                 <h3 className="text-base font-black text-emerald-950">
@@ -298,7 +298,7 @@ export default function AadhaarCardPrintPage() {
             {TOOL_DEEP_DIVES['/tools/aadhaar-card-print'] && (() => {
               const deepDive = TOOL_DEEP_DIVES['/tools/aadhaar-card-print'];
               return (
-                <section className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6 text-slate-700">
+                <section className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6 text-slate-700 print:hidden">
                   <div className="border-b border-slate-100 pb-4 space-y-1">
                     <div className="flex items-center gap-2 text-rose-600 text-xs font-black uppercase tracking-wider">
                       <BookOpen className="w-4 h-4 shrink-0" />
@@ -512,7 +512,7 @@ export default function AadhaarCardPrintPage() {
           </div>
 
           {/* Sticky Sidebar Column (4 Cols) */}
-          <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-20">
+          <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-20 print:hidden">
             {/* Sticky Sidebar Ad Unit */}
             <div className="w-full">
               <AdSlot slotType="sticky-sidebar" />

@@ -19,9 +19,10 @@ import {
   Scissors,
   Eye,
   RefreshCw,
+  X,
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { PDFDocument, rgb } from 'pdf-lib';
+import { PDFDocument, PDFImage, rgb } from 'pdf-lib';
 import { trackEvent } from '@/lib/analytics';
 
 // ISO/IEC 7810 ID-1 standard card dimensions in mm
@@ -42,6 +43,7 @@ export function AadhaarPrintStudio() {
   const [isPasswordRequired, setIsPasswordRequired] = useState(false);
   const [isDecrypting, setIsDecrypting] = useState(false);
   const [pdfRenderedPage, setPdfRenderedPage] = useState<HTMLCanvasElement | null>(null);
+  const [pdfPreviewUrl, setPdfPreviewUrl] = useState<string | null>(null);
 
   // Images Mode states
   const [frontImage, setFrontImage] = useState<string | null>(null);
@@ -72,6 +74,7 @@ export function AadhaarPrintStudio() {
     setIsPasswordRequired(false);
     setPdfPassword('');
     setPdfRenderedPage(null);
+    setPdfPreviewUrl(null);
     setStatusMessage(null);
     await processPdf(file, '');
   };
@@ -106,6 +109,8 @@ export function AadhaarPrintStudio() {
       await page.render({ canvasContext: ctx, viewport }).promise;
 
       setPdfRenderedPage(canvas);
+      const fullPageDataUrl = canvas.toDataURL('image/jpeg', 0.95);
+      setPdfPreviewUrl(fullPageDataUrl);
       setIsPasswordRequired(false);
       toast.success('e-Aadhaar PDF unlocked successfully!');
       trackEvent('image_uploaded', { toolSlug: 'aadhaar-card-print', action: 'pdf_unlocked' });
@@ -170,8 +175,47 @@ export function AadhaarPrintStudio() {
   const handleImageFile = (file: File, side: 'front' | 'back') => {
     const reader = new FileReader();
     reader.onload = (e) => {
-      if (side === 'front') setFrontImage(e.target?.result as string);
-      else setBackImage(e.target?.result as string);
+      const rawUrl = e.target?.result as string;
+      if (!rawUrl) return;
+
+      const img = new Image();
+      img.onload = () => {
+        try {
+          const canvas = document.createElement('canvas');
+          canvas.width = img.naturalWidth || img.width;
+          canvas.height = img.naturalHeight || img.height;
+          const ctx = canvas.getContext('2d');
+          if (ctx) {
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0);
+            // Standard JPEG with guaranteed SOI header (0xFF, 0xD8)
+            const cleanJpg = canvas.toDataURL('image/jpeg', 0.98);
+            if (side === 'front') {
+              setFrontImage(cleanJpg);
+              setFrontRotation(0);
+            } else {
+              setBackImage(cleanJpg);
+              setBackRotation(0);
+            }
+            toast.success(`${side === 'front' ? 'Front side' : 'Back side'} photo loaded successfully!`);
+            return;
+          }
+        } catch {
+          // fallback to rawUrl
+        }
+        if (side === 'front') {
+          setFrontImage(rawUrl);
+          setFrontRotation(0);
+        } else {
+          setBackImage(rawUrl);
+          setBackRotation(0);
+        }
+      };
+      img.onerror = () => {
+        toast.error('Failed to load image file. Please try another image.');
+      };
+      img.src = rawUrl;
     };
     reader.readAsDataURL(file);
   };
@@ -180,8 +224,6 @@ export function AadhaarPrintStudio() {
   // 3. RENDER CANVAS PRINT SHEET
   // -------------------------------------------------------------
   const renderPrintCanvas = useCallback(async () => {
-    if (!frontImage && !backImage) return;
-
     const canvas = previewCanvasRef.current;
     if (!canvas) return;
 
@@ -199,8 +241,13 @@ export function AadhaarPrintStudio() {
       canvasW = 1200;
       canvasH = 1800;
     } else if (paperLayout === 'pvc') {
-      canvasW = 1011;
-      canvasH = arrangement === 'stacked' ? 1320 : 638;
+      if (arrangement === 'stacked') {
+        canvasW = 1011;
+        canvasH = 1320;
+      } else {
+        canvasW = 2067;
+        canvasH = 638;
+      }
     }
 
     canvas.width = canvasW;
@@ -213,11 +260,12 @@ export function AadhaarPrintStudio() {
     // Filter settings (brightness & contrast)
     ctx.filter = `brightness(${100 + brightness}%) contrast(${100 + contrast}%)`;
 
-    // Load front & back images
+    // Load front & back images if available
     const loadImg = (src: string): Promise<HTMLImageElement> => {
       return new Promise((res) => {
         const img = new Image();
         img.onload = () => res(img);
+        img.onerror = () => res(img);
         img.src = src;
       });
     };
@@ -236,27 +284,100 @@ export function AadhaarPrintStudio() {
       img: HTMLImageElement | null,
       x: number,
       y: number,
-      rotation: number
+      rotation: number,
+      isBack = false
     ) => {
       ctx.save();
       ctx.translate(x + cardW / 2, y + cardH / 2);
       if (rotation !== 0) ctx.rotate((rotation * Math.PI) / 180);
 
-      // Clip with rounded corners (3mm radius ~ 35px)
+      // Clip with rounded corners (3mm radius ~ 32px)
       const r = 32;
       ctx.beginPath();
       ctx.roundRect(-cardW / 2, -cardH / 2, cardW, cardH, r);
       ctx.clip();
 
-      if (img) {
+      if (img && img.naturalWidth > 0) {
         ctx.drawImage(img, -cardW / 2, -cardH / 2, cardW, cardH);
       } else {
-        ctx.fillStyle = '#F1F5F9';
+        // Aesthetic Realistic Aadhaar Card Wireframe Placeholder
+        ctx.fillStyle = '#F8FAFC';
         ctx.fillRect(-cardW / 2, -cardH / 2, cardW, cardH);
-        ctx.fillStyle = '#94A3B8';
-        ctx.font = 'bold 36px sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText('Side Not Uploaded', 0, 0);
+
+        // Header tricolor band
+        ctx.fillStyle = '#F97316'; // Saffron
+        ctx.fillRect(-cardW / 2, -cardH / 2, cardW, 16);
+        ctx.fillStyle = '#16A34A'; // Green
+        ctx.fillRect(-cardW / 2, cardH / 2 - 16, cardW, 16);
+
+        // Card Border Outline
+        ctx.strokeStyle = '#E2E8F0';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(-cardW / 2, -cardH / 2, cardW, cardH);
+
+        if (!isBack) {
+          // Front Card Placeholder
+          // Candidate Photo Frame
+          ctx.fillStyle = '#E2E8F0';
+          ctx.beginPath();
+          ctx.roundRect(-cardW / 2 + 55, -cardH / 2 + 100, 210, 260, 16);
+          ctx.fill();
+          ctx.strokeStyle = '#CBD5E1';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+
+          ctx.fillStyle = '#94A3B8';
+          ctx.font = 'bold 24px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('PHOTO', -cardW / 2 + 160, -cardH / 2 + 240);
+
+          // Card simulated text lines
+          ctx.fillStyle = '#CBD5E1';
+          ctx.beginPath();
+          ctx.roundRect(-cardW / 2 + 300, -cardH / 2 + 130, 480, 24, 6);
+          ctx.roundRect(-cardW / 2 + 300, -cardH / 2 + 175, 360, 20, 6);
+          ctx.roundRect(-cardW / 2 + 300, -cardH / 2 + 215, 420, 20, 6);
+          ctx.fill();
+
+          // Aadhaar Number Box
+          ctx.fillStyle = '#BE123C';
+          ctx.font = 'bold 42px monospace';
+          ctx.textAlign = 'center';
+          ctx.fillText('XXXX  XXXX  XXXX', 0, 165);
+
+          ctx.fillStyle = '#64748B';
+          ctx.font = 'bold 26px sans-serif';
+          ctx.fillText('Front Side (Candidate Photo & Aadhaar #)', 0, 235);
+        } else {
+          // Back Card Placeholder
+          // QR Code Frame
+          ctx.fillStyle = '#E2E8F0';
+          ctx.beginPath();
+          ctx.roundRect(cardW / 2 - 280, -cardH / 2 + 100, 225, 225, 16);
+          ctx.fill();
+          ctx.strokeStyle = '#CBD5E1';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+
+          ctx.fillStyle = '#94A3B8';
+          ctx.font = 'bold 24px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('QR CODE', cardW / 2 - 167, -cardH / 2 + 225);
+
+          // Address simulated lines
+          ctx.fillStyle = '#CBD5E1';
+          ctx.beginPath();
+          ctx.roundRect(-cardW / 2 + 65, -cardH / 2 + 120, 520, 20, 6);
+          ctx.roundRect(-cardW / 2 + 65, -cardH / 2 + 160, 560, 20, 6);
+          ctx.roundRect(-cardW / 2 + 65, -cardH / 2 + 200, 480, 20, 6);
+          ctx.roundRect(-cardW / 2 + 65, -cardH / 2 + 240, 400, 20, 6);
+          ctx.fill();
+
+          ctx.fillStyle = '#64748B';
+          ctx.font = 'bold 26px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('Back Side (Address & QR Code)', 0, 235);
+        }
       }
       ctx.restore();
 
@@ -281,11 +402,11 @@ export function AadhaarPrintStudio() {
     // Calculate layout positions
     const renderSet = (startX: number, startY: number) => {
       if (arrangement === 'sideBySide') {
-        renderSingleCard(frontImg, startX, startY, frontRotation);
-        renderSingleCard(backImg, startX + cardW + gap, startY, backRotation);
+        renderSingleCard(frontImg, startX, startY, frontRotation, false);
+        renderSingleCard(backImg, startX + cardW + gap, startY, backRotation, true);
       } else {
-        renderSingleCard(frontImg, startX, startY, frontRotation);
-        renderSingleCard(backImg, startX, startY + cardH + gap, backRotation);
+        renderSingleCard(frontImg, startX, startY, frontRotation, false);
+        renderSingleCard(backImg, startX, startY + cardH + gap, backRotation, true);
       }
     };
 
@@ -306,9 +427,12 @@ export function AadhaarPrintStudio() {
       renderSet(leftMargin, 120);
     } else {
       // PVC Card size
-      renderSingleCard(frontImg, 0, 0, frontRotation);
       if (arrangement === 'stacked') {
-        renderSingleCard(backImg, 0, cardH + 40, backRotation);
+        renderSingleCard(frontImg, 0, 0, frontRotation, false);
+        renderSingleCard(backImg, 0, cardH + 40, backRotation, true);
+      } else {
+        renderSingleCard(frontImg, 0, 0, frontRotation, false);
+        renderSingleCard(backImg, cardW + gap, 0, backRotation, true);
       }
     }
 
@@ -331,15 +455,331 @@ export function AadhaarPrintStudio() {
   }, [renderPrintCanvas]);
 
   // -------------------------------------------------------------
-  // 4. PRINT NOW (Direct physical mm print dialog)
+  // DIRECT PRINT & DOWNLOAD FOR e-AADHAAR PDF (Original PDF Direct Print)
   // -------------------------------------------------------------
-  const handlePrintNow = () => {
+  const handleDirectPrintPdf = useCallback(() => {
+    if (!pdfPreviewUrl) {
+      toast.error('Please upload and unlock your e-Aadhaar PDF first.');
+      return;
+    }
+
+    trackEvent('download_clicked', { toolSlug: 'aadhaar-card-print', action: 'direct_print_pdf' });
+
+    try {
+      const iframe = document.createElement('iframe');
+      iframe.style.position = 'fixed';
+      iframe.style.right = '0';
+      iframe.style.bottom = '0';
+      iframe.style.width = '0';
+      iframe.style.height = '0';
+      iframe.style.border = '0';
+      iframe.style.opacity = '0';
+      document.body.appendChild(iframe);
+
+      const doc = iframe.contentWindow?.document;
+      if (!doc) {
+        window.print();
+        return;
+      }
+
+      doc.open();
+      doc.write(`
+        <!DOCTYPE html>
+        <html lang="en">
+          <head>
+            <meta charset="utf-8" />
+            <title>Print e-Aadhaar PDF</title>
+            <style>
+              @page {
+                size: A4 portrait;
+                margin: 0mm;
+              }
+              * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+              }
+              html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                background: #ffffff;
+              }
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                display: block;
+              }
+            </style>
+          </head>
+          <body>
+            <img src="${pdfPreviewUrl}" />
+          </body>
+        </html>
+      `);
+      doc.close();
+
+      setTimeout(() => {
+        try {
+          iframe.contentWindow?.focus();
+          iframe.contentWindow?.print();
+        } catch (err) {
+          console.error(err);
+        } finally {
+          setTimeout(() => {
+            try {
+              document.body.removeChild(iframe);
+            } catch {}
+          }, 4000);
+        }
+      }, 500);
+    } catch (e) {
+      console.error(e);
+      window.print();
+    }
+  }, [pdfPreviewUrl]);
+
+  const handleDownloadUnlockedPdf = useCallback(async () => {
+    if (!pdfPreviewUrl) {
+      toast.error('Please upload and unlock your e-Aadhaar PDF first.');
+      return;
+    }
+
+    setIsGenerating(true);
+    try {
+      const { PDFDocument } = await import('pdf-lib');
+      const pdfDoc = await PDFDocument.create();
+      // Standard A4 dimensions in pt: 595.28 x 841.89
+      const page = pdfDoc.addPage([595.28, 841.89]);
+      const img = await embedImageSafely(pdfDoc, pdfPreviewUrl);
+      page.drawImage(img, {
+        x: 0,
+        y: 0,
+        width: 595.28,
+        height: 841.89,
+      });
+
+      const pdfBytes = await pdfDoc.save();
+      const blob = new Blob([pdfBytes as unknown as BlobPart], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Unlocked_${pdfFile?.name ? pdfFile.name.replace(/\.pdf$/i, '') : 'eAadhaar'}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      toast.success('Unlocked e-Aadhaar PDF downloaded!');
+      trackEvent('download_clicked', { toolSlug: 'aadhaar-card-print', action: 'download_unlocked_pdf' });
+    } catch (err: any) {
+      console.error(err);
+      toast.error('Failed to generate unlocked PDF download.');
+    } finally {
+      setIsGenerating(false);
+    }
+  }, [pdfPreviewUrl, pdfFile]);
+
+  // -------------------------------------------------------------
+  // 4. PRINT NOW (Direct physical mm print dialog via isolated iframe)
+  // -------------------------------------------------------------
+  const handlePrintNow = useCallback(() => {
     if (!frontImage && !backImage) {
       toast.error('Please upload your Aadhaar card first.');
       return;
     }
+
+    const canvas = previewCanvasRef.current;
+    if (!canvas) {
+      toast.error('Canvas preview is not ready yet.');
+      return;
+    }
+
     trackEvent('download_clicked', { toolSlug: 'aadhaar-card-print', action: 'print', layout: paperLayout });
-    window.print();
+
+    try {
+      const dataUrl = canvas.toDataURL('image/png', 1.0);
+
+      // Create isolated printing iframe
+      const iframe = document.createElement('iframe');
+      iframe.style.position = 'fixed';
+      iframe.style.right = '0';
+      iframe.style.bottom = '0';
+      iframe.style.width = '0';
+      iframe.style.height = '0';
+      iframe.style.border = '0';
+      iframe.style.opacity = '0';
+      iframe.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(iframe);
+
+      const doc = iframe.contentWindow?.document;
+      if (!doc) {
+        window.print();
+        return;
+      }
+
+      const pageSize =
+        paperLayout === 'a4'
+          ? 'A4 portrait'
+          : paperLayout === '4x6'
+          ? '4in 6in portrait'
+          : 'auto';
+
+      doc.open();
+      doc.write(`
+        <!DOCTYPE html>
+        <html lang="en">
+          <head>
+            <meta charset="utf-8" />
+            <title>Aadhaar Card Print - FileZenith</title>
+            <style>
+              @page {
+                size: ${pageSize};
+                margin: 0mm;
+              }
+              * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+              }
+              html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                background: #ffffff;
+                overflow: hidden;
+              }
+              .sheet-container {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+              }
+              img {
+                width: 100%;
+                height: 100%;
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: contain;
+                display: block;
+                margin: 0 auto;
+                page-break-inside: avoid;
+                break-inside: avoid;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="sheet-container">
+              <img id="printSheetImg" src="${dataUrl}" alt="Aadhaar Card Print Sheet" />
+            </div>
+          </body>
+        </html>
+      `);
+      doc.close();
+
+      const printImg = doc.getElementById('printSheetImg') as HTMLImageElement | null;
+      const doPrint = () => {
+        try {
+          iframe.contentWindow?.focus();
+          iframe.contentWindow?.print();
+        } catch {
+          window.print();
+        } finally {
+          setTimeout(() => {
+            if (document.body.contains(iframe)) {
+              document.body.removeChild(iframe);
+            }
+          }, 60000);
+        }
+      };
+
+      if (printImg) {
+        if (printImg.complete) {
+          setTimeout(doPrint, 150);
+        } else {
+          printImg.onload = () => setTimeout(doPrint, 150);
+          printImg.onerror = () => doPrint();
+        }
+      } else {
+        setTimeout(doPrint, 150);
+      }
+    } catch {
+      window.print();
+    }
+  }, [frontImage, backImage, paperLayout]);
+
+  // Intercept Ctrl+P / Cmd+P to invoke exact 1-page studio print
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'p') {
+        if (frontImage || backImage) {
+          e.preventDefault();
+          handlePrintNow();
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [handlePrintNow, frontImage, backImage]);
+
+  // Helper to safely embed ANY image (PNG, WebP, JPEG, EXIF) without "SOI not found in JPEG"
+  const embedImageSafely = async (
+    pdfDoc: PDFDocument,
+    imageSrc: string,
+    rotation = 0
+  ): Promise<PDFImage> => {
+    return new Promise<PDFImage>((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = async () => {
+        try {
+          const isRotated90or270 = rotation === 90 || rotation === 270;
+          const origW = img.naturalWidth || img.width;
+          const origH = img.naturalHeight || img.height;
+          const canvasW = isRotated90or270 ? origH : origW;
+          const canvasH = isRotated90or270 ? origW : origH;
+
+          const canvas = document.createElement('canvas');
+          canvas.width = canvasW;
+          canvas.height = canvasH;
+          const ctx = canvas.getContext('2d');
+          if (!ctx) throw new Error('Could not get 2D canvas context');
+
+          // Pure white background to prevent dark artifacts
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fillRect(0, 0, canvasW, canvasH);
+
+          ctx.save();
+          ctx.translate(canvasW / 2, canvasH / 2);
+          if (rotation !== 0) {
+            ctx.rotate((rotation * Math.PI) / 180);
+          }
+          ctx.drawImage(img, -origW / 2, -origH / 2, origW, origH);
+          ctx.restore();
+
+          // Standard JPEG encoding
+          try {
+            const jpegDataUrl = canvas.toDataURL('image/jpeg', 0.98);
+            const embedded = await pdfDoc.embedJpg(jpegDataUrl);
+            resolve(embedded);
+            return;
+          } catch {
+            // Fallback to PNG encoding
+            const pngDataUrl = canvas.toDataURL('image/png');
+            const embeddedPng = await pdfDoc.embedPng(pngDataUrl);
+            resolve(embeddedPng);
+          }
+        } catch (err) {
+          reject(err);
+        }
+      };
+      img.onerror = () => reject(new Error('Failed to load card image for PDF'));
+      img.src = imageSrc;
+    });
   };
 
   // -------------------------------------------------------------
@@ -366,9 +806,9 @@ export function AadhaarPrintStudio() {
       const cardH_pt = CARD_HEIGHT_MM * MM_TO_PT; // ~153.1 pt
       const gap_pt = 4 * MM_TO_PT; // ~11.3 pt gap
 
-      // Embed Front image
-      const frontJpg = frontImage ? await pdfDoc.embedJpg(frontImage) : null;
-      const backJpg = backImage ? await pdfDoc.embedJpg(backImage) : null;
+      // Embed Front and Back images safely without "SOI not found in JPEG"
+      const frontJpg = frontImage ? await embedImageSafely(pdfDoc, frontImage, frontRotation) : null;
+      const backJpg = backImage ? await embedImageSafely(pdfDoc, backImage, backRotation) : null;
 
       const topY = pageH - 50 - cardH_pt; // 50 pt from top margin
 
@@ -469,42 +909,9 @@ export function AadhaarPrintStudio() {
   };
 
   return (
-    <div className="space-y-8 text-slate-900">
-      {/* Printable Area Wrapper for window.print() */}
-      <style jsx global>{`
-        @media print {
-          body * {
-            visibility: hidden !important;
-          }
-          #printable-aadhaar-canvas, #printable-aadhaar-canvas * {
-            visibility: visible !important;
-          }
-          #printable-aadhaar-canvas {
-            position: fixed !important;
-            left: 0 !important;
-            top: 0 !important;
-            width: 100vw !important;
-            height: 100vh !important;
-            display: flex !important;
-            align-items: flex-start !important;
-            justify-content: center !important;
-            background: white !important;
-            padding: 0 !important;
-            margin: 0 !important;
-          }
-          #printable-aadhaar-canvas canvas {
-            max-width: 100% !important;
-            height: auto !important;
-          }
-          @page {
-            size: A4 portrait;
-            margin: 10mm;
-          }
-        }
-      `}</style>
-
+    <div className="space-y-8 text-slate-900 print:space-y-0 print:m-0 print:p-0">
       {/* Main Studio Control Panel */}
-      <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-md space-y-6">
+      <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-md space-y-6 print:hidden">
         {/* Header Badges */}
         <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-100">
           <div className="flex items-center gap-2">
@@ -553,59 +960,185 @@ export function AadhaarPrintStudio() {
         {/* Mode 1: PDF Dropzone & Password Prompt */}
         {activeTab === 'pdf' && (
           <div className="space-y-4">
-            <label className="flex flex-col items-center justify-center p-8 border-2 border-dashed border-rose-200 hover:border-rose-500 bg-rose-50/20 hover:bg-rose-50/40 rounded-2xl cursor-pointer transition-all group">
-              <Upload className="w-9 h-9 text-rose-500 group-hover:scale-110 transition-transform mb-2" />
-              <span className="text-sm font-extrabold text-slate-800 text-center">
-                {pdfFile ? pdfFile.name : 'Click or Drag & Drop e-Aadhaar PDF'}
-              </span>
-              <span className="text-xs text-slate-500 mt-1">
-                Downloaded from eaadhaar.uidai.gov.in
-              </span>
-              <input
-                type="file"
-                accept=".pdf,application/pdf"
-                className="hidden"
-                onChange={(e) => {
-                  const f = e.target.files?.[0];
-                  if (f) handlePdfUpload(f);
-                }}
-              />
-            </label>
+            {pdfPreviewUrl ? (
+              /* Full Unlocked e-Aadhaar PDF Document Preview (Direct Print Same) */
+              <div className="p-4 sm:p-6 rounded-2xl bg-white border-2 border-emerald-300 shadow-sm space-y-5 animate-in fade-in">
+                <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+                      <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-black uppercase tracking-wider text-emerald-950">
+                          e-Aadhaar PDF Unlocked & Decrypted
+                        </span>
+                        <span className="text-[10px] font-extrabold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                          Ready to Print
+                        </span>
+                      </div>
+                      <p className="text-xs font-semibold text-slate-600 truncate max-w-[240px] sm:max-w-md">
+                        {pdfFile ? pdfFile.name : 'e-Aadhaar PDF'}
+                      </p>
+                    </div>
+                  </div>
 
-            {/* Password Unlock Box */}
-            {isPasswordRequired && (
-              <div className="p-5 rounded-2xl bg-amber-50 border border-amber-200 space-y-3 animate-in fade-in">
-                <div className="flex items-start gap-2.5">
-                  <Lock className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="text-xs font-black uppercase text-amber-900 tracking-wider">
-                      e-Aadhaar PDF Password Required
-                    </h4>
-                    <p className="text-xs font-medium text-amber-800 mt-0.5">
+                  <div className="flex items-center gap-2">
+                    <label className="text-xs font-black text-slate-700 hover:text-slate-900 bg-slate-50 hover:bg-slate-100 px-3.5 py-2 rounded-xl border border-slate-200 shadow-2xs cursor-pointer flex items-center gap-1.5 transition-colors">
+                      <RefreshCw className="w-3.5 h-3.5 text-slate-600" />
+                      <span>Upload Another PDF</span>
+                      <input
+                        type="file"
+                        accept=".pdf,application/pdf"
+                        className="hidden"
+                        onChange={(e) => {
+                          const f = e.target.files?.[0];
+                          if (f) handlePdfUpload(f);
+                        }}
+                      />
+                    </label>
+                  </div>
+                </div>
+
+                {/* Direct Action Buttons on Top for Instant Access */}
+                <div className="flex flex-wrap gap-3">
+                  <button
+                    type="button"
+                    onClick={handleDirectPrintPdf}
+                    className="flex-1 min-w-[220px] py-4 bg-rose-600 hover:bg-rose-700 text-white font-black text-sm rounded-2xl flex items-center justify-center gap-2.5 shadow-lg shadow-rose-600/20 hover:scale-[1.01] active:scale-[0.99] transition-all cursor-pointer"
+                  >
+                    <Printer className="w-5 h-5" />
+                    <span>Direct Print e-Aadhaar (Same as PDF)</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={handleDownloadUnlockedPdf}
+                    disabled={isGenerating}
+                    className="px-6 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm rounded-2xl flex items-center justify-center gap-2 shadow-md shadow-indigo-600/20 hover:scale-[1.01] active:scale-[0.99] transition-all cursor-pointer disabled:opacity-50"
+                  >
+                    <FileDown className="w-4 h-4 text-white" />
+                    <span>Download Unlocked PDF (No Password)</span>
+                  </button>
+                </div>
+
+                {/* Entire PDF Page Preview */}
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-xs font-bold text-slate-600 px-1">
+                    <span className="flex items-center gap-1.5">
+                      <Eye className="w-4 h-4 text-rose-600" /> Full e-Aadhaar Document Preview
+                    </span>
+                    <span className="text-[11px] font-medium text-slate-400">
+                      Standard A4 Official Print Scale
+                    </span>
+                  </div>
+
+                  <div className="relative w-full max-h-[580px] sm:max-h-[700px] overflow-y-auto bg-slate-100/90 rounded-2xl p-3 sm:p-6 border border-slate-200 flex justify-center shadow-inner">
+                    <img
+                      src={pdfPreviewUrl}
+                      alt="Full Unlocked e-Aadhaar PDF"
+                      className="w-full max-w-[620px] h-auto object-contain bg-white rounded-xl shadow-xl border border-slate-300"
+                    />
+                  </div>
+                </div>
+
+                {/* Bottom Direct Print Button */}
+                <div className="pt-2 border-t border-slate-100 flex flex-wrap gap-3">
+                  <button
+                    type="button"
+                    onClick={handleDirectPrintPdf}
+                    className="flex-1 min-w-[200px] py-4 bg-rose-600 hover:bg-rose-700 text-white font-black text-sm rounded-2xl flex items-center justify-center gap-2.5 shadow-lg shadow-rose-600/20 hover:scale-[1.01] active:scale-[0.99] transition-all cursor-pointer"
+                  >
+                    <Printer className="w-5 h-5" />
+                    <span>Direct Print Now (1-Click A4)</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleDownloadUnlockedPdf}
+                    disabled={isGenerating}
+                    className="px-6 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm rounded-2xl flex items-center justify-center gap-2 shadow-md shadow-indigo-600/20 transition-all cursor-pointer disabled:opacity-50"
+                  >
+                    <FileDown className="w-4 h-4 text-white" />
+                    <span>Save Decrypted PDF</span>
+                  </button>
+                </div>
+              </div>
+            ) : isPasswordRequired ? (
+              /* Password Unlock Box */
+              <div className="p-5 sm:p-6 rounded-2xl bg-amber-50 border-2 border-amber-300 space-y-4 animate-in fade-in">
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center shrink-0">
+                    <Lock className="w-5 h-5 text-amber-700" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between flex-wrap gap-2">
+                      <h4 className="text-xs font-black uppercase text-amber-900 tracking-wider">
+                        e-Aadhaar PDF Password Required
+                      </h4>
+                      {pdfFile && (
+                        <span className="text-[11px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-md">
+                          {pdfFile.name}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs font-medium text-amber-800 mt-1">
                       Standard format: First 4 letters of your name in <strong>CAPITAL</strong> + <strong>Year of Birth (YYYY)</strong>.
-                      <br />Example: Name is <em>ANIL KUMAR</em> born in <em>1995</em> → Password is <strong className="font-mono bg-amber-100 px-1 py-0.5 rounded">ANIL1995</strong>.
+                      <br />Example: Name is <em>ANIL KUMAR</em> born in <em>1995</em> → Password is <strong className="font-mono bg-amber-200 px-1.5 py-0.5 rounded text-amber-950 font-bold">ANIL1995</strong>.
                     </p>
                   </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-2">
+                <div className="flex flex-col sm:flex-row gap-2.5">
                   <input
                     type="password"
                     placeholder="Enter e.g. ANIL1995"
                     value={pdfPassword}
                     onChange={(e) => setPdfPassword(e.target.value.toUpperCase())}
-                    className="flex-1 p-3.5 rounded-xl border border-amber-300 bg-white font-mono font-bold text-sm tracking-wider uppercase focus:outline-none focus:ring-2 focus:ring-rose-500"
+                    className="flex-1 p-3.5 rounded-xl border border-amber-300 bg-white font-mono font-bold text-sm tracking-wider uppercase focus:outline-none focus:ring-2 focus:ring-rose-500 shadow-xs"
+                    autoFocus
                   />
                   <button
                     onClick={() => pdfFile && processPdf(pdfFile, pdfPassword)}
                     disabled={!pdfPassword || isDecrypting}
-                    className="px-6 py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-black text-xs rounded-xl flex items-center justify-center gap-2 cursor-pointer shadow-xs disabled:opacity-50"
+                    className="px-6 py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-black text-xs rounded-xl flex items-center justify-center gap-2 cursor-pointer shadow-md disabled:opacity-50 transition-colors"
                   >
                     <Unlock className="w-4 h-4" />
                     <span>{isDecrypting ? 'Decrypting...' : 'Unlock & Crop Card'}</span>
                   </button>
+                  <label className="px-4 py-3.5 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs rounded-xl border border-amber-300 flex items-center justify-center cursor-pointer transition-colors">
+                    <span>Change File</span>
+                    <input
+                      type="file"
+                      accept=".pdf,application/pdf"
+                      className="hidden"
+                      onChange={(e) => {
+                        const f = e.target.files?.[0];
+                        if (f) handlePdfUpload(f);
+                      }}
+                    />
+                  </label>
                 </div>
               </div>
+            ) : (
+              /* Initial Upload Dropzone */
+              <label className="flex flex-col items-center justify-center p-8 border-2 border-dashed border-rose-200 hover:border-rose-500 bg-rose-50/20 hover:bg-rose-50/40 rounded-2xl cursor-pointer transition-all group">
+                <Upload className="w-9 h-9 text-rose-500 group-hover:scale-110 transition-transform mb-2" />
+                <span className="text-sm font-extrabold text-slate-800 text-center">
+                  {pdfFile ? pdfFile.name : 'Click or Drag & Drop e-Aadhaar PDF'}
+                </span>
+                <span className="text-xs text-slate-500 mt-1">
+                  Downloaded from eaadhaar.uidai.gov.in (Password protected supported)
+                </span>
+                <input
+                  type="file"
+                  accept=".pdf,application/pdf"
+                  className="hidden"
+                  onChange={(e) => {
+                    const f = e.target.files?.[0];
+                    if (f) handlePdfUpload(f);
+                  }}
+                />
+              </label>
             )}
           </div>
         )}
@@ -616,71 +1149,291 @@ export function AadhaarPrintStudio() {
             {/* Front Side */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-black uppercase text-slate-700">1. Front Side (Photo & Aadhaar No.)</label>
+                <label className="text-xs font-black uppercase text-slate-700 flex items-center gap-1.5">
+                  <span>1. Front Side (Candidate Photo & ID)</span>
+                  {frontImage && (
+                    <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
+                      <CheckCircle2 className="w-3 h-3 text-emerald-600" /> Loaded
+                    </span>
+                  )}
+                </label>
                 {frontImage && (
-                  <button
-                    onClick={() => setFrontRotation((r) => (r + 90) % 360)}
-                    className="text-xs font-bold text-rose-600 hover:text-rose-700 flex items-center gap-1 cursor-pointer"
-                  >
-                    <RotateCw className="w-3.5 h-3.5" /> Rotate
-                  </button>
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      type="button"
+                      onClick={() => setFrontRotation((r) => (r + 90) % 360)}
+                      className="text-xs font-bold text-rose-600 hover:text-rose-700 flex items-center gap-1 cursor-pointer bg-rose-50 hover:bg-rose-100 px-2 py-1 rounded-lg border border-rose-200 transition-colors"
+                      title="Rotate 90° Clockwise"
+                    >
+                      <RotateCw className="w-3.5 h-3.5" /> Rotate
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setFrontImage(null);
+                        setFrontRotation(0);
+                      }}
+                      className="text-xs font-bold text-slate-400 hover:text-rose-600 flex items-center gap-1 cursor-pointer p-1 rounded-lg hover:bg-slate-100 transition-colors"
+                      title="Remove Front Image"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
                 )}
               </div>
-              <label className="flex flex-col items-center justify-center p-6 border-2 border-dashed border-slate-200 hover:border-rose-400 bg-slate-50 hover:bg-rose-50/20 rounded-2xl cursor-pointer min-h-[140px] transition-all group">
-                <Upload className="w-6 h-6 text-slate-400 group-hover:text-rose-600 mb-1" />
-                <span className="text-xs font-bold text-slate-700 text-center">
-                  {frontImage ? 'Change Front Photo' : 'Upload Front Image'}
-                </span>
-                <input
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={(e) => {
-                    const f = e.target.files?.[0];
-                    if (f) handleImageFile(f, 'front');
-                  }}
-                />
-              </label>
+
+              {frontImage ? (
+                <div className="rounded-2xl border-2 border-emerald-200 bg-slate-900/5 p-3 space-y-2">
+                  <div className="relative w-full aspect-[1.586/1] bg-white rounded-xl overflow-hidden flex items-center justify-center border border-slate-300 shadow-sm group">
+                    <img
+                      src={frontImage}
+                      alt="Candidate Front Photo & Aadhaar Card"
+                      className="w-full h-full object-contain transition-transform duration-200"
+                      style={{ transform: `rotate(${frontRotation}deg)` }}
+                    />
+                    {/* Hover Overlay */}
+                    <label className="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-1.5 text-white cursor-pointer backdrop-blur-xs">
+                      <Upload className="w-6 h-6 text-white" />
+                      <span className="text-xs font-bold">Click to Replace Candidate Photo</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          const f = e.target.files?.[0];
+                          if (f) handleImageFile(f, 'front');
+                        }}
+                      />
+                    </label>
+                  </div>
+                  <div className="flex items-center justify-between text-xs px-1">
+                    <span className="font-bold text-emerald-800 flex items-center gap-1">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Candidate Photo Visible
+                    </span>
+                    <label className="font-extrabold text-rose-600 hover:text-rose-700 cursor-pointer flex items-center gap-1">
+                      <RefreshCw className="w-3 h-3" /> Change Photo
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          const f = e.target.files?.[0];
+                          if (f) handleImageFile(f, 'front');
+                        }}
+                      />
+                    </label>
+                  </div>
+                </div>
+              ) : (
+                <label className="flex flex-col items-center justify-center p-6 border-2 border-dashed border-slate-200 hover:border-rose-400 bg-slate-50 hover:bg-rose-50/20 rounded-2xl cursor-pointer min-h-[160px] transition-all group">
+                  <div className="w-12 h-12 rounded-2xl bg-rose-50 border border-rose-100 flex items-center justify-center text-rose-600 mb-2 group-hover:scale-105 transition-transform">
+                    <Upload className="w-6 h-6" />
+                  </div>
+                  <span className="text-xs font-black text-slate-800 text-center">
+                    Upload Candidate Front Photo
+                  </span>
+                  <span className="text-[11px] font-medium text-slate-500 mt-0.5 text-center">
+                    Shows Candidate portrait photo, name, and Aadhaar number
+                  </span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => {
+                      const f = e.target.files?.[0];
+                      if (f) handleImageFile(f, 'front');
+                    }}
+                  />
+                </label>
+              )}
             </div>
 
             {/* Back Side */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-black uppercase text-slate-700">2. Back Side (Address & QR Code)</label>
+                <label className="text-xs font-black uppercase text-slate-700 flex items-center gap-1.5">
+                  <span>2. Back Side (Address & QR Code)</span>
+                  {backImage && (
+                    <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
+                      <CheckCircle2 className="w-3 h-3 text-emerald-600" /> Loaded
+                    </span>
+                  )}
+                </label>
                 {backImage && (
-                  <button
-                    onClick={() => setBackRotation((r) => (r + 90) % 360)}
-                    className="text-xs font-bold text-rose-600 hover:text-rose-700 flex items-center gap-1 cursor-pointer"
-                  >
-                    <RotateCw className="w-3.5 h-3.5" /> Rotate
-                  </button>
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      type="button"
+                      onClick={() => setBackRotation((r) => (r + 90) % 360)}
+                      className="text-xs font-bold text-rose-600 hover:text-rose-700 flex items-center gap-1 cursor-pointer bg-rose-50 hover:bg-rose-100 px-2 py-1 rounded-lg border border-rose-200 transition-colors"
+                      title="Rotate 90° Clockwise"
+                    >
+                      <RotateCw className="w-3.5 h-3.5" /> Rotate
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setBackImage(null);
+                        setBackRotation(0);
+                      }}
+                      className="text-xs font-bold text-slate-400 hover:text-rose-600 flex items-center gap-1 cursor-pointer p-1 rounded-lg hover:bg-slate-100 transition-colors"
+                      title="Remove Back Image"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
                 )}
               </div>
-              <label className="flex flex-col items-center justify-center p-6 border-2 border-dashed border-slate-200 hover:border-rose-400 bg-slate-50 hover:bg-rose-50/20 rounded-2xl cursor-pointer min-h-[140px] transition-all group">
-                <Upload className="w-6 h-6 text-slate-400 group-hover:text-rose-600 mb-1" />
-                <span className="text-xs font-bold text-slate-700 text-center">
-                  {backImage ? 'Change Back Photo' : 'Upload Back Image'}
-                </span>
-                <input
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={(e) => {
-                    const f = e.target.files?.[0];
-                    if (f) handleImageFile(f, 'back');
-                  }}
-                />
-              </label>
+
+              {backImage ? (
+                <div className="rounded-2xl border-2 border-emerald-200 bg-slate-900/5 p-3 space-y-2">
+                  <div className="relative w-full aspect-[1.586/1] bg-white rounded-xl overflow-hidden flex items-center justify-center border border-slate-300 shadow-sm group">
+                    <img
+                      src={backImage}
+                      alt="Candidate Aadhaar Back Side"
+                      className="w-full h-full object-contain transition-transform duration-200"
+                      style={{ transform: `rotate(${backRotation}deg)` }}
+                    />
+                    {/* Hover Overlay */}
+                    <label className="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-1.5 text-white cursor-pointer backdrop-blur-xs">
+                      <Upload className="w-6 h-6 text-white" />
+                      <span className="text-xs font-bold">Click to Replace Back Side</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          const f = e.target.files?.[0];
+                          if (f) handleImageFile(f, 'back');
+                        }}
+                      />
+                    </label>
+                  </div>
+                  <div className="flex items-center justify-between text-xs px-1">
+                    <span className="font-bold text-emerald-800 flex items-center gap-1">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Address & QR Code Visible
+                    </span>
+                    <label className="font-extrabold text-rose-600 hover:text-rose-700 cursor-pointer flex items-center gap-1">
+                      <RefreshCw className="w-3 h-3" /> Change Photo
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          const f = e.target.files?.[0];
+                          if (f) handleImageFile(f, 'back');
+                        }}
+                      />
+                    </label>
+                  </div>
+                </div>
+              ) : (
+                <label className="flex flex-col items-center justify-center p-6 border-2 border-dashed border-slate-200 hover:border-rose-400 bg-slate-50 hover:bg-rose-50/20 rounded-2xl cursor-pointer min-h-[160px] transition-all group">
+                  <div className="w-12 h-12 rounded-2xl bg-rose-50 border border-rose-100 flex items-center justify-center text-rose-600 mb-2 group-hover:scale-105 transition-transform">
+                    <Upload className="w-6 h-6" />
+                  </div>
+                  <span className="text-xs font-black text-slate-800 text-center">
+                    Upload Back Side (Address & QR)
+                  </span>
+                  <span className="text-[11px] font-medium text-slate-500 mt-0.5 text-center">
+                    Shows official QR code and residential address
+                  </span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => {
+                      const f = e.target.files?.[0];
+                      if (f) handleImageFile(f, 'back');
+                    }}
+                  />
+                </label>
+              )}
             </div>
           </div>
         )}
 
-        {/* Print Configuration Controls */}
-        {(frontImage || backImage) && (
-          <div className="pt-6 border-t border-slate-200 space-y-5 animate-in fade-in">
-            <h3 className="text-xs font-black uppercase tracking-wider text-slate-700">
-              Print Sheet Settings & Formatting
-            </h3>
+      </div>
+
+      {/* Containers 2 & 3: Live Print Sheet Preview and ID-1 Formatting (Shown ONLY in Upload Photos / Scans mode) */}
+      {activeTab === 'images' && (
+        <>
+          {/* Container 2: Live Interactive Print Sheet Preview (Placed DIRECTLY ABOVE Formatting so users see changes in real-time) */}
+          <div className="space-y-3 print:space-y-0 print:m-0 print:p-0 animate-in fade-in">
+            <div className="flex flex-wrap items-center justify-between gap-2 bg-white px-5 py-3.5 rounded-2xl border border-slate-200 shadow-xs print:hidden">
+              <div className="flex items-center gap-2">
+                <Eye className="w-4 h-4 text-rose-600" />
+                <h3 className="text-xs font-black uppercase tracking-wider text-slate-800">
+                  Live Print Sheet Preview ({paperLayout.toUpperCase()} Physical Scale)
+                </h3>
+                {frontImage || backImage ? (
+                  <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    Candidate Card Active
+                  </span>
+                ) : (
+                  <span className="text-[10px] font-bold text-slate-500 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-full">
+                    Interactive Layout Guide
+                  </span>
+                )}
+              </div>
+
+              <div className="flex items-center gap-2 text-xs">
+                <span className="font-bold text-slate-400 hidden sm:inline">
+                  Card Size: {CARD_WIDTH_MM} × {CARD_HEIGHT_MM} mm
+                </span>
+                <span className="text-[10px] font-black text-rose-700 bg-rose-50 border border-rose-200 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                  {paperLayout.toUpperCase()} • {arrangement === 'sideBySide' ? 'Side-by-Side' : 'Stacked'} {paperLayout === 'a4' ? `• ${copies} ${copies === 1 ? 'Copy' : 'Copies'}` : ''}
+                </span>
+              </div>
+            </div>
+
+            <div
+              id="printable-aadhaar-canvas"
+              className="p-4 sm:p-8 bg-slate-100/90 rounded-3xl border border-slate-200 flex items-center justify-center overflow-auto shadow-inner print:p-0 print:m-0 print:bg-transparent print:border-none print:shadow-none print:rounded-none"
+            >
+              <div className="bg-white shadow-2xl rounded-xl p-2 max-w-full overflow-hidden border border-slate-300 print:p-0 print:m-0 print:bg-transparent print:border-none print:shadow-none print:rounded-none">
+                <canvas
+                  ref={previewCanvasRef}
+                  className="max-w-full h-auto object-contain block mx-auto print:w-full print:max-w-full print:h-auto"
+                  style={{ maxHeight: '560px' }}
+                />
+              </div>
+            </div>
+            <p className="text-[11px] text-slate-500 font-medium text-center print:hidden">
+              💡 Live sheet preview above — adjust paper layout, alignment, copies, and brightness sliders below to see changes instantly.
+            </p>
+          </div>
+
+          {/* Container 3: Print Configuration Controls & Action Buttons (Directly below preview) */}
+          <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-md space-y-6 print:hidden animate-in fade-in">
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+              <h3 className="text-xs font-black uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
+                <Sliders className="w-4 h-4 text-rose-600" />
+                <span>Print Sheet Settings & Formatting</span>
+              </h3>
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] font-bold text-slate-400 hidden sm:inline">
+                  Changes reflect live on sheet preview above
+                </span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setPaperLayout('a4');
+                    setArrangement('sideBySide');
+                    setCopies(1);
+                    setShowCutBorder(true);
+                    setBrightness(0);
+                    setContrast(0);
+                    toast.info('Formatting reset to default');
+                  }}
+                  className="text-xs font-bold text-slate-500 hover:text-rose-600 flex items-center gap-1 cursor-pointer bg-slate-50 hover:bg-rose-50 px-2.5 py-1 rounded-lg border border-slate-200 transition-colors"
+                  title="Reset formatting to default"
+                >
+                  <RefreshCw className="w-3 h-3" />
+                  <span>Reset Formatting</span>
+                </button>
+              </div>
+            </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {/* Paper Layout */}
@@ -802,35 +1555,7 @@ export function AadhaarPrintStudio() {
               </button>
             </div>
           </div>
-        )}
-      </div>
-
-      {/* Live Interactive Print Sheet Preview */}
-      {(frontImage || backImage) && (
-        <div className="space-y-3">
-          <div className="flex items-center justify-between">
-            <h3 className="text-xs font-black uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-              <Eye className="w-4 h-4 text-rose-600" />
-              Live Print Sheet Preview ({paperLayout.toUpperCase()} Physical Scale)
-            </h3>
-            <span className="text-[11px] font-bold text-slate-400">
-              Exact Size: {CARD_WIDTH_MM} mm × {CARD_HEIGHT_MM} mm
-            </span>
-          </div>
-
-          <div
-            id="printable-aadhaar-canvas"
-            className="p-6 sm:p-10 bg-slate-100/80 rounded-3xl border border-slate-200 flex items-center justify-center overflow-auto shadow-inner"
-          >
-            <div className="bg-white shadow-2xl rounded-lg p-2 max-w-full overflow-hidden border border-slate-300">
-              <canvas
-                ref={previewCanvasRef}
-                className="max-w-full h-auto object-contain block mx-auto"
-                style={{ maxHeight: '720px' }}
-              />
-            </div>
-          </div>
-        </div>
+        </>
       )}
     </div>
   );

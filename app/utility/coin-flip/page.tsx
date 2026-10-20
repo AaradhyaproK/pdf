@@ -133,6 +133,15 @@ export default function CoinFlipPage() {
     return side === 'heads' ? customHeads || 'Option A' : customTails || 'Option B';
   }, [mode, customHeads, customTails]);
 
+  const getRandomBit = useCallback((): boolean => {
+    if (typeof window !== 'undefined' && window.crypto && window.crypto.getRandomValues) {
+      const buf = new Uint32Array(1);
+      window.crypto.getRandomValues(buf);
+      return (buf[0] & 1) === 0;
+    }
+    return Math.random() < 0.5;
+  }, []);
+
   const flipCoins = useCallback(() => {
     if (isFlipping) return;
     setIsFlipping(true);
@@ -142,7 +151,7 @@ export default function CoinFlipPage() {
     const newRotations = [...rotations];
 
     for (let i = 0; i < numCoins; i++) {
-      const isHeads = Math.random() < 0.5;
+      const isHeads = getRandomBit();
       const result: 'heads' | 'tails' = isHeads ? 'heads' : 'tails';
       newResults.push(result);
 
@@ -265,7 +274,7 @@ export default function CoinFlipPage() {
     let h = 0;
     let t = 0;
     for (let i = 0; i < 100; i++) {
-      if (Math.random() < 0.5) h++;
+      if (getRandomBit()) h++;
       else t++;
     }
 

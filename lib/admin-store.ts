@@ -63,7 +63,7 @@ const DEFAULT_ADS_CONFIG: AdsManagerConfig = {
   supportDevTextSidebar: 'Fast, private, in-browser file tools.',
   supportDevTextPostDownload: 'Fast, private, in-browser file tools.',
   fallbackSupportUrl: '/',
-  adLabelText: 'Advertisement',
+  adLabelText: '',
   publisherId: 'ca-pub-1291898061670715',
   adSenseScriptEnabled: true,
   headerBannerEnabled: true,

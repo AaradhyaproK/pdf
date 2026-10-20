@@ -7827,103 +7827,103 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
   },
   "/utility/coin-flip": {
     "slug": "/utility/coin-flip",
-    "badge": "Probability Simulation Suite",
-    "heading": "Comprehensive Technical Guide: Virtual Coin Flip, Bernoulli Trial Mathematics & 3D Physics Simulation",
-    "subheading": "In-depth guide exploring Bernoulli distributions, CSPRNG cryptographic randomness, 3D CSS perspective transforms, Law of Large Numbers convergence analysis, and statistical streak metrics.",
+    "badge": "Interactive 3D Probability Tool",
+    "heading": "Comprehensive Technical Guide: Virtual Coin Flip Simulator, Probability Mechanics & 3D Physics",
+    "subheading": "In-depth guide exploring Bernoulli trial mathematics, browser-based cryptographic randomness, multi-coin flipping, tournament match modes, and statistical distribution tracking.",
     "sections": [
       {
-        "title": "1. Mathematical Foundations: The Bernoulli Trial & Binary Decision Theory",
+        "title": "Mathematical Foundations: The Bernoulli Trial & Binary Decision Theory",
         "paragraphs": [
-          "The coin flip is humanity's oldest and most universal randomization tool, dating back to the Roman Empire where the practice was known as 'capita aut navia' (heads or ships). In probability theory and mathematical statistics, a coin flip is the quintessential Bernoulli trial: a discrete experiment with exactly two mutually exclusive outcomes\u2014success (Heads) or failure (Tails)\u2014where the theoretical probability of each outcome is p = 0.5.",
-          "While tossing a physical coin appears fundamentally random, physical experiments conducted by Stanford mathematicians have demonstrated that physical coin flips are deterministic and slightly biased: coins tend to land on the same face they started on roughly 51% of the time due to precession dynamics. A digital, cryptographically powered coin toss completely eliminates physical mechanical bias, delivering a mathematically perfect 50.000% binary distribution."
+          "The coin flip is humanity's oldest and most universal randomization tool, dating back to the Roman Empire where the practice was known as 'capita aut navia' (heads or ships). In probability theory and mathematical statistics, a coin flip is the quintessential Bernoulli trial: a discrete experiment with exactly two mutually exclusive outcomes—success (Heads) or failure (Tails)—where the theoretical probability of each outcome is p = 0.5.",
+          "Digital coin toss simulations provide an impartial arbiter for everyday decisions, sporting kick-offs, classroom probability demonstrations, and algorithmic symmetry breaking, providing an uncorrupted binary distribution."
         ],
         "bullets": [
-          "Pure Bernoulli Distribution: Delivers exact theoretical probability P(Heads) = P(Tails) = 0.5 without physical coin mechanical bias.",
-          "Binary Decision Architecture: Ideal for impartial arbitration, dispute resolution, sports kick-offs, and algorithmic symmetry breaking.",
-          "Historical Pedigree: Replaces manual coin tosses with mathematically rigorous, verified digital randomization."
+          "Pure Bernoulli Distribution: Delivers an exact theoretical probability P(Heads) = P(Tails) = 0.5.",
+          "Binary Decision Architecture: Ideal for impartial arbitration, dispute resolution, sports kick-offs, and board games.",
+          "Historical Pedigree: Replaces manual coin tosses with clean, verified digital randomization."
         ]
       },
       {
-        "title": "2. Cryptographic Entropy: CSPRNG vs Pseudo-Random Math.random()",
+        "title": "Randomness Architecture: Web Cryptography API vs Pseudo-Random Math.random()",
         "paragraphs": [
-          "The integrity of any digital decision tool rests on the quality of its entropy source. Standard web applications frequently use `Math.random()`, which produces pseudo-random numbers using algorithms like xorshift128+. In statistical experiments involving thousands of repeated flips, `Math.random()` can exhibit subtle correlations or algorithmic vulnerabilities that undermine fairness.",
-          "FileZenith's Coin Flip engine relies exclusively on the browser's native Web Cryptography API (`crypto.getRandomValues`). The algorithm extracts a cryptographically secure 32-bit unsigned integer (UInt32) directly from hardware entropy sources (such as thermal sensor fluctuations, CPU timing variations, and operating system entropy pools). By evaluating whether the least significant bit is 0 or 1, our engine delivers true unpredictability that meets the highest standards for statistical simulations and cryptographic applications."
+          "The reliability of any digital decision tool depends on its source of randomness. Basic web applications often rely on Math.random(), which produces pseudo-random numbers that can exhibit subtle statistical clustering across repeated trials.",
+          "FileZenith utilizes the browser's native Web Cryptography API (crypto.getRandomValues). The algorithm samples cryptographically secure unsigned integers, evaluating bit parity to guarantee unpredictable, unbiased 50/50 outcomes that meet rigorous simulation and decision-making standards."
         ],
         "bullets": [
-          "Hardware Entropy Harvesting: Generates random states from CPU timing jitter and OS entropy via `crypto.getRandomValues()`.",
-          "Bitwise Evaluation: Evaluates parity on cryptographically secure integers to prevent mathematical floating-point bias.",
-          "Monte Carlo Integrity: Perfectly suited for high-volume statistical demonstrations, Monte Carlo simulations, and academic research."
+          "Cryptographically Secure PRNG: Generates random states using the browser's native crypto.getRandomValues() API.",
+          "Bitwise Evaluation: Evaluates integer parity directly to prevent floating-point bias.",
+          "Client-Side Integrity: Computes all outcomes locally in your browser with zero network latency."
         ]
       },
       {
-        "title": "3. 3D CSS Physics & Spatial Animation Architecture",
+        "title": "3D CSS Physics & Spatial Animation Architecture",
         "paragraphs": [
-          "A satisfying digital coin toss must communicate physical weight, rotational velocity, and spatial depth. Static 2D image swaps feel sterile and fail to convey a genuine sense of chance. FileZenith implements a full 3D hardware-accelerated physics animation utilizing CSS 3D transforms (`transform-style: preserve-3d` and `perspective: 1000px`).",
-          "When you initiate a flip, the virtual coin launches into a multi-axis trajectory. The animation engine calculates an altitude arc using cubic-bezier timing curves while rotating through an odd or even multiple of 1800 degrees (5 to 10 full revolutions). A realistic landing wobble and bounce phase incorporates dampening kinetics before the coin settles onto the table, delivering an authentic visual experience that builds genuine suspense."
+          "A satisfying digital coin toss must communicate physical weight, rotational velocity, and spatial depth. Rather than static 2D image swaps, FileZenith implements hardware-accelerated 3D physics animation utilizing CSS 3D transforms (transform-style: preserve-3d and perspective: 1000px).",
+          "When you initiate a toss, the virtual coin launches into a multi-revolution trajectory. The animation engine calculates an altitude arc using cubic-bezier timing curves while tumbling through multiple revolutions. A realistic landing bounce incorporates dampening kinetics before the coin settles onto the table."
         ],
         "bullets": [
-          "Hardware 3D Compositing: Leverages CSS `preserve-3d`, `rotateX`, and `perspective` for photorealistic spatial tumbling.",
-          "Cubic-Bezier Trajectory: Simulates parabolic vertical launch, gravitational deceleration, apex hang time, and rapid descent.",
-          "Tactile Bounce & Settle: Includes realistic post-impact micro-bounces and rotational damping before resting on the final face."
+          "Hardware 3D Compositing: Leverages CSS preserve-3d, rotateX, and perspective for realistic spatial tumbling.",
+          "Cubic-Bezier Trajectory: Simulates parabolic vertical launch, deceleration, apex hang time, and rapid descent.",
+          "Multi-Coin Support: Toss 1, 2, 3, or 4 coins simultaneously with individual rotational physics."
         ]
       },
       {
-        "title": "4. The Law of Large Numbers & Statistical Convergence Tracking",
+        "title": "Statistical Tally, Streak Counter & Instant 100-Flip Simulation",
         "paragraphs": [
-          "A single coin toss reveals nothing about probability; only repeated trials illuminate statistical truth. According to the Law of Large Numbers (LLN), as the number of independent trials n increases, the sample proportion of heads S_n / n converges almost surely to the expected value mu = 0.5. However, human intuition frequently falls victim to the 'Gambler's Fallacy'\u2014falsely believing that after five consecutive Heads, a Tails is 'due'.",
-          "Our coin flip tool features an integrated Real-Time Statistical Ledger. With support for batch simulations of up to 10,000 automated flips in a fraction of a second, users can visually observe the convergence curve of Heads versus Tails over time. The dashboard graphs live percentage distributions, tracks longest winning and losing streaks, and calculates standard deviation, serving as an exceptional educational aid for data science and statistics classrooms."
+          "A single coin toss reveals an individual outcome, while repeated trials illustrate statistical behavior. Over a large series of trials, the sample proportion of heads and tails tends to balance toward the expected 50% split. However, human intuition frequently falls victim to the Gambler's Fallacy—falsely assuming that a run of Heads makes a Tails 'due'.",
+          "Our coin flip simulator features an integrated statistics ledger. It logs cumulative flips, heads and tails percentages, and tracks your current consecutive streak in real time. For fast probability demonstrations, an Instant 100 Flips simulation button lets you test a 100-toss sample in a fraction of a second."
         ],
         "bullets": [
-          "High-Speed Batch Simulation: Execute 10, 50, 100, 1,000, or 10,000 instant flips to empirically demonstrate the Law of Large Numbers.",
-          "Gambler's Fallacy Debunking: Visually proves that each trial remains strictly independent regardless of prior streak lengths.",
-          "Streak & Variance Metrics: Tracks max consecutive Heads/Tails streaks and percentage deviations in real time."
+          "Instant 100-Flip Simulation: Run a rapid 100-toss sample in milliseconds to inspect empirical distribution splits.",
+          "Streak Counter: Monitors consecutive outcomes and celebrates milestones with celebratory confetti.",
+          "Recent History Log: Displays the last 25 flip outcomes with individual timestamps."
         ]
       },
       {
-        "title": "5. Custom Coin Themes, Audio Synthesis & Classroom Utility",
+        "title": "Custom Decision Presets, Currency Styles & Tournament Matches",
         "paragraphs": [
-          "Beyond standard gold coins, modern users and educators require versatile visual and thematic options. FileZenith offers multiple beautifully rendered coin designs, including traditional Gold Bullion, Silver Eagle, Bitcoin cryptocurrency tokens, Yes/No decision medallions, and high-contrast classroom tokens for visual accessibility.",
-          "Complementing the visual engine, procedural audio synthesized via the Web Audio API delivers authentic metallic clinks upon launch and landing. Educators can toggle sound on or off, switch between flip speeds, and project the high-definition canvas onto classroom smartboards or video conference screen shares with zero lag and zero advertisements."
+          "Beyond standard heads or tails, users frequently need quick visual choices. FileZenith provides multiple coin styles including Classic Gold, US Quarter ($), Indian Rupee (₹), Euro (€), and Bitcoin (₿), along with Yes/No and custom option modes.",
+          "For competitive scenarios, the tool includes Best of 3 (BO3) and Best of 5 (BO5) Tournament Match modes with live score tracking. Procedural audio synthesized via the Web Audio API delivers authentic metallic clinks upon flick and landing, complete with an instant mute toggle for quiet environments."
         ],
         "bullets": [
-          "Versatile Numismatic Skins: Switch between Classic Gold, Antique Silver, Bitcoin, Yes/No, and custom custom tokens.",
-          "Acoustic Coin Clink Synthesis: Realistic metallic impacts synthesized via Web Audio API without sluggish external audio files.",
-          "Presentation & Smartboard Ready: Clean, uncluttered full-screen layout designed for classroom teaching and live streaming."
+          "Numismatic Styles: Switch between Classic Gold, US Quarter ($), Indian Rupee (₹), Euro (€), and Bitcoin (₿).",
+          "Decision Modes: Toggle between Heads/Tails, Yes/No, or custom options (e.g. Pizza vs Burger, Study vs Gaming).",
+          "Tournament Match Mode: Play Best of 3 or Best of 5 series with live scorekeeping and winner celebrations."
         ]
       }
     ],
     "faqs": [
       {
-        "question": "Is a digital coin flip truly 50/50 fair compared to a real physical coin?",
-        "answer": "Yes. In fact, a digital coin flip using cryptographic randomness is mathematically fairer than a physical coin. Studies by mathematicians show physical coins have a ~51% bias toward landing on the face they started on due to human hand precession. FileZenith uses hardware entropy via 'crypto.getRandomValues', delivering an exact 50.0% probability with zero physical bias."
+        "question": "Is this digital coin flip truly 50/50 fair?",
+        "answer": "Yes. FileZenith uses the browser's native Web Cryptography API (crypto.getRandomValues) rather than basic pseudo-random generators, delivering an unbiased, mathematically fair 50.0% probability."
       },
       {
-        "question": "How does FileZenith ensure the coin toss cannot be predicted or manipulated?",
-        "answer": "Our tool utilizes the Web Cryptography API rather than standard 'Math.random()'. It pulls random entropy directly from your operating system and CPU hardware pools, making each outcome completely unpredictable, non-repeatable, and mathematically tamper-proof."
+        "question": "Can I flip multiple coins at once?",
+        "answer": "Yes. You can select 1, 2, 3, or 4 coins to toss simultaneously. Each coin tumbles with its own independent 3D rotation and landing orientation."
       },
       {
-        "question": "Can I flip multiple coins at once or run a batch of 1,000 flips?",
-        "answer": "Yes. In addition to single interactive 3D flips, you can select batch flip modes to simulate 10, 100, 1,000, or up to 10,000 coin tosses instantly. The tool calculates cumulative heads/tails counts, percentages, and streak statistics in real time."
+        "question": "What does the 100 Flips simulation button do?",
+        "answer": "The 100 Flips button instantly simulates 100 cryptographic coin tosses in milliseconds. It updates your cumulative tally and reveals the exact percentage split between heads and tails."
       },
       {
-        "question": "What is the Law of Large Numbers and how does this tool demonstrate it?",
-        "answer": "The Law of Large Numbers states that as the number of independent trials increases, the actual observed percentage of heads and tails will converge closer and closer to the theoretical 50% expectation. Our live statistics ledger plots this convergence curve visually across your flip history."
+        "question": "Can I use custom decision options instead of Heads or Tails?",
+        "answer": "Yes. You can switch to Yes/No mode or type custom options (such as Option A vs Option B, Pizza vs Burger, or Workout vs Rest Day) to quickly make decisions."
       },
       {
-        "question": "Can I use this tool to settle disputes or sports coin tosses fairly?",
-        "answer": "Yes. Because the tool runs on an unbiased cryptographic random engine with a transparent landing animation and persistent history log, it provides a completely neutral, tamper-proof arbiter for sports kickoffs, board games, and group decisions."
+        "question": "How does Tournament Match mode work?",
+        "answer": "Selecting Best of 3 or Best of 5 initiates a competitive series. The tool tracks round wins for each side in real time and triggers celebration confetti when the winning threshold is reached."
       },
       {
-        "question": "Can I customize the coin design or use a Yes/No coin?",
-        "answer": "Yes. You can choose from various themes including Classic Gold, Silver Eagle, Bitcoin, and Yes/No decision tokens. Each theme features custom 3D metallic textures and realistic edge bevels."
+        "question": "Can I mute the sound effects?",
+        "answer": "Yes. Click the sound toggle at the top of the tool to mute or unmute audio at any time. The audio uses lightweight Web Audio API synthesis."
       },
       {
-        "question": "Does the coin flip tool make sound effects?",
-        "answer": "Yes. The tool features realistic metallic coin flick and landing sounds generated via the Web Audio API. You can toggle audio on or off at any time using the sound icon."
+        "question": "Can I flip the coin using my keyboard?",
+        "answer": "Yes. Pressing the Spacebar on your keyboard triggers an instant coin flip without needing to click the button."
       },
       {
-        "question": "Does the coin toss work offline without an active internet connection?",
-        "answer": "Yes. The entire simulation runs locally inside your browser using client-side JavaScript, CSS 3D transforms, and local cryptographic APIs. No network calls are made during the flip."
+        "question": "Does the coin toss work offline?",
+        "answer": "Yes. The entire simulation runs locally inside your browser using client-side JavaScript, CSS 3D transforms, and local cryptographic APIs without making any network requests."
       }
     ]
   },

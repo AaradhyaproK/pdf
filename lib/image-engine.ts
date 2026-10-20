@@ -329,12 +329,64 @@ export async function imagesToPDF(
 
   for (const file of files) {
     const imgBuffer = await file.arrayBuffer();
-    let embeddedImg;
+    let embeddedImg: any;
 
-    if (file.type.includes('png')) {
-      embeddedImg = await pdfDoc.embedPng(imgBuffer);
-    } else {
-      embeddedImg = await pdfDoc.embedJpg(imgBuffer);
+    const bytes = new Uint8Array(imgBuffer);
+    const isPng = bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4e && bytes[3] === 0x47;
+    const isJpeg = bytes[0] === 0xff && bytes[1] === 0xd8;
+
+    if (isPng || file.type.includes('png')) {
+      try {
+        embeddedImg = await pdfDoc.embedPng(imgBuffer);
+      } catch {
+        try {
+          embeddedImg = await pdfDoc.embedJpg(imgBuffer);
+        } catch {
+          // Canvas fallback below
+        }
+      }
+    } else if (isJpeg || file.type.includes('jpeg') || file.type.includes('jpg')) {
+      try {
+        embeddedImg = await pdfDoc.embedJpg(imgBuffer);
+      } catch {
+        try {
+          embeddedImg = await pdfDoc.embedPng(imgBuffer);
+        } catch {
+          // Canvas fallback below
+        }
+      }
+    }
+
+    if (!embeddedImg) {
+      // Universal canvas normalization for WebP, HEIC, or non-SOI images
+      embeddedImg = await new Promise((resolve, reject) => {
+        const url = URL.createObjectURL(file);
+        const img = new Image();
+        img.onload = async () => {
+          try {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.naturalWidth || img.width;
+            canvas.height = img.naturalHeight || img.height;
+            const ctx = canvas.getContext('2d');
+            if (!ctx) throw new Error('Canvas 2D context unavailable');
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0);
+            const pngData = canvas.toDataURL('image/png');
+            const res = await pdfDoc.embedPng(pngData);
+            URL.revokeObjectURL(url);
+            resolve(res);
+          } catch (e) {
+            URL.revokeObjectURL(url);
+            reject(e);
+          }
+        };
+        img.onerror = () => {
+          URL.revokeObjectURL(url);
+          reject(new Error(`Failed to process image: ${file.name}`));
+        };
+        img.src = url;
+      });
     }
 
     const page = pdfDoc.addPage([pageW, pageH]);
