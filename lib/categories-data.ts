@@ -169,7 +169,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
         description: 'Reduce image file size in KB while preserving sharp visual quality.',
         tools: [
           { name: 'Compress Image', slug: '/image/compress', description: 'Universal JPEG/PNG image compressor with interactive quality slider.', isPopular: true, badge: 'Popular', iconName: 'Minimize2' },
-          { name: 'Compress Image to 20KB', slug: '/tools/compress-image-to-20kb', description: 'Compress signature & photo under 20KB for online forms.', isPopular: true, badge: 'Target 20KB', iconName: 'Minimize2' },
+          { name: 'Compress Image to 20KB', slug: '/image/compress-to-20kb', description: 'Compress signature & photo under 20KB for online forms.', isPopular: true, badge: 'Target 20KB', iconName: 'Minimize2' },
           { name: 'Compress Image to 50KB', slug: '/image/compress-to-50kb', description: 'Target 50KB passport photo compressor for recruitment portals.', isPopular: true, badge: 'Target 50KB', iconName: 'Minimize2' },
           { name: 'Compress Image to 100KB', slug: '/image/compress-to-100kb', description: 'Compress document scans and certificates under 100KB.', iconName: 'Minimize2' }
         ]
@@ -810,7 +810,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
           { name: 'NEET Photo Resizer', slug: '/tools/neet-photo-resizer', description: 'NEET passport & postcard 4"x6" photo with DOP stamp.', badge: 'NEET UG', iconName: 'UserCheck' },
           { name: 'Photo Name & Date Generator', slug: '/tools/photo-name-date-generator', description: 'Overlay candidate full name and date on passport photos.', badge: 'Name & Date', iconName: 'Calendar' },
           { name: 'Compress Image to 50KB', slug: '/image/compress-to-50kb', description: 'General passport photo compressor under 50KB.', badge: 'Target 50KB', iconName: 'Minimize2' },
-          { name: 'Compress Image to 20KB', slug: '/tools/compress-image-to-20kb', description: 'Compress signature & photo under 20KB.', badge: 'Target 20KB', iconName: 'Minimize2' },
+          { name: 'Compress Image to 20KB', slug: '/image/compress-to-20kb', description: 'Compress signature & photo under 20KB.', badge: 'Target 20KB', iconName: 'Minimize2' },
           { name: 'Passport Photo Maker', slug: '/image/passport-maker', description: 'Crop to standard 3.5x4.5cm official passport photo.', badge: '3.5x4.5cm', iconName: 'UserCheck' }
         ]
       },

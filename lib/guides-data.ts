@@ -72,7 +72,7 @@ export const GUIDE_REGISTRY: Record<string, GuideConfig> = {
       { question: 'What is the best format for 20KB limit?', answer: 'JPEG (.jpg) is universally accepted and yields the smallest byte size at 20KB limits.' }
     ],
     relatedTools: [
-      { name: 'Compress Image to 20KB Tool', slug: '/tools/compress-image-to-20kb', desc: 'Instant 20KB target compressor.' },
+      { name: 'Compress Image to 20KB Tool', slug: '/image/compress-to-20kb', desc: 'Instant 20KB target compressor.' },
       { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Format signature 10KB-20KB.' }
     ],
     relatedGuides: [
@@ -143,7 +143,7 @@ export const GUIDE_REGISTRY: Record<string, GuideConfig> = {
       { question: 'Can marks sheets compressed to 100KB be read clearly?', answer: 'Yes, if resolution is kept around 1000px width and JPEG quality is kept around 0.70–0.85.' }
     ],
     relatedTools: [
-      { name: 'Compress Image to 100KB Tool', slug: '/tools/compress-image-to-100kb', desc: 'Target 100KB compressor.' },
+      { name: 'Compress Image to 100KB Tool', slug: '/image/compress-to-100kb', desc: 'Target 100KB compressor.' },
       { name: 'UPSC Photo Resizer', slug: '/tools/upsc-photo-resizer', desc: 'UPSC OTR photo tool.' }
     ],
     relatedGuides: [
@@ -253,7 +253,7 @@ export const GUIDE_REGISTRY: Record<string, GuideConfig> = {
       { question: 'Why does portal reject my PNG image?', answer: 'Many legacy portals only accept .jpg or .jpeg extensions. Convert your PNG to JPEG using FileZenith studio.' }
     ],
     relatedTools: [
-      { name: 'Compress Image to 20KB', slug: '/tools/compress-image-to-20kb', desc: 'Convert & compress JPEG.' }
+      { name: 'Compress Image to 20KB', slug: '/image/compress-to-20kb', desc: 'Convert & compress JPEG.' }
     ],
     relatedGuides: [
       { name: 'Photo Size & File Size Explained', slug: '/blog/photo-size-and-file-size-explained', desc: 'Understand file specs.' }
@@ -319,8 +319,8 @@ export const GUIDE_REGISTRY: Record<string, GuideConfig> = {
       { question: 'What is the optimal JPEG quality for web forms?', answer: 'Quality between 0.75 and 0.85 offers the best balance of tiny file size and sharp visual clarity.' }
     ],
     relatedTools: [
-      { name: 'Compress Image to 50KB', slug: '/tools/compress-image-to-50kb', desc: '50KB target tool.' },
-      { name: 'Compress Image to 100KB', slug: '/tools/compress-image-to-100kb', desc: '100KB target tool.' }
+      { name: 'Compress Image to 50KB', slug: '/image/compress-to-50kb', desc: '50KB target tool.' },
+      { name: 'Compress Image to 100KB', slug: '/image/compress-to-100kb', desc: '100KB target tool.' }
     ],
     relatedGuides: [
       { name: 'How to Compress Image to 20KB', slug: '/blog/how-to-compress-image-to-20kb', desc: '20KB guide.' }

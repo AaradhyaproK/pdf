@@ -96,6 +96,26 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/blog/income-tax-slabs-fy-2025-26',
+        destination: '/blog/old-vs-new-tax-regime-calculator-guide',
+        permanent: true,
+      },
+      {
+        source: '/tools/compress-image-to-20kb',
+        destination: '/image/compress-to-20kb',
+        permanent: true,
+      },
+      {
+        source: '/tools/compress-image-to-50kb',
+        destination: '/image/compress-to-50kb',
+        permanent: true,
+      },
+      {
+        source: '/tools/compress-image-to-100kb',
+        destination: '/image/compress-to-100kb',
+        permanent: true,
+      },
+      {
         source: '/presets/:slug',
         destination: '/tools/:slug',
         permanent: true,

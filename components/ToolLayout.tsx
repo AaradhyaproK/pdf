@@ -197,7 +197,7 @@ export function ToolLayout({
     : [
         { title: 'How to Calculate Loan EMI Accurately', href: '/blog/emi-calculator-guide' },
         { title: 'Calculate Exact Age for Exams', href: '/blog/age-calculator-india' },
-        { title: 'Income Tax Slabs Guide (FY 2025-26)', href: '/blog/income-tax-slabs-fy-2025-26' },
+        { title: 'Old vs New Tax Regime Guide (FY 2026-27)', href: '/blog/old-vs-new-tax-regime-calculator-guide' },
       ];
 
   return (

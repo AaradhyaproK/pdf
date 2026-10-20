@@ -91,7 +91,7 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
     relatedTools: [
       { name: 'Clean B&W Signature', slug: '/tools/clean-black-white-signature', desc: 'Remove gray paper background noise.' },
       { name: 'SSC Photo Resizer', slug: '/tools/ssc-photo-resizer', desc: 'SSC photo with name & date stamp.' },
-      { name: 'Compress Image to 20KB', slug: '/tools/compress-image-to-20kb', desc: 'Generic 20KB file size compressor.' },
+      { name: 'Compress Image to 20KB', slug: '/image/compress-to-20kb', desc: 'Generic 20KB file size compressor.' },
       { name: 'GATE Signature Resizer', slug: '/tools/gate-signature-resizer', desc: 'GATE 560x160 px signature format.' }
     ],
     keywords: [
@@ -170,7 +170,7 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
     relatedTools: [
       { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Format signature for SSC portal.' },
       { name: 'Photo Name & Date Generator', slug: '/tools/photo-name-date-generator', desc: 'Add candidate name bar to photo.' },
-      { name: 'Compress Image to 50KB', slug: '/tools/compress-image-to-50kb', desc: 'Compress image under 50KB limit.' },
+      { name: 'Compress Image to 50KB', slug: '/image/compress-to-50kb', desc: 'Compress image under 50KB limit.' },
       { name: 'Aadhaar Card Print Tool', slug: '/tools/aadhaar-card-print', desc: 'Print Aadhaar ID card for exam center entry.' }
     ],
     keywords: [
@@ -249,7 +249,7 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
     relatedTools: [
       { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Resize signature file.' },
       { name: 'Photo & Signature Joiner', slug: '/tools/photo-signature-joiner', desc: 'Combine photo & signature.' },
-      { name: 'Compress Image to 100KB', slug: '/tools/compress-image-to-100kb', desc: 'Target 100KB compressor.' },
+      { name: 'Compress Image to 100KB', slug: '/image/compress-to-100kb', desc: 'Target 100KB compressor.' },
       { name: 'Aadhaar Card Print Tool', slug: '/tools/aadhaar-card-print', desc: 'Format Aadhaar card for UPSC verification.' }
     ],
     keywords: [
@@ -316,7 +316,7 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
     ],
     relatedTools: [
       { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Format IBPS signature.' },
-      { name: 'Compress Image to 50KB', slug: '/tools/compress-image-to-50kb', desc: '50KB size ceiling.' }
+      { name: 'Compress Image to 50KB', slug: '/image/compress-to-50kb', desc: '50KB size ceiling.' }
     ],
     keywords: [
       'ibps photo resizer 20 to 50kb',
@@ -373,7 +373,7 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
     ],
     relatedTools: [
       { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Format RRB signature.' },
-      { name: 'Compress Image to 50KB', slug: '/tools/compress-image-to-50kb', desc: 'Shrink photo under 50KB.' }
+      { name: 'Compress Image to 50KB', slug: '/image/compress-to-50kb', desc: 'Shrink photo under 50KB.' }
     ],
     keywords: [
       'rrb photo resizer 30 to 50kb',
@@ -439,7 +439,7 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
     relatedTools: [
       { name: 'Photo Name & Date Generator', slug: '/tools/photo-name-date-generator', desc: 'Add candidate name stamp.' },
       { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'NEET signature resizer.' },
-      { name: 'Compress Image to 100KB', slug: '/tools/compress-image-to-100kb', desc: 'Postcard photo compressor.' },
+      { name: 'Compress Image to 100KB', slug: '/image/compress-to-100kb', desc: 'Postcard photo compressor.' },
       { name: 'Aadhaar Card Print Tool', slug: '/tools/aadhaar-card-print', desc: 'Print Aadhaar card for NEET center entry.' }
     ],
     keywords: [
@@ -495,7 +495,7 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
     ],
     relatedTools: [
       { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'BPSC signature size tool.' },
-      { name: 'Compress Image to 50KB', slug: '/tools/compress-image-to-50kb', desc: 'Compress image under 50KB.' }
+      { name: 'Compress Image to 50KB', slug: '/image/compress-to-50kb', desc: 'Compress image under 50KB.' }
     ],
     keywords: [
       'bpsc photo resizer 20 to 50kb',
@@ -540,7 +540,7 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
     ],
     relatedTools: [
       { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'MPSC signature resizer.' },
-      { name: 'Compress Image to 50KB', slug: '/tools/compress-image-to-50kb', desc: 'Shrink photo size.' }
+      { name: 'Compress Image to 50KB', slug: '/image/compress-to-50kb', desc: 'Shrink photo size.' }
     ],
     keywords: [
       'mpsc photo resizer 20 to 50kb',
@@ -582,7 +582,7 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
       { question: 'What is PAN card signature size?', answer: 'Signature size is 444 × 205 pixels, file size under 50KB.' }
     ],
     relatedTools: [
-      { name: 'Compress Image to 50KB', slug: '/tools/compress-image-to-50kb', desc: 'Compress photo to 50KB.' },
+      { name: 'Compress Image to 50KB', slug: '/image/compress-to-50kb', desc: 'Compress photo to 50KB.' },
       { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'PAN signature resizer.' }
     ],
     keywords: [
@@ -783,160 +783,6 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
     ]
   },
 
-  'compress-image-to-20kb': {
-    slug: 'compress-image-to-20kb',
-    portalName: 'Online Forms (20KB Limit)',
-    defaultTargetKB: 19,
-    maxKB: 20,
-    title: 'Compress Image to 20KB Online Free | FileZenith',
-    metaTitle: 'Compress Image to Under 20KB Online | FileZenith',
-    metaDescription: 'Compress image/photo size under 20KB online free without losing clarity. Perfect for government portal signatures and photo uploads.',
-    h1: 'Compress Image to Under 20KB Online',
-    shortDescription: 'Compress any JPG or PNG image strictly under 20KB for online portal upload limits.',
-    longDescription: 'Reduces any JPG/PNG file weight strictly below 20KB limit using intelligent in-browser binary search quality optimization.',
-    targetSize: 'Under 20 KB',
-    maximumSize: '20 KB',
-    allowedFormats: ['JPG', 'JPEG', 'PNG', 'WEBP'],
-    instructions: ['Upload image file.', 'Canvas compresses to ~18KB.', 'Download output.'],
-    requirements: ['Strictly ≤ 20 KB file weight.'],
-    tips: ['Keep dimensions reasonable for 20KB target.'],
-    officialGuidelines: 'Reduces any JPG/PNG file weight strictly below 20KB limit using intelligent in-browser binary search quality optimization.',
-    lastVerifiedDate: 'Verified September 2026',
-    faq: [
-      { question: 'Will compressing to 20KB ruin image quality?', answer: 'Our iterative compression preserves maximum resolution while meeting the strict 20KB ceiling.' }
-    ],
-    relatedTools: [
-      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Signature 10-20KB.' },
-      { name: 'Compress Image to 50KB', slug: '/tools/compress-image-to-50kb', desc: 'Compress under 50KB.' }
-    ],
-    keywords: [
-      'compress image to 20kb',
-      'reduce image size under 20kb',
-      'photo compressor 20kb',
-      'signature compressor under 20kb',
-      'resize image to 20kb online free for sarkari form',
-      'reduce signature size below 20kb in mobile'
-    ]
-  },
-
-  'compress-image-to-50kb': {
-    slug: 'compress-image-to-50kb',
-    portalName: 'Govt Job & Exam Portals (50KB Limit)',
-    defaultTargetKB: 45,
-    minKB: 20,
-    maxKB: 50,
-    allowNameDate: true,
-    title: 'Compress Image to 50KB Online Free (Exact Size Reducer) | FileZenith',
-    metaTitle: 'Compress Image to 50KB Online Free — Form Ready | FileZenith',
-    metaDescription: 'Compress photo to under 50KB online free without losing quality. Exact file size reducer for SSC, UPSC, IBPS, RRB, SBI, NEET, and visa portals. 100% private in-browser.',
-    h1: 'Compress Image to 50KB Online Free (Job Application & Form Specialist)',
-    shortDescription: 'Compress JPG, PNG, and WEBP photos to strictly under 50KB with razor-sharp facial details and client-side privacy.',
-    longDescription: 'Most Indian recruitment and competitive examination portals (SSC CGL, CHSL, MTS, GD Constable, IBPS PO/Clerk, SBI, Railway RRB, and State PSCs) reject candidate passport photos if the file size exceeds 50KB or drops below 20KB. FileZenith uses client-side HTML5 canvas binary search to iteratively determine the optimal JPEG quality quantization matrix, landing perfectly at 40KB–48KB with zero pixelation or blurry edges.',
-    targetSize: '20 KB to 50 KB (Target: ~45 KB)',
-    minimumSize: '20 KB',
-    maximumSize: '50 KB',
-    width: '3.5 cm (300 to 600 px)',
-    height: '4.5 cm (400 to 800 px)',
-    allowedFormats: ['JPG', 'JPEG', 'PNG', 'WEBP'],
-    instructions: [
-      'Upload your passport photo, certificate crop, or ID photo (up to 25MB supported).',
-      'Check the Candidate Name & Date Stamp box if your recruitment notice mandates name and DOP printed on the photo.',
-      'Adjust the target size slider between 20KB and 50KB (recommended: 45KB for maximum gateway safety margin).',
-      'Preview real-time compression output showing exact exported byte weight and sharpness.',
-      'Click Download Compressed Photo to save your form-ready, gateway-compliant JPEG file.'
-    ],
-    requirements: [
-      'File weight must strictly remain between 20 KB and 50 KB (files above 50.00 KB trigger automated server rejection).',
-      'Exported image must be standard JPEG/JPG format with RGB 24-bit color depth (no CMYK or alpha transparency).',
-      'Facial features (eyes, nose, mouth, and both ears) must be clearly visible with neutral expression and uniform lighting.',
-      'Background must be plain white, off-white, or light gray without outdoor scenes, patterns, or shadows.'
-    ],
-    tips: [
-      'Target 42KB to 47KB: Setting the target to 45KB guarantees that filesystem cluster round-up never pushes the file past 50.00KB.',
-      'Do NOT wear spectacles, dark sunglasses, caps, mufflers, or heavy religious coverings that obscure facial contours.',
-      'Avoid taking photos of physical laminated photos whenever possible; capture a direct front-facing mobile portrait under bright natural light.',
-      'If your portal specifically requires Candidate Name and Date of Photo (DOP), enable our 1-click bottom stamp feature above.'
-    ],
-    officialGuidelines: 'Official recruitment portal guidelines across SSC, IBPS, SBI, Railway RRB, and State PSCs mandate passport photographs formatted strictly between 20KB and 50KB in JPG/JPEG format with clear facial features, light/white background, and unedited natural facial contours.',
-    lastVerifiedDate: 'Verified October 2026',
-    faq: [
-      { question: 'How can I compress an image to under 50KB without losing quality?', answer: 'Upload your photo above. Our browser-based canvas engine performs iterative binary-search compression on JPEG discrete cosine transform (DCT) matrices. It isolates high-frequency noise while preserving vital facial contours and eye contrast, dropping the file size to ~45KB with zero discernible blur.' },
-      { question: 'Why do government portals like SSC, IBPS, and SBI reject photos above 50KB?', answer: 'Central recruitment servers process millions of concurrent applicants. To conserve server storage and bandwidth during bulk document verification and admit card generation, their upload scripts enforce strict server-side validation rejecting any file exceeding 51,200 bytes (50KB).' },
-      { question: 'What is the safest target size between 20KB and 50KB for form upload?', answer: 'We strongly recommend targeting 42KB to 47KB (default setting: 45KB). This comfortably clears the 20KB minimum floor while leaving a safe safety buffer below the strict 50.00KB ceiling to prevent filesystem byte-rounding rejections.' },
-      { question: 'Can I compress PNG or WEBP photos to 50KB JPG?', answer: 'Yes! FileZenith automatically decodes PNG, WEBP, HEIC, and BMP images, flattens any transparent alpha channels onto a crisp pure-white background, and converts the output into universally accepted 24-bit RGB JPEG format under 50KB.' },
-      { question: 'Can I compress my photo to 50KB directly on mobile (Android or iPhone)?', answer: 'Yes, absolutely. The tool is 100% mobile-friendly and runs directly inside Chrome, Safari, and Samsung Internet. Simply pick your photo from your phone gallery or take a picture with your camera; it processes locally in seconds.' },
-      { question: 'Is it safe to upload confidential passport and ID photos to FileZenith?', answer: '100% safe! FileZenith operates entirely inside your device browser memory via HTML5 Canvas and WebAssembly. Your photos are NEVER sent to any cloud server, saved in databases, or accessed by third parties. Complete privacy is guaranteed.' },
-      { question: 'Photo ko 50KB me kaise convert karein mobile se?', answer: 'Mobile se photo ko 50KB karne ke liye: 1. Upar "Upload Photo" par click karke apni gallery se photo chunein. 2. Slider me 45KB select karein (20KB se 50KB ke beech). 3. "Download Compressed Photo" par click karein. Photo bina dhundhla hue turant save ho jayegi aur kisi bhi government form me upload ho jayegi.' },
-      { question: 'What should I do if my photo becomes smaller than 20KB after compression?', answer: 'Many portals enforce a minimum floor of 20KB. If your original image is very simple or low resolution, move our target slider up to 45KB or 48KB. Our engine will calibrate compression quality so your exported file stays strictly between 20KB and 50KB.' }
-    ],
-    relatedTools: [
-      { name: 'SSC Photo Resizer', slug: '/tools/ssc-photo-resizer', desc: 'SSC photo with name & date stamp.' },
-      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Format signature for govt portals.' },
-      { name: 'Compress PDF to 200KB', slug: '/pdf/compress-to-200kb', desc: 'Compress govt document scans.' },
-      { name: 'Photo Name & Date Generator', slug: '/tools/photo-name-date-generator', desc: 'Add candidate name bar to photo.' },
-      { name: 'Aadhaar Card Print Tool', slug: '/tools/aadhaar-card-print', desc: 'Print Aadhaar ID card for exam center entry.' },
-      { name: 'Compress Image to 20KB', slug: '/tools/compress-image-to-20kb', desc: 'Ultra-small signature and thumbnail compressor.' }
-    ],
-    keywords: [
-      'compress image to 50kb',
-      'compress photo to 50kb',
-      'reduce photo size under 50kb',
-      'compress image under 50kb online free',
-      'compress photo to 50kb online without losing quality',
-      'passport photo 50kb compressor',
-      'photo compressor 20 to 50 kb',
-      'image size reducer in kb under 50kb for online application',
-      'sarkari result photo compressor 50kb',
-      'ssc photo resizer 20 to 50kb',
-      'ibps photo resizer 20 to 50 kb',
-      'photo ko 50kb me kaise convert kare',
-      'compress jpeg to 50kb online',
-      'reduce image size in kb for govt jobs',
-      'compress photo to 50kb for upsc ssc rrb',
-      'passport size photo under 50 kb converter',
-      'resize photo to 50kb for pan card form',
-      'compress photo to 50kb mobile me kaise kare',
-      'online photo resizer 50kb target',
-      'free image compressor under 50kb'
-    ]
-  },
-
-  'compress-image-to-100kb': {
-    slug: 'compress-image-to-100kb',
-    portalName: 'Identity Document Portals (100KB Limit)',
-    defaultTargetKB: 95,
-    maxKB: 100,
-    title: 'Compress Image to 100KB Online Free | FileZenith',
-    metaTitle: 'Compress Image to Under 100KB Online | FileZenith',
-    metaDescription: 'Compress image file size under 100KB online free. Ideal for Aadhaar, Marks Card, Certificate, and PDF uploads.',
-    h1: 'Compress Image to Under 100KB Online',
-    shortDescription: 'Compress document scans, marks sheets, and certificates under 100KB limit.',
-    longDescription: 'Reduces document scans and photos under 100KB ceiling while maintaining crisp text readability.',
-    targetSize: 'Under 100 KB',
-    maximumSize: '100 KB',
-    allowedFormats: ['JPG', 'JPEG', 'PNG', 'WEBP'],
-    instructions: ['Upload document scan or photo.', 'Engine compresses to ~95KB.', 'Download output.'],
-    requirements: ['Strictly ≤ 100 KB file weight.'],
-    tips: ['Text on certificates remains sharp and readable.'],
-    officialGuidelines: 'Reduces document scans and photos under 100KB ceiling while maintaining crisp text readability.',
-    lastVerifiedDate: 'Verified September 2026',
-    faq: [
-      { question: 'Can I compress document certificates under 100KB?', answer: 'Yes! Text remains legible while file size drops below 100KB.' }
-    ],
-    relatedTools: [
-      { name: 'Compress Image to 50KB', slug: '/tools/compress-image-to-50kb', desc: 'Compress under 50KB.' },
-      { name: 'UPSC Photo Resizer', slug: '/tools/upsc-photo-resizer', desc: 'UPSC photo tool.' }
-    ],
-    keywords: [
-      'compress image to 100kb',
-      'reduce document photo under 100kb',
-      'certificate image compressor under 100kb',
-      'compress marksheet scan under 100kb',
-      'reduce jpg file size to 100kb online free',
-      'document scan compressor under 100kb'
-    ]
-  },
-
   'aadhaar-card-print': {
     slug: 'aadhaar-card-print',
     portalName: 'UIDAI e-Aadhaar & PVC ID Card',
@@ -1050,7 +896,7 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
     ],
     relatedTools: [
       { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Format RRB signature scan.' },
-      { name: 'Compress Image to 50KB', slug: '/tools/compress-image-to-50kb', desc: 'Compress image under 50KB.' },
+      { name: 'Compress Image to 50KB', slug: '/image/compress-to-50kb', desc: 'Compress image under 50KB.' },
       { name: 'Aadhaar Card Print Tool', slug: '/tools/aadhaar-card-print', desc: 'Aadhaar print for exam day.' }
     ],
     keywords: [
@@ -1111,8 +957,8 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
     ],
     relatedTools: [
       { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Format IBPS signature.' },
-      { name: 'Compress Image to 50KB', slug: '/tools/compress-image-to-50kb', desc: 'Compress image under 50KB.' },
-      { name: 'Compress Image to 100KB', slug: '/tools/compress-image-to-100kb', desc: 'Handwritten declaration (50-100KB).' }
+      { name: 'Compress Image to 50KB', slug: '/image/compress-to-50kb', desc: 'Compress image under 50KB.' },
+      { name: 'Compress Image to 100KB', slug: '/image/compress-to-100kb', desc: 'Handwritten declaration (50-100KB).' }
     ],
     keywords: [
       'ibps photo resizer',

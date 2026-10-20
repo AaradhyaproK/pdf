@@ -487,7 +487,7 @@ export function SEOContent({ slug }: SEOContentProps) {
       '/tools/upsc-photo-resizer',
       '/tools/neet-photo-resizer',
       '/tools/photo-name-date-generator',
-      '/tools/compress-image-to-50kb',
+      '/image/compress-to-50kb',
       '/tools/aadhaar-card-print',
       '/utility/pages-to-word',
       '/utility/word-to-pages',
