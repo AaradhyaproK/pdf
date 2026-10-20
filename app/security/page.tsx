@@ -27,7 +27,7 @@ const SECURITY_PILLARS = [
   {
     icon: ServerOff,
     title: 'Zero Cloud Server Uploads',
-    badge: '0 Bytes Transferred',
+    badge: 'Direct Client Processing',
     badgeColor: 'bg-emerald-100 text-emerald-800 border-emerald-200',
     iconBg: 'bg-emerald-50 text-emerald-600 border-emerald-100',
     accentBorder: 'border-emerald-200/80',
@@ -130,7 +130,7 @@ export default function SecurityPage() {
         </p>
         <div className="pt-2 flex flex-wrap items-center justify-center gap-3 text-xs font-bold">
           <span className="px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
-            0 Bytes Cloud Upload
+            In-Browser File Execution
           </span>
           <span className="px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
             No Registration Needed

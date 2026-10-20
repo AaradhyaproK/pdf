@@ -50,20 +50,20 @@ export function HomepageTrustSection() {
         <div className="text-center max-w-3xl mx-auto space-y-2 sm:space-y-3">
           <div className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-black uppercase tracking-wider text-rose-600 bg-rose-50 px-3 py-1 rounded-full border border-rose-100">
             <Sparkles className="w-3.5 h-3.5 text-rose-600" />
-            <span>Zero-Server Security Engine</span>
+            <span>Client-Side Processing Engine</span>
           </div>
           <h2 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
             Why You Can Trust FileZenith
           </h2>
           <p className="text-xs sm:text-base text-slate-600 font-medium leading-relaxed max-w-xl mx-auto">
-            Traditional cloud PDF tools upload your sensitive documents to remote servers. FileZenith executes 100% of conversions directly on your local device.
+            Traditional cloud PDF tools upload your sensitive documents to remote servers. FileZenith processes your files directly on your local device.
           </p>
           <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/security"
               className="inline-flex items-center gap-1.5 text-xs font-extrabold text-indigo-600 hover:text-indigo-800 hover:underline"
             >
-              <span>Learn about 100% Secure Serverless processing</span>
+              <span>Learn about secure in-browser processing</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
             <span className="hidden sm:inline text-slate-300">•</span>
@@ -130,9 +130,9 @@ export function HomepageTrustSection() {
           </div>
 
           <div className="p-3 rounded-2xl bg-indigo-50/70 border border-indigo-100/80">
-            <span className="text-base sm:text-xl font-black text-indigo-900 block">0 Bytes</span>
+            <span className="text-base sm:text-xl font-black text-indigo-900 block">Private</span>
             <span className="text-[10px] sm:text-xs text-indigo-700 font-semibold flex items-center justify-center gap-1">
-              <Lock className="w-3 h-3 text-indigo-600" /> Cloud Upload Risk
+              <Lock className="w-3 h-3 text-indigo-600" /> In-Browser Compute
             </span>
           </div>
 

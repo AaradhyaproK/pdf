@@ -6,8 +6,7 @@ import { AdSlot } from '@/components/AdSlot';
 import { LandingToolGrid } from '@/components/LandingToolGrid';
 import { HomepageTrustSection } from '@/components/HomepageTrustSection';
 import { HomepageFAQAccordion } from '@/components/HomepageFAQAccordion';
-import { HomepageBlogSection } from '@/components/HomepageBlogSection';
-import { HomepageGuidesCluster } from '@/components/HomepageGuidesCluster';
+import { HomepageKnowledgeHub } from '@/components/HomepageKnowledgeHub';
 import {
   CheckCircle2,
   ShieldCheck,
@@ -218,11 +217,8 @@ export default function HomePage() {
       {/* Mobile App-Centric High-Trust Features Grid Section */}
       <HomepageTrustSection />
 
-      {/* Guides & Knowledge Base Cluster Section */}
-      <HomepageGuidesCluster />
-
-      {/* Latest Blog & Guides Showcase Section */}
-      <HomepageBlogSection />
+      {/* Comprehensive Editorial Knowledge Base & Guides Hub (All 37 Guides Indexed) */}
+      <HomepageKnowledgeHub />
 
       {/* Interactive Mobile-Optimized FAQ Accordion Section */}
       <HomepageFAQAccordion faqs={HOMEPAGE_FAQS} />

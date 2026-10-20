@@ -52,7 +52,7 @@ export const GUIDE_REGISTRY: Record<string, GuideConfig> = {
       },
       {
         title: 'Step 2: Use Client-Side Canvas Compression',
-        content: 'Instead of uploading sensitive personal photos to external servers, use browser-native HTML5 Canvas binary search compression. Our tool tests compression qualities between 0.05 and 0.98 in milliseconds to find the exact sweet spot under 20KB.'
+        content: 'Instead of uploading sensitive personal photos to external servers, use browser-native HTML5 Canvas binary search compression. Our tool tests compression qualities between 0.05 and 0.98 in seconds to find the exact sweet spot under 20KB.'
       },
       {
         title: 'Step 3: Export as JPEG Format',

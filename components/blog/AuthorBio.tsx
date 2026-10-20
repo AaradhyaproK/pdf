@@ -42,7 +42,7 @@ export function AuthorBio({ post }: AuthorBioProps) {
         <div className="h-10 w-10 sm:h-11 sm:w-11 rounded-xl bg-gradient-to-br from-indigo-50 to-blue-50 border border-indigo-200/80 flex items-center justify-center p-1.5 shadow-2xs shrink-0">
           <Image
             src="/filezenith-logo.png"
-            alt="FileZenith Verified"
+            alt="Aaradhya Pathak - FileZenith"
             width={28}
             height={28}
             className="h-6 w-6 sm:h-7 sm:w-7 object-contain"

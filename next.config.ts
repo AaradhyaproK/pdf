@@ -51,6 +51,31 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/image/to-pdf',
+        destination: '/image/pics-to-pdf',
+        permanent: true,
+      },
+      {
+        source: '/image/png-to-pdf',
+        destination: '/image/pics-to-pdf',
+        permanent: true,
+      },
+      {
+        source: '/image/passport-photo-maker',
+        destination: '/image/passport-maker',
+        permanent: true,
+      },
+      {
+        source: '/image/resize-signature',
+        destination: '/tools/signature-resizer-10-to-20kb',
+        permanent: true,
+      },
+      {
+        source: '/image/convert',
+        destination: '/image/jpg-to-png',
+        permanent: true,
+      },
+      {
         source: '/guides/:slug',
         destination: '/blog/:slug',
         permanent: true,

@@ -168,7 +168,7 @@ function getRelatedGuidesAndArticles(slug: string, category: string): ArticleRec
     ];
   }
 
-  if (slug === '/image/passport-photo-maker' || slug.includes('passport') || slug.includes('exam')) {
+  if (slug === '/image/passport-maker' || slug === '/image/passport-photo-maker' || slug.includes('passport') || slug.includes('exam')) {
     return [
       {
         title: 'The Ultimate Passport Size Photo Maker Guide',

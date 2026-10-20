@@ -2550,11 +2550,20 @@ export function getCompleteToolFaqs(tool: ToolSEO): Array<{ question: string; an
       ? 'social media asset'
       : 'file';
 
+  const isNetworkTool =
+    tool.category === 'social' ||
+    ['/social/youtube-thumbnail-downloader', '/social/youtube-tag-extractor', '/utility/text-to-speech'].includes(tool.slug);
+
   const defaultPool = [
-    {
-      question: `Are files processed using ${tool.title} uploaded or stored on any remote server?`,
-      answer: `No. FileZenith operates on a 100% serverless, client-side architecture. When you use ${tool.title}, all processing executes locally in your browser memory via WebAssembly and HTML5 APIs. Zero bytes of your ${formatName} or personal data are ever uploaded, transmitted, or saved on any remote cloud server.`,
-    },
+    isNetworkTool
+      ? {
+          question: `Does FileZenith store or log my queries or media when using ${tool.title}?`,
+          answer: `No. FileZenith processes your requests directly through public online endpoints. We do not track, log, or save your entered URLs, search queries, or downloaded media on any server.`,
+        }
+      : {
+          question: `Are files processed using ${tool.title} uploaded or stored on any remote server?`,
+          answer: `No. FileZenith uses client-side web technologies. When you process your ${formatName}, all execution occurs locally in your browser memory via WebAssembly and HTML5 APIs. Documents are never saved on our servers or exposed to external cloud queues.`,
+        },
     {
       question: `What is the maximum file size limit supported by ${tool.title}?`,
       answer: `Unlike traditional cloud converters that throttle users with 15MB or 50MB file size caps, FileZenith utilizes your device local RAM. You can process large files smoothly without network upload bottlenecks or server timeout errors.`,
@@ -2579,10 +2588,15 @@ export function getCompleteToolFaqs(tool: ToolSEO): Array<{ question: string; an
       question: `Is ${tool.title} completely free, or will I be asked to pay after several uses?`,
       answer: `FileZenith is 100% free forever with unlimited conversions. There are no trial periods, hidden credit card prompts, or daily quota limits. All tools are funded sustainably through clean, non-intrusive web advertisements.`,
     },
-    {
-      question: `Can I run ${tool.title} offline without an active internet connection?`,
-      answer: `Yes! Once the page is loaded in your browser cache, the WebAssembly and JavaScript engines run entirely on your local machine, allowing you to process files securely even when offline.`,
-    },
+    isNetworkTool
+      ? {
+          question: `Does ${tool.title} require an active internet connection?`,
+          answer: `Yes. Because ${tool.title} retrieves public media assets or online metadata, an active internet connection is required to communicate with public service endpoints.`,
+        }
+      : {
+          question: `Can I run ${tool.title} offline without an active internet connection?`,
+          answer: `Yes! Once the page is loaded in your browser cache, the WebAssembly and JavaScript engines run entirely on your local machine, allowing you to process files securely even when offline.`,
+        },
   ];
 
   const combined = [...existing];
@@ -2610,7 +2624,7 @@ export function generateToolSchemas(slug: string) {
     'name': 'FileZenith',
     'url': siteUrl,
     'logo': `${siteUrl}/filezenith-logo.png`,
-    'description': 'Free online PDF, image and utility tools. 100% client-side, zero server uploads.',
+    'description': 'Free online PDF, image and utility tools. Private in-browser processing for documents and media.',
     'parentOrganization': {
       '@type': 'Organization',
       'name': 'SNAB Innovations / Aurea',
@@ -2628,7 +2642,7 @@ export function generateToolSchemas(slug: string) {
     '@type': 'WebSite',
     'name': 'FileZenith',
     'url': siteUrl,
-    'description': 'Free online PDF, image and utility tools. 100% client-side, zero server uploads.',
+    'description': 'Free online PDF, image and utility tools. Private in-browser processing for documents and media.',
     'publisher': {
       '@type': 'Organization',
       'name': 'SNAB Innovations / Aurea',

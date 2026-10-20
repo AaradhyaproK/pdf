@@ -36,7 +36,7 @@
 - [Passport Photo Maker](https://www.filezenith.com/image/passport-maker)
 - [AI Background Remover](https://www.filezenith.com/image/remove-background)
 - [Apple HEIC to JPG Converter](https://www.filezenith.com/image/convert-heic)
-- [Image to PDF Converter](https://www.filezenith.com/image/to-pdf)
+- [Image to PDF Converter](https://www.filezenith.com/image/pics-to-pdf)
 - [Color Palette Extractor](https://www.filezenith.com/image/color-palette-extractor)
 - [SVG Converter](https://www.filezenith.com/image/svg-converter)
 
