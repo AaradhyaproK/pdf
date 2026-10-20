@@ -889,7 +889,7 @@ export function Navbar() {
         </div>
       )}
 
-      <div className="hidden md:flex max-w-7xl mx-auto px-6 lg:px-8 h-16 items-center justify-between gap-4">
+      <div className="hidden md:flex max-w-7xl mx-auto px-4 lg:px-8 h-16 items-center justify-between gap-2 lg:gap-4">
         <Link href="/" className="flex items-center gap-2.5 group shrink-0 active:scale-95 transition-transform duration-200">
           <img
             src="/filezenith-logo.png"
@@ -906,7 +906,7 @@ export function Navbar() {
           </div>
         </Link>
 
-        <nav className="flex items-center gap-1 text-sm font-semibold text-slate-700">
+        <nav className="flex items-center gap-1 lg:gap-1.5 text-xs lg:text-sm font-bold text-slate-700">
           {/* PDF Studio */}
           <div
             className="relative py-4"
@@ -916,16 +916,16 @@ export function Navbar() {
             <Link
               href="/pdf-tools"
               onClick={closeAllNavbars}
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-all cursor-pointer ${
+              className={`flex items-center gap-1.5 px-2.5 lg:px-3 py-1.5 rounded-xl whitespace-nowrap shrink-0 transition-all cursor-pointer ${
                 isActive('/pdf')
                   ? 'bg-slate-900/10 text-slate-900 font-extrabold border border-slate-900/15 backdrop-blur-sm'
                   : 'hover:bg-slate-100 hover:text-slate-900'
               }`}
             >
-              <FileText className="w-4 h-4 text-slate-700" />
+              <FileText className="w-4 h-4 text-slate-700 shrink-0" />
               <span>PDF Studio</span>
               <ChevronDown
-                className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${
+                className={`w-3.5 h-3.5 text-slate-400 shrink-0 transition-transform duration-200 ${
                   activeDropdown === 'pdf' ? 'rotate-180 text-slate-900' : ''
                 }`}
               />
@@ -988,16 +988,16 @@ export function Navbar() {
             <Link
               href="/image-tools"
               onClick={closeAllNavbars}
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-all cursor-pointer ${
+              className={`flex items-center gap-1.5 px-2.5 lg:px-3 py-1.5 rounded-xl whitespace-nowrap shrink-0 transition-all cursor-pointer ${
                 isActive('/image')
                   ? 'bg-slate-900/10 text-slate-900 font-extrabold border border-slate-900/15 backdrop-blur-sm'
                   : 'hover:bg-slate-100 hover:text-slate-900'
               }`}
             >
-              <ImageIcon className="w-4 h-4 text-slate-700" />
+              <ImageIcon className="w-4 h-4 text-slate-700 shrink-0" />
               <span>Image Studio</span>
               <ChevronDown
-                className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${
+                className={`w-3.5 h-3.5 text-slate-400 shrink-0 transition-transform duration-200 ${
                   activeDropdown === 'image' ? 'rotate-180 text-slate-900' : ''
                 }`}
               />
@@ -1060,16 +1060,16 @@ export function Navbar() {
             <Link
               href="/utility-tools"
               onClick={closeAllNavbars}
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-all cursor-pointer ${
+              className={`flex items-center gap-1.5 px-2.5 lg:px-3 py-1.5 rounded-xl whitespace-nowrap shrink-0 transition-all cursor-pointer ${
                 isActive('/utility')
                   ? 'bg-slate-900/10 text-slate-900 font-extrabold border border-slate-900/15 backdrop-blur-sm'
                   : 'hover:bg-slate-100 hover:text-slate-900'
               }`}
             >
-              <Wrench className="w-4 h-4 text-slate-700" />
+              <Wrench className="w-4 h-4 text-slate-700 shrink-0" />
               <span>Daily Utilities</span>
               <ChevronDown
-                className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${
+                className={`w-3.5 h-3.5 text-slate-400 shrink-0 transition-transform duration-200 ${
                   activeDropdown === 'utility' ? 'rotate-180 text-slate-900' : ''
                 }`}
               />
@@ -1132,16 +1132,16 @@ export function Navbar() {
             <Link
               href="/social-tools"
               onClick={closeAllNavbars}
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-all cursor-pointer ${
+              className={`flex items-center gap-1.5 px-2.5 lg:px-3 py-1.5 rounded-xl whitespace-nowrap shrink-0 transition-all cursor-pointer ${
                 isActive('/social')
                   ? 'bg-slate-900/10 text-slate-900 font-extrabold border border-slate-900/15 backdrop-blur-sm'
                   : 'hover:bg-slate-100 hover:text-slate-900'
               }`}
             >
-              <Share2 className="w-4 h-4 text-slate-700" />
+              <Share2 className="w-4 h-4 text-slate-700 shrink-0" />
               <span>Social Tools</span>
               <ChevronDown
-                className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${
+                className={`w-3.5 h-3.5 text-slate-400 shrink-0 transition-transform duration-200 ${
                   activeDropdown === 'social' ? 'rotate-180 text-slate-900' : ''
                 }`}
               />
@@ -1196,21 +1196,23 @@ export function Navbar() {
           </div>
 
           {/* Guides & Blog Direct Link */}
-          <Link
-            href="/blog"
-            onClick={closeAllNavbars}
-            className={`flex items-center gap-1.5 px-3 py-2 rounded-xl transition-all cursor-pointer ${
-              isActive('/blog')
-                ? 'bg-slate-900/10 text-slate-900 font-extrabold border border-slate-900/15 backdrop-blur-sm'
-                : 'hover:bg-slate-100 hover:text-slate-900'
-            }`}
-          >
-            <BookOpen className="w-4 h-4 text-slate-700" />
-            <span>Guides &amp; Blog</span>
-          </Link>
+          <div className="relative py-4">
+            <Link
+              href="/blog"
+              onClick={closeAllNavbars}
+              className={`flex items-center gap-1.5 px-2.5 lg:px-3 py-1.5 rounded-xl whitespace-nowrap shrink-0 transition-all cursor-pointer ${
+                isActive('/blog')
+                  ? 'bg-slate-900/10 text-slate-900 font-extrabold border border-slate-900/15 backdrop-blur-sm'
+                  : 'hover:bg-slate-100 hover:text-slate-900'
+              }`}
+            >
+              <BookOpen className="w-4 h-4 text-slate-700 shrink-0" />
+              <span>Guides &amp; Blog</span>
+            </Link>
+          </div>
         </nav>
 
-        <div ref={searchContainerRef} className="relative flex items-center w-64 lg:w-80">
+        <div ref={searchContainerRef} className="relative flex items-center w-40 lg:w-56 xl:w-64 shrink-0">
           <div
             className={`w-full relative flex items-center rounded-full transition-all duration-200 ${
               searchOpen

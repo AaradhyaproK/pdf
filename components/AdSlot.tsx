@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { trackAdImpression, getAdsConfig, getAdsConfigFromFirestore, AdsManagerConfig } from '@/lib/admin-store';
 
 export interface AdSlotProps {
@@ -44,6 +44,8 @@ function CustomAdEmbed({ code, height = 250 }: { code: string; height?: number }
 
 export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
   const [config, setConfig] = useState<AdsManagerConfig>(getAdsConfig());
+  const [isAdFilled, setIsAdFilled] = useState<boolean>(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     trackAdImpression(slotType);
@@ -63,26 +65,71 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
     } catch {
       // Silently handled before AdSense approval
     }
-  }, [slotType]);
+
+    if (config.adProvider === 'custom') {
+      setIsAdFilled(true);
+      return;
+    }
+
+    const container = containerRef.current;
+    if (!container) return;
+
+    const checkFilled = () => {
+      const ins = container.querySelector('ins.adsbygoogle');
+      const hasIframe = !!container.querySelector('iframe');
+      const status = ins?.getAttribute('data-ad-status');
+      if (hasIframe || status === 'filled') {
+        setIsAdFilled(true);
+      } else if (status === 'unfilled') {
+        setIsAdFilled(false);
+      }
+    };
+
+    checkFilled();
+
+    const observer = new MutationObserver(() => {
+      checkFilled();
+    });
+
+    observer.observe(container, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['data-ad-status', 'data-adsbygoogle-status'],
+    });
+
+    return () => observer.disconnect();
+  }, [slotType, config.adProvider]);
 
   const publisherId = config?.publisherId || 'ca-pub-1291898061670715';
   const adLabel = config?.adLabelText !== undefined ? config.adLabelText : 'Advertisement';
 
   if (slotType === 'header-leaderboard') {
     return (
-      <div className={`w-full flex-col items-center justify-center my-4 sm:my-6 hidden [&:has(iframe)]:flex ${className}`}>
+      <div
+        ref={containerRef}
+        className={`w-full max-w-[728px] mx-auto flex flex-col items-center justify-center transition-all duration-300 ${
+          isAdFilled
+            ? 'my-6 sm:my-8 opacity-100'
+            : 'h-0 min-h-0 m-0 p-0 overflow-hidden opacity-0 has-[iframe]:h-auto has-[iframe]:my-6 has-[iframe]:sm:my-8 has-[iframe]:overflow-visible has-[iframe]:opacity-100'
+        } ${className}`}
+      >
         {adLabel && (
-          <span className="text-[10px] tracking-widest uppercase text-slate-400 font-semibold mb-1.5 block select-none text-center">
+          <span
+            className={`text-[10px] tracking-widest uppercase text-slate-400 font-semibold mb-1.5 select-none text-center ${
+              isAdFilled ? 'block' : 'hidden group-has-[iframe]:block'
+            }`}
+          >
             {adLabel}
           </span>
         )}
-        <div className="w-full max-w-[728px] flex items-center justify-center overflow-hidden">
+        <div className="w-full flex items-center justify-center overflow-hidden">
           {config.adProvider === 'custom' && config.customHeaderCode ? (
             <CustomAdEmbed code={config.customHeaderCode} height={90} />
           ) : (
             <ins
               className="adsbygoogle"
-              style={{ display: 'block', width: '100%' }}
+              style={{ display: 'block', width: '100%', minHeight: 0 }}
               data-ad-client={publisherId}
               data-ad-slot={clientAdId}
               data-ad-format="auto"
@@ -96,19 +143,30 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
 
   if (slotType === 'sticky-sidebar') {
     return (
-      <div className={`w-full flex-col items-center my-4 hidden [&:has(iframe)]:flex ${className}`}>
+      <div
+        ref={containerRef}
+        className={`w-full max-w-[300px] mx-auto flex flex-col items-center justify-center text-center transition-all duration-300 ${
+          isAdFilled
+            ? 'my-4 opacity-100'
+            : 'h-0 min-h-0 m-0 p-0 overflow-hidden opacity-0 has-[iframe]:h-auto has-[iframe]:my-4 has-[iframe]:overflow-visible has-[iframe]:opacity-100'
+        } ${className}`}
+      >
         {adLabel && (
-          <span className="text-[10px] tracking-widest uppercase text-slate-400 font-semibold mb-1.5 block select-none text-center">
+          <span
+            className={`text-[10px] tracking-widest uppercase text-slate-400 font-semibold mb-1.5 select-none text-center ${
+              isAdFilled ? 'block' : 'hidden group-has-[iframe]:block'
+            }`}
+          >
             {adLabel}
           </span>
         )}
-        <div className="w-full max-w-[300px] flex flex-col items-center justify-center text-center overflow-hidden">
+        <div className="w-full flex flex-col items-center justify-center text-center overflow-hidden">
           {config.adProvider === 'custom' && config.customSidebarCode ? (
             <CustomAdEmbed code={config.customSidebarCode} height={600} />
           ) : (
             <ins
               className="adsbygoogle"
-              style={{ display: 'block', width: '100%' }}
+              style={{ display: 'block', width: '100%', minHeight: 0 }}
               data-ad-client={publisherId}
               data-ad-slot={clientAdId}
               data-ad-format="auto"
@@ -122,19 +180,30 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
 
   // Post-Download / In-Feed Banner Slot
   return (
-    <div className={`w-full my-4 sm:my-6 flex-col items-center justify-center hidden [&:has(iframe)]:flex ${className}`}>
+    <div
+      ref={containerRef}
+      className={`w-full max-w-4xl mx-auto flex flex-col items-center justify-center transition-all duration-300 ${
+        isAdFilled
+          ? 'my-6 sm:my-8 opacity-100'
+          : 'h-0 min-h-0 m-0 p-0 overflow-hidden opacity-0 has-[iframe]:h-auto has-[iframe]:my-6 has-[iframe]:sm:my-8 has-[iframe]:overflow-visible has-[iframe]:opacity-100'
+      } ${className}`}
+    >
       {adLabel && (
-        <span className="text-[10px] tracking-widest uppercase text-slate-400 font-semibold mb-1.5 block select-none text-center">
+        <span
+          className={`text-[10px] tracking-widest uppercase text-slate-400 font-semibold mb-1.5 select-none text-center ${
+            isAdFilled ? 'block' : 'hidden group-has-[iframe]:block'
+          }`}
+        >
           {adLabel}
         </span>
       )}
-      <div className="w-full max-w-4xl flex items-center justify-center overflow-hidden">
+      <div className="w-full flex items-center justify-center overflow-hidden">
         {config.adProvider === 'custom' && config.customPostDownloadCode ? (
           <CustomAdEmbed code={config.customPostDownloadCode} height={120} />
         ) : (
           <ins
             className="adsbygoogle"
-            style={{ display: 'block', width: '100%' }}
+            style={{ display: 'block', width: '100%', minHeight: 0 }}
             data-ad-client={publisherId}
             data-ad-slot={clientAdId}
             data-ad-format="auto"
