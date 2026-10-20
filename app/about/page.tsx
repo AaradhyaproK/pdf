@@ -99,9 +99,9 @@ export default function AboutPage() {
           </div>
           <div className="space-y-3 text-center md:text-left flex-1">
             <div className="space-y-1">
-              <div className="inline-flex items-center gap-1.5 text-[11px] font-black uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-                <CheckCircle2 className="w-3 h-3 text-emerald-600" />
-                <span>Verified Builder & Maintainer</span>
+              <div className="inline-flex items-center gap-1.5 text-[11px] font-bold text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200">
+                <Code2 className="w-3 h-3 text-slate-600" />
+                <span>Builder & Maintainer</span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-black text-slate-900">
                 Aaradhya Pathak
@@ -221,9 +221,9 @@ export default function AboutPage() {
             <div className="w-10 h-10 rounded-2xl bg-sky-50 text-sky-600 border border-sky-100 flex items-center justify-center font-bold shrink-0">
               <Cpu className="w-5 h-5" />
             </div>
-            <h3 className="text-base font-black text-slate-900">Sub-Second Local Compute</h3>
+            <h3 className="text-base font-black text-slate-900">Direct In-Browser Compute</h3>
             <p className="text-xs text-slate-600 leading-relaxed font-medium">
-              By removing server upload bottlenecks, processing 100MB documents takes milliseconds. Your own device CPU handles the crunching with zero network queue delays.
+              By removing server upload bottlenecks, document processing starts immediately on your local device CPU with zero network queue delays.
             </p>
           </div>
         </div>

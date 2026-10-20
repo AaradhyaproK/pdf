@@ -36,7 +36,7 @@ export function Footer() {
             </span>
           </div>
           <p className="text-xs text-slate-300 leading-relaxed font-medium">
-            100% Free Client-Side Document &amp; Image Studio. All conversion engines execute strictly in browser RAM with zero cloud uploads.
+            Free Document, Image &amp; Utility Studio. Client-side tools execute directly in your browser memory with strict privacy.
           </p>
           <div className="pt-1 flex flex-wrap items-center justify-between gap-2 border-t border-slate-800 pt-3">
             <a
@@ -175,12 +175,12 @@ export function Footer() {
               </span>
             </div>
             <p className="text-xs text-slate-500 leading-relaxed font-medium">
-              100% Client-Side PDF, Image, and Utility Studio. All document tools execute locally in your browser memory with zero cloud file uploads.
+              Free PDF, image, and online utility studio. Document tools execute locally in your browser memory with strict client-side privacy.
             </p>
 
             <div className="flex items-center gap-2 text-xs text-emerald-700 bg-emerald-50 border border-emerald-200/80 px-3 py-1.5 rounded-full w-fit font-bold">
               <ShieldCheck className="w-4 h-4 text-emerald-600" />
-              <span>Zero Server Guaranteed</span>
+              <span>Browser-Based Processing</span>
             </div>
 
             {/* Official Support Email */}

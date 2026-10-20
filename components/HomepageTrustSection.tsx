@@ -7,12 +7,12 @@ export function HomepageTrustSection() {
   const trustFeatures = [
     {
       icon: ShieldCheck,
-      title: '100% Client-Side Privacy',
-      badge: '0 Bytes Uploaded',
+      title: 'Client-Side Privacy',
+      badge: 'Local Processing',
       badgeColor: 'bg-emerald-100 text-emerald-800 border-emerald-200',
       iconBg: 'bg-emerald-50 text-emerald-600 border-emerald-100',
       accentBorder: 'border-emerald-200/80',
-      desc: 'Your PDF is processed directly in your browser, helping keep your document processing private. Zero file uploads or data tracking guaranteed.',
+      desc: 'Documents and images are processed directly inside your browser memory via WebAssembly. Files never touch remote servers.',
     },
     {
       icon: Zap,
@@ -21,16 +21,16 @@ export function HomepageTrustSection() {
       badgeColor: 'bg-rose-100 text-rose-800 border-rose-200',
       iconBg: 'bg-rose-50 text-rose-600 border-rose-100',
       accentBorder: 'border-rose-200/80',
-      desc: 'No cloud server queueing or upload bottlenecks. Large 100MB PDFs compress and convert in milliseconds on your local CPU.',
+      desc: 'No cloud server queueing or upload bottlenecks. Documents process directly on your device CPU without waiting in server queues.',
     },
     {
       icon: Cpu,
       title: 'Browser-Native Technology',
-      badge: '100% Secure Serverless',
+      badge: 'WebAssembly Engine',
       badgeColor: 'bg-indigo-100 text-indigo-800 border-indigo-200',
       iconBg: 'bg-indigo-50 text-indigo-600 border-indigo-100',
       accentBorder: 'border-indigo-200/80',
-      desc: 'Engineered for complete document protection. Your PDF is processed directly in your browser without ever hitting external cloud servers.',
+      desc: 'Engineered for complete document protection. Processing executes directly on your local hardware without external server bottlenecks.',
     },
     {
       icon: Globe,

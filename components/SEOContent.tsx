@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { SEO_REGISTRY, generateToolSchemas, getCompleteToolFaqs, ToolSEO } from '@/lib/seo-config';
 import { TOOL_DEEP_DIVES } from '@/lib/tool-deep-dives';
-import { ChevronDown, CheckCircle2, Cpu, ArrowRight, Sparkles, FileText, Image as ImageIcon, Wrench, BookOpen, Clock, ShieldCheck } from 'lucide-react';
+import { ChevronDown, CheckCircle2, ArrowRight, Sparkles, FileText, Image as ImageIcon, Wrench, BookOpen, Clock, ShieldCheck } from 'lucide-react';
 
 export interface SEOContentProps {
   slug: string;
@@ -402,160 +402,7 @@ function ToolDeepDiveEditorial({ tool, fileTerm }: { tool: ToolSEO; fileTerm: st
     );
   }
 
-  return (
-    <section className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-2xs space-y-6 text-slate-700">
-      <div className="border-b border-slate-100 pb-4 space-y-1">
-        <div className="flex items-center gap-2 text-indigo-600 text-xs font-black uppercase tracking-wider">
-          <BookOpen className="w-4 h-4" />
-          <span>Comprehensive Technical Guide & Portal Reference</span>
-        </div>
-        <h2 className="text-lg sm:text-2xl font-black text-slate-900">
-          In-Depth Operational Guide: Mastering {tool.title}
-        </h2>
-        <p className="text-xs sm:text-sm text-slate-500 font-medium">
-          Authoritative technical breakdown, official portal submission rules, performance benchmarks, and privacy architecture.
-        </p>
-      </div>
-
-      <div className="space-y-6 text-xs sm:text-sm leading-relaxed font-medium">
-        {/* Section 1: Architecture & Zero-Cloud Execution */}
-        <div className="space-y-2.5">
-          <h3 className="text-sm sm:text-base font-extrabold text-slate-900 flex items-center gap-2">
-            <span className="w-6 h-6 rounded-lg bg-indigo-50 text-indigo-600 font-black text-xs flex items-center justify-center shrink-0">1</span>
-            <span>Architectural Deep Dive: Client-Side Zero-Server Engine</span>
-          </h3>
-          <p>
-            Traditional online utilities operate by uploading your sensitive {fileTerm} files across public network connections to remote cloud data centers. Once received, third-party server clusters queue the job, execute the conversion or compression script, and store temporary copies on remote hard drives before returning a download link. This legacy architecture presents severe data privacy vulnerabilities, bandwidth delays, and arbitrary file size caps.
-          </p>
-          <p>
-            FileZenith fundamentally reimagines this workflow through modern WebAssembly (Wasm) and HTML5 client-side APIs. When you load <strong>{tool.title}</strong>, the computational engine executes directly inside your device sandbox memory. Zero bytes of your {fileTerm} are ever transmitted over the network or saved in an external database. Your CPU and GPU handle the mathematical execution locally, ensuring military-grade data sovereignty, zero network latency, and compliance with strict privacy frameworks including GDPR, HIPAA, and corporate confidential non-disclosure mandates.
-          </p>
-        </div>
-
-        {/* Section 2: Step-by-Step Optimization & Best Practice Workflow */}
-        <div className="space-y-2.5">
-          <h3 className="text-sm sm:text-base font-extrabold text-slate-900 flex items-center gap-2">
-            <span className="w-6 h-6 rounded-lg bg-indigo-50 text-indigo-600 font-black text-xs flex items-center justify-center shrink-0">2</span>
-            <span>Step-by-Step Optimization & Practical Operational Workflow</span>
-          </h3>
-          <p>
-            To achieve optimal output fidelity, meet strict institutional thresholds, and prevent formatting degradation when using <strong>{tool.title}</strong>, follow these comprehensive step-by-step operational recommendations:
-          </p>
-          <ul className="list-disc pl-5 space-y-1.5 text-slate-600">
-            <li>
-              <strong>Source File Inspection & Verification:</strong> Before processing, confirm that your source {fileTerm} is uncorrupted, properly formatted, and contains intact structural metadata. If working with scanned documents, ensure page skew is corrected for optimal readability.
-            </li>
-            <li>
-              <strong>Target Parameter & Compression Setting:</strong> Select from our curated pre-configured thresholds (such as 20KB for signatures, 50KB for passport photos, 100KB for exam forms, or 200KB for institutional PDF submissions) or manually adjust quantization sliders to fine-tune exact output byte boundaries.
-            </li>
-            <li>
-              <strong>Intelligent Vector & Font Preservation:</strong> Our algorithms automatically separate textual character glyphs and geometric vectors from photographic raster objects. This guarantees that text remains crisp, selectable, and publication-ready even when aggressive image compression is applied.
-            </li>
-            <li>
-              <strong>Instant Local Memory Export:</strong> Because processing takes place entirely within local browser buffers, output generation is instantaneous. Click download to immediately save the resulting file directly to your local storage drive without experiencing remote server rendering queues or rate-limiting delays.
-            </li>
-          </ul>
-        </div>
-
-        {/* Section 3: Supported Formats & Precision Engineering */}
-        <div className="space-y-2.5">
-          <h3 className="text-sm sm:text-base font-extrabold text-slate-900 flex items-center gap-2">
-            <span className="w-6 h-6 rounded-lg bg-indigo-50 text-indigo-600 font-black text-xs flex items-center justify-center shrink-0">3</span>
-            <span>Supported File Formats, Encodings & Precision Engineering</span>
-          </h3>
-          <p>
-            The underlying engine for <strong>{tool.title}</strong> is architected to handle complex binary formats, modern image encodings, and enterprise document specifications with uncompromising fidelity:
-          </p>
-          <ul className="list-disc pl-5 space-y-1.5 text-slate-600">
-            <li>
-              <strong>Document & PDF Standards:</strong> Full compliance with ISO 32000-1 (PDF 1.7) and ISO 19005 (PDF/A archiving standard), supporting true font embedding, xref stream recovery, and linearized fast web view optimization.
-            </li>
-            <li>
-              <strong>Raster & Vector Image Specifications:</strong> Seamless support for standard JPEG (EXIF preserved or stripped), lossless PNG (24-bit with alpha transparency), modern WebP (lossless and lossy modes), Apple HEIC/HEIF containers, and scalable SVG vectors.
-            </li>
-            <li>
-              <strong>Color Space Fidelity & DPI Integrity:</strong> Image transformations preserve the standard sRGB IEC61966-2.1 color profile to prevent washed-out colors or chromatic aberration, maintaining 300 DPI print-ready resolution for official submissions.
-            </li>
-          </ul>
-        </div>
-
-        {/* Section 4: Institutional & Government Portal Compliance */}
-        <div className="space-y-2.5">
-          <h3 className="text-sm sm:text-base font-extrabold text-slate-900 flex items-center gap-2">
-            <span className="w-6 h-6 rounded-lg bg-indigo-50 text-indigo-600 font-black text-xs flex items-center justify-center shrink-0">4</span>
-            <span>Institutional, Exam & Government Portal Compliance Standards</span>
-          </h3>
-          <p>
-            Recruitment portals, academic universities, and government identity gateways enforce stringent technical parameters for document and photo uploads. Non-compliance often leads to automatic rejection of job applications or examination admit cards:
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">
-              <span className="font-extrabold text-xs text-indigo-900">Govt Job Portals (SSC, UPSC, IBPS, State PSC)</span>
-              <p className="text-xs text-slate-600">
-                Mandates passport photos between 20KB–50KB (3.5 × 4.5 cm), signatures strictly between 10KB–20KB, and certificates formatted as crisp PDF documents under 200KB or 300KB.
-              </p>
-            </div>
-            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">
-              <span className="font-extrabold text-xs text-indigo-900">Academic & Visa Gateways (NTA, CBSE, US/EU Visas)</span>
-              <p className="text-xs text-slate-600">
-                Requires precise 2x2 inch (600x600 px) or 35x45 mm dimensions with clean white background, zero shadow artifacts, and minimum 300 DPI resolution without watermarks.
-              </p>
-            </div>
-          </div>
-          <p className="pt-1">
-            Outputs produced by FileZenith conform strictly to standard MIME formats (application/pdf, image/jpeg, image/png) and official color spaces (sRGB standard), guaranteeing 100% acceptance across all modern validation firewalls.
-          </p>
-        </div>
-
-        {/* Section 5: Performance Benchmarking: Client-Side vs Cloud SaaS */}
-        <div className="space-y-2.5">
-          <h3 className="text-sm sm:text-base font-extrabold text-slate-900 flex items-center gap-2">
-            <span className="w-6 h-6 rounded-lg bg-indigo-50 text-indigo-600 font-black text-xs flex items-center justify-center shrink-0">5</span>
-            <span>Comparative Performance Benchmarks & Bandwidth Savings</span>
-          </h3>
-          <p>
-            In empirical benchmark tests against traditional cloud SaaS platforms (including Adobe Acrobat Web, iLovePDF, and Smallpdf), FileZenith client-side architecture delivers measurable competitive advantages:
-          </p>
-          <ul className="list-disc pl-5 space-y-1.5 text-slate-600">
-            <li>
-              <strong>Zero Upload Overhead:</strong> For a 40MB file, cloud converters require 15 to 45 seconds of upstream bandwidth just to upload the file to their server. FileZenith loads into browser memory in less than 50 milliseconds.
-            </li>
-            <li>
-              <strong>Hardware Acceleration:</strong> Modern laptop and mobile device processors compute WebAssembly tasks up to 10× faster than congested, shared cloud VM queues.
-            </li>
-            <li>
-              <strong>Unlimited Free Use:</strong> Cloud platforms enforce strict paywalls (e.g., 2 free tasks per day followed by $12–$20/month paywalls). FileZenith provides unlimited free operations forever with zero account sign-up.
-            </li>
-          </ul>
-        </div>
-
-        {/* Section 6: Troubleshooting, Edge-Cases & Security Threat Model */}
-        <div className="space-y-2.5">
-          <h3 className="text-sm sm:text-base font-extrabold text-slate-900 flex items-center gap-2">
-            <span className="w-6 h-6 rounded-lg bg-indigo-50 text-indigo-600 font-black text-xs flex items-center justify-center shrink-0">6</span>
-            <span>Troubleshooting Common Edge Cases & Security Guarantees</span>
-          </h3>
-          <p>
-            If you encounter unexpected results while preparing your {fileTerm}, keep the following diagnostic tips in mind:
-          </p>
-          <ul className="list-disc pl-5 space-y-1.5 text-slate-600">
-            <li>
-              <strong>Memory Pressure on High-Resolution Files:</strong> If processing an extremely large multi-hundred-megabyte file on a low-RAM mobile phone, close background browser tabs to free up available device memory.
-            </li>
-            <li>
-              <strong>Password Protection:</strong> If working with encrypted financial statements or salary slips, unlock the document first using our client-side Remove PDF Password tool before merging or compressing.
-            </li>
-            <li>
-              <strong>Biometric Clarity:</strong> For official government ID cards and passport photos, avoid heavily compressed WhatsApp screenshots; upload original camera captures for optimal sharpness and clarity.
-            </li>
-            <li>
-              <strong>Zero-Trace Guarantee:</strong> Closing your browser tab immediately flushes all loaded buffers from device RAM. No temporary files or persistent cookies remain on your system.
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-  );
+  return null;
 }
 
 export function SEOContent({ slug }: SEOContentProps) {
@@ -628,6 +475,39 @@ export function SEOContent({ slug }: SEOContentProps) {
 
   const recommendedArticles = getRelatedGuidesAndArticles(slug, tool.category);
 
+  const cleanTitle = tool.title.split(/\||—|-/)[0].trim() || tool.title;
+
+  const isFileTool =
+    tool.category === 'pdf' ||
+    tool.category === 'image' ||
+    isIWorkOfficeTool ||
+    [
+      '/tools/ssc-photo-resizer',
+      '/tools/signature-resizer-10-to-20kb',
+      '/tools/upsc-photo-resizer',
+      '/tools/neet-photo-resizer',
+      '/tools/photo-name-date-generator',
+      '/tools/compress-image-to-50kb',
+      '/tools/aadhaar-card-print',
+      '/utility/pages-to-word',
+      '/utility/word-to-pages',
+      '/utility/numbers-to-excel',
+      '/utility/excel-to-numbers',
+      '/utility/markdown-editor',
+      '/utility/base64',
+      '/utility/json-formatter',
+    ].includes(slug);
+
+  const isCalculator =
+    slug.includes('calculator') ||
+    [
+      '/utility/cgpa-to-percentage',
+      '/utility/percentage-calculator',
+      '/utility/number-to-words',
+    ].includes(slug);
+
+  const deepDive = TOOL_DEEP_DIVES[slug];
+
   return (
     <div className="w-full space-y-6 sm:space-y-10 mt-6 sm:mt-12 pt-6 sm:pt-10 border-t border-slate-200/80 text-slate-700">
       {/* Inject Structured Data JSON-LD Schemas */}
@@ -640,32 +520,38 @@ export function SEOContent({ slug }: SEOContentProps) {
         />
       ))}
 
-      {/* Tool Overview & Privacy Benefits Card */}
+      {/* Tool Overview Card */}
       <section className="space-y-3 bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-2xs">
         <div className="flex items-center gap-2">
           <div className="p-1.5 rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-100 shrink-0">
             <Sparkles className="w-4 h-4 text-indigo-600" />
           </div>
           <h2 className="text-base sm:text-2xl font-black text-slate-900">
-            About {tool.title}
+            About {cleanTitle}
           </h2>
         </div>
         <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
-          {tool.description} FileZenith provides a 100% free, browser-native solution engineered specifically for office professionals, students, researchers, and freelancers who demand maximum processing speed and absolute data privacy.
+          {tool.description}
         </p>
-        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
-          Unlike traditional online file converters that require you to upload confidential files to remote cloud servers, your {fileTerm} is processed directly in your browser, helping keep your data private. This means your files never leave your computer or phone, eliminating all cybersecurity risks with no daily file conversion caps.
-        </p>
+        {deepDive?.subheading && (
+          <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-medium">
+            {deepDive.subheading}
+          </p>
+        )}
       </section>
 
-      {/* How-To Step-by-Step Guide (Mobile App Timeline Cards) */}
+      {/* How-To Step-by-Step Guide */}
       <section className="space-y-4">
         <div className="text-center max-w-2xl mx-auto space-y-1 sm:space-y-2">
           <h2 className="text-lg sm:text-2xl font-black text-slate-900">
-            How to Use {tool.title}
+            How to Use {cleanTitle}
           </h2>
           <p className="text-xs sm:text-sm text-slate-500 font-medium">
-            Follow these 3 simple steps to complete your task directly in your browser with zero server file uploads.
+            {isFileTool
+              ? `Follow these simple steps to process your ${fileTerm} securely on your device.`
+              : isCalculator
+              ? 'Follow these simple steps to get accurate calculations in seconds.'
+              : `Follow these simple steps to use ${cleanTitle} directly in your browser.`}
           </p>
         </div>
 
@@ -679,7 +565,6 @@ export function SEOContent({ slug }: SEOContentProps) {
                 <div className="px-3 py-1 rounded-xl bg-indigo-600 text-white font-black text-xs shadow-xs">
                   Step {idx + 1}
                 </div>
-                <span className="text-[10px] font-bold text-slate-400">100% Free</span>
               </div>
               <div className="space-y-1">
                 <h3 className="text-sm sm:text-base font-black text-slate-900">
@@ -699,10 +584,12 @@ export function SEOContent({ slug }: SEOContentProps) {
         <section className="space-y-4">
           <div className="text-center max-w-2xl mx-auto space-y-1 sm:space-y-2">
             <h2 className="text-lg sm:text-2xl font-black text-slate-900">
-              Why Choose FileZenith Browser Engine?
+              Why Choose FileZenith?
             </h2>
             <p className="text-xs sm:text-sm text-slate-500 font-medium">
-              See how FileZenith browser processing compares against standard cloud {fileTerm === 'PDF' ? 'PDF' : fileTerm === 'spreadsheet' ? 'spreadsheet' : fileTerm === 'image' ? 'image' : 'file'} converters.
+              {isFileTool
+                ? `See how FileZenith browser processing compares against standard cloud ${fileTerm} converters.`
+                : 'See how FileZenith compares against standard online alternatives.'}
             </p>
           </div>
 
@@ -713,10 +600,10 @@ export function SEOContent({ slug }: SEOContentProps) {
                   <th className="p-3 sm:p-4 font-black text-slate-900">Feature</th>
                   <th className="p-3 sm:p-4 font-black text-indigo-700 flex items-center gap-1">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                    FileZenith Engine
+                    FileZenith
                   </th>
                   <th className="p-3 sm:p-4 font-bold text-slate-500">
-                    Standard Cloud Converters
+                    {isFileTool ? 'Standard Cloud Converters' : 'Other Online Tools'}
                   </th>
                 </tr>
               </thead>
@@ -739,24 +626,6 @@ export function SEOContent({ slug }: SEOContentProps) {
           </div>
         </section>
       )}
-
-      {/* Technical Explanation - Dark App Security Banner */}
-      <section className="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white border border-slate-800 rounded-2xl sm:rounded-3xl p-5 sm:p-8 space-y-3 shadow-xl">
-        <div className="flex items-center justify-between gap-2">
-          <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-xl bg-indigo-600 text-white shrink-0 shadow-xs">
-              <Cpu className="w-4 h-4 sm:w-5 sm:h-5" />
-            </div>
-            <h3 className="text-sm sm:text-xl font-black text-white">100% Secure Serverless Architecture</h3>
-          </div>
-          <span className="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shrink-0">
-            100% Private
-          </span>
-        </div>
-        <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-medium">
-          Unlike traditional web tools that upload your sensitive files to remote servers over the internet, your {fileTerm} is processed directly in your browser, helping keep your data private. This guarantees absolute data privacy, instant local execution, and offline capability.
-        </p>
-      </section>
 
       {/* Comprehensive In-Depth Editorial Guide (800+ Words for Superior SEO & E-E-A-T) */}
       <ToolDeepDiveEditorial tool={tool} fileTerm={fileTerm} />

@@ -395,7 +395,7 @@ function CategoryDeepDiveGuide({ category }: { category: CategoryConfig }) {
           </p>
           <ul className="list-disc pl-5 space-y-2 text-slate-600">
             <li>
-              <strong>Instant Processing Without Upload Queues:</strong> Traditional cloud converters take between 20 and 60 seconds to upload, queue, process, and download a 25MB file. In FileZenith, the same file is loaded into memory in milliseconds and processed instantly by your local hardware.
+              <strong>Instant Processing Without Upload Queues:</strong> Traditional cloud converters take between 20 and 60 seconds to upload, queue, process, and download a 25MB file. In FileZenith, the file loads directly into local memory with zero upload delay and is processed immediately by your device.
             </li>
             <li>
               <strong>Bandwidth Savings on Mobile Networks:</strong> Because zero files are transferred to external servers, users save hundreds of megabytes of cellular data when batch converting or compressing documents on mobile phones.
@@ -1034,7 +1034,7 @@ export function CategoryHubPage({ category }: { category: CategoryConfig }) {
                   <td className="py-3 px-4 font-bold text-slate-900">File Storage & Privacy</td>
                   <td className="py-3 px-4 font-extrabold text-emerald-700 bg-indigo-50/20 flex items-center gap-1.5">
                     <Check className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span>0 Bytes Uploaded (100% In-Browser)</span>
+                    <span>Local In-Browser Processing (Files Never Sent to Server)</span>
                   </td>
                   <td className="py-3 px-4 text-slate-500 flex items-center gap-1.5">
                     <XCircle className="w-4 h-4 text-rose-500 shrink-0" />

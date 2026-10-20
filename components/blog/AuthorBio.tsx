@@ -63,7 +63,7 @@ export function AuthorBio({ post }: AuthorBioProps) {
         </div>
       </div>
 
-      {/* 2. Metadata line: Published · Updated · Read Time · Fact-checked badge */}
+      {/* 2. Metadata line: Published · Updated · Read Time */}
       <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 text-xs text-slate-500 pl-0 sm:pl-14">
         <span className="inline-flex items-center gap-1.5 font-medium text-slate-600">
           <Calendar className="h-3.5 w-3.5 text-slate-400" />
@@ -82,17 +82,6 @@ export function AuthorBio({ post }: AuthorBioProps) {
           <Clock className="h-3.5 w-3.5 text-indigo-600" />
           <span>{readingTime}</span>
         </span>
-
-        <span className="text-slate-300">·</span>
-
-        <Link
-          href="/about"
-          className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[11px] font-bold text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition-colors shadow-2xs"
-          title="Fact-checked for 2026 Standards (FileZenith Verification)"
-        >
-          <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
-          <span>Fact-checked for 2026 Standards</span>
-        </Link>
       </div>
     </div>
   );

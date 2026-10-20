@@ -342,11 +342,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     {post.readingTime}
                   </span>
                 </div>
-
-                <span className="flex items-center gap-1.5 text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-                  <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                  <span>100% Privacy Verified</span>
-                </span>
               </div>
 
               <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-snug sm:leading-tight">
@@ -375,25 +370,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               )}
             </header>
 
-            {/* E-E-A-T Editorial Reviewer & Fact-Check Badge (Day Mode Styled) */}
-            <div className="p-4 sm:p-5 rounded-3xl bg-gradient-to-br from-emerald-50/70 via-white to-slate-50 border border-emerald-200/80 shadow-2xs space-y-2.5">
-              <div className="flex flex-wrap items-center justify-between gap-2.5 border-b border-emerald-100 pb-2.5">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 border border-emerald-200 flex items-center justify-center shrink-0 shadow-2xs">
-                    <CheckCircle2 className="w-4.5 h-4.5 text-emerald-600" />
-                  </div>
-                  <div>
-                    <p className="text-xs sm:text-sm font-black text-slate-900">Authored &amp; Verified by Aaradhya Pathak</p>
-                    <p className="text-[10px] sm:text-[11px] text-emerald-700 font-bold">Founder, Snab Innovations · Fact-Checked for Official 2026-27 Notification Standards</p>
-                  </div>
+            {/* Author Attribution & Research Context */}
+            <div className="p-4 sm:p-5 rounded-3xl bg-slate-50 border border-slate-200/90 shadow-2xs space-y-2.5">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-700 border border-indigo-200 flex items-center justify-center shrink-0 shadow-2xs">
+                  <CheckCircle2 className="w-4 h-4 text-indigo-600" />
                 </div>
-                <span className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200/80 shadow-2xs tracking-wider">
-                  <ShieldCheck className="w-3 h-3 text-emerald-600" />
-                  <span>E-E-A-T Verified</span>
-                </span>
+                <div>
+                  <p className="text-xs sm:text-sm font-black text-slate-900">Written by Aaradhya Pathak</p>
+                  <p className="text-[10px] sm:text-[11px] text-slate-500 font-medium">Founder, Snab Innovations · Researched against official portal guidelines</p>
+                </div>
               </div>
               <p className="text-xs text-slate-600 leading-relaxed font-medium">
-                Dimensions, file size rules, and accepted formats are verified against current SSC, UPSC, NTA, and State PSC guidelines. <span className="font-bold text-slate-800">Zero-server guarantee:</span> images and signatures are processed locally inside your web browser.
+                Dimensions, file size rules, and accepted formats are verified against official portal notices. Tools on FileZenith process files directly inside your browser memory for complete privacy.
               </p>
             </div>
 

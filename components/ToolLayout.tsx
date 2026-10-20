@@ -126,6 +126,80 @@ export function ToolLayout({
 
   const sidebarTools = getSidebarTools(slug, pathname);
 
+  const normSlug = slug ? slug.trim().toLowerCase() : '';
+  const isFileTool =
+    normSlug.startsWith('/pdf') ||
+    normSlug.startsWith('/image') ||
+    normSlug.startsWith('/tools') ||
+    [
+      '/utility/excel-to-numbers',
+      '/utility/numbers-to-excel',
+      '/utility/word-to-pages',
+      '/utility/pages-to-word',
+      '/utility/markdown-editor',
+      '/utility/base64',
+      '/utility/json-formatter',
+    ].includes(normSlug);
+
+  const isCalculator =
+    normSlug.includes('calculator') ||
+    [
+      '/utility/cgpa-to-percentage',
+      '/utility/percentage-calculator',
+      '/utility/number-to-words',
+    ].includes(normSlug);
+
+  const isNetworkTool =
+    normSlug.includes('youtube') ||
+    normSlug.includes('social') ||
+    normSlug.includes('text-to-speech');
+
+  const privacyCard = isFileTool
+    ? {
+        title: '100% Client-Side Privacy',
+        subtitle: 'Zero Server File Uploads',
+        desc: 'All file modifications, conversions, and compression run strictly in your web browser RAM via WebAssembly. Your sensitive documents never leave your computer or phone.',
+        badges: ['Browser RAM Only', 'Zero Cloud Logs', 'No Account Needed'],
+      }
+    : isCalculator
+    ? {
+        title: '100% Private Calculations',
+        subtitle: 'Local In-Browser Compute',
+        desc: 'All calculations, interest schedules, and numeric formulas run entirely on your device. Zero personal or financial data is ever stored, tracked, or sent to any server.',
+        badges: ['Local Compute', 'Zero Tracking', 'Instant Results'],
+      }
+    : isNetworkTool
+    ? {
+        title: 'Fast & Private Online Utility',
+        subtitle: 'Direct Endpoint Connection',
+        desc: 'Processes your requests directly through public endpoints. We never log, track, or save your queries, search history, or media.',
+        badges: ['No Sign-up', 'Zero Query Logging', 'Free Forever'],
+      }
+    : {
+        title: 'Fast, Private & Free',
+        subtitle: 'Browser-Native Engine',
+        desc: 'Runs 100% locally on your device with instant execution. No accounts, no sign-ups, and zero background tracking.',
+        badges: ['Instant Speed', 'No Sign-up', 'Free Forever'],
+      };
+
+  const sidebarGuides = normSlug.startsWith('/pdf')
+    ? [
+        { title: 'How to Compress PDF to 200KB', href: '/blog/how-to-compress-pdf-to-200kb-online' },
+        { title: 'How to Convert Scanned PDF to Word', href: '/blog/how-to-convert-scanned-pdf-to-editable-word' },
+        { title: 'How to Remove Password from PDF', href: '/blog/how-to-remove-password-from-pdf' },
+      ]
+    : normSlug.startsWith('/image') || normSlug.startsWith('/tools')
+    ? [
+        { title: 'How to Compress Image to 20KB', href: '/blog/how-to-compress-image-to-20kb' },
+        { title: 'How to Resize Signature Online', href: '/blog/how-to-resize-signature-online' },
+        { title: 'RRB NTPC Photo & Sign Specs', href: '/blog/rrb-ntpc-photo-signature-guidelines-2026' },
+      ]
+    : [
+        { title: 'How to Calculate Loan EMI Accurately', href: '/blog/emi-calculator-guide' },
+        { title: 'Calculate Exact Age for Exams', href: '/blog/age-calculator-india' },
+        { title: 'Income Tax Slabs Guide (FY 2025-26)', href: '/blog/income-tax-slabs-fy-2025-26' },
+      ];
+
   return (
     <main className="min-h-screen w-full bg-slate-50/70 pt-3 sm:pt-6 pb-32 sm:pb-16 px-2 sm:px-6 lg:px-8 transition-colors">
       <motion.div
@@ -192,18 +266,20 @@ export function ToolLayout({
                 </div>
                 <div>
                   <h3 className="text-xs font-black uppercase tracking-wider text-slate-900">
-                    100% Client-Side Privacy
+                    {privacyCard.title}
                   </h3>
-                  <p className="text-[10px] text-emerald-700 font-bold">Zero Server File Uploads</p>
+                  <p className="text-[10px] text-emerald-700 font-bold">{privacyCard.subtitle}</p>
                 </div>
               </div>
               <p className="text-xs text-slate-600 leading-relaxed font-medium">
-                All file modifications, conversions, and compression run strictly in your web browser RAM via WebAssembly. Your sensitive documents never leave your computer or phone.
+                {privacyCard.desc}
               </p>
               <div className="pt-1 flex flex-wrap gap-1.5 text-[10px] font-bold text-slate-700">
-                <span className="px-2 py-0.5 rounded-full bg-slate-100 border border-slate-200">Browser RAM Only</span>
-                <span className="px-2 py-0.5 rounded-full bg-slate-100 border border-slate-200">Zero Cloud Logs</span>
-                <span className="px-2 py-0.5 rounded-full bg-slate-100 border border-slate-200">No Account Needed</span>
+                {privacyCard.badges.map((b, bIdx) => (
+                  <span key={bIdx} className="px-2 py-0.5 rounded-full bg-slate-100 border border-slate-200">
+                    {b}
+                  </span>
+                ))}
               </div>
             </div>
 
@@ -226,33 +302,17 @@ export function ToolLayout({
                 </Link>
               </div>
               <ul className="space-y-2 text-xs">
-                <li>
-                  <Link
-                    href="/blog/how-to-compress-image-to-20kb"
-                    className="p-2 rounded-xl bg-slate-50 hover:bg-indigo-50 hover:text-indigo-600 flex items-center justify-between border border-slate-200/70 transition-colors group"
-                  >
-                    <span className="font-semibold text-slate-800 group-hover:text-indigo-600">How to Compress Image to 20KB</span>
-                    <ArrowRight className="w-3 h-3 text-slate-400 group-hover:text-indigo-600 group-hover:translate-x-0.5 transition-all shrink-0" />
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/blog/how-to-compress-pdf-to-200kb-online"
-                    className="p-2 rounded-xl bg-slate-50 hover:bg-indigo-50 hover:text-indigo-600 flex items-center justify-between border border-slate-200/70 transition-colors group"
-                  >
-                    <span className="font-semibold text-slate-800 group-hover:text-indigo-600">How to Compress PDF to 200KB</span>
-                    <ArrowRight className="w-3 h-3 text-slate-400 group-hover:text-indigo-600 group-hover:translate-x-0.5 transition-all shrink-0" />
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/blog/rrb-ntpc-photo-signature-guidelines-2026"
-                    className="p-2 rounded-xl bg-slate-50 hover:bg-indigo-50 hover:text-indigo-600 flex items-center justify-between border border-slate-200/70 transition-colors group"
-                  >
-                    <span className="font-semibold text-slate-800 group-hover:text-indigo-600">RRB NTPC Photo &amp; Sign Specs</span>
-                    <ArrowRight className="w-3 h-3 text-slate-400 group-hover:text-indigo-600 group-hover:translate-x-0.5 transition-all shrink-0" />
-                  </Link>
-                </li>
+                {sidebarGuides.map((guide, gIdx) => (
+                  <li key={gIdx}>
+                    <Link
+                      href={guide.href}
+                      className="p-2 rounded-xl bg-slate-50 hover:bg-indigo-50 hover:text-indigo-600 flex items-center justify-between border border-slate-200/70 transition-colors group"
+                    >
+                      <span className="font-semibold text-slate-800 group-hover:text-indigo-600">{guide.title}</span>
+                      <ArrowRight className="w-3 h-3 text-slate-400 group-hover:text-indigo-600 group-hover:translate-x-0.5 transition-all shrink-0" />
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
 
