@@ -140,21 +140,20 @@ export default function HomePage() {
         </div>
 
         <div className="max-w-4xl mx-auto text-center space-y-4 sm:space-y-6 relative z-10">
-          <div className="inline-flex flex-wrap items-center justify-center gap-2">
-            <PrivacyBadge />
-            <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-rose-50 text-rose-700 text-xs font-extrabold border border-rose-200">
-              <Sparkles className="w-3.5 h-3.5 text-rose-600" />
-              100% Free Mobile & Desktop Studio
+          {/* Trust Badges Bar on Top of Main Title */}
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs font-bold text-slate-700">
+            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 shadow-2xs">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+              100% Free • Unlimited Usage
             </span>
-            <a
-              href="https://www.producthunt.com/products/filezenith/reviews/new?utm_source=badge-product_review&utm_medium=badge&utm_source=badge-filezenith"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 hover:bg-amber-100 text-amber-900 text-xs font-black border border-amber-200 transition-all hover:scale-105 shadow-2xs"
-            >
-              <span className="text-orange-600 font-black">★</span>
-              <span>Review us on Product Hunt</span>
-            </a>
+            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 text-indigo-800 border border-indigo-200 shadow-2xs">
+              <Lock className="w-3.5 h-3.5 text-indigo-600" />
+              No Sign-Up Required
+            </span>
+            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 text-rose-800 border border-rose-200 shadow-2xs">
+              <ShieldCheck className="w-3.5 h-3.5 text-rose-600" />
+              Private In-Browser Processing
+            </span>
           </div>
 
           {/* High-Contrast Bold Headline */}
@@ -166,22 +165,6 @@ export default function HomePage() {
           <p className="text-sm sm:text-base lg:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-medium">
             100% FREE! Merge, split, compress, convert, edit, protect, and OCR your files. Your PDF is processed directly in your browser, helping keep your document processing private.
           </p>
-
-          {/* Trust Badges Bar */}
-          <div className="pt-2 flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 text-xs font-bold text-slate-700">
-            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-              100% Free • Unlimited Usage
-            </span>
-            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-indigo-50 text-indigo-800 border border-indigo-200">
-              <Lock className="w-4 h-4 text-indigo-600" />
-              No Sign-Up Required
-            </span>
-            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-rose-50 text-rose-800 border border-rose-200">
-              <ShieldCheck className="w-4 h-4 text-rose-600" />
-              Private In-Browser Processing
-            </span>
-          </div>
 
           {/* Official Product Hunt Embed Badge */}
           <div className="pt-3 flex items-center justify-center">

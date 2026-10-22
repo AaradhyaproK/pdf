@@ -71,6 +71,12 @@ const PDF_TOOLS = [
   { name: 'Compress PDF to 200KB', slug: '/pdf/compress-to-200kb', desc: 'Target size for form uploads', icon: Minimize2, badge: 'Form Preset', category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'Merge PDF', slug: '/pdf/merge', desc: 'Combine multiple PDFs into one', icon: Combine, category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'Split PDF', slug: '/pdf/split', desc: 'Extract pages & custom page ranges', icon: Split, category: 'pdf', catLabel: 'PDF Studio' },
+  { name: 'Free Invoice & HRA Rent Receipt', slug: '/utility/invoice-generator', desc: 'Client invoice & HRA rent receipt with instant PDF', icon: Receipt, badge: 'PDF Invoice', category: 'pdf', catLabel: 'PDF Studio' },
+  { name: 'Apple Keynote to PDF & Slides', slug: '/utility/keynote-to-powerpoint', desc: 'Convert .key presentations on Windows & Android', icon: Presentation, badge: 'Keynote', category: 'pdf', catLabel: 'PDF Studio' },
+  { name: 'Markdown Editor & PDF', slug: '/utility/markdown-editor', desc: 'Live Markdown preview & vector PDF export', icon: FileText, badge: 'Editor', category: 'pdf', catLabel: 'PDF Studio' },
+  { name: 'Pages to Word (DOCX)', slug: '/utility/pages-to-word', desc: 'Convert Apple Pages to editable Word', icon: FileText, badge: 'Apple', category: 'pdf', catLabel: 'PDF Studio' },
+  { name: 'Word to Pages Converter', slug: '/utility/word-to-pages', desc: 'Convert Word DOCX to Apple Pages', icon: FileCode, badge: 'New', category: 'pdf', catLabel: 'PDF Studio' },
+  { name: 'PDF & EXIF Metadata Remover', slug: '/utility/metadata-remover', desc: 'Scrub author, software & tracking from PDFs', icon: EyeOff, badge: 'Privacy Scrub', category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'PDF Page Numberer', slug: '/pdf/page-numbers', desc: 'Add Page X of Y & custom footers', icon: Hash, badge: 'New', category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'Organize PDF', slug: '/pdf/organize', desc: 'Rotate, reorder & delete pages', icon: Grid, category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'PDF OCR Text Extractor', slug: '/pdf/ocr', desc: 'Extract editable text via AI Tesseract', icon: FileCheck, badge: 'AI Wasm', category: 'pdf', catLabel: 'PDF Studio' },
@@ -88,6 +94,9 @@ const PDF_TOOLS = [
 const IMAGE_TOOLS = [
   { name: 'Visa & Passport Photo Maker (2x2")', slug: '/image/visa-photo-maker', desc: 'US DS-160 (2x2"), Schengen, UK with head oval guide', icon: UserCheck, badge: 'US DS-160', category: 'image', catLabel: 'Image Studio' },
   { name: 'Pics to PDF (JPG to PDF)', slug: '/image/pics-to-pdf', desc: 'Turn photos, scans, JPG, PNG & WebP into a clean PDF', icon: Camera, badge: 'Popular', category: 'image', catLabel: 'Image Studio', keywords: ['jpg to pdf', 'jpeg to pdf', 'png to pdf', 'image to pdf', 'images to pdf', 'photo to pdf', 'photos to pdf', 'pics to pdf', 'pictures to pdf', 'pic to pdf', 'picture to pdf', 'convert photo to pdf', 'convert jpg to pdf', 'convert png to pdf', 'jpg2pdf', 'png2pdf', 'jpeg2pdf', 'scan to pdf', 'heic to pdf', 'webp to pdf', 'photo pdf', 'jpg pdf', 'png pdf', 'camera to pdf'] },
+  { name: 'QR Code Generator', slug: '/utility/qr-generator', desc: 'Create custom vector QR codes with logo & colors', icon: QrCode, badge: 'Vector QR', category: 'image', catLabel: 'Image Studio' },
+  { name: 'Glassmorphism CSS Generator', slug: '/utility/glassmorphism-generator', desc: 'Frosted glass UI CSS graphic generator', icon: Hexagon, badge: 'UI Tool', category: 'image', catLabel: 'Image Studio' },
+  { name: 'Base64 Image Encoder', slug: '/utility/base64', desc: 'Convert photos & graphics to Data URL Base64', icon: Code2, badge: 'Data URI', category: 'image', catLabel: 'Image Studio' },
   { name: 'WebP to JPG Converter', slug: '/image/webp-to-jpg', desc: 'Convert WebP images to JPG with white background fill', icon: FileImage, badge: 'Bulk', category: 'image', catLabel: 'Image Studio', keywords: ['webp to jpg', 'webp', 'jpeg', 'convert webp', 'save webp as jpg'] },
   { name: 'JPG to WebP Converter', slug: '/image/jpg-to-webp', desc: 'Convert JPG/PNG to modern WebP (up to 80% smaller)', icon: Zap, badge: 'Web Vitals', category: 'image', catLabel: 'Image Studio', keywords: ['jpg to webp', 'png to webp', 'webp', 'compress', 'speed', 'core web vitals'] },
   { name: 'Railway RRB Photo Resizer', slug: '/tools/railway-rrb-photo-resizer', desc: 'RRB NTPC, ALP, Group D 20-50KB photo resizer (320x240 px)', icon: UserCheck, badge: 'RRB 20-50KB', category: 'image', catLabel: 'Image Studio', keywords: ['railway', 'rrb', 'ntpc', 'alp', 'group d', 'technician', 'railway photo resizer'] },
@@ -116,44 +125,29 @@ const IMAGE_TOOLS = [
 ];
 
 const UTILITY_TOOLS = [
-  { name: 'Free Invoice & HRA Rent Receipt', slug: '/utility/invoice-generator', desc: 'Client invoice & HRA rent receipt with instant PDF', icon: Receipt, badge: 'Zero Sign-Up', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Apple Keynote to PDF & Slides', slug: '/utility/keynote-to-powerpoint', desc: 'Convert .key presentations on Windows & Android', icon: Presentation, badge: 'Keynote .key', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'PDF & EXIF Metadata Remover', slug: '/utility/metadata-remover', desc: 'Scrub hidden camera GPS, author & edit history', icon: EyeOff, badge: 'Privacy Scrub', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'Electricity Bill Calculator', slug: '/utility/electricity-bill-calculator', desc: 'Calculate monthly electricity bill with state tariff slabs & subsidies', icon: DollarSign, badge: 'State Slabs', category: 'utility', catLabel: 'Daily Utility', keywords: ['electricity', 'bill', 'bijli', 'power', 'kwh', 'msedcl', 'bses', 'uppcl', 'bescom', 'tangedco', 'subsidy', 'ac'] },
-  { name: 'URL Encoder & Decoder', slug: '/utility/url-encoder-decoder', desc: 'Encode or decode URLs and inspect query parameters', icon: FileCode, badge: 'RFC 3986', category: 'utility', catLabel: 'Daily Utility', keywords: ['url encode', 'url decode', 'urlencoder', 'urldecoder', 'percent encoding', 'encodeuricomponent', 'decodeuri'] },
-  { name: 'Hash Generator (MD5 / SHA)', slug: '/utility/hash-generator', desc: 'Generate MD5, SHA-1, SHA-256 and verify file checksums', icon: Hash, badge: 'Checksum', category: 'utility', catLabel: 'Daily Utility', keywords: ['hash', 'md5', 'sha256', 'sha1', 'sha512', 'checksum', 'digest'] },
-  { name: 'Pages to Word (DOCX)', slug: '/utility/pages-to-word', desc: 'Convert Apple Pages to editable Word', icon: FileText, badge: 'Apple', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Word to Pages Converter', slug: '/utility/word-to-pages', desc: 'Convert Word DOCX to Apple Pages', icon: FileCode, badge: 'New', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Numbers to Excel (XLSX)', slug: '/utility/numbers-to-excel', desc: 'Convert Apple Numbers to Excel', icon: Table, badge: 'Apple', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Excel to Numbers Converter', slug: '/utility/excel-to-numbers', desc: 'Convert Excel workbook to Numbers', icon: Table, badge: 'New', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Glassmorphism CSS Generator', slug: '/utility/glassmorphism-generator', desc: 'Frosted glass UI CSS maker', icon: Hexagon, badge: 'UI Tool', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Free Text to Speech (TTS)', slug: '/utility/text-to-speech', desc: 'No-limit text to voice AI audio', icon: Volume2, badge: 'No Limit', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Pomodoro Timer & Study Clock', slug: '/utility/pomodoro-timer', desc: 'Aesthetic 25m focus timer', icon: Brain, badge: 'Focus', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Spin the Wheel & Name Picker', slug: '/utility/spin-the-wheel', desc: 'Random winner picker with confetti', icon: Dices, badge: 'Viral Tool', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Coin Flip Online (3D Toss)', slug: '/utility/coin-flip', desc: '3D heads or tails decision simulator', icon: Coins, badge: '3D Toss', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Roll the Dice (1-12 Dice)', slug: '/utility/dice-roller', desc: 'Virtual 3D dice roller & RPG dice', icon: Dices, badge: '1-12 Dice', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Random Number Picker & RNG', slug: '/utility/random-number-picker', desc: 'Pick numbers without duplicates & PINs', icon: Hash, badge: 'RNG', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'EPF Balance Growth Calculator', slug: '/utility/epf-calculator', desc: 'EPFO 8.25% retirement interest math', icon: Coins, badge: 'EPFO 8.25%', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Age Calculator & Birthday', slug: '/utility/age-calculator', desc: 'Years, months, days, seconds & zodiac', icon: Calendar, badge: '#1 Tool', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Percentage Calculator', slug: '/utility/percentage-calculator', desc: '% increase, discount, marks & ratio', icon: Percent, badge: 'Popular', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'CGPA to Percentage', slug: '/utility/cgpa-to-percentage', desc: 'CBSE, Mumbai Univ, VTU, DU & SGPA', icon: GraduationCap, badge: 'College', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Word & Character Counter', slug: '/utility/word-counter', desc: 'Real-time text stats, reading time & SEO', icon: Type, category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Typing Speed Test (WPM Cert)', slug: '/utility/typing-speed-test', desc: 'Test WPM speed & export PNG certificate', icon: Zap, badge: 'Viral Cert', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Fancy Text Generator', slug: '/utility/fancy-text-generator', desc: '30+ Unicode font styles & gaming tags', icon: Sparkles, badge: 'Fonts', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Password Generator', slug: '/utility/password-generator', desc: 'Generate strong passwords 100% offline', icon: Lock, badge: 'Secure', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Number to Words Converter', slug: '/utility/number-to-words', desc: 'Cheque & invoice amount words (Rupees/$)', icon: DollarSign, badge: 'Cheque', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'EMI Loan Calculator', slug: '/utility/emi-calculator', desc: 'Home, car & personal loan monthly EMI math', icon: DollarSign, badge: 'Loan', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'Income Tax Calculator', slug: '/utility/income-tax-calculator', desc: 'Old vs New Regime tax savings FY 2026-27', icon: DollarSign, badge: 'Tax', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'EMI Loan Calculator', slug: '/utility/emi-calculator', desc: 'Home, car & personal loan monthly EMI math', icon: DollarSign, badge: 'Loan', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'SIP Mutual Fund Calculator', slug: '/utility/sip-calculator', desc: 'Compounding growth for monthly mutual funds', icon: DollarSign, badge: 'Wealth', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'CTC to In-Hand Salary Calculator', slug: '/utility/salary-calculator', desc: 'Monthly take-home salary after EPF & TDS', icon: DollarSign, badge: 'Salary', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'GST Tax Calculator', slug: '/utility/gst-calculator', desc: 'Add or Remove GST 5%, 12%, 18%, 28%', icon: Percent, badge: 'B2B', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Number to Words Converter', slug: '/utility/number-to-words', desc: 'Cheque & invoice amount words (Rupees/$)', icon: DollarSign, badge: 'Cheque', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Age Calculator & Birthday', slug: '/utility/age-calculator', desc: 'Years, months, days, seconds & zodiac', icon: Calendar, badge: '#1 Tool', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Percentage Calculator', slug: '/utility/percentage-calculator', desc: '% increase, discount, marks & ratio', icon: Percent, badge: 'Popular', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'CGPA to Percentage', slug: '/utility/cgpa-to-percentage', desc: 'CBSE, Mumbai Univ, VTU, DU & SGPA', icon: GraduationCap, badge: 'College', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'BMI & Health Calculator', slug: '/utility/bmi-calculator', desc: 'Body Mass Index & ideal weight range', icon: Zap, badge: 'Health', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Pomodoro Timer & Study Clock', slug: '/utility/pomodoro-timer', desc: 'Aesthetic 25m focus timer', icon: Brain, badge: 'Focus', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Coin Flip Online (3D Toss)', slug: '/utility/coin-flip', desc: '3D heads or tails decision simulator', icon: Coins, badge: '3D Toss', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Roll the Dice (1-12 Dice)', slug: '/utility/dice-roller', desc: 'Virtual 3D dice roller & RPG dice', icon: Dices, badge: '1-12 Dice', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Random Number Picker & RNG', slug: '/utility/random-number-picker', desc: 'Pick numbers without duplicates & PINs', icon: Hash, badge: 'RNG', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Password Generator', slug: '/utility/password-generator', desc: 'Generate strong passwords 100% offline', icon: Lock, badge: 'Secure', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Word & Character Counter', slug: '/utility/word-counter', desc: 'Real-time text stats, reading time & SEO', icon: Type, category: 'utility', catLabel: 'Daily Utility' },
   { name: 'Text Case Converter', slug: '/utility/case-converter', desc: 'UPPER, lower, Title, camel & snake case', icon: Type, badge: 'Writing', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Text Repeater (10k Times)', slug: '/utility/text-repeater', desc: 'Repeat text & emojis up to 10,000 times', icon: Sparkles, badge: 'Viral', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Love Match Calculator', slug: '/utility/love-calculator', desc: 'Calculate love score & share on WhatsApp', icon: Sparkles, badge: 'Fun', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Base64 Encoder & Decoder', slug: '/utility/base64', desc: 'Convert files/images to Data URLs', icon: Code2, badge: 'New', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Markdown Editor & PDF', slug: '/utility/markdown-editor', desc: 'Live Markdown preview & PDF export', icon: FileText, badge: 'New', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'QR Code Generator', slug: '/utility/qr-generator', desc: 'Create custom QR codes with logo & colors', icon: QrCode, badge: 'Custom', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'URL Encoder & Decoder', slug: '/utility/url-encoder-decoder', desc: 'Encode or decode URLs and inspect query parameters', icon: FileCode, badge: 'RFC 3986', category: 'utility', catLabel: 'Daily Utility', keywords: ['url encode', 'url decode', 'urlencoder', 'urldecoder', 'percent encoding', 'encodeuricomponent', 'decodeuri'] },
+  { name: 'Hash Generator (MD5 / SHA)', slug: '/utility/hash-generator', desc: 'Generate MD5, SHA-1, SHA-256 and verify file checksums', icon: Hash, badge: 'Checksum', category: 'utility', catLabel: 'Daily Utility', keywords: ['hash', 'md5', 'sha256', 'sha1', 'sha512', 'checksum', 'digest'] },
+  { name: 'Numbers to Excel (XLSX)', slug: '/utility/numbers-to-excel', desc: 'Convert Apple Numbers to Excel', icon: Table, badge: 'Apple', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Excel to Numbers Converter', slug: '/utility/excel-to-numbers', desc: 'Convert Excel workbook to Numbers', icon: Table, badge: 'New', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'JSON Formatter & Validator', slug: '/utility/json-formatter', desc: 'Beautify, minify, and validate JSON data', icon: Code2, category: 'utility', catLabel: 'Daily Utility' },
 ];
 
@@ -161,6 +155,12 @@ const SOCIAL_TOOLS = [
   { name: 'WhatsApp Direct Chat Launcher', slug: '/social/whatsapp-direct-chat', desc: 'Chat without saving phone numbers', icon: MessageSquare, badge: 'wa.me', category: 'social', catLabel: 'Social Studio' },
   { name: 'YouTube 1080p Thumbnail DL', slug: '/social/youtube-thumbnail-downloader', desc: 'Download 1080p HD video cover images', icon: Camera, badge: 'Thumbnails', category: 'social', catLabel: 'Social Studio' },
   { name: 'YouTube Tag Extractor', slug: '/social/youtube-tag-extractor', desc: 'Extract SEO tags & keywords from video URL', icon: Hash, badge: 'SEO', category: 'social', catLabel: 'Social Studio' },
+  { name: 'Fancy Text Generator', slug: '/utility/fancy-text-generator', desc: '30+ Unicode font styles & gaming bios', icon: Sparkles, badge: 'Fonts', category: 'social', catLabel: 'Social Studio' },
+  { name: 'Text Repeater (10k Times)', slug: '/utility/text-repeater', desc: 'Repeat text & emojis up to 10,000 times', icon: Sparkles, badge: 'Viral', category: 'social', catLabel: 'Social Studio' },
+  { name: 'Free Text to Speech (TTS)', slug: '/utility/text-to-speech', desc: 'Voice AI audio generator for reels & videos', icon: Volume2, badge: 'Audio AI', category: 'social', catLabel: 'Social Studio' },
+  { name: 'Love Match Calculator', slug: '/utility/love-calculator', desc: 'Calculate love score & share on WhatsApp', icon: Sparkles, badge: 'Fun', category: 'social', catLabel: 'Social Studio' },
+  { name: 'Spin the Wheel & Name Picker', slug: '/utility/spin-the-wheel', desc: 'Random winner picker with confetti', icon: Dices, badge: 'Giveaway', category: 'social', catLabel: 'Social Studio' },
+  { name: 'Typing Speed Test (WPM Cert)', slug: '/utility/typing-speed-test', desc: 'Test WPM speed & export shareable cert', icon: Zap, badge: 'Viral Cert', category: 'social', catLabel: 'Social Studio' },
 ];
 
 const ALL_SEARCHABLE_TOOLS = [...PDF_TOOLS, ...IMAGE_TOOLS, ...UTILITY_TOOLS, ...SOCIAL_TOOLS];
@@ -666,20 +666,25 @@ export function Navbar() {
 
       {/* Mobile Drawer Menu (Accessible from Navbar on Mobile) */}
       {isMobileMenuOpen && !searchOpen && (
-        <div className="md:hidden fixed inset-x-0 top-[52px] bottom-0 z-40 bg-white/98 backdrop-blur-2xl border-b border-slate-200 shadow-2xl overflow-y-auto overscroll-contain p-4 pb-28 animate-in slide-in-from-top-2 duration-200 space-y-4">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-            <div>
-              <p className="text-xs font-black text-slate-900 uppercase tracking-wider">Navigation Menu</p>
-              <p className="text-[11px] text-slate-500 font-medium">Browse 80+ tools across 4 studios</p>
+        <div className="md:hidden fixed inset-0 h-[100dvh] w-full z-[100] bg-white flex flex-col pt-[env(safe-area-inset-top,0px)] animate-in fade-in duration-150">
+          <div className="p-3 border-b border-slate-200/80 flex items-center justify-between bg-white shadow-xs shrink-0 min-h-[52px]">
+            <div className="flex items-center gap-2">
+              <img src="/filezenith-logo.png" alt="FileZenith Logo" className="w-6 h-6 object-contain" />
+              <div>
+                <p className="text-xs font-black text-slate-900 uppercase tracking-wider leading-none">Navigation Menu</p>
+                <p className="text-[10px] text-slate-500 font-medium mt-0.5">Browse 80+ tools across 4 studios</p>
+              </div>
             </div>
             <button
               onClick={() => setIsMobileMenuOpen(false)}
-              className="p-1.5 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 cursor-pointer"
+              className="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-800 flex items-center justify-center active:scale-90 transition-transform cursor-pointer"
               aria-label="Close menu"
             >
-              <X className="w-4 h-4" />
+              <X className="w-5 h-5 text-slate-900 stroke-[2.5]" />
             </button>
           </div>
+
+          <div className="flex-1 overflow-y-auto overscroll-contain p-4 pb-36 space-y-4 bg-white">
 
           {/* PDF Studio Mobile Card */}
           <div className="p-3.5 rounded-2xl bg-slate-50/80 border border-slate-200/80 space-y-2.5">
@@ -899,6 +904,7 @@ export function Navbar() {
             </div>
           </div>
         </div>
+      </div>
       )}
 
       <div className="hidden md:flex max-w-7xl mx-auto px-4 lg:px-8 h-16 items-center justify-between gap-2 lg:gap-4">

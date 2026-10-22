@@ -1032,13 +1032,17 @@ export function CategoryHubPage({ category }: { category: CategoryConfig }) {
               <tbody className="divide-y divide-slate-100 text-xs">
                 <tr>
                   <td className="py-3 px-4 font-bold text-slate-900">File Storage & Privacy</td>
-                  <td className="py-3 px-4 font-extrabold text-emerald-700 bg-indigo-50/20 flex items-center gap-1.5">
-                    <Check className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span>Local In-Browser Processing (Files Never Sent to Server)</span>
+                  <td className="py-3 px-4 font-extrabold text-emerald-700 bg-indigo-50/20">
+                    <div className="flex items-center gap-1.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                      <span>Local In-Browser Processing (Files Never Sent to Server)</span>
+                    </div>
                   </td>
-                  <td className="py-3 px-4 text-slate-500 flex items-center gap-1.5">
-                    <XCircle className="w-4 h-4 text-rose-500 shrink-0" />
-                    <span>Uploaded to Remote Cloud Servers</span>
+                  <td className="py-3 px-4 text-slate-500">
+                    <div className="flex items-center gap-1.5">
+                      <XCircle className="w-4 h-4 text-rose-500 shrink-0" />
+                      <span>Uploaded to Remote Cloud Servers</span>
+                    </div>
                   </td>
                 </tr>
                 <tr>

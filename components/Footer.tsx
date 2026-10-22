@@ -46,21 +46,6 @@ export function Footer() {
               <Mail className="w-3.5 h-3.5 text-indigo-400" />
               <span>hello@snab.co.in</span>
             </a>
-            <a
-              href="https://www.producthunt.com/products/filezenith/reviews/new?utm_source=badge-product_review&utm_medium=badge&utm_source=badge-filezenith"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block hover:opacity-95 transition-opacity"
-            >
-              <img
-                src="https://api.producthunt.com/widgets/embed-image/v1/product_review.svg?product_id=1336391&theme=light"
-                alt="FileZenith - 100% private in-browser PDF, image & document studio | Product Hunt"
-                style={{ width: '180px', height: '39px' }}
-                width={250}
-                height={54}
-                className="w-[180px] h-auto rounded-lg shadow-xs"
-              />
-            </a>
           </div>
         </div>
 

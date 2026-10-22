@@ -1371,24 +1371,6 @@ export function LandingToolGrid() {
     <div className="space-y-6 sm:space-y-10">
       {/* Search Input & Horizontal Swipeable Category Pills Bar */}
       <div className="space-y-4 sm:space-y-6">
-        {/* Mobile Product Hunt Banner */}
-        <div className="sm:hidden flex justify-center pb-1">
-          <a
-            href="https://www.producthunt.com/products/filezenith/reviews/new?utm_source=badge-product_review&utm_medium=badge&utm_source=badge-filezenith"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block hover:opacity-95 transition-all"
-          >
-            <img
-              src="https://api.producthunt.com/widgets/embed-image/v1/product_review.svg?product_id=1336391&theme=light"
-              alt="FileZenith - 100% private in-browser PDF, image & document studio | Product Hunt"
-              style={{ width: '250px', height: '54px' }}
-              width={250}
-              height={54}
-              className="w-[195px] h-auto rounded-lg shadow-2xs"
-            />
-          </a>
-        </div>
 
         {/* Compact App Search Input */}
         <div className="relative max-w-2xl mx-auto shadow-md rounded-full">
