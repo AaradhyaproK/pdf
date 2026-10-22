@@ -395,6 +395,32 @@ function ToolDeepDiveEditorial({ tool, fileTerm }: { tool: ToolSEO; fileTerm: st
                   ))}
                 </ul>
               )}
+              {sec.table && (
+                <div className="overflow-x-auto my-3 rounded-2xl border border-slate-200 shadow-2xs">
+                  <table className="w-full text-left text-xs border-collapse">
+                    <thead>
+                      <tr className="bg-slate-100 text-slate-900 border-b border-slate-200">
+                        {sec.table.headers.map((h, hIdx) => (
+                          <th key={hIdx} className="p-3 font-black uppercase text-[10px] tracking-wider">
+                            {h}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100">
+                      {sec.table.rows.map((row, rIdx) => (
+                        <tr key={rIdx} className={rIdx % 2 === 0 ? 'bg-white' : 'bg-slate-50/70'}>
+                          {row.map((cell, cIdx) => (
+                            <td key={cIdx} className="p-3 text-slate-700 leading-normal font-medium">
+                              {cell}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
             </div>
           ))}
         </div>
