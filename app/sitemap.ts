@@ -53,7 +53,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }));
 
-  const allRoutes = [...staticRoutes, ...categoryRoutes, ...toolRoutes, ...presetRoutes, ...blogRoutes];
+  // Explicitly exclude redirected URLs so sitemap only contains clean 200 OK canonicals
+  const REDIRECTED_SLUGS = new Set([
+    '/image/to-pdf',
+    '/image/png-to-pdf',
+    '/image/heic-to-jpg',
+    '/image/passport-photo-maker',
+    '/image/resize-signature',
+    '/image/convert',
+    '/tools/compress-image-to-20kb',
+    '/tools/compress-image-to-50kb',
+    '/tools/compress-image-to-100kb',
+    '/blog/income-tax-slabs-fy-2025-26',
+    '/presets/ssc-pdf-200kb',
+    '/presets/upsc-pdf-300kb',
+  ]);
+
+  const allRoutes = [...staticRoutes, ...categoryRoutes, ...toolRoutes, ...presetRoutes, ...blogRoutes].filter(
+    (item) => !REDIRECTED_SLUGS.has(item.url.replace(baseUrl, ''))
+  );
 
   // Deduplicate by URL (preserving higher priority)
   const routeMap = new Map<string, MetadataRoute.Sitemap[number]>();
