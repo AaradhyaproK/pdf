@@ -55,10 +55,18 @@ import {
   Printer,
   Menu,
   BookOpen,
+  Eraser,
+  EyeOff,
+  Receipt,
+  Presentation,
+  ShieldCheck,
 } from 'lucide-react';
 
 const PDF_TOOLS = [
   { name: 'Edit PDF Online', slug: '/pdf/edit', desc: 'Add text, whiteout content, draw & sign', icon: Edit3, badge: 'Interactive', category: 'pdf', catLabel: 'PDF Studio' },
+  { name: 'Mask Aadhaar Card', slug: '/pdf/mask-aadhaar', desc: 'Hide first 8 digits of Aadhaar (XXXX-XXXX-1234) offline', icon: ShieldCheck, badge: 'UIDAI', category: 'pdf', catLabel: 'PDF Studio' },
+  { name: 'Redact PDF (Zero-Leak)', slug: '/pdf/redact', desc: 'Permanent blackout pixel flattening tool', icon: Eraser, badge: 'Zero-Leak', category: 'pdf', catLabel: 'PDF Studio' },
+  { name: 'Combine Marksheets', slug: '/pdf/combine-marksheets', desc: 'Merge 10th & 12th marksheets in 1 A4 PDF <500KB', icon: GraduationCap, badge: 'College Ready', category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'Compress PDF', slug: '/pdf/compress', desc: 'Shrink PDF size up to 80%', icon: Minimize2, badge: 'Popular', category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'Compress PDF to 200KB', slug: '/pdf/compress-to-200kb', desc: 'Target size for form uploads', icon: Minimize2, badge: 'Form Preset', category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'Merge PDF', slug: '/pdf/merge', desc: 'Combine multiple PDFs into one', icon: Combine, category: 'pdf', catLabel: 'PDF Studio' },
@@ -78,6 +86,7 @@ const PDF_TOOLS = [
 ];
 
 const IMAGE_TOOLS = [
+  { name: 'Visa & Passport Photo Maker (2x2")', slug: '/image/visa-photo-maker', desc: 'US DS-160 (2x2"), Schengen, UK with head oval guide', icon: UserCheck, badge: 'US DS-160', category: 'image', catLabel: 'Image Studio' },
   { name: 'Pics to PDF (JPG to PDF)', slug: '/image/pics-to-pdf', desc: 'Turn photos, scans, JPG, PNG & WebP into a clean PDF', icon: Camera, badge: 'Popular', category: 'image', catLabel: 'Image Studio', keywords: ['jpg to pdf', 'jpeg to pdf', 'png to pdf', 'image to pdf', 'images to pdf', 'photo to pdf', 'photos to pdf', 'pics to pdf', 'pictures to pdf', 'pic to pdf', 'picture to pdf', 'convert photo to pdf', 'convert jpg to pdf', 'convert png to pdf', 'jpg2pdf', 'png2pdf', 'jpeg2pdf', 'scan to pdf', 'heic to pdf', 'webp to pdf', 'photo pdf', 'jpg pdf', 'png pdf', 'camera to pdf'] },
   { name: 'WebP to JPG Converter', slug: '/image/webp-to-jpg', desc: 'Convert WebP images to JPG with white background fill', icon: FileImage, badge: 'Bulk', category: 'image', catLabel: 'Image Studio', keywords: ['webp to jpg', 'webp', 'jpeg', 'convert webp', 'save webp as jpg'] },
   { name: 'JPG to WebP Converter', slug: '/image/jpg-to-webp', desc: 'Convert JPG/PNG to modern WebP (up to 80% smaller)', icon: Zap, badge: 'Web Vitals', category: 'image', catLabel: 'Image Studio', keywords: ['jpg to webp', 'png to webp', 'webp', 'compress', 'speed', 'core web vitals'] },
@@ -107,6 +116,9 @@ const IMAGE_TOOLS = [
 ];
 
 const UTILITY_TOOLS = [
+  { name: 'Free Invoice & HRA Rent Receipt', slug: '/utility/invoice-generator', desc: 'Client invoice & HRA rent receipt with instant PDF', icon: Receipt, badge: 'Zero Sign-Up', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'Apple Keynote to PDF & Slides', slug: '/utility/keynote-to-powerpoint', desc: 'Convert .key presentations on Windows & Android', icon: Presentation, badge: 'Keynote .key', category: 'utility', catLabel: 'Daily Utility' },
+  { name: 'PDF & EXIF Metadata Remover', slug: '/utility/metadata-remover', desc: 'Scrub hidden camera GPS, author & edit history', icon: EyeOff, badge: 'Privacy Scrub', category: 'utility', catLabel: 'Daily Utility' },
   { name: 'Electricity Bill Calculator', slug: '/utility/electricity-bill-calculator', desc: 'Calculate monthly electricity bill with state tariff slabs & subsidies', icon: DollarSign, badge: 'State Slabs', category: 'utility', catLabel: 'Daily Utility', keywords: ['electricity', 'bill', 'bijli', 'power', 'kwh', 'msedcl', 'bses', 'uppcl', 'bescom', 'tangedco', 'subsidy', 'ac'] },
   { name: 'URL Encoder & Decoder', slug: '/utility/url-encoder-decoder', desc: 'Encode or decode URLs and inspect query parameters', icon: FileCode, badge: 'RFC 3986', category: 'utility', catLabel: 'Daily Utility', keywords: ['url encode', 'url decode', 'urlencoder', 'urldecoder', 'percent encoding', 'encodeuricomponent', 'decodeuri'] },
   { name: 'Hash Generator (MD5 / SHA)', slug: '/utility/hash-generator', desc: 'Generate MD5, SHA-1, SHA-256 and verify file checksums', icon: Hash, badge: 'Checksum', category: 'utility', catLabel: 'Daily Utility', keywords: ['hash', 'md5', 'sha256', 'sha1', 'sha512', 'checksum', 'digest'] },

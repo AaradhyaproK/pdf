@@ -2449,6 +2449,221 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { feature: 'Appliance Breakdown', omnitool: 'Interactive AC, Fridge, Fan, Geyser Wattage Estimator', standardCloud: 'Requires manual unit entry' },
       { feature: 'WhatsApp Sharing', omnitool: '1-Click Formatted Summary Sharing', standardCloud: 'None' }
     ]
+  },
+  '/pdf/mask-aadhaar': {
+    slug: '/pdf/mask-aadhaar',
+    title: 'Mask Aadhaar Card Online (Hide First 8 Digits Offline & Free)',
+    metaTitle: 'Mask Aadhaar Card Online — Hide First 8 Digits (100% Private & Free)',
+    description: 'Mask your Aadhaar card online to hide the first 8 digits (XXXX-XXXX-1234) for hotels, banks & KYC. 100% in-browser offline processing with zero cloud uploads.',
+    keywords: [
+      'mask aadhaar card online',
+      'mask aadhaar card free',
+      'hide first 8 digits of aadhaar',
+      'masked aadhaar pdf generator',
+      'mask aadhaar without otp offline',
+      'uidai masked aadhaar online tool',
+      'mask aadhaar number on image'
+    ],
+    category: 'pdf',
+    howToSteps: [
+      { title: 'Upload Aadhaar Card', text: 'Select or drag your Aadhaar card scan (JPG, PNG, or PDF). It loads locally in browser memory.' },
+      { title: 'Apply Masking Preset', text: 'Choose Standard Mask to automatically cover the first 8 digits with XXXX-XXXX-, or customize box coordinates.' },
+      { title: 'Download Compliant Masked PDF', text: 'Click Generate Masked Aadhaar Document to export a flattened, RBI and UIDAI compliant PDF file.' }
+    ],
+    faqs: [
+      { question: 'What is a Masked Aadhaar card and why is it needed?', answer: 'A Masked Aadhaar card masks or blacks out the first 8 digits of your 12-digit Aadhaar number, showing only the last 4 digits (e.g. XXXX-XXXX-1234). The Reserve Bank of India (RBI) and UIDAI mandate masked Aadhaar for hotels, SIM verification, and private KYC to prevent identity theft.' },
+      { question: 'Is it safe to mask my Aadhaar card on FileZenith?', answer: 'Yes, 100%. FileZenith operates on a zero-server client-side architecture. Your Aadhaar document is processed directly inside your browser using WebAssembly. No image, PDF, or personal data is ever transmitted across the internet.' },
+      { question: 'Does this masked Aadhaar work for hotel check-ins and flight travel?', answer: 'Yes! Under UIDAI circulars and Indian law, hotels and airlines are legally required to accept masked Aadhaar as valid photo and identity proof.' },
+      { question: 'Can I mask the QR code on my Aadhaar card as well?', answer: 'Yes. Select the Maximum Security Mask preset to cover both the 8-digit Aadhaar number and the biometric QR code.' }
+    ],
+    comparisonTable: [
+      { feature: 'Processing Location', omnitool: '100% In-Browser (Zero Cloud Upload)', standardCloud: 'Uploads copy to remote server' },
+      { feature: 'OTP Requirement', omnitool: 'Zero OTP needed (Works directly on scan)', standardCloud: 'Requires UIDAI portal OTP login' },
+      { feature: 'KYC Compliance', omnitool: 'RBI & UIDAI Circular Compliant', standardCloud: 'Varies' }
+    ]
+  },
+  '/image/visa-photo-maker': {
+    slug: '/image/visa-photo-maker',
+    title: 'Online Visa & Passport Photo Maker (2x2 Inch / 35x45mm Free)',
+    metaTitle: 'Visa & Passport Photo Maker Online (2x2 Inch & 35x45mm Free)',
+    description: 'Create official passport and visa photos online for US DS-160 (2x2 inch), Schengen (35x45mm), UK, Canada & India. Includes biometric head oval guide and 4x6 printable grid.',
+    keywords: [
+      'visa photo maker online',
+      'passport photo maker 2x2 inch free',
+      'us visa photo maker ds 160',
+      'schengen visa photo resizer 35x45 mm',
+      'uk visa photo converter free',
+      'passport size photo 4x6 sheet printable',
+      'online visa photo editor white background'
+    ],
+    category: 'image',
+    howToSteps: [
+      { title: 'Select Visa or Country Preset', text: 'Choose US Visa (2x2 inch / 51x51mm), Schengen (35x45mm), UK, Canada, or India Passport.' },
+      { title: 'Upload Portrait Photo', text: 'Upload any straight-facing portrait or smartphone selfie.' },
+      { title: 'Align with Biometric Guides', text: 'Adjust zoom and position so your head and chin align with the official embassy guideline oval.' },
+      { title: 'Download Single or 6-Photo Sheet', text: 'Export single photo for online DS-160 upload, or 4x6 inch printable sheet for physical submission.' }
+    ],
+    faqs: [
+      { question: 'What are the exact dimensions for a US Visa (DS-160) photo?', answer: 'A US Visa photo must be a square 2x2 inches (51x51 mm), minimum 600x600 pixels at 300 DPI, under 240 KB in JPEG format, with head height occupying between 50% and 69% of the total frame on a plain white background.' },
+      { question: 'What is the required size for a European Schengen Visa photo?', answer: 'Schengen visas require a 35x45 mm photo with face height between 32mm and 36mm (70-80% of photo), taken against a light grey or neutral background with no shadows.' },
+      { question: 'Can I print these passport photos on a 4x6 inch photo paper?', answer: 'Yes! FileZenith generates a standardized 4x6 inch printable sheet containing 6 passport photos with clear cutting guidelines, saving you expensive studio fees.' },
+      { question: 'Can I wear glasses or a hat in a visa photo?', answer: 'Embassies generally prohibit eyeglasses (since 2016 for US visas) to prevent flash glare and eye biometric distortion. Head coverings are only permitted for recognized religious or medical reasons and must not obscure any facial features.' }
+    ],
+    comparisonTable: [
+      { feature: 'Cost', omnitool: '100% Free (No Watermark)', standardCloud: '$7 to $15 per download' },
+      { feature: 'Biometric Head Oval Guide', omnitool: 'Interactive Real-Time Guidelines', standardCloud: 'Blind crop' },
+      { feature: 'Printable 4x6 Grid', omnitool: 'Instant 6-in-1 Sheet Included', standardCloud: 'Extra paid add-on' }
+    ]
+  },
+  '/pdf/redact': {
+    slug: '/pdf/redact',
+    title: 'Permanently Redact PDF Online (True Zero-Leak Blackout Tool)',
+    metaTitle: 'Redact PDF Online Free — Permanent Blackout & Zero Leak',
+    description: 'Permanently black out and redact sensitive text, SSN, bank accounts, and PAN numbers in PDF documents. Flattens vector layers to permanently destroy text underneath.',
+    keywords: [
+      'redact pdf online free',
+      'black out text in pdf permanently',
+      'redact sensitive information in pdf',
+      'permanent pdf blackout tool',
+      'true pdf redactor zero leak',
+      'hide private text in pdf without adobe'
+    ],
+    category: 'pdf',
+    howToSteps: [
+      { title: 'Upload PDF Document', text: 'Select your confidential contract, bank statement, or tax return to load pages.' },
+      { title: 'Draw Blackout Redaction Boxes', text: 'Click and drag over names, account numbers, or figures you wish to redact.' },
+      { title: 'Burn Redactions & Flatten PDF', text: 'Click Burn Redactions to flatten all pages into rasterized pixels, permanently destroying hidden text.' }
+    ],
+    faqs: [
+      { question: 'Why are standard PDF black rectangles dangerous?', answer: 'In standard PDF readers, drawing a black rectangle only puts a shape on top of the text. The underlying text remains selectable, searchable, and can be copied or recovered with a single click. FileZenith rasterizes the page into pixels, making recovery mathematically impossible.' },
+      { question: 'Are my redacted documents uploaded to any server?', answer: 'No. FileZenith executes all rendering and PDF compiling directly inside your browser memory using WebAssembly. Your confidential legal documents never leave your machine.' },
+      { question: 'Can someone use an un-redact tool to reveal the blacked out information?', answer: 'No. Because the vector characters are completely removed from the PDF structure and replaced with solid black pixels, there is zero data left to un-redact.' }
+    ],
+    comparisonTable: [
+      { feature: 'Redaction Mechanism', omnitool: 'Permanent Pixel Flattening (0-Leak)', standardCloud: 'Visual shape overlay (Data leak risk)' },
+      { feature: 'Text Recoverability', omnitool: 'Mathematically Impossible to Recover', standardCloud: 'Can often be copied through clipboard' },
+      { feature: 'Server Storage', omnitool: 'Zero (100% Local Browser Memory)', standardCloud: 'Retained on cloud server disks' }
+    ]
+  },
+  '/utility/keynote-to-powerpoint': {
+    slug: '/utility/keynote-to-powerpoint',
+    title: 'Convert Apple Keynote to PDF & Slides (.key to .pdf / .pptx)',
+    metaTitle: 'Keynote to PDF Converter Online (.key to .pdf Free)',
+    description: 'Open and convert Apple Keynote (.key) presentations on Windows, Android & Linux. Extract high-res slides and printable PDF presentation decks 100% in-browser.',
+    keywords: [
+      'keynote to pdf online',
+      'convert key to pdf online free',
+      'open keynote on windows',
+      'apple keynote to powerpoint converter',
+      'extract slides from keynote file',
+      'convert dot key file without mac'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Upload Apple Keynote File', text: 'Drag and drop your .key presentation file or zipped package.' },
+      { title: 'Automatic Slide Extraction', text: 'Our engine unpacks vector slide structures, preview assets, and thumbnails.' },
+      { title: 'Download Universal PDF Deck', text: 'Download the compiled presentation as a high-definition PDF viewable on any device.' }
+    ],
+    faqs: [
+      { question: 'How do I open an Apple Keynote (.key) file on Windows?', answer: 'Windows cannot natively open .key files. FileZenith parses the internal Apple iWork package structure directly in your browser and converts it into a universal PDF presentation deck that opens on any PC or projector.' },
+      { question: 'Do I need a Mac or an iCloud account to use this converter?', answer: 'No! You do not need Apple Keynote software, a Mac, or an iCloud login. The conversion runs entirely client-side on your device.' },
+      { question: 'Will my slide images and typography be preserved?', answer: 'Yes. FileZenith extracts the high-resolution rendered slide canvases packaged within the presentation, preserving fonts, images, and layout fidelity.' }
+    ],
+    comparisonTable: [
+      { feature: 'Mac / Apple ID Required', omnitool: 'No (Runs on Windows, Android, Linux)', standardCloud: 'Often requires iCloud login' },
+      { feature: 'Speed', omnitool: 'Instant Local Unpacking', standardCloud: 'Queued on slow conversion servers' },
+      { feature: 'Privacy', omnitool: '100% Client-Side', standardCloud: 'Stored on third-party servers' }
+    ]
+  },
+  '/utility/metadata-remover': {
+    slug: '/utility/metadata-remover',
+    title: 'Remove PDF & Image Metadata (EXIF, Author & GPS Stripper)',
+    metaTitle: 'Remove Metadata from PDF & Photos Online (EXIF & GPS Stripper)',
+    description: 'Scrub hidden metadata from PDF files and images (JPG, PNG, WebP). Remove author names, device models, GPS coordinates & edit history 100% privately.',
+    keywords: [
+      'remove metadata from pdf online',
+      'strip exif data from photos free',
+      'remove gps location from image',
+      'sanitize pdf document online',
+      'clear author metadata from pdf',
+      'photo privacy metadata cleaner'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Upload PDF or Photo', text: 'Select any document or image. We scan and display detected metadata tags.' },
+      { title: 'Inspect Detected Headers', text: 'View author names, creation software, camera models, and timestamps.' },
+      { title: '1-Click Sanitize & Download', text: 'Click Scrub Metadata to erase all identifying tags and download a pristine file.' }
+    ],
+    faqs: [
+      { question: 'What hidden metadata is stored inside my photos and PDFs?', answer: 'Camera photos often record exact GPS latitude/longitude of your home or location, camera serial numbers, and capture timestamps. PDFs routinely store computer usernames, organization names, and editing software history.' },
+      { question: 'Why is it important to scrub metadata before uploading files online?', answer: 'Exposing EXIF and document metadata can reveal your physical location, private identity, employer, and internal workflows to strangers or data harvesters.' },
+      { question: 'Does removing metadata reduce photo or document quality?', answer: 'No. FileZenith strips the header metadata bytes without altering your document text or visual image resolution.' }
+    ],
+    comparisonTable: [
+      { feature: 'Supported Formats', omnitool: 'PDF, JPG, PNG, WebP', standardCloud: 'Usually only image EXIF or only PDF' },
+      { feature: 'Visual Inspection', omnitool: 'Inspect Detected Attributes Before Scrubbing', standardCloud: 'Black-box blind removal' },
+      { feature: 'Privacy', omnitool: '100% Client-Side (Zero Server Upload)', standardCloud: 'Uploads original file to cloud' }
+    ]
+  },
+  '/pdf/combine-marksheets': {
+    slug: '/pdf/combine-marksheets',
+    title: 'Combine Marksheets into Single PDF under 500KB (College & Govt Portals)',
+    metaTitle: 'Combine Marksheets into Single PDF under 500KB / 300KB Free',
+    description: 'Merge 10th, 12th, Degree marksheets & category certificates into 1 clean PDF under 500KB or 300KB. Guaranteed clear text readability for DU, IIT, JoSAA, NEET & UPSC.',
+    keywords: [
+      'combine marksheets into single pdf under 500kb',
+      'merge marksheets for college admission online',
+      'combine 10th and 12th marksheet in one pdf',
+      'neet counselling marksheet pdf merge under 300kb',
+      'du admission marksheet combiner free',
+      'merge certificates under 500kb online'
+    ],
+    category: 'pdf',
+    howToSteps: [
+      { title: 'Upload Marksheets in Order', text: 'Upload 10th marksheet, 12th marksheet, Degree certificates, or category forms.' },
+      { title: 'Select Target Size Limit', text: 'Choose Strictly Under 500KB (Standard), Strictly Under 300KB, or 1MB.' },
+      { title: 'Auto-Merge & Compress', text: 'Click Merge & Compress. Our algorithm combines pages and auto-tunes compression to pass portal validation.' }
+    ],
+    faqs: [
+      { question: 'Why do college admission portals require marksheets in a single PDF under 500KB?', answer: 'Government and university portals (like DU CSAS, JoSAA, MCC NEET, UPSC) enforce strict bandwidth caps and only provide one file upload slot for educational qualifications, requiring all certificates in a single lightweight PDF.' },
+      { question: 'Will the marksheet text and roll numbers remain readable after compression?', answer: 'Yes! FileZenith uses adaptive raster optimization to maintain sharp high-contrast typography, ensuring university verification officers can clearly read marks, dates, and roll numbers.' },
+      { question: 'Can I reorder the sequence of marksheets in the final PDF?', answer: 'Yes. Use the up and down arrows to arrange certificates chronologically (10th Class first, followed by 12th and Degree).' }
+    ],
+    comparisonTable: [
+      { feature: 'File Size Guarantee', omnitool: 'Strictly Enforces Target (e.g. Under 500KB)', standardCloud: 'Generic merge produces 4MB oversized file' },
+      { feature: 'Text Readability', omnitool: 'Adaptive High-Contrast Sharpness', standardCloud: 'Often turns text blurry' },
+      { feature: 'Admission Portal Ready', omnitool: 'Pre-calibrated for DU, NEET, JoSAA & UPSC', standardCloud: 'Requires multiple manual compression steps' }
+    ]
+  },
+  '/utility/invoice-generator': {
+    slug: '/utility/invoice-generator',
+    title: 'Free Invoice & Rent Receipt Generator (No Sign-Up, Instant PDF)',
+    metaTitle: 'Free Invoice & Rent Receipt Generator Online (Instant PDF No Login)',
+    description: 'Create professional client invoices and HRA rent receipts for tax deductions. 100% free with instant clean vector PDF download—no account or login required.',
+    keywords: [
+      'free invoice generator no sign up',
+      'rent receipt generator for hra online',
+      'freelance invoice maker free pdf',
+      'hra rent receipt with landlord pan',
+      'instant invoice generator without watermark',
+      'simple invoice maker for small business'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Choose Document Type', text: 'Select Freelance / Business Invoice or HRA Rent Receipt for tax deduction.' },
+      { title: 'Enter Client & Item Details', text: 'Fill in business details, line items, rates, taxes, or landlord PAN and rental address.' },
+      { title: 'Instant Vector PDF Download', text: 'Click Download PDF to export a crisp, printable document with zero watermarks.' }
+    ],
+    faqs: [
+      { question: 'Is this invoice generator completely free without watermarks or login?', answer: 'Yes! You can create and download unlimited professional invoices and rent receipts with zero sign-up, zero credit card, and zero watermarks.' },
+      { question: 'Is the rent receipt valid for Income Tax HRA exemption filing?', answer: 'Yes. The generated rent receipt complies with Section 10(13A) of the Income Tax Act, including landlord details, property address, and landlord PAN fields required for annual rent exceeding ₹1,00,000.' },
+      { question: 'Are my financial numbers and client information kept private?', answer: 'Yes. The invoice PDF is compiled directly inside your browser memory using client-side vector engines. Your financial data is never transmitted to or stored on any server.' }
+    ],
+    comparisonTable: [
+      { feature: 'Account / Sign-Up', omnitool: 'Zero Sign-Up (Instant Generation)', standardCloud: 'Forces account creation and email capture' },
+      { feature: 'Watermarks', omnitool: '100% Clean Vector PDF (No Watermarks)', standardCloud: 'Adds branding or requires paid subscription' },
+      { feature: 'HRA Rent Receipt Mode', omnitool: 'Built-in Section 10(13A) IT Act Format', standardCloud: 'Only basic invoice templates' }
+    ]
   }
 };
 

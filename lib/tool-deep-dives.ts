@@ -8478,6 +8478,468 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
         "answer": "Yes. FileZenith's number picker runs 100% locally in your browser using client-side JavaScript and the Web Cryptography API. Once the page is loaded, it requires zero internet connection to generate numbers."
       }
     ]
+  },
+  "/pdf/mask-aadhaar": {
+    "slug": "/pdf/mask-aadhaar",
+    "badge": "UIDAI & RBI Compliance",
+    "heading": "Authoritative Operational Guide: Offline Aadhaar Card Masking & KYC Privacy",
+    "subheading": "Comprehensive technical guide on masking the first 8 digits of Aadhaar (XXXX-XXXX-1234) for hotels, banks, telecom verification & legal compliance.",
+    "sections": [
+      {
+        "title": "1. Regulatory Mandate & Legal Framework (UIDAI Circulars & RBI Guidelines)",
+        "paragraphs": [
+          "The Unique Identification Authority of India (UIDAI) and the Reserve Bank of India (RBI) have explicitly mandated that private entities—including hotels, telecom providers, car rentals, and private employers—are not legally authorized to collect or store an individual's unmasked 12-digit Aadhaar number. Under the Aadhaar Act (Section 29), storing raw Aadhaar numbers exposes organizations to severe penalties and individuals to identity fraud and synthetic banking theft.",
+          "Masked Aadhaar is the legally prescribed remedy: it conceals the first 8 digits (displaying only as 'XXXX-XXXX-1234') while preserving the final 4 digits, photograph, name, date of birth, and barcode. This satisfies KYC verification protocols without compromising privacy. FileZenith provides an instant, client-side masking tool that processes your Aadhaar card directly on your device with zero cloud transmissions."
+        ],
+        "bullets": [
+          "Legal Prescript: Strictly compliant with Section 29 of the Aadhaar Act and RBI Master Direction on KYC.",
+          "Accepted Everywhere: Legally valid for flight boarding, hotel check-ins, job verification, and SIM activation.",
+          "Zero Cloud Exposure: Processes document pixels in local browser RAM without sending identity files over the internet."
+        ]
+      },
+      {
+        "title": "2. Client-Side Vector Flattening vs. Dangerous Marker Overlays",
+        "paragraphs": [
+          "Many users attempt to mask Aadhaar cards by drawing a black highlighter stroke using a smartphone gallery app. However, mobile photo editors often create a non-destructive markup layer that can easily be removed or brightened to reveal the hidden digits underneath. Furthermore, uploading Aadhaar scans to unknown cloud utility websites risks your biometric document being logged or sold.",
+          "FileZenith employs destructive vector and raster flattening. When the masking box is placed over the 8-digit sequence, our engine permanently stamps opaque black pixels directly into the document canvas, destroying the original numbers at the binary level before compiling a fresh, clean PDF."
+        ],
+        "bullets": [
+          "Destructive Redaction: Underlying pixels are permanently overwritten and cannot be revealed by contrast adjustment.",
+          "QR Code Protection: Optional 'Maximum Security' preset blacks out the 2D QR code to prevent barcode scanner scraping.",
+          "Format Versatility: Accepts JPG, PNG, and PDF Aadhaar downloads directly from the official mAadhaar or UIDAI portal."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is a Masked Aadhaar card?",
+        "answer": "A Masked Aadhaar card is an official variation of your Aadhaar card where the first 8 digits of your 12-digit number are blacked out (displaying as XXXX-XXXX-1234), leaving only the last 4 digits visible alongside your name, photo, and address."
+      },
+      {
+        "question": "Is Masked Aadhaar legally valid for hotel check-ins and travel in India?",
+        "answer": "Yes. UIDAI has officially issued circulars clarifying that Masked Aadhaar is fully legally valid and acceptable as proof of identity and address across all hotels, domestic airlines, railway journeys, and private businesses."
+      },
+      {
+        "question": "Do I need an Aadhaar OTP to mask my card on FileZenith?",
+        "answer": "No. While the UIDAI website requires an OTP sent to your registered mobile number, FileZenith works directly on any existing PDF or scanned photo of your Aadhaar card, allowing you to mask it instantly without waiting for SMS OTPs."
+      },
+      {
+        "question": "Are my Aadhaar details uploaded to your server?",
+        "answer": "Never. FileZenith runs 100% locally in your web browser memory using HTML5 Canvas and WebAssembly. Zero bytes of your Aadhaar card are ever uploaded, transmitted, or saved on any remote server."
+      },
+      {
+        "question": "Can I mask the QR code on the Aadhaar card as well?",
+        "answer": "Yes. Select the 'Maximum Security' preset to mask both the 8-digit sequence and the machine-readable QR code, ensuring complete protection against unauthorized digital scanning."
+      },
+      {
+        "question": "What if the mask box does not align with my card's numbers?",
+        "answer": "You can fine-tune the X/Y position and box dimensions using the intuitive sliders, or drag the box to match any custom Aadhaar format (e-Aadhaar, PVC card, or m-Aadhaar)."
+      },
+      {
+        "question": "Can I download the masked card as a PDF?",
+        "answer": "Yes. You can download your masked Aadhaar as a crisp, standard vector PDF document ready for printing or digital submission."
+      },
+      {
+        "question": "Does this tool work on mobile phones?",
+        "answer": "Yes. FileZenith is fully responsive and functions smoothly across all Android smartphones and iPhones without needing to install external mobile apps."
+      }
+    ]
+  },
+  "/image/visa-photo-maker": {
+    "slug": "/image/visa-photo-maker",
+    "badge": "ICAO Biometric Standards",
+    "heading": "International Biometric Visa & Passport Photo Standards Manual",
+    "subheading": "Comprehensive operational guide covering US DS-160 (2x2 inch), Schengen (35x45mm), UK, Canada & India biometric passport sizing specifications.",
+    "sections": [
+      {
+        "title": "1. Embassy Biometric Geometries & Strict Sizing Tolerances",
+        "paragraphs": [
+          "Visa and passport application rejections occur most frequently due to non-compliant biometric photographs. Embassies utilize automated computer vision scanning to measure exact facial ratios: the distance from the bottom of the chin to the top of the head (crown), horizontal eye-line centering, and background chromaticity. If your head occupies less than 50% or more than 69% of the frame on a US visa application, the DS-160 automated system will immediately reject the file.",
+          "FileZenith's Visa Photo Maker incorporates real-time biometric guideline overlays conforming to the International Civil Aviation Organization (ICAO Doc 9303) and US Department of State standards. By aligning your face with the dashed oval, eye level, and chin markers, you guarantee strict mathematical compliance."
+        ],
+        "bullets": [
+          "US Visa / DS-160: Exact 2x2 inches (51x51mm / 600x600 px @ 300 DPI) with pure white background and 50-69% head height.",
+          "Schengen Visa: 35x45mm standard with 70-80% face coverage (32-36mm chin-to-crown) and neutral light grey background.",
+          "UK Visitor Visa: 35x45mm with plain cream or light grey background, zero shadows, and neutral facial expression."
+        ]
+      },
+      {
+        "title": "2. 4x6 Inch Printable Sheet Generation for Physical Submissions",
+        "paragraphs": [
+          "When submitting hard-copy passport applications at embassy collection centers (such as VFS Global or passport offices), candidates are frequently charged exorbitant studio fees for physical prints. FileZenith includes an integrated 4x6 inch (1200x1800 px @ 300 DPI) sheet generator that arranges 6 identical, millimeter-precise passport photos with cutting margins on a single sheet.",
+          "You can take this file to any local pharmacy or photo kiosk and print all 6 photos on standard photo paper for mere pennies."
+        ],
+        "bullets": [
+          "High DPI Rasterization: Full 300 DPI resolution ensures pin-sharp physical prints with zero pixelation.",
+          "Cutting Grid: Integrated 1px guide lines make scissor or rotary trimmer cuts perfectly uniform.",
+          "Multi-Country Switcher: Effortlessly toggle between US, Schengen, UK, Canada, and Indian OCI specifications."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What are the exact requirements for a US Visa (DS-160) photo?",
+        "answer": "A US Visa photo must be 2x2 inches (51x51mm), square 600x600 pixels minimum, under 240 KB in size, with a plain white background. Your head must measure between 1 inch and 1 3/8 inches (50% to 69%) from the bottom of your chin to the top of your head."
+      },
+      {
+        "question": "What is the correct background color for Schengen visa photos?",
+        "answer": "European Schengen consulates require a plain light grey, off-white, or neutral background. Pure stark white is often rejected by certain consulates; FileZenith provides pre-calibrated light grey and off-white toggles."
+      },
+      {
+        "question": "Can I wear eyeglasses in my visa photo?",
+        "answer": "No. The US Department of State and most global embassies strictly prohibit eyeglasses in visa and passport photos to avoid flash glare and ocular biometric obstruction."
+      },
+      {
+        "question": "Can I use a selfie taken with my smartphone?",
+        "answer": "Yes! Stand about 4 feet away in front of a flat, well-lit wall with natural daylight. Look directly into the camera lens with a neutral expression (no smiling or teeth showing), upload it here, and use our zoom and positioning sliders to fit the guideline oval."
+      },
+      {
+        "question": "How do I print 6 passport photos on a 4x6 photo sheet?",
+        "answer": "Click 'Download 6-Photo Printable Sheet (4x6 Inch)'. The tool generates a standard 1800x1200 pixel photo sheet that you can print at any standard photo kiosk or local print shop on 4x6 photo paper."
+      },
+      {
+        "question": "Does FileZenith compress the image to comply with the 240KB US visa cap?",
+        "answer": "Yes. The exported single JPG photo is automatically optimized to ensure it stays strictly under the 240 KB upload ceiling of the CEAC DS-160 portal while maintaining crisp 300 DPI visual quality."
+      },
+      {
+        "question": "Are head coverings allowed in passport photos?",
+        "answer": "Head coverings are permitted solely for recognized religious or medical reasons, provided the entire face from the bottom of the chin to the top of the forehead and both edges of the face are completely visible."
+      },
+      {
+        "question": "Are my portrait photos uploaded to any server?",
+        "answer": "No. All cropping, background rendering, filter adjustments, and sheet generation take place 100% locally in your browser memory."
+      }
+    ]
+  },
+  "/pdf/redact": {
+    "slug": "/pdf/redact",
+    "badge": "Permanent Pixel Rasterization",
+    "heading": "Technical Manual on Permanent PDF Redaction & Zero-Leak Security",
+    "subheading": "In-depth guide explaining how superficial markup leaks confidential data and why pixel flattening guarantees true, unrecoverable PDF redaction.",
+    "sections": [
+      {
+        "title": "1. The Mechanics of Data Leaks in Superficial Redactions",
+        "paragraphs": [
+          "Superficial redaction is one of the most widespread security oversights in corporate, legal, and government document management. In naive PDF editing programs, 'redaction' simply draws a black rectangular vector shape on top of the text. Because the underlying text objects (the PDF content stream with Tj operators) remain completely intact beneath the shape, anyone can highlight, copy, or use search tools to read the hidden information.",
+          "High-profile legal cases have repeatedly seen confidential settlement amounts, trade secrets, and witness identities inadvertently exposed through flawed redactions. True redaction requires permanently eliminating the character strings from the PDF's internal data tree."
+        ],
+        "bullets": [
+          "Text Stream Removal: The underlying text stream is completely purged from the document object hierarchy.",
+          "Clipboard Immunity: Selecting or copying the redacted region yields zero text characters.",
+          "Search Immunity: Internal PDF search indexing engines cannot find words inside redacted sections."
+        ]
+      },
+      {
+        "title": "2. FileZenith True Redaction: Destructive Rasterization & Vector Flattening",
+        "paragraphs": [
+          "FileZenith implements true permanent redaction through client-side destructive rasterization. When you define blackout boundaries on a page, our engine renders the page canvas, burns solid #000000 black pixels directly into the coordinate matrix, and discards the original vector text layer. The resulting page is embedded into a brand-new PDF as an immutable, high-definition image stream.",
+          "Because the characters are converted to solid pixels of uniform color, no computational analysis, contrast manipulation, or reverse engineering can ever recover what was underneath."
+        ],
+        "bullets": [
+          "Permanent Erasure: Solid pitch-black pixels replace characters at the physical pixel buffer level.",
+          "Zero Leak Architecture: 100% in-browser processing guarantees unredacted versions are never uploaded to cloud servers.",
+          "Multi-Page Workflow: Effortlessly page through contracts, tax forms, or bank statements with persistent blackout tracking."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "How does FileZenith ensure permanent redaction without data leaks?",
+        "answer": "FileZenith renders the document pages to high-resolution raster canvases, burns solid black pixels over the redacted areas, and generates a flattened PDF. The underlying text is completely purged from the file, making it mathematically impossible to recover or copy."
+      },
+      {
+        "question": "Can someone copy-paste the text under a blacked-out box?",
+        "answer": "No. In FileZenith's flattened output, the vector text objects have been permanently replaced with raw pixels. There is no selectable text whatsoever beneath the redactions."
+      },
+      {
+        "question": "Is FileZenith redaction suitable for court and legal filings?",
+        "answer": "Yes. Our true flattening approach meets court-mandated redaction rules (such as US Federal Rule of Civil Procedure 5.2 and Indian IT Act confidentiality standards) for redacting Social Security numbers, bank accounts, and personal identifiers."
+      },
+      {
+        "question": "Are my legal contracts or bank statements uploaded to external servers?",
+        "answer": "No. The entire redaction and PDF rebuilding process runs entirely in your local browser memory via WebAssembly. Your files never leave your computer."
+      },
+      {
+        "question": "Can I redact multiple pages in the same PDF document?",
+        "answer": "Yes. Use the pagination arrows to move across pages, draw blackouts wherever needed, and click 'Burn Redactions' to export all pages simultaneously."
+      },
+      {
+        "question": "Will the document text outside the redacted boxes remain sharp?",
+        "answer": "Yes. The engine exports at high DPI resolution, ensuring that non-redacted text, signatures, and letterheads remain crisp and easily readable."
+      },
+      {
+        "question": "Can I undo or delete a redaction box before exporting?",
+        "answer": "Yes. You can clear redactions on any individual page or reset the document at any time prior to clicking the final export button."
+      },
+      {
+        "question": "Can forensic software unmask this redaction?",
+        "answer": "No. Because the redacted region is converted to solid black pixels (#000000) with identical color values, there is zero residual signal for forensic tools to reconstruct."
+      }
+    ]
+  },
+  "/utility/keynote-to-powerpoint": {
+    "slug": "/utility/keynote-to-powerpoint",
+    "badge": "Apple iWork Extractor",
+    "heading": "Apple iWork Keynote (.key) Architecture & Cross-Platform Conversion Guide",
+    "subheading": "Comprehensive technical manual explaining Apple Keynote package internals, slide extraction, and conversion to PDF decks for Windows and Android.",
+    "sections": [
+      {
+        "title": "1. Apple Keynote File Architecture (Proprietary Bundles & IWA Archives)",
+        "paragraphs": [
+          "Apple Keynote presentations (with the .key extension) are not single binary documents; they are zipped package bundles containing Apple-proprietary Protocol Buffer archives (.iwa files), media assets, and QuickLook previews. Because Microsoft PowerPoint and Windows operating systems have zero native support for parsing Keynote's internal protobuf structures, opening a .key file on a PC typically results in file corruption errors.",
+          "FileZenith solves this cross-platform barrier client-side. Using in-browser zip decompression and stream parsing, our converter extracts high-resolution slide renders and vector QuickLook PDF assets packaged inside the .key archive, immediately compiling them into a universal presentation deck viewable on any device."
+        ],
+        "bullets": [
+          "Zero Software Dependency: Open and convert Mac Keynote presentations without owning a Mac or installing software.",
+          "High-Definition Slide Preservation: Extracts 1080p and 4K slide images directly from the archive's internal asset store.",
+          "Universal Output: Generates a standardized multi-page PDF presentation deck compatible with PowerPoint, Adobe Acrobat, and projector systems."
+        ]
+      },
+      {
+        "title": "2. Client-Side Parsing Workflow & Visual Deck Navigation",
+        "paragraphs": [
+          "Traditional online conversion websites require users to upload multi-megabyte presentation files to remote cloud queues, where conversion jobs often timeout or expose confidential corporate slides. FileZenith unpacks and reconstructs the presentation entirely within your local browser memory.",
+          "Once loaded, an interactive slide navigator allows you to flip through individual slides, preview visual layouts, and download either the full PDF slide deck or individual slide graphics with zero latency."
+        ],
+        "bullets": [
+          "Instant Unpacking: High-speed local archive extraction without slow network upload bottlenecks.",
+          "Slide Thumbnails: Interactive sidebar to inspect and review presentation flow.",
+          "Privacy First: Internal company pitch decks, earnings reports, and student lectures stay 100% private."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "How do I open an Apple Keynote (.key) presentation on a Windows PC?",
+        "answer": "Upload your .key file to FileZenith. Our browser engine extracts the slide deck and converts it into a universal PDF presentation deck that opens in any browser, Adobe Acrobat, or presentation viewer on Windows, Android, and Linux."
+      },
+      {
+        "question": "Do I need Apple Keynote installed or an active iCloud account?",
+        "answer": "No! You do not need a Mac computer, Apple Keynote software, or an iCloud login. The conversion executes entirely inside your web browser on your existing device."
+      },
+      {
+        "question": "Are formatting, custom fonts, and images preserved?",
+        "answer": "Yes. Keynote packages bundle pre-rendered high-definition slide assets; FileZenith extracts these exact renders, ensuring that custom typography, charts, and image placements look identical to the Mac original."
+      },
+      {
+        "question": "Can I convert the presentation to PowerPoint PPTX?",
+        "answer": "Yes. Once downloaded as a PDF presentation deck, you can open it directly in PowerPoint (Insert > Object > From File) or present it in full-screen mode on any classroom or boardroom projector."
+      },
+      {
+        "question": "Is there a file size limit for Keynote presentations?",
+        "answer": "Because the files are unpacked locally in your computer's RAM, you can process presentations with large video or image assets without hitting traditional 15MB cloud limits."
+      },
+      {
+        "question": "Are my presentation slides uploaded to your server?",
+        "answer": "No. All extraction and PDF assembly occur 100% on your local machine with zero bytes uploaded to external cloud storage."
+      },
+      {
+        "question": "Can I extract individual slide images from the Keynote file?",
+        "answer": "Yes. The tool displays an interactive slide carousel where you can view and save individual slide images in full resolution."
+      },
+      {
+        "question": "Does this tool work on mobile devices and Chromebooks?",
+        "answer": "Yes! FileZenith runs on all modern browsers, enabling students and professionals to view Keynote decks on Chromebooks, Android tablets, and Windows laptops seamlessly."
+      }
+    ]
+  },
+  "/utility/metadata-remover": {
+    "slug": "/utility/metadata-remover",
+    "badge": "Zero-Footprint Sanitizer",
+    "heading": "Digital Privacy Handbook: Document & Image Metadata (EXIF/GPS) Sanitization",
+    "subheading": "Comprehensive technical manual explaining hidden metadata vulnerabilities, EXIF GPS geocoding, PDF author tracking tags, and in-browser sanitization.",
+    "sections": [
+      {
+        "title": "1. The Hidden Threat of EXIF & Document Header Profiling",
+        "paragraphs": [
+          "Every digital photo captured on a smartphone or digital camera embeds extensive Exchangeable Image File Format (EXIF) metadata into the file headers. This hidden data routinely includes exact GPS coordinates (latitude, longitude, and altitude of your home or office), the camera serial number, lens parameters, and precise timestamps. When photos are uploaded to social media, classifieds, or forums, malicious actors can easily extract this data to map your physical movements.",
+          "Similarly, PDF documents created in Microsoft Word, Adobe InDesign, or Google Docs contain metadata dictionaries specifying your computer username, operating system, organization name, and detailed revision histories. Distributing documents without sanitization exposes sensitive corporate infrastructure and personal identities."
+        ],
+        "bullets": [
+          "GPS Coordinates: Pinpoints the exact geographic location where photos were taken down to a few meters.",
+          "Author Profiling: Exposes corporate usernames, email addresses, and server path directories in PDFs.",
+          "Software Fingerprints: Discloses editing software versions and machine IDs to third parties."
+        ]
+      },
+      {
+        "title": "2. Client-Side Metadata Scrubbing Architecture",
+        "paragraphs": [
+          "FileZenith provides a complete, dual-engine metadata scrubber for both documents (PDF) and images (JPG, PNG, WebP). For PDF files, our engine reconstructs the document's information dictionary, setting Title, Author, Subject, Creator, and Producer tags to empty strings while stripping XMP metadata packets.",
+          "For images, our tool draws the raw pixel array onto an isolated HTML5 canvas buffer and exports a fresh, pristine image file without any EXIF or GPS header segments. The visual quality remains untouched, while your privacy is completely restored."
+        ],
+        "bullets": [
+          "Visual Header Inspector: View all detected metadata attributes before deciding to scrub.",
+          "Lossless Visual Preservation: Strips metadata headers without introducing compression artifacts or downscaling resolution.",
+          "100% Client-Side Privacy: The original and sanitized files never leave your device memory."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What kind of hidden metadata is stored in my photos?",
+        "answer": "Smartphone and camera photos typically contain EXIF headers with exact GPS coordinates (latitude/longitude), camera model, shutter speed, ISO, date and time, and even facial recognition tags."
+      },
+      {
+        "question": "What metadata is stored in PDF documents?",
+        "answer": "PDFs often contain the author's full name, computer login username, organization, creation and modification timestamps, and the specific software used to compile the document."
+      },
+      {
+        "question": "Does removing metadata reduce image or document quality?",
+        "answer": "No. FileZenith only purges the binary header tags (which take up a few kilobytes). Your visual document pages, text typography, and image resolution remain 100% untouched."
+      },
+      {
+        "question": "Why should I remove GPS location from photos before posting online?",
+        "answer": "Posting photos with embedded GPS coordinates allows strangers, stalkers, or data brokers to identify your home address, workplace, or children's school locations."
+      },
+      {
+        "question": "Are my files uploaded to any server during sanitization?",
+        "answer": "No. FileZenith executes all metadata reading and purging locally inside your web browser. No file data is ever transmitted across the internet."
+      },
+      {
+        "question": "Which image formats are supported for metadata removal?",
+        "answer": "FileZenith supports JPEG, JPG, PNG, and WebP images, as well as multi-page PDF documents."
+      },
+      {
+        "question": "Can metadata be recovered after being stripped by FileZenith?",
+        "answer": "No. The exported file has completely empty metadata headers; the old data is not stored in the new file and cannot be recovered."
+      },
+      {
+        "question": "Can I inspect the metadata before scrubbing it?",
+        "answer": "Yes! When you upload a file, FileZenith immediately analyzes and displays the detected author, software, and timestamp fields for your review."
+      }
+    ]
+  },
+  "/pdf/combine-marksheets": {
+    "slug": "/pdf/combine-marksheets",
+    "badge": "Admission Portal Calibrated",
+    "heading": "University Admission & Examination Portal Marksheet Integration Guide",
+    "subheading": "Comprehensive operational handbook for merging 10th, 12th, Degree marksheets & category certificates into a single ISO A4 PDF strictly under 500KB or 300KB.",
+    "sections": [
+      {
+        "title": "1. University & Government Portal Single-Upload Constraints",
+        "paragraphs": [
+          "Academic admission portals (such as Delhi University CSAS, IIT JEE JoSAA, NEET MCC, and state PSC recruitments) provide only one single document upload slot for educational qualifications, accompanied by strict file size restrictions (typically 'Single PDF under 500KB' or 'Under 300KB'). Applicants who merge multiple high-resolution scans with conventional software inevitably produce 4MB–8MB files that are instantly rejected by the portal.",
+          "Furthermore, when candidates upload documents of varying sizes, the resulting PDF contains mismatched page dimensions—some pages appear huge while others are tiny. This can cause verification officers to mark applications as defective."
+        ],
+        "bullets": [
+          "Strict Size Constraints: Hard caps at 500KB or 300KB enforced across national counseling portals.",
+          "Readability Mandate: Text, marks, roll numbers, and official board seals must remain crystal clear.",
+          "Chronological Ordering: Portals require 10th class certificates first, followed by 12th, graduation, and category certificates."
+        ]
+      },
+      {
+        "title": "2. Uniform ISO A4 Standardization & Adaptive Compression",
+        "paragraphs": [
+          "FileZenith solves both problems simultaneously. First, our engine standardizes every uploaded document onto a uniform ISO A4 page layout (595.28 x 841.89 points) with clean, centered margins, eliminating awkward page size variations. Second, our algorithm applies multi-pass adaptive JPEG stream compression, mathematically balancing typography sharpness and file weight.",
+          "The resulting dossier strictly adheres to your chosen limit (under 500KB or 300KB) while ensuring that verification officers can read every grade and signature clearly."
+        ],
+        "bullets": [
+          "Uniform A4 Standard: Every single page is formatted to exact A4 dimensions with proportional scaling and zero distortion.",
+          "Target Size Guarantee: Iterative binary quality optimization guarantees the file stays under 300KB, 500KB, or 1MB.",
+          "Interactive Sequence Arrangement: Reorder your certificates chronologically with simple up/down controls."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Why do college admission portals require marksheets in one single PDF under 500KB?",
+        "answer": "Centralized admission portals like DU CSAS, JoSAA, NEET, and UPSC handle millions of applicants and limit upload bandwidth by providing only a single file slot with a strict 500KB cap."
+      },
+      {
+        "question": "Will all pages in the final PDF have the same A4 size?",
+        "answer": "Yes! FileZenith automatically standardizes every marksheet and certificate onto a uniform ISO A4 page (595 x 842 pt), centering each image with neat margins so your application looks professional."
+      },
+      {
+        "question": "Will the marks, roll numbers, and text remain readable after compression?",
+        "answer": "Yes. Our engine uses adaptive raster optimization that maintains high contrast on black-and-white typography, ensuring marks and official board seals remain clear and legible."
+      },
+      {
+        "question": "Can I reorder the sequence of marksheets before merging?",
+        "answer": "Yes. Use the up and down arrow buttons next to each file to arrange your documents chronologically (e.g., 10th Marksheet first, followed by 12th, Degree, and Category Certificate)."
+      },
+      {
+        "question": "Can I combine both images (JPG/PNG) and existing PDF files together?",
+        "answer": "Yes. You can upload any combination of smartphone photos (JPG/PNG) and PDF document scans; our tool seamlessly extracts and unifies them into a single PDF."
+      },
+      {
+        "question": "Can I choose a 300KB limit instead of 500KB?",
+        "answer": "Yes. FileZenith provides pre-configured target presets: Strictly Under 300KB (for state PSC portals), Strictly Under 500KB (for DU/JoSAA/NEET), and Under 1MB."
+      },
+      {
+        "question": "Are my educational certificates uploaded to any server?",
+        "answer": "No. The entire merging and compression pipeline runs 100% locally on your computer or smartphone browser memory. Your personal academic records remain completely private."
+      },
+      {
+        "question": "Does this tool work on mobile phones?",
+        "answer": "Yes! You can take photos of your marksheets with your phone camera, upload them directly to FileZenith, and download the standardized A4 PDF within seconds."
+      }
+    ]
+  },
+  "/utility/invoice-generator": {
+    "slug": "/utility/invoice-generator",
+    "badge": "Zero Sign-Up Financial Engine",
+    "heading": "Freelance Billing & Section 10(13A) HRA Rent Receipt Legal Guidelines",
+    "subheading": "Comprehensive operational manual for generating professional business invoices and legally compliant HRA rent receipts with instant vector PDF rendering.",
+    "sections": [
+      {
+        "title": "1. Section 10(13A) IT Act Mandates for HRA Rent Receipts",
+        "paragraphs": [
+          "Under Section 10(13A) and Rule 2A of the Indian Income Tax Act, salaried employees claiming House Rent Allowance (HRA) tax exemptions must submit formal rent receipts to their employers. If the annual rent paid exceeds ₹1,00,000 (or approximately ₹8,333 per month), Central Board of Direct Taxes (CBDT) regulations make it mandatory to provide the landlord's Permanent Account Number (PAN).",
+          "Failure to submit valid receipts with the landlord's PAN, rental address, and acknowledgment leads employers to deduct heavy Tax Deducted at Source (TDS) from monthly paychecks. FileZenith generates legally formatted HRA rent receipts complete with revenue stamp boxes, landlord PAN fields, and statutory declarations."
+        ],
+        "bullets": [
+          "Statutory Compliance: Formatted strictly according to CBDT circulars for Section 10(13A) HRA exemption filing.",
+          "Landlord PAN Integration: Mandatory PAN capture ensuring your corporate HR team accepts the receipt without queries.",
+          "Revenue Stamp Guidelines: Pre-printed box for affixing a ₹1 revenue stamp as required under the Indian Stamp Act."
+        ]
+      },
+      {
+        "title": "2. Client-Side Vector PDF Invoicing for Freelancers & Contractors",
+        "paragraphs": [
+          "Traditional invoice SaaS platforms force freelancers and small business owners to register accounts, subscribe to monthly plans, or accept intrusive promotional watermarks on client deliverables. FileZenith provides a 100% free, private invoicing workspace.",
+          "Our engine computes hourly or fixed item subtotals, applies custom GST or regional sales tax percentages, and renders crisp, vector-standard A4 PDF invoices using client-side font embedding. Your financial figures and client contact information are never transmitted to any third-party server."
+        ],
+        "bullets": [
+          "Zero Watermark Guarantee: Clean, modern, executive-grade invoice design suitable for global corporate clients.",
+          "Multi-Currency Support: Effortlessly invoice in USD ($), INR (₹), EUR (€), GBP (£), or CAD (C$).",
+          "Automated Calculations: Instant computation of subtotal, tax breakdown, and total amounts due."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Is this invoice generator completely free without watermarks?",
+        "answer": "Yes! FileZenith generates clean, professional invoices and rent receipts with zero sign-up, zero watermarks, and zero hidden subscription fees."
+      },
+      {
+        "question": "Is the rent receipt valid for Income Tax HRA exemption submission?",
+        "answer": "Yes. The receipt incorporates all statutory particulars mandated under Section 10(13A) of the Income Tax Act, including tenant and landlord names, rental property address, monthly rent amount, and landlord PAN."
+      },
+      {
+        "question": "When is a landlord's PAN mandatory on rent receipts?",
+        "answer": "As per CBDT circulars, if your annual rent exceeds ₹1,00,000 (more than ₹8,333 per month), declaring the landlord's 10-digit PAN on the receipt is legally mandatory to claim HRA exemptions."
+      },
+      {
+        "question": "Do I need to affix a revenue stamp on the rent receipt?",
+        "answer": "Under the Indian Stamp Act, if rent exceeding ₹5,000 per month is paid via cash, affixing a ₹1 revenue stamp with the landlord's cross-signature is legally recommended. For bank/UPI transfers, the stamp is optional but good practice."
+      },
+      {
+        "question": "Are my client names and financial details stored on your server?",
+        "answer": "No. The invoice PDF is compiled directly inside your browser memory using client-side vector engines. Your financial information never leaves your machine."
+      },
+      {
+        "question": "Can I add multiple line items and custom tax rates to invoices?",
+        "answer": "Yes. You can add as many service or product line items as needed, specify quantities and rates, and enter custom GST/sales tax percentages."
+      },
+      {
+        "question": "Which currencies are supported on the invoice?",
+        "answer": "You can select US Dollar ($), Indian Rupee (₹), Euro (€), British Pound (£), or Canadian Dollar (C$)."
+      },
+      {
+        "question": "Can I generate rent receipts for multiple months?",
+        "answer": "Yes. Simply update the 'Rental Month / Period' field (e.g., 'October 2026' or 'Q3 FY 2026-27') and click download to generate receipts for each period."
+      }
+    ]
   }
 }
 ;

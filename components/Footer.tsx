@@ -221,6 +221,9 @@ export function Footer() {
             </h4>
             <ul className="space-y-2 text-xs">
               <li><Link href="/pdf/edit" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Edit PDF Online</Link></li>
+              <li><Link href="/pdf/mask-aadhaar" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Mask Aadhaar Card (Offline)</Link></li>
+              <li><Link href="/pdf/redact" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Permanently Redact PDF</Link></li>
+              <li><Link href="/pdf/combine-marksheets" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Combine Marksheets (&lt;500KB)</Link></li>
               <li><Link href="/pdf/pdf-to-word" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">PDF to Word (DOCX)</Link></li>
               <li><Link href="/pdf/word-to-pdf" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Word to PDF Converter</Link></li>
               <li><Link href="/pdf/compress" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress PDF (Auto)</Link></li>
@@ -242,6 +245,7 @@ export function Footer() {
               Image Studio
             </h4>
             <ul className="space-y-2 text-xs">
+              <li><Link href="/image/visa-photo-maker" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Visa &amp; Passport Photo (2x2&quot;)</Link></li>
               <li><Link href="/image/pics-to-pdf" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Pics to PDF (Photos to PDF)</Link></li>
               <li><Link href="/image/webp-to-jpg" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">WebP to JPG Converter</Link></li>
               <li><Link href="/image/jpg-to-webp" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">JPG to WebP Converter</Link></li>
@@ -271,6 +275,9 @@ export function Footer() {
               <li><Link href="/terms" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Terms of Service</Link></li>
               <li><Link href="/blog" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Guides &amp; Exam Blog</Link></li>
               <li><Link href="/download-app" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Download Offline App (PWA)</Link></li>
+              <li><Link href="/utility/invoice-generator" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Free Invoice &amp; Rent Receipt</Link></li>
+              <li><Link href="/utility/keynote-to-powerpoint" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Apple Keynote to PDF (.key)</Link></li>
+              <li><Link href="/utility/metadata-remover" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">PDF &amp; EXIF Metadata Remover</Link></li>
               <li><Link href="/utility/electricity-bill-calculator" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Electricity Bill Calculator</Link></li>
               <li><Link href="/utility/epf-calculator" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">EPF Balance Calculator</Link></li>
               <li><Link href="/utility/age-calculator" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Age Calculator &amp; Birthday</Link></li>

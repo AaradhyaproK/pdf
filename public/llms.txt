@@ -22,9 +22,13 @@
 - [Add Page Numbers to PDF](https://www.filezenith.com/pdf/page-numbers)
 - [PDF to Word Converter](https://www.filezenith.com/pdf/pdf-to-word)
 - [Word to PDF Converter](https://www.filezenith.com/pdf/word-to-pdf)
+- [Mask Aadhaar Card Online](https://www.filezenith.com/pdf/mask-aadhaar)
+- [Permanently Redact PDF](https://www.filezenith.com/pdf/redact)
+- [Combine Marksheets into Single PDF](https://www.filezenith.com/pdf/combine-marksheets)
 
 ## Image Studio Tools
 - [Pics to PDF](https://www.filezenith.com/image/pics-to-pdf)
+- [Online Visa & Passport Photo Maker](https://www.filezenith.com/image/visa-photo-maker)
 - [PNG to JPG Converter](https://www.filezenith.com/image/png-to-jpg)
 - [PNG to PDF Converter](https://www.filezenith.com/image/png-to-pdf)
 - [JPG to PNG Converter](https://www.filezenith.com/image/jpg-to-png)
@@ -41,6 +45,9 @@
 - [SVG Converter](https://www.filezenith.com/image/svg-converter)
 
 ## Utility Studio Tools
+- [Free Invoice & Rent Receipt Generator](https://www.filezenith.com/utility/invoice-generator)
+- [Apple Keynote to PDF & Slides](https://www.filezenith.com/utility/keynote-to-powerpoint)
+- [PDF & EXIF Metadata Remover](https://www.filezenith.com/utility/metadata-remover)
 - [Vector QR Code Generator](https://www.filezenith.com/utility/qr-generator)
 - [Word Counter](https://www.filezenith.com/utility/word-counter)
 - [JSON Formatter](https://www.filezenith.com/utility/json-formatter)

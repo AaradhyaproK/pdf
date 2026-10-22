@@ -6,11 +6,16 @@ import { FileUploader, FileItem } from '@/components/FileUploader';
 import { mergePDFs } from '@/lib/pdf-engine';
 import { toast } from 'sonner';
 import { Download, Combine, CheckCircle2, Sparkles, AlertCircle } from 'lucide-react';
+import { FileReadyModal } from '@/components/FileReadyModal';
+import { renderPDFPagesToImages } from '@/lib/pdf-engine';
 
 export default function MergePDFPage() {
   const [files, setFiles] = useState<FileItem[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
+  const [mergedSizeKb, setMergedSizeKb] = useState<number | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleMerge = async () => {
     if (files.length < 2) {
@@ -22,8 +27,24 @@ export default function MergePDFPage() {
     try {
       const rawFiles = files.map((f) => f.file);
       const mergedBytes = await mergePDFs(rawFiles);
+      const sizeKb = Math.round(mergedBytes.byteLength / 1024);
+      setMergedSizeKb(sizeKb);
       const blob = new Blob([new Uint8Array(mergedBytes)], { type: 'application/pdf' });
-      setDownloadUrl(URL.createObjectURL(blob));
+      const url = URL.createObjectURL(blob);
+      setDownloadUrl(url);
+
+      // Generate visual page 1 preview
+      try {
+        const dummy = new File([blob], 'merged-document.pdf', { type: 'application/pdf' });
+        const rendered = await renderPDFPagesToImages(dummy, 1.2);
+        if (rendered.length > 0) {
+          setPreviewUrl(rendered[0].dataUrl);
+        }
+      } catch (e) {
+        console.warn('Merge preview render error:', e);
+      }
+
+      setIsModalOpen(true);
       toast.success('PDF files merged successfully!');
     } catch (err: any) {
       toast.error(err?.message || 'Failed to merge PDF files.');
@@ -103,6 +124,24 @@ export default function MergePDFPage() {
             </a>
           </div>
         )}
+
+        {/* Celebratory Completion Modal with Preview & Confetti */}
+        <FileReadyModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          downloadUrl={downloadUrl}
+          fileName="merged-document.pdf"
+          fileSizeKb={mergedSizeKb}
+          previewUrl={previewUrl}
+          fileType="pdf"
+          title="Your Merged PDF is Ready"
+          subtitle={`Successfully combined ${files.length} PDF documents into 1 unified file with zero cloud uploads.`}
+          onReset={() => {
+            setFiles([]);
+            setDownloadUrl(null);
+            setPreviewUrl(null);
+          }}
+        />
       </div>
     </ToolLayout>
   );

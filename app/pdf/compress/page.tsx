@@ -7,6 +7,7 @@ import { compressPDF, renderPDFPagesToImages } from '@/lib/pdf-engine';
 import { PDFPageGridList } from '@/components/PDFPageGridList';
 import { toast } from 'sonner';
 import { Download, Sliders, Minimize2, CheckCircle2, Sparkles, Target, Zap, Info, X } from 'lucide-react';
+import { FileReadyModal } from '@/components/FileReadyModal';
 
 export default function CompressPDFPage() {
   const [files, setFiles] = useState<FileItem[]>([]);
@@ -20,6 +21,7 @@ export default function CompressPDFPage() {
   const [thumbnails, setThumbnails] = useState<{ pageNumber: number; dataUrl: string }[]>([]);
   const [isLoadingPages, setIsLoadingPages] = useState(false);
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const handleOpenCustom = () => {
@@ -95,6 +97,7 @@ export default function CompressPDFPage() {
         })
       );
 
+      setIsModalOpen(true);
       toast.success('PDF compressed successfully!');
     } catch (err: any) {
       toast.error(err?.message || 'Failed to compress PDF.');
@@ -587,6 +590,24 @@ export default function CompressPDFPage() {
             </div>
           </div>
         )}
+
+        {/* Celebratory Completion Modal with Preview & Confetti */}
+        <FileReadyModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          downloadUrl={downloadUrl}
+          fileName={`compressed-${files[0]?.file.name || 'document.pdf'}`}
+          fileSizeKb={resultInfo ? Math.round(resultInfo.compSize / 1024) : null}
+          previewUrl={thumbnails[0]?.dataUrl || null}
+          fileType="pdf"
+          title="Your Compressed PDF is Ready"
+          subtitle={`Size reduced by ${getSavedPercent()}% (${resultInfo ? formatBytes(resultInfo.origSize) : ''} → ${resultInfo ? formatBytes(resultInfo.compSize) : ''}) with zero cloud uploads.`}
+          onReset={() => {
+            setFiles([]);
+            setDownloadUrl(null);
+            setResultInfo(null);
+          }}
+        />
       </div>
     </ToolLayout>
   );

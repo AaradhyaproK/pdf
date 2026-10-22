@@ -59,6 +59,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
         description: 'Organize, rearrange, merge, and split PDF documents with drag-and-drop simplicity.',
         tools: [
           { name: 'Merge PDF Files', slug: '/pdf/merge', description: 'Combine multiple PDF documents into a single organized master PDF file in seconds.', isPopular: true, badge: 'Most Used', iconName: 'Combine' },
+          { name: 'Combine Marksheets', slug: '/pdf/combine-marksheets', description: 'Merge 10th, 12th & Degree marksheets into 1 uniform A4 PDF strictly under 500KB.', isPopular: true, badge: 'College Ready', iconName: 'GraduationCap' },
           { name: 'Split PDF Pages', slug: '/pdf/split', description: 'Extract specific pages or separate PDF into distinct documents with custom page ranges.', isPopular: true, badge: 'Popular', iconName: 'Split' },
           { name: 'Organize PDF Pages', slug: '/pdf/organize', description: 'Reorder pages with drag-and-drop, rotate orientations, and delete unwanted pages.', iconName: 'Grid' },
           { name: 'PDF Page Numberer', slug: '/pdf/page-numbers', description: 'Add custom "Page X of Y" numbering, headers, and footers with custom placement.', badge: 'New', iconName: 'Hash' }
@@ -79,6 +80,8 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
         description: 'Annotate PDFs, extract selectable text from scans, encrypt files, or unlock bank statements.',
         tools: [
           { name: 'Edit PDF Online', slug: '/pdf/edit', description: 'Add custom text, whiteout sensitive details, draw annotations, and add digital signatures.', isPopular: true, badge: 'Interactive', iconName: 'Edit3' },
+          { name: 'Mask Aadhaar Card', slug: '/pdf/mask-aadhaar', description: 'Hide the first 8 digits of your Aadhaar card into XXXX-XXXX-1234 offline for KYC.', isPopular: true, badge: 'UIDAI Ready', iconName: 'ShieldCheck' },
+          { name: 'Redact PDF Permanently', slug: '/pdf/redact', description: 'True zero-leak blackout tool that flattens vector layers to permanently destroy text underneath.', isPopular: true, badge: 'Zero-Leak', iconName: 'Eraser' },
           { name: 'PDF OCR Text Extractor', slug: '/pdf/ocr', description: 'Extract selectable text from scanned PDF pages and images using browser Tesseract OCR.', isPopular: true, badge: 'AI Wasm', iconName: 'FileCheck' },
           { name: 'Password Protect PDF', slug: '/pdf/protect', description: 'Encrypt your PDF documents with military-grade passwords before emailing or sharing.', badge: 'Secure', iconName: 'Lock' },
           { name: 'Remove PDF Password', slug: '/pdf/remove-password', description: 'Unlock and remove owner passwords from bank statements, payslips, and e-Aadhaar PDFs.', isPopular: true, badge: 'Unlock', iconName: 'Unlock' },
@@ -191,6 +194,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
         description: 'Resize dimensions, crop frames, and prepare official photos.',
         tools: [
           { name: 'Passport Photo Maker', slug: '/image/passport-maker', description: 'Create 3.5x4.5cm and 2x2" passport photos with official dimensions.', isPopular: true, badge: 'Official Format', iconName: 'UserCheck' },
+          { name: 'Online Visa Photo Maker', slug: '/image/visa-photo-maker', description: 'Create official photos for US DS-160 (2x2"), Schengen, UK & Canada with biometric oval guide & 4x6 sheet.', isPopular: true, badge: 'US DS-160', iconName: 'UserCheck' },
           { name: 'Image Cropper & Aspect Ratio', slug: '/image/crop', description: 'Crop images to 1:1, 16:9, 4:3, or custom aspect ratios.', iconName: 'Crop' },
           { name: 'Resize Image Dimensions', slug: '/image/resize', description: 'Resize pixel width and height or scale by percentage.', iconName: 'Sliders' },
           { name: 'Pics to PDF Converter', slug: '/image/pics-to-pdf', description: 'Convert multiple photos into a single PDF document.', isPopular: true, badge: 'Popular', iconName: 'Camera' },
@@ -302,6 +306,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
           { name: 'Income Tax Calculator (Old vs New)', slug: '/utility/income-tax-calculator', description: 'Compare Old vs New Tax Regime savings for FY 2026-27.', isPopular: true, badge: 'Tax Season', iconName: 'DollarSign' },
           { name: 'SIP Mutual Fund Calculator', slug: '/utility/sip-calculator', description: 'Calculate future wealth compounding returns for monthly SIP investments.', isPopular: true, badge: 'Wealth', iconName: 'DollarSign' },
           { name: 'CTC to In-Hand Salary Calculator', slug: '/utility/salary-calculator', description: 'Calculate monthly take-home salary after PF, PT, and TDS deductions.', isPopular: true, badge: 'Salary', iconName: 'DollarSign' },
+          { name: 'Free Invoice & Rent Receipt Maker', slug: '/utility/invoice-generator', description: 'Create professional client invoices and HRA rent receipts with instant vector PDF download.', isPopular: true, badge: 'Zero Sign-Up', iconName: 'Receipt' },
           { name: 'GST Tax Calculator', slug: '/utility/gst-calculator', description: 'Add or remove GST tax for 5%, 12%, 18%, 28% slabs with CGST/SGST split.', isPopular: true, badge: 'Tax Tool', iconName: 'Percent' },
           { name: 'BMI & Health Calculator', slug: '/utility/bmi-calculator', description: 'Calculate Body Mass Index, health category, and ideal weight target.', isPopular: true, badge: 'Health', iconName: 'Zap' }
         ]
@@ -314,6 +319,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
           { name: 'Word to Pages Converter', slug: '/utility/word-to-pages', description: 'Convert Microsoft Word (.docx) documents to Apple Pages format.', isPopular: true, badge: 'New', iconName: 'FileCode' },
           { name: 'Numbers to Excel (XLSX)', slug: '/utility/numbers-to-excel', description: 'Convert Apple Numbers (.numbers) spreadsheets to Microsoft Excel (.xlsx).', isPopular: true, badge: 'Apple Tool', iconName: 'Table' },
           { name: 'Excel to Numbers Converter', slug: '/utility/excel-to-numbers', description: 'Convert Excel workbooks to Apple Numbers format cleanly.', isPopular: true, badge: 'New', iconName: 'Table' },
+          { name: 'Keynote to PowerPoint & PDF', slug: '/utility/keynote-to-powerpoint', description: 'Convert Apple Keynote (.key) presentations into universal PDF and slide decks.', isPopular: true, badge: 'Keynote .key', iconName: 'Presentation' },
           { name: 'Markdown Editor & PDF', slug: '/utility/markdown-editor', description: 'Live Markdown preview editor with instant PDF and HTML export.', iconName: 'FileText' }
         ]
       },
@@ -335,6 +341,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
         description: 'Fast, secure utilities for web developers and programmers.',
         tools: [
           { name: 'Password Generator', slug: '/utility/password-generator', description: 'Generate strong, cryptographically secure passwords 100% offline.', isPopular: true, badge: 'Secure', iconName: 'Lock' },
+          { name: 'PDF & EXIF Metadata Remover', slug: '/utility/metadata-remover', description: 'Scrub hidden camera EXIF, GPS location, author name, and editing software from PDFs and images.', isPopular: true, badge: 'Privacy Scrub', iconName: 'EyeOff' },
           { name: 'QR Code Generator', slug: '/utility/qr-generator', description: 'Create custom QR codes for URLs, WiFi credentials, vCards, and text.', isPopular: true, badge: 'Custom QR', iconName: 'QrCode' },
           { name: 'JSON Formatter & Validator', slug: '/utility/json-formatter', description: 'Format, beautify, minify, and validate JSON data with syntax highlighting.', isPopular: true, badge: 'Popular', iconName: 'Code2' },
           { name: 'Base64 Encoder / Decoder', slug: '/utility/base64', description: 'Encode or decode text, files, and images into Base64 format securely.', isPopular: true, iconName: 'Code2' },

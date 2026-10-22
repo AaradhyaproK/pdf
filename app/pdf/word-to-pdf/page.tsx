@@ -6,6 +6,8 @@ import { FileUploader, FileItem } from '@/components/FileUploader';
 import { convertDocxToPdf } from '@/lib/pdf-word-engine';
 import { Download, FileText, CheckCircle2, Sparkles, RefreshCw } from 'lucide-react';
 import { toast } from 'sonner';
+import { FileReadyModal } from '@/components/FileReadyModal';
+import { renderPDFPagesToImages } from '@/lib/pdf-engine';
 
 export default function WordToPdfPage() {
   const [files, setFiles] = useState<FileItem[]>([]);
@@ -13,6 +15,8 @@ export default function WordToPdfPage() {
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const [downloadName, setDownloadName] = useState('converted-document.pdf');
   const [stats, setStats] = useState<{ pageCount: number; fileSizeKB: number } | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleFilesChange = (selected: FileItem[]) => {
     setFiles(selected);
@@ -60,6 +64,18 @@ export default function WordToPdfPage() {
         fileSizeKB: Math.round(blob.size / 1024),
       });
 
+      // Generate preview of page 1
+      try {
+        const dummy = new File([blob], outName, { type: 'application/pdf' });
+        const rendered = await renderPDFPagesToImages(dummy, 1.2);
+        if (rendered.length > 0) {
+          setPreviewUrl(rendered[0].dataUrl);
+        }
+      } catch (e) {
+        console.warn('Word to PDF preview render error:', e);
+      }
+
+      setIsModalOpen(true);
       toast.success('Word document successfully converted to PDF!');
     } catch (err: any) {
       console.error('Word to PDF conversion error:', err);
@@ -146,6 +162,20 @@ export default function WordToPdfPage() {
             </div>
           </div>
         )}
+
+        {/* Celebratory Completion Modal with Preview & Confetti */}
+        <FileReadyModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          downloadUrl={downloadUrl}
+          fileName={downloadName}
+          fileSizeKb={stats?.fileSizeKB || null}
+          previewUrl={previewUrl}
+          fileType="pdf"
+          title="Your PDF Document is Ready"
+          subtitle={`Converted from Microsoft Word (.docx) into crisp vector PDF with zero cloud uploads.`}
+          onReset={handleReset}
+        />
       </div>
     </ToolLayout>
   );

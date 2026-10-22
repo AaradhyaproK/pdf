@@ -6,6 +6,8 @@ import { FileUploader, FileItem } from '@/components/FileUploader';
 import { convertPdfToDocx } from '@/lib/pdf-word-engine';
 import { Download, FileText, CheckCircle2, Sparkles, RefreshCw } from 'lucide-react';
 import { toast } from 'sonner';
+import { FileReadyModal } from '@/components/FileReadyModal';
+import { renderPDFPagesToImages } from '@/lib/pdf-engine';
 
 export default function PdfToWordPage() {
   const [files, setFiles] = useState<FileItem[]>([]);
@@ -13,6 +15,8 @@ export default function PdfToWordPage() {
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const [downloadName, setDownloadName] = useState('converted-document.docx');
   const [stats, setStats] = useState<{ wordCount: number; pageCount: number; fileSizeKB: number } | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleFilesChange = (selected: FileItem[]) => {
     setFiles(selected);
@@ -24,6 +28,7 @@ export default function PdfToWordPage() {
     setFiles([]);
     setDownloadUrl(null);
     setStats(null);
+    setPreviewUrl(null);
   };
 
   const handleConvert = async () => {
@@ -53,6 +58,17 @@ export default function PdfToWordPage() {
         fileSizeKB: Math.round(result.blob.size / 1024),
       });
 
+      // Generate preview of page 1
+      try {
+        const rendered = await renderPDFPagesToImages(sourceFile, 1.2);
+        if (rendered.length > 0) {
+          setPreviewUrl(rendered[0].dataUrl);
+        }
+      } catch (e) {
+        console.warn('PDF preview render error:', e);
+      }
+
+      setIsModalOpen(true);
       toast.success('PDF successfully converted to editable Word (.docx)!');
     } catch (err: any) {
       console.error('PDF to Word conversion error:', err);
@@ -139,6 +155,20 @@ export default function PdfToWordPage() {
             </div>
           </div>
         )}
+
+        {/* Celebratory Completion Modal with Preview & Confetti */}
+        <FileReadyModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          downloadUrl={downloadUrl}
+          fileName={downloadName}
+          fileSizeKb={stats?.fileSizeKB || null}
+          previewUrl={previewUrl}
+          fileType="file"
+          title="Your Word Document is Ready"
+          subtitle={`Extracted ${stats?.wordCount.toLocaleString() || 'all'} words across ${stats?.pageCount || 1} page(s) into editable .docx format with zero cloud uploads.`}
+          onReset={handleReset}
+        />
       </div>
     </ToolLayout>
   );
