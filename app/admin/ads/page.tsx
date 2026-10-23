@@ -453,10 +453,10 @@ export default function AdminAdsPage() {
                   onChange={(e) => {
                     const val = e.target.value;
                     const pubNum = val.replace(/[^0-9]/g, '');
-                    const updatedAdsTxt = `google.com, pub-${pubNum || '1234567890123456'}, DIRECT, f08c47fec0942fa0`;
+                    const updatedAdsTxt = `google.com, pub-${pubNum || '1291898061670715'}, DIRECT, f08c47fec0942fa0`;
                     setConfig({ ...config, publisherId: val, adsTxtContent: updatedAdsTxt });
                   }}
-                  placeholder="ca-pub-1234567890123456"
+                  placeholder="ca-pub-1291898061670715"
                   className="w-full px-4 py-3 rounded-2xl border border-slate-300 bg-slate-50 text-slate-900 font-mono font-bold text-sm focus:outline-none focus:border-indigo-600 min-h-[48px]"
                 />
               </div>
@@ -531,7 +531,7 @@ export default function AdminAdsPage() {
                 onChange={(e) => setConfig({ ...config, adsTxtContent: e.target.value })}
                 className="w-full p-4 rounded-2xl border border-slate-300 bg-slate-900 text-emerald-400 font-mono text-xs focus:outline-none focus:border-indigo-600 leading-relaxed"
               />
-              <p className="text-[11px] text-slate-400 font-medium">Standard format: <code className="text-slate-200">google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0</code></p>
+              <p className="text-[11px] text-slate-400 font-medium">Standard format: <code className="text-slate-200">google.com, pub-1291898061670715, DIRECT, f08c47fec0942fa0</code></p>
             </div>
           </div>
         )}
