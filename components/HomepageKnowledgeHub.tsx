@@ -81,6 +81,7 @@ const KNOWLEDGE_CLUSTERS = [
       { slug: 'neet-photo-size-requirements', title: 'NTA NEET UG Photo & Postcard (4x6) Photo Requirements', readTime: '4 min' },
       { slug: 'passport-size-photo-maker-guide', title: 'Passport Size Photo Maker Guide: US Visa, Schengen & India', readTime: '6 min' },
       { slug: 'aadhaar-card-print-size-guide', title: 'Aadhaar Card PVC & Paper Print Size Guide (DPI & CM)', readTime: '7 min' },
+      { slug: 'how-to-mask-aadhaar-card-online-offline-protect-privacy', title: 'How to Mask Aadhaar Card Online (Hide First 8 Digits for KYC)', readTime: '6 min' },
       { slug: 'how-to-resize-photo-for-online-application', title: 'How to Resize Photo for Online Application Forms', readTime: '5 min' },
       { slug: 'how-to-resize-signature-online', title: 'How to Resize Signature Online (10KB to 20KB & B&W)', readTime: '5 min' },
     ],
@@ -93,6 +94,7 @@ const KNOWLEDGE_CLUSTERS = [
     badgeColor: 'bg-rose-50 text-rose-700 border-rose-200',
     iconBg: 'bg-rose-50 text-rose-600',
     guides: [
+      { slug: 'how-to-combine-10th-and-12th-marksheets-into-one-pdf-under-500kb', title: 'Combine 10th & 12th Marksheets into Single PDF (<500KB)', readTime: '6 min' },
       { slug: 'how-to-compress-pdf-to-200kb-online', title: 'How to Compress PDF to 200KB Online (Without Blurry Text)', readTime: '6 min' },
       { slug: 'how-to-compress-pdf-to-50kb-online', title: 'How to Compress PDF to 50KB Online Free (Job Portals)', readTime: '6 min' },
       { slug: 'how-to-compress-pdf-to-100kb-without-losing-quality', title: 'Compress PDF to 100KB Without Quality or Text Blur', readTime: '5 min' },

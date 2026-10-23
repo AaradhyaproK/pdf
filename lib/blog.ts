@@ -61,6 +61,8 @@ const DEFAULT_POST_IMAGES: Record<string, string> = {
   'how-to-convert-webp-to-jpg-online-free': '/blog/image-compression.jpg',
   'how-to-compress-pdf-to-1mb-without-losing-quality': '/blog/compress-pdf-100kb-guide.jpg',
   'how-to-compress-pdf-to-50kb-online': '/blog/compress-pdf-100kb-guide.jpg',
+  'how-to-combine-10th-and-12th-marksheets-into-one-pdf-under-500kb': '/blog/pdf-merge.webp',
+  'how-to-mask-aadhaar-card-online-offline-protect-privacy': '/blog/aadhaar-card-print.webp',
 };
 
 // Helper function to extract FAQs for Google FAQPage Schema
