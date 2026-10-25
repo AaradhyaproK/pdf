@@ -104,6 +104,14 @@ export default function YouTubeTagExtractorPage() {
             </div>
           </div>
         )}
+
+        {/* Trademark Disclaimer & Usage Policy */}
+        <div className="p-4 rounded-2xl bg-slate-100/80 border border-slate-200/80 text-[11px] text-slate-500 leading-relaxed space-y-1">
+          <p className="font-bold text-slate-700">Trademark &amp; Fair Use Disclaimer</p>
+          <p>
+            YouTube is a registered trademark of Google LLC. FileZenith is an independent online utility and is not affiliated with, endorsed by, or sponsored by YouTube or Google LLC. This tool parses public video metadata for educational, search optimization, and editorial reference only.
+          </p>
+        </div>
       </div>
     </ToolLayout>
   );

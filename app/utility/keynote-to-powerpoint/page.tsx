@@ -296,6 +296,14 @@ export default function KeynoteToPowerPointPage() {
             setPdfDownloadUrl(null);
           }}
         />
+
+        {/* Trademark Disclaimer & Usage Policy */}
+        <div className="p-4 rounded-2xl bg-slate-100/80 border border-slate-200/80 text-[11px] text-slate-500 leading-relaxed space-y-1">
+          <p className="font-bold text-slate-700">Trademark &amp; Compatibility Disclaimer</p>
+          <p>
+            Apple Keynote is a trademark of Apple Inc. Microsoft PowerPoint is a registered trademark of Microsoft Corporation. FileZenith is an independent browser utility and is not affiliated with, endorsed by, or sponsored by Apple Inc. or Microsoft Corporation.
+          </p>
+        </div>
       </div>
     </ToolLayout>
   );

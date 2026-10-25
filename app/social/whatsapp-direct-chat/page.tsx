@@ -230,6 +230,14 @@ export default function WhatsAppDirectChatPage() {
             </span>
           </div>
         </div>
+
+        {/* Trademark Disclaimer & Usage Policy */}
+        <div className="p-4 rounded-2xl bg-slate-100/80 border border-slate-200/80 text-[11px] text-slate-500 leading-relaxed space-y-1">
+          <p className="font-bold text-slate-700">Trademark &amp; Fair Use Disclaimer</p>
+          <p>
+            WhatsApp is a registered trademark of Meta Platforms, Inc. FileZenith is an independent online utility and is not affiliated with, endorsed by, or sponsored by WhatsApp or Meta Platforms, Inc. This tool utilizes public wa.me universal URL formatting protocols for direct communication.
+          </p>
+        </div>
       </div>
     </ToolLayout>
   );
