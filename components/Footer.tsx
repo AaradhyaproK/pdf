@@ -46,6 +46,19 @@ export function Footer() {
               <Mail className="w-3.5 h-3.5 text-indigo-400" />
               <span>hello@snab.co.in</span>
             </a>
+            <a
+              href="https://www.instagram.com/file_zenith/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 rounded-full bg-gradient-to-r from-pink-500/20 via-rose-500/20 to-purple-500/20 text-pink-300 border border-pink-500/30 hover:text-white transition-colors"
+            >
+              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+              </svg>
+              <span>Follow @file_zenith</span>
+            </a>
           </div>
         </div>
 
@@ -176,6 +189,31 @@ export function Footer() {
               >
                 <Mail className="w-3.5 h-3.5 text-indigo-600" />
                 <span>hello@snab.co.in</span>
+              </a>
+            </div>
+
+            {/* Instagram Community Card */}
+            <div className="pt-1">
+              <a
+                href="https://www.instagram.com/file_zenith/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-2xl bg-gradient-to-r from-pink-50 via-rose-50 to-amber-50 border border-rose-200/80 hover:border-rose-300 hover:shadow-xs transition-all duration-200 w-full max-w-[250px]"
+              >
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 flex items-center justify-center text-white shrink-0 shadow-xs group-hover:scale-105 transition-transform">
+                    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                    </svg>
+                  </div>
+                  <div className="min-w-0 text-left">
+                    <div className="text-[10px] font-black uppercase tracking-wider text-rose-600 leading-tight">Follow on Instagram</div>
+                    <div className="text-xs font-bold text-slate-800 truncate group-hover:text-rose-600 transition-colors">@file_zenith</div>
+                  </div>
+                </div>
+                <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-rose-600 transition-colors shrink-0" />
               </a>
             </div>
 
@@ -321,6 +359,20 @@ export function Footer() {
             <a href="mailto:hello@snab.co.in" className="text-indigo-600 hover:underline flex items-center gap-1 font-bold">
               <Mail className="w-3 h-3 text-indigo-500" />
               <span>hello@snab.co.in</span>
+            </a>
+            <span>&bull;</span>
+            <a
+              href="https://www.instagram.com/file_zenith/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-pink-600 hover:text-pink-700 hover:underline flex items-center gap-1 font-bold transition-colors"
+            >
+              <svg className="w-3 h-3 text-pink-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+              </svg>
+              <span>Instagram</span>
             </a>
             <span>&bull;</span>
             <Link href="/about" className="hover:text-indigo-600 transition-colors">About Us</Link>
