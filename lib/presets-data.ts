@@ -1195,5 +1195,180 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
       'jee main cuet photo resizer online',
       'nta photo resizer 2026'
     ]
+  },
+
+  'ssc-cgl-photo-signature-resizer': {
+    slug: 'ssc-cgl-photo-signature-resizer',
+    portalName: 'Staff Selection Commission (SSC CGL & CHSL Portal)',
+    defaultTargetKB: 42,
+    minKB: 20,
+    maxKB: 50,
+    fixedWidth: 413,
+    fixedHeight: 531,
+    allowNameDate: true,
+    title: 'SSC CGL Photo & Signature Resizer 2026 (20 to 50KB Free) | FileZenith',
+    metaTitle: 'SSC CGL Photo & Signature Resizer (20-50KB with Name & Date) | FileZenith',
+    metaDescription: 'Resize photo and signature for SSC CGL, CHSL, MTS & GD online free. 20KB to 50KB photo with candidate name & date of photo (DOP), and 10KB to 20KB signature. 100% compliant.',
+    h1: 'SSC CGL Photo & Signature Resizer (2026 Official Format)',
+    shortDescription: 'Dedicated resizer for SSC CGL applicants: 20KB–50KB passport photo (3.5×4.5 cm) with Name & DOP stamp, plus 10KB–20KB signature scan.',
+    longDescription: 'Applying for SSC CGL requires exact adherence to photo and signature guidelines. Over 15% of SSC applications face rejection due to incorrect file weight (under 20KB or over 50KB), improper aspect ratio, or missing candidate name and date of photo (DOP). Our browser-based studio crops your photo to exact 3.5cm × 4.5cm dimensions, stamps candidate name and capture date, and compresses the JPEG file to 40–45KB with zero server upload risk.',
+    targetSize: '20 KB to 50 KB (Photo) / 10 KB to 20 KB (Signature)',
+    minimumSize: '20 KB',
+    maximumSize: '50 KB',
+    width: '413 px (3.5 cm)',
+    height: '531 px (4.5 cm)',
+    allowedFormats: ['JPG', 'JPEG'],
+    instructions: [
+      'Upload a front-facing passport photograph with white or light gray background.',
+      'Check the Candidate Name & Date Stamp box to print your name and DOP.',
+      'Keep the size slider between 20KB and 50KB (recommended: 40–45KB).',
+      'Click Download to save your compliant photo, then switch to signature mode for your 10–20KB signature scan.'
+    ],
+    requirements: [
+      'Photograph dimensions: 3.5 cm (width) × 4.5 cm (height).',
+      'File weight: Strictly between 20 KB and 50 KB.',
+      'Both ears, neck, and shoulders must be clearly visible with a neutral expression.',
+      'No spectacles, sunglasses, caps, or side-tilted poses.'
+    ],
+    tips: [
+      'Ensure the Date of Photo (DOP) printed is not more than 3 months old.',
+      'Sign with a black or dark blue ballpoint pen on plain white paper before cropping.'
+    ],
+    officialGuidelines: 'Official SSC CGL guidelines mandate 3.5cm × 4.5cm photo (20KB–50KB) and 4.0cm × 2.0cm signature (10KB–20KB) in JPG format.',
+    lastVerifiedDate: 'Verified October 2026',
+    faq: [
+      { question: 'What is the required photo size for SSC CGL 2026?', answer: 'The photo must be in JPEG/JPG format, sized strictly between 20 KB and 50 KB, with dimensions of 3.5 cm width × 4.5 cm height (413 × 531 pixels).' },
+      { question: 'Is candidate name and date mandatory on SSC CGL photo?', answer: 'Yes, printing the candidate full name in block letters and the date on which the photograph was taken (DOP) ensures full compliance with SSC regional scrutiny rules.' },
+      { question: 'What are the dimensions and size for SSC CGL signature?', answer: 'SSC CGL signature must be between 10 KB and 20 KB with dimensions of 4.0 cm width × 2.0 cm height (around 140 × 60 pixels).' }
+    ],
+    relatedTools: [
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'SSC signature converter.' },
+      { name: 'UPSC OTR Photo Resizer', slug: '/tools/upsc-otr-photo-resizer', desc: 'UPSC 350x350 resizer.' },
+      { name: 'Aadhaar Card Print Tool', slug: '/tools/aadhaar-card-print', desc: 'Print Aadhaar card for exam center.' }
+    ],
+    keywords: [
+      'ssc cgl photo resizer',
+      'ssc cgl photo and signature size',
+      'ssc cgl photo resizer 20 to 50 kb',
+      'ssc photo resizer with name and date 2026',
+      'ssc cgl signature resizer 10 to 20 kb',
+      'sarkari result ssc cgl photo resizer'
+    ]
+  },
+
+  'upsc-otr-photo-resizer': {
+    slug: 'upsc-otr-photo-resizer',
+    portalName: 'UPSC One Time Registration (OTR) Portal',
+    defaultTargetKB: 160,
+    minKB: 20,
+    maxKB: 300,
+    fixedWidth: 350,
+    fixedHeight: 350,
+    aspectRatio: 1,
+    allowNameDate: true,
+    title: 'UPSC OTR Photo Resizer 2026 (350x350 px, 20-300KB) Free | FileZenith',
+    metaTitle: 'UPSC OTR Photo Resizer (350x350 px with Name & Date) | FileZenith',
+    metaDescription: 'Resize photo and signature for UPSC OTR, Civil Services (IAS), NDA, and CDS. 350x350 pixels (1:1 square), 20KB to 300KB with candidate name and date stamp free online.',
+    h1: 'UPSC OTR Photo Resizer (350×350 Square Format)',
+    shortDescription: 'Format square photograph (350×350 px to 1000×1000 px, 20KB–300KB) with candidate name and DOP stamp for UPSC One Time Registration (OTR).',
+    longDescription: 'The Union Public Service Commission (UPSC) OTR portal requires photographs in a 1:1 square ratio (minimum 350 × 350 pixels, maximum 1000 × 1000 pixels) with candidate name and date of photo printed at the bottom. The photo must not be older than 10 days from application filling date. Our tool formats your photo to exact UPSC OTR guidelines in seconds.',
+    targetSize: '20 KB to 300 KB',
+    minimumSize: '20 KB',
+    maximumSize: '300 KB',
+    width: '350 px (Square 1:1)',
+    height: '350 px (Square 1:1)',
+    allowedFormats: ['JPG', 'JPEG'],
+    instructions: [
+      'Upload a clear passport portrait or selfie against a plain white background.',
+      'Check the Candidate Name & Date Stamp option.',
+      'Enter your full name in capital letters and photo capture date (within 10 days).',
+      'Set target size between 100KB and 250KB and click Download.'
+    ],
+    requirements: [
+      'Aspect ratio must be strictly 1:1 (Square).',
+      'Dimensions must be at least 350 × 350 pixels up to 1000 × 1000 pixels.',
+      'File weight must be between 20 KB and 300 KB in JPG format.',
+      'Photo must clearly show candidate face occupying 3/4th of the space.'
+    ],
+    tips: [
+      'UPSC mandates that photograph should not be older than 10 days from application date.',
+      'Do not wear spectacles with thick frames or tinted lenses.'
+    ],
+    officialGuidelines: 'UPSC OTR requires square photo (350x350 px min, 20-300KB) with candidate name and photo date within 10 days of application.',
+    lastVerifiedDate: 'Verified October 2026',
+    faq: [
+      { question: 'What is the exact UPSC OTR photo size and dimension?', answer: 'The photo must have equal width and height (minimum 350 × 350 pixels, maximum 1000 × 1000 pixels) and a file size between 20 KB and 300 KB.' },
+      { question: 'Is candidate name and date mandatory for UPSC OTR?', answer: 'Yes. UPSC instructions state that the candidate name and the date on which the photograph was taken must be clearly inscribed at the bottom of the photograph.' },
+      { question: 'How old can the UPSC photograph be?', answer: 'The photograph must not be more than 10 days old from the commencement of the online application process.' }
+    ],
+    relatedTools: [
+      { name: 'SSC CGL Photo Resizer', slug: '/tools/ssc-cgl-photo-signature-resizer', desc: 'SSC 3.5x4.5cm photo.' },
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Signature tool.' },
+      { name: 'Aadhaar Card Print Tool', slug: '/tools/aadhaar-card-print', desc: 'Print Aadhaar card.' }
+    ],
+    keywords: [
+      'upsc otr photo resizer',
+      'upsc photo resizer 350x350',
+      'upsc otr photo and signature size',
+      'upsc photo resizer 20 to 300 kb',
+      'upsc photo with name and date online maker',
+      'upsc ias photo signature compressor'
+    ]
+  },
+
+  'ctet-photo-signature-resizer': {
+    slug: 'ctet-photo-signature-resizer',
+    portalName: 'CBSE Central Teacher Eligibility Test (CTET)',
+    defaultTargetKB: 60,
+    minKB: 10,
+    maxKB: 100,
+    fixedWidth: 413,
+    fixedHeight: 531,
+    title: 'CTET Photo & Signature Resizer 2026 (10 to 100KB Free) | FileZenith',
+    metaTitle: 'CTET Photo & Signature Resizer (10-100KB CBSE Format) | FileZenith',
+    metaDescription: 'Resize passport photo (10KB to 100KB) and signature (3KB to 30KB) for CBSE CTET 2026 online form. 3.5cm x 4.5cm photo and 3.5cm x 1.5cm signature 100% compliant.',
+    h1: 'CTET Photo & Signature Resizer (CBSE Official Format)',
+    shortDescription: 'Crop and compress photograph (10KB–100KB, 3.5×4.5 cm) and signature (3KB–30KB) for CBSE CTET teacher eligibility forms.',
+    longDescription: 'CBSE Central Teacher Eligibility Test (CTET) mandates that candidate photographs be sized strictly between 10KB and 100KB with 3.5 cm × 4.5 cm dimensions, while the signature scan must be between 3KB and 30KB (3.5 cm × 1.5 cm). Our client-side engine formats both in 2 seconds with zero compression blur.',
+    targetSize: '10 KB to 100 KB (Photo) / 3 KB to 30 KB (Signature)',
+    minimumSize: '10 KB',
+    maximumSize: '100 KB',
+    width: '413 px (3.5 cm)',
+    height: '531 px (4.5 cm)',
+    allowedFormats: ['JPG', 'JPEG'],
+    instructions: [
+      'Upload your portrait photograph or scanned signature.',
+      'Adjust crop area to center your face (70% coverage).',
+      'Set target size slider between 10KB and 100KB (recommended: 50–70KB).',
+      'Download your CTET-ready JPG file.'
+    ],
+    requirements: [
+      'Photo dimensions: 3.5 cm (width) × 4.5 cm (height).',
+      'Photo file size: 10 KB to 100 KB in JPG/JPEG.',
+      'Signature dimensions: 3.5 cm (width) × 1.5 cm (height).',
+      'Signature file size: 3 KB to 30 KB in JPG/JPEG.'
+    ],
+    tips: [
+      'Use a white background with good contrast.',
+      'Sign with black pen for crisp scanning without gray background.'
+    ],
+    officialGuidelines: 'CBSE CTET guidelines: 10-100KB JPG photo (3.5x4.5cm) and 3-30KB signature (3.5x1.5cm).',
+    lastVerifiedDate: 'Verified October 2026',
+    faq: [
+      { question: 'What is the required photo size for CTET 2026?', answer: 'The photo must be between 10 KB and 100 KB in JPG/JPEG format with dimensions of 3.5 cm × 4.5 cm.' },
+      { question: 'What is the signature size for CTET?', answer: 'CTET signature scan must be between 3 KB and 30 KB with dimensions of 3.5 cm × 1.5 cm.' }
+    ],
+    relatedTools: [
+      { name: 'SSC CGL Photo Resizer', slug: '/tools/ssc-cgl-photo-signature-resizer', desc: 'SSC photo tool.' },
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Signature tool.' }
+    ],
+    keywords: [
+      'ctet photo resizer',
+      'ctet signature resizer 3 to 30 kb',
+      'ctet photo and signature size in kb',
+      'cbse ctet photo resizer 10 to 100 kb',
+      'ctet photo resizer online free'
+    ]
   }
 };
+

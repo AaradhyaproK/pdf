@@ -84,41 +84,80 @@ export default function AgeCalculatorPage() {
               </div>
             </div>
 
-            <div className="space-y-1.5">
-              <label className="block text-xs font-black uppercase tracking-wider text-slate-700">
-                Age at Date (Default: Today)
-              </label>
-              <div className="relative">
-                <input
-                  type="date"
-                  value={targetDate}
-                  onChange={(e) => setTargetDate(e.target.value)}
-                  className="w-full p-3.5 rounded-2xl border border-slate-300 bg-slate-50 text-slate-900 font-bold text-sm focus:outline-none focus:ring-2 focus:ring-rose-500 shadow-2xs"
-                />
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <label className="block text-xs font-black uppercase tracking-wider text-slate-700">
+                    Age at Date / Exam Cut-Off
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => setTargetDate(new Date().toISOString().split('T')[0])}
+                    className="text-[11px] font-bold text-rose-600 hover:text-rose-700 underline cursor-pointer"
+                  >
+                    Reset to Today
+                  </button>
+                </div>
+                <div className="relative">
+                  <input
+                    type="date"
+                    value={targetDate}
+                    onChange={(e) => setTargetDate(e.target.value)}
+                    className="w-full p-3.5 rounded-2xl border border-slate-300 bg-slate-50 text-slate-900 font-bold text-sm focus:outline-none focus:ring-2 focus:ring-rose-500 shadow-2xs"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Exam Cut-Off Quick Selectors */}
+            <div className="pt-2 border-t border-slate-100 space-y-2">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-[11px] font-black text-rose-600 uppercase flex items-center gap-1">
+                  🎯 Exam Cut-Offs:
+                </span>
+                {[
+                  { label: 'SSC CGL (01-08-2026)', date: '2026-08-01' },
+                  { label: 'UPSC CSE (01-08-2026)', date: '2026-08-01' },
+                  { label: 'IBPS PO (01-07-2026)', date: '2026-07-01' },
+                  { label: 'RRB NTPC (01-01-2026)', date: '2026-01-01' },
+                  { label: 'SBI Clerk (01-04-2026)', date: '2026-04-01' },
+                ].map((exam, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => setTargetDate(exam.date)}
+                    className={`px-2.5 py-1 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                      targetDate === exam.date
+                        ? 'bg-rose-600 text-white shadow-xs'
+                        : 'bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-200'
+                    }`}
+                  >
+                    {exam.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Quick DOB Preset Buttons */}
+              <div className="flex flex-wrap items-center gap-2 pt-1">
+                <span className="text-[11px] font-black text-slate-500 uppercase">DOB Presets:</span>
+                {[
+                  { label: 'Born in 2000', dob: '2000-01-01' },
+                  { label: 'Born in 1998', dob: '1998-05-12' },
+                  { label: 'Born in 1995', dob: '1995-06-15' },
+                  { label: 'Born in 1993', dob: '1993-11-20' },
+                  { label: 'Born in 2004', dob: '2004-03-10' },
+                ].map((p, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => setBirthDate(p.dob)}
+                    className="px-2.5 py-1 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold transition-all cursor-pointer"
+                  >
+                    {p.label}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
-
-          {/* Quick Preset Buttons */}
-          <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-100">
-            <span className="text-[11px] font-black text-slate-500 uppercase">Presets:</span>
-            {[
-              { label: 'Born in 2000', dob: '2000-01-01' },
-              { label: 'Born in 1995', dob: '1995-06-15' },
-              { label: 'Born in 1990', dob: '1990-08-20' },
-              { label: 'Born in 2005', dob: '2005-03-10' },
-            ].map((p, idx) => (
-              <button
-                key={idx}
-                type="button"
-                onClick={() => setBirthDate(p.dob)}
-                className="px-3 py-1 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold transition-all cursor-pointer"
-              >
-                {p.label}
-              </button>
-            ))}
-          </div>
-        </div>
 
         {ageData && (
           <>
@@ -171,6 +210,41 @@ export default function AgeCalculatorPage() {
                 <span className="bg-white/20 px-3 py-1 rounded-full text-xs font-black">
                   Day: {ageData.nextBirthday.dayOfWeek}
                 </span>
+              </div>
+
+              {/* Govt Exam Eligibility Status Bar */}
+              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20 space-y-2.5">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-black uppercase tracking-wider text-amber-300 flex items-center gap-1.5">
+                    🏛️ Competitive Exam Eligibility (as on selected cut-off date)
+                  </span>
+                  <span className="text-[11px] font-bold text-white/90">
+                    Age: {ageData.years}Y {ageData.months}M {ageData.days}D
+                  </span>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-bold">
+                  {[
+                    { exam: 'SSC CGL', range: '18–27/30 Y', eligible: ageData.years >= 18 && (ageData.years < 30 || (ageData.years === 30 && ageData.months === 0 && ageData.days === 0)) },
+                    { exam: 'UPSC CSE', range: '21–32 Y', eligible: ageData.years >= 21 && (ageData.years < 32 || (ageData.years === 32 && ageData.months === 0 && ageData.days === 0)) },
+                    { exam: 'IBPS Bank PO', range: '20–30 Y', eligible: ageData.years >= 20 && (ageData.years < 30 || (ageData.years === 30 && ageData.months === 0 && ageData.days === 0)) },
+                    { exam: 'Railway RRB', range: '18–33 Y', eligible: ageData.years >= 18 && (ageData.years < 33 || (ageData.years === 33 && ageData.months === 0 && ageData.days === 0)) },
+                  ].map((item, idx) => (
+                    <div
+                      key={idx}
+                      className={`p-2.5 rounded-xl border flex flex-col justify-between ${
+                        item.eligible
+                          ? 'bg-emerald-500/20 border-emerald-400/40 text-emerald-100'
+                          : 'bg-rose-900/30 border-rose-400/30 text-rose-200'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between text-[11px]">
+                        <span className="font-black text-white">{item.exam}</span>
+                        <span>{item.eligible ? '✅ Eligible' : '❌ Exceeded'}</span>
+                      </div>
+                      <div className="text-[10px] opacity-80 mt-1">General: {item.range}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 

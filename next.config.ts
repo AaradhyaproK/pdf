@@ -116,6 +116,26 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/tools/exam-age-calculator',
+        destination: '/utility/age-calculator',
+        permanent: true,
+      },
+      {
+        source: '/tools/cgpa-to-percentage',
+        destination: '/utility/cgpa-to-percentage',
+        permanent: true,
+      },
+      {
+        source: '/calculators/age-calculator',
+        destination: '/utility/age-calculator',
+        permanent: true,
+      },
+      {
+        source: '/calculators/cgpa-to-percentage',
+        destination: '/utility/cgpa-to-percentage',
+        permanent: true,
+      },
+      {
         source: '/presets/:slug',
         destination: '/tools/:slug',
         permanent: true,

@@ -9284,5 +9284,242 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       "answer": "Yes. Simply update the 'Rental Month / Period' field (e.g., 'October 2026' or 'Q3 FY 2026-27') and click download to generate receipts for each period."
     }
   ]
+},
+"/tools/ssc-cgl-photo-signature-resizer": {
+  "slug": "/tools/ssc-cgl-photo-signature-resizer",
+  "badge": "SSC 2026 Scrutiny Standards",
+  "heading": "Official SSC CGL Photo & Signature Specifications, DOP Guidelines & Scrutiny Protocols",
+  "subheading": "Comprehensive technical guide for Staff Selection Commission candidates: 20KB–50KB photo formatting, Candidate Name & Date of Photo stamping, and 10KB–20KB signature cleanup.",
+  "sections": [
+    {
+      "title": "1. SSC CGL Photo Requirements: Dimensions, Aspect Ratio & Facial Geometry",
+      "paragraphs": [
+        "The Staff Selection Commission (SSC) enforces stringent image upload protocols for all tier examinations, including CGL (Combined Graduate Level), CHSL, MTS, GD Constable, and CPO. Application forms undergo automated computational scrutiny where images failing boundary requirements are disqualified before human review. The candidate photograph must be a recent color passport portrait taken against a plain light white or off-white background.",
+        "The official dimensions are 3.5 cm width by 4.5 cm height, which corresponds to 413 × 531 pixels at 300 DPI (or a minimum of 100 × 120 pixels). The candidate's face must occupy between 70% and 80% of the total frame, with both ears, jawline, neck, and shoulders clearly illuminated without shadows. The file weight must strictly stay within 20.0 KB and 50.0 KB in JPEG/JPG format. Files under 20 KB are flagged for insufficient resolution, while files exceeding 50 KB are rejected by the portal's upload script."
+      ],
+      "bullets": [
+        "Dimensions: 3.5 cm (width) × 4.5 cm (height) / 413 × 531 px at standard 300 DPI.",
+        "File Size Window: 20.0 KB minimum to 50.0 KB maximum in JPG/JPEG.",
+        "Facial Proportions: Face must cover 70% to 80% of vertical height with direct frontal eye gaze.",
+        "Background: Pure white or light off-white with zero shadows, patterns, or outdoor landscapes."
+      ],
+      "table": {
+        "headers": ["Parameter", "SSC CGL Photo Rule", "SSC CGL Signature Rule"],
+        "rows": [
+          ["File Size", "20 KB to 50 KB", "10 KB to 20 KB"],
+          ["Dimensions", "3.5 cm × 4.5 cm (413 × 531 px)", "4.0 cm × 2.0 cm (140 × 60 px)"],
+          ["Color / Ink", "Color portrait on white background", "Black or dark blue ink on white paper"],
+          ["Name & Date", "Mandatory / Recommended (DOP < 3 mo)", "Candidate personal signature only"],
+          ["Format", "JPEG / JPG only", "JPEG / JPG only"]
+        ]
+      }
+    },
+    {
+      "title": "2. Candidate Name & Date of Photo (DOP) Bottom Banner Protocol",
+      "paragraphs": [
+        "Under Section 7 of official SSC examination notices, photographs must be clearly inscribed with the candidate's full legal name (in block capital letters) and the Date on which the Photograph was taken (DOP) printed at the bottom white bar. The DOP must not be older than three months from the notification release date. This requirement allows commission invigilators to confirm identity consistency between the application submission date and the Tier-1 computer-based exam date.",
+        "FileZenith's canvas rendering studio dynamically synthesizes an ISO-standard typography banner directly onto your photo. It automatically computes high-contrast black lettering on an opaque white base bar, ensuring maximum OCR readability by SSC automated processing scripts without distorting candidate facial aspect ratios."
+      ],
+      "bullets": [
+        "DOP Age Limit: Captured within 90 days of notification publication date.",
+        "Typography Format: Candidate Full Name in ALL CAPS followed by 'DOP: DD-MM-YYYY'.",
+        "Banner Placement: Bottom 12% to 15% of frame, preserving full visibility of chin and collar.",
+        "Contrast Compliance: Opaque pure-white background with dark charcoal/black lettering for optimal readability."
+      ]
+    },
+    {
+      "title": "3. SSC Signature Formatting & Artifact-Free Black & White Binarization",
+      "paragraphs": [
+        "Signature rejections represent over 40% of all administrative discrepancies in SSC recruitment. Candidates frequently upload signatures cropped from mobile snapshots taken in dim lighting, resulting in yellow paper tint, shadow gradients, and blurry strokes. The SSC portal mandates a crisp signature sized strictly between 10.0 KB and 20.0 KB with horizontal dimensions of 4.0 cm × 2.0 cm (approximately 140 × 60 pixels).",
+        "Our engine implements local adaptive binarization (Magic B&W). It calculates luminance histograms across your cropped signature scan, dynamically elevates gray background paper fibers to pure #FFFFFF white, and deepens blue/black ink strokes to crisp vector-like clarity. The resulting file weighs between 12 KB and 18 KB, guaranteeing instantaneous acceptance by the SSC portal."
+      ],
+      "bullets": [
+        "Size Range: 10 KB to 20 KB strictly.",
+        "Ink Specification: Black or dark blue ballpoint pen on unruled white printer paper.",
+        "Prohibited: Capital block letter signatures (must be natural running handwriting), red/green ink, or pencil marks."
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the exact photo and signature size required for SSC CGL 2026?",
+      "answer": "For SSC CGL 2026, the passport photo must be between 20.0 KB and 50.0 KB with dimensions of 3.5 cm (width) × 4.5 cm (height) in JPG/JPEG format. The signature scan must be between 10.0 KB and 20.0 KB with dimensions of 4.0 cm × 2.0 cm (around 140 × 60 pixels)."
+    },
+    {
+      "question": "Will SSC reject my application if I wear spectacles in the photo?",
+      "answer": "YES. SSC has strictly disallowed spectacles, sunglasses, caps, hats, or headgear in application photographs. Flash reflections on spectacle lenses prevent iris recognition and biometric matching, leading to immediate rejection during scrutiny."
+    },
+    {
+      "question": "Is candidate Name and Date of Photo (DOP) mandatory for SSC CGL?",
+      "answer": "Yes. Most SSC notifications explicitly require candidate full name in capital letters and the Date of Photograph (DOP) printed clearly at the bottom. The date must be within 3 months prior to the date of publication of the examination notice."
+    },
+    {
+      "question": "How to reduce photo size to 20 to 50 KB without losing clarity?",
+      "answer": "Upload your portrait to FileZenith's SSC CGL resizer. Our canvas engine maintains high 300 DPI resolution while performing intelligent iterative JPEG compression, achieving an optimal ~42 KB file with crisp facial details."
+    },
+    {
+      "question": "Can I sign in CAPITAL LETTERS for SSC CGL?",
+      "answer": "No. The Staff Selection Commission explicitly prohibits signatures written in capital letters. Applications with block-letter signatures are rejected as invalid. Your signature must be in your natural running handwriting style."
+    },
+    {
+      "question": "What background color is accepted for SSC CGL photographs?",
+      "answer": "The photograph must be taken against a plain, light white or off-white background with uniform lighting. Dark, patterned, or colored backgrounds (such as blue, red, or outdoor settings) are not permitted."
+    },
+    {
+      "question": "What should I do if the SSC portal shows 'Photo size cannot exceed 50KB'?",
+      "answer": "Use FileZenith's slider to set your target weight to 42 KB. Our engine ensures that the exported JPEG strictly caps at 42 KB, preventing browser rounding errors that cause 50.1 KB portal upload rejections."
+    },
+    {
+      "question": "Are my personal exam photos uploaded to any external server?",
+      "answer": "Never. All cropping, background cleaning, Name & Date stamping, and JPEG compression take place 100% within your local browser memory using HTML5 Canvas. Zero bytes are uploaded to external servers."
+    }
+  ]
+},
+"/tools/upsc-otr-photo-resizer": {
+  "slug": "/tools/upsc-otr-photo-resizer",
+  "badge": "UPSC OTR 1:1 Square Standards",
+  "heading": "Official UPSC OTR Photo & Signature Resizer Guidelines (Civil Services, NDA, CDS)",
+  "subheading": "Complete technical manual for Union Public Service Commission One Time Registration: 350×350 px square aspect ratio, 20KB–300KB file weights, and 10-day DOP capture mandate.",
+  "sections": [
+    {
+      "title": "1. UPSC OTR Photographic Norms: 1:1 Square Ratio & 10-Day Recency Mandate",
+      "paragraphs": [
+        "The Union Public Service Commission (UPSC) One Time Registration (OTR) system governs applications across prestigious central examinations, including Civil Services Examination (CSE / IAS / IPS), National Defence Academy (NDA), Combined Defence Services (CDS), and Engineering Services (ESE). In recent circulars, UPSC introduced modernized biometric capture standards to prevent fraudulent candidate substitution.",
+        "Unlike state recruitment boards that utilize rectangular 3.5×4.5 cm portraits, UPSC mandates an exact 1:1 square aspect ratio. The minimum permissible pixel dimensions are 350 × 350 pixels, and the maximum is 1000 × 1000 pixels. The file weight must strictly reside between 20.0 KB and 300.0 KB. Most critically, the photograph must not be more than 10 days old from the date of the online application form submission, and the candidate's facial image must occupy 3/4th (75%) of the total frame space."
+      ],
+      "bullets": [
+        "Aspect Ratio: Strictly 1:1 (Equal width and height).",
+        "Pixel Resolution: Minimum 350 × 350 px, maximum 1000 × 1000 px.",
+        "File Size Range: 20 KB minimum to 300 KB maximum in JPG/JPEG.",
+        "Recency Mandate: Captured within 10 days of filling the online application form."
+      ]
+    },
+    {
+      "title": "2. UPSC Candidate Name & Capture Date Inscription Rules",
+      "paragraphs": [
+        "UPSC OTR guidelines mandate that the candidate's full legal name along with the exact date on which the photograph was taken must be clearly inscribed at the bottom of the square photograph. The date must reflect recent capture (within the 10-day window) to ensure that the candidate's physical appearance on exam day (beard, hairstyle, facial contours) matches the uploaded digital record.",
+        "FileZenith automatically adapts your portrait to an exact 350 × 350 square canvas. When you enable the Name & Date toggle, our system overlays candidate details in compliant bold sans-serif font over a crisp white baseline, ensuring effortless scrutiny validation by UPSC verification officers."
+      ],
+      "bullets": [
+        "Inscription Content: Full legal name as registered in Class 10 certificate + Date of Photo.",
+        "Prohibited Elements: Dark shades, theatrical filters, tilted selfies, or artistic portrait blur.",
+        "Lighting: Clear, diffuse illumination without hard cheek or nose shadows."
+      ]
+    },
+    {
+      "title": "3. UPSC Signature Specifications (20KB to 300KB)",
+      "paragraphs": [
+        "The UPSC signature upload parameters mirror the file weight constraints of the photograph (20 KB to 300 KB), requiring minimum pixel dimensions of 350 × 350 pixels. Signatures must be executed in black ballpoint ink on crisp white paper. Scanning signatures with mobile devices often yields files smaller than 20 KB or blurry 72 DPI artifacts that fail portal validation.",
+        "FileZenith provides specialized canvas upsampling and background cleanup. If your cropped signature is only 15 KB, our engine intelligently embeds standard color metadata and clean padding to elevate file weight comfortably into the compliant 40–80 KB bracket while maintaining pristine stroke sharpness."
+      ],
+      "bullets": [
+        "Signature Dimensions: Minimum 350 × 350 px, square bounding box.",
+        "File Size: 20 KB to 300 KB.",
+        "Stroke Quality: Unbroken black ink lines on pure white background."
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What are the exact dimensions for UPSC OTR photograph?",
+      "answer": "UPSC OTR requires a 1:1 square photograph with minimum dimensions of 350 × 350 pixels and maximum dimensions of 1000 × 1000 pixels. The file weight must be between 20 KB and 300 KB in JPG/JPEG format."
+    },
+    {
+      "question": "How old can the photograph be for UPSC Civil Services 2026?",
+      "answer": "Under official UPSC instructions, the photograph must not be more than 10 days old from the commencement of the online application process for the respective examination."
+    },
+    {
+      "question": "Is candidate Name and Date mandatory on UPSC OTR photo?",
+      "answer": "Yes. UPSC guidelines explicitly require the candidate's full name and the date of photograph capture to be clearly printed at the bottom of the photograph."
+    },
+    {
+      "question": "What is the signature requirement for UPSC OTR?",
+      "answer": "UPSC signature must be between 20 KB and 300 KB with minimum dimensions of 350 × 350 pixels in JPG/JPEG format, signed in black ink on white paper."
+    },
+    {
+      "question": "Why does the UPSC portal reject my photo when it looks clear?",
+      "answer": "The most common rejection causes are non-square aspect ratio (e.g., standard 3:4 instead of 1:1), file size below 20 KB, or pixel dimensions under 350 × 350 px. FileZenith automatically forces exact 1:1 ratio and compliant byte sizing."
+    },
+    {
+      "question": "Can I use a beard photo if I usually shave?",
+      "answer": "UPSC advises that candidate appearance on the exam day must match the uploaded photograph. If you have a beard in the photograph, you should appear with a beard at the examination center and vice versa."
+    },
+    {
+      "question": "Does FileZenith store my UPSC candidate details?",
+      "answer": "No. All canvas transformations, name stamping, and JPEG formatting occur entirely in your browser's local memory with zero network uploads."
+    },
+    {
+      "question": "Can the same OTR photo be used for both Prelims and Mains?",
+      "answer": "Yes. Once uploaded to your verified UPSC OTR profile, the photo and signature are automatically linked to your Prelims, Mains, and Personality Test (Interview) application records."
+    }
+  ]
+},
+"/tools/ctet-photo-signature-resizer": {
+  "slug": "/tools/ctet-photo-signature-resizer",
+  "badge": "CBSE CTET 2026 Standards",
+  "heading": "Official CBSE CTET Photo & Signature Resizer Specifications & Upload Manual",
+  "subheading": "Authoritative guide for Central Teacher Eligibility Test candidates: 10KB–100KB passport photo formatting, 3KB–30KB signature cleanup, and 3.5×4.5 cm aspect ratio compliance.",
+  "sections": [
+    {
+      "title": "1. CTET Candidate Photograph Specifications (10KB to 100KB)",
+      "paragraphs": [
+        "The Central Teacher Eligibility Test (CTET), administered by the Central Board of Secondary Education (CBSE), requires hundreds of thousands of aspiring school educators to submit verified digital credentials. The CTET application portal applies automated file verification filters upon file selection. Uploads that deviate from authorized aspect ratios or file weights produce immediate validation errors.",
+        "Candidate photographs must be in JPG/JPEG format with file size strictly between 10.0 KB and 100.0 KB. The standard geometric dimensions are 3.5 cm in width by 4.5 cm in height. The photograph must be a clear portrait with 70% facial coverage against a light or white background. Candidates must face forward with a neutral expression and unblocked eye contact."
+      ],
+      "bullets": [
+        "File Size Range: 10.0 KB minimum to 100.0 KB maximum.",
+        "Physical Dimensions: 3.5 cm (width) × 4.5 cm (height).",
+        "Facial Coverage: 70% to 80% facial framing from forehead to chin.",
+        "Accepted Formats: JPG / JPEG only."
+      ]
+    },
+    {
+      "title": "2. CTET Signature Scan Requirements (3KB to 30KB)",
+      "paragraphs": [
+        "CBSE enforces distinct dimensional criteria for CTET signatures. The signature image file size must reside between 3.0 KB and 30.0 KB, with dimensions of 3.5 cm in width by 1.5 cm in height. Signatures must be executed on pure white unruled paper using a black ink ballpoint pen.",
+        "FileZenith crops your signature to exact 3.5 × 1.5 cm proportions, suppresses background paper shadows, and optimizes the compression curve to achieve a crisp 15–25 KB file weight that uploads effortlessly without rejection."
+      ],
+      "bullets": [
+        "Signature Size Range: 3.0 KB to 30.0 KB strictly.",
+        "Dimensions: 3.5 cm (width) × 1.5 cm (height).",
+        "Color: Crisp black or dark blue ink on clean white background."
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the photo size for CTET 2026 application form?",
+      "answer": "For CTET 2026, the photograph must be in JPG/JPEG format sized between 10 KB and 100 KB with dimensions of 3.5 cm × 4.5 cm."
+    },
+    {
+      "question": "What is the signature file size and dimension for CTET?",
+      "answer": "CTET signature must be between 3 KB and 30 KB in JPG/JPEG format with dimensions of 3.5 cm width × 1.5 cm height."
+    },
+    {
+      "question": "Can I take a CTET photo on mobile and compress it here?",
+      "answer": "Yes! Upload your mobile camera portrait to FileZenith's CTET resizer. Our engine automatically crops the image to 3.5×4.5 cm and compresses it to an optimal ~50 KB file."
+    },
+    {
+      "question": "Is Name and Date of Photo mandatory for CTET?",
+      "answer": "CBSE does not strictly mandate Name and Date on CTET photos, but your face must be clearly visible occupying 70% of the frame against a white background."
+    },
+    {
+      "question": "Why does the CTET portal say 'Invalid image format or size'?",
+      "answer": "This error occurs if your image is saved in PNG/WEBP format or exceeds the 100 KB limit for photos or 30 KB limit for signatures. FileZenith automatically outputs 100% compliant JPG."
+    },
+    {
+      "question": "Can I wear religious headgear in the CTET photograph?",
+      "answer": "Yes, religious headwear (such as a turban or hijab) is permitted provided the full face from forehead to chin and both cheeks are completely visible without casting shadows."
+    },
+    {
+      "question": "What resolution should I use for CTET signature scanning?",
+      "answer": "A scanning resolution of 200 to 300 DPI is ideal. FileZenith automatically optimizes the pixel density to prevent pixelation on candidate admit cards."
+    },
+    {
+      "question": "Are my files stored on FileZenith during compression?",
+      "answer": "No. All CTET image resizing and cropping take place locally in your browser memory with zero server uploads."
+    }
+  ]
 }
 };
+

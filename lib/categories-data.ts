@@ -811,6 +811,9 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
         title: 'Govt Exam Photo & Signature Resizers',
         description: 'Exact dimensions, byte limits (KB), and formats for SSC, UPSC, IBPS, and State PSC recruitment portals.',
         tools: [
+          { name: 'SSC CGL Photo & Signature Resizer', slug: '/tools/ssc-cgl-photo-signature-resizer', description: 'Official 20-50KB photo with Name & DOP stamp and 10-20KB signature.', isPopular: true, badge: 'CGL 2026', iconName: 'UserCheck' },
+          { name: 'UPSC OTR Photo Resizer (350x350)', slug: '/tools/upsc-otr-photo-resizer', description: 'Square 350x350 px photo (20-300KB) with candidate name and date.', isPopular: true, badge: 'OTR Square', iconName: 'UserCheck' },
+          { name: 'CTET Photo & Signature Resizer', slug: '/tools/ctet-photo-signature-resizer', description: 'CBSE CTET 10-100KB photo and 3-30KB signature resizer.', badge: 'CTET 2026', iconName: 'UserCheck' },
           { name: 'SSC Photo Resizer (20-50KB)', slug: '/tools/ssc-photo-resizer', description: 'Format SSC CGL, CHSL, MTS 3.5x4.5cm photo with Name & Date stamp.', isPopular: true, badge: 'SSC 20-50KB', iconName: 'UserCheck' },
           { name: 'Signature Resizer 10 to 20KB', slug: '/tools/signature-resizer-10-to-20kb', description: 'Resize signature to 10-20KB with Magic B&W cleanup.', isPopular: true, badge: '10-20KB', iconName: 'Stamp' },
           { name: 'UPSC Photo Resizer', slug: '/tools/upsc-photo-resizer', description: '350x350 px OTR square photo format with Name & Date.', isPopular: true, badge: 'UPSC OTR', iconName: 'UserCheck' },

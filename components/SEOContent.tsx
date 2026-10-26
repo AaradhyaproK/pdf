@@ -433,7 +433,7 @@ function ToolDeepDiveEditorial({ tool, fileTerm }: { tool: ToolSEO; fileTerm: st
 
 export function SEOContent({ slug }: SEOContentProps) {
   const tool = SEO_REGISTRY[slug];
-  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+  const [openFaqs, setOpenFaqs] = useState<Set<number>>(new Set([0, 1]));
 
   if (!tool) return null;
 
@@ -441,7 +441,15 @@ export function SEOContent({ slug }: SEOContentProps) {
   const completeFaqs = getCompleteToolFaqs(tool);
 
   const toggleFaq = (index: number) => {
-    setOpenFaqIndex(openFaqIndex === index ? null : index);
+    setOpenFaqs((prev) => {
+      const next = new Set(prev);
+      if (next.has(index)) {
+        next.delete(index);
+      } else {
+        next.add(index);
+      }
+      return next;
+    });
   };
 
   // Determine dynamic file terminology for contextual SEO
@@ -669,11 +677,10 @@ export function SEOContent({ slug }: SEOContentProps) {
 
         <div className="max-w-3xl mx-auto space-y-2.5 sm:space-y-3">
           {completeFaqs.map((faq, idx) => {
-            const isOpen = openFaqIndex === idx;
+            const isOpen = openFaqs.has(idx);
             return (
               <div
                 key={idx}
-                onMouseEnter={() => setOpenFaqIndex(idx)}
                 className={`rounded-2xl border transition-all duration-150 overflow-hidden cursor-pointer ${
                   isOpen
                     ? 'border-indigo-300 bg-indigo-50/20 shadow-2xs ring-1 ring-indigo-200/40'

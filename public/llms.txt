@@ -79,5 +79,12 @@
 - [Numbers to Excel Converter](https://www.filezenith.com/utility/numbers-to-excel)
 - [Excel to Numbers Converter](https://www.filezenith.com/utility/excel-to-numbers)
 
+## Govt Job Exam Tools
+- [SSC CGL Photo & Signature Resizer (20-50KB)](https://www.filezenith.com/tools/ssc-cgl-photo-signature-resizer)
+- [UPSC OTR Photo Resizer (350x350 px)](https://www.filezenith.com/tools/upsc-otr-photo-resizer)
+- [CTET Photo & Signature Resizer](https://www.filezenith.com/tools/ctet-photo-signature-resizer)
+- [Signature Resizer 10 to 20KB](https://www.filezenith.com/tools/signature-resizer-10-to-20kb)
+- [Aadhaar Card Print Tool (A4 & PVC)](https://www.filezenith.com/tools/aadhaar-card-print)
+
 ## Optional Reference
 - [Full LLM Manifest](https://www.filezenith.com/llms-full.txt): Detailed technical guide for AI models.

@@ -81,7 +81,8 @@ export function FileReadyModal({
   };
 
   const handleShareWhatsApp = () => {
-    const text = `I just generated my ${fileType.toUpperCase()} safely and free on FileZenith! No file upload to servers, 100% private: ${window.location.href}`;
+    const currentToolUrl = typeof window !== 'undefined' ? window.location.href : 'https://www.filezenith.com';
+    const text = `Hey! I just formatted my ${fileType.toUpperCase()} safely on FileZenith in 2 seconds (100% private, no server upload). Try this free tool: ${currentToolUrl}`;
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
   };
 
@@ -213,33 +214,33 @@ export function FileReadyModal({
               <span>Download {ext} File</span>
             </a>
 
-            {/* Sharing & Utilities Row */}
-            <div className="grid grid-cols-2 gap-2">
-              <button
-                onClick={handleShareWhatsApp}
-                className="py-2.5 px-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
-              >
-                <Share2 className="w-3.5 h-3.5 text-emerald-600" />
-                <span>Share WhatsApp</span>
-              </button>
+            {/* High-Impact WhatsApp Viral Share Button */}
+            <button
+              onClick={handleShareWhatsApp}
+              className="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] text-white font-bold text-xs shadow-sm transition-all flex items-center justify-center gap-2 cursor-pointer border border-emerald-500"
+            >
+              <Share2 className="w-3.5 h-3.5 text-white" />
+              <span>Share with Friends on WhatsApp</span>
+              <span className="ml-auto text-[10px] bg-emerald-700 px-2 py-0.5 rounded-full font-semibold">1-Click</span>
+            </button>
 
-              <button
-                onClick={handleCopyLink}
-                className="py-2.5 px-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
-              >
-                {copied ? (
-                  <>
-                    <Check className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>Copied!</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-3.5 h-3.5 text-slate-500" />
-                    <span>Copy Link</span>
-                  </>
-                )}
-              </button>
-            </div>
+            {/* Copy Link Utility */}
+            <button
+              onClick={handleCopyLink}
+              className="w-full py-2 px-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-medium text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+            >
+              {copied ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-emerald-600" />
+                  <span className="text-emerald-700 font-bold">Link Copied to Clipboard!</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-3.5 h-3.5 text-slate-500" />
+                  <span>Copy Free Tool Link</span>
+                </>
+              )}
+            </button>
 
             {/* Process Another */}
             {onReset && (

@@ -423,17 +423,23 @@ export default async function ToolPresetPage({ params }: PageProps) {
                 {activeFaqs.map((item, idx) => (
                   <details
                     key={idx}
-                    className="group border border-slate-200 rounded-2xl p-4 cursor-pointer transition-all bg-slate-50/50 hover:bg-slate-50"
+                    open={idx < 2}
+                    className="group border border-slate-200 rounded-2xl p-4 sm:p-5 cursor-pointer transition-all bg-white hover:border-indigo-300 shadow-2xs open:border-indigo-200 open:bg-indigo-50/15"
                   >
-                    <summary className="font-extrabold text-xs sm:text-sm text-slate-900 flex justify-between items-center select-none">
-                      <span>{item.question}</span>
-                      <span className="text-indigo-600 font-bold group-open:rotate-180 transition-transform">
+                    <summary className="font-extrabold text-xs sm:text-base text-slate-900 flex justify-between items-center select-none gap-3">
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        <span className="text-xs sm:text-sm font-black text-indigo-600 shrink-0">
+                          Q{idx + 1}.
+                        </span>
+                        <span className="leading-snug">{item.question}</span>
+                      </div>
+                      <span className="p-1.5 rounded-full bg-slate-100 group-open:bg-indigo-100 text-indigo-600 font-bold group-open:rotate-180 transition-transform shrink-0">
                         ▼
                       </span>
                     </summary>
-                    <p className="text-xs text-slate-600 font-medium leading-relaxed mt-2 pt-2 border-t border-slate-200/60">
+                    <div className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed mt-3 pt-3 border-t border-indigo-100/70 pl-2 sm:pl-3 border-l-2 border-indigo-400">
                       {item.answer}
-                    </p>
+                    </div>
                   </details>
                 ))}
               </div>
