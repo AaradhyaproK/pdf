@@ -1605,29 +1605,6 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
     ]
   },
 
-  '/utility/love-calculator': {
-    slug: '/utility/love-calculator',
-    title: 'Love Calculator & Name Match Compatibility',
-    metaTitle: 'Love Calculator Online Free - Check Love Match Percentage | FileZenith',
-    description: 'Calculate love compatibility match percentage between two names online free. Generate cute shareable love score cards for WhatsApp and social media.',
-    keywords: [
-      'love calculator',
-      'love calculator by name free online',
-      'love percentage match test',
-      'relationship name compatibility check',
-      'love calculator whatsapp score share'
-    ],
-    category: 'utility',
-    howToSteps: [
-      { title: 'Enter Your Name', text: 'Input first name.' },
-      { title: 'Enter Partner Name', text: 'Input partner or crush name.' },
-      { title: 'Calculate & Share', text: 'Click Calculate Match to reveal percentage score and share result card on WhatsApp!' }
-    ],
-    faqs: [
-      { question: 'Is the Love Calculator accurate?', answer: 'This tool is built for fun, entertainment, and social sharing between friends and couples!' }
-    ]
-  },
-
   '/social/youtube-thumbnail-downloader': {
     slug: '/social/youtube-thumbnail-downloader',
     title: 'YouTube Thumbnail Downloader (1080p Full HD & 4K Image Grabber)',

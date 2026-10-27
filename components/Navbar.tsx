@@ -162,7 +162,7 @@ const SOCIAL_TOOLS = [
   { name: 'Fancy Text Generator', slug: '/utility/fancy-text-generator', desc: '30+ Unicode font styles & gaming bios', icon: Sparkles, badge: 'Fonts', category: 'social', catLabel: 'Social Studio' },
   { name: 'Text Repeater (10k Times)', slug: '/utility/text-repeater', desc: 'Repeat text & emojis up to 10,000 times', icon: Sparkles, badge: 'Viral', category: 'social', catLabel: 'Social Studio' },
   { name: 'Free Text to Speech (TTS)', slug: '/utility/text-to-speech', desc: 'Voice AI audio generator for reels & videos', icon: Volume2, badge: 'Audio AI', category: 'social', catLabel: 'Social Studio' },
-  { name: 'Love Match Calculator', slug: '/utility/love-calculator', desc: 'Calculate love score & share on WhatsApp', icon: Sparkles, badge: 'Fun', category: 'social', catLabel: 'Social Studio' },
+  { name: 'Printable Greeting & Love Card Maker', slug: '/image/greeting-card-maker', desc: 'Create bi-fold A4 cards & digital love notes', icon: Sparkles, badge: 'Printable A4', category: 'image', catLabel: 'Image Studio' },
   { name: 'Spin the Wheel & Name Picker', slug: '/utility/spin-the-wheel', desc: 'Random winner picker with confetti', icon: Dices, badge: 'Giveaway', category: 'social', catLabel: 'Social Studio' },
   { name: 'Typing Speed Test (WPM Cert)', slug: '/utility/typing-speed-test', desc: 'Test WPM speed & export shareable cert', icon: Zap, badge: 'Viral Cert', category: 'social', catLabel: 'Social Studio' },
 ];

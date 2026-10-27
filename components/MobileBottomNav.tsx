@@ -124,7 +124,7 @@ const UTILITY_TOOLS = [
   { name: 'BMI & Health Calculator', slug: '/utility/bmi-calculator', desc: 'Body Mass Index & ideal weight range', icon: Zap, badge: 'Health' },
   { name: 'Text Case Converter', slug: '/utility/case-converter', desc: 'UPPER, lower, Title, camel & snake case', icon: Type, badge: 'Writing' },
   { name: 'Text Repeater (10k Times)', slug: '/utility/text-repeater', desc: 'Repeat text & emojis up to 10,000 times', icon: SparklesIcon, badge: 'Viral' },
-  { name: 'Love Match Calculator', slug: '/utility/love-calculator', desc: 'Calculate love score & share on WhatsApp', icon: SparklesIcon, badge: 'Fun' },
+  { name: 'Printable Greeting Card Maker', slug: '/image/greeting-card-maker', desc: 'Create bi-fold A4 cards & digital love notes', icon: SparklesIcon, badge: 'Printable' },
   { name: 'Base64 Encoder & Decoder', slug: '/utility/base64', desc: 'Convert files/images to Data URLs', icon: Code2, badge: 'New' },
   { name: 'Markdown Editor & PDF', slug: '/utility/markdown-editor', desc: 'Live Markdown preview & PDF export', icon: FileText, badge: 'New' },
   { name: 'QR Code Generator', slug: '/utility/qr-generator', desc: 'Create custom QR codes with logo & colors', icon: QrCode, badge: 'Custom' },

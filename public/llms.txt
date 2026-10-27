@@ -65,7 +65,6 @@
 - [Glassmorphism Generator](https://www.filezenith.com/utility/glassmorphism-generator)
 - [GST Calculator](https://www.filezenith.com/utility/gst-calculator)
 - [Income Tax Calculator](https://www.filezenith.com/utility/income-tax-calculator)
-- [Love Calculator](https://www.filezenith.com/utility/love-calculator)
 - [Markdown Editor](https://www.filezenith.com/utility/markdown-editor)
 - [Number to Words](https://www.filezenith.com/utility/number-to-words)
 - [Password Generator](https://www.filezenith.com/utility/password-generator)

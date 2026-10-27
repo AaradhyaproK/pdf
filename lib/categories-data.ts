@@ -373,8 +373,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
           { name: 'Spin the Wheel & Name Picker', slug: '/utility/spin-the-wheel', description: 'Random winner decision picker with custom slices and confetti.', badge: 'Viral Tool', iconName: 'Dices' },
           { name: 'Coin Flip Online (3D Toss)', slug: '/utility/coin-flip', description: 'Realistic 3D heads or tails decision coin toss simulator.', badge: '3D Toss', iconName: 'Coins' },
           { name: 'Virtual Dice Roller (1-12 Dice)', slug: '/utility/dice-roller', description: 'Roll virtual 3D dice for board games and RPG tabletop gaming.', badge: '1-12 Dice', iconName: 'Dices' },
-          { name: 'Random Number Picker & RNG', slug: '/utility/random-number-picker', description: 'Pick random numbers without duplicates and generate random PINs.', badge: 'RNG', iconName: 'Hash' },
-          { name: 'Love Match Calculator', slug: '/utility/love-calculator', description: 'Fun love compatibility score calculator with shareable results.', badge: 'Fun', iconName: 'Sparkles' }
+          { name: 'Random Number Picker & RNG', slug: '/utility/random-number-picker', description: 'Pick random numbers without duplicates and generate random PINs.', badge: 'RNG', iconName: 'Hash' }
         ]
       }
     ],

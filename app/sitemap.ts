@@ -65,6 +65,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/tools/compress-image-to-50kb',
     '/tools/compress-image-to-100kb',
     '/blog/income-tax-slabs-fy-2025-26',
+    '/utility/love-calculator',
     '/presets/ssc-pdf-200kb',
     '/presets/upsc-pdf-300kb',
   ]);

@@ -136,6 +136,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/utility/love-calculator',
+        destination: '/image/greeting-card-maker',
+        permanent: true,
+      },
+      {
         source: '/presets/:slug',
         destination: '/tools/:slug',
         permanent: true,
