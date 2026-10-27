@@ -87,6 +87,13 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
           { name: 'Remove PDF Password', slug: '/pdf/remove-password', description: 'Unlock and remove owner passwords from bank statements, payslips, and e-Aadhaar PDFs.', isPopular: true, badge: 'Unlock', iconName: 'Unlock' },
           { name: 'Watermark PDF', slug: '/pdf/watermark', description: 'Overlay custom confidential stamps, logos, or text watermarks across PDF pages.', iconName: 'Stamp' }
         ]
+      },
+      {
+        title: 'Printable Planners & Productivity',
+        description: 'Generate high-resolution vector printable PDFs for habit tracking, study plans, and goals.',
+        tools: [
+          { name: 'Printable Habit & Goal Tracker', slug: '/pdf/habit-tracker-planner', description: 'Design custom 30-day habit trackers, New Year resolution sheets & daily routines in print-ready vector A4 PDF.', isPopular: true, badge: 'Printable A4', iconName: 'Calendar' }
+        ]
       }
     ],
     popularTools: [
@@ -217,6 +224,14 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
           { name: 'UPSC Photo Resizer', slug: '/tools/upsc-photo-resizer', description: '350x350 px OTR square photo format with Name & Date.', badge: 'UPSC OTR', iconName: 'UserCheck' },
           { name: 'NEET Photo Resizer', slug: '/tools/neet-photo-resizer', description: 'NEET passport & postcard 4"x6" photo with DOP stamp.', badge: 'NEET UG', iconName: 'UserCheck' },
           { name: 'Photo Name & Date Generator', slug: '/tools/photo-name-date-generator', description: 'Overlay candidate full name and date on passport photos.', badge: 'Name & Date', iconName: 'Calendar' }
+        ]
+      },
+      {
+        title: 'Creative Memory & Polaroid Cards',
+        description: 'Create aesthetic vintage photo prints, Polaroid cards, and romantic gifts 100% privately.',
+        tools: [
+          { name: 'Printable Greeting & Love Card Maker', slug: '/image/greeting-card-maker', description: 'Design romantic love cards, birthday greetings, and anniversary cards with photos. Export digital PNG or printable bi-fold A4 PDF.', isPopular: true, badge: 'Printable A4', iconName: 'Heart' },
+          { name: 'Polaroid & Memory Card Maker', slug: '/image/polaroid-maker', description: 'Turn couple photos & memories into vintage Polaroid cards with handwritten captions & date stamps. Export high-res PNG or printable A4 PDF.', isPopular: true, badge: 'Valentine Ready', iconName: 'Camera' }
         ]
       }
     ],

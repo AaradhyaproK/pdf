@@ -205,6 +205,117 @@ function getRelatedGuidesAndArticles(slug: string, category: string): ArticleRec
     ];
   }
 
+  if (slug === '/image/greeting-card-maker') {
+    return [
+      {
+        title: 'Free Polaroid & Vintage Memory Card Maker',
+        desc: 'Turn couple memories & snapshots into vintage Polaroid prints with date stamps.',
+        url: '/image/polaroid-maker',
+        badge: 'Top Creative Tool',
+        readTime: 'Free Tool',
+        type: 'preset'
+      },
+      {
+        title: 'Pics to PDF (Photos to High-Res PDF Album)',
+        desc: 'Combine romantic vacation photos and photo albums into an uncompressed PDF.',
+        url: '/image/pics-to-pdf',
+        badge: 'Photo Studio',
+        readTime: 'Free Tool',
+        type: 'preset'
+      },
+      {
+        title: 'Printable Habit Tracker & Goal Planner PDF',
+        desc: 'Design daily gratitude, couple milestone trackers, and 30-day goal grids.',
+        url: '/pdf/habit-tracker-planner',
+        badge: 'Printable A4',
+        readTime: 'Free Tool',
+        type: 'preset'
+      },
+      {
+        title: 'AI Background Remover (Free HD Cutouts)',
+        desc: 'Extract clean portrait silhouettes of couples for custom card designs.',
+        url: '/image/remove-background',
+        badge: 'AI Studio',
+        readTime: 'Free Tool',
+        type: 'preset'
+      }
+    ];
+  }
+
+  if (slug === '/image/polaroid-maker') {
+    return [
+      {
+        title: 'Free Printable Greeting & Love Card Maker',
+        desc: 'Design folding bi-fold A4 greeting cards with romantic vows and personal photos.',
+        url: '/image/greeting-card-maker',
+        badge: 'Trending Studio',
+        readTime: 'Free Tool',
+        type: 'preset'
+      },
+      {
+        title: 'Free Image Cropper & Aspect Ratio Tool',
+        desc: 'Crop photos into perfect 1:1 squares for authentic vintage Polaroid framing.',
+        url: '/image/crop',
+        badge: 'Image Studio',
+        readTime: 'Free Tool',
+        type: 'preset'
+      },
+      {
+        title: 'Pics to PDF (Photo Scrapbook Generator)',
+        desc: 'Compile memory prints and photobooth strips into a printable keepsake booklet.',
+        url: '/image/pics-to-pdf',
+        badge: 'Keepsake Book',
+        readTime: 'Free Tool',
+        type: 'preset'
+      },
+      {
+        title: 'AI Background Remover (HD Cutout)',
+        desc: 'Create aesthetic floating transparent cutouts for custom retro collages.',
+        url: '/image/remove-background',
+        badge: 'AI Cutout',
+        readTime: 'Free Tool',
+        type: 'preset'
+      }
+    ];
+  }
+
+  if (slug === '/pdf/habit-tracker-planner') {
+    return [
+      {
+        title: 'Free Printable Greeting & Love Card Maker',
+        desc: 'Celebrate habit streaks and goal milestones with printable folding gift cards.',
+        url: '/image/greeting-card-maker',
+        badge: 'Printable A4',
+        readTime: 'Free Tool',
+        type: 'preset'
+      },
+      {
+        title: 'Free Invoice & Rent Receipt Generator',
+        desc: 'Instant vector PDF receipts for HRA tax exemption and financial tracking.',
+        url: '/utility/invoice-generator',
+        badge: 'Finance Tool',
+        readTime: 'Free Tool',
+        type: 'preset'
+      },
+      {
+        title: 'Merge PDF Files Free',
+        desc: 'Combine 12 monthly habit tracker sheets into an all-in-one yearly goal journal.',
+        url: '/pdf/merge',
+        badge: 'PDF Tool',
+        readTime: 'Free Tool',
+        type: 'preset'
+      },
+      {
+        title: 'Compress PDF to 200KB Online',
+        desc: 'Shrink digital journals and planner files for cloud backups and email.',
+        url: '/blog/how-to-compress-pdf-to-200kb-online',
+        badge: 'PDF Guide',
+        readTime: '5 min read',
+        type: 'blog'
+      }
+    ];
+  }
+
   if (slug === '/image/remove-background') {
     return [
       {

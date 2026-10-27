@@ -34,6 +34,7 @@ export interface ToolLayoutProps {
   badgeText?: string;
   noCardWrapper?: boolean;
   hideTitle?: boolean;
+  hideSidebar?: boolean;
   children: ReactNode;
 }
 
@@ -110,6 +111,7 @@ export function ToolLayout({
   badgeText = '100% Client-Side Engine',
   noCardWrapper = false,
   hideTitle = false,
+  hideSidebar = false,
   children,
 }: ToolLayoutProps) {
   const pathname = usePathname();
@@ -212,9 +214,9 @@ export function ToolLayout({
         <AdSlot slotType="header-leaderboard" />
 
         {/* Main Grid: Workspace & Sticky Sidebar */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 items-start">
+        <div className={`grid grid-cols-1 ${hideSidebar ? 'w-full' : 'lg:grid-cols-12'} gap-3 sm:gap-6 items-start`}>
           {/* Main Content Workspace */}
-          <div className="lg:col-span-8 space-y-3 sm:space-y-6 min-w-0">
+          <div className={`${hideSidebar ? 'w-full' : 'lg:col-span-8'} space-y-3 sm:space-y-6 min-w-0`}>
             {/* Tool Header Title & Subtitle Container */}
             {title && !hideTitle && (
               <div className="p-3.5 sm:p-0 rounded-2xl sm:rounded-none bg-white sm:bg-transparent border sm:border-none border-slate-200/90 sm:shadow-none shadow-2xs space-y-1.5 sm:space-y-2">
@@ -249,6 +251,111 @@ export function ToolLayout({
               <AdSlot slotType="post-download" />
             </div>
 
+            {/* When hideSidebar is true, render the sidebar guides, privacy & PWA cards cleanly below the studio */}
+            {hideSidebar && (
+              <div className="pt-6 sm:pt-8 border-t border-slate-200/80 space-y-5">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xs sm:text-sm font-black uppercase tracking-wider text-slate-900 flex items-center gap-2">
+                    <BookOpen className="w-4 h-4 text-indigo-600" />
+                    Helpful Guides, Privacy &amp; Quick Links
+                  </h3>
+                  <span className="text-[11px] text-slate-500 font-semibold">Related Resources</span>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
+                  {/* 1. Client-Side Privacy Guarantee Card */}
+                  <div className="bg-white p-5 rounded-3xl border border-slate-200/90 shadow-2xs space-y-3 flex flex-col justify-between">
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2">
+                        <div className="p-2 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200">
+                          <ShieldCheck className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <h4 className="text-xs font-black uppercase tracking-wider text-slate-900">
+                            {privacyCard.title}
+                          </h4>
+                          <p className="text-[10px] text-emerald-700 font-bold">{privacyCard.subtitle}</p>
+                        </div>
+                      </div>
+                      <p className="text-xs text-slate-600 leading-relaxed font-medium">
+                        {privacyCard.desc}
+                      </p>
+                    </div>
+                    <div className="pt-2 flex flex-wrap gap-1.5 text-[10px] font-bold text-slate-700">
+                      {privacyCard.badges.map((b, bIdx) => (
+                        <span key={bIdx} className="px-2 py-0.5 rounded-full bg-slate-100 border border-slate-200">
+                          {b}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* 2. Helpful Step-by-Step Guides Card */}
+                  <div className="bg-white p-5 rounded-3xl border border-slate-200/90 shadow-2xs space-y-3 flex flex-col justify-between">
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
+                        <div className="flex items-center gap-2">
+                          <div className="p-1.5 rounded-lg bg-indigo-50 text-indigo-600">
+                            <BookOpen className="w-3.5 h-3.5" />
+                          </div>
+                          <h4 className="text-xs font-black uppercase tracking-wider text-slate-900">
+                            Helpful Guides
+                          </h4>
+                        </div>
+                        <Link
+                          href="/blog"
+                          className="text-[10px] font-bold text-indigo-600 hover:underline flex items-center gap-0.5"
+                        >
+                          View All →
+                        </Link>
+                      </div>
+                      <ul className="space-y-2 text-xs">
+                        {sidebarGuides.map((guide, gIdx) => (
+                          <li key={gIdx}>
+                            <Link
+                              href={guide.href}
+                              className="p-2 rounded-xl bg-slate-50 hover:bg-indigo-50 hover:text-indigo-600 flex items-center justify-between border border-slate-200/70 transition-colors group"
+                            >
+                              <span className="font-semibold text-slate-800 group-hover:text-indigo-600 truncate mr-2">{guide.title}</span>
+                              <ArrowRight className="w-3 h-3 text-slate-400 group-hover:text-indigo-600 group-hover:translate-x-0.5 transition-all shrink-0" />
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* 3. Offline PWA Desktop & Mobile App Card */}
+                  <div className="bg-gradient-to-br from-slate-900 to-indigo-950 text-white p-5 rounded-3xl shadow-md space-y-3 border border-slate-800 flex flex-col justify-between">
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className="p-1.5 rounded-lg bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                            <Smartphone className="w-3.5 h-3.5" />
+                          </div>
+                          <h4 className="text-xs font-black uppercase tracking-wider text-white">
+                            Offline PWA Studio
+                          </h4>
+                        </div>
+                        <span className="text-[9px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full font-bold border border-emerald-500/30">
+                          100% Offline
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-slate-300 leading-relaxed font-medium">
+                        Install FileZenith on your computer or mobile to use our 80+ document &amp; photo tools anytime without internet.
+                      </p>
+                    </div>
+                    <Link
+                      href="/download-app"
+                      className="w-full py-2 px-3 rounded-xl bg-white hover:bg-slate-100 text-slate-900 text-xs font-black text-center flex items-center justify-center gap-1.5 transition-all shadow-xs"
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      <span>Get Offline Web App</span>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Explore Related FileZenith Tools */}
             <RelatedToolsSection currentSlug={slug} />
 
@@ -257,7 +364,8 @@ export function ToolLayout({
           </div>
 
           {/* Sticky Sidebar (Ad Placement Unit + E-E-A-T Trust & Quick Navigation) */}
-          <div className="lg:col-span-4 space-y-5 lg:sticky lg:top-20">
+          {!hideSidebar && (
+            <div className="lg:col-span-4 space-y-5 lg:sticky lg:top-20">
             {/* 1. Client-Side Privacy Guarantee Card */}
             <div className="bg-white p-5 rounded-3xl border border-slate-200/90 shadow-2xs space-y-3">
               <div className="flex items-center gap-2">
@@ -442,6 +550,7 @@ export function ToolLayout({
             {/* 6. Sticky Sidebar Ad Unit */}
             <AdSlot slotType="sticky-sidebar" />
           </div>
+          )}
         </div>
       </motion.div>
     </main>

@@ -25,8 +25,11 @@
 - [Mask Aadhaar Card Online](https://www.filezenith.com/pdf/mask-aadhaar)
 - [Permanently Redact PDF](https://www.filezenith.com/pdf/redact)
 - [Combine Marksheets into Single PDF](https://www.filezenith.com/pdf/combine-marksheets)
+- [Printable Habit Tracker & Goal Planner PDF](https://www.filezenith.com/pdf/habit-tracker-planner)
 
 ## Image Studio Tools
+- [Printable Greeting & Love Card Maker](https://www.filezenith.com/image/greeting-card-maker)
+- [Polaroid & Memory Card Maker](https://www.filezenith.com/image/polaroid-maker)
 - [Pics to PDF](https://www.filezenith.com/image/pics-to-pdf)
 - [Online Visa & Passport Photo Maker](https://www.filezenith.com/image/visa-photo-maker)
 - [PNG to JPG Converter](https://www.filezenith.com/image/png-to-jpg)

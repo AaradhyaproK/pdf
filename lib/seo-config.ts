@@ -2664,6 +2664,151 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { feature: 'Watermarks', omnitool: '100% Clean Vector PDF (No Watermarks)', standardCloud: 'Adds branding or requires paid subscription' },
       { feature: 'HRA Rent Receipt Mode', omnitool: 'Built-in Section 10(13A) IT Act Format', standardCloud: 'Only basic invoice templates' }
     ]
+  },
+  '/pdf/habit-tracker-planner': {
+    slug: '/pdf/habit-tracker-planner',
+    title: 'Free Printable Habit Tracker & Goal Planner PDF Generator (A4 / Letter)',
+    metaTitle: 'Free Printable Habit Tracker & Goal Planner PDF (Instant 300 DPI A4 & Letter)',
+    description: 'Design and download a free printable 30-day habit tracker, monthly goal planner & New Year resolution sheet in 300 DPI vector PDF. A4 & Letter formats, 100% free, no sign up.',
+    keywords: [
+      'printable habit tracker pdf',
+      'free habit tracker template printable a4',
+      'monthly habit tracker printable 30 day grid',
+      'daily goal planner pdf download free',
+      'bullet journal habit tracker template a4',
+      'atomic habits habit tracker printable pdf',
+      'free 21 day habit tracker template pdf',
+      'weekly routine habit tracker printable',
+      'minimalist habit tracker a4 letter pdf',
+      'habit tracker for productivity and fitness free',
+      'customizable printable habit tracker grid',
+      'new year resolution planner pdf',
+      'daily goal tracker printable free',
+      'monthly goal sheet pdf printable free',
+      'study habit tracker printable pdf',
+      'workout and fitness habit tracker printable',
+      'habit tracker printable black and white'
+    ],
+    category: 'pdf',
+    howToSteps: [
+      { title: 'Customize Title & Daily Habits', text: 'Enter your custom planner title and customize your daily habits, goals, routine targets, and monthly milestones.' },
+      { title: 'Choose Aesthetic Theme & Paper Format', text: 'Select an aesthetic design (Minimalist Black & White, Sage Botanical, Nordic Slate, or Sunset Rose) and your paper size (ISO A4 or US Letter).' },
+      { title: 'Download Print-Ready Vector PDF', text: 'Click Download PDF to export an ultra-crisp 300 DPI vector PDF ready for immediate home or office printing.' }
+    ],
+    faqs: [
+      { question: 'Is this habit tracker PDF generator completely free with no watermark?', answer: 'Yes! You can create and download unlimited customized printable habit planners without signup, subscription, or watermarks forever.' },
+      { question: 'What paper sizes are supported for printing?', answer: 'Our generator provides calibrated vector layouts for international ISO A4 (210 × 297 mm) and North American US Letter (8.5 × 11 in) paper standards.' },
+      { question: 'Can I print this on a monochrome black-and-white laser printer?', answer: 'Yes. The Minimalist Black & White theme is specifically engineered with high-contrast monochrome lines to look crisp on standard home and office printers while conserving ink and toner.' },
+      { question: 'What paper GSM is best for printing habit planners?', answer: 'We recommend standard 80–100 GSM copy paper for clipboard or binder use, or 120 GSM smooth bond paper if you like to use fountain pens, brush markers, or highlighters without bleed-through.' },
+      { question: 'How many days are included on the monthly habit grid?', answer: 'The tracker provides a full 31-day numbered grid with day-of-week indicators, habit check boxes, and monthly progress note sections.' },
+      { question: 'Can I use this with the Atomic Habits framework?', answer: 'Yes! The tracker is ideal for James Clear Atomic Habits principles, habit stacking, identity-based habits, and visual streak tracking.' },
+      { question: 'Are my personal goals and habits kept private?', answer: '100% private. All PDF compilation occurs entirely in your browser memory using WebAssembly. Your personal goals and routines are never transmitted to any server.' },
+      { question: 'Can I import the generated PDF into GoodNotes, Notability, or iPad apps?', answer: 'Yes! The exported vector PDF is fully compatible with digital planner apps like GoodNotes, Notability, Samsung Notes, and Apple Books for iPad stylus journaling.' }
+    ],
+    comparisonTable: [
+      { feature: 'Account / Sign-Up', omnitool: 'Zero Sign-Up (Instant Generation)', standardCloud: 'Requires email signup or app install' },
+      { feature: 'Watermarks', omnitool: '100% Clean Vector PDF (No Watermarks)', standardCloud: 'Adds watermarks or locks themes behind paywall' },
+      { feature: 'Vector Resolution', omnitool: 'Razor-Sharp 300+ DPI ISO 32000 Vector', standardCloud: 'Pixelated low-res PNG conversions' },
+      { feature: 'Device Privacy', omnitool: '100% In-Browser (Zero Cloud Upload)', standardCloud: 'Logs personal goals on remote servers' }
+    ]
+  },
+  '/image/polaroid-maker': {
+    slug: '/image/polaroid-maker',
+    title: 'Free Polaroid & Vintage Memory Card Maker (Printable A4 PDF & PNG)',
+    metaTitle: 'Free Polaroid Maker Online — Vintage Photo Cards (Printable A4 PDF & PNG)',
+    description: 'Turn your couple photos & memories into vintage Polaroid cards with handwritten captions, date stamps & Spotify codes. Free printable A4 sheet & 300 DPI PNG. No watermark.',
+    keywords: [
+      'polaroid frame maker online free',
+      'vintage photo card maker printable pdf',
+      'turn photo into polaroid free no watermark',
+      'polaroid memory card maker with date and caption',
+      'polaroid with spotify code generator free',
+      'photobooth film strip maker online',
+      'polaroid wall aesthetic maker free printable',
+      'retro 90s polaroid photo editor',
+      'mini instax photo printer template a4 pdf',
+      'custom polaroid collage maker free',
+      'aesthetic polaroid gift card maker',
+      'valentines day polaroid card maker',
+      'couple photo anniversary card maker',
+      'polaroid photo with text free no signup',
+      'polaroid picture frame template printable',
+      'vintage film camera border maker'
+    ],
+    category: 'image',
+    howToSteps: [
+      { title: 'Upload Your Photo(s)', text: 'Select 1 or more couple, travel, or memory photos. Photos are processed 100% locally in your browser memory.' },
+      { title: 'Customize Layout, Caption & Date', text: 'Choose Classic Polaroid, Duo Memory, Photobooth Strip, or Spotify Code layout. Type custom handwritten captions, anniversary dates, and choose vintage analog filters.' },
+      { title: 'Download PNG or Print-Ready A4 PDF', text: 'Export a 300 DPI high-resolution PNG for WhatsApp/Instagram, or a multi-up A4 printable PDF with scissor cut guidelines for physical scrapbooking.' }
+    ],
+    faqs: [
+      { question: 'Are my private couple photos uploaded to any server?', answer: 'Never. FileZenith uses 100% client-side HTML5 Canvas rendering. Your personal photos stay strictly on your device and are never sent over the internet.' },
+      { question: 'Can I print multiple Polaroid cards on a single sheet of paper?', answer: 'Yes! Choose "Download Print-Ready A4 PDF" to automatically arrange 4 vintage Polaroid cards onto a single A4 page with dotted scissor cut lines for quick trimming.' },
+      { question: 'What paper is best for printing Polaroid memory cards?', answer: 'For authentic photo texture and glossy vibrancy, we recommend 200–260 GSM glossy or semi-gloss photo paper. Standard cardstock (220 GSM) also produces a rustic matte finish.' },
+      { question: 'Can I add a scannable Spotify code or song caption?', answer: 'Yes! Select the Spotify layout mode to display your favorite song title, artist, progress bar, and custom romantic dedication.' },
+      { question: 'What vintage analog film filters are included?', answer: 'The studio includes 90s Warm Film, Golden Hour, Romance Blush, and High-Contrast Noir black-and-white filters.' },
+      { question: 'Is this Polaroid maker really free without watermarks?', answer: 'Yes! Unlike commercial photo apps that charge per download or stamp branding on the white frame, FileZenith is 100% free with zero watermarks forever.' },
+      { question: 'Can I use this for scrapbooking, bullet journals, and wall collages?', answer: 'Absolutely! Thousands of creators use our tool to make DIY aesthetic photo walls, fairy-light clip displays, anniversary scrapbooks, and gift box cards.' },
+      { question: 'Does it support iPhone HEIC and smartphone photos?', answer: 'Yes, it natively supports Apple HEIC, JPG, PNG, and WebP photos directly from any smartphone, tablet, or desktop browser.' }
+    ],
+    comparisonTable: [
+      { feature: 'Photo Privacy', omnitool: '100% Client-Side (0 Bytes Uploaded)', standardCloud: 'Uploads private photos to remote cloud servers' },
+      { feature: 'Print-Ready PDF Output', omnitool: 'Built-in A4 Multi-Up with Cutting Guides', standardCloud: 'Only low-res single image download' },
+      { feature: 'Pricing & Watermarks', omnitool: '100% Free Forever with Zero Watermarks', standardCloud: 'Slaps branding or requires monthly subscription' },
+      { feature: 'Custom Spotify Code', omnitool: 'Built-in Romantic Music Player Layout', standardCloud: 'Not available or behind paywall' }
+    ]
+  },
+
+  '/image/greeting-card-maker': {
+    slug: '/image/greeting-card-maker',
+    title: 'Free Printable Greeting & Love Card Maker (Bi-Fold A4 PDF & Digital PNG)',
+    metaTitle: 'Free Printable Greeting & Love Card Maker — Bi-Fold A4 PDF & PNG (No Watermark)',
+    description: 'Design free printable greeting cards, romantic love notes, anniversary vows & birthday cards with photos. Instant bi-fold A4 PDF with fold lines & 300 DPI PNG. 100% free, no sign up.',
+    keywords: [
+      'free printable greeting card maker',
+      'printable love card maker with photo',
+      'free printable folding card maker a4 pdf',
+      'anniversary card maker online free no signup',
+      'birthday card maker printable no watermark',
+      'bifold greeting card template a4 pdf',
+      'make your own greeting card free printable',
+      'valentines day card maker with photo free',
+      'diy printable anniversary card maker pdf',
+      'romantic greeting card maker free online',
+      'love note card generator with photo',
+      'custom greeting card maker free printable',
+      'print at home greeting cards a4',
+      'free online greeting card designer',
+      'thank you card maker printable free',
+      'greeting card maker for boyfriend girlfriend',
+      'wedding anniversary card template printable free',
+      'digital love card generator free',
+      'printable card maker with envelope guide',
+      'cute birthday card maker printable free'
+    ],
+    category: 'image',
+    howToSteps: [
+      { title: 'Choose Occasion & Aesthetic Frame', text: 'Select Love & Anniversary, Birthday Celebration, Thank You, Wedding, or Blank Canvas. Choose luxury gold foil, deckled edge, botanical leaves, or airmail postcard frames.' },
+      { title: 'Upload Photo & Personalize Letter', text: 'Add your couple or memory photo, adjust zoom and filter, choose cursive script or editorial serif typography, and customize your heartfelt message.' },
+      { title: 'Inspect with 3D Page Turn & Export', text: 'Use the interactive Turn Page feature to inspect Front Cover, Inside Letter Spread, and Back Keepsake. Export as 300 DPI PNG or print-ready A4 PDF with fold crease and cut guides.' }
+    ],
+    faqs: [
+      { question: 'Is this greeting card maker really 100% free with no watermarks?', answer: 'Yes! Unlike Canva, Greetings Island, or American Greetings which require paid subscriptions or force watermarks on downloads, FileZenith is 100% free with zero watermarks forever.' },
+      { question: 'How does the printable bi-fold card work for physical gifting?', answer: 'When you choose "Print A4 PDF", our studio generates a landscape A4 sheet with the front cover on the right, the back keepsake on the left, and a center folding guideline. Print on cardstock and fold down the center for a genuine physical card!' },
+      { question: 'Can I see the inside of the card before printing?', answer: 'Yes! Click "Turn Page" or the "Inside Spread" tab to view the two facing inside pages: your memory photo on the left page and your full handwritten letter with wax seal signature on the right page.' },
+      { question: 'Are my private photos and romantic messages secure?', answer: 'Completely secure. All rendering happens strictly in your browser RAM using client-side HTML5 Canvas. Zero bytes of your photos or notes are ever uploaded to any cloud server.' },
+      { question: 'What paper is best for printing greeting cards at home?', answer: 'For the most luxurious physical feel, we recommend 220 to 300 GSM matte, linen, or semi-gloss cardstock paper on any standard inkjet or laser color printer.' },
+      { question: 'What size envelope fits the folded A4 bi-fold card?', answer: 'An A4 sheet folded in half creates a standard A5 card (148 × 210 mm), which fits standard C5 envelopes. If printed at 70% scale, it fits standard C6 envelopes.' },
+      { question: 'Can I send the card digitally on WhatsApp, iMessage, or Instagram?', answer: 'Yes! Click "Download PNG" to export a 300 DPI high-resolution digital image formatted perfectly for WhatsApp, iMessage, Instagram Stories, or email gifting.' },
+      { question: 'Can I write my own custom message or poetry?', answer: 'Yes! You can type any personalized letter or choose from our built-in viral library of romantic anniversary quotes, short aesthetic 1-liners, and warm birthday wishes.' }
+    ],
+    comparisonTable: [
+      { feature: 'Pricing & Watermarks', omnitool: '100% Free with Zero Watermarks', standardCloud: 'Paywall for high-res or forces watermarks' },
+      { feature: 'Print-Ready Folding Format', omnitool: 'True Bi-Fold A4 Sheet with Center Fold Guide', standardCloud: 'Flat image only, difficult to fold properly' },
+      { feature: 'Account Requirement', omnitool: 'Zero Sign-up or Login Required', standardCloud: 'Mandatory account creation and email collection' },
+      { feature: 'Photo Privacy', omnitool: '100% Client-Side (Zero Server Upload)', standardCloud: 'Uploaded and processed on remote cloud servers' },
+      { feature: 'Interactive Turn Page', omnitool: 'Inspect Front Cover, Inside Spread & Back', standardCloud: 'Static preview only' }
+    ]
   }
 };
 

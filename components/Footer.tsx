@@ -114,6 +114,8 @@ export function Footer() {
             </button>
             {openSection === 'image' && (
               <div className="p-4 bg-white border-t border-slate-100 grid grid-cols-1 gap-2 animate-in fade-in duration-150">
+                <Link href="/image/greeting-card-maker" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Printable Greeting &amp; Love Card Maker</Link>
+                <Link href="/image/polaroid-maker" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Polaroid &amp; Memory Card Maker</Link>
                 <Link href="/image/pics-to-pdf" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Pics to PDF (Photos to PDF)</Link>
                 <Link href="/image/webp-to-jpg" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">WebP to JPG Converter</Link>
                 <Link href="/image/jpg-to-webp" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">JPG to WebP Converter</Link>
@@ -243,6 +245,7 @@ export function Footer() {
               PDF Studio
             </h4>
             <ul className="space-y-2 text-xs">
+              <li><Link href="/pdf/habit-tracker-planner" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Printable Habit Tracker PDF</Link></li>
               <li><Link href="/pdf/edit" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Edit PDF Online</Link></li>
               <li><Link href="/pdf/mask-aadhaar" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Mask Aadhaar Card (Offline)</Link></li>
               <li><Link href="/pdf/redact" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Permanently Redact PDF</Link></li>
@@ -268,6 +271,8 @@ export function Footer() {
               Image Studio
             </h4>
             <ul className="space-y-2 text-xs">
+              <li><Link href="/image/greeting-card-maker" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Printable Greeting &amp; Love Card Maker</Link></li>
+              <li><Link href="/image/polaroid-maker" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Polaroid &amp; Memory Card Maker</Link></li>
               <li><Link href="/image/visa-photo-maker" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Visa &amp; Passport Photo (2x2&quot;)</Link></li>
               <li><Link href="/image/pics-to-pdf" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Pics to PDF (Photos to PDF)</Link></li>
               <li><Link href="/image/webp-to-jpg" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">WebP to JPG Converter</Link></li>

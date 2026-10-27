@@ -60,6 +60,7 @@ import {
   Receipt,
   Presentation,
   ShieldCheck,
+  Heart,
 } from 'lucide-react';
 
 const PDF_TOOLS = [
@@ -74,6 +75,7 @@ const PDF_TOOLS = [
   { name: 'Free Invoice & HRA Rent Receipt', slug: '/utility/invoice-generator', desc: 'Client invoice & HRA rent receipt with instant PDF', icon: Receipt, badge: 'PDF Invoice', category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'Apple Keynote to PDF & Slides', slug: '/utility/keynote-to-powerpoint', desc: 'Convert .key presentations on Windows & Android', icon: Presentation, badge: 'Keynote', category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'Markdown Editor & PDF', slug: '/utility/markdown-editor', desc: 'Live Markdown preview & vector PDF export', icon: FileText, badge: 'Editor', category: 'pdf', catLabel: 'PDF Studio' },
+  { name: 'Printable Habit & Goal Tracker', slug: '/pdf/habit-tracker-planner', desc: 'Design 30-day habit planner & resolution sheet in A4 PDF', icon: Calendar, badge: 'Printable A4', category: 'pdf', catLabel: 'PDF Studio', keywords: ['habit tracker', 'printable habit tracker', 'new year resolution', 'planner pdf'] },
   { name: 'Pages to Word (DOCX)', slug: '/utility/pages-to-word', desc: 'Convert Apple Pages to editable Word', icon: FileText, badge: 'Apple', category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'Word to Pages Converter', slug: '/utility/word-to-pages', desc: 'Convert Word DOCX to Apple Pages', icon: FileCode, badge: 'New', category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'PDF & EXIF Metadata Remover', slug: '/utility/metadata-remover', desc: 'Scrub author, software & tracking from PDFs', icon: EyeOff, badge: 'Privacy Scrub', category: 'pdf', catLabel: 'PDF Studio' },
@@ -99,6 +101,8 @@ const IMAGE_TOOLS = [
   { name: 'Base64 Image Encoder', slug: '/utility/base64', desc: 'Convert photos & graphics to Data URL Base64', icon: Code2, badge: 'Data URI', category: 'image', catLabel: 'Image Studio' },
   { name: 'WebP to JPG Converter', slug: '/image/webp-to-jpg', desc: 'Convert WebP images to JPG with white background fill', icon: FileImage, badge: 'Bulk', category: 'image', catLabel: 'Image Studio', keywords: ['webp to jpg', 'webp', 'jpeg', 'convert webp', 'save webp as jpg'] },
   { name: 'JPG to WebP Converter', slug: '/image/jpg-to-webp', desc: 'Convert JPG/PNG to modern WebP (up to 80% smaller)', icon: Zap, badge: 'Web Vitals', category: 'image', catLabel: 'Image Studio', keywords: ['jpg to webp', 'png to webp', 'webp', 'compress', 'speed', 'core web vitals'] },
+  { name: 'Printable Greeting & Love Card Maker', slug: '/image/greeting-card-maker', desc: 'Design romantic love cards & birthday greetings with photo & A4 folding print', icon: Heart, badge: 'Printable A4', category: 'image', catLabel: 'Image Studio', keywords: ['greeting card', 'love card', 'printable card', 'birthday card', 'anniversary card', 'valentine card', 'card maker'] },
+  { name: 'Polaroid & Memory Card Maker', slug: '/image/polaroid-maker', desc: 'Turn photos into vintage Polaroid cards with captions & dates', icon: Camera, badge: 'Valentine', category: 'image', catLabel: 'Image Studio', keywords: ['polaroid', 'memory card', 'vintage photo', 'valentine', 'anniversary'] },
   { name: 'Railway RRB Photo Resizer', slug: '/tools/railway-rrb-photo-resizer', desc: 'RRB NTPC, ALP, Group D 20-50KB photo resizer (320x240 px)', icon: UserCheck, badge: 'RRB 20-50KB', category: 'image', catLabel: 'Image Studio', keywords: ['railway', 'rrb', 'ntpc', 'alp', 'group d', 'technician', 'railway photo resizer'] },
   { name: 'IBPS Photo Resizer', slug: '/tools/ibps-photo-resizer', desc: 'IBPS PO, Clerk, RRB 200x230 px (20-50KB) photo resizer', icon: UserCheck, badge: 'IBPS 20-50KB', category: 'image', catLabel: 'Image Studio', keywords: ['ibps', 'po', 'clerk', 'bank', 'thumb impression', 'handwritten declaration'] },
   { name: 'SBI PO Photo Resizer', slug: '/tools/sbi-po-photo-resizer', desc: 'SBI PO & Clerk photo and signature resizer (20-50KB)', icon: UserCheck, badge: 'SBI PO', category: 'image', catLabel: 'Image Studio', keywords: ['sbi', 'sbi po', 'sbi clerk', 'junior associate', 'state bank'] },
