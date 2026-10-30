@@ -63,6 +63,8 @@ const DEFAULT_POST_IMAGES: Record<string, string> = {
   'how-to-compress-pdf-to-50kb-online': '/blog/compress-pdf-100kb-guide.jpg',
   'how-to-combine-10th-and-12th-marksheets-into-one-pdf-under-500kb': '/blog/pdf-merge.webp',
   'how-to-mask-aadhaar-card-online-offline-protect-privacy': '/blog/aadhaar-card-print.webp',
+  'ctet-photo-and-signature-size-guidelines-2026': '/blog/exam-guide.webp',
+  'how-to-create-printable-habit-tracker-planner-pdf': '/blog/pdf-compression.webp',
 };
 
 // Helper function to extract FAQs for Google FAQPage Schema

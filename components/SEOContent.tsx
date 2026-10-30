@@ -282,6 +282,14 @@ function getRelatedGuidesAndArticles(slug: string, category: string): ArticleRec
   if (slug === '/pdf/habit-tracker-planner') {
     return [
       {
+        title: 'How to Create a Printable Habit Tracker PDF (A4 & Letter)',
+        desc: 'Comprehensive guide to designing, personalizing, and printing 300 DPI vector habit planners.',
+        url: '/blog/how-to-create-printable-habit-tracker-planner-pdf',
+        badge: 'Top Guide',
+        readTime: '5 min read',
+        type: 'blog'
+      },
+      {
         title: 'Free Printable Greeting & Love Card Maker',
         desc: 'Celebrate habit streaks and goal milestones with printable folding gift cards.',
         url: '/image/greeting-card-maker',

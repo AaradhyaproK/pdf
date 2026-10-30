@@ -72,6 +72,7 @@ const KNOWLEDGE_CLUSTERS = [
     iconBg: 'bg-indigo-50 text-indigo-600',
     guides: [
       { slug: 'ssc-gd-constable-photo-signature-resizer-guide-2026', title: 'SSC GD Constable & CGL Photo/Signature Rules 2026-27', readTime: '7 min' },
+      { slug: 'ctet-photo-and-signature-size-guidelines-2026', title: 'CTET 2026 Photo & Signature Requirements (Dimensions & KB)', readTime: '6 min' },
       { slug: 'ssc-photo-size-requirements', title: 'SSC Photo & Signature Size Requirements (Official Rules)', readTime: '5 min' },
       { slug: 'rrb-ntpc-photo-signature-guidelines-2026', title: 'RRB NTPC & Group D Photo, Signature & Travel Pass Size', readTime: '7 min' },
       { slug: 'rrb-photo-size-requirements', title: 'RRB Railway Exam Photo & Signature Rules (NTPC, ALP)', readTime: '4 min' },
@@ -94,6 +95,7 @@ const KNOWLEDGE_CLUSTERS = [
     badgeColor: 'bg-rose-50 text-rose-700 border-rose-200',
     iconBg: 'bg-rose-50 text-rose-600',
     guides: [
+      { slug: 'how-to-create-printable-habit-tracker-planner-pdf', title: 'How to Create a Printable Habit Tracker PDF (A4 & Letter)', readTime: '5 min' },
       { slug: 'how-to-combine-10th-and-12th-marksheets-into-one-pdf-under-500kb', title: 'Combine 10th & 12th Marksheets into Single PDF (<500KB)', readTime: '6 min' },
       { slug: 'how-to-compress-pdf-to-200kb-online', title: 'How to Compress PDF to 200KB Online (Without Blurry Text)', readTime: '6 min' },
       { slug: 'how-to-compress-pdf-to-50kb-online', title: 'How to Compress PDF to 50KB Online Free (Job Portals)', readTime: '6 min' },
