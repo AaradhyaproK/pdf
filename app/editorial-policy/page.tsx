@@ -279,7 +279,7 @@ export default function EditorialPolicyPage() {
 
             <div className="rounded-2xl border border-slate-200 bg-slate-50/80 p-5 text-xs space-y-1.5 text-slate-700 font-medium pt-4 mt-4">
               <div><strong>Publishing Entity:</strong> Snab Innovations</div>
-              <div><strong>Lead Developer:</strong> Aaradhya Pathak</div>
+              <div><strong>Lead Developer:</strong> Aaradhya Pathak (<a href="mailto:aaradhya@snab.co.in" className="text-indigo-600 underline font-bold hover:text-indigo-700">aaradhya@snab.co.in</a>)</div>
               <div><strong>Corporate Address:</strong> Nashik, Maharashtra, India (PIN: 422005)</div>
               <div>
                 <strong>Editorial Contact &amp; Corrections:</strong>{' '}

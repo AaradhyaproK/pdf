@@ -64,10 +64,10 @@ export default function ContactPage() {
               </p>
             </div>
 
-            {/* Direct Email */}
+            {/* Direct Email Support */}
             <div className="space-y-1.5">
               <span className="text-[11px] font-black uppercase tracking-wider text-slate-400">
-                Direct Email Support
+                General Support &amp; Feedback
               </span>
               <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-indigo-50/50 border border-indigo-100/80">
                 <div className="w-9 h-9 rounded-xl bg-indigo-600 text-white flex items-center justify-center shrink-0 shadow-2xs">
@@ -83,6 +83,29 @@ export default function ContactPage() {
                   <div className="flex items-center gap-1 text-[10px] text-slate-400 font-medium pt-0.5">
                     <Clock className="w-3 h-3 text-slate-400" />
                     <span>Response within 24 business hours</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Executive & Founder Desk */}
+            <div className="space-y-1.5">
+              <span className="text-[11px] font-black uppercase tracking-wider text-slate-400">
+                Executive &amp; Founder Inquiries
+              </span>
+              <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80">
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-rose-600 text-white flex items-center justify-center shrink-0 shadow-2xs font-bold text-xs">
+                  AP
+                </div>
+                <div className="min-w-0 flex-1">
+                  <a
+                    href="mailto:aaradhya@snab.co.in"
+                    className="text-xs sm:text-sm font-black text-slate-900 hover:text-indigo-600 hover:underline truncate block"
+                  >
+                    aaradhya@snab.co.in
+                  </a>
+                  <div className="flex items-center gap-1 text-[10px] text-slate-500 font-medium pt-0.5">
+                    <span>Aaradhya Pathak (Founder &amp; Lead Architect)</span>
                   </div>
                 </div>
               </div>

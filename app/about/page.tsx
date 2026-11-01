@@ -44,7 +44,7 @@ export default function AboutPage() {
         name: 'Aaradhya Pathak',
         jobTitle: 'Founder & Principal Software Engineer',
         url: 'https://aaradhyadev.vercel.app',
-        email: 'aaradhya1774@gmail.com',
+        email: 'aaradhya@snab.co.in',
         sameAs: [
           'https://aaradhyadev.vercel.app',
           'https://www.linkedin.com/in/aaradhyapathak17',
@@ -166,13 +166,13 @@ export default function AboutPage() {
                 <ExternalLink className="w-3 h-3 text-slate-400" />
               </a>
 
-              {/* Personal Email */}
+              {/* Corporate Executive Email */}
               <a
-                href="mailto:aaradhya1774@gmail.com"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 transition-all hover:scale-105 shadow-2xs"
+                href="mailto:aaradhya@snab.co.in"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200/80 transition-all hover:scale-105 shadow-2xs"
               >
-                <Mail className="w-3.5 h-3.5 text-rose-600" />
-                <span>aaradhya1774@gmail.com</span>
+                <Mail className="w-3.5 h-3.5 text-indigo-600" />
+                <span>aaradhya@snab.co.in</span>
               </a>
 
               {/* Snab Studio */}
