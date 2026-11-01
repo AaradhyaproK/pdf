@@ -39,8 +39,8 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
   'pdf-tools': {
     slug: 'pdf-tools',
     title: 'Free Online PDF Tools: Merge, Split, Compress & Edit PDF Files',
-    metaTitle: 'Free Online PDF Tools: Merge, Split, Compress & Edit | FileZenith',
-    metaDescription: '100% Free browser-based PDF tools. Merge PDF files, split pages, compress PDF under 100KB & 200KB, convert PDF to Word, extract OCR text, watermark, and edit PDFs with zero server uploads.',
+    metaTitle: 'Free Online PDF Tools: Merge, Compress 100KB/200KB, Split & Edit | FileZenith',
+    metaDescription: '100% Free client-side PDF tools. Merge PDF files, split pages, compress PDF under 100KB & 200KB, convert PDF to Word DOCX, extract OCR text, watermark, remove passwords & mask Aadhaar offline with zero cloud server uploads.',
     h1: 'Free Online PDF Tools & Document Utilities',
     intro: 'Organize, compress, convert, and edit your PDF files directly inside your browser. Powered by WebAssembly and local client-side processing — your confidential documents are never uploaded to any cloud server, with zero file size caps and zero subscriptions.',
     subgroups: [
@@ -145,32 +145,44 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
       { name: 'Govt Job Exam Tools', slug: '/govt-job-tools', desc: 'SSC, UPSC, Aadhaar print, and signature resizers.' }
     ],
     keywords: [
+      'free online pdf tools',
       'merge pdf online free',
+      'combine pdf files free',
       'compress pdf to 200kb',
       'compress pdf to 100kb',
+      'compress pdf to 500kb',
       'compress pdf under 1mb',
-      'pdf to word converter free',
+      'reduce pdf file size online',
+      'pdf to word converter free without email',
       'word to pdf converter online',
       'split pdf pages free',
+      'extract pages from pdf',
       'edit pdf online free without watermark',
-      'remove password from pdf',
-      'unlock bank statement pdf',
-      'organize pdf pages',
-      'add page numbers to pdf',
-      'extract text from pdf ocr',
-      'watermark pdf online',
+      'redact pdf permanently zero leak',
+      'mask aadhaar card online free',
+      'combine marksheets into single pdf',
+      'remove password from bank statement pdf',
+      'unlock pdf online free',
+      'pdf ocr text extractor',
+      'organize pdf pages drag and drop',
+      'add page numbers to pdf free',
+      'rotate pdf pages online',
+      'watermark pdf free',
       'pics to pdf converter',
       'jpg to pdf online free',
       'pdf to jpg converter',
-      'sarkari result pdf compressor'
+      'printable habit tracker pdf a4',
+      'sarkari result pdf compressor 100kb 200kb',
+      'upsc ssc form pdf compressor',
+      'client side private pdf tools'
     ]
   },
 
   'image-tools': {
     slug: 'image-tools',
     title: 'Free Online Image Tools: Compress, Convert, Resize & Edit Images',
-    metaTitle: 'Free Online Image Tools: Compress, Convert, Resize & Edit | FileZenith',
-    metaDescription: '100% Free browser-based image tools. Compress image KB, resize photos, convert HEIC/PNG/JPG/SVG, remove backgrounds, format passport photos, and print Aadhaar cards with zero server uploads.',
+    metaTitle: 'Free Online Image Tools: Compress 20KB/50KB, Convert HEIC/WebP & Resize | FileZenith',
+    metaDescription: '100% Free in-browser image tools. Compress image to 20KB & 50KB, resize photos, convert iPhone HEIC to JPG, WebP/PNG converter, AI background remover, passport photo maker & Aadhaar print tool with zero server uploads.',
     h1: 'Free Online Image Tools & Compressors',
     intro: 'Process, compress, convert, and resize images directly in your browser. No files uploaded to external servers, no watermark, and no account required.',
     subgroups: [
@@ -284,27 +296,45 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
       { name: 'Social Media Tools', slug: '/social', desc: 'WhatsApp direct chat, thumbnail downloads, and bio fonts.' }
     ],
     keywords: [
-      'compress image to 50kb',
+      'free online image tools',
       'compress image to 20kb',
-      'heic to jpg converter free',
-      'passport photo maker online',
+      'compress image to 50kb',
+      'compress image to 100kb',
+      'image compressor in kb',
+      'photo size reducer in kb',
+      'passport photo maker online free',
+      'passport size photo 3.5 x 4.5 cm',
+      'us visa photo maker 2x2 inches ds 160',
+      'schengen visa photo maker online',
+      'heic to jpg converter free iphone',
+      'convert apple heic to jpg windows',
+      'webp to jpg converter bulk free',
+      'jpg to webp converter core web vitals',
+      'png to jpg converter white background',
+      'jpg to png transparent free',
+      'svg to png high resolution converter',
       'ssc photo resizer 20kb to 50kb',
-      'signature resizer 10 to 20 kb',
-      'aadhaar card print tool',
-      'webp to jpg converter',
-      'jpg to webp converter',
-      'png to jpg converter',
-      'remove background from image free',
-      'pics to pdf converter',
-      'photo name and date generator'
+      'signature resizer 10 to 20 kb online',
+      'aadhaar card print tool a4 pvc 85.6x54mm',
+      'crop e-aadhaar for pvc card printing',
+      'railway rrb photo resizer 20-50kb',
+      'ibps po clerk photo resizer 200x230',
+      'jee main photo resizer with dop date',
+      'upsc otr photo resizer 350x350',
+      'photo name and date generator online',
+      'ai background remover transparent png free',
+      'pics to pdf converter free',
+      'printable greeting card maker a4 bifold',
+      'vintage polaroid photo card maker',
+      'sarkari photo signature resizer online'
     ]
   },
 
   'utility': {
     slug: 'utility',
     title: 'Free Online Utility Tools: Calculators, Converters & Daily Productivity',
-    metaTitle: 'Free Online Utility Tools: Calculators, Converters & Productivity | FileZenith',
-    metaDescription: '35+ Free online utilities: Electricity bill calculator, EPF calculator, age calculator, EMI, GST, typing speed test, password generator, QR codes, and Apple iWork converters.',
+    metaTitle: 'Free Online Utilities: Electricity Bill, EPF, Age, EMI Calculators & Converters | FileZenith',
+    metaDescription: '35+ Free browser utilities: Electricity bill calculator with state slabs & subsidies, EPF 8.25% balance calculator, exact age calculator, home loan EMI, income tax FY 2026-27, Apple Pages/Numbers converters & typing speed test.',
     h1: 'Free Online Utilities, Calculators & Productivity Tools',
     intro: 'A complete suite of free browser utilities for students, developers, job seekers, and daily productivity. Calculate loans and taxes, convert Apple Pages and Numbers, format text, and generate secure passwords — 100% private in your browser.',
     subgroups: [
@@ -426,27 +456,217 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
       { name: 'Govt Job Exam Tools', slug: '/govt-job-tools', desc: 'SSC, UPSC, Aadhaar print, and signature resizers.' }
     ],
     keywords: [
+      'free online utility tools',
+      'online calculators and converters',
       'electricity bill calculator india',
-      'epf balance growth calculator',
-      'age calculator for govt exams',
-      'cgpa to percentage cbse calculator',
-      'emi calculator for home loan',
-      'old vs new tax regime calculator 2026',
-      'pages to word converter free',
-      'numbers to excel converter',
-      'typing speed test wpm certificate',
-      'word and character counter online',
-      'password generator offline secure',
-      'custom qr code generator free',
-      'json formatter beautifier online'
+      'calculate electricity bill from meter reading',
+      'msedcl electricity bill calculator',
+      'bses delhi electricity bill calculator',
+      'uppcl bijli bill calculator',
+      'bescom tangedco power tariff calculator',
+      'gruha jyothi free electricity calculator',
+      'epf balance growth calculator 8.25',
+      'epfo pension maturity corpus calculator',
+      'age calculator online exact years months days',
+      'date of birth age calculator for sarkari exams',
+      'income tax calculator old vs new regime 2026-27',
+      'ctc to in hand take home salary calculator',
+      'home loan emi calculator with amortization schedule',
+      'car loan personal loan emi calculator',
+      'sip mutual fund compounding return calculator',
+      'gst calculator add remove gst 5 12 18 28',
+      'cgpa to percentage cbse 9.5 calculator',
+      'mumbai university vtu cgpa to percentage',
+      'percentage marks discount difference calculator',
+      'pages to word converter free apple mac',
+      'convert .pages to docx windows pc',
+      'numbers to excel converter online .numbers to .xlsx',
+      'keynote to powerpoint pptx converter',
+      'free invoice generator and hra rent receipt maker',
+      'typing speed test online wpm certificate free',
+      'word and character counter reading time',
+      'fancy text generator for bio',
+      'free offline password generator cryptographically secure',
+      'exif metadata remover pdf photo privacy scrub',
+      'custom vector qr code generator with logo colors',
+      'json formatter validator beautifier minify',
+      'base64 encoder decoder image to data url',
+      'pomodoro timer 25 min study clock',
+      'spin the wheel random winner picker confetti'
+    ]
+  },
+
+  'utility-tools': {
+    slug: 'utility-tools',
+    title: 'Free Online Utility Tools: Calculators, Converters & Daily Productivity',
+    metaTitle: 'Free Online Utilities: Electricity Bill, EPF, Age, EMI Calculators & Converters | FileZenith',
+    metaDescription: '35+ Free browser utilities: Electricity bill calculator with state slabs & subsidies, EPF 8.25% balance calculator, exact age calculator, home loan EMI, income tax FY 2026-27, Apple Pages/Numbers converters & typing speed test.',
+    h1: 'Free Online Utilities, Calculators & Productivity Tools',
+    intro: 'A complete suite of free browser utilities for students, developers, job seekers, and daily productivity. Calculate loans and taxes, convert Apple Pages and Numbers, format text, and generate secure passwords — 100% private in your browser.',
+    subgroups: [
+      {
+        title: 'Financial & Government Calculators',
+        description: 'Instant, precise financial and educational calculators for loans, taxes, EPF, age, and marks.',
+        tools: [
+          { name: 'Electricity Bill Calculator', slug: '/utility/electricity-bill-calculator', description: 'Calculate monthly electricity bill with state tariff slabs & subsidies.', isPopular: true, badge: 'State Slabs', iconName: 'DollarSign' },
+          { name: 'EPF Balance Growth Calculator', slug: '/utility/epf-calculator', description: 'EPFO 8.25% retirement interest and maturity corpus calculator.', isPopular: true, badge: 'EPFO 8.25%', iconName: 'Coins' },
+          { name: 'Age Calculator & Birthday', slug: '/utility/age-calculator', description: 'Calculate exact age in years, months, days, hours, and minutes with cut-off dates.', isPopular: true, badge: '#1 Trending', iconName: 'Calendar' },
+          { name: 'Percentage Calculator', slug: '/utility/percentage-calculator', description: 'Calculate percentage difference, marks percentage, and discounts.', isPopular: true, badge: 'Daily Tool', iconName: 'Percent' },
+          { name: 'CGPA to Percentage Calculator', slug: '/utility/cgpa-to-percentage', description: 'Convert CBSE, University CGPA/SGPA to percentage using standard 9.5 formula.', isPopular: true, badge: 'Student Tool', iconName: 'GraduationCap' },
+          { name: 'EMI Loan Calculator', slug: '/utility/emi-calculator', description: 'Calculate home, car, and personal loan monthly EMI with amortization schedule.', isPopular: true, badge: 'High RPM', iconName: 'DollarSign' },
+          { name: 'Income Tax Calculator (Old vs New)', slug: '/utility/income-tax-calculator', description: 'Compare Old vs New Tax Regime savings for FY 2026-27.', isPopular: true, badge: 'Tax Season', iconName: 'DollarSign' },
+          { name: 'SIP Mutual Fund Calculator', slug: '/utility/sip-calculator', description: 'Calculate future wealth compounding returns for monthly SIP investments.', isPopular: true, badge: 'Wealth', iconName: 'DollarSign' },
+          { name: 'CTC to In-Hand Salary Calculator', slug: '/utility/salary-calculator', description: 'Calculate monthly take-home salary after PF, PT, and TDS deductions.', isPopular: true, badge: 'Salary', iconName: 'DollarSign' },
+          { name: 'Free Invoice & Rent Receipt Maker', slug: '/utility/invoice-generator', description: 'Create professional client invoices and HRA rent receipts with instant vector PDF download.', isPopular: true, badge: 'Zero Sign-Up', iconName: 'Receipt' },
+          { name: 'GST Tax Calculator', slug: '/utility/gst-calculator', description: 'Add or remove GST tax for 5%, 12%, 18%, 28% slabs with CGST/SGST split.', isPopular: true, badge: 'Tax Tool', iconName: 'Percent' },
+          { name: 'BMI & Health Calculator', slug: '/utility/bmi-calculator', description: 'Calculate Body Mass Index, health category, and ideal weight target.', isPopular: true, badge: 'Health', iconName: 'Zap' }
+        ]
+      },
+      {
+        title: 'Apple iWork & Office Document Converters',
+        description: 'Convert between Apple Pages, Numbers, Microsoft Word, and Excel formats.',
+        tools: [
+          { name: 'Pages to Word (DOCX)', slug: '/utility/pages-to-word', description: 'Convert Apple Pages (.pages) to editable Word (.docx) for Windows PC.', isPopular: true, badge: 'Apple Tool', iconName: 'FileText' },
+          { name: 'Word to Pages Converter', slug: '/utility/word-to-pages', description: 'Convert Microsoft Word (.docx) documents to Apple Pages format.', isPopular: true, badge: 'New', iconName: 'FileCode' },
+          { name: 'Numbers to Excel (XLSX)', slug: '/utility/numbers-to-excel', description: 'Convert Apple Numbers (.numbers) spreadsheets to Microsoft Excel (.xlsx).', isPopular: true, badge: 'Apple Tool', iconName: 'Table' },
+          { name: 'Excel to Numbers Converter', slug: '/utility/excel-to-numbers', description: 'Convert Excel workbooks to Apple Numbers format cleanly.', isPopular: true, badge: 'New', iconName: 'Table' },
+          { name: 'Keynote to PowerPoint & PDF', slug: '/utility/keynote-to-powerpoint', description: 'Convert Apple Keynote (.key) presentations into universal PDF and slide decks.', isPopular: true, badge: 'Keynote .key', iconName: 'Presentation' },
+          { name: 'Markdown Editor & PDF', slug: '/utility/markdown-editor', description: 'Live Markdown preview editor with instant PDF and HTML export.', iconName: 'FileText' }
+        ]
+      },
+      {
+        title: 'Writing, Speech & Text Utilities',
+        description: 'Count words, test typing speed, generate stylish fonts, and convert numbers to words.',
+        tools: [
+          { name: 'Word & Character Counter', slug: '/utility/word-counter', description: 'Count words, characters, sentences, paragraphs, and reading time in real-time.', isPopular: true, badge: 'Upgraded', iconName: 'Type' },
+          { name: 'Typing Speed Test (WPM Cert)', slug: '/utility/typing-speed-test', description: 'Test typing speed in WPM with accuracy score and downloadable PNG certificate.', isPopular: true, badge: 'Viral Test', iconName: 'Zap' },
+          { name: 'Fancy Text Generator', slug: '/utility/fancy-text-generator', description: 'Generate 30+ stylish Unicode fonts for Instagram bio and WhatsApp.', isPopular: true, badge: 'Cool Fonts', iconName: 'Sparkles' },
+          { name: 'Number to Words Converter', slug: '/utility/number-to-words', description: 'Convert numbers into words and currency cheques (USD / INR Lakhs & Crores).', isPopular: true, badge: 'Cheque Tool', iconName: 'DollarSign' },
+          { name: 'Text Case Converter', slug: '/utility/case-converter', description: 'Convert text to UPPERCASE, lowercase, Title Case, camelCase, and snake_case.', badge: 'Writing', iconName: 'Type' },
+          { name: 'Text Repeater (10,000x)', slug: '/utility/text-repeater', description: 'Repeat messages, emojis, and text strings up to 10,000 times for messaging.', badge: 'Viral', iconName: 'Sparkles' },
+          { name: 'Free Text to Speech (TTS)', slug: '/utility/text-to-speech', description: 'Browser-based voice synthesizer with zero character caps.', badge: 'No Limit', iconName: 'Volume2' }
+        ]
+      },
+      {
+        title: 'Developer & Security Utilities',
+        description: 'Fast, secure utilities for web developers and programmers.',
+        tools: [
+          { name: 'Password Generator', slug: '/utility/password-generator', description: 'Generate strong, cryptographically secure passwords 100% offline.', isPopular: true, badge: 'Secure', iconName: 'Lock' },
+          { name: 'PDF & EXIF Metadata Remover', slug: '/utility/metadata-remover', description: 'Scrub hidden camera EXIF, GPS location, author name, and editing software from PDFs and images.', isPopular: true, badge: 'Privacy Scrub', iconName: 'EyeOff' },
+          { name: 'QR Code Generator', slug: '/utility/qr-generator', description: 'Create custom QR codes for URLs, WiFi credentials, vCards, and text.', isPopular: true, badge: 'Custom QR', iconName: 'QrCode' },
+          { name: 'JSON Formatter & Validator', slug: '/utility/json-formatter', description: 'Format, beautify, minify, and validate JSON data with syntax highlighting.', isPopular: true, badge: 'Popular', iconName: 'Code2' },
+          { name: 'Base64 Encoder / Decoder', slug: '/utility/base64', description: 'Encode or decode text, files, and images into Base64 format securely.', isPopular: true, iconName: 'Code2' },
+          { name: 'Hash Generator (MD5 / SHA)', slug: '/utility/hash-generator', description: 'Generate MD5, SHA-1, SHA-256 and verify file checksum integrity.', isPopular: true, badge: 'Checksum', iconName: 'Hash' },
+          { name: 'URL Encoder / Decoder', slug: '/utility/url-encoder-decoder', description: 'Encode or decode URLs and inspect query parameters cleanly.', isPopular: true, badge: 'RFC 3986', iconName: 'FileCode' },
+          { name: 'Glassmorphism CSS Generator', slug: '/utility/glassmorphism-generator', description: 'Generate frosted glass CSS backdrop-filter snippets interactively.', badge: 'UI Tool', iconName: 'Hexagon' }
+        ]
+      },
+      {
+        title: 'Interactive Decision & Focus Tools',
+        description: 'Fun, engaging tools for daily productivity, study focus, and decisions.',
+        tools: [
+          { name: 'Pomodoro Timer & Study Clock', slug: '/utility/pomodoro-timer', description: 'Aesthetic 25-minute productivity timer with break alarms.', badge: 'Focus', iconName: 'Brain' },
+          { name: 'Spin the Wheel & Name Picker', slug: '/utility/spin-the-wheel', description: 'Random winner decision picker with custom slices and confetti.', badge: 'Viral Tool', iconName: 'Dices' },
+          { name: 'Coin Flip Online (3D Toss)', slug: '/utility/coin-flip', description: 'Realistic 3D heads or tails decision coin toss simulator.', badge: '3D Toss', iconName: 'Coins' },
+          { name: 'Virtual Dice Roller (1-12 Dice)', slug: '/utility/dice-roller', description: 'Roll virtual 3D dice for board games and RPG tabletop gaming.', badge: '1-12 Dice', iconName: 'Dices' },
+          { name: 'Random Number Picker & RNG', slug: '/utility/random-number-picker', description: 'Pick random numbers without duplicates and generate random PINs.', badge: 'RNG', iconName: 'Hash' }
+        ]
+      }
+    ],
+    popularTools: [
+      { name: 'Electricity Bill Calculator', slug: '/utility/electricity-bill-calculator', description: 'Calculate monthly electricity bill with state tariff slabs & subsidies.' },
+      { name: 'Age Calculator & Birthday', slug: '/utility/age-calculator', description: 'Find your exact age down to days and minutes for exam forms.' },
+      { name: 'EMI Loan Calculator', slug: '/utility/emi-calculator', description: 'Calculate monthly EMI loan repayments for home and car loans.' },
+      { name: 'Income Tax Calculator', slug: '/utility/income-tax-calculator', description: 'Compare Old vs New Tax Regime savings for FY 2026-27.' },
+      { name: 'Pages to Word (DOCX)', slug: '/utility/pages-to-word', description: 'Convert Apple Pages files to Microsoft Word on Windows PC.' },
+      { name: 'Typing Speed Test', slug: '/utility/typing-speed-test', description: 'Test your WPM typing speed and download a verified certificate.' }
+    ],
+    faqs: [
+      {
+        question: 'Are FileZenith financial calculators updated with the latest 2026-27 rules?',
+        answer: 'Yes! Our Income Tax Calculator incorporates both the revised Old and New Tax Regimes for FY 2026-27 (AY 2027-28), including updated standard deduction caps and slab thresholds. Our EPF Calculator uses the official 8.25% EPFO interest rate.'
+      },
+      {
+        question: 'How does the Electricity Bill Calculator handle state tariff slabs and subsidies?',
+        answer: 'Our Electricity Bill Calculator includes pre-configured tariff slabs for major state electricity boards (including MSEDCL, BSES Delhi, UPPCL, BESCOM, TANGEDCO). It automatically factors in free unit subsidies (such as Delhi 200 units or Karnataka Gruha Jyothi) and fixed meter charges.'
+      },
+      {
+        question: 'How can I open Apple Pages (.pages) or Numbers (.numbers) on a Windows PC?',
+        answer: 'Windows PC cannot natively open Apple iWork files. Use our "Pages to Word" or "Numbers to Excel" converters. Upload your .pages or .numbers file, and our tool extracts the internal document XML and converts it into standard Microsoft Word (.docx) or Excel (.xlsx) formats.'
+      },
+      {
+        question: 'Are generated passwords safe and kept private?',
+        answer: 'Yes. Our Password Generator utilizes your browser native window.crypto.getRandomValues() cryptographic API. Passwords are generated strictly in your computer local memory and are never transmitted across the network or stored in any log.'
+      },
+      {
+        question: 'How does the Typing Speed Test calculate WPM and accuracy?',
+        answer: 'WPM (Words Per Minute) is calculated using the international standard formula: (Total Characters typed / 5) divided by time in minutes. Errors reduce your Net WPM score. Once finished, you can download a personalized PNG certificate showing your typing speed and accuracy.'
+      },
+      {
+        question: 'Does the QR Code Generator create permanent, non-expiring QR codes?',
+        answer: 'Yes! FileZenith generates static QR codes where your data (URL, WiFi, text) is directly encoded into the matrix. Static QR codes never expire, have zero scan limits, and do not redirect through third-party servers.'
+      },
+      {
+        question: 'How do I convert CGPA to percentage using the official formula?',
+        answer: 'For CBSE Class 10/12 and most Indian engineering universities, the standard formula is Percentage = CGPA × 9.5. Our CGPA to Percentage Calculator computes this instantly and also supports university-specific multipliers (such as Mumbai University or VTU).'
+      },
+      {
+        question: 'Can I use these utility tools offline without an active internet connection?',
+        answer: 'Yes! Once the page is loaded in your browser, virtually all utility tools (calculators, text converters, password generators, and decision tools) execute purely via client-side JavaScript and work completely offline.'
+      }
+    ],
+    relatedCategories: [
+      { name: 'PDF Tools', slug: '/pdf-tools', desc: 'Merge, split, and compress PDF documents.' },
+      { name: 'Image Tools', slug: '/image-tools', desc: 'Compress, convert, and resize images.' },
+      { name: 'Social Media Tools', slug: '/social-tools', desc: 'WhatsApp direct chat, thumbnail downloads, and bio fonts.' },
+      { name: 'Govt Job Exam Tools', slug: '/govt-job-tools', desc: 'SSC, UPSC, Aadhaar print, and signature resizers.' }
+    ],
+    keywords: [
+      'free online utility tools',
+      'online calculators and converters',
+      'electricity bill calculator india',
+      'calculate electricity bill from meter reading',
+      'msedcl electricity bill calculator',
+      'bses delhi electricity bill calculator',
+      'uppcl bijli bill calculator',
+      'bescom tangedco power tariff calculator',
+      'gruha jyothi free electricity calculator',
+      'epf balance growth calculator 8.25',
+      'epfo pension maturity corpus calculator',
+      'age calculator online exact years months days',
+      'date of birth age calculator for sarkari exams',
+      'income tax calculator old vs new regime 2026-27',
+      'ctc to in hand take home salary calculator',
+      'home loan emi calculator with amortization schedule',
+      'car loan personal loan emi calculator',
+      'sip mutual fund compounding return calculator',
+      'gst calculator add remove gst 5 12 18 28',
+      'cgpa to percentage cbse 9.5 calculator',
+      'mumbai university vtu cgpa to percentage',
+      'percentage marks discount difference calculator',
+      'pages to word converter free apple mac',
+      'convert .pages to docx windows pc',
+      'numbers to excel converter online .numbers to .xlsx',
+      'keynote to powerpoint pptx converter',
+      'free invoice generator and hra rent receipt maker',
+      'typing speed test online wpm certificate free',
+      'word and character counter reading time',
+      'fancy text generator for bio',
+      'free offline password generator cryptographically secure',
+      'exif metadata remover pdf photo privacy scrub',
+      'custom vector qr code generator with logo colors',
+      'json formatter validator beautifier minify',
+      'base64 encoder decoder image to data url',
+      'pomodoro timer 25 min study clock',
+      'spin the wheel random winner picker confetti'
     ]
   },
 
   'social': {
     slug: 'social',
     title: 'Free Online Social Media Tools: WhatsApp Direct, Thumbnail Preview & Bio Fonts',
-    metaTitle: 'Free Social Media Tools: WhatsApp Direct, Video Thumbnails & Bio | FileZenith',
-    metaDescription: '100% Free online social media tools: Launch WhatsApp chats without saving numbers, preview 1080p YouTube video covers, extract video tags, and generate stylish bio fonts.',
+    metaTitle: 'Free Online Social Media Tools: WhatsApp Direct, HD Thumbnails & Bio Fonts | FileZenith',
+    metaDescription: '100% Free online social media creator tools: Send WhatsApp messages without saving numbers (wa.me), inspect & preview 1080p YouTube video covers, extract viral SEO tags, and format aesthetic bio fonts.',
     h1: 'Free Online Social Media Utilities & Creator Tools',
     intro: 'Streamline your social media workflow with instant, client-side tools. Start WhatsApp chats with unsaved numbers, preview crystal-clear 1080p YouTube video thumbnails, extract ranking tags, and format eye-catching bio fonts — no app installs or logins required.',
     subgroups: [
@@ -523,14 +743,136 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
       { name: 'PDF Tools', slug: '/pdf-tools', desc: 'Merge, split, and compress PDF documents.' }
     ],
     keywords: [
+      'free online social media tools',
+      'social media creator utilities',
       'whatsapp direct chat without saving number',
+      'send whatsapp message without saving contact wa.me',
+      'open whatsapp chat without contact',
+      'whatsapp link generator free',
       'youtube thumbnail preview 1080p full hd',
+      'view youtube video cover image high resolution',
+      'youtube video thumbnail downloader inspector',
       'youtube tag extractor seo tool',
-      'instagram caption copier with line breaks',
+      'extract tags from youtube video url',
+      'find competitor youtube video tags',
+      'instagram caption copier with clean line breaks',
+      'copy instagram captions with spaces',
       'fancy text generator for instagram bio',
-      'stylish font generator for whatsapp',
-      'text repeater 10000 times online free',
-      'qr code generator for social media profile'
+      'aesthetic unicode fonts for instagram and tiktok',
+      'stylish font generator for whatsapp bio',
+      'cool nickname fonts for pubg free fire discord',
+      'text repeater 10000 times copy and paste',
+      'free text to speech voice generator for reels shorts',
+      'spin the wheel giveaway random winner picker',
+      'social media profile qr code generator',
+      'utm campaign link builder clean url encoder'
+    ]
+  },
+
+  'social-tools': {
+    slug: 'social-tools',
+    title: 'Free Online Social Media Tools: WhatsApp Direct, Thumbnail Preview & Bio Fonts',
+    metaTitle: 'Free Online Social Media Tools: WhatsApp Direct, HD Thumbnails & Bio Fonts | FileZenith',
+    metaDescription: '100% Free online social media creator tools: Send WhatsApp messages without saving numbers (wa.me), inspect & preview 1080p YouTube video covers, extract viral SEO tags, and format aesthetic bio fonts.',
+    h1: 'Free Online Social Media Utilities & Creator Tools',
+    intro: 'Streamline your social media workflow with instant, client-side tools. Start WhatsApp chats with unsaved numbers, preview crystal-clear 1080p YouTube video thumbnails, extract ranking tags, and format eye-catching bio fonts — no app installs or logins required.',
+    subgroups: [
+      {
+        title: 'WhatsApp & Messaging Helpers',
+        description: 'Chat directly without cluttering your address book contacts.',
+        tools: [
+          { name: 'WhatsApp Direct Chat Launcher', slug: '/social/whatsapp-direct-chat', description: 'Open WhatsApp chats directly with any phone number without saving it to your contacts.', isPopular: true, badge: 'wa.me', iconName: 'MessageSquare' }
+        ]
+      },
+      {
+        title: 'Video Thumbnail Preview & SEO Tags',
+        description: 'Inspect HD video covers and extract keywords to analyze video SEO.',
+        tools: [
+          { name: 'YouTube 1080p Thumbnail Preview', slug: '/social/youtube-thumbnail-downloader', description: 'Preview maximum resolution (1080p Full HD) thumbnail cover images from any YouTube video URL.', isPopular: true, badge: '1080p HD', iconName: 'Camera' },
+          { name: 'YouTube SEO Tag Extractor', slug: '/social/youtube-tag-extractor', description: 'Extract ranking keywords, video tags, and metadata to boost your video SEO and visibility.', isPopular: true, badge: 'SEO Tags', iconName: 'Hash' }
+        ]
+      },
+      {
+        title: 'Creator Fonts, Bios & Profile Links',
+        description: 'Format bios, generate viral text, and encode clean links for social profiles.',
+        tools: [
+          { name: 'Instagram Caption Copier', slug: '/social/instagram-caption-copier', description: 'Copy clean Instagram captions, quotes, and hashtags with proper line breaks.', isPopular: true, badge: 'Captions', iconName: 'Type' },
+          { name: 'Fancy Text & Bio Font Generator', slug: '/utility/fancy-text-generator', description: 'Generate 30+ stylish Unicode fonts and gaming nicknames for Instagram, TikTok, and WhatsApp bios.', isPopular: true, badge: 'Cool Fonts', iconName: 'Sparkles' },
+          { name: 'Custom QR Code Generator', slug: '/utility/qr-generator', description: 'Generate custom QR codes linking to your social profiles, Linktree, and YouTube channel.', isPopular: true, badge: 'Custom QR', iconName: 'QrCode' },
+          { name: 'URL Encoder / Decoder', slug: '/utility/url-encoder-decoder', description: 'Encode social campaign UTM parameters and clean redirected URLs cleanly.', badge: 'RFC 3986', iconName: 'FileCode' },
+          { name: 'Text Repeater (10,000x)', slug: '/utility/text-repeater', description: 'Repeat viral messages, emojis, and fun text chains up to 10,000 times for WhatsApp and Telegram.', badge: 'Viral', iconName: 'Sparkles' }
+        ]
+      }
+    ],
+    popularTools: [
+      { name: 'WhatsApp Direct Chat Launcher', slug: '/social/whatsapp-direct-chat', description: 'Chat on WhatsApp without saving strangers or business numbers.' },
+      { name: 'YouTube 1080p Thumbnail Preview', slug: '/social/youtube-thumbnail-downloader', description: 'Preview Full HD 1080p cover images from any YouTube video URL.' },
+      { name: 'YouTube SEO Tag Extractor', slug: '/social/youtube-tag-extractor', description: 'Find competitor video tags and viral keywords with one click.' },
+      { name: 'Fancy Text Generator', slug: '/utility/fancy-text-generator', description: 'Generate stylish aesthetic Unicode fonts for Instagram & TikTok bios.' }
+    ],
+    faqs: [
+      {
+        question: 'How does WhatsApp Direct Chat work without saving the phone number?',
+        answer: 'WhatsApp provides an official deep link API ("https://wa.me/<number>"). Our tool formats the international country code and phone number, allowing your phone or WhatsApp Web to launch an instant conversation without creating a new address book entry.'
+      },
+      {
+        question: 'Does FileZenith store or access my WhatsApp messages or contacts?',
+        answer: 'Never. FileZenith simply generates the official WhatsApp deep link locally in your browser. We never have access to your contacts, chat history, or personal messages.'
+      },
+      {
+        question: 'Is it legal to inspect YouTube video thumbnail covers?',
+        answer: 'YouTube thumbnails are publicly accessible media assets. Viewing and inspecting thumbnails for personal reference, fair use analysis, design inspiration, or backup of your own content is generally permitted. However, re-uploading other creators artwork as your own may infringe on copyright.'
+      },
+      {
+        question: 'What resolution thumbnail will I see in the YouTube Thumbnail Preview tool?',
+        answer: 'Our tool fetches the highest available quality from YouTube public CDN, starting with maximum resolution 1080p ("maxresdefault.jpg" at 1920x1080). If the creator uploaded a lower-res image, it seamlessly falls back to 720p or standard high definition.'
+      },
+      {
+        question: 'How can I use the extracted YouTube tags to rank my own videos?',
+        answer: 'Enter the URL of high-ranking competitor videos in your niche. Our Tag Extractor reveals the hidden keywords and search terms the creator tagged. You can analyze their keyword strategy, identify missing topic clusters, and incorporate relevant keywords into your own video titles and descriptions.'
+      },
+      {
+        question: 'Do fancy Unicode fonts work on all phones (iPhone and Android)?',
+        answer: 'Yes! Fancy text relies on universal Unicode alphanumeric mathematical symbols that are natively supported on modern iOS, Android, macOS, and Windows operating systems. They display properly in Instagram bios, TikTok profiles, Discord usernames, and WhatsApp messages.'
+      },
+      {
+        question: 'Why do line breaks disappear on Instagram captions, and how does your tool fix it?',
+        answer: 'Instagram default text parser frequently collapses blank returns and empty line breaks. Our Instagram Caption tool inserts invisible whitespace characters (such as non-breaking space and zero-width joiners) between paragraphs so your formatting stays perfectly structured.'
+      },
+      {
+        question: 'Are there daily limits on using these social media tools?',
+        answer: 'No! All social media utilities on FileZenith are completely free with zero limits on searches, previews, or chat launches.'
+      }
+    ],
+    relatedCategories: [
+      { name: 'Utility Tools', slug: '/utility-tools', desc: 'Calculators, text formatters, and password generators.' },
+      { name: 'Image Tools', slug: '/image-tools', desc: 'Compress, crop, and convert images.' },
+      { name: 'PDF Tools', slug: '/pdf-tools', desc: 'Merge, split, and compress PDF documents.' }
+    ],
+    keywords: [
+      'free online social media tools',
+      'social media creator utilities',
+      'whatsapp direct chat without saving number',
+      'send whatsapp message without saving contact wa.me',
+      'open whatsapp chat without contact',
+      'whatsapp link generator free',
+      'youtube thumbnail preview 1080p full hd',
+      'view youtube video cover image high resolution',
+      'youtube video thumbnail downloader inspector',
+      'youtube tag extractor seo tool',
+      'extract tags from youtube video url',
+      'find competitor youtube video tags',
+      'instagram caption copier with clean line breaks',
+      'copy instagram captions with spaces',
+      'fancy text generator for instagram bio',
+      'aesthetic unicode fonts for instagram and tiktok',
+      'stylish font generator for whatsapp bio',
+      'cool nickname fonts for pubg free fire discord',
+      'text repeater 10000 times copy and paste',
+      'free text to speech voice generator for reels shorts',
+      'spin the wheel giveaway random winner picker',
+      'social media profile qr code generator',
+      'utm campaign link builder clean url encoder'
     ]
   },
 

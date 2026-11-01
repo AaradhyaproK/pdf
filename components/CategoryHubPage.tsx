@@ -709,8 +709,17 @@ export function CategoryHubPage({ category }: { category: CategoryConfig }) {
     return category.subgroups.reduce((acc, sub) => acc + sub.tools.length, 0);
   }, [category.subgroups]);
 
+  const hubBgImage = useMemo(() => {
+    const s = category.slug.toLowerCase();
+    if (s.includes('pdf')) return '/bg-pdf.webp';
+    if (s.includes('image')) return '/bg-image.webp';
+    if (s.includes('social')) return '/bg-social.webp';
+    if (s.includes('utility') || s.includes('calc') || s.includes('tool')) return '/bg-utility.webp';
+    return '/bging.webp';
+  }, [category.slug]);
+
   return (
-    <main className="min-h-screen bg-slate-50/50 py-8 px-4 sm:px-6 lg:px-8 text-slate-900">
+    <main className="min-h-screen bg-slate-50/70 text-slate-900">
       {/* Inject Structured Data Schemas */}
       <script
         type="application/ld+json"
@@ -729,7 +738,72 @@ export function CategoryHubPage({ category }: { category: CategoryConfig }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareAppSchema) }}
       />
 
-      <div className="max-w-7xl mx-auto space-y-8">
+      {/* Authority Hero Banner Section (Full width matching Landing Page) */}
+      <section className="block relative overflow-hidden pt-10 sm:pt-16 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 border-b border-slate-200/80 bg-slate-50">
+        {/* 3D Floating Ecosystem Background Artwork */}
+        <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
+          <img
+            src={hubBgImage}
+            alt={`${category.h1} Studio`}
+            className="w-full h-full object-cover object-center scale-[1.02] transform-gpu"
+          />
+          {/* Precision Center-Vignette: Keeps center text razor-sharp while showcasing colorful 3D file icons on flanks */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(255,255,255,0.75)_0%,_rgba(255,255,255,0.40)_50%,_rgba(255,255,255,0.15)_100%)]" />
+          {/* Seamless bottom fade transition into the page canvas */}
+          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-50 via-slate-50/50 to-transparent" />
+        </div>
+
+        <div className="max-w-4xl mx-auto text-center space-y-4 sm:space-y-6 relative z-10">
+          {/* Trust Badges Bar on Top of Main Title */}
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs font-bold text-slate-700">
+            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 text-indigo-800 border border-indigo-200 shadow-2xs">
+              <Grid className="w-3.5 h-3.5 text-indigo-600" />
+              {category.title.split(':')[0]} Hub
+            </span>
+            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 shadow-2xs">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+              100% Free • Unlimited Usage
+            </span>
+            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 text-rose-800 border border-rose-200 shadow-2xs">
+              <ShieldCheck className="w-3.5 h-3.5 text-rose-600" />
+              Private In-Browser Processing
+            </span>
+          </div>
+
+          {/* High-Contrast Bold Headline */}
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-tight">
+            {category.h1}
+          </h1>
+
+          {/* Crisp Subtitle */}
+          <p className="text-sm sm:text-base lg:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-medium">
+            {category.intro}
+          </p>
+
+          {/* Centered Trust Highlights Badges Strip */}
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 text-xs font-bold text-slate-700">
+            <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-sm border border-slate-200 shadow-2xs">
+              <Lock className="w-3.5 h-3.5 text-indigo-600" />
+              100% On-Device
+            </span>
+            <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-sm border border-slate-200 shadow-2xs">
+              <Zap className="w-3.5 h-3.5 text-emerald-600" />
+              Instant Speed
+            </span>
+            <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-sm border border-slate-200 shadow-2xs">
+              <Cpu className="w-3.5 h-3.5 text-purple-600" />
+              No Size Caps
+            </span>
+            <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-sm border border-slate-200 shadow-2xs">
+              <CheckCircle2 className="w-3.5 h-3.5 text-amber-600" />
+              Free Forever
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* Main Content Body */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         {/* Breadcrumb Navigation */}
         <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-bold text-slate-500">
           <Link href="/" className="hover:text-indigo-600 transition-colors">
@@ -738,72 +812,6 @@ export function CategoryHubPage({ category }: { category: CategoryConfig }) {
           <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
           <span className="text-slate-900 font-extrabold truncate">{category.h1}</span>
         </nav>
-
-        {/* Hero Header Banner */}
-        <header className="space-y-4 bg-white p-6 sm:p-10 rounded-3xl border border-slate-200/90 shadow-xs relative overflow-hidden">
-          <div className="flex flex-wrap items-center gap-2.5 text-xs font-bold">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 font-extrabold border border-indigo-100">
-              <Grid className="w-3.5 h-3.5 text-indigo-600" /> {category.title.split(':')[0]}
-            </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 font-bold border border-emerald-200">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" /> 100% Client-Side Engine
-            </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-900 font-bold border border-amber-200">
-              <Lock className="w-3.5 h-3.5 text-amber-600" /> Zero Server Uploads • Zero Logs
-            </span>
-          </div>
-
-          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
-            {category.h1}
-          </h1>
-
-          <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed max-w-3xl">
-            {category.intro}
-          </p>
-
-          {/* Trust Highlights Strip */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-slate-100">
-            <div className="flex items-center gap-2.5 p-3 rounded-2xl bg-slate-50 border border-slate-200/70">
-              <div className="p-2 rounded-xl bg-indigo-100 text-indigo-700 shrink-0">
-                <Lock className="w-4 h-4" />
-              </div>
-              <div className="min-w-0">
-                <p className="text-xs font-black text-slate-900 truncate">100% On-Device</p>
-                <p className="text-[10px] text-slate-500 font-medium truncate">Zero file upload</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2.5 p-3 rounded-2xl bg-slate-50 border border-slate-200/70">
-              <div className="p-2 rounded-xl bg-emerald-100 text-emerald-700 shrink-0">
-                <Zap className="w-4 h-4" />
-              </div>
-              <div className="min-w-0">
-                <p className="text-xs font-black text-slate-900 truncate">Instant Speed</p>
-                <p className="text-[10px] text-slate-500 font-medium truncate">No wait queues</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2.5 p-3 rounded-2xl bg-slate-50 border border-slate-200/70">
-              <div className="p-2 rounded-xl bg-purple-100 text-purple-700 shrink-0">
-                <Cpu className="w-4 h-4" />
-              </div>
-              <div className="min-w-0">
-                <p className="text-xs font-black text-slate-900 truncate">No Size Caps</p>
-                <p className="text-[10px] text-slate-500 font-medium truncate">Unlimited file size</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2.5 p-3 rounded-2xl bg-slate-50 border border-slate-200/70">
-              <div className="p-2 rounded-xl bg-amber-100 text-amber-800 shrink-0">
-                <CheckCircle2 className="w-4 h-4" />
-              </div>
-              <div className="min-w-0">
-                <p className="text-xs font-black text-slate-900 truncate">Free Forever</p>
-                <p className="text-[10px] text-slate-500 font-medium truncate">No watermarks</p>
-              </div>
-            </div>
-          </div>
-        </header>
 
         {/* Top Header Leaderboard Ad Slot */}
         <AdSlot slotType="header-leaderboard" />
