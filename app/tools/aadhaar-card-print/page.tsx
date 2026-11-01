@@ -448,12 +448,12 @@ export default function AadhaarCardPrintPage() {
                       'Aadhaar Card Lamination Size 65x95 mm',
                       '5 Copies Aadhaar Batch Sheet on A4',
                       'Crop Aadhaar Card Online Free',
-                      'UIDAI Compliant e-Aadhaar Card Printer',
+                      'Standard 85.6x54 mm Document Scaler',
                       'How to Print e-Aadhaar on Photo Paper',
                       'Aadhaar Card Print Ready PDF',
                       'e-Aadhaar PDF Password Format ANIL1995',
-                      'Print PVC Aadhaar Card at Home',
-                      'Sarkari Aadhaar Card Print Tool Free',
+                      'CR80 Wallet Card Size Scaling',
+                      'Identity Document Paper Print Assistant',
                       'Epson Canon Inkjet Aadhaar Print Scaling 100%',
                     ].map((kw, i) => (
                       <span
