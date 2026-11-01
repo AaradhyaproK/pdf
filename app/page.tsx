@@ -131,6 +131,8 @@ export default function HomePage() {
           <img
             src="/bging.webp"
             alt="FileZenith In-Browser File Studio"
+            loading="eager"
+            fetchPriority="high"
             className="w-full h-full object-cover object-center scale-[1.02] transform-gpu"
           />
           {/* Precision Center-Vignette: Keeps center text razor-sharp while showcasing colorful 3D file icons on flanks */}
