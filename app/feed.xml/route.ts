@@ -1,5 +1,7 @@
 import { getAllPosts } from '@/lib/blog';
 
+export const dynamic = 'force-static';
+
 export async function GET() {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.filezenith.com';
   const posts = getAllPosts();

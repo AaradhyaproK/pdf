@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 3600; // Enable 1 hour ISR for live post updates
+export const dynamic = 'force-static';
 
 export default async function BlogIndexPage() {
   const staticPosts = getAllPosts();

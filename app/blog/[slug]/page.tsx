@@ -24,7 +24,7 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 
-export const revalidate = 86400; // 24 hours ISR
+export const dynamic = 'force-static';
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
