@@ -1031,12 +1031,14 @@ export function Navbar() {
             </Link>
 
             <div
-              className={`absolute top-full left-0 w-[880px] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-3.5 transition-all duration-200 max-h-[calc(100vh-80px)] flex flex-col z-50 ${
+              className={`absolute top-full left-1/2 -translate-x-1/2 w-[780px] max-w-[calc(100vw-32px)] bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-3.5 transition-all duration-200 max-h-[calc(100vh-80px)] flex flex-col z-50 ${
                 activeDropdown === 'image'
                   ? 'opacity-100 visible translate-y-0 pointer-events-auto'
                   : 'opacity-0 invisible translate-y-2 pointer-events-none'
               }`}
             >
+              {/* Center Pointer Notch directly below Image Studio hover */}
+              <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-t border-l border-slate-200/90 rotate-45 pointer-events-none" />
               <div className="px-3 py-2 flex items-center justify-between border-b border-slate-100 shrink-0 mb-1.5">
                 <Link
                   href="/image-tools"
