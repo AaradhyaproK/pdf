@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { ToolLayout } from '@/components/ToolLayout';
 import { PDFDocument, PageSizes } from 'pdf-lib';
 import { toast } from 'sonner';
+import { triggerBrowserDownload } from '@/lib/download-helper';
 import {
   Upload,
   RefreshCw,
@@ -599,15 +600,8 @@ export default function PicsToPDFPage() {
       }
 
       const pdfBytes = await outPdfDoc.save();
-      const blob = new Blob([pdfBytes as any], { type: 'application/pdf' });
-      const blobUrl = URL.createObjectURL(blob);
-
       const downloadName = `document-${Date.now()}.pdf`;
-      const a = document.createElement('a');
-      a.href = blobUrl;
-      a.download = downloadName;
-      a.click();
-      URL.revokeObjectURL(blobUrl);
+      triggerBrowserDownload(pdfBytes, downloadName, 'application/pdf');
 
       const sizeMB = (pdfBytes.byteLength / (1024 * 1024)).toFixed(2);
       toast.success(`PDF downloaded (${sizeMB} MB)!`);

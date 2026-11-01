@@ -15,6 +15,7 @@ import {
   ExternalLink,
 } from 'lucide-react';
 import { toast } from 'sonner';
+import { triggerBrowserDownload } from '@/lib/download-helper';
 
 interface FileReadyModalProps {
   isOpen: boolean;
@@ -202,17 +203,18 @@ export function FileReadyModal({
           {/* Primary Action Buttons */}
           <div className="space-y-2 pt-1">
             {/* Download CTA — Clean Label That Never Wraps Awkwardly */}
-            <a
-              href={downloadUrl}
-              download={fileName}
+            <button
               onClick={() => {
-                toast.success('Download started! Thank you for using FileZenith.');
+                if (downloadUrl) {
+                  triggerBrowserDownload(downloadUrl, fileName);
+                  toast.success('Download started! Thank you for using FileZenith.');
+                }
               }}
               className="w-full py-3.5 px-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 active:scale-[0.99] text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
               <Download className="w-4 h-4" />
               <span>Download {ext} File</span>
-            </a>
+            </button>
 
             {/* High-Impact WhatsApp Viral Share Button */}
             <button

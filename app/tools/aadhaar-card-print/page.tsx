@@ -168,21 +168,34 @@ export default function AadhaarCardPrintPage() {
         <header className="space-y-3 print:hidden">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 border border-rose-200 text-rose-700 text-xs font-black uppercase tracking-wider">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Cyber Cafe & CSC Print Ready • Exact ISO ID-1 Standard</span>
+            <span>Document Formatting Studio • Exact ISO ID-1 Standard</span>
           </div>
 
           <h1 className="text-2xl sm:text-4xl font-black text-slate-950 tracking-tight leading-tight">
-            Aadhaar Card Print Tool (e-Aadhaar to A4 & PVC Card)
+            e-Aadhaar A4 Paper Formatting &amp; Sizing Helper
           </h1>
 
           <p className="text-sm sm:text-base text-slate-600 font-medium max-w-3xl leading-relaxed">
-            Unlock e-Aadhaar PDF, crop front & back cards, and format onto standard A4 paper or PVC card with exact ISO 85.6 × 54.0 mm dimensions. 100% private in-browser processing.
+            Format your personal e-Aadhaar PDF onto standard A4 paper or photo paper with exact ISO 85.6 × 54.0 mm dimensions. 100% private in-browser document scaling with zero server uploads.
           </p>
         </header>
 
-        {/* Top Header Leaderboard Ad Slot */}
-        <div className="w-full print:hidden">
-          <AdSlot slotType="header-leaderboard" />
+        {/* UIDAI Compliance & Legal Disclaimer Notice */}
+        <div className="p-4 sm:p-5 rounded-3xl bg-amber-50/90 border border-amber-200 text-amber-950 space-y-2 text-xs print:hidden shadow-xs">
+          <div className="flex items-center gap-2 font-black uppercase tracking-wider text-amber-900">
+            <ShieldCheck className="w-4 h-4 text-amber-700 shrink-0" />
+            <span>Official UIDAI Compliance &amp; Legal Notice</span>
+          </div>
+          <p className="leading-relaxed font-medium text-amber-900">
+            <strong>Disclaimer:</strong> FileZenith is an independent educational client-side document formatting tool and is <strong>NOT</strong> affiliated with, authorized, associated, or endorsed by the Unique Identification Authority of India (UIDAI) or the Government of India. FileZenith does not issue, verify, or produce official Aadhaar cards.
+          </p>
+          <p className="leading-relaxed text-amber-800">
+            Under UIDAI regulations, unofficial PVC Aadhaar cards printed from open markets without authorized security holograms are not recommended. Genuine, tamper-proof PVC Aadhaar cards can be ordered directly from the official UIDAI portal at{' '}
+            <a href="https://myaadhaar.uidai.gov.in" target="_blank" rel="noopener noreferrer" className="font-bold underline text-amber-950 hover:text-indigo-600">
+              myaadhaar.uidai.gov.in
+            </a>
+            . This tool is provided solely for personal offline A4 document scaling and paper printing assistance.
+          </p>
         </div>
 
         {/* 2-Column Responsive Layout (Main Studio + Sticky Sidebar) */}
@@ -191,11 +204,6 @@ export default function AadhaarCardPrintPage() {
           <div className="lg:col-span-8 space-y-8 print:block print:p-0 print:m-0 print:w-full print:space-y-0">
             {/* Aadhaar Print Studio Component */}
             <AadhaarPrintStudio />
-
-            {/* In-Feed Post-Download Ad Unit (Strictly >= 25px clear margin to prevent accidental clicks) */}
-            <div className="w-full pt-4 sm:pt-6 print:hidden">
-              <AdSlot slotType="post-download" />
-            </div>
 
             {/* Standard ID-1 Physical Dimensions Table */}
             <section className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6 print:hidden">
@@ -513,11 +521,6 @@ export default function AadhaarCardPrintPage() {
 
           {/* Sticky Sidebar Column (4 Cols) */}
           <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-20 print:hidden">
-            {/* Sticky Sidebar Ad Unit */}
-            <div className="w-full">
-              <AdSlot slotType="sticky-sidebar" />
-            </div>
-
             {/* Quick ID-1 Specification Cheat Sheet */}
             <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
               <div className="flex items-center gap-2 border-b border-slate-100 pb-3">

@@ -1607,24 +1607,24 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/social/youtube-thumbnail-downloader': {
     slug: '/social/youtube-thumbnail-downloader',
-    title: 'YouTube Thumbnail Downloader (1080p Full HD & 4K Image Grabber)',
-    metaTitle: 'YouTube Thumbnail Downloader Free - Download HD 1080p Cover | FileZenith',
-    description: 'Download YouTube video cover thumbnail images free in 1080p Full HD (MaxRes), HD (640p), HQ, and MQ quality. Preview and save YouTube thumbnails instantly.',
+    title: 'YouTube Thumbnail Viewer & HD Cover Preview (1080p MaxRes)',
+    metaTitle: 'YouTube Thumbnail Viewer - Preview HD 1080p Video Covers | FileZenith',
+    description: 'Preview YouTube video cover thumbnails in 1080p Full HD (MaxRes), HD (640p), HQ, and standard quality. Inspect YouTube thumbnails and video assets for research and fair use.',
     keywords: [
-      'youtube thumbnail downloader',
-      'download youtube video thumbnail hd 1080p',
-      'get youtube thumbnail image free',
-      'youtube thumbnail saver maxresdefault',
-      'youtube video cover photo downloader'
+      'youtube thumbnail viewer',
+      'youtube video cover preview hd 1080p',
+      'view youtube thumbnail image free',
+      'youtube thumbnail inspect maxresdefault',
+      'youtube video cover photo preview'
     ],
     category: 'social',
     howToSteps: [
       { title: 'Paste YouTube URL', text: 'Paste any YouTube video or Shorts link (e.g. https://www.youtube.com/watch?v=...)' },
-      { title: 'Preview Resolutions', text: 'View 1080p MaxRes, 640p HD, and 480p HQ thumbnails.' },
-      { title: 'Download Image', text: 'Click Download HD Thumbnail to save high-res JPG directly to device memory.' }
+      { title: 'Inspect Resolutions', text: 'View 1080p MaxRes, 640p HD, and 480p HQ thumbnails.' },
+      { title: 'Save Cover Image', text: 'Save high-res JPG directly to device memory for reference.' }
     ],
     faqs: [
-      { question: 'How do I download a YouTube thumbnail in 1080p max resolution?', answer: 'Just paste the YouTube URL. FileZenith automatically fetches the maxresdefault.jpg file directly from YouTube servers.' }
+      { question: 'How do I view a YouTube thumbnail in 1080p max resolution?', answer: 'Just paste the YouTube URL. FileZenith automatically displays the maxresdefault.jpg file directly from public YouTube CDN.' }
     ]
   },
 

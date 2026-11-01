@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { ToolLayout } from '@/components/ToolLayout';
 import { parseSocialMediaURL } from '@/lib/social-engine';
 import { toast } from 'sonner';
+import { triggerBrowserDownload } from '@/lib/download-helper';
 import { Video, Download, Image as ImageIcon, Copy, Check, Sparkles } from 'lucide-react';
 
 export default function YouTubeThumbnailDownloaderPage() {
@@ -34,20 +35,15 @@ export default function YouTubeThumbnailDownloaderPage() {
 
   const downloadThumbnail = (imgUrl: string, filename: string) => {
     const proxyUrl = `/api/download-image?url=${encodeURIComponent(imgUrl)}&filename=${encodeURIComponent(filename)}`;
-    const a = document.createElement('a');
-    a.href = proxyUrl;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    toast.success('Downloading thumbnail image...');
+    triggerBrowserDownload(proxyUrl, filename);
+    toast.success('Saving cover image...');
   };
 
   return (
     <ToolLayout
       slug="/social/youtube-thumbnail-downloader"
-      title="YouTube Thumbnail Downloader (1080p Full HD Grabber)"
-      subtitle="Download YouTube video cover thumbnails free in 1080p MaxRes, 640p HD, and 480p HQ resolutions."
+      title="YouTube Thumbnail Viewer & HD Cover Preview"
+      subtitle="Preview and inspect YouTube video cover thumbnails in 1080p MaxRes, 640p HD, and 480p HQ resolutions."
       badgeText="Social Media Tool"
     >
       <div className="space-y-6 text-slate-900">
@@ -87,9 +83,9 @@ export default function YouTubeThumbnailDownloaderPage() {
               />
               <button
                 onClick={() => downloadThumbnail(`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`, `yt-thumbnail-1080p-${videoId}.jpg`)}
-                className="w-full py-3 rounded-2xl bg-rose-600 hover:bg-rose-500 text-white font-black text-xs flex items-center justify-center gap-2 transition"
+                className="w-full py-3 rounded-2xl bg-rose-600 hover:bg-rose-500 text-white font-black text-xs flex items-center justify-center gap-2 transition cursor-pointer"
               >
-                <Download className="w-4 h-4" /> Download 1080p HD Image
+                <Download className="w-4 h-4" /> Save 1080p HD Cover
               </button>
             </div>
 
@@ -106,9 +102,9 @@ export default function YouTubeThumbnailDownloaderPage() {
               />
               <button
                 onClick={() => downloadThumbnail(`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`, `yt-thumbnail-640p-${videoId}.jpg`)}
-                className="w-full py-3 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-black text-xs flex items-center justify-center gap-2 transition"
+                className="w-full py-3 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-black text-xs flex items-center justify-center gap-2 transition cursor-pointer"
               >
-                <Download className="w-4 h-4" /> Download 640p Image
+                <Download className="w-4 h-4" /> Save 640p Cover
               </button>
             </div>
           </div>

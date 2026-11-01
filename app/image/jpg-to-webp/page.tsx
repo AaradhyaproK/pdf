@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import Link from 'next/link';
 import { ToolLayout } from '@/components/ToolLayout';
 import { toast } from 'sonner';
+import { triggerBrowserDownload } from '@/lib/download-helper';
 import {
   Upload,
   Download,
@@ -109,10 +110,7 @@ export default function JPGToWebPPage() {
   };
 
   const handleDownloadSingle = (item: ConvertedItem) => {
-    const a = document.createElement('a');
-    a.href = item.dataUrl;
-    a.download = item.originalName;
-    a.click();
+    triggerBrowserDownload(item.dataUrl, item.originalName, 'image/webp');
   };
 
   const handleDownloadAll = () => {

@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { ToolLayout } from '@/components/ToolLayout';
 import { PDFDocument } from 'pdf-lib';
 import { toast } from 'sonner';
+import { triggerBrowserDownload } from '@/lib/download-helper';
 import { renderPDFPagesToImages } from '@/lib/pdf-engine';
 import {
   ShieldCheck,
@@ -635,9 +636,16 @@ export default function MaskAadhaarPage() {
 
       const highResCanvas = canvasRef.current;
       const dataUrl = highResCanvas.toDataURL('image/jpeg', 0.98);
+      const jpgBlob = await new Promise<Blob | null>((resolve) =>
+        highResCanvas.toBlob(resolve, 'image/jpeg', 0.98)
+      );
 
       // Create download JPG url
-      setDownloadJpgUrl(dataUrl);
+      if (jpgBlob) {
+        setDownloadJpgUrl(URL.createObjectURL(jpgBlob));
+      } else {
+        setDownloadJpgUrl(dataUrl);
+      }
       setMaskedPreviewUrl(dataUrl);
 
       // 2. Embed into PDF
@@ -1058,24 +1066,32 @@ export default function MaskAadhaarPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {downloadPdfUrl && (
-                      <a
-                        href={downloadPdfUrl}
-                        download={`Masked_Aadhaar_${Date.now()}.pdf`}
-                        className="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black flex items-center justify-center gap-2 shadow-xs transition-colors"
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (downloadPdfUrl) {
+                            triggerBrowserDownload(downloadPdfUrl, `Masked_Aadhaar_${Date.now()}.pdf`);
+                          }
+                        }}
+                        className="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black flex items-center justify-center gap-2 shadow-xs transition-colors cursor-pointer"
                       >
                         <Download className="w-4 h-4" />
                         Download Masked PDF
-                      </a>
+                      </button>
                     )}
                     {downloadJpgUrl && (
-                      <a
-                        href={downloadJpgUrl}
-                        download={`Masked_Aadhaar_${Date.now()}.jpg`}
-                        className="w-full py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-black flex items-center justify-center gap-2 shadow-xs transition-colors"
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (downloadJpgUrl) {
+                            triggerBrowserDownload(downloadJpgUrl, `Masked_Aadhaar_${Date.now()}.jpg`);
+                          }
+                        }}
+                        className="w-full py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-black flex items-center justify-center gap-2 shadow-xs transition-colors cursor-pointer"
                       >
                         <Download className="w-4 h-4" />
                         Download Masked JPG Image
-                      </a>
+                      </button>
                     )}
                   </div>
                 </div>
@@ -1100,6 +1116,13 @@ export default function MaskAadhaarPage() {
             setDownloadJpgUrl(null);
           }}
         />
+        {/* UIDAI Compliance Notice */}
+        <div className="p-4 rounded-2xl bg-slate-100/90 border border-slate-200/90 text-[11px] text-slate-600 leading-relaxed space-y-1">
+          <p className="font-bold text-slate-800">UIDAI Compliance &amp; Privacy Notice</p>
+          <p>
+            FileZenith is an independent browser-based privacy utility and is not affiliated with UIDAI or the Government of India. In accordance with UIDAI and RBI guidelines, masking the first 8 digits of your Aadhaar number is a recommended security measure before sharing identity documents with non-banking entities.
+          </p>
+        </div>
       </div>
     </ToolLayout>
   );

@@ -5,6 +5,7 @@ import { ToolLayout } from '@/components/ToolLayout';
 import { FileUploader, FileItem } from '@/components/FileUploader';
 import { removeImageBackground } from '@/lib/image-engine';
 import { toast } from 'sonner';
+import { triggerBrowserDownload } from '@/lib/download-helper';
 import {
   Download,
   Scissors,
@@ -235,11 +236,7 @@ export default function RemoveBackgroundPage() {
         bgCtx.drawImage(canvas, 0, 0);
         bgCanvas.toBlob((blob) => {
           if (blob) {
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'edited-photo.jpg';
-            a.click();
+            triggerBrowserDownload(blob, 'edited-photo.jpg');
             toast.success('Edited photo downloaded!');
           }
         }, 'image/jpeg', 0.95);
@@ -249,11 +246,7 @@ export default function RemoveBackgroundPage() {
 
     canvas.toBlob((blob) => {
       if (blob) {
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'edited-cutout.png';
-        a.click();
+        triggerBrowserDownload(blob, 'edited-cutout.png');
         toast.success('Hand-edited cutout PNG downloaded!');
       }
     }, 'image/png');

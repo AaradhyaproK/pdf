@@ -37,6 +37,7 @@ import {
   RefreshCw,
 } from 'lucide-react';
 import { toast } from 'sonner';
+import { triggerBrowserDownload } from '@/lib/download-helper';
 
 type LayoutMode = 'stacked' | 'side' | 'editor' | 'preview';
 
@@ -193,12 +194,8 @@ console.log("Markdown Live Editor Studio");
 
   // Download .md File
   const handleDownloadMD = () => {
-    const blob = new Blob([markdownText], { type: 'text/markdown' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'document.md';
-    a.click();
+    const blob = new Blob([markdownText], { type: 'text/markdown;charset=utf-8' });
+    triggerBrowserDownload(blob, 'document.md');
     toast.success('Downloaded document.md!');
   };
 

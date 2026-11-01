@@ -719,7 +719,7 @@ export default function PolaroidMakerPage() {
       });
 
       const pdfBytes = await pdfDoc.save();
-      const blob = new Blob([pdfBytes.buffer as ArrayBuffer], { type: 'application/pdf' });
+      const blob = new Blob([new Uint8Array(pdfBytes)], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
 
       const fileName = `Printable_Polaroid_${mode}_A4_${Date.now()}.pdf`;

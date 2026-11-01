@@ -157,7 +157,7 @@ const UTILITY_TOOLS = [
 
 const SOCIAL_TOOLS = [
   { name: 'WhatsApp Direct Chat Launcher', slug: '/social/whatsapp-direct-chat', desc: 'Chat without saving phone numbers', icon: MessageSquare, badge: 'wa.me', category: 'social', catLabel: 'Social Studio' },
-  { name: 'YouTube 1080p Thumbnail DL', slug: '/social/youtube-thumbnail-downloader', desc: 'Download 1080p HD video cover images', icon: Camera, badge: 'Thumbnails', category: 'social', catLabel: 'Social Studio' },
+  { name: 'YouTube Thumbnail Preview', slug: '/social/youtube-thumbnail-downloader', desc: 'Preview 1080p HD video cover images', icon: Camera, badge: 'Thumbnails', category: 'social', catLabel: 'Social Studio' },
   { name: 'YouTube Tag Extractor', slug: '/social/youtube-tag-extractor', desc: 'Extract SEO tags & keywords from video URL', icon: Hash, badge: 'SEO', category: 'social', catLabel: 'Social Studio' },
   { name: 'Fancy Text Generator', slug: '/utility/fancy-text-generator', desc: '30+ Unicode font styles & gaming bios', icon: Sparkles, badge: 'Fonts', category: 'social', catLabel: 'Social Studio' },
   { name: 'Text Repeater (10k Times)', slug: '/utility/text-repeater', desc: 'Repeat text & emojis up to 10,000 times', icon: Sparkles, badge: 'Viral', category: 'social', catLabel: 'Social Studio' },

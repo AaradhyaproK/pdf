@@ -5,6 +5,7 @@ import { ToolLayout } from '@/components/ToolLayout';
 import { FileUploader, FileItem } from '@/components/FileUploader';
 import { extractTextOCR } from '@/lib/pdf-engine';
 import { toast } from 'sonner';
+import { triggerBrowserDownload } from '@/lib/download-helper';
 import { Copy, Download, FileCheck, RefreshCw, Sparkles, Check, FileText, Globe } from 'lucide-react';
 
 const OCR_LANGUAGES = [
@@ -140,12 +141,8 @@ export default function PDFOCRPage() {
   const downloadTextFile = () => {
     if (!extractedText) return;
     const blob = new Blob([extractedText], { type: 'text/plain;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `extracted-ocr-${files[0]?.file.name || 'document'}.txt`;
-    a.click();
-    URL.revokeObjectURL(url);
+    const filename = `extracted-ocr-${files[0]?.file.name || 'document'}.txt`;
+    triggerBrowserDownload(blob, filename);
   };
 
   const wordCount = extractedText ? extractedText.trim().split(/\s+/).filter(Boolean).length : 0;

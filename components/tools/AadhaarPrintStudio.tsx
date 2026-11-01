@@ -24,6 +24,7 @@ import {
 import { toast } from 'sonner';
 import { PDFDocument, PDFImage, rgb } from 'pdf-lib';
 import { trackEvent } from '@/lib/analytics';
+import { triggerBrowserDownload } from '@/lib/download-helper';
 
 // ISO/IEC 7810 ID-1 standard card dimensions in mm
 // 85.60 mm x 53.98 mm (~85.6 mm x 54 mm)
@@ -562,15 +563,8 @@ export function AadhaarPrintStudio() {
       });
 
       const pdfBytes = await pdfDoc.save();
-      const blob = new Blob([pdfBytes as unknown as BlobPart], { type: 'application/pdf' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `Unlocked_${pdfFile?.name ? pdfFile.name.replace(/\.pdf$/i, '') : 'eAadhaar'}.pdf`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+      const filename = `Unlocked_${pdfFile?.name ? pdfFile.name.replace(/\.pdf$/i, '') : 'eAadhaar'}.pdf`;
+      triggerBrowserDownload(pdfBytes, filename, 'application/pdf');
       toast.success('Unlocked e-Aadhaar PDF downloaded!');
       trackEvent('download_clicked', { toolSlug: 'aadhaar-card-print', action: 'download_unlocked_pdf' });
     } catch (err: any) {
@@ -873,15 +867,7 @@ export function AadhaarPrintStudio() {
       }
 
       const pdfBytes = await pdfDoc.save();
-      const blob = new Blob([pdfBytes as unknown as BlobPart], { type: 'application/pdf' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'aadhaar-card-print-ready.pdf';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+      triggerBrowserDownload(pdfBytes, 'aadhaar-card-print-ready.pdf', 'application/pdf');
 
       toast.success('Print-ready PDF downloaded successfully!', { id: toastId });
       trackEvent('download_clicked', { toolSlug: 'aadhaar-card-print', action: 'pdf_download', copies, layout: paperLayout });
@@ -899,13 +885,15 @@ export function AadhaarPrintStudio() {
     const canvas = previewCanvasRef.current;
     if (!canvas) return;
 
-    const a = document.createElement('a');
-    a.href = canvas.toDataURL('image/jpeg', 0.95);
-    a.download = `aadhaar-print-${paperLayout}.jpg`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    toast.success('Downloaded print image successfully!');
+    canvas.toBlob(
+      (blob) => {
+        if (!blob) return;
+        triggerBrowserDownload(blob, `aadhaar-print-${paperLayout}.jpg`);
+        toast.success('Downloaded print image successfully!');
+      },
+      'image/jpeg',
+      0.95
+    );
   };
 
   return (
@@ -932,6 +920,18 @@ export function AadhaarPrintStudio() {
           <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0" />
           <span>
             <strong>Zero Server Upload:</strong> Your Aadhaar PDF, password, and biometric details never leave your browser. Decryption, card extraction, and A4 alignment happen 100% locally.
+          </span>
+        </div>
+
+        {/* UIDAI Official Notice & Compliance */}
+        <div className="flex items-start gap-2.5 p-3.5 rounded-2xl bg-amber-50/80 border border-amber-200/90 text-[11px] text-amber-950">
+          <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+          <span className="leading-relaxed">
+            <strong>Official UIDAI Notice:</strong> FileZenith is an independent educational tool and is not affiliated with UIDAI. This tool formats your personal document locally for paper printing. Official PVC Aadhaar cards should be ordered directly from UIDAI at{' '}
+            <a href="https://myaadhaar.uidai.gov.in" target="_blank" rel="noopener noreferrer" className="font-bold underline text-amber-950 hover:text-indigo-600">
+              myaadhaar.uidai.gov.in
+            </a>
+            .
           </span>
         </div>
 

@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { ToolLayout } from '@/components/ToolLayout';
 import { toast } from 'sonner';
+import { triggerBrowserDownload } from '@/lib/download-helper';
 import { matchTool, rankToolsForSearch, isPicsToPdfQuery } from '@/lib/tool-search';
 import {
   Edit3,
@@ -318,13 +319,18 @@ export default function FlagshipStudioPage() {
                 <p className="text-xs font-extrabold text-emerald-900">🎉 Result Processed in Master Studio!</p>
                 <p className="text-[11px] text-emerald-700 font-medium">Your processed file is ready for download.</p>
               </div>
-              <a
-                href={outputUrl}
-                download="filezenith-studio-result"
-                className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black shadow-sm flex items-center gap-1.5"
+              <button
+                type="button"
+                onClick={() => {
+                  if (outputUrl) {
+                    const ext = selectedToolId === 'to-image' ? 'png' : 'pdf';
+                    triggerBrowserDownload(outputUrl, `filezenith-studio-result.${ext}`);
+                  }
+                }}
+                className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black shadow-sm flex items-center gap-1.5 cursor-pointer"
               >
                 <Download className="w-4 h-4" /> Download Result
-              </a>
+              </button>
             </div>
           )}
         </div>

@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { ToolLayout } from '@/components/ToolLayout';
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import { toast } from 'sonner';
+import { triggerBrowserDownload } from '@/lib/download-helper';
 import {
   Upload,
   Type,
@@ -1181,16 +1182,7 @@ export default function PDFEditPage() {
       }
 
       const pdfBytes = await pdfDocLib.save();
-      const blob = new Blob([pdfBytes as any], { type: 'application/pdf' });
-      const blobUrl = URL.createObjectURL(blob);
-
-      const a = document.createElement('a');
-      a.href = blobUrl;
-      a.download = `edited-${file.name}`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(blobUrl);
+      triggerBrowserDownload(pdfBytes, `edited-${file.name}`, 'application/pdf');
 
       toast.success('Edited PDF exported successfully!');
     } catch (err: any) {

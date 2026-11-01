@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { ToolLayout } from '@/components/ToolLayout';
 import { toast } from 'sonner';
+import { triggerBrowserDownload } from '@/lib/download-helper';
 import {
   Upload,
   Download,
@@ -208,8 +209,12 @@ export default function PassportMakerPage() {
 
     try {
       const singleCanvas = previewCanvasRef.current;
-      const singleDataUrl = singleCanvas.toDataURL('image/jpeg', 0.95);
-      setSinglePhotoUrl(singleDataUrl);
+      const singleBlob = await new Promise<Blob | null>((resolve) =>
+        singleCanvas.toBlob(resolve, 'image/jpeg', 0.95)
+      );
+      if (singleBlob) {
+        setSinglePhotoUrl(URL.createObjectURL(singleBlob));
+      }
 
       // Render Print Sheet Canvas
       const sheet = selectedSheetLayout;
@@ -246,8 +251,12 @@ export default function PassportMakerPage() {
           }
         }
 
-        const sheetDataUrl = sheetCanvas.toDataURL('image/jpeg', 0.95);
-        setSheetPhotoUrl(sheetDataUrl);
+        const sheetBlob = await new Promise<Blob | null>((resolve) =>
+          sheetCanvas.toBlob(resolve, 'image/jpeg', 0.95)
+        );
+        if (sheetBlob) {
+          setSheetPhotoUrl(URL.createObjectURL(sheetBlob));
+        }
       }
 
       toast.success('Passport photos & printable sheet generated!');
@@ -719,14 +728,18 @@ export default function PassportMakerPage() {
                 <div className="text-xs font-bold text-slate-700">
                   {selectedPreset.name} • {selectedPreset.label}
                 </div>
-                <a
-                  href={singlePhotoUrl}
-                  download={`passport-single-${selectedPreset.id}.jpg`}
-                  className="w-full py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-extrabold flex items-center justify-center gap-2 shadow-sm transition-all"
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (singlePhotoUrl) {
+                      triggerBrowserDownload(singlePhotoUrl, `passport-single-${selectedPreset.id}.jpg`);
+                    }
+                  }}
+                  className="w-full py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-extrabold flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer"
                 >
                   <Download className="w-4 h-4" />
                   <span>Download Single Biometric Photo</span>
-                </a>
+                </button>
               </div>
 
               {/* Printable Grid Sheet Card */}
@@ -741,14 +754,18 @@ export default function PassportMakerPage() {
                 <div className="text-xs font-bold text-slate-700">
                   {selectedSheetLayout.paper} • Ready for Home or Photo Studio Printing
                 </div>
-                <a
-                  href={sheetPhotoUrl}
-                  download={`passport-sheet-${selectedSheetLayout.id}.jpg`}
-                  className="w-full py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold flex items-center justify-center gap-2 shadow-sm transition-all"
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (sheetPhotoUrl) {
+                      triggerBrowserDownload(sheetPhotoUrl, `passport-sheet-${selectedSheetLayout.id}.jpg`);
+                    }
+                  }}
+                  className="w-full py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer"
                 >
                   <Download className="w-4 h-4" />
                   <span>Download Multi-Photo Print Sheet</span>
-                </a>
+                </button>
               </div>
             </div>
           </div>

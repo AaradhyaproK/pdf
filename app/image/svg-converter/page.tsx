@@ -12,6 +12,7 @@ import {
   Image as ImageIcon,
 } from 'lucide-react';
 import { toast } from 'sonner';
+import { triggerBrowserDownload } from '@/lib/download-helper';
 
 type ScaleFactor = 1 | 2 | 4 | 8;
 type OutputFormat = 'png' | 'jpeg';
@@ -66,10 +67,21 @@ export default function SVGConverterPage() {
         }
 
         ctx.drawImage(img, 0, 0, width, height);
-        const resultUrl = canvas.toDataURL(`image/${format}`, 0.95);
-        setOutputUrl(resultUrl);
-        setIsProcessing(false);
-        toast.success(`Converted SVG to ${format.toUpperCase()} (${scale}x scale)!`);
+        canvas.toBlob(
+          (blob) => {
+            if (blob) {
+              const resultUrl = URL.createObjectURL(blob);
+              setOutputUrl(resultUrl);
+              setIsProcessing(false);
+              toast.success(`Converted SVG to ${format.toUpperCase()} (${scale}x scale)!`);
+            } else {
+              setIsProcessing(false);
+              toast.error('Failed to convert SVG graphics.');
+            }
+          },
+          `image/${format}`,
+          0.95
+        );
       };
 
       img.onerror = () => {
@@ -208,14 +220,18 @@ export default function SVGConverterPage() {
                   <img src={outputUrl} alt="Converted PNG/JPG" className="max-h-64 object-contain rounded-xl shadow-md" />
                 </div>
 
-                <a
-                  href={outputUrl}
-                  download={`${svgFileName}-${scale}x.${format}`}
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (outputUrl) {
+                      triggerBrowserDownload(outputUrl, `${svgFileName}-${scale}x.${format}`);
+                    }
+                  }}
                   className="inline-flex items-center gap-2 px-8 py-3.5 bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-black text-xs sm:text-sm rounded-full shadow-lg transition-all cursor-pointer"
                 >
                   <Download className="w-4 h-4" />
                   <span>Download Converted Image</span>
-                </a>
+                </button>
               </div>
             )}
           </div>

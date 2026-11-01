@@ -10,6 +10,7 @@ import {
   FileText,
 } from 'lucide-react';
 import { toast } from 'sonner';
+import { triggerBrowserDownload } from '@/lib/download-helper';
 
 export interface PageItem {
   pageNumber: number;
@@ -88,12 +89,7 @@ export function FullPageViewerModal({
 
   const handleDownloadSinglePage = () => {
     if (!currentPage) return;
-    const a = document.createElement('a');
-    a.href = currentPage.dataUrl;
-    a.download = `page-${currentPage.pageNumber}.png`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    triggerBrowserDownload(currentPage.dataUrl, `page-${currentPage.pageNumber}.png`, 'image/png');
     toast.success(`Downloaded Page ${currentPage.pageNumber}`);
   };
 

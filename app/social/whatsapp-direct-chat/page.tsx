@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { ToolLayout } from '@/components/ToolLayout';
 import QRCode from 'qrcode';
 import { toast } from 'sonner';
+import { triggerBrowserDownload } from '@/lib/download-helper';
 import {
   MessageSquare,
   Send,
@@ -71,11 +72,7 @@ export default function WhatsAppDirectChatPage() {
     }
     const vcardContent = `BEGIN:VCARD\nVERSION:3.0\nFN:WhatsApp Contact (${fullPhone})\nTEL;TYPE=CELL:${selectedCountry}${cleanPhone}\nEND:VCARD`;
     const blob = new Blob([vcardContent], { type: 'text/vcard;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `Contact_${fullPhone}.vcf`;
-    link.click();
+    triggerBrowserDownload(blob, `Contact_${fullPhone}.vcf`);
     toast.success('vCard contact file downloaded!');
   };
 
@@ -211,14 +208,18 @@ export default function WhatsAppDirectChatPage() {
                 Scan this QR code using your phone camera or WhatsApp scanner to open chat directly on your phone.
               </p>
               <div className="pt-2">
-                <a
-                  href={qrDataUrl}
-                  download={`WhatsApp_QR_${fullPhone}.png`}
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (qrDataUrl) {
+                      triggerBrowserDownload(qrDataUrl, `WhatsApp_QR_${fullPhone}.png`, 'image/png');
+                    }
+                  }}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs cursor-pointer"
                 >
                   <Download className="w-3.5 h-3.5" />
                   <span>Download QR PNG</span>
-                </a>
+                </button>
               </div>
             </div>
           </div>

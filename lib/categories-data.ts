@@ -444,11 +444,11 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
 
   'social': {
     slug: 'social',
-    title: 'Free Online Social Media Tools: WhatsApp Direct, YouTube Downloader & Bio Fonts',
-    metaTitle: 'Free Social Media Tools: WhatsApp Direct, YouTube Thumbnails & Bio | FileZenith',
-    metaDescription: '100% Free online social media tools: Launch WhatsApp chats without saving numbers, download 1080p YouTube thumbnails, extract video tags, and generate stylish bio fonts.',
+    title: 'Free Online Social Media Tools: WhatsApp Direct, Thumbnail Preview & Bio Fonts',
+    metaTitle: 'Free Social Media Tools: WhatsApp Direct, Video Thumbnails & Bio | FileZenith',
+    metaDescription: '100% Free online social media tools: Launch WhatsApp chats without saving numbers, preview 1080p YouTube video covers, extract video tags, and generate stylish bio fonts.',
     h1: 'Free Online Social Media Utilities & Creator Tools',
-    intro: 'Streamline your social media workflow with instant, client-side tools. Start WhatsApp chats with unsaved numbers, download crystal-clear 1080p YouTube video thumbnails, extract ranking tags, and format eye-catching bio fonts — no app installs or logins required.',
+    intro: 'Streamline your social media workflow with instant, client-side tools. Start WhatsApp chats with unsaved numbers, preview crystal-clear 1080p YouTube video thumbnails, extract ranking tags, and format eye-catching bio fonts — no app installs or logins required.',
     subgroups: [
       {
         title: 'WhatsApp & Messaging Helpers',
@@ -458,10 +458,10 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
         ]
       },
       {
-        title: 'YouTube Media & SEO Extraction',
-        description: 'Download HD video covers and extract keywords to boost video rankings.',
+        title: 'Video Thumbnail Preview & SEO Tags',
+        description: 'Inspect HD video covers and extract keywords to analyze video SEO.',
         tools: [
-          { name: 'YouTube 1080p Thumbnail DL', slug: '/social/youtube-thumbnail-downloader', description: 'Download maximum resolution (1080p Full HD) thumbnail images from any YouTube video URL.', isPopular: true, badge: '1080p HD', iconName: 'Camera' },
+          { name: 'YouTube 1080p Thumbnail Preview', slug: '/social/youtube-thumbnail-downloader', description: 'Preview maximum resolution (1080p Full HD) thumbnail cover images from any YouTube video URL.', isPopular: true, badge: '1080p HD', iconName: 'Camera' },
           { name: 'YouTube SEO Tag Extractor', slug: '/social/youtube-tag-extractor', description: 'Extract ranking keywords, video tags, and metadata to boost your video SEO and visibility.', isPopular: true, badge: 'SEO Tags', iconName: 'Hash' }
         ]
       },
@@ -479,7 +479,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
     ],
     popularTools: [
       { name: 'WhatsApp Direct Chat Launcher', slug: '/social/whatsapp-direct-chat', description: 'Chat on WhatsApp without saving strangers or business numbers.' },
-      { name: 'YouTube 1080p Thumbnail DL', slug: '/social/youtube-thumbnail-downloader', description: 'Download Full HD 1080p cover images from any YouTube video URL.' },
+      { name: 'YouTube 1080p Thumbnail Preview', slug: '/social/youtube-thumbnail-downloader', description: 'Preview Full HD 1080p cover images from any YouTube video URL.' },
       { name: 'YouTube SEO Tag Extractor', slug: '/social/youtube-tag-extractor', description: 'Find competitor video tags and viral keywords with one click.' },
       { name: 'Fancy Text Generator', slug: '/utility/fancy-text-generator', description: 'Generate stylish aesthetic Unicode fonts for Instagram & TikTok bios.' }
     ],
@@ -493,12 +493,12 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
         answer: 'Never. FileZenith simply generates the official WhatsApp deep link locally in your browser. We never have access to your contacts, chat history, or personal messages.'
       },
       {
-        question: 'Is it legal to download YouTube video thumbnail covers?',
-        answer: 'YouTube thumbnails are publicly accessible media assets. Downloading thumbnails for personal reference, fair use analysis, design inspiration, or backup of your own content is generally permitted. However, re-uploading other creators artwork as your own may infringe on copyright.'
+        question: 'Is it legal to inspect YouTube video thumbnail covers?',
+        answer: 'YouTube thumbnails are publicly accessible media assets. Viewing and inspecting thumbnails for personal reference, fair use analysis, design inspiration, or backup of your own content is generally permitted. However, re-uploading other creators artwork as your own may infringe on copyright.'
       },
       {
-        question: 'What resolution thumbnail will I get from the YouTube Thumbnail Downloader?',
-        answer: 'Our tool fetches the highest available quality from YouTube CDN, starting with maximum resolution 1080p ("maxresdefault.jpg" at 1920x1080). If the creator uploaded a lower-res image, it seamlessly falls back to 720p or standard high definition.'
+        question: 'What resolution thumbnail will I see in the YouTube Thumbnail Preview tool?',
+        answer: 'Our tool fetches the highest available quality from YouTube public CDN, starting with maximum resolution 1080p ("maxresdefault.jpg" at 1920x1080). If the creator uploaded a lower-res image, it seamlessly falls back to 720p or standard high definition.'
       },
       {
         question: 'How can I use the extracted YouTube tags to rank my own videos?',
@@ -514,7 +514,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
       },
       {
         question: 'Are there daily limits on using these social media tools?',
-        answer: 'No! All social media utilities on FileZenith are completely free with zero limits on searches, downloads, or chat launches.'
+        answer: 'No! All social media utilities on FileZenith are completely free with zero limits on searches, previews, or chat launches.'
       }
     ],
     relatedCategories: [
@@ -524,7 +524,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
     ],
     keywords: [
       'whatsapp direct chat without saving number',
-      'youtube thumbnail downloader 1080p full hd',
+      'youtube thumbnail preview 1080p full hd',
       'youtube tag extractor seo tool',
       'instagram caption copier with line breaks',
       'fancy text generator for instagram bio',

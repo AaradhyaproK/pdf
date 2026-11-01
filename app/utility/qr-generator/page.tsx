@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { ToolLayout } from '@/components/ToolLayout';
 import { generateQRCodeDataUrl, generateQRCodeSVG } from '@/lib/utility-engine';
 import { toast } from 'sonner';
+import { triggerBrowserDownload } from '@/lib/download-helper';
 import {
   Download,
   QrCode,
@@ -115,21 +116,14 @@ export default function QRGeneratorPage() {
 
   const downloadPNG = () => {
     if (!qrDataUrl) return;
-    const a = document.createElement('a');
-    a.href = qrDataUrl;
-    a.download = `qrcode-${Date.now()}.png`;
-    a.click();
+    triggerBrowserDownload(qrDataUrl, `qrcode-${Date.now()}.png`, 'image/png');
     toast.success('PNG QR code downloaded successfully!');
   };
 
   const downloadSVG = () => {
     if (!qrSvg) return;
     const blob = new Blob([qrSvg], { type: 'image/svg+xml;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `qrcode-${Date.now()}.svg`;
-    a.click();
+    triggerBrowserDownload(blob, `qrcode-${Date.now()}.svg`);
     toast.success('Vector SVG QR code downloaded!');
   };
 

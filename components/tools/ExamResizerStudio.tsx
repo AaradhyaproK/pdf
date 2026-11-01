@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { trackEvent } from '@/lib/analytics';
+import { triggerBrowserDownload } from '@/lib/download-helper';
 
 export interface ExamResizerStudioProps {
   defaultTargetKB: number;
@@ -380,13 +381,8 @@ export function ExamResizerStudio({
 
   // Handle Downloads
   const handleDownload = () => {
-    if (!outputUrl || !outputBlob) return;
-    const a = document.createElement('a');
-    a.href = outputUrl;
-    a.download = `filezenith-${slug}.jpg`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    if (!outputUrl && !outputBlob) return;
+    triggerBrowserDownload(outputBlob || outputUrl!, `filezenith-${slug}.jpg`, 'image/jpeg');
 
     toast.success(`Downloaded filezenith-${slug}.jpg successfully!`);
     trackEvent('download_clicked', {

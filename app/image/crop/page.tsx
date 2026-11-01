@@ -19,6 +19,7 @@ import {
   Maximize2,
 } from 'lucide-react';
 import { toast } from 'sonner';
+import { triggerBrowserDownload } from '@/lib/download-helper';
 
 type AspectRatioPreset =
   | 'free'
@@ -866,14 +867,19 @@ export default function ImageCropPage() {
                       <span>Copy</span>
                     </button>
 
-                    <a
-                      href={croppedOutputUrl}
-                      download={`${imageName}-cropped.${exportFormat === 'jpeg' ? 'jpg' : exportFormat}`}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (croppedOutputUrl) {
+                          const ext = exportFormat === 'jpeg' ? 'jpg' : exportFormat;
+                          triggerBrowserDownload(croppedOutputUrl, `${imageName}-cropped.${ext}`);
+                        }
+                      }}
                       className="flex-1 sm:flex-none px-6 py-3.5 bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-extrabold text-xs sm:text-sm rounded-full flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer animate-in zoom-in-95 duration-200"
                     >
                       <Download className="w-4 h-4" />
                       <span>Download {exportFormat.toUpperCase()}</span>
-                    </a>
+                    </button>
                   </div>
                 )}
               </div>

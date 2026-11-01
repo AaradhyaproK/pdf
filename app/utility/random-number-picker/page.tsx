@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { ToolLayout } from '@/components/ToolLayout';
 import { RandomSuiteNav } from '@/components/RandomSuiteNav';
 import { toast } from 'sonner';
+import { triggerBrowserDownload } from '@/lib/download-helper';
 import confetti from 'canvas-confetti';
 import {
   Sparkles,
@@ -205,14 +206,8 @@ export default function RandomNumberPickerPage() {
   const downloadFile = (type: 'txt' | 'csv') => {
     const content = type === 'txt' ? results.join('\n') : results.join(',');
     const blob = new Blob([content], { type: type === 'txt' ? 'text/plain' : 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `random_numbers_${Date.now()}.${type}`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    const filename = `random_numbers_${Date.now()}.${type}`;
+    triggerBrowserDownload(blob, filename);
     toast.success(`Exported as .${type}`);
   };
 

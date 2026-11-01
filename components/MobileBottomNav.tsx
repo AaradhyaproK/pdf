@@ -134,7 +134,7 @@ const UTILITY_TOOLS = [
 const SOCIAL_TOOLS = [
   { name: 'Instagram Caption Copier', slug: '/social/instagram-caption-copier', desc: 'Copy formatted bio captions & line breaks', icon: MessageSquare, badge: 'Viral' },
   { name: 'WhatsApp Direct Chat Launcher', slug: '/social/whatsapp-direct-chat', desc: 'Chat without saving phone numbers', icon: MessageSquare, badge: 'wa.me' },
-  { name: 'YouTube 1080p Thumbnail DL', slug: '/social/youtube-thumbnail-downloader', desc: 'Download 1080p HD video cover images', icon: Camera, badge: 'Thumbnails' },
+  { name: 'YouTube Thumbnail Preview', slug: '/social/youtube-thumbnail-downloader', desc: 'Preview 1080p HD video cover images', icon: Camera, badge: 'Thumbnails' },
   { name: 'YouTube Tag Extractor', slug: '/social/youtube-tag-extractor', desc: 'Extract SEO tags from video URL', icon: Hash, badge: 'SEO' },
 ];
 

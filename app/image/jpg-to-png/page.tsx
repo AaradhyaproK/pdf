@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { ToolLayout } from '@/components/ToolLayout';
 import { toast } from 'sonner';
+import { triggerBrowserDownload } from '@/lib/download-helper';
 import { Upload, Download, RefreshCw, FileImage, Layers, Sparkles } from 'lucide-react';
 
 interface ConvertedPNGFile {
@@ -80,10 +81,7 @@ export default function JPGToPNGPage() {
   };
 
   const handleDownloadSingle = (item: ConvertedPNGFile) => {
-    const a = document.createElement('a');
-    a.href = item.dataUrl;
-    a.download = item.originalName;
-    a.click();
+    triggerBrowserDownload(item.dataUrl, item.originalName, 'image/png');
   };
 
   return (

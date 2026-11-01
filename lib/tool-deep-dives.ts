@@ -7871,8 +7871,8 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
   },
   "/social/youtube-thumbnail-downloader": {
     "slug": "/social/youtube-thumbnail-downloader",
-    "badge": "Media Extraction Engine",
-    "heading": "Comprehensive Technical Guide: YouTube Thumbnail Downloader & Image Resolution Architecture",
+    "badge": "Media Inspection Engine",
+    "heading": "Comprehensive Technical Guide: YouTube Thumbnail Preview & Image Resolution Architecture",
     "subheading": "In-depth guide exploring YouTube CDN image endpoints (maxresdefault to default.jpg), video ID regex extraction, 404 placeholder fallback heuristics, client-side WebP conversion, and creator CTR optimization.",
     "sections": [
       {

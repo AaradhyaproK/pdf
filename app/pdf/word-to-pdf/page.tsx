@@ -6,6 +6,7 @@ import { FileUploader, FileItem } from '@/components/FileUploader';
 import { convertDocxToPdf } from '@/lib/pdf-word-engine';
 import { Download, FileText, CheckCircle2, Sparkles, RefreshCw } from 'lucide-react';
 import { toast } from 'sonner';
+import { triggerBrowserDownload } from '@/lib/download-helper';
 import { FileReadyModal } from '@/components/FileReadyModal';
 import { renderPDFPagesToImages } from '@/lib/pdf-engine';
 
@@ -52,7 +53,7 @@ export default function WordToPdfPage() {
         includePageNumbers: true,
       });
 
-      const blob = new Blob([result.pdfBytes.buffer as ArrayBuffer], { type: 'application/pdf' });
+      const blob = new Blob([new Uint8Array(result.pdfBytes)], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
       const baseName = file.name.replace(/\.[^/.]+$/, '');
       const outName = `${baseName}.pdf`;
@@ -151,14 +152,18 @@ export default function WordToPdfPage() {
                 <span className="hidden sm:inline">New File</span>
               </button>
 
-              <a
-                href={downloadUrl}
-                download={downloadName}
-                className="flex-1 sm:flex-initial px-6 py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-black text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2"
+              <button
+                type="button"
+                onClick={() => {
+                  if (downloadUrl) {
+                    triggerBrowserDownload(downloadUrl, downloadName);
+                  }
+                }}
+                className="flex-1 sm:flex-initial px-6 py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-black text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Download className="w-4 h-4" />
                 <span>Download PDF File</span>
-              </a>
+              </button>
             </div>
           </div>
         )}

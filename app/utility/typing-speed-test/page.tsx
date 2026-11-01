@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import { ToolLayout } from '@/components/ToolLayout';
 import { TYPING_TEST_PARAGRAPHS } from '@/lib/utility-engine';
 import { toast } from 'sonner';
+import { triggerBrowserDownload } from '@/lib/download-helper';
 import {
   Zap,
   Clock,
@@ -274,12 +275,14 @@ export default function TypingSpeedTestPage() {
   const handleDownloadCertificate = () => {
     const canvas = certCanvasRef.current;
     if (!canvas) return;
-    const url = canvas.toDataURL('image/png');
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `FileZenith_Typing_Certificate_${stats.netWPM}WPM.png`;
-    a.click();
-    toast.success('WPM Certificate downloaded in high resolution!');
+    canvas.toBlob(
+      (blob) => {
+        if (!blob) return;
+        triggerBrowserDownload(blob, `FileZenith_Typing_Certificate_${stats.netWPM}WPM.png`, 'image/png');
+        toast.success('WPM Certificate downloaded in high resolution!');
+      },
+      'image/png'
+    );
   };
 
   return (

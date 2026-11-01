@@ -1,5 +1,6 @@
 import { toast } from 'sonner';
 import { trackToolExecution } from './admin-store';
+import { triggerBrowserDownload } from './download-helper';
 
 export interface MediaFormat {
   quality: string;
@@ -71,12 +72,9 @@ export async function parseSocialMediaURL(inputUrl: string): Promise<ParsedSocia
       videoId,
       duration: isShorts ? 'Shorts' : 'Full HD',
       formats: [
-        { quality: '1080p Full HD Video (MP4)', format: 'mp4', sizeLabel: '1080p Full HD', downloadUrl: cleanUrl },
-        { quality: '720p HD Video (MP4)', format: 'mp4', sizeLabel: '720p HD', downloadUrl: cleanUrl },
-        { quality: '480p SD Video (MP4)', format: 'mp4', sizeLabel: '480p SD', downloadUrl: cleanUrl },
-        { quality: '360p Fast Video (MP4)', format: 'mp4', sizeLabel: '360p Fast', downloadUrl: cleanUrl },
-        { quality: '320kbps Audio Track (MP3)', format: 'mp3', sizeLabel: 'High Quality Audio', downloadUrl: cleanUrl },
-        { quality: 'HD Cover Thumbnail (4K JPG)', format: 'jpg', sizeLabel: 'MaxRes Photo', downloadUrl: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` },
+        { quality: '1080p Full HD Cover (MaxRes JPG)', format: 'jpg', sizeLabel: '1080p MaxRes', downloadUrl: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` },
+        { quality: 'Standard HD Cover (HQ JPG)', format: 'jpg', sizeLabel: '480p High Quality', downloadUrl: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` },
+        { quality: 'Medium Quality Preview (MQ JPG)', format: 'jpg', sizeLabel: '320p Medium', downloadUrl: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg` },
       ],
     };
   }
@@ -174,19 +172,19 @@ export async function parseSocialMediaURL(inputUrl: string): Promise<ParsedSocia
 }
 
 /**
- * Triggers 100% direct in-app video stream file download & logs event to Firestore.
+ * Triggers client-side cover asset save & logs event to Firestore.
  */
 export async function downloadSocialAsset(format: MediaFormat, title: string, sourceUrl?: string): Promise<boolean> {
   const sanitizedTitle = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40);
   const filename = `${sanitizedTitle}-${format.quality.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.${format.format}`;
 
   // Log execution event to Firestore
-  trackToolExecution(sourceUrl || '/social/downloader', 'Social');
+  trackToolExecution(sourceUrl || '/social/youtube-thumbnail-downloader', 'Social');
 
-  // 1. Direct HD Cover Photo Download (JPG/PNG)
+  // Direct HD Cover Photo Download (JPG/PNG)
   if (format.format === 'jpg' || format.format === 'png') {
     if (format.downloadUrl && format.downloadUrl.startsWith('http')) {
-      const toastId = toast.loading('Downloading cover thumbnail...');
+      const toastId = toast.loading('Loading cover thumbnail...');
       try {
         let res = await fetch(format.downloadUrl);
         // Fallback for YouTube maxres thumbnail if not available
@@ -195,54 +193,19 @@ export async function downloadSocialAsset(format: MediaFormat, title: string, so
         }
         if (res.ok) {
           const blob = await res.blob();
-          const blobUrl = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = blobUrl;
-          a.download = filename;
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          URL.revokeObjectURL(blobUrl);
-          toast.success('HD Cover photo downloaded successfully!', { id: toastId });
+          triggerBrowserDownload(blob, filename);
+          toast.success('HD Cover photo saved successfully!', { id: toastId });
           return true;
         } else {
-          toast.error('Could not download cover thumbnail.', { id: toastId });
+          toast.error('Could not load cover thumbnail.', { id: toastId });
           return false;
         }
       } catch {
-        toast.error('Failed to download cover thumbnail.', { id: toastId });
+        toast.error('Failed to load cover thumbnail.', { id: toastId });
         return false;
       }
     }
   }
 
-  // 2. Direct In-App Media Download via Next.js Proxy API (/api/stream)
-  const targetUrl = sourceUrl || format.downloadUrl;
-  const proxyApiUrl = `/api/stream?url=${encodeURIComponent(targetUrl)}&filename=${encodeURIComponent(filename)}&format=${encodeURIComponent(format.format)}&quality=${encodeURIComponent(format.quality)}`;
-
-  const toastId = toast.loading(`Processing & preparing ${format.quality}... Please wait a few seconds.`);
-
-  try {
-    const res = await fetch(proxyApiUrl);
-    if (res.ok) {
-      const blob = await res.blob();
-      const blobUrl = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = blobUrl;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(blobUrl);
-      toast.success(`${format.format.toUpperCase()} downloaded successfully!`, { id: toastId });
-      return true;
-    } else {
-      const data = await res.json().catch(() => ({}));
-      toast.error(data.error || 'Failed to download video stream. The media could not be extracted.', { id: toastId });
-      return false;
-    }
-  } catch {
-    toast.error('Network error while downloading the media file.', { id: toastId });
-    return false;
-  }
+  return false;
 }

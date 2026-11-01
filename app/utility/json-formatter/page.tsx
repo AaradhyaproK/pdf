@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { ToolLayout } from '@/components/ToolLayout';
 import { processJSON } from '@/lib/utility-engine';
 import { toast } from 'sonner';
+import { triggerBrowserDownload } from '@/lib/download-helper';
 import {
   Copy,
   Download,
@@ -116,12 +117,8 @@ export default function JSONFormatterPage() {
     if (lastAction === 'to-yaml') ext = 'yaml';
 
     const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `formatted-data-${Date.now()}.${ext}`;
-    a.click();
-    URL.revokeObjectURL(url);
+    const filename = `formatted-data-${Date.now()}.${ext}`;
+    triggerBrowserDownload(blob, filename);
     toast.success(`Downloaded .${ext} file!`);
   };
 

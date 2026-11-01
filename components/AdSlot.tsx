@@ -47,6 +47,14 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
   const [isAdFilled, setIsAdFilled] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const hasCustomCode =
+    config.adProvider === 'custom' &&
+    ((slotType === 'header-leaderboard' && !!config.customHeaderCode) ||
+      (slotType === 'sticky-sidebar' && !!config.customSidebarCode) ||
+      (slotType === 'post-download' && !!config.customPostDownloadCode));
+
+  const hasValidAdSenseSlot = config.adProvider === 'adsense' && !!clientAdId;
+
   useEffect(() => {
     trackAdImpression(slotType);
 
@@ -57,18 +65,22 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
       }
     });
 
-    // Request Google AdSense to fill slot if approved
+    if (hasCustomCode) {
+      setIsAdFilled(true);
+      return;
+    }
+
+    if (!hasValidAdSenseSlot) {
+      return;
+    }
+
+    // Request Google AdSense to fill slot only when a real clientAdId exists
     try {
       if (typeof window !== 'undefined') {
         ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
       }
     } catch {
-      // Silently handled before AdSense approval
-    }
-
-    if (config.adProvider === 'custom') {
-      setIsAdFilled(true);
-      return;
+      // Handled silently
     }
 
     const container = containerRef.current;
@@ -118,7 +130,12 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
       observer.disconnect();
       clearTimeout(timer);
     };
-  }, [slotType, config.adProvider]);
+  }, [slotType, config.adProvider, hasCustomCode, hasValidAdSenseSlot]);
+
+  // If there is neither custom ad code nor an active AdSense ad unit slot ID, do not render empty markup
+  if (!hasCustomCode && !hasValidAdSenseSlot) {
+    return null;
+  }
 
   const publisherId = config?.publisherId || 'ca-pub-1291898061670715';
 
@@ -129,7 +146,7 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
         className={`w-full max-w-[728px] mx-auto flex flex-col items-center justify-center transition-all duration-300 ${
           isAdFilled
             ? 'my-6 sm:my-8 opacity-100 overflow-visible'
-            : 'h-0 min-h-0 m-0 p-0 overflow-hidden opacity-0 pointer-events-none has-[ins[data-ad-status="filled"]]:h-auto has-[ins[data-ad-status="filled"]]:my-6 has-[ins[data-ad-status="filled"]]:sm:my-8 has-[ins[data-ad-status="filled"]]:opacity-100 has-[ins[data-ad-status="filled"]]:overflow-visible has-[ins[data-ad-status="filled"]]:pointer-events-auto'
+            : 'h-0 min-h-0 m-0 p-0 overflow-hidden opacity-0 pointer-events-none'
         } ${className}`}
       >
         <div className="w-full flex items-center justify-center overflow-hidden">
@@ -157,7 +174,7 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
         className={`w-full max-w-[300px] mx-auto flex flex-col items-center justify-center text-center transition-all duration-300 ${
           isAdFilled
             ? 'my-4 opacity-100 overflow-visible'
-            : 'h-0 min-h-0 m-0 p-0 overflow-hidden opacity-0 pointer-events-none has-[ins[data-ad-status="filled"]]:h-auto has-[ins[data-ad-status="filled"]]:my-4 has-[ins[data-ad-status="filled"]]:opacity-100 has-[ins[data-ad-status="filled"]]:overflow-visible has-[ins[data-ad-status="filled"]]:pointer-events-auto'
+            : 'h-0 min-h-0 m-0 p-0 overflow-hidden opacity-0 pointer-events-none'
         } ${className}`}
       >
         <div className="w-full flex flex-col items-center justify-center text-center overflow-hidden">
@@ -185,7 +202,7 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
       className={`w-full max-w-4xl mx-auto flex flex-col items-center justify-center transition-all duration-300 ${
         isAdFilled
           ? 'my-6 sm:my-8 opacity-100 overflow-visible'
-          : 'h-0 min-h-0 m-0 p-0 overflow-hidden opacity-0 pointer-events-none has-[ins[data-ad-status="filled"]]:h-auto has-[ins[data-ad-status="filled"]]:my-6 has-[ins[data-ad-status="filled"]]:sm:my-8 has-[ins[data-ad-status="filled"]]:opacity-100 has-[ins[data-ad-status="filled"]]:overflow-visible has-[ins[data-ad-status="filled"]]:pointer-events-auto'
+          : 'h-0 min-h-0 m-0 p-0 overflow-hidden opacity-0 pointer-events-none'
       } ${className}`}
     >
       <div className="w-full flex items-center justify-center overflow-hidden">

@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { ToolLayout } from '@/components/ToolLayout';
 import { toast } from 'sonner';
+import { triggerBrowserDownload } from '@/lib/download-helper';
 import {
   ShieldCheck,
   UploadCloud,
@@ -307,12 +308,8 @@ export default function VisaPhotoMakerPage() {
     sheetCanvas.toBlob(
       (blob) => {
         if (!blob) return;
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `Printable_4x6_${selectedPreset.id}_sheet.jpg`;
-        a.click();
-        URL.revokeObjectURL(url);
+        const filename = `Printable_4x6_${selectedPreset.id}_sheet.jpg`;
+        triggerBrowserDownload(blob, filename);
         toast.success('Downloaded 6-in-1 Printable 4x6 Sheet!');
       },
       'image/jpeg',

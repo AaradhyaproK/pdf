@@ -1042,18 +1042,25 @@ export default function GreetingCardMakerPage() {
     setIsProcessing(true);
 
     try {
-      const dataUrl = canvas.toDataURL('image/png', 1.0);
-      const fileName = `Greeting_Card_${occasion}_${Date.now()}.png`;
+      canvas.toBlob((blob) => {
+        if (!blob) {
+          toast.error('Failed to export PNG.');
+          setIsProcessing(false);
+          return;
+        }
+        const blobUrl = URL.createObjectURL(blob);
+        const fileName = `Greeting_Card_${occasion}_${Date.now()}.png`;
 
-      setDownloadUrl(dataUrl);
-      setDownloadFileName(fileName);
-      setDownloadType('png');
-      setIsModalOpen(true);
-      toast.success('High-resolution card exported!');
+        setDownloadUrl(blobUrl);
+        setDownloadFileName(fileName);
+        setDownloadType('png');
+        setIsModalOpen(true);
+        setIsProcessing(false);
+        toast.success('High-resolution card exported!');
+      }, 'image/png');
     } catch (e) {
       console.error(e);
       toast.error('Failed to export PNG.');
-    } finally {
       setIsProcessing(false);
     }
   };
@@ -1134,7 +1141,7 @@ export default function GreetingCardMakerPage() {
       });
 
       const pdfBytes = await pdfDoc.save();
-      const blob = new Blob([pdfBytes.buffer as ArrayBuffer], { type: 'application/pdf' });
+      const blob = new Blob([new Uint8Array(pdfBytes)], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
 
       const fileName = `Printable_Greeting_Card_${occasion}_A4_${Date.now()}.pdf`;

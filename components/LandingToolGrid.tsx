@@ -881,9 +881,9 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: 'youtube-thumbnail-downloader',
-    name: 'YouTube 1080p Thumbnail Downloader',
+    name: 'YouTube 1080p Thumbnail Preview',
     slug: '/social/youtube-thumbnail-downloader',
-    desc: 'Download YouTube video cover thumbnails in 1080p Full HD MaxRes & 640p HD.',
+    desc: 'Preview YouTube video cover thumbnails in 1080p Full HD MaxRes & 640p HD.',
     category: 'utility',
     tags: ['utility'],
     icon: Smartphone,

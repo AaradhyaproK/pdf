@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { ToolLayout } from '@/components/ToolLayout';
 import { toast } from 'sonner';
 import JSZip from 'jszip';
+import { triggerBrowserDownload } from '@/lib/download-helper';
 import {
   Upload,
   Download,
@@ -259,12 +260,7 @@ export default function ResizeImagePage() {
     });
 
     const content = await zip.generateAsync({ type: 'blob' });
-    const url = URL.createObjectURL(content);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `resized-images-${Date.now()}.zip`;
-    a.click();
-    URL.revokeObjectURL(url);
+    triggerBrowserDownload(content, `resized-images-${Date.now()}.zip`);
     toast.success('ZIP file downloaded!');
   };
 
@@ -532,13 +528,19 @@ export default function ResizeImagePage() {
 
                     <div className="flex items-center justify-between text-xs pt-2 border-t border-slate-200">
                       {item.resizedUrl ? (
-                        <a
-                          href={item.resizedUrl}
-                          download={`resized-${item.name}`}
-                          className="text-xs font-black text-indigo-600 hover:underline flex items-center gap-1"
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (item.resizedBlob) {
+                              triggerBrowserDownload(item.resizedBlob, `resized-${item.name}`);
+                            } else if (item.resizedUrl) {
+                              triggerBrowserDownload(item.resizedUrl, `resized-${item.name}`);
+                            }
+                          }}
+                          className="text-xs font-black text-indigo-600 hover:underline flex items-center gap-1 cursor-pointer"
                         >
                           <Download className="w-3.5 h-3.5" /> Download
-                        </a>
+                        </button>
                       ) : (
                         <span className="text-[10px] text-slate-400 font-bold">Ready to resize</span>
                       )}
