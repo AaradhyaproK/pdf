@@ -1,14 +1,4 @@
-import readingTime from 'reading-time';
-import { db } from './firebase';
-import { collection, getDocs, doc, setDoc, deleteDoc, serverTimestamp } from 'firebase/firestore';
 import type { BlogPost, BlogFaq } from './blog';
-
-const DEFAULT_POST_IMAGES: Record<string, string> = {
-  'compress-pdf-without-losing-quality': '/blog/pdf-compression.jpg',
-  'how-to-merge-pdf-files-free': '/blog/pdf-merge.jpg',
-  'emi-calculator-guide': '/blog/emi-calculator.jpg',
-  'age-calculator-india': '/blog/age-calculator.jpg',
-};
 
 export function extractFaqsFromContent(content: string): BlogFaq[] {
   const faqs: BlogFaq[] = [];
@@ -30,49 +20,15 @@ export function extractFaqsFromContent(content: string): BlogFaq[] {
   return faqs;
 }
 
-// Fetch live posts stored in Firebase Firestore
+// Zero-Firebase Client Stubs
 export async function getFirestorePosts(): Promise<BlogPost[]> {
-  try {
-    const snap = await getDocs(collection(db, 'blog_posts'));
-    return snap.docs.map((d) => {
-      const data = d.data();
-      const content = data.content || '';
-      const stats = readingTime(content);
-      const faqs = extractFaqsFromContent(content);
-
-      return {
-        slug: d.id,
-        title: data.title || 'Untitled Post',
-        description: data.description || '',
-        date: data.date || new Date().toISOString().split('T')[0],
-        tags: Array.isArray(data.tags) ? data.tags : [],
-        readingTime: stats.text || '3 min read',
-        content,
-        tool: data.tool || null,
-        image: data.image || DEFAULT_POST_IMAGES[d.id] || '/blog/pdf-compression.jpg',
-        faqs,
-      };
-    });
-  } catch {
-    return [];
-  }
+  return [];
 }
 
-// Save post to Firebase Firestore
-export async function saveBlogPostToFirestore(post: BlogPost): Promise<void> {
-  const docRef = doc(db, 'blog_posts', post.slug);
-  await setDoc(
-    docRef,
-    {
-      ...post,
-      updatedAt: serverTimestamp(),
-    },
-    { merge: true }
-  );
+export async function saveBlogPostToFirestore(_post: BlogPost): Promise<void> {
+  // Static content only
 }
 
-// Delete post from Firebase Firestore
-export async function deleteBlogPostFromFirestore(slug: string): Promise<void> {
-  const docRef = doc(db, 'blog_posts', slug);
-  await deleteDoc(docRef);
+export async function deleteBlogPostFromFirestore(_slug: string): Promise<void> {
+  // Static content only
 }

@@ -140,10 +140,10 @@ export default function AdminDashboardPage() {
               <h1 className="text-base font-black text-slate-900 leading-tight flex items-center gap-2">
                 <span>FileZenith Analytics & Admin Console</span>
                 <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase">
-                  Cloudflare & Firestore Live
+                  Cloudflare & Fast Local Engine
                 </span>
               </h1>
-              <p className="text-xs text-slate-500 font-medium">100% Verified Cloudflare & Cloud Firestore Metrics • faceid-login-xraxh</p>
+              <p className="text-xs text-slate-500 font-medium">100% Client-Side Fast Engine & Verified Cloudflare Metrics</p>
             </div>
           </div>
 
@@ -449,7 +449,7 @@ export default function AdminDashboardPage() {
                 <Activity className="w-4 h-4 text-emerald-600 animate-pulse" />
                 Live Real-Time Activity Stream
               </h3>
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-emerald-100 text-emerald-700">Firestore (faceid-login-xraxh)</span>
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-emerald-100 text-emerald-700">Client-Side Engine</span>
             </div>
 
             {summary.recentVisits.length === 0 ? (

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
-import { trackAdImpression, getAdsConfig, getAdsConfigFromFirestore, AdsManagerConfig } from '@/lib/admin-store';
+import { trackAdImpression, getAdsConfig, AdsManagerConfig } from '@/lib/admin-store';
 
 export interface AdSlotProps {
   slotType: 'header-leaderboard' | 'sticky-sidebar' | 'post-download';
@@ -57,13 +57,6 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
 
   useEffect(() => {
     trackAdImpression(slotType);
-
-    // Sync live Firebase Firestore stored ad configurations & publisher IDs
-    getAdsConfigFromFirestore().then((liveConfig) => {
-      if (liveConfig) {
-        setConfig(liveConfig);
-      }
-    });
 
     if (hasCustomCode) {
       setIsAdFilled(true);

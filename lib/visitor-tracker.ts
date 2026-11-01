@@ -124,29 +124,8 @@ export function getVisitorTrackingPayload(pagePath: string): VisitorInfo {
 }
 
 /**
- * Asynchronously Dispatch Analytics Tracking Event (Non-blocking)
+ * Asynchronously Dispatch Analytics Tracking Event (Zero network overhead)
  */
-export function trackVisitorEventAsync(pagePath: string): void {
-  if (typeof window === 'undefined') return;
-
-  const payload = getVisitorTrackingPayload(pagePath);
-  if (payload.isBot) return; // Ignore obvious bots
-
-  const runTrack = () => {
-    fetch('/api/analytics/track', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    }).catch(() => {
-      // Silently catch tracking errors so page execution is never impacted
-    });
-  };
-
-  if ('requestIdleCallback' in window) {
-    (window as any).requestIdleCallback(runTrack);
-  } else {
-    setTimeout(runTrack, 500);
-  }
+export function trackVisitorEventAsync(_pagePath: string): void {
+  // Pure client-side no-op (Zero external network calls or Firebase dependencies)
 }

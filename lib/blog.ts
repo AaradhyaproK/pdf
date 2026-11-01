@@ -2,8 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import readingTime from 'reading-time';
-import { db } from './firebase';
-import { collection, getDocs, doc, setDoc, deleteDoc, serverTimestamp } from 'firebase/firestore';
 
 export interface BlogFaq {
   q: string;
@@ -147,49 +145,15 @@ export function getPostBySlug(slug: string): BlogPost | null {
   }
 }
 
-// Fetch live posts stored in Firebase Firestore
+// Stub functions for backward compatibility (Static SSG posts only, Zero Firebase)
 export async function getFirestorePosts(): Promise<BlogPost[]> {
-  try {
-    const snap = await getDocs(collection(db, 'blog_posts'));
-    return snap.docs.map((d) => {
-      const data = d.data();
-      const content = data.content || '';
-      const stats = readingTime(content);
-      const faqs = extractFaqsFromContent(content);
-
-      return {
-        slug: d.id,
-        title: data.title || 'Untitled Post',
-        description: data.description || '',
-        date: data.date || new Date().toISOString().split('T')[0],
-        tags: Array.isArray(data.tags) ? data.tags : [],
-        readingTime: stats.text || '3 min read',
-        content,
-        tool: data.tool || null,
-        image: data.image || DEFAULT_POST_IMAGES[d.id] || '/blog/pdf-compression.jpg',
-        faqs,
-      };
-    });
-  } catch {
-    return [];
-  }
+  return [];
 }
 
-// Save post to Firebase Firestore
-export async function saveBlogPostToFirestore(post: BlogPost): Promise<void> {
-  const docRef = doc(db, 'blog_posts', post.slug);
-  await setDoc(
-    docRef,
-    {
-      ...post,
-      updatedAt: serverTimestamp(),
-    },
-    { merge: true }
-  );
+export async function saveBlogPostToFirestore(_post: BlogPost): Promise<void> {
+  // Static content only
 }
 
-// Delete post from Firebase Firestore
-export async function deleteBlogPostFromFirestore(slug: string): Promise<void> {
-  const docRef = doc(db, 'blog_posts', slug);
-  await deleteDoc(docRef);
+export async function deleteBlogPostFromFirestore(_slug: string): Promise<void> {
+  // Static content only
 }

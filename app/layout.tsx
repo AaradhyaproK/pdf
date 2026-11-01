@@ -5,7 +5,6 @@ import './globals.css';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { CookieConsent } from '@/components/CookieConsent';
-import { AnalyticsTracker } from '@/components/AnalyticsTracker';
 import { Toaster } from 'sonner';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -149,7 +148,6 @@ export default function RootLayout({
       <body className={`${inter.className} min-h-full flex flex-col bg-slate-50/70 text-slate-900 antialiased`}>
         <NavigationProgressBar />
         <CloudflareAnalytics />
-        <AnalyticsTracker />
         <Navbar />
         <div className="flex-1 pb-24 md:pb-0">{children}</div>
         <Footer />
