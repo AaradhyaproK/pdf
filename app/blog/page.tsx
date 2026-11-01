@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { getAllPosts, getFirestorePosts, BlogPost } from '@/lib/blog';
+import { getAllPosts, BlogPost } from '@/lib/blog';
 import { AdSlot } from '@/components/AdSlot';
 import { BlogFilterableList } from '@/components/blog/BlogFilterableList';
 import { BookOpen, ShieldCheck, ArrowRight, Sparkles, Wrench, CheckCircle2, Lock, Zap } from 'lucide-react';
@@ -58,17 +58,8 @@ export const metadata: Metadata = {
 
 export const dynamic = 'force-static';
 
-export default async function BlogIndexPage() {
-  const staticPosts = getAllPosts();
-  const firestorePosts = await getFirestorePosts();
-
-  // Merge static posts & live Firestore posts, deduplicated by slug
-  const map = new Map<string, BlogPost>();
-  staticPosts.forEach((p) => map.set(p.slug, p));
-  firestorePosts.forEach((p) => map.set(p.slug, p));
-  const posts = Array.from(map.values()).sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
+export default function BlogIndexPage() {
+  const posts = getAllPosts();
 
   // 1. Blog Collection Schema
   const blogSchema = {
