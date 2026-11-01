@@ -3,8 +3,9 @@
 import { useState } from 'react';
 import { ToolLayout } from '@/components/ToolLayout';
 import { FileUploader, FileItem } from '@/components/FileUploader';
-import { unprotectPDF } from "@/lib/unprotect";;
+import { unprotectPDF } from '@/lib/unprotect';
 import { toast } from 'sonner';
+import { triggerBrowserDownload } from '@/lib/download-helper';
 import { Download, Unlock, Eye, EyeOff, ShieldAlert, CheckCircle2 } from 'lucide-react';
 
 export default function RemovePasswordPDFPage() {
@@ -133,14 +134,18 @@ export default function RemovePasswordPDFPage() {
                 </p>
               </div>
             </div>
-            <a
-              href={downloadUrl}
-              download={`unlocked-${files[0]?.file.name || 'document.pdf'}`}
+            <button
+              type="button"
+              onClick={() => {
+                if (downloadUrl) {
+                  triggerBrowserDownload(downloadUrl, `unlocked-${files[0]?.file.name || 'document.pdf'}`);
+                }
+              }}
               className="w-full sm:w-auto px-6 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md flex items-center justify-center gap-2 shrink-0 cursor-pointer"
             >
               <Download className="w-4 h-4" />
               <span>Download Unlocked PDF</span>
-            </a>
+            </button>
           </div>
         )}
       </div>

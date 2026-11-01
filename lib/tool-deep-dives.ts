@@ -441,7 +441,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
         "answer": "Yes! FileZenith is fully responsive and works smoothly on mobile browsers including Chrome and Safari on Android and iOS devices."
       },
       {
-        "question": "Is this tool completely free to use without daily limits?",
+        "question": "Are there daily file compression limits or paywalls when shrinking PDFs under 100KB?",
         "answer": "Yes. FileZenith is 100% free with unlimited conversions. There are no subscriptions, hidden fees, watermarks, or account registration requirements."
       }
     ]
@@ -545,8 +545,8 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
         "answer": "Yes! FileZenith is fully responsive and works smoothly across Safari and Chrome on iPhones, iPads, Android devices, and laptops."
       },
       {
-        "question": "Is this tool completely free to use without daily limits?",
-        "answer": "Yes. FileZenith is 100% free with unlimited conversions and zero paywalls, subscriptions, or account registration requirements."
+        "question": "Can I compress multiple heavy 50MB reports down to 1MB per day for free?",
+        "answer": "Yes. There are no daily conversion caps, tiered pricing tiers, or registration requirements. You can process dozens of 50MB annual reports, research dissertations, or architectural portfolios into compact 1MB files in succession entirely within your local browser session."
       }
     ]
   },
@@ -641,7 +641,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
         "answer": "If a PDF has an active password preventing access, you must first unlock it using our free client-side Unlock PDF tool before merging it with other files."
       },
       {
-        "question": "Are my confidential legal contracts uploaded to any cloud server?",
+        "question": "Are confidential legal contracts or business agreements uploaded to cloud storage during merging?",
         "answer": "No. FileZenith operates on a 100% serverless, client-side architecture. Your files are processed entirely in local browser RAM via WebAssembly and are never uploaded to any remote server."
       },
       {
@@ -745,7 +745,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
         "answer": "Because splitting executes entirely in your local browser memory via WebAssembly, FileZenith can process documents with hundreds of pages and large file sizes smoothly, limited only by your device's RAM."
       },
       {
-        "question": "Are my confidential files uploaded or saved on any remote server?",
+        "question": "Does extracting individual sensitive pages from financial audits send any data to external servers?",
         "answer": "Never. FileZenith operates on a 100% client-side architecture. Your document is processed entirely in your web browser and is never uploaded, stored, or viewed by anyone else."
       },
       {
@@ -1165,7 +1165,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
         "answer": "No. FileZenith injects page numbers into the designated header or footer margin space as an independent vector layer, leaving all existing text and layout formatting completely untouched."
       },
       {
-        "question": "Are my confidential files uploaded or saved on any remote server?",
+        "question": "Are my stamped legal briefs or academic theses stored or logged on remote servers?",
         "answer": "Never. FileZenith operates entirely inside your web browser via WebAssembly. Your documents are processed in local memory and are never uploaded to any cloud server or database."
       },
       {
@@ -1469,7 +1469,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
         "answer": "Yes. In the visual thumbnail grid, you can click specifically on the page thumbnails you wish to convert, and FileZenith will export only those selected pages."
       },
       {
-        "question": "Are my confidential legal contracts uploaded to any cloud server?",
+        "question": "Can third parties access high-resolution extracted page images of proprietary schematics?",
         "answer": "Never. FileZenith operates on a 100% client-side architecture. Your document is rendered directly within your web browser via WebAssembly and is never uploaded to any remote server or stored in any database."
       },
       {
@@ -1686,7 +1686,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Does FileZenith add any watermark to the converted Word document?",
-        "answer": "No. All exported Word documents are 100% clean, professional, and free of any FileZenith branding, logos, or watermarks."
+        "answer": "No. The resulting Microsoft Word (.docx) file is clean and completely unbranded. Headers, footers, paragraph styles, and tables are preserved without any promotional tags, vendor stamps, or trial evaluation watermarks."
       },
       {
         "question": "Can I convert PDF to Word on my phone or tablet?",
@@ -1790,7 +1790,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Does FileZenith add any watermark to converted PDF files?",
-        "answer": "No. All exported PDF files are 100% clean, professional, and free of any FileZenith branding, logos, or promotional watermarks."
+        "answer": "No. Every generated PDF is rendered strictly from your Word DOCX contents with zero FileZenith watermarks, margin banners, or author metadata tags added, making it fully ready for official corporate and legal submissions."
       },
       {
         "question": "Can I convert Word to PDF on an iPhone, iPad, or Android phone?",
@@ -1889,12 +1889,12 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
         "answer": "FileZenith allows you to strip sensitive EXIF metadata (such as GPS coordinates and camera serial numbers) for privacy while preserving correct image orientation."
       },
       {
-        "question": "Are my private personal photos uploaded to any remote server?",
+        "question": "Are uncompressed camera raw files or personal portraits transmitted to cloud compression clusters?",
         "answer": "Never. FileZenith operates entirely inside your web browser via client-side WebAssembly. Your photos are processed in local memory and are never uploaded, stored, or viewed by anyone else."
       },
       {
         "question": "Does FileZenith add any watermark to compressed images?",
-        "answer": "No. All exported images are 100% clean, professional, and free of any FileZenith branding, logos, or watermarks."
+        "answer": "No. FileZenith compresses the raw pixel buffers of your images without imprinting logos, corner stamps, or visual watermarks. Your photos remain pristine and ready for publishing or e-commerce listing."
       },
       {
         "question": "Can I compress photos directly on my iPhone, iPad, or Android phone?",
@@ -1906,7 +1906,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
     "slug": "/image/compress-to-20kb",
     "badge": "Signature & Document Optimizer",
     "heading": "In-Depth Technical Guide: Compressing Signatures & Photos Under 20KB Online",
-    "subheading": "Comprehensive operational manual for meeting strict 10KB–20KB signature and thumbnail thresholds on SSC, UPSC, IBPS, and state recruitment portals.",
+    "subheading": "Comprehensive operational manual for meeting strict 10KB\u201320KB signature and thumbnail thresholds on SSC, UPSC, IBPS, and state recruitment portals.",
     "sections": [
       {
         "title": "1. The 20KB Barrier for Official Gateways and Signatures",
@@ -1915,7 +1915,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
           "FileZenith's client-side 20KB optimizer uses an adaptive binary search across JPEG quality factor matrices and spatial downscaling to preserve stroke contrast and edge definition while locking output file size safely below the 20KB limit."
         ],
         "bullets": [
-          "Target Sweet Spot: Outputs in the 12KB–18KB range, ensuring guaranteed portal acceptance without upload errors.",
+          "Target Sweet Spot: Outputs in the 12KB\u201318KB range, ensuring guaranteed portal acceptance without upload errors.",
           "High Stroke Contrast: Binarization and edge preservation keep signature ink lines crisp on plain white backgrounds.",
           "Zero Cloud Risk: Biometric signature data is processed entirely in local browser RAM without external transmission."
         ]
@@ -1924,23 +1924,71 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
         "title": "2. Step-by-Step Practical Signature Compression Workflow",
         "paragraphs": [
           "To prepare an official signature under 20KB, sign with a dark blue or black pen on unruled white paper. Take a well-lit photo or scan without shadows or perspective tilt.",
-          "Upload your file into the tool, crop closely around the signature strokes, and the engine automatically optimizes the file to conform strictly to portal dimensions (typically 140 × 60 px or 200 × 100 px) and file size under 20KB."
+          "Upload your file into the tool, crop closely around the signature strokes, and the engine automatically optimizes the file to conform strictly to portal dimensions (typically 140 \u00d7 60 px or 200 \u00d7 100 px) and file size under 20KB."
         ],
         "bullets": [
           "Step 1: Plain White Paper - Sign cleanly with a black or dark blue ink pen.",
           "Step 2: Tight Crop - Remove excess blank borders around the signature to maximize stroke resolution.",
           "Step 3: Instant Local Export - Download the optimized JPEG ready for instant gateway submission."
         ]
+      },
+      {
+        "title": "3. Discrete Cosine Transform (DCT) & Quantization Thresholds for 20KB Signatures",
+        "paragraphs": [
+          "When encoding a signature into a tiny 20KB file payload, the primary challenge is preventing block artifacts around high-frequency stroke edges. Standard JPEG compression divides the image into 8x8 pixel blocks and applies the Discrete Cosine Transform.",
+          "FileZenith's compression pipeline prioritizes luminance coefficients over chrominance data. Because signatures are monochromatic (dark ink on white paper), chromatic subsampling (4:2:0) discards unnecessary color nuance, freeing up critical bytes to maintain sharp line contrast without blur."
+        ],
+        "bullets": [
+          "Luminance Preservation: High contrast between ink and background keeps strokes dark and legible even at 15KB.",
+          "Block Artifact Mitigation: Iterative quality scaling prevents mosquito noise around signature loops and dots.",
+          "Dimension Normalization: Preserves standard 2:1 or 7:3 aspect ratios demanded by Indian government portals."
+        ]
+      },
+      {
+        "title": "4. Portal-Specific Signature Guidelines & Dimensional Matrices",
+        "paragraphs": [
+          "Different government recruitment commissions establish specific dimensional envelopes alongside the 20KB weight ceiling. Understanding these dimensions guarantees that your signature will not be stretched or squished on official admit cards.",
+          "The table below outlines the exact requirements across major national recruitment boards for instant compliance check."
+        ],
+        "bullets": [
+          "SSC (Staff Selection Commission): 140 \u00d7 60 pixels, 10KB to 20KB file size, JPEG/JPG format only.",
+          "UPSC (Union Public Service Commission): 350 \u00d7 350 pixels minimum, 20KB to 50KB or 10KB to 20KB depending on notice.",
+          "IBPS (Banking Personnel Selection): 140 \u00d7 60 pixels, 10KB to 20KB file size, black ink on white paper required."
+        ]
       }
     ],
     "faqs": [
       {
         "question": "Why do portals require signatures strictly under 20KB?",
-        "answer": "Portal database architectures scale to millions of candidates. Storing lightweight 10KB–20KB images minimizes bandwidth strain and ensures admit cards load rapidly on mobile connections."
+        "answer": "Portal database architectures scale to millions of candidates. Storing lightweight 10KB\u201320KB images minimizes bandwidth strain and ensures admit cards load rapidly on mobile connections."
       },
       {
-        "question": "How do I ensure my signature is not blurry after compression?",
+        "question": "How do I ensure my signature is not blurry after compression to 20KB?",
         "answer": "Crop excess white margin closely before compressing. This ensures that the allocated byte budget is spent on ink strokes rather than empty white background pixels."
+      },
+      {
+        "question": "Which pen color is recommended for 20KB signature uploads?",
+        "answer": "Black or dark blue gel/ballpoint pens on smooth unruled white paper are recommended. Blue and black inks offer the highest tonal contrast when digitized."
+      },
+      {
+        "question": "What are the exact pixel dimensions for an SSC signature under 20KB?",
+        "answer": "The official SSC signature specification is 140 pixels width by 60 pixels height (approx 4 cm x 2 cm), with a file size strictly between 10KB and 20KB in JPEG format."
+      },
+      {
+        "question": "What should I do if my compressed signature is smaller than 10KB?",
+        "answer": "Many government portals enforce both a maximum limit (20KB) and a minimum threshold (10KB). If your file is below 10KB, reduce your crop margin slightly or set the quality slider to 85% to target 14KB\u201318KB."
+      },
+      {
+        "question": "Can I compress my signature directly on my smartphone?",
+        "answer": "Yes. FileZenith runs 100% locally in mobile web browsers on both Android and iPhone, allowing you to photograph, crop, and compress your signature to under 20KB without installing any app."
+      },
+      {
+        "question": "Are biometric signature images uploaded to your cloud servers?",
+        "answer": "No. All signature compression, contrast adjustment, and cropping execute entirely in your device's memory using HTML5 Canvas. Your signature never leaves your phone or computer."
+      },
+      {
+        "question": "Does this tool support signatures in PNG format?",
+        "answer": "You can upload signatures in PNG, WebP, or JPG. The tool automatically converts and exports the final compressed file as an official compliant JPEG file below 20KB."
       }
     ]
   },
@@ -2248,7 +2296,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Does FileZenith add any watermark to resized images?",
-        "answer": "No. All exported images are 100% clean, professional, and free of any FileZenith branding, logos, or watermarks."
+        "answer": "No. Resized images are exported with clean pixel buffers without any overlay watermarks, copyright notices, or metadata signatures from FileZenith."
       },
       {
         "question": "Can I resize photos on an iPhone, iPad, or Android phone?",
@@ -2451,7 +2499,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
         "answer": "You can upload JPEG, JPG, PNG, WebP, and Apple HEIC photos of any resolution."
       },
       {
-        "question": "Are my private personal photos uploaded to any remote server?",
+        "question": "Does FileZenith transmit my selfies or commercial product photos to external AI vision servers?",
         "answer": "Never. FileZenith runs the entire AI model locally within your web browser. Zero bytes of your photographs are ever transmitted across the internet, stored in databases, or used for AI training."
       },
       {
@@ -2559,8 +2607,8 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
         "answer": "Never. FileZenith operates entirely inside your web browser via client-side WebAssembly. Your photos are decoded and converted in local device memory and are never uploaded to any cloud server."
       },
       {
-        "question": "Does FileZenith add any watermark to converted JPG images?",
-        "answer": "No. All exported images are 100% clean, professional, and free of any FileZenith branding, logos, or watermarks."
+        "question": "Does FileZenith imprint promotional branding or watermarks onto converted iPhone HEIC pictures?",
+        "answer": "No. Your converted JPEG or PNG images contain only the decoded image raster from your iPhone HEIC container. No promotional logos, timestamps, or watermarks are ever injected."
       },
       {
         "question": "Can I convert HEIC photos directly on my iPhone or iPad?",
@@ -2663,12 +2711,12 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
         "answer": "Never. FileZenith compiles your PDF entirely within your web browser via WebAssembly. Your images never leave your local device and are never uploaded to any remote server."
       },
       {
-        "question": "Does FileZenith add any watermark to the generated PDF?",
-        "answer": "No. All exported PDF files are 100% clean, professional, and free of any FileZenith branding, logos, or promotional watermarks."
+        "question": "Are watermarks or FileZenith branding added to compiled image PDFs?",
+        "answer": "No. The compiled PDF document contains solely your selected images placed cleanly on vector page canvases without any FileZenith branding, headers, or watermarks."
       },
       {
         "question": "Can I convert images to PDF on my iPhone, iPad, or Android phone?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside mobile browsers including Safari and Chrome without requiring app downloads."
+        "answer": "Yes. You can select camera roll pictures or mobile photo library shots in mobile Safari or Android Chrome and compile them directly into an organized PDF right on your handheld device."
       }
     ]
   },
@@ -2767,12 +2815,12 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
         "answer": "Never. FileZenith operates entirely inside your web browser via WebAssembly. Your images are converted in local device memory and are never uploaded to any remote server or stored in any database."
       },
       {
-        "question": "Does FileZenith add any watermark to converted JPG images?",
+        "question": "Are converted JPEG images marked with watermarks or logo overlays?",
         "answer": "No. All exported JPG images are 100% clean, professional, and free of any FileZenith branding, logos, or promotional watermarks."
       },
       {
         "question": "Can I convert PNG to JPG on my iPhone, iPad, or Android phone?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside mobile browsers including Safari and Chrome without requiring app downloads."
+        "answer": "Yes. The client-side canvas conversion runs seamlessly in mobile Safari and Chrome, allowing you to convert transparent PNG graphics into lightweight JPGs on your phone without installing an app."
       }
     ]
   },
@@ -2871,12 +2919,12 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
         "answer": "Never. FileZenith compiles your PDF entirely within your web browser via WebAssembly. Your images never leave your local device and are never uploaded to any cloud server or database."
       },
       {
-        "question": "Does FileZenith add any watermark to the generated PDF?",
-        "answer": "No. All exported PDF files are 100% clean, professional, and free of any FileZenith branding, logos, or promotional watermarks."
+        "question": "Does the exported PNG-to-PDF portfolio contain any commercial watermarks or page stamps?",
+        "answer": "No. The resulting PDF document is completely clean of watermarks, headers, or promotional text, making it suitable for professional design portfolios and print distribution."
       },
       {
         "question": "Can I convert PNG to PDF on an iPhone, iPad, or Android phone?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside mobile browsers including Safari and Chrome without requiring app downloads."
+        "answer": "Yes. Touchscreen drag-and-drop and mobile file picker integration allow you to sequence PNG illustrations and screenshots into a single multi-page PDF directly on your tablet or smartphone."
       }
     ]
   },
@@ -2979,7 +3027,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
         "answer": "No. All exported PDF albums are 100% clean, professional, and free of any FileZenith branding, logos, or watermarks."
       },
       {
-        "question": "Is this tool completely free to use without daily limits?",
+        "question": "Can students and administrative clerks compile unlimited photo albums into PDF without paywalls?",
         "answer": "Yes. FileZenith is 100% free with unlimited conversions. You can create as many photo albums as you need with zero paywalls or registration requirements."
       }
     ]
@@ -3075,8 +3123,8 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
         "answer": "Yes! Once converted to PNG, you can use FileZenith's free AI Background Remover tool to cleanly remove the background and export a transparent PNG cutout."
       },
       {
-        "question": "Are my private personal photos uploaded to any remote server?",
-        "answer": "Never. FileZenith operates entirely inside your web browser via client-side WebAssembly. Your photos are converted in local device memory and are never uploaded to any cloud server or database."
+        "question": "Do high-resolution JPEG photos get cached or stored on external servers during PNG conversion?",
+        "answer": "No. The conversion pipeline operates solely through your browser's local Canvas 2D context. The raw RGB pixels are read and re-encoded into PNG chunks locally in RAM, without any server interaction or caching."
       },
       {
         "question": "Does FileZenith add any watermark to converted PNG images?",
@@ -3084,7 +3132,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Can I convert JPG to PNG on my iPhone, iPad, or Android phone?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside mobile browsers including Safari and Chrome without requiring app downloads."
+        "answer": "Yes. You can upload JPEG images directly from your mobile camera roll and download lossless PNG images with alpha channel support in mobile Safari or Chrome without installing software."
       }
     ]
   },
@@ -3179,12 +3227,12 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
         "answer": "The Rule of Thirds grid displays two horizontal and two vertical guide lines across your image. Placing focal points (like eyes or main subjects) along these lines creates more balanced, aesthetically pleasing photographic compositions."
       },
       {
-        "question": "Are my private personal photos uploaded to any remote server?",
+        "question": "Are cropped personal headshots, profile avatars, or receipts saved on external servers?",
         "answer": "Never. FileZenith operates entirely inside your web browser via client-side WebAssembly. Your photos are cropped in local device memory and are never uploaded to any cloud server or database."
       },
       {
         "question": "Does FileZenith add any watermark to cropped images?",
-        "answer": "No. All exported images are 100% clean, professional, and free of any FileZenith branding, logos, or watermarks."
+        "answer": "No. The cropped output retains only your selected sub-region pixels with zero watermarks, site stamps, or branding, ensuring full compliance for official avatars and resumes."
       },
       {
         "question": "Can I crop photos on an iPhone, iPad, or Android phone?",
@@ -3396,7 +3444,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Can I extract color palettes on my iPhone, iPad, or Android phone?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside mobile browsers including Safari and Chrome without requiring app downloads."
+        "answer": "Yes. The k-means color quantization algorithm runs client-side in mobile browsers, letting you tap to sample HEX and RGB color swatches from camera snapshots on the go."
       }
     ]
   },
@@ -4015,12 +4063,12 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
         "answer": "Never. FileZenith operates entirely inside your web browser via client-side WebAssembly. Your photos are converted in local device memory and are never uploaded to any cloud server or database."
       },
       {
-        "question": "Does FileZenith add any watermark to converted JPG images?",
+        "question": "Are converted WebP graphic assets or icons stamped with FileZenith watermarks?",
         "answer": "No. All exported JPG images are 100% clean, professional, and free of any FileZenith branding, logos, or watermarks."
       },
       {
         "question": "Can I convert WebP to JPG on my iPhone, iPad, or Android phone?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside mobile browsers including Safari and Chrome without requiring app downloads."
+        "answer": "Yes. Modern mobile Safari and Chrome on iOS and Android natively decode WebP images and re-encode them to standard JPG format through FileZenith's touch-optimized mobile interface."
       }
     ]
   },
@@ -4115,8 +4163,8 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
         "answer": "Yes! Over 97% of all web browsers globally\u2014including Google Chrome, Apple Safari (on iOS and macOS), Mozilla Firefox, Microsoft Edge, and Opera\u2014fully support the WebP format."
       },
       {
-        "question": "Are my private personal photos uploaded to any remote server?",
-        "answer": "Never. FileZenith operates entirely inside your web browser via client-side WebAssembly. Your photos are converted in local device memory and are never uploaded to any cloud server or database."
+        "question": "Are uploaded photography portfolios stored or retained when converting JPG to modern WebP?",
+        "answer": "Never. Your high-resolution photographic portfolios are processed directly in your browser's memory via WebP canvas compression, guaranteeing total privacy without cloud storage."
       },
       {
         "question": "Does FileZenith add any watermark to converted WebP images?",
@@ -4124,7 +4172,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Can I convert JPG to WebP on my iPhone, iPad, or Android phone?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside mobile browsers including Safari and Chrome without requiring app downloads."
+        "answer": "Yes. You can convert JPG photos to high-efficiency WebP files straight from your mobile browser to dramatically reduce storage and optimize images for mobile web publishing."
       }
     ]
   },
@@ -4228,7 +4276,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Can I use this EMI calculator on my mobile phone?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside mobile browsers including Chrome and Safari on iPhone, Android, and tablets without requiring app downloads."
+        "answer": "Yes. The EMI calculator interface is fully responsive, featuring touch-friendly interest sliders, dynamic amortization pie charts, and monthly installment breakdowns optimized for smartphones."
       }
     ]
   },
@@ -4332,7 +4380,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Can I use the SIP calculator on my smartphone?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside Chrome and Safari on iPhone, Android, and tablets without requiring app downloads."
+        "answer": "Yes. You can model monthly mutual fund systematic investment plans, compounding wealth projections, and expected maturity corpuses right on your phone without downloading financial apps."
       }
     ]
   },
@@ -4436,7 +4484,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Can I calculate my income tax on an iPhone, iPad, or Android phone?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside Chrome and Safari on mobile devices and laptops alike without requiring app downloads."
+        "answer": "Yes. The tax calculation engine runs instantly on mobile browsers, computing Section 115BAC New Regime and Old Regime tax liabilities, 87A rebates, and cess on your phone with zero data transmission."
       }
     ]
   },
@@ -4540,7 +4588,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Can I calculate my salary breakup on an iPhone or Android phone?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside Chrome and Safari on mobile devices and laptops alike without requiring app downloads."
+        "answer": "Yes. You can calculate gross salary, CTC components, EPF deductions, professional tax, and net take-home pay smoothly on any mobile screen with instant real-time calculations."
       }
     ]
   },
@@ -4646,7 +4694,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Can I calculate GST on my smartphone or tablet?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside Chrome and Safari on iPhone, Android, and tablets without requiring app downloads."
+        "answer": "Yes. The GST calculator provides quick toggle buttons for 5%, 12%, 18%, and 28% slabs and computes inclusive or exclusive CGST, SGST, and IGST breakdowns directly on mobile touchscreens."
       }
     ]
   },
@@ -4750,7 +4798,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Can I calculate my EPF growth on an iPhone or Android phone?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside Chrome and Safari on mobile devices and laptops alike without requiring app downloads."
+        "answer": "Yes. The retirement provident fund compounding model runs locally in your mobile browser, charting your employer-employee contributions and accumulated interest through retirement age."
       }
     ]
   },
@@ -4855,7 +4903,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Can I calculate my electricity bill on an iPhone or Android phone?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside Chrome and Safari on mobile devices and laptops alike without requiring app downloads."
+        "answer": "Yes. You can enter meter unit consumption and evaluate tiered slab tariffs on any smartphone browser, complete with fixed charges, fuel adjustments, and state electricity duty calculations."
       }
     ]
   },
@@ -4959,7 +5007,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Can I calculate my BMI on an iPhone, iPad, or Android phone?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside Chrome and Safari on mobile devices and laptops alike without requiring app downloads."
+        "answer": "Yes. The BMI health calculator allows you to enter height in centimeters or feet/inches and weight in kilograms or pounds on your phone to instantly view your WHO weight category and healthy range."
       }
     ]
   },
@@ -5063,7 +5111,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Can I calculate my age on an iPhone, iPad, or Android phone?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside Chrome and Safari on mobile devices and laptops alike without requiring app downloads."
+        "answer": "Yes. The age calculator interface features mobile calendar pickers, calculating your exact age in years, months, days, hours, and countdown to your next birthday instantly on any mobile device."
       }
     ]
   },
@@ -5272,7 +5320,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Can I convert CGPA to percentage on my iPhone, iPad, or Android phone?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside Chrome and Safari on mobile devices and laptops alike without requiring app downloads."
+        "answer": "Yes. The CGPA converter supports CBSE, Mumbai University, VTU, and Anna University formulas on mobile browsers, giving students instant percentage equivalents on their phones."
       }
     ]
   },
@@ -5481,7 +5529,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Can I convert numbers to words on an iPhone, iPad, or Android phone?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside Chrome and Safari on mobile devices and laptops alike without requiring app downloads."
+        "answer": "Yes. You can convert large numerical figures into English words in both Indian Lakhs/Crores and Western Million/Billion systems on your smartphone for writing bank cheques and receipts."
       }
     ]
   },
@@ -5586,7 +5634,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Can I use the Pomodoro timer on my smartphone or tablet?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside mobile browsers including Chrome and Safari on iPhone, Android, and tablets without requiring app downloads."
+        "answer": "Yes. The Pomodoro focus timer runs smoothly in mobile web browsers, providing audio chimes, visual circular countdowns, and customizable work/break intervals for focused study sessions."
       }
     ]
   },
@@ -5690,7 +5738,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Can I generate QR codes on an iPhone, iPad, or Android phone?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside Chrome and Safari on mobile devices and laptops alike without requiring app downloads."
+        "answer": "Yes. You can generate custom URL, Wi-Fi, and text QR codes with custom colors and instantly download high-resolution PNG or SVG vector files directly to your phone's photo library."
       }
     ]
   },
@@ -5794,7 +5842,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Can I use the Word Counter on an iPhone, iPad, or Android phone?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside Chrome and Safari on mobile devices and laptops alike without requiring app downloads."
+        "answer": "Yes. You can paste essay drafts, social media captions, or blog text directly into the mobile editor to analyze real-time word count, character density, and estimated reading time on your phone."
       }
     ]
   },
@@ -5898,7 +5946,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Can I format JSON on an iPhone, iPad, or Android phone?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside mobile browsers including Chrome and Safari on mobile devices and laptops alike without requiring app downloads."
+        "answer": "Yes. The JSON editor provides syntax highlighting, indentation formatting, validation error badges, and tree visualization optimized for mobile and tablet code inspection."
       }
     ]
   },
@@ -6002,7 +6050,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Can I encode and decode Base64 on an iPhone, iPad, or Android phone?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside Chrome and Safari on mobile devices and laptops alike without requiring app downloads."
+        "answer": "Yes. Developers and analysts can encode or decode strings, UTF-8 text, and data URLs into standard Base64 representation on any mobile browser without transmitting sensitive tokens over the wire."
       }
     ]
   },
@@ -6314,7 +6362,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Can I use the Case Converter on an iPhone, iPad, or Android phone?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside Chrome and Safari on mobile devices and laptops alike without requiring app downloads."
+        "answer": "Yes. You can transform text between UPPERCASE, lowercase, Title Case, camelCase, snake_case, and kebab-case on your smartphone with one-tap clipboard copy buttons."
       }
     ]
   },
@@ -6418,7 +6466,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Can I use the Text Repeater on an iPhone, iPad, or Android phone?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside Chrome and Safari on mobile devices and laptops alike without requiring app downloads."
+        "answer": "Yes. You can generate repeated strings, emoji patterns, and separated text sequences up to thousands of iterations on your mobile device for texting or UI stress testing."
       }
     ]
   },
@@ -6523,7 +6571,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Can I generate fancy text on an iPhone, iPad, or Android phone?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside Chrome and Safari on mobile devices and laptops alike without requiring app downloads."
+        "answer": "Yes. The Unicode text transformer generates cursive, gothic, bold serif, bubble, and aesthetic font styles that can be copied with a single tap into Instagram bio, WhatsApp, or Twitter."
       }
     ]
   },
@@ -6731,7 +6779,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Can I encode and decode URLs on an iPhone, iPad, or Android phone?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside Chrome and Safari on mobile devices and laptops alike without requiring app downloads."
+        "answer": "Yes. You can paste query strings, tracking parameters, and REST API endpoints on your phone to encode or decode RFC 3986 percent-encoded entities with zero network latency."
       }
     ]
   },
@@ -6835,7 +6883,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Can I generate hashes on an iPhone, iPad, or Android phone?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside mobile browsers including Chrome and Safari on mobile devices and laptops alike without requiring app downloads."
+        "answer": "Yes. Cryptographic SHA-256, SHA-512, and MD5 hashes are computed using browser-native Web Crypto APIs on your mobile device without exposing your input passwords or hashes to remote servers."
       }
     ]
   },
@@ -6926,16 +6974,16 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
         "answer": "Apple Pages uses a proprietary binary format based on Snappy-compressed Google Protocol Buffers (.iwa files). Windows lacks native software to read this structure, requiring conversion to DOCX."
       },
       {
-        "question": "Do I need to sign in to an Apple ID or iCloud to use this tool?",
+        "question": "Do I need an active Apple ID, iCloud subscription, or macOS license to extract Word documents?",
         "answer": "No. Unlike Apple's official method which requires logging into an iCloud account in a browser, FileZenith converts files directly in your browser with zero logins and zero accounts."
       },
       {
-        "question": "Are my confidential contracts or personal documents uploaded to any server?",
-        "answer": "Never. FileZenith executes all document conversions entirely within your web browser via client-side WebAssembly. Zero bytes of your files are ever uploaded to any cloud server or recorded in any database."
+        "question": "Are proprietary legal contracts or NDAs saved in cloud buffers during Pages extraction?",
+        "answer": "Never. The Pages zip archive parsing and document extraction routine executes 100% inside your local browser memory. Your proprietary contracts and legal filings never touch an external server."
       },
       {
         "question": "Does FileZenith add any watermark to converted Word documents?",
-        "answer": "No. All exported Word documents are 100% clean, professional, and free of any FileZenith branding, logos, or watermarks."
+        "answer": "No. Extracted Microsoft Word (.docx) files retain clean formatting without any FileZenith watermarks, footers, or promotional stamps, ensuring your document looks completely authentic."
       },
       {
         "question": "Can I convert Apple Pages files on an Android phone or tablet?",
@@ -7019,7 +7067,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Will the converted Pages file open on my iPad and iPhone?",
-        "answer": "Yes! The exported file follows official Apple Pages package specifications and opens natively in the Pages app across macOS, iPadOS, and iOS via AirDrop, iCloud Drive, or email."
+        "answer": "Yes. You can upload DOCX files from the iOS Files app in mobile Safari and download formatted Pages documents ready to open in Apple Pages on your iPad, iPhone, or Mac."
       },
       {
         "question": "Does the converted Pages file support Apple Pencil annotations?",
@@ -7034,8 +7082,8 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
         "answer": "No. You can convert Word documents to Pages on any computer\u2014including Windows PCs, Chromebooks, and Android tablets\u2014directly within your web browser."
       },
       {
-        "question": "Are my confidential contracts or personal documents uploaded to any server?",
-        "answer": "Never. FileZenith executes all document conversions entirely within your web browser via client-side WebAssembly. Zero bytes of your files are ever uploaded to any cloud server or recorded in any database."
+        "question": "Are confidential corporate DOCX manuscripts uploaded to external conversion clusters?",
+        "answer": "Never. All OpenXML text tokenization and iWork Pages package assembly runs strictly on your local machine, keeping corporate strategy papers and manuscripts completely private."
       },
       {
         "question": "Does FileZenith add any watermark to converted Pages documents?",
@@ -7043,7 +7091,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Can I convert Word to Pages directly on an iPhone or iPad?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside mobile Safari and Chrome on iOS and Android devices without requiring app downloads."
+        "answer": "Yes! You can upload Microsoft Word (.docx) files directly from the iOS Files app or iCloud Drive in mobile Safari, convert them client-side into Apple Pages archive packages, and immediately open or edit them in the native Pages app on your iPad, iPhone, or Mac."
       }
     ]
   },
@@ -7134,7 +7182,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
         "answer": "Because Apple Numbers allows multiple floating tables on one canvas, FileZenith maps each table into an organized, separate worksheet tab in the exported Excel workbook, ensuring data never overlaps."
       },
       {
-        "question": "Do I need to sign in to an Apple ID or iCloud to use this tool?",
+        "question": "Does converting Apple Numbers workbooks require logging into an iCloud account or owning a Mac?",
         "answer": "No. Unlike Apple's official method which requires logging into iCloud in a browser, FileZenith converts files directly in your web browser with zero logins and zero accounts."
       },
       {
@@ -7227,7 +7275,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Will the converted Numbers file open on my iPad and iPhone?",
-        "answer": "Yes! The exported file follows official Apple Numbers package specifications and opens natively in the Numbers app across macOS, iPadOS, and iOS via AirDrop, iCloud Drive, or email."
+        "answer": "Yes. You can select XLSX spreadsheets from your mobile cloud storage in Safari and generate Apple Numbers compatible packages directly on your iPad or iPhone without needing a computer."
       },
       {
         "question": "Will formulas like SUM and AVERAGE continue working in Numbers?",
@@ -7251,7 +7299,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "Can I convert Excel to Numbers directly on an iPhone or iPad?",
-        "answer": "Yes! FileZenith is fully responsive and runs smoothly inside mobile Safari and Chrome on iOS and Android devices without requiring app downloads."
+        "answer": "Yes! You can choose Microsoft Excel (.xlsx) workbooks or CSV spreadsheets directly from your iOS Files manager or cloud storage in mobile Safari, generate native Apple Numbers spreadsheet packages in your browser RAM, and launch them instantly in Numbers on your iPad or iPhone."
       }
     ]
   },
@@ -7674,7 +7722,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       {
         "title": "Mathematical Foundations: The Bernoulli Trial & Binary Decision Theory",
         "paragraphs": [
-          "The coin flip is humanity's oldest and most universal randomization tool, dating back to the Roman Empire where the practice was known as 'capita aut navia' (heads or ships). In probability theory and mathematical statistics, a coin flip is the quintessential Bernoulli trial: a discrete experiment with exactly two mutually exclusive outcomes—success (Heads) or failure (Tails)—where the theoretical probability of each outcome is p = 0.5.",
+          "The coin flip is humanity's oldest and most universal randomization tool, dating back to the Roman Empire where the practice was known as 'capita aut navia' (heads or ships). In probability theory and mathematical statistics, a coin flip is the quintessential Bernoulli trial: a discrete experiment with exactly two mutually exclusive outcomes\u2014success (Heads) or failure (Tails)\u2014where the theoretical probability of each outcome is p = 0.5.",
           "Digital coin toss simulations provide an impartial arbiter for everyday decisions, sporting kick-offs, classroom probability demonstrations, and algorithmic symmetry breaking, providing an uncorrupted binary distribution."
         ],
         "bullets": [
@@ -7710,7 +7758,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       {
         "title": "Statistical Tally, Streak Counter & Instant 100-Flip Simulation",
         "paragraphs": [
-          "A single coin toss reveals an individual outcome, while repeated trials illustrate statistical behavior. Over a large series of trials, the sample proportion of heads and tails tends to balance toward the expected 50% split. However, human intuition frequently falls victim to the Gambler's Fallacy—falsely assuming that a run of Heads makes a Tails 'due'.",
+          "A single coin toss reveals an individual outcome, while repeated trials illustrate statistical behavior. Over a large series of trials, the sample proportion of heads and tails tends to balance toward the expected 50% split. However, human intuition frequently falls victim to the Gambler's Fallacy\u2014falsely assuming that a run of Heads makes a Tails 'due'.",
           "Our coin flip simulator features an integrated statistics ledger. It logs cumulative flips, heads and tails percentages, and tracks your current consecutive streak in real time. For fast probability demonstrations, an Instant 100 Flips simulation button lets you test a 100-toss sample in a fraction of a second."
         ],
         "bullets": [
@@ -7722,11 +7770,11 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       {
         "title": "Custom Decision Presets, Currency Styles & Tournament Matches",
         "paragraphs": [
-          "Beyond standard heads or tails, users frequently need quick visual choices. FileZenith provides multiple coin styles including Classic Gold, US Quarter ($), Indian Rupee (₹), Euro (€), and Bitcoin (₿), along with Yes/No and custom option modes.",
+          "Beyond standard heads or tails, users frequently need quick visual choices. FileZenith provides multiple coin styles including Classic Gold, US Quarter ($), Indian Rupee (\u20b9), Euro (\u20ac), and Bitcoin (\u20bf), along with Yes/No and custom option modes.",
           "For competitive scenarios, the tool includes Best of 3 (BO3) and Best of 5 (BO5) Tournament Match modes with live score tracking. Procedural audio synthesized via the Web Audio API delivers authentic metallic clinks upon flick and landing, complete with an instant mute toggle for quiet environments."
         ],
         "bullets": [
-          "Numismatic Styles: Switch between Classic Gold, US Quarter ($), Indian Rupee (₹), Euro (€), and Bitcoin (₿).",
+          "Numismatic Styles: Switch between Classic Gold, US Quarter ($), Indian Rupee (\u20b9), Euro (\u20ac), and Bitcoin (\u20bf).",
           "Decision Modes: Toggle between Heads/Tails, Yes/No, or custom options (e.g. Pizza vs Burger, Study vs Gaming).",
           "Tournament Match Mode: Play Best of 3 or Best of 5 series with live scorekeeping and winner celebrations."
         ]
@@ -8379,1044 +8427,1169 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       }
     ]
   },
-    "/pdf/mask-aadhaar": {
-  "slug": "/pdf/mask-aadhaar",
-  "badge": "UIDAI & RBI Compliance",
-  "heading": "Authoritative Operational Guide: Offline Aadhaar Card Masking & KYC Privacy",
-  "subheading": "Comprehensive technical guide on masking the first 8 digits of Aadhaar (XXXX-XXXX-1234) for hotels, banks, telecom verification & legal compliance.",
-  "sections": [
-    {
-      "title": "1. Regulatory Mandate & Legal Framework (UIDAI Circulars & RBI Guidelines)",
-      "paragraphs": [
-        "The Unique Identification Authority of India (UIDAI) and the Reserve Bank of India (RBI) have explicitly mandated that private entities—including hotels, telecom providers, car rentals, and private employers—are not legally authorized to collect or store an individual's unmasked 12-digit Aadhaar number. Under Section 29 of the Aadhaar (Targeted Delivery of Financial and Other Subsidies, Benefits and Services) Act, storing raw Aadhaar numbers exposes organizations to severe penalties and individuals to identity fraud and synthetic banking theft.",
-        "Masked Aadhaar is the legally prescribed remedy: it conceals the first 8 digits (displaying only as 'XXXX-XXXX-1234') while preserving the final 4 digits, photograph, name, date of birth, and barcode. This satisfies KYC verification protocols without compromising privacy. FileZenith provides an instant, client-side masking tool that processes your Aadhaar card directly on your device with zero cloud transmissions."
-      ],
-      "bullets": [
-        "Legal Prescript: Strictly compliant with Section 29 of the Aadhaar Act and RBI Master Direction on KYC.",
-        "Accepted Everywhere: Legally valid for flight boarding, hotel check-ins, job verification, and SIM activation.",
-        "Zero Cloud Exposure: Processes document pixels in local browser RAM without sending identity files over the internet."
-      ]
-    },
-    {
-      "title": "2. Client-Side Vector Flattening vs. Dangerous Marker Overlays",
-      "paragraphs": [
-        "Many users attempt to mask Aadhaar cards by drawing a black highlighter stroke using a smartphone gallery app. However, mobile photo editors often create a non-destructive markup layer that can easily be removed or brightened to reveal the hidden digits underneath. Furthermore, uploading Aadhaar scans to unknown cloud utility websites risks your biometric document being logged or sold.",
-        "FileZenith employs destructive vector and raster flattening. When the masking box is placed over the 8-digit sequence, our engine permanently stamps opaque black pixels directly into the document canvas, destroying the original numbers at the binary level before compiling a fresh, clean PDF."
-      ],
-      "bullets": [
-        "Destructive Redaction: Underlying pixels are permanently overwritten and cannot be revealed by contrast adjustment.",
-        "QR Code Protection: Optional 'Maximum Security' preset blacks out the 2D QR code to prevent barcode scanner scraping.",
-        "Format Versatility: Accepts JPG, PNG, and PDF Aadhaar downloads directly from the official mAadhaar or UIDAI portal."
-      ]
-    },
-    {
-      "title": "3. Compliance Matrix: Where Can You Legally Submit Masked Aadhaar?",
-      "paragraphs": [
-        "Consumers frequently encounter resistance from front-desk staff demanding raw unmasked Aadhaar cards. Below is the official legal compliance reference issued by UIDAI and central authorities:"
-      ],
-      "table": {
-        "headers": [
-          "Industry / Verification Scenario",
-          "Is Masked Aadhaar Mandatory?",
-          "Can Raw Aadhaar Be Refused?",
-          "Legal Authority & Penalty"
+  "/pdf/mask-aadhaar": {
+    "slug": "/pdf/mask-aadhaar",
+    "badge": "UIDAI & RBI Compliance",
+    "heading": "Authoritative Operational Guide: Offline Aadhaar Card Masking & KYC Privacy",
+    "subheading": "Comprehensive technical guide on masking the first 8 digits of Aadhaar (XXXX-XXXX-1234) for hotels, banks, telecom verification & legal compliance.",
+    "sections": [
+      {
+        "title": "1. Regulatory Mandate & Legal Framework (UIDAI Circulars & RBI Guidelines)",
+        "paragraphs": [
+          "The Unique Identification Authority of India (UIDAI) and the Reserve Bank of India (RBI) have explicitly mandated that private entities\u2014including hotels, telecom providers, car rentals, and private employers\u2014are not legally authorized to collect or store an individual's unmasked 12-digit Aadhaar number. Under Section 29 of the Aadhaar (Targeted Delivery of Financial and Other Subsidies, Benefits and Services) Act, storing raw Aadhaar numbers exposes organizations to severe penalties and individuals to identity fraud and synthetic banking theft.",
+          "Masked Aadhaar is the legally prescribed remedy: it conceals the first 8 digits (displaying only as 'XXXX-XXXX-1234') while preserving the final 4 digits, photograph, name, date of birth, and barcode. This satisfies KYC verification protocols without compromising privacy. FileZenith provides an instant, client-side masking tool that processes your Aadhaar card directly on your device with zero cloud transmissions."
         ],
-        "rows": [
-          [
-            "Hotels & Guest Houses",
-            "Yes — Strictly Mandatory",
-            "Yes — Guest has legal right to refuse raw Aadhaar",
-            "UIDAI Advisory: Fines up to ₹1 Crore for unauthorized storage"
+        "bullets": [
+          "Legal Prescript: Strictly compliant with Section 29 of the Aadhaar Act and RBI Master Direction on KYC.",
+          "Accepted Everywhere: Legally valid for flight boarding, hotel check-ins, job verification, and SIM activation.",
+          "Zero Cloud Exposure: Processes document pixels in local browser RAM without sending identity files over the internet."
+        ]
+      },
+      {
+        "title": "2. Client-Side Vector Flattening vs. Dangerous Marker Overlays",
+        "paragraphs": [
+          "Many users attempt to mask Aadhaar cards by drawing a black highlighter stroke using a smartphone gallery app. However, mobile photo editors often create a non-destructive markup layer that can easily be removed or brightened to reveal the hidden digits underneath. Furthermore, uploading Aadhaar scans to unknown cloud utility websites risks your biometric document being logged or sold.",
+          "FileZenith employs destructive vector and raster flattening. When the masking box is placed over the 8-digit sequence, our engine permanently stamps opaque black pixels directly into the document canvas, destroying the original numbers at the binary level before compiling a fresh, clean PDF."
+        ],
+        "bullets": [
+          "Destructive Redaction: Underlying pixels are permanently overwritten and cannot be revealed by contrast adjustment.",
+          "QR Code Protection: Optional 'Maximum Security' preset blacks out the 2D QR code to prevent barcode scanner scraping.",
+          "Format Versatility: Accepts JPG, PNG, and PDF Aadhaar downloads directly from the official mAadhaar or UIDAI portal."
+        ]
+      },
+      {
+        "title": "3. Compliance Matrix: Where Can You Legally Submit Masked Aadhaar?",
+        "paragraphs": [
+          "Consumers frequently encounter resistance from front-desk staff demanding raw unmasked Aadhaar cards. Below is the official legal compliance reference issued by UIDAI and central authorities:"
+        ],
+        "table": {
+          "headers": [
+            "Industry / Verification Scenario",
+            "Is Masked Aadhaar Mandatory?",
+            "Can Raw Aadhaar Be Refused?",
+            "Legal Authority & Penalty"
           ],
-          [
-            "Banks & NBFCs (Offline KYC)",
-            "Yes — Mandatory unless voluntarily e-KYC verified",
-            "Yes — Masked copy must be accepted",
-            "RBI Master Direction - Know Your Customer (KYC) Direction, 2016"
-          ],
-          [
-            "Telecom & SIM Retailers",
-            "Yes — Point-of-sale physical copy must be masked",
-            "Yes — Raw Aadhaar collection is illegal",
-            "DoT Guidelines on Customer Acquisition Verification"
-          ],
-          [
-            "Domestic Airlines & Airport Security",
-            "Yes — Accepted at entry gates and check-in counters",
-            "Yes — Photo and name matching is sufficient",
-            "BCAS Circular on Approved Government Identity Proofs"
-          ],
-          [
-            "Private Employers & Background Check",
-            "Yes — Masked copy compliant for personnel records",
-            "Yes — Employers cannot compel raw 12 digits",
-            "Supreme Court Constitution Bench Aadhaar Ruling (2018)"
+          "rows": [
+            [
+              "Hotels & Guest Houses",
+              "Yes \u2014 Strictly Mandatory",
+              "Yes \u2014 Guest has legal right to refuse raw Aadhaar",
+              "UIDAI Advisory: Fines up to \u20b91 Crore for unauthorized storage"
+            ],
+            [
+              "Banks & NBFCs (Offline KYC)",
+              "Yes \u2014 Mandatory unless voluntarily e-KYC verified",
+              "Yes \u2014 Masked copy must be accepted",
+              "RBI Master Direction - Know Your Customer (KYC) Direction, 2016"
+            ],
+            [
+              "Telecom & SIM Retailers",
+              "Yes \u2014 Point-of-sale physical copy must be masked",
+              "Yes \u2014 Raw Aadhaar collection is illegal",
+              "DoT Guidelines on Customer Acquisition Verification"
+            ],
+            [
+              "Domestic Airlines & Airport Security",
+              "Yes \u2014 Accepted at entry gates and check-in counters",
+              "Yes \u2014 Photo and name matching is sufficient",
+              "BCAS Circular on Approved Government Identity Proofs"
+            ],
+            [
+              "Private Employers & Background Check",
+              "Yes \u2014 Masked copy compliant for personnel records",
+              "Yes \u2014 Employers cannot compel raw 12 digits",
+              "Supreme Court Constitution Bench Aadhaar Ruling (2018)"
+            ]
           ]
+        }
+      },
+      {
+        "title": "4. Preventing QR Code Scraping & Identity Extraction",
+        "paragraphs": [
+          "A critical vulnerability in printed Aadhaar cards is the high-density machine-readable QR code on the front and back. Even if the human-readable 8-digit sequence is obscured, scanning the QR code using any mobile camera reader reveals the unmasked 12-digit number, full residential address, and father's/spouse's name.",
+          "FileZenith's 'Maximum Security' mode automatically places a calibrated blackout box over the 2D QR code. This ensures complete protection when handing photocopies to unknown service providers or utility counters."
+        ],
+        "bullets": [
+          "2D Barcode Obfuscation: Prevents automated optical scanners from recovering raw identification data.",
+          "Complete KYC Proof: Leaves your photograph, full legal name, date of birth, and last 4 digits 100% visible for manual verification."
         ]
       }
-    },
-    {
-      "title": "4. Preventing QR Code Scraping & Identity Extraction",
-      "paragraphs": [
-        "A critical vulnerability in printed Aadhaar cards is the high-density machine-readable QR code on the front and back. Even if the human-readable 8-digit sequence is obscured, scanning the QR code using any mobile camera reader reveals the unmasked 12-digit number, full residential address, and father's/spouse's name.",
-        "FileZenith's 'Maximum Security' mode automatically places a calibrated blackout box over the 2D QR code. This ensures complete protection when handing photocopies to unknown service providers or utility counters."
-      ],
-      "bullets": [
-        "2D Barcode Obfuscation: Prevents automated optical scanners from recovering raw identification data.",
-        "Complete KYC Proof: Leaves your photograph, full legal name, date of birth, and last 4 digits 100% visible for manual verification."
-      ]
-    }
-  ],
-  "faqs": [
-    {
-      "question": "What is a Masked Aadhaar card?",
-      "answer": "A Masked Aadhaar card is an official variation of your Aadhaar card where the first 8 digits of your 12-digit number are blacked out (displaying as XXXX-XXXX-1234), leaving only the last 4 digits visible alongside your name, photo, and address."
-    },
-    {
-      "question": "Is Masked Aadhaar legally valid for hotel check-ins and travel in India?",
-      "answer": "Yes. UIDAI has officially issued circulars clarifying that Masked Aadhaar is fully legally valid and acceptable as proof of identity and address across all hotels, domestic airlines, railway journeys, and private businesses."
-    },
-    {
-      "question": "Do I need an Aadhaar OTP to mask my card on FileZenith?",
-      "answer": "No. While the UIDAI website requires an OTP sent to your registered mobile number, FileZenith works directly on any existing PDF or scanned photo of your Aadhaar card, allowing you to mask it instantly without waiting for SMS OTPs."
-    },
-    {
-      "question": "Are my Aadhaar details uploaded to your server?",
-      "answer": "Never. FileZenith runs 100% locally in your web browser memory using HTML5 Canvas and WebAssembly. Zero bytes of your Aadhaar card are ever uploaded, transmitted, or saved on any remote server."
-    },
-    {
-      "question": "Can I mask the QR code on the Aadhaar card as well?",
-      "answer": "Yes. Select the 'Maximum Security' preset to mask both the 8-digit sequence and the machine-readable QR code, ensuring complete protection against unauthorized digital scanning."
-    },
-    {
-      "question": "What if the mask box does not align with my card's numbers?",
-      "answer": "You can fine-tune the X/Y position and box dimensions using the intuitive sliders, or drag the box to match any custom Aadhaar format (e-Aadhaar, PVC card, or m-Aadhaar)."
-    },
-    {
-      "question": "Can I download the masked card as a PDF?",
-      "answer": "Yes. You can download your masked Aadhaar as a crisp, standard vector PDF document ready for printing or digital submission."
-    },
-    {
-      "question": "Does this tool work on mobile phones?",
-      "answer": "Yes. FileZenith is fully responsive and functions smoothly across all Android smartphones and iPhones without needing to install external mobile apps."
-    }
-  ]
-},
+    ],
+    "faqs": [
+      {
+        "question": "What is a Masked Aadhaar card?",
+        "answer": "A Masked Aadhaar card is an official variation of your Aadhaar card where the first 8 digits of your 12-digit number are blacked out (displaying as XXXX-XXXX-1234), leaving only the last 4 digits visible alongside your name, photo, and address."
+      },
+      {
+        "question": "Is Masked Aadhaar legally valid for hotel check-ins and travel in India?",
+        "answer": "Yes. UIDAI has officially issued circulars clarifying that Masked Aadhaar is fully legally valid and acceptable as proof of identity and address across all hotels, domestic airlines, railway journeys, and private businesses."
+      },
+      {
+        "question": "Do I need an Aadhaar OTP to mask my card on FileZenith?",
+        "answer": "No. While the UIDAI website requires an OTP sent to your registered mobile number, FileZenith works directly on any existing PDF or scanned photo of your Aadhaar card, allowing you to mask it instantly without waiting for SMS OTPs."
+      },
+      {
+        "question": "Are my Aadhaar details uploaded to your server?",
+        "answer": "Never. FileZenith runs 100% locally in your web browser memory using HTML5 Canvas and WebAssembly. Zero bytes of your Aadhaar card are ever uploaded, transmitted, or saved on any remote server."
+      },
+      {
+        "question": "Can I mask the QR code on the Aadhaar card as well?",
+        "answer": "Yes. Select the 'Maximum Security' preset to mask both the 8-digit sequence and the machine-readable QR code, ensuring complete protection against unauthorized digital scanning."
+      },
+      {
+        "question": "What if the mask box does not align with my card's numbers?",
+        "answer": "You can fine-tune the X/Y position and box dimensions using the intuitive sliders, or drag the box to match any custom Aadhaar format (e-Aadhaar, PVC card, or m-Aadhaar)."
+      },
+      {
+        "question": "Can I download the masked card as a PDF?",
+        "answer": "Yes. You can download your masked Aadhaar as a crisp, standard vector PDF document ready for printing or digital submission."
+      },
+      {
+        "question": "Can I securely mask my 12-digit Aadhaar number directly on an iPhone or Android mobile browser?",
+        "answer": "Yes. FileZenith is fully responsive and functions smoothly across all Android smartphones and iPhones without needing to install external mobile apps."
+      }
+    ]
+  },
   "/image/visa-photo-maker": {
-  "slug": "/image/visa-photo-maker",
-  "badge": "ICAO Biometric Standards",
-  "heading": "International Biometric Visa & Passport Photo Standards Manual",
-  "subheading": "Comprehensive operational guide covering US DS-160 (2x2 inch), Schengen (35x45mm), UK, Canada & India biometric passport sizing specifications.",
-  "sections": [
-    {
-      "title": "1. Embassy Biometric Geometries & Strict Sizing Tolerances",
-      "paragraphs": [
-        "Visa and passport application rejections occur most frequently due to non-compliant biometric photographs. Embassies utilize automated computer vision scanning to measure exact facial ratios: the distance from the bottom of the chin to the top of the head (crown), horizontal eye-line centering, and background chromaticity. If your head occupies less than 50% or more than 69% of the frame on a US visa application, the DS-160 automated system will immediately reject the file.",
-        "FileZenith's Visa Photo Maker incorporates real-time biometric guideline overlays conforming to the International Civil Aviation Organization (ICAO Doc 9303) and US Department of State standards. By aligning your face with the dashed oval, eye level, and chin markers, you guarantee strict mathematical compliance."
-      ],
-      "bullets": [
-        "US Visa / DS-160: Exact 2x2 inches (51x51mm / 600x600 px @ 300 DPI) with pure white background and 50-69% head height.",
-        "Schengen Visa: 35x45mm standard with 70-80% face coverage (32-36mm chin-to-crown) and neutral light grey background.",
-        "UK Visitor Visa: 35x45mm with plain cream or light grey background, zero shadows, and neutral facial expression."
-      ]
-    },
-    {
-      "title": "2. Comprehensive Embassy Photo Sizing & Biometric Matrix",
-      "paragraphs": [
-        "Different consulates enforce vastly contrasting dimensions, background shades, and face proportions. The table below details official consular requirements across primary global jurisdictions:"
-      ],
-      "table": {
-        "headers": [
-          "Consulate / Jurisdiction",
-          "Dimensions (mm / in)",
-          "Head Height % (Crown to Chin)",
-          "Background Color Spec",
-          "Eyeglasses Allowed?"
+    "slug": "/image/visa-photo-maker",
+    "badge": "ICAO Biometric Standards",
+    "heading": "International Biometric Visa & Passport Photo Standards Manual",
+    "subheading": "Comprehensive operational guide covering US DS-160 (2x2 inch), Schengen (35x45mm), UK, Canada & India biometric passport sizing specifications.",
+    "sections": [
+      {
+        "title": "1. Embassy Biometric Geometries & Strict Sizing Tolerances",
+        "paragraphs": [
+          "Visa and passport application rejections occur most frequently due to non-compliant biometric photographs. Embassies utilize automated computer vision scanning to measure exact facial ratios: the distance from the bottom of the chin to the top of the head (crown), horizontal eye-line centering, and background chromaticity. If your head occupies less than 50% or more than 69% of the frame on a US visa application, the DS-160 automated system will immediately reject the file.",
+          "FileZenith's Visa Photo Maker incorporates real-time biometric guideline overlays conforming to the International Civil Aviation Organization (ICAO Doc 9303) and US Department of State standards. By aligning your face with the dashed oval, eye level, and chin markers, you guarantee strict mathematical compliance.",
+          "The International Civil Aviation Organization (ICAO) Doc 9303 specification establishes strict mathematical tolerances for Machine Readable Travel Documents (MRTD). Automated biometric passport gates (e-Gates) utilize facial landmark detection algorithms that measure inter-pupillary distance (IPD), the ratio of the eye-axis line to the horizontal plane (which must not exceed 2 degrees of tilt), and the vertical position of the nose bridge relative to the frame center. Failure to maintain these precise geometric ratios results in automatic e-Gate rejection and manual secondary inspection at border control checkpoints."
         ],
-        "rows": [
-          [
-            "US Department of State (DS-160 / B1/B2)",
-            "51x51 mm (2x2 in)",
-            "50% to 69% (1 in to 1 3/8 in)",
-            "Pure Plain White (#FFFFFF)",
-            "Strictly Prohibited (No Exceptions)"
+        "bullets": [
+          "US Visa / DS-160: Exact 2x2 inches (51x51mm / 600x600 px @ 300 DPI) with pure white background and 50-69% head height.",
+          "Schengen Visa: 35x45mm standard with 70-80% face coverage (32-36mm chin-to-crown) and neutral light grey background.",
+          "UK Visitor Visa: 35x45mm with plain cream or light grey background, zero shadows, and neutral facial expression."
+        ]
+      },
+      {
+        "title": "2. Comprehensive Embassy Photo Sizing & Biometric Matrix",
+        "paragraphs": [
+          "Different consulates enforce vastly contrasting dimensions, background shades, and face proportions. The table below details official consular requirements across primary global jurisdictions:"
+        ],
+        "table": {
+          "headers": [
+            "Consulate / Jurisdiction",
+            "Dimensions (mm / in)",
+            "Head Height % (Crown to Chin)",
+            "Background Color Spec",
+            "Eyeglasses Allowed?"
           ],
-          [
-            "European Schengen Consulates",
-            "35x45 mm",
-            "70% to 80% (32 mm to 36 mm)",
-            "Light Grey or Neutral Light Tint",
-            "Prohibited unless medical certification"
-          ],
-          [
-            "UK Visas & Immigration (UKVI)",
-            "35x45 mm",
-            "65% to 75% (29 mm to 34 mm)",
-            "Light Grey or Cream",
-            "Prohibited (Tinted/Glare Forbidden)"
-          ],
-          [
-            "Canada IRCC (Work/Student/PR)",
-            "50x70 mm (35x45 mm digital)",
-            "31 mm to 36 mm chin-to-crown",
-            "Pure Plain White",
-            "Prohibited (Eyes must be clearly visible)"
-          ],
-          [
-            "India Passport Seva / OCI Card",
-            "51x51 mm (2x2 in) / 35x45 mm",
-            "68% to 80% coverage",
-            "Plain White or Off-White",
-            "Prohibited (Glare & reflections banned)"
+          "rows": [
+            [
+              "US Department of State (DS-160 / B1/B2)",
+              "51x51 mm (2x2 in)",
+              "50% to 69% (1 in to 1 3/8 in)",
+              "Pure Plain White (#FFFFFF)",
+              "Strictly Prohibited (No Exceptions)"
+            ],
+            [
+              "European Schengen Consulates",
+              "35x45 mm",
+              "70% to 80% (32 mm to 36 mm)",
+              "Light Grey or Neutral Light Tint",
+              "Prohibited unless medical certification"
+            ],
+            [
+              "UK Visas & Immigration (UKVI)",
+              "35x45 mm",
+              "65% to 75% (29 mm to 34 mm)",
+              "Light Grey or Cream",
+              "Prohibited (Tinted/Glare Forbidden)"
+            ],
+            [
+              "Canada IRCC (Work/Student/PR)",
+              "50x70 mm (35x45 mm digital)",
+              "31 mm to 36 mm chin-to-crown",
+              "Pure Plain White",
+              "Prohibited (Eyes must be clearly visible)"
+            ],
+            [
+              "India Passport Seva / OCI Card",
+              "51x51 mm (2x2 in) / 35x45 mm",
+              "68% to 80% coverage",
+              "Plain White or Off-White",
+              "Prohibited (Glare & reflections banned)"
+            ]
           ]
+        }
+      },
+      {
+        "title": "3. 4x6 Inch Printable Sheet Economics vs. Commercial Studio Pricing",
+        "paragraphs": [
+          "When submitting hard-copy passport applications at embassy collection centers (such as VFS Global or passport offices), candidates are frequently charged exorbitant studio fees for physical prints. FileZenith includes an integrated 4x6 inch (1200x1800 px @ 300 DPI) sheet generator that arranges 6 identical, millimeter-precise passport photos with cutting margins on a single sheet.",
+          "You can take this file to any local pharmacy or photo kiosk and print all 6 photos on standard photo paper for mere pennies."
+        ],
+        "bullets": [
+          "High DPI Rasterization: Full 300 DPI resolution ensures pin-sharp physical prints with zero pixelation.",
+          "Cutting Grid: Integrated 1px guide lines make scissor or rotary trimmer cuts perfectly uniform.",
+          "Multi-Country Switcher: Effortlessly toggle between US, Schengen, UK, Canada, and Indian OCI specifications."
+        ]
+      },
+      {
+        "title": "4. Lighting, Attire & Contrast Rules for Embassy Verification",
+        "paragraphs": [
+          "Embassies reject photos with severe flash shadows behind the ears or washed-out skin tones. Stand approximately 3 to 4 feet in front of a flat, smooth wall in bright, indirect daylight.",
+          "Wear attire that contrasts with the background (e.g., navy blue, black, or dark grey shirts). Do not wear white clothing when applying for US or Canadian visas, as white-on-white blends your shoulders into the background and triggers automated segmentation failures.",
+          "To achieve biometric verification compliance across European Schengen consulates, US Department of State consular processing, and Indian visa centers, lighting must be completely diffused with zero specular highlights or hot spots on the forehead or cheeks. Backgrounds must be pure solid white (#FFFFFF) or light neutral grey with a minimum reflectance value of 78%, completely free of decorative patterns, wallpaper textures, or cast shadows. FileZenith's interactive cropping canvas provides visual alignment overlays for the crown, eye line, and chin, enabling applicants to frame compliant visa photos in seconds from home."
         ]
       }
-    },
-    {
-      "title": "3. 4x6 Inch Printable Sheet Economics vs. Commercial Studio Pricing",
-      "paragraphs": [
-        "When submitting hard-copy passport applications at embassy collection centers (such as VFS Global or passport offices), candidates are frequently charged exorbitant studio fees for physical prints. FileZenith includes an integrated 4x6 inch (1200x1800 px @ 300 DPI) sheet generator that arranges 6 identical, millimeter-precise passport photos with cutting margins on a single sheet.",
-        "You can take this file to any local pharmacy or photo kiosk and print all 6 photos on standard photo paper for mere pennies."
-      ],
-      "bullets": [
-        "High DPI Rasterization: Full 300 DPI resolution ensures pin-sharp physical prints with zero pixelation.",
-        "Cutting Grid: Integrated 1px guide lines make scissor or rotary trimmer cuts perfectly uniform.",
-        "Multi-Country Switcher: Effortlessly toggle between US, Schengen, UK, Canada, and Indian OCI specifications."
-      ]
-    },
-    {
-      "title": "4. Lighting, Attire & Contrast Rules for Embassy Verification",
-      "paragraphs": [
-        "Embassies reject photos with severe flash shadows behind the ears or washed-out skin tones. Stand approximately 3 to 4 feet in front of a flat, smooth wall in bright, indirect daylight.",
-        "Wear attire that contrasts with the background (e.g., navy blue, black, or dark grey shirts). Do not wear white clothing when applying for US or Canadian visas, as white-on-white blends your shoulders into the background and triggers automated segmentation failures."
-      ]
-    }
-  ],
-  "faqs": [
-    {
-      "question": "What are the exact requirements for a US Visa (DS-160) photo?",
-      "answer": "A US Visa photo must be 2x2 inches (51x51mm), square 600x600 pixels minimum, under 240 KB in size, with a plain white background. Your head must measure between 1 inch and 1 3/8 inches (50% to 69%) from the bottom of your chin to the top of your head."
-    },
-    {
-      "question": "What is the correct background color for Schengen visa photos?",
-      "answer": "European Schengen consulates require a plain light grey, off-white, or neutral background. Pure stark white is often rejected by certain consulates; FileZenith provides pre-calibrated light grey and off-white toggles."
-    },
-    {
-      "question": "Can I wear eyeglasses in my visa photo?",
-      "answer": "No. The US Department of State and most global embassies strictly prohibit eyeglasses in visa and passport photos to avoid flash glare and ocular biometric obstruction."
-    },
-    {
-      "question": "Can I use a selfie taken with my smartphone?",
-      "answer": "Yes! Stand about 4 feet away in front of a flat, well-lit wall with natural daylight. Look directly into the camera lens with a neutral expression (no smiling or teeth showing), upload it here, and use our zoom and positioning sliders to fit the guideline oval."
-    },
-    {
-      "question": "How do I print 6 passport photos on a 4x6 photo sheet?",
-      "answer": "Click 'Download 6-Photo Printable Sheet (4x6 Inch)'. The tool generates a standard 1800x1200 pixel photo sheet that you can print at any standard photo kiosk or local print shop on 4x6 photo paper."
-    },
-    {
-      "question": "Does FileZenith compress the image to comply with the 240KB US visa cap?",
-      "answer": "Yes. The exported single JPG photo is automatically optimized to ensure it stays strictly under the 240 KB upload ceiling of the CEAC DS-160 portal while maintaining crisp 300 DPI visual quality."
-    },
-    {
-      "question": "Are head coverings allowed in passport photos?",
-      "answer": "Head coverings are permitted solely for recognized religious or medical reasons, provided the entire face from the bottom of the chin to the top of the forehead and both edges of the face are completely visible."
-    },
-    {
-      "question": "Are my portrait photos uploaded to any server?",
-      "answer": "No. All cropping, background rendering, filter adjustments, and sheet generation take place 100% locally in your browser memory."
-    }
-  ]
-},
+    ],
+    "faqs": [
+      {
+        "question": "What are the exact requirements for a US Visa (DS-160) photo?",
+        "answer": "A US Visa photo must be 2x2 inches (51x51mm), square 600x600 pixels minimum, under 240 KB in size, with a plain white background. Your head must measure between 1 inch and 1 3/8 inches (50% to 69%) from the bottom of your chin to the top of your head."
+      },
+      {
+        "question": "What is the correct background color for Schengen visa photos?",
+        "answer": "European Schengen consulates require a plain light grey, off-white, or neutral background. Pure stark white is often rejected by certain consulates; FileZenith provides pre-calibrated light grey and off-white toggles."
+      },
+      {
+        "question": "Can I wear eyeglasses in my visa photo?",
+        "answer": "No. The US Department of State and most global embassies strictly prohibit eyeglasses in visa and passport photos to avoid flash glare and ocular biometric obstruction."
+      },
+      {
+        "question": "Can I use a selfie taken with my smartphone?",
+        "answer": "Yes! Stand about 4 feet away in front of a flat, well-lit wall with natural daylight. Look directly into the camera lens with a neutral expression (no smiling or teeth showing), upload it here, and use our zoom and positioning sliders to fit the guideline oval."
+      },
+      {
+        "question": "How do I print 6 passport photos on a 4x6 photo sheet?",
+        "answer": "Click 'Download 6-Photo Printable Sheet (4x6 Inch)'. The tool generates a standard 1800x1200 pixel photo sheet that you can print at any standard photo kiosk or local print shop on 4x6 photo paper."
+      },
+      {
+        "question": "Does FileZenith compress the image to comply with the 240KB US visa cap?",
+        "answer": "Yes. The exported single JPG photo is automatically optimized to ensure it stays strictly under the 240 KB upload ceiling of the CEAC DS-160 portal while maintaining crisp 300 DPI visual quality."
+      },
+      {
+        "question": "Are head coverings allowed in passport photos?",
+        "answer": "Head coverings are permitted solely for recognized religious or medical reasons, provided the entire face from the bottom of the chin to the top of the forehead and both edges of the face are completely visible."
+      },
+      {
+        "question": "Are my portrait photos uploaded to any server?",
+        "answer": "No. All cropping, background rendering, filter adjustments, and sheet generation take place 100% locally in your browser memory."
+      }
+    ]
+  },
   "/pdf/redact": {
-  "slug": "/pdf/redact",
-  "badge": "Permanent Pixel Rasterization",
-  "heading": "Technical Manual on Permanent PDF Redaction & Zero-Leak Security",
-  "subheading": "In-depth guide explaining how superficial markup leaks confidential data and why pixel flattening guarantees true, unrecoverable PDF redaction.",
-  "sections": [
-    {
-      "title": "1. The Mechanics of Data Leaks in Superficial Redactions",
-      "paragraphs": [
-        "Superficial redaction is one of the most widespread security oversights in corporate, legal, and government document management. In naive PDF editing programs, 'redaction' simply draws a black rectangular vector shape on top of the text. Because the underlying text objects (the PDF content stream with Tj operators) remain completely intact beneath the shape, anyone can highlight, copy, or use search tools to read the hidden information.",
-        "High-profile legal cases have repeatedly seen confidential settlement amounts, trade secrets, and witness identities inadvertently exposed through flawed redactions. True redaction requires permanently eliminating the character strings from the PDF's internal data tree."
-      ],
-      "bullets": [
-        "Text Stream Removal: The underlying text stream is completely purged from the document object hierarchy.",
-        "Clipboard Immunity: Selecting or copying the redacted region yields zero text characters.",
-        "Search Immunity: Internal PDF search indexing engines cannot find words inside redacted sections."
-      ]
-    },
-    {
-      "title": "2. Compliance Matrix: Court & Regulatory Redaction Standards",
-      "paragraphs": [
-        "Judicial and administrative bodies enforce strict statutory standards for document redacting. Failure to properly blackout sensitive data carries heavy sanctions:"
-      ],
-      "table": {
-        "headers": [
-          "Statute / Regulatory Authority",
-          "Protected Data Elements",
-          "Mandatory Redaction Standard",
-          "Consequence of Defective Redaction"
+    "slug": "/pdf/redact",
+    "badge": "Permanent Pixel Rasterization",
+    "heading": "Technical Manual on Permanent PDF Redaction & Zero-Leak Security",
+    "subheading": "In-depth guide explaining how superficial markup leaks confidential data and why pixel flattening guarantees true, unrecoverable PDF redaction.",
+    "sections": [
+      {
+        "title": "1. The Mechanics of Data Leaks in Superficial Redactions",
+        "paragraphs": [
+          "Superficial redaction is one of the most widespread security oversights in corporate, legal, and government document management. In naive PDF editing programs, 'redaction' simply draws a black rectangular vector shape on top of the text. Because the underlying text objects (the PDF content stream with Tj operators) remain completely intact beneath the shape, anyone can highlight, copy, or use search tools to read the hidden information.",
+          "High-profile legal cases have repeatedly seen confidential settlement amounts, trade secrets, and witness identities inadvertently exposed through flawed redactions. True redaction requires permanently eliminating the character strings from the PDF's internal data tree."
         ],
-        "rows": [
-          [
-            "US Federal Rule of Civil Procedure 5.2",
-            "Social Security Numbers, Taxpayer IDs, Minor names, Financial accounts",
-            "First 5 digits of SSN redacted; minor initials only; year of birth only",
-            "Court contempt sanctions, case dismissal, public disclosure liability"
+        "bullets": [
+          "Text Stream Removal: The underlying text stream is completely purged from the document object hierarchy.",
+          "Clipboard Immunity: Selecting or copying the redacted region yields zero text characters.",
+          "Search Immunity: Internal PDF search indexing engines cannot find words inside redacted sections."
+        ]
+      },
+      {
+        "title": "2. Compliance Matrix: Court & Regulatory Redaction Standards",
+        "paragraphs": [
+          "Judicial and administrative bodies enforce strict statutory standards for document redacting. Failure to properly blackout sensitive data carries heavy sanctions:"
+        ],
+        "table": {
+          "headers": [
+            "Statute / Regulatory Authority",
+            "Protected Data Elements",
+            "Mandatory Redaction Standard",
+            "Consequence of Defective Redaction"
           ],
-          [
-            "EU General Data Protection Regulation (GDPR)",
-            "Special category data, health records, biometric signatures",
-            "Irreversible anonymization (Article 17 & 89)",
-            "Fines up to €20M or 4% of global annual turnover"
-          ],
-          [
-            "HIPAA Privacy Rule (45 CFR § 164.514)",
-            "18 Protected Health Identifiers (Names, SSNs, medical record numbers)",
-            "Safe Harbor method: complete eradication of all 18 identifiers",
-            "Civil monetary penalties up to $50,000 per violation day"
-          ],
-          [
-            "Indian Digital Personal Data Protection (DPDP) Act",
-            "Aadhaar numbers, bank accounts, biometric markers, health data",
-            "Complete masking/redaction prior to public filing or sharing",
-            "Regulatory penalties up to ₹250 Crore for data security lapses"
+          "rows": [
+            [
+              "US Federal Rule of Civil Procedure 5.2",
+              "Social Security Numbers, Taxpayer IDs, Minor names, Financial accounts",
+              "First 5 digits of SSN redacted; minor initials only; year of birth only",
+              "Court contempt sanctions, case dismissal, public disclosure liability"
+            ],
+            [
+              "EU General Data Protection Regulation (GDPR)",
+              "Special category data, health records, biometric signatures",
+              "Irreversible anonymization (Article 17 & 89)",
+              "Fines up to \u20ac20M or 4% of global annual turnover"
+            ],
+            [
+              "HIPAA Privacy Rule (45 CFR \u00a7 164.514)",
+              "18 Protected Health Identifiers (Names, SSNs, medical record numbers)",
+              "Safe Harbor method: complete eradication of all 18 identifiers",
+              "Civil monetary penalties up to $50,000 per violation day"
+            ],
+            [
+              "Indian Digital Personal Data Protection (DPDP) Act",
+              "Aadhaar numbers, bank accounts, biometric markers, health data",
+              "Complete masking/redaction prior to public filing or sharing",
+              "Regulatory penalties up to \u20b9250 Crore for data security lapses"
+            ]
           ]
+        }
+      },
+      {
+        "title": "3. FileZenith True Redaction: Destructive Rasterization & Vector Flattening",
+        "paragraphs": [
+          "FileZenith implements true permanent redaction through client-side destructive rasterization. When you define blackout boundaries on a page, our engine renders the page canvas, burns solid #000000 black pixels directly into the coordinate matrix, and discards the original vector text layer. The resulting page is embedded into a brand-new PDF as an immutable, high-definition image stream.",
+          "Because the characters are converted to solid pixels of uniform color, no computational analysis, contrast manipulation, or reverse engineering can ever recover what was underneath.",
+          "Furthermore, client-side rasterization guarantees that even if a third party attempts to execute advanced digital image thresholding or gamma curve stretching on the exported document, the redacted coordinates contain mathematically uniform #000000 pixel values. Because there is zero tonal variation, gradient edge, or color divergence between the redact box and the background canvas, forensic data recovery is physically and mathematically impossible."
+        ],
+        "bullets": [
+          "Permanent Erasure: Solid pitch-black pixels replace characters at the physical pixel buffer level.",
+          "Zero Leak Architecture: 100% in-browser processing guarantees unredacted versions are never uploaded to cloud servers.",
+          "Multi-Page Workflow: Effortlessly page through contracts, tax forms, or bank statements with persistent blackout tracking."
+        ]
+      },
+      {
+        "title": "4. Cryptographic Metadata Sanitization & Hidden Content Stream Scrubbing",
+        "paragraphs": [
+          "Beyond surface-level character erasure, comprehensive document redaction requires inspecting and scrubbing non-visual data containers embedded within the PDF container architecture. PDF documents frequently harbor sensitive remnants inside the document Information Dictionary (/Info), Extensible Metadata Platform (XMP) metadata packets, embedded thumbnail previews, annotations (/Annots), piece info dictionaries (/PieceInfo), and incremental update tables.",
+          "FileZenith's deep redaction pipeline performs recursive garbage collection on the document object hierarchy. When generating the flattened export, all prior revision histories, unreferenced XObject graphic streams, and hidden metadata fields are stripped entirely. The exported document contains only the newly generated high-resolution raster page streams, ensuring that forensic inspection of internal binary dictionaries reveals zero trace of previous edits, author identities, or historical versions."
+        ],
+        "bullets": [
+          "XMP Stream Stripping: Removes XML-formatted metadata packets containing creation software, camera/scanner IDs, and author tags.",
+          "Incremental Revision Neutralization: Flattens historical edit trees to prevent rollback to unredacted document states.",
+          "Orphaned Object Purging: Scans the cross-reference (xref) table to purge unlinked content streams and cached font descriptors."
         ]
       }
-    },
-    {
-      "title": "3. FileZenith True Redaction: Destructive Rasterization & Vector Flattening",
-      "paragraphs": [
-        "FileZenith implements true permanent redaction through client-side destructive rasterization. When you define blackout boundaries on a page, our engine renders the page canvas, burns solid #000000 black pixels directly into the coordinate matrix, and discards the original vector text layer. The resulting page is embedded into a brand-new PDF as an immutable, high-definition image stream.",
-        "Because the characters are converted to solid pixels of uniform color, no computational analysis, contrast manipulation, or reverse engineering can ever recover what was underneath."
-      ],
-      "bullets": [
-        "Permanent Erasure: Solid pitch-black pixels replace characters at the physical pixel buffer level.",
-        "Zero Leak Architecture: 100% in-browser processing guarantees unredacted versions are never uploaded to cloud servers.",
-        "Multi-Page Workflow: Effortlessly page through contracts, tax forms, or bank statements with persistent blackout tracking."
-      ]
-    }
-  ],
-  "faqs": [
-    {
-      "question": "How does FileZenith ensure permanent redaction without data leaks?",
-      "answer": "FileZenith renders the document pages to high-resolution raster canvases, burns solid black pixels over the redacted areas, and generates a flattened PDF. The underlying text is completely purged from the file, making it mathematically impossible to recover or copy."
-    },
-    {
-      "question": "Can someone copy-paste the text under a blacked-out box?",
-      "answer": "No. In FileZenith's flattened output, the vector text objects have been permanently replaced with raw pixels. There is no selectable text whatsoever beneath the redactions."
-    },
-    {
-      "question": "Is FileZenith redaction suitable for court and legal filings?",
-      "answer": "Yes. Our true flattening approach meets court-mandated redaction rules (such as US Federal Rule of Civil Procedure 5.2 and Indian IT Act confidentiality standards) for redacting Social Security numbers, bank accounts, and personal identifiers."
-    },
-    {
-      "question": "Are my legal contracts or bank statements uploaded to external servers?",
-      "answer": "No. The entire redaction and PDF rebuilding process runs entirely in your local browser memory via WebAssembly. Your files never leave your computer."
-    },
-    {
-      "question": "Can I redact multiple pages in the same PDF document?",
-      "answer": "Yes. Use the pagination arrows to move across pages, draw blackouts wherever needed, and click 'Burn Redactions' to export all pages simultaneously."
-    },
-    {
-      "question": "Will the document text outside the redacted boxes remain sharp?",
-      "answer": "Yes. The engine exports at high DPI resolution, ensuring that non-redacted text, signatures, and letterheads remain crisp and easily readable."
-    },
-    {
-      "question": "Can I undo or delete a redaction box before exporting?",
-      "answer": "Yes. You can clear redactions on any individual page or reset the document at any time prior to clicking the final export button."
-    },
-    {
-      "question": "Can forensic software unmask this redaction?",
-      "answer": "No. Because the redacted region is converted to solid black pixels (#000000) with identical color values, there is zero residual signal for forensic tools to reconstruct."
-    }
-  ]
-},
+    ],
+    "faqs": [
+      {
+        "question": "How does FileZenith ensure permanent redaction without data leaks?",
+        "answer": "FileZenith renders the document pages to high-resolution raster canvases, burns solid black pixels over the redacted areas, and generates a flattened PDF. The underlying text is completely purged from the file, making it mathematically impossible to recover or copy."
+      },
+      {
+        "question": "Can someone copy-paste the text under a blacked-out box?",
+        "answer": "No. In FileZenith's flattened output, the vector text objects have been permanently replaced with raw pixels. There is no selectable text whatsoever beneath the redactions."
+      },
+      {
+        "question": "Is FileZenith redaction suitable for court and legal filings?",
+        "answer": "Yes. Our true flattening approach meets court-mandated redaction rules (such as US Federal Rule of Civil Procedure 5.2 and Indian IT Act confidentiality standards) for redacting Social Security numbers, bank accounts, and personal identifiers."
+      },
+      {
+        "question": "Are my legal contracts or bank statements uploaded to external servers?",
+        "answer": "No. The entire redaction and PDF rebuilding process runs entirely in your local browser memory via WebAssembly. Your files never leave your computer."
+      },
+      {
+        "question": "Can I redact multiple pages in the same PDF document?",
+        "answer": "Yes. Use the pagination arrows to move across pages, draw blackouts wherever needed, and click 'Burn Redactions' to export all pages simultaneously."
+      },
+      {
+        "question": "Will the document text outside the redacted boxes remain sharp?",
+        "answer": "Yes. The engine exports at high DPI resolution, ensuring that non-redacted text, signatures, and letterheads remain crisp and easily readable."
+      },
+      {
+        "question": "Can I undo or delete a redaction box before exporting?",
+        "answer": "Yes. You can clear redactions on any individual page or reset the document at any time prior to clicking the final export button."
+      },
+      {
+        "question": "Can forensic software unmask this redaction?",
+        "answer": "No. Because the redacted region is converted to solid black pixels (#000000) with identical color values, there is zero residual signal for forensic tools to reconstruct."
+      }
+    ]
+  },
   "/utility/keynote-to-powerpoint": {
-  "slug": "/utility/keynote-to-powerpoint",
-  "badge": "Apple iWork Extractor",
-  "heading": "Apple iWork Keynote (.key) Architecture & Cross-Platform Conversion Guide",
-  "subheading": "Comprehensive technical manual explaining Apple Keynote package internals, slide extraction, and conversion to PDF decks for Windows and Android.",
-  "sections": [
-    {
-      "title": "1. Apple Keynote File Architecture (Proprietary Bundles & IWA Archives)",
-      "paragraphs": [
-        "Apple Keynote presentations (with the .key extension) are not single binary documents; they are zipped package bundles containing Apple-proprietary Protocol Buffer archives (.iwa files), media assets, and QuickLook previews. Because Microsoft PowerPoint and Windows operating systems have zero native support for parsing Keynote's internal protobuf structures, opening a .key file on a PC typically results in file corruption errors.",
-        "FileZenith solves this cross-platform barrier client-side. Using in-browser zip decompression and stream parsing, our converter extracts high-resolution slide renders and vector QuickLook PDF assets packaged inside the .key archive, immediately compiling them into a universal presentation deck viewable on any device."
-      ],
-      "bullets": [
-        "Zero Software Dependency: Open and convert Mac Keynote presentations without owning a Mac or installing software.",
-        "High-Definition Slide Preservation: Extracts 1080p and 4K slide images directly from the archive's internal asset store.",
-        "Universal Output: Generates a standardized multi-page PDF presentation deck compatible with PowerPoint, Adobe Acrobat, and projector systems."
-      ]
-    },
-    {
-      "title": "2. Apple iWork vs Microsoft Office Format Compatibility Matrix",
-      "paragraphs": [
-        "Understanding how Apple's proprietary productivity suite maps to universal enterprise office formats helps ensure seamless cross-platform sharing:"
-      ],
-      "table": {
-        "headers": [
-          "Apple iWork File Type",
-          "Native Extension",
-          "Microsoft Equivalent",
-          "Windows Native Support",
-          "FileZenith Direct Output"
+    "slug": "/utility/keynote-to-powerpoint",
+    "badge": "Apple iWork Extractor",
+    "heading": "Apple iWork Keynote (.key) Architecture & Cross-Platform Conversion Guide",
+    "subheading": "Comprehensive technical manual explaining Apple Keynote package internals, slide extraction, and conversion to PDF decks for Windows and Android.",
+    "sections": [
+      {
+        "title": "1. Apple Keynote File Architecture (Proprietary Bundles & IWA Archives)",
+        "paragraphs": [
+          "Apple Keynote presentations (with the .key extension) are not single binary documents; they are zipped package bundles containing Apple-proprietary Protocol Buffer archives (.iwa files), media assets, and QuickLook previews. Because Microsoft PowerPoint and Windows operating systems have zero native support for parsing Keynote's internal protobuf structures, opening a .key file on a PC typically results in file corruption errors.",
+          "FileZenith solves this cross-platform barrier client-side. Using in-browser zip decompression and stream parsing, our converter extracts high-resolution slide renders and vector QuickLook PDF assets packaged inside the .key archive, immediately compiling them into a universal presentation deck viewable on any device."
         ],
-        "rows": [
-          [
-            "Keynote Presentation",
-            ".key (ZIP Package)",
-            "PowerPoint (.pptx)",
-            "Zero Native Support (Error: Invalid Format)",
-            "Multi-Page Vector PDF Slide Deck"
+        "bullets": [
+          "Zero Software Dependency: Open and convert Mac Keynote presentations without owning a Mac or installing software.",
+          "High-Definition Slide Preservation: Extracts 1080p and 4K slide images directly from the archive's internal asset store.",
+          "Universal Output: Generates a standardized multi-page PDF presentation deck compatible with PowerPoint, Adobe Acrobat, and projector systems."
+        ]
+      },
+      {
+        "title": "2. Apple iWork vs Microsoft Office Format Compatibility Matrix",
+        "paragraphs": [
+          "Understanding how Apple's proprietary productivity suite maps to universal enterprise office formats helps ensure seamless cross-platform sharing:"
+        ],
+        "table": {
+          "headers": [
+            "Apple iWork File Type",
+            "Native Extension",
+            "Microsoft Equivalent",
+            "Windows Native Support",
+            "FileZenith Direct Output"
           ],
-          [
-            "Pages Document",
-            ".pages (ZIP Package)",
-            "Word (.docx)",
-            "Zero Native Support (Requires iCloud)",
-            "Word (.docx) / Clean Standard PDF"
-          ],
-          [
-            "Numbers Spreadsheet",
-            ".numbers (ZIP Package)",
-            "Excel (.xlsx)",
-            "Zero Native Support",
-            "Excel (.xlsx) / CSV Spreadsheet"
-          ],
-          [
-            "Keynote Theme Template",
-            ".kth",
-            "PowerPoint Template (.potx)",
-            "Zero Native Support",
-            "Vector PDF Layout Reference"
+          "rows": [
+            [
+              "Keynote Presentation",
+              ".key (ZIP Package)",
+              "PowerPoint (.pptx)",
+              "Zero Native Support (Error: Invalid Format)",
+              "Multi-Page Vector PDF Slide Deck"
+            ],
+            [
+              "Pages Document",
+              ".pages (ZIP Package)",
+              "Word (.docx)",
+              "Zero Native Support (Requires iCloud)",
+              "Word (.docx) / Clean Standard PDF"
+            ],
+            [
+              "Numbers Spreadsheet",
+              ".numbers (ZIP Package)",
+              "Excel (.xlsx)",
+              "Zero Native Support",
+              "Excel (.xlsx) / CSV Spreadsheet"
+            ],
+            [
+              "Keynote Theme Template",
+              ".kth",
+              "PowerPoint Template (.potx)",
+              "Zero Native Support",
+              "Vector PDF Layout Reference"
+            ]
           ]
+        }
+      },
+      {
+        "title": "3. Client-Side Parsing Workflow & Visual Deck Navigation",
+        "paragraphs": [
+          "Traditional online conversion websites require users to upload multi-megabyte presentation files to remote cloud queues, where conversion jobs often timeout or expose confidential corporate slides. FileZenith unpacks and reconstructs the presentation entirely within your local browser memory.",
+          "Once loaded, an interactive slide navigator allows you to flip through individual slides, preview visual layouts, and download either the full PDF slide deck or individual slide graphics with zero latency."
+        ],
+        "bullets": [
+          "Instant Unpacking: High-speed local archive extraction without slow network upload bottlenecks.",
+          "Slide Thumbnails: Interactive sidebar to inspect and review presentation flow.",
+          "Privacy First: Internal company pitch decks, earnings reports, and student lectures stay 100% private."
+        ]
+      },
+      {
+        "title": "4. Slide Typography, Master Layouts & Vector Shape Translation Pipeline",
+        "paragraphs": [
+          "A primary challenge when viewing Apple Keynote presentations on non-Apple operating systems is typographic and vector divergence. Keynote relies heavily on Apple-exclusive system typefaces\u2014most notably San Francisco (SF Pro Display / SF Pro Text), New York, and Helvetica Neue\u2014as well as proprietary CoreGraphics B\u00e9zier curve smoothing algorithms that do not exist natively on Windows, Linux, or Android devices.",
+          "FileZenith solves this cross-platform compatibility barrier by synthesizing standard OpenType metric fallbacks and rendering vector graphics to standardized PostScript paths. When you extract slide sequences or convert decks to high-resolution vector PDF portfolios, our client-side engine computes precise glyph advance widths and line-height bounding boxes. This guarantees that slide headlines, diagram connectors, and tabular text blocks maintain their exact typographic alignments without awkward word-wrapping or broken slide layouts on foreign screens."
+        ],
+        "bullets": [
+          "Typographic Fallback Synthesis: Employs CSS metric matching to substitute Apple San Francisco with universally supported OpenType font metrics.",
+          "Vector Path Standardization: Normalizes Keynote curved shapes and gradient fills into device-independent vector rendering primitives.",
+          "Zero Cloud Transmission: Your proprietary pitch decks, corporate financials, and keynote slides never leave your device."
         ]
       }
-    },
-    {
-      "title": "3. Client-Side Parsing Workflow & Visual Deck Navigation",
-      "paragraphs": [
-        "Traditional online conversion websites require users to upload multi-megabyte presentation files to remote cloud queues, where conversion jobs often timeout or expose confidential corporate slides. FileZenith unpacks and reconstructs the presentation entirely within your local browser memory.",
-        "Once loaded, an interactive slide navigator allows you to flip through individual slides, preview visual layouts, and download either the full PDF slide deck or individual slide graphics with zero latency."
-      ],
-      "bullets": [
-        "Instant Unpacking: High-speed local archive extraction without slow network upload bottlenecks.",
-        "Slide Thumbnails: Interactive sidebar to inspect and review presentation flow.",
-        "Privacy First: Internal company pitch decks, earnings reports, and student lectures stay 100% private."
-      ]
-    }
-  ],
-  "faqs": [
-    {
-      "question": "How do I open an Apple Keynote (.key) presentation on a Windows PC?",
-      "answer": "Upload your .key file to FileZenith. Our browser engine extracts the slide deck and converts it into a universal PDF presentation deck that opens in any browser, Adobe Acrobat, or presentation viewer on Windows, Android, and Linux."
-    },
-    {
-      "question": "Do I need Apple Keynote installed or an active iCloud account?",
-      "answer": "No! You do not need a Mac computer, Apple Keynote software, or an iCloud login. The conversion executes entirely inside your web browser on your existing device."
-    },
-    {
-      "question": "Are formatting, custom fonts, and images preserved?",
-      "answer": "Yes. Keynote packages bundle pre-rendered high-definition slide assets; FileZenith extracts these exact renders, ensuring that custom typography, charts, and image placements look identical to the Mac original."
-    },
-    {
-      "question": "Can I convert the presentation to PowerPoint PPTX?",
-      "answer": "Yes. Once downloaded as a PDF presentation deck, you can open it directly in PowerPoint (Insert > Object > From File) or present it in full-screen mode on any classroom or boardroom projector."
-    },
-    {
-      "question": "Is there a file size limit for Keynote presentations?",
-      "answer": "Because the files are unpacked locally in your computer's RAM, you can process presentations with large video or image assets without hitting traditional 15MB cloud limits."
-    },
-    {
-      "question": "Are my presentation slides uploaded to your server?",
-      "answer": "No. All extraction and PDF assembly occur 100% on your local machine with zero bytes uploaded to external cloud storage."
-    },
-    {
-      "question": "Can I extract individual slide images from the Keynote file?",
-      "answer": "Yes. The tool displays an interactive slide carousel where you can view and save individual slide images in full resolution."
-    },
-    {
-      "question": "Does this tool work on mobile devices and Chromebooks?",
-      "answer": "Yes! FileZenith runs on all modern browsers, enabling students and professionals to view Keynote decks on Chromebooks, Android tablets, and Windows laptops seamlessly."
-    }
-  ]
-},
+    ],
+    "faqs": [
+      {
+        "question": "How do I open an Apple Keynote (.key) presentation on a Windows PC?",
+        "answer": "Upload your .key file to FileZenith. Our browser engine extracts the slide deck and converts it into a universal PDF presentation deck that opens in any browser, Adobe Acrobat, or presentation viewer on Windows, Android, and Linux."
+      },
+      {
+        "question": "Do I need Apple Keynote installed or an active iCloud account?",
+        "answer": "No! You do not need a Mac computer, Apple Keynote software, or an iCloud login. The conversion executes entirely inside your web browser on your existing device."
+      },
+      {
+        "question": "Are formatting, custom fonts, and images preserved?",
+        "answer": "Yes. Keynote packages bundle pre-rendered high-definition slide assets; FileZenith extracts these exact renders, ensuring that custom typography, charts, and image placements look identical to the Mac original."
+      },
+      {
+        "question": "Can I convert the presentation to PowerPoint PPTX?",
+        "answer": "Yes. Once downloaded as a PDF presentation deck, you can open it directly in PowerPoint (Insert > Object > From File) or present it in full-screen mode on any classroom or boardroom projector."
+      },
+      {
+        "question": "Is there a file size limit for Keynote presentations?",
+        "answer": "Because the files are unpacked locally in your computer's RAM, you can process presentations with large video or image assets without hitting traditional 15MB cloud limits."
+      },
+      {
+        "question": "Are my presentation slides uploaded to your server?",
+        "answer": "No. All extraction and PDF assembly occur 100% on your local machine with zero bytes uploaded to external cloud storage."
+      },
+      {
+        "question": "Can I extract individual slide images from the Keynote file?",
+        "answer": "Yes. The tool displays an interactive slide carousel where you can view and save individual slide images in full resolution."
+      },
+      {
+        "question": "Does this tool work on mobile devices and Chromebooks?",
+        "answer": "Yes! FileZenith runs on all modern browsers, enabling students and professionals to view Keynote decks on Chromebooks, Android tablets, and Windows laptops seamlessly."
+      }
+    ]
+  },
   "/utility/metadata-remover": {
-  "slug": "/utility/metadata-remover",
-  "badge": "Zero-Footprint Sanitizer",
-  "heading": "Digital Privacy Handbook: Document & Image Metadata (EXIF/GPS) Sanitization & AI Provenance",
-  "subheading": "Comprehensive technical manual explaining hidden metadata vulnerabilities, EXIF GPS geocoding, AI synthesis markers, and in-browser sanitization.",
-  "sections": [
-    {
-      "title": "1. The Hidden Threat of EXIF & Document Header Profiling",
-      "paragraphs": [
-        "Every digital photo captured on a smartphone or digital camera embeds extensive Exchangeable Image File Format (EXIF) metadata into the file headers. This hidden data routinely includes exact GPS coordinates (latitude, longitude, and altitude of your home or office), the camera serial number, lens parameters, and precise timestamps. When photos are uploaded to social media, classifieds, or forums, malicious actors can easily extract this data to map your physical movements.",
-        "Similarly, PDF documents created in Microsoft Word, Adobe InDesign, or Google Docs contain metadata dictionaries specifying your computer username, operating system, organization name, and detailed revision histories. Distributing documents without sanitization exposes sensitive corporate infrastructure and personal identities."
-      ],
-      "bullets": [
-        "GPS Coordinates: Pinpoints the exact geographic location where photos were taken down to a few meters.",
-        "Author Profiling: Exposes corporate usernames, email addresses, and server path directories in PDFs.",
-        "Software Fingerprints: Discloses editing software versions and machine IDs to third parties."
-      ]
-    },
-    {
-      "title": "2. Metadata Threat Matrix: What Your Files Expose by Default",
-      "paragraphs": [
-        "Digital files carry dozens of metadata fields across EXIF, IPTC, and XMP blocks that reveal personal habits, hardware IDs, and physical coordinates:"
-      ],
-      "table": {
-        "headers": [
-          "Metadata Field / Tag",
-          "Typical Content Embedded",
-          "Privacy Threat Level",
-          "Real-World Exploitation Vector"
+    "slug": "/utility/metadata-remover",
+    "badge": "Zero-Footprint Sanitizer",
+    "heading": "Digital Privacy Handbook: Document & Image Metadata (EXIF/GPS) Sanitization & AI Provenance",
+    "subheading": "Comprehensive technical manual explaining hidden metadata vulnerabilities, EXIF GPS geocoding, AI synthesis markers, and in-browser sanitization.",
+    "sections": [
+      {
+        "title": "1. The Hidden Threat of EXIF & Document Header Profiling",
+        "paragraphs": [
+          "Every digital photo captured on a smartphone or digital camera embeds extensive Exchangeable Image File Format (EXIF) metadata into the file headers. This hidden data routinely includes exact GPS coordinates (latitude, longitude, and altitude of your home or office), the camera serial number, lens parameters, and precise timestamps. When photos are uploaded to social media, classifieds, or forums, malicious actors can easily extract this data to map your physical movements.",
+          "Similarly, PDF documents created in Microsoft Word, Adobe InDesign, or Google Docs contain metadata dictionaries specifying your computer username, operating system, organization name, and detailed revision histories. Distributing documents without sanitization exposes sensitive corporate infrastructure and personal identities.",
+          "Within modern digital imaging and office productivity formats, metadata is partitioned across diverse standardization schemas. In JPEG and HEIC files, metadata is structured into Exchangeable Image File Format (EXIF) header blocks containing integer and rational tags: tag 0x0112 (Orientation), tag 0x829A (ExposureTime), tag 0x829D (FNumber), tag 0x8827 (PhotographicSensitivity / ISO), and tag 0x9286 (UserComment). In PDF and DOCX containers, metadata follows the Extensible Metadata Platform (XMP) specification serialized as XML packets conforming to Dublin Core (dc:creator, dc:title, dc:subject) and Adobe PDF (pdf:Producer, pdf:Keywords) schemas. Without rigorous sanitization, these containers persist across public web uploads, social media sharing, and legal disclosures."
         ],
-        "rows": [
-          [
-            "GPSLatitude & GPSLongitude",
-            "Exact decimal coordinates (e.g. 28.6139° N, 77.2090° E)",
-            "Critical / High",
-            "Locates home address, workplace, or private meeting sites via Google Maps"
+        "bullets": [
+          "GPS Coordinates: Pinpoints the exact geographic location where photos were taken down to a few meters.",
+          "Author Profiling: Exposes corporate usernames, email addresses, and server path directories in PDFs.",
+          "Software Fingerprints: Discloses editing software versions and machine IDs to third parties."
+        ]
+      },
+      {
+        "title": "2. Metadata Threat Matrix: What Your Files Expose by Default",
+        "paragraphs": [
+          "Digital files carry dozens of metadata fields across EXIF, IPTC, and XMP blocks that reveal personal habits, hardware IDs, and physical coordinates:"
+        ],
+        "table": {
+          "headers": [
+            "Metadata Field / Tag",
+            "Typical Content Embedded",
+            "Privacy Threat Level",
+            "Real-World Exploitation Vector"
           ],
-          [
-            "DateTimeOriginal",
-            "Exact timestamp down to the second (e.g. 2026:10:14 15:28:22)",
-            "High",
-            "Establishes alibis, travel itineraries, and daily schedule patterns"
-          ],
-          [
-            "Make, Model & LensModel",
-            "Device brand, phone model, lens serial number (e.g. iPhone 15 Pro)",
-            "Medium",
-            "Device fingerprinting and spear-phishing tailored to OS vulnerabilities"
-          ],
-          [
-            "PDF Author & CreatorTool",
-            "Login username, OS profile, Microsoft Word / InDesign build",
-            "Medium / High",
-            "Corporate employee mapping, username discovery for brute-force attacks"
-          ],
-          [
-            "AI Prompt / PNG Parameters",
-            "Full text prompt, negative prompt, seed, model checkpoint hash",
-            "High (IP Risk)",
-            "Reveals confidential prompts, business strategies, and proprietary workflows"
+          "rows": [
+            [
+              "GPSLatitude & GPSLongitude",
+              "Exact decimal coordinates (e.g. 28.6139\u00b0 N, 77.2090\u00b0 E)",
+              "Critical / High",
+              "Locates home address, workplace, or private meeting sites via Google Maps"
+            ],
+            [
+              "DateTimeOriginal",
+              "Exact timestamp down to the second (e.g. 2026:10:14 15:28:22)",
+              "High",
+              "Establishes alibis, travel itineraries, and daily schedule patterns"
+            ],
+            [
+              "Make, Model & LensModel",
+              "Device brand, phone model, lens serial number (e.g. iPhone 15 Pro)",
+              "Medium",
+              "Device fingerprinting and spear-phishing tailored to OS vulnerabilities"
+            ],
+            [
+              "PDF Author & CreatorTool",
+              "Login username, OS profile, Microsoft Word / InDesign build",
+              "Medium / High",
+              "Corporate employee mapping, username discovery for brute-force attacks"
+            ],
+            [
+              "AI Prompt / PNG Parameters",
+              "Full text prompt, negative prompt, seed, model checkpoint hash",
+              "High (IP Risk)",
+              "Reveals confidential prompts, business strategies, and proprietary workflows"
+            ]
           ]
+        }
+      },
+      {
+        "title": "3. AI Generation Detection & Forensic Provenance Analysis",
+        "paragraphs": [
+          "Generative AI platforms (including Midjourney, Stable Diffusion, ComfyUI, DALL-E, and Adobe Firefly) embed distinct metadata markers into exported images. Stable Diffusion and Automatic1111 write complete generation recipes into PNG text chunks ('parameters' with steps, CFG scale, sampler, and seed). Midjourney embeds prompt syntax, and C2PA compliant tools embed cryptographic provenance assertions ('trainedAlgorithmicMedia').",
+          "FileZenith's dual engine inspects both camera hardware sensor tags and synthetic generation chunks. If genuine optical characteristics (aperture, shutter speed, ISO) are verified, the image is confirmed as authentic camera capture; if AI markers are found, the platform and prompt parameters are extracted and presented for inspection."
+        ]
+      },
+      {
+        "title": "4. Client-Side Metadata Scrubbing Architecture",
+        "paragraphs": [
+          "FileZenith provides a complete, dual-engine metadata scrubber for both documents (PDF) and images (JPG, PNG, WebP). For PDF files, our engine reconstructs the document's information dictionary, setting Title, Author, Subject, Creator, and Producer tags to empty strings while stripping XMP metadata packets.",
+          "For images, our tool draws the raw pixel array onto an isolated HTML5 canvas buffer and exports a fresh, pristine image file without any EXIF or GPS header segments. The visual quality remains untouched, while your privacy is completely restored.",
+          "FileZenith's metadata scrubbing engine implements a destructive stream-level purge rather than superficial tag zeroing. For raster images, our browser-based engine decodes compressed image chunks into an unformatted raw Uint8ClampedArray pixel buffer on an offscreen HTML5 canvas, completely discarding the surrounding EXIF, IPTC, and XMP metadata envelopes before re-encoding clean JFIF/PNG binary streams. For PDF and text documents, cross-reference tables and trailer dictionaries are parsed to delete /Info dictionaries, /PieceInfo objects, and orphaned revision layers, resulting in 100% sterile, leak-proof files."
         ]
       }
-    },
-    {
-      "title": "3. AI Generation Detection & Forensic Provenance Analysis",
-      "paragraphs": [
-        "Generative AI platforms (including Midjourney, Stable Diffusion, ComfyUI, DALL-E, and Adobe Firefly) embed distinct metadata markers into exported images. Stable Diffusion and Automatic1111 write complete generation recipes into PNG text chunks ('parameters' with steps, CFG scale, sampler, and seed). Midjourney embeds prompt syntax, and C2PA compliant tools embed cryptographic provenance assertions ('trainedAlgorithmicMedia').",
-        "FileZenith's dual engine inspects both camera hardware sensor tags and synthetic generation chunks. If genuine optical characteristics (aperture, shutter speed, ISO) are verified, the image is confirmed as authentic camera capture; if AI markers are found, the platform and prompt parameters are extracted and presented for inspection."
-      ]
-    },
-    {
-      "title": "4. Client-Side Metadata Scrubbing Architecture",
-      "paragraphs": [
-        "FileZenith provides a complete, dual-engine metadata scrubber for both documents (PDF) and images (JPG, PNG, WebP). For PDF files, our engine reconstructs the document's information dictionary, setting Title, Author, Subject, Creator, and Producer tags to empty strings while stripping XMP metadata packets.",
-        "For images, our tool draws the raw pixel array onto an isolated HTML5 canvas buffer and exports a fresh, pristine image file without any EXIF or GPS header segments. The visual quality remains untouched, while your privacy is completely restored."
-      ]
-    }
-  ],
-  "faqs": [
-    {
-      "question": "What kind of hidden metadata is stored in my photos?",
-      "answer": "Smartphone and camera photos typically contain EXIF headers with exact GPS coordinates (latitude/longitude), camera model, shutter speed, ISO, date and time, and even facial recognition tags."
-    },
-    {
-      "question": "What metadata is stored in PDF documents?",
-      "answer": "PDFs often contain the author's full name, computer login username, organization, creation and modification timestamps, and the specific software used to compile the document."
-    },
-    {
-      "question": "Does removing metadata reduce image or document quality?",
-      "answer": "No. FileZenith only purges the binary header tags (which take up a few kilobytes). Your visual document pages, text typography, and image resolution remain 100% untouched."
-    },
-    {
-      "question": "Why should I remove GPS location from photos before posting online?",
-      "answer": "Posting photos with embedded GPS coordinates allows strangers, stalkers, or data brokers to identify your home address, workplace, or children's school locations."
-    },
-    {
-      "question": "Can FileZenith detect whether an image was created by AI?",
-      "answer": "Yes! FileZenith analyzes image headers, XMP packets, and PNG text chunks for markers from Midjourney, Stable Diffusion, ComfyUI, DALL-E, and Adobe Firefly, displaying the detected platform and prompt parameters."
-    },
-    {
-      "question": "Are my files uploaded to any server during sanitization?",
-      "answer": "No. FileZenith executes all metadata reading and purging locally inside your web browser. No file data is ever transmitted across the internet."
-    },
-    {
-      "question": "Which image formats are supported for metadata removal?",
-      "answer": "FileZenith supports JPEG, JPG, PNG, and WebP images, as well as multi-page PDF documents."
-    },
-    {
-      "question": "Can metadata be recovered after being stripped by FileZenith?",
-      "answer": "No. The exported file has completely empty metadata headers; the old data is not stored in the new file and cannot be recovered."
-    }
-  ]
-},
+    ],
+    "faqs": [
+      {
+        "question": "What kind of hidden metadata is stored in my photos?",
+        "answer": "Smartphone and camera photos typically contain EXIF headers with exact GPS coordinates (latitude/longitude), camera model, shutter speed, ISO, date and time, and even facial recognition tags."
+      },
+      {
+        "question": "What metadata is stored in PDF documents?",
+        "answer": "PDFs often contain the author's full name, computer login username, organization, creation and modification timestamps, and the specific software used to compile the document."
+      },
+      {
+        "question": "Does removing metadata reduce image or document quality?",
+        "answer": "No. FileZenith only purges the binary header tags (which take up a few kilobytes). Your visual document pages, text typography, and image resolution remain 100% untouched."
+      },
+      {
+        "question": "Why should I remove GPS location from photos before posting online?",
+        "answer": "Posting photos with embedded GPS coordinates allows strangers, stalkers, or data brokers to identify your home address, workplace, or children's school locations."
+      },
+      {
+        "question": "Can FileZenith detect whether an image was created by AI?",
+        "answer": "Yes! FileZenith analyzes image headers, XMP packets, and PNG text chunks for markers from Midjourney, Stable Diffusion, ComfyUI, DALL-E, and Adobe Firefly, displaying the detected platform and prompt parameters."
+      },
+      {
+        "question": "Are my files uploaded to any server during sanitization?",
+        "answer": "No. FileZenith executes all metadata reading and purging locally inside your web browser. No file data is ever transmitted across the internet."
+      },
+      {
+        "question": "Which image formats are supported for metadata removal?",
+        "answer": "FileZenith supports JPEG, JPG, PNG, and WebP images, as well as multi-page PDF documents."
+      },
+      {
+        "question": "Can metadata be recovered after being stripped by FileZenith?",
+        "answer": "No. The exported file has completely empty metadata headers; the old data is not stored in the new file and cannot be recovered."
+      }
+    ]
+  },
   "/pdf/combine-marksheets": {
-  "slug": "/pdf/combine-marksheets",
-  "badge": "Admission Portal Calibrated",
-  "heading": "University Admission & Examination Portal Marksheet Integration Guide",
-  "subheading": "Comprehensive operational handbook for merging 10th, 12th, Degree marksheets & category certificates into a single ISO A4 PDF strictly under 500KB or 300KB.",
-  "sections": [
-    {
-      "title": "1. University & Government Portal Single-Upload Constraints",
-      "paragraphs": [
-        "Academic admission portals (such as Delhi University CSAS, IIT JEE JoSAA, NEET MCC, and state PSC recruitments) provide only one single document upload slot for educational qualifications, accompanied by strict file size restrictions (typically 'Single PDF under 500KB' or 'Under 300KB'). Applicants who merge multiple high-resolution scans with conventional software inevitably produce 4MB–8MB files that are instantly rejected by the portal.",
-        "Furthermore, when candidates upload documents of varying sizes, the resulting PDF contains mismatched page dimensions—some pages appear huge while others are tiny. This can cause verification officers to mark applications as defective."
-      ],
-      "bullets": [
-        "Strict Size Constraints: Hard caps at 500KB or 300KB enforced across national counseling portals.",
-        "Readability Mandate: Text, marks, roll numbers, and official board seals must remain crystal clear.",
-        "Chronological Ordering: Portals require 10th class certificates first, followed by 12th, graduation, and category certificates."
-      ]
-    },
-    {
-      "title": "2. National Admission Portal Document Acceptance Matrix",
-      "paragraphs": [
-        "Before uploading your combined dossier, consult the exact file size caps and document ordering rules enforced by major admission counseling authorities:"
-      ],
-      "table": {
-        "headers": [
-          "Counseling Portal / Board",
-          "Max Allowed File Size",
-          "Mandatory Document Sequence",
-          "Target Preset on FileZenith"
+    "slug": "/pdf/combine-marksheets",
+    "badge": "Admission Portal Calibrated",
+    "heading": "University Admission & Examination Portal Marksheet Integration Guide",
+    "subheading": "Comprehensive operational handbook for merging 10th, 12th, Degree marksheets & category certificates into a single ISO A4 PDF strictly under 500KB or 300KB.",
+    "sections": [
+      {
+        "title": "1. University & Government Portal Single-Upload Constraints",
+        "paragraphs": [
+          "Academic admission portals (such as Delhi University CSAS, IIT JEE JoSAA, NEET MCC, and state PSC recruitments) provide only one single document upload slot for educational qualifications, accompanied by strict file size restrictions (typically 'Single PDF under 500KB' or 'Under 300KB'). Applicants who merge multiple high-resolution scans with conventional software inevitably produce 4MB\u20138MB files that are instantly rejected by the portal.",
+          "Furthermore, when candidates upload documents of varying sizes, the resulting PDF contains mismatched page dimensions\u2014some pages appear huge while others are tiny. This can cause verification officers to mark applications as defective."
         ],
-        "rows": [
-          [
-            "DU CSAS (Delhi University UG/PG)",
-            "Under 500 KB (Single PDF)",
-            "10th Marksheet > 12th Marksheet > Degree (if PG) > EWS/OBC-NCL Certificate",
-            "Strictly Under 500 KB"
+        "bullets": [
+          "Strict Size Constraints: Hard caps at 500KB or 300KB enforced across national counseling portals.",
+          "Readability Mandate: Text, marks, roll numbers, and official board seals must remain crystal clear.",
+          "Chronological Ordering: Portals require 10th class certificates first, followed by 12th, graduation, and category certificates."
+        ]
+      },
+      {
+        "title": "2. National Admission Portal Document Acceptance Matrix",
+        "paragraphs": [
+          "Before uploading your combined dossier, consult the exact file size caps and document ordering rules enforced by major admission counseling authorities:"
+        ],
+        "table": {
+          "headers": [
+            "Counseling Portal / Board",
+            "Max Allowed File Size",
+            "Mandatory Document Sequence",
+            "Target Preset on FileZenith"
           ],
-          [
-            "JoSAA / CSAB (IITs, NITs, IIITs)",
-            "Under 500 KB (Single PDF)",
-            "Class 10 Certificate (DoB proof) > Class 12 Performance > Category Proof",
-            "Strictly Under 500 KB"
-          ],
-          [
-            "NEET MCC (Medical Counseling)",
-            "Under 300 KB to 500 KB",
-            "Admit Card > Class 10 Result > Class 12 Marks > PwD/Category Certificate",
-            "Strictly Under 300 KB"
-          ],
-          [
-            "UPSC CSE / State PSC Portals",
-            "Under 300 KB (PDF Format)",
-            "Matriculation (DoB) > Degree Certificate > Domicile / Caste Certificate",
-            "Strictly Under 300 KB"
-          ],
-          [
-            "Foreign University / WES Evaluations",
-            "Under 1 MB to 5 MB",
-            "Semester Marksheets (Sem 1 to 8) > Consolidated Transcript > Degree",
-            "Under 1 MB Standard"
+          "rows": [
+            [
+              "DU CSAS (Delhi University UG/PG)",
+              "Under 500 KB (Single PDF)",
+              "10th Marksheet > 12th Marksheet > Degree (if PG) > EWS/OBC-NCL Certificate",
+              "Strictly Under 500 KB"
+            ],
+            [
+              "JoSAA / CSAB (IITs, NITs, IIITs)",
+              "Under 500 KB (Single PDF)",
+              "Class 10 Certificate (DoB proof) > Class 12 Performance > Category Proof",
+              "Strictly Under 500 KB"
+            ],
+            [
+              "NEET MCC (Medical Counseling)",
+              "Under 300 KB to 500 KB",
+              "Admit Card > Class 10 Result > Class 12 Marks > PwD/Category Certificate",
+              "Strictly Under 300 KB"
+            ],
+            [
+              "UPSC CSE / State PSC Portals",
+              "Under 300 KB (PDF Format)",
+              "Matriculation (DoB) > Degree Certificate > Domicile / Caste Certificate",
+              "Strictly Under 300 KB"
+            ],
+            [
+              "Foreign University / WES Evaluations",
+              "Under 1 MB to 5 MB",
+              "Semester Marksheets (Sem 1 to 8) > Consolidated Transcript > Degree",
+              "Under 1 MB Standard"
+            ]
           ]
+        }
+      },
+      {
+        "title": "3. Uniform ISO A4 Standardization & Adaptive Compression",
+        "paragraphs": [
+          "FileZenith solves both problems simultaneously. First, our engine standardizes every uploaded document onto a uniform ISO A4 page layout (595.28 x 841.89 points) with clean, centered margins, eliminating awkward page size variations. Second, our algorithm applies multi-pass adaptive JPEG stream compression, mathematically balancing typography sharpness and file weight.",
+          "The resulting dossier strictly adheres to your chosen limit (under 500KB or 300KB) while ensuring that verification officers can read every grade and signature clearly."
+        ],
+        "bullets": [
+          "Uniform A4 Standard: Every single page is formatted to exact A4 dimensions with proportional scaling and zero distortion.",
+          "Target Size Guarantee: Iterative binary quality optimization guarantees the file stays under 300KB, 500KB, or 1MB.",
+          "Interactive Sequence Arrangement: Reorder your certificates chronologically with simple up/down controls."
+        ]
+      },
+      {
+        "title": "4. DigiLocker QR Verification & Digital Signature Preservation in Merged Portfolios",
+        "paragraphs": [
+          "Modern academic credentials, state board marksheets (CBSE, ICSE, State Boards), and graduation degrees issued via DigiLocker feature cryptographically verifiable QR codes alongside digital PKCS#7 / X.509 signature annotations. When combining multiple separate documents into an integrated admissions dossier, applicants must ensure that verification mechanisms remain completely legible and auditable by university scrutiny officers.",
+          "Because merging separate PDF binary files mathematically alters the global document byte sequence (thereby invalidating original cryptographic digital hash stamps), FileZenith utilizes a visual-fidelity preservation approach. Our engine renders every marksheet page at high optical resolution (300 DPI equivalent) before compiling them into a unified, sequential ISO A4 catalog. The high-contrast rendering ensures that university admission officers can instantly scan the embedded DigiLocker QR codes directly off the combined PDF screen or printed paper copy to authenticate credentials in real time."
+        ],
+        "bullets": [
+          "QR Code Legibility: High-contrast rasterization maintains QR module clarity for instant scanner and smartphone camera decoding.",
+          "Dossier Page Numbering: Standardized A4 vertical canvas alignment prevents clipping of bottom verification timestamps and certificate serial numbers.",
+          "Multi-Tier Compression: Intelligently downsizes large color certificate scans to hit strict portal thresholds (under 300KB or 500KB) while keeping text razor sharp."
         ]
       }
-    },
-    {
-      "title": "3. Uniform ISO A4 Standardization & Adaptive Compression",
-      "paragraphs": [
-        "FileZenith solves both problems simultaneously. First, our engine standardizes every uploaded document onto a uniform ISO A4 page layout (595.28 x 841.89 points) with clean, centered margins, eliminating awkward page size variations. Second, our algorithm applies multi-pass adaptive JPEG stream compression, mathematically balancing typography sharpness and file weight.",
-        "The resulting dossier strictly adheres to your chosen limit (under 500KB or 300KB) while ensuring that verification officers can read every grade and signature clearly."
-      ],
-      "bullets": [
-        "Uniform A4 Standard: Every single page is formatted to exact A4 dimensions with proportional scaling and zero distortion.",
-        "Target Size Guarantee: Iterative binary quality optimization guarantees the file stays under 300KB, 500KB, or 1MB.",
-        "Interactive Sequence Arrangement: Reorder your certificates chronologically with simple up/down controls."
-      ]
-    }
-  ],
-  "faqs": [
-    {
-      "question": "Why do college admission portals require marksheets in one single PDF under 500KB?",
-      "answer": "Centralized admission portals like DU CSAS, JoSAA, NEET, and UPSC handle millions of applicants and limit upload bandwidth by providing only a single file slot with a strict 500KB cap."
-    },
-    {
-      "question": "Will all pages in the final PDF have the same A4 size?",
-      "answer": "Yes! FileZenith automatically standardizes every marksheet and certificate onto a uniform ISO A4 page (595 x 842 pt), centering each image with neat margins so your application looks professional."
-    },
-    {
-      "question": "Will the marks, roll numbers, and text remain readable after compression?",
-      "answer": "Yes. Our engine uses adaptive raster optimization that maintains high contrast on black-and-white typography, ensuring marks and official board seals remain clear and legible."
-    },
-    {
-      "question": "Can I reorder the sequence of marksheets before merging?",
-      "answer": "Yes. Use the up and down arrow buttons next to each file to arrange your documents chronologically (e.g., 10th Marksheet first, followed by 12th, Degree, and Category Certificate)."
-    },
-    {
-      "question": "Can I combine both images (JPG/PNG) and existing PDF files together?",
-      "answer": "Yes. You can upload any combination of smartphone photos (JPG/PNG) and PDF document scans; our tool seamlessly extracts and unifies them into a single PDF."
-    },
-    {
-      "question": "Can I choose a 300KB limit instead of 500KB?",
-      "answer": "Yes. FileZenith provides pre-configured target presets: Strictly Under 300KB (for state PSC portals), Strictly Under 500KB (for DU/JoSAA/NEET), and Under 1MB."
-    },
-    {
-      "question": "Are my educational certificates uploaded to any server?",
-      "answer": "No. The entire merging and compression pipeline runs 100% locally on your computer or smartphone browser memory. Your personal academic records remain completely private."
-    },
-    {
-      "question": "Does this tool work on mobile phones?",
-      "answer": "Yes! You can take photos of your marksheets with your phone camera, upload them directly to FileZenith, and download the standardized A4 PDF within seconds."
-    }
-  ]
-},
+    ],
+    "faqs": [
+      {
+        "question": "Why do college admission portals require marksheets in one single PDF under 500KB?",
+        "answer": "Centralized admission portals like DU CSAS, JoSAA, NEET, and UPSC handle millions of applicants and limit upload bandwidth by providing only a single file slot with a strict 500KB cap."
+      },
+      {
+        "question": "Will all pages in the final PDF have the same A4 size?",
+        "answer": "Yes! FileZenith automatically standardizes every marksheet and certificate onto a uniform ISO A4 page (595 x 842 pt), centering each image with neat margins so your application looks professional."
+      },
+      {
+        "question": "Will the marks, roll numbers, and text remain readable after compression?",
+        "answer": "Yes. Our engine uses adaptive raster optimization that maintains high contrast on black-and-white typography, ensuring marks and official board seals remain clear and legible."
+      },
+      {
+        "question": "Can I reorder the sequence of marksheets before merging?",
+        "answer": "Yes. Use the up and down arrow buttons next to each file to arrange your documents chronologically (e.g., 10th Marksheet first, followed by 12th, Degree, and Category Certificate)."
+      },
+      {
+        "question": "Can I combine both images (JPG/PNG) and existing PDF files together?",
+        "answer": "Yes. You can upload any combination of smartphone photos (JPG/PNG) and PDF document scans; our tool seamlessly extracts and unifies them into a single PDF."
+      },
+      {
+        "question": "Can I choose a 300KB limit instead of 500KB?",
+        "answer": "Yes. FileZenith provides pre-configured target presets: Strictly Under 300KB (for state PSC portals), Strictly Under 500KB (for DU/JoSAA/NEET), and Under 1MB."
+      },
+      {
+        "question": "Are my educational certificates uploaded to any server?",
+        "answer": "No. The entire merging and compression pipeline runs 100% locally on your computer or smartphone browser memory. Your personal academic records remain completely private."
+      },
+      {
+        "question": "Can students combine multiple semester marksheets and diploma scans using a mobile phone?",
+        "answer": "Yes! You can take photos of your marksheets with your phone camera, upload them directly to FileZenith, and download the standardized A4 PDF within seconds."
+      }
+    ]
+  },
   "/utility/invoice-generator": {
-  "slug": "/utility/invoice-generator",
-  "badge": "Zero Sign-Up Financial Engine",
-  "heading": "Freelance Billing & Section 10(13A) HRA Rent Receipt Legal Guidelines",
-  "subheading": "Comprehensive operational manual for generating professional business invoices and legally compliant HRA rent receipts with instant vector PDF rendering.",
-  "sections": [
-    {
-      "title": "1. Section 10(13A) IT Act Mandates for HRA Rent Receipts",
-      "paragraphs": [
-        "Under Section 10(13A) and Rule 2A of the Indian Income Tax Act, salaried employees claiming House Rent Allowance (HRA) tax exemptions must submit formal rent receipts to their employers. If the annual rent paid exceeds ₹1,00,000 (or approximately ₹8,333 per month), Central Board of Direct Taxes (CBDT) regulations make it mandatory to provide the landlord's Permanent Account Number (PAN).",
-        "Failure to submit valid receipts with the landlord's PAN, rental address, and acknowledgment leads employers to deduct heavy Tax Deducted at Source (TDS) from monthly paychecks. FileZenith generates legally formatted HRA rent receipts complete with revenue stamp boxes, landlord PAN fields, and statutory declarations."
-      ],
-      "bullets": [
-        "Statutory Compliance: Formatted strictly according to CBDT circulars for Section 10(13A) HRA exemption filing.",
-        "Landlord PAN Integration: Mandatory PAN capture ensuring your corporate HR team accepts the receipt without queries.",
-        "Revenue Stamp Guidelines: Pre-printed box for affixing a ₹1 revenue stamp as required under the Indian Stamp Act."
-      ]
-    },
-    {
-      "title": "2. Statutory Tax Thresholds for HRA Exemption Claims",
-      "paragraphs": [
-        "The table below outlines the exact statutory documentation and tax deduction rules based on monthly rental brackets in India:"
-      ],
-      "table": {
-        "headers": [
-          "Monthly Rent Bracket",
-          "Annual Rent Total",
-          "Landlord PAN Mandatory?",
-          "Revenue Stamp Required?",
-          "TDS Under Sec 194-IB?"
+    "slug": "/utility/invoice-generator",
+    "badge": "Zero Sign-Up Financial Engine",
+    "heading": "Freelance Billing & Section 10(13A) HRA Rent Receipt Legal Guidelines",
+    "subheading": "Comprehensive operational manual for generating professional business invoices and legally compliant HRA rent receipts with instant vector PDF rendering.",
+    "sections": [
+      {
+        "title": "1. Section 10(13A) IT Act Mandates for HRA Rent Receipts",
+        "paragraphs": [
+          "Under Section 10(13A) and Rule 2A of the Indian Income Tax Act, salaried employees claiming House Rent Allowance (HRA) tax exemptions must submit formal rent receipts to their employers. If the annual rent paid exceeds \u20b91,00,000 (or approximately \u20b98,333 per month), Central Board of Direct Taxes (CBDT) regulations make it mandatory to provide the landlord's Permanent Account Number (PAN).",
+          "Failure to submit valid receipts with the landlord's PAN, rental address, and acknowledgment leads employers to deduct heavy Tax Deducted at Source (TDS) from monthly paychecks. FileZenith generates legally formatted HRA rent receipts complete with revenue stamp boxes, landlord PAN fields, and statutory declarations."
         ],
-        "rows": [
-          [
-            "Up to ₹3,000 / month",
-            "Up to ₹36,000 / year",
-            "No (Receipts optional in some companies)",
-            "No",
-            "No TDS Applicable"
+        "bullets": [
+          "Statutory Compliance: Formatted strictly according to CBDT circulars for Section 10(13A) HRA exemption filing.",
+          "Landlord PAN Integration: Mandatory PAN capture ensuring your corporate HR team accepts the receipt without queries.",
+          "Revenue Stamp Guidelines: Pre-printed box for affixing a \u20b91 revenue stamp as required under the Indian Stamp Act."
+        ]
+      },
+      {
+        "title": "2. Statutory Tax Thresholds for HRA Exemption Claims",
+        "paragraphs": [
+          "The table below outlines the exact statutory documentation and tax deduction rules based on monthly rental brackets in India:"
+        ],
+        "table": {
+          "headers": [
+            "Monthly Rent Bracket",
+            "Annual Rent Total",
+            "Landlord PAN Mandatory?",
+            "Revenue Stamp Required?",
+            "TDS Under Sec 194-IB?"
           ],
-          [
-            "₹3,001 to ₹8,333 / month",
-            "Up to ₹1,00,000 / year",
-            "No (Only rent receipts required)",
-            "Yes (if cash payment over ₹5,000)",
-            "No TDS Applicable"
-          ],
-          [
-            "₹8,334 to ₹50,000 / month",
-            "₹1,00,001 to ₹6,00,000 / year",
-            "Yes — Strictly Mandatory by CBDT",
-            "Yes (if cash payment)",
-            "No TDS Applicable"
-          ],
-          [
-            "Exceeding ₹50,000 / month",
-            "Exceeding ₹6,00,000 / year",
-            "Yes — Strictly Mandatory",
-            "Yes (if cash payment)",
-            "Yes — Tenant must deduct 5% TDS under Sec 194-IB"
+          "rows": [
+            [
+              "Up to \u20b93,000 / month",
+              "Up to \u20b936,000 / year",
+              "No (Receipts optional in some companies)",
+              "No",
+              "No TDS Applicable"
+            ],
+            [
+              "\u20b93,001 to \u20b98,333 / month",
+              "Up to \u20b91,00,000 / year",
+              "No (Only rent receipts required)",
+              "Yes (if cash payment over \u20b95,000)",
+              "No TDS Applicable"
+            ],
+            [
+              "\u20b98,334 to \u20b950,000 / month",
+              "\u20b91,00,001 to \u20b96,00,000 / year",
+              "Yes \u2014 Strictly Mandatory by CBDT",
+              "Yes (if cash payment)",
+              "No TDS Applicable"
+            ],
+            [
+              "Exceeding \u20b950,000 / month",
+              "Exceeding \u20b96,00,000 / year",
+              "Yes \u2014 Strictly Mandatory",
+              "Yes (if cash payment)",
+              "Yes \u2014 Tenant must deduct 5% TDS under Sec 194-IB"
+            ]
           ]
+        }
+      },
+      {
+        "title": "3. Client-Side Vector PDF Invoicing for Freelancers & Contractors",
+        "paragraphs": [
+          "Traditional invoice SaaS platforms force freelancers and small business owners to register accounts, subscribe to monthly plans, or accept intrusive promotional watermarks on client deliverables. FileZenith provides a 100% free, private invoicing workspace.",
+          "Our engine computes hourly or fixed item subtotals, applies custom GST or regional sales tax percentages, and renders crisp, vector-standard A4 PDF invoices using client-side font embedding. Your financial figures and client contact information are never transmitted to any third-party server."
+        ],
+        "bullets": [
+          "Zero Watermark Guarantee: Clean, modern, executive-grade invoice design suitable for global corporate clients.",
+          "Multi-Currency Support: Effortlessly invoice in USD ($), INR (\u20b9), EUR (\u20ac), GBP (\u00a3), or CAD (C$).",
+          "Automated Calculations: Instant computation of subtotal, tax breakdown, and total amounts due."
+        ]
+      },
+      {
+        "title": "4. Client-Side Cryptographic Vector Rendering & Zero-Footprint Accounting Security",
+        "paragraphs": [
+          "Traditional web-based invoice generators and rent receipt portals require users to upload sensitive financial information\u2014including landlord names, PAN cards, client business names, hourly billing rates, bank account numbers, and IFSC/SWIFT routing codes\u2014to centralized cloud databases. Storing raw accounting data on third-party servers creates severe data leak liabilities and exposes proprietary business billing records to commercial tracking or data harvesting.",
+          "FileZenith operates under an absolute zero-footprint security model. The invoice and rent receipt rendering pipeline executes 100% within your client-side browser runtime using native HTML5 Canvas and vector PDF composition libraries. Calculations for sub-totals, tiered GST percentages, TDS withholdings, and net receivables are evaluated locally in memory. When you click 'Download Invoice PDF', the vector document is synthesized directly into a private local memory blob and passed straight to your browser downloads, leaving zero trace on our servers or external networks."
+        ],
+        "bullets": [
+          "Local Calculation Engine: Instant arithmetic evaluation for GST (CGST, SGST, IGST), TDS, discounts, and currency formatting without network latency.",
+          "300 DPI Vector PDF: Razor-sharp typographic rendering suitable for professional corporate billing, client retainers, and tax audits.",
+          "Zero Data Harvesting: Your landlord PAN, client addresses, and banking routing details are never logged, tracked, or transmitted across the internet."
         ]
       }
-    },
-    {
-      "title": "3. Client-Side Vector PDF Invoicing for Freelancers & Contractors",
-      "paragraphs": [
-        "Traditional invoice SaaS platforms force freelancers and small business owners to register accounts, subscribe to monthly plans, or accept intrusive promotional watermarks on client deliverables. FileZenith provides a 100% free, private invoicing workspace.",
-        "Our engine computes hourly or fixed item subtotals, applies custom GST or regional sales tax percentages, and renders crisp, vector-standard A4 PDF invoices using client-side font embedding. Your financial figures and client contact information are never transmitted to any third-party server."
-      ],
-      "bullets": [
-        "Zero Watermark Guarantee: Clean, modern, executive-grade invoice design suitable for global corporate clients.",
-        "Multi-Currency Support: Effortlessly invoice in USD ($), INR (₹), EUR (€), GBP (£), or CAD (C$).",
-        "Automated Calculations: Instant computation of subtotal, tax breakdown, and total amounts due."
-      ]
-    }
-  ],
-  "faqs": [
-    {
-      "question": "Is this invoice generator completely free without watermarks?",
-      "answer": "Yes! FileZenith generates clean, professional invoices and rent receipts with zero sign-up, zero watermarks, and zero hidden subscription fees."
-    },
-    {
-      "question": "Is the rent receipt valid for Income Tax HRA exemption submission?",
-      "answer": "Yes. The receipt incorporates all statutory particulars mandated under Section 10(13A) of the Income Tax Act, including tenant and landlord names, rental property address, monthly rent amount, and landlord PAN."
-    },
-    {
-      "question": "When is a landlord's PAN mandatory on rent receipts?",
-      "answer": "As per CBDT circulars, if your annual rent exceeds ₹1,00,000 (more than ₹8,333 per month), declaring the landlord's 10-digit PAN on the receipt is legally mandatory to claim HRA exemptions."
-    },
-    {
-      "question": "Do I need to affix a revenue stamp on the rent receipt?",
-      "answer": "Under the Indian Stamp Act, if rent exceeding ₹5,000 per month is paid via cash, affixing a ₹1 revenue stamp with the landlord's cross-signature is legally recommended. For bank/UPI transfers, the stamp is optional but good practice."
-    },
-    {
-      "question": "Are my client names and financial details stored on your server?",
-      "answer": "No. The invoice PDF is compiled directly inside your browser memory using client-side vector engines. Your financial information never leaves your machine."
-    },
-    {
-      "question": "Can I add multiple line items and custom tax rates to invoices?",
-      "answer": "Yes. You can add as many service or product line items as needed, specify quantities and rates, and enter custom GST/sales tax percentages."
-    },
-    {
-      "question": "Which currencies are supported on the invoice?",
-      "answer": "You can select US Dollar ($), Indian Rupee (₹), Euro (€), British Pound (£), or Canadian Dollar (C$)."
-    },
-    {
-      "question": "Can I generate rent receipts for multiple months?",
-      "answer": "Yes. Simply update the 'Rental Month / Period' field (e.g., 'October 2026' or 'Q3 FY 2026-27') and click download to generate receipts for each period."
-    }
-  ]
-},
-"/tools/ssc-cgl-photo-signature-resizer": {
-  "slug": "/tools/ssc-cgl-photo-signature-resizer",
-  "badge": "SSC 2026 Scrutiny Standards",
-  "heading": "Official SSC CGL Photo & Signature Specifications, DOP Guidelines & Scrutiny Protocols",
-  "subheading": "Comprehensive technical guide for Staff Selection Commission candidates: 20KB–50KB photo formatting, Candidate Name & Date of Photo stamping, and 10KB–20KB signature cleanup.",
-  "sections": [
-    {
-      "title": "1. SSC CGL Photo Requirements: Dimensions, Aspect Ratio & Facial Geometry",
-      "paragraphs": [
-        "The Staff Selection Commission (SSC) enforces stringent image upload protocols for all tier examinations, including CGL (Combined Graduate Level), CHSL, MTS, GD Constable, and CPO. Application forms undergo automated computational scrutiny where images failing boundary requirements are disqualified before human review. The candidate photograph must be a recent color passport portrait taken against a plain light white or off-white background.",
-        "The official dimensions are 3.5 cm width by 4.5 cm height, which corresponds to 413 × 531 pixels at 300 DPI (or a minimum of 100 × 120 pixels). The candidate's face must occupy between 70% and 80% of the total frame, with both ears, jawline, neck, and shoulders clearly illuminated without shadows. The file weight must strictly stay within 20.0 KB and 50.0 KB in JPEG/JPG format. Files under 20 KB are flagged for insufficient resolution, while files exceeding 50 KB are rejected by the portal's upload script."
-      ],
-      "bullets": [
-        "Dimensions: 3.5 cm (width) × 4.5 cm (height) / 413 × 531 px at standard 300 DPI.",
-        "File Size Window: 20.0 KB minimum to 50.0 KB maximum in JPG/JPEG.",
-        "Facial Proportions: Face must cover 70% to 80% of vertical height with direct frontal eye gaze.",
-        "Background: Pure white or light off-white with zero shadows, patterns, or outdoor landscapes."
-      ],
-      "table": {
-        "headers": ["Parameter", "SSC CGL Photo Rule", "SSC CGL Signature Rule"],
-        "rows": [
-          ["File Size", "20 KB to 50 KB", "10 KB to 20 KB"],
-          ["Dimensions", "3.5 cm × 4.5 cm (413 × 531 px)", "4.0 cm × 2.0 cm (140 × 60 px)"],
-          ["Color / Ink", "Color portrait on white background", "Black or dark blue ink on white paper"],
-          ["Name & Date", "Mandatory / Recommended (DOP < 3 mo)", "Candidate personal signature only"],
-          ["Format", "JPEG / JPG only", "JPEG / JPG only"]
+    ],
+    "faqs": [
+      {
+        "question": "Is this invoice generator completely free without watermarks?",
+        "answer": "Yes! FileZenith generates clean, professional invoices and rent receipts with zero sign-up, zero watermarks, and zero hidden subscription fees."
+      },
+      {
+        "question": "Is the rent receipt valid for Income Tax HRA exemption submission?",
+        "answer": "Yes. The receipt incorporates all statutory particulars mandated under Section 10(13A) of the Income Tax Act, including tenant and landlord names, rental property address, monthly rent amount, and landlord PAN."
+      },
+      {
+        "question": "When is a landlord's PAN mandatory on rent receipts?",
+        "answer": "As per CBDT circulars, if your annual rent exceeds \u20b91,00,000 (more than \u20b98,333 per month), declaring the landlord's 10-digit PAN on the receipt is legally mandatory to claim HRA exemptions."
+      },
+      {
+        "question": "Do I need to affix a revenue stamp on the rent receipt?",
+        "answer": "Under the Indian Stamp Act, if rent exceeding \u20b95,000 per month is paid via cash, affixing a \u20b91 revenue stamp with the landlord's cross-signature is legally recommended. For bank/UPI transfers, the stamp is optional but good practice."
+      },
+      {
+        "question": "Are my client names and financial details stored on your server?",
+        "answer": "No. The invoice PDF is compiled directly inside your browser memory using client-side vector engines. Your financial information never leaves your machine."
+      },
+      {
+        "question": "Can I add multiple line items and custom tax rates to invoices?",
+        "answer": "Yes. You can add as many service or product line items as needed, specify quantities and rates, and enter custom GST/sales tax percentages."
+      },
+      {
+        "question": "Which currencies are supported on the invoice?",
+        "answer": "You can select US Dollar ($), Indian Rupee (\u20b9), Euro (\u20ac), British Pound (\u00a3), or Canadian Dollar (C$)."
+      },
+      {
+        "question": "Can I generate rent receipts for multiple months?",
+        "answer": "Yes. Simply update the 'Rental Month / Period' field (e.g., 'October 2026' or 'Q3 FY 2026-27') and click download to generate receipts for each period."
+      }
+    ]
+  },
+  "/tools/ssc-cgl-photo-signature-resizer": {
+    "slug": "/tools/ssc-cgl-photo-signature-resizer",
+    "badge": "SSC 2026 Scrutiny Standards",
+    "heading": "Official SSC CGL Photo & Signature Specifications, DOP Guidelines & Scrutiny Protocols",
+    "subheading": "Comprehensive technical guide for Staff Selection Commission candidates: 20KB\u201350KB photo formatting, Candidate Name & Date of Photo stamping, and 10KB\u201320KB signature cleanup.",
+    "sections": [
+      {
+        "title": "1. SSC CGL Photo Requirements: Dimensions, Aspect Ratio & Facial Geometry",
+        "paragraphs": [
+          "The Staff Selection Commission (SSC) enforces stringent image upload protocols for all tier examinations, including CGL (Combined Graduate Level), CHSL, MTS, GD Constable, and CPO. Application forms undergo automated computational scrutiny where images failing boundary requirements are disqualified before human review. The candidate photograph must be a recent color passport portrait taken against a plain light white or off-white background.",
+          "The official dimensions are 3.5 cm width by 4.5 cm height, which corresponds to 413 \u00d7 531 pixels at 300 DPI (or a minimum of 100 \u00d7 120 pixels). The candidate's face must occupy between 70% and 80% of the total frame, with both ears, jawline, neck, and shoulders clearly illuminated without shadows. The file weight must strictly stay within 20.0 KB and 50.0 KB in JPEG/JPG format. Files under 20 KB are flagged for insufficient resolution, while files exceeding 50 KB are rejected by the portal's upload script."
+        ],
+        "bullets": [
+          "Dimensions: 3.5 cm (width) \u00d7 4.5 cm (height) / 413 \u00d7 531 px at standard 300 DPI.",
+          "File Size Window: 20.0 KB minimum to 50.0 KB maximum in JPG/JPEG.",
+          "Facial Proportions: Face must cover 70% to 80% of vertical height with direct frontal eye gaze.",
+          "Background: Pure white or light off-white with zero shadows, patterns, or outdoor landscapes."
+        ],
+        "table": {
+          "headers": [
+            "Parameter",
+            "SSC CGL Photo Rule",
+            "SSC CGL Signature Rule"
+          ],
+          "rows": [
+            [
+              "File Size",
+              "20 KB to 50 KB",
+              "10 KB to 20 KB"
+            ],
+            [
+              "Dimensions",
+              "3.5 cm \u00d7 4.5 cm (413 \u00d7 531 px)",
+              "4.0 cm \u00d7 2.0 cm (140 \u00d7 60 px)"
+            ],
+            [
+              "Color / Ink",
+              "Color portrait on white background",
+              "Black or dark blue ink on white paper"
+            ],
+            [
+              "Name & Date",
+              "Mandatory / Recommended (DOP < 3 mo)",
+              "Candidate personal signature only"
+            ],
+            [
+              "Format",
+              "JPEG / JPG only",
+              "JPEG / JPG only"
+            ]
+          ]
+        }
+      },
+      {
+        "title": "2. Candidate Name & Date of Photo (DOP) Bottom Banner Protocol",
+        "paragraphs": [
+          "Under Section 7 of official SSC examination notices, photographs must be clearly inscribed with the candidate's full legal name (in block capital letters) and the Date on which the Photograph was taken (DOP) printed at the bottom white bar. The DOP must not be older than three months from the notification release date. This requirement allows commission invigilators to confirm identity consistency between the application submission date and the Tier-1 computer-based exam date.",
+          "FileZenith's canvas rendering studio dynamically synthesizes an ISO-standard typography banner directly onto your photo. It automatically computes high-contrast black lettering on an opaque white base bar, ensuring maximum OCR readability by SSC automated processing scripts without distorting candidate facial aspect ratios."
+        ],
+        "bullets": [
+          "DOP Age Limit: Captured within 90 days of notification publication date.",
+          "Typography Format: Candidate Full Name in ALL CAPS followed by 'DOP: DD-MM-YYYY'.",
+          "Banner Placement: Bottom 12% to 15% of frame, preserving full visibility of chin and collar.",
+          "Contrast Compliance: Opaque pure-white background with dark charcoal/black lettering for optimal readability."
+        ]
+      },
+      {
+        "title": "3. SSC Signature Formatting & Artifact-Free Black & White Binarization",
+        "paragraphs": [
+          "Signature rejections represent over 40% of all administrative discrepancies in SSC recruitment. Candidates frequently upload signatures cropped from mobile snapshots taken in dim lighting, resulting in yellow paper tint, shadow gradients, and blurry strokes. The SSC portal mandates a crisp signature sized strictly between 10.0 KB and 20.0 KB with horizontal dimensions of 4.0 cm \u00d7 2.0 cm (approximately 140 \u00d7 60 pixels).",
+          "Our engine implements local adaptive binarization (Magic B&W). It calculates luminance histograms across your cropped signature scan, dynamically elevates gray background paper fibers to pure #FFFFFF white, and deepens blue/black ink strokes to crisp vector-like clarity. The resulting file weighs between 12 KB and 18 KB, guaranteeing instantaneous acceptance by the SSC portal."
+        ],
+        "bullets": [
+          "Size Range: 10 KB to 20 KB strictly.",
+          "Ink Specification: Black or dark blue ballpoint pen on unruled white printer paper.",
+          "Prohibited: Capital block letter signatures (must be natural running handwriting), red/green ink, or pencil marks."
+        ]
+      },
+      {
+        "title": "4. SSC Regional Portal Error Codes, Multi-Tier Verification & Rejection Safeguards",
+        "paragraphs": [
+          "The Staff Selection Commission conducts recruitment for Group B and C posts across nine distinct regional directorates (Northern, Western, Eastern, Southern, Central, Karnataka-Kerala, North-Eastern, Madhya Pradesh, and North-Western Sub-Regions). During active recruitment cycles (SSC CGL, CHSL, MTS, CPO, GD Constable), regional servers process tens of thousands of concurrent document uploads, triggering automated rejection scripts whenever files exhibit non-compliant dimensional or size attributes.",
+          "The most prevalent reasons for SSC application rejection include missing or blurred Date of Photo (DOP) text banners, signatures uploaded with bluish/grey backgrounds instead of crisp black ink on white paper, and images exceeding 50KB or falling under 20KB. FileZenith eliminates these failure vectors through a streamlined three-point pre-flight check: automatic DOP banner embedding, high-contrast monochrome binarization for signatures, and precise binary-search compression targeting 35KB for photos and 15KB for signatures."
+        ],
+        "bullets": [
+          "Regional Server Compatibility: Calibrated against SSC Central, Northern, and regional server upload validation endpoints.",
+          "DOP Banner Legibility: Inscribes candidate name and photo capture date in clean Arial/Helvetica bold text at 14pt equivalent scale.",
+          "Multi-Tier Inspection Immunity: Preserves facial clarity to ensure acceptance across Tier-1 computer-based testing, Tier-2, and final Document Verification (DV)."
         ]
       }
-    },
-    {
-      "title": "2. Candidate Name & Date of Photo (DOP) Bottom Banner Protocol",
-      "paragraphs": [
-        "Under Section 7 of official SSC examination notices, photographs must be clearly inscribed with the candidate's full legal name (in block capital letters) and the Date on which the Photograph was taken (DOP) printed at the bottom white bar. The DOP must not be older than three months from the notification release date. This requirement allows commission invigilators to confirm identity consistency between the application submission date and the Tier-1 computer-based exam date.",
-        "FileZenith's canvas rendering studio dynamically synthesizes an ISO-standard typography banner directly onto your photo. It automatically computes high-contrast black lettering on an opaque white base bar, ensuring maximum OCR readability by SSC automated processing scripts without distorting candidate facial aspect ratios."
-      ],
-      "bullets": [
-        "DOP Age Limit: Captured within 90 days of notification publication date.",
-        "Typography Format: Candidate Full Name in ALL CAPS followed by 'DOP: DD-MM-YYYY'.",
-        "Banner Placement: Bottom 12% to 15% of frame, preserving full visibility of chin and collar.",
-        "Contrast Compliance: Opaque pure-white background with dark charcoal/black lettering for optimal readability."
-      ]
-    },
-    {
-      "title": "3. SSC Signature Formatting & Artifact-Free Black & White Binarization",
-      "paragraphs": [
-        "Signature rejections represent over 40% of all administrative discrepancies in SSC recruitment. Candidates frequently upload signatures cropped from mobile snapshots taken in dim lighting, resulting in yellow paper tint, shadow gradients, and blurry strokes. The SSC portal mandates a crisp signature sized strictly between 10.0 KB and 20.0 KB with horizontal dimensions of 4.0 cm × 2.0 cm (approximately 140 × 60 pixels).",
-        "Our engine implements local adaptive binarization (Magic B&W). It calculates luminance histograms across your cropped signature scan, dynamically elevates gray background paper fibers to pure #FFFFFF white, and deepens blue/black ink strokes to crisp vector-like clarity. The resulting file weighs between 12 KB and 18 KB, guaranteeing instantaneous acceptance by the SSC portal."
-      ],
-      "bullets": [
-        "Size Range: 10 KB to 20 KB strictly.",
-        "Ink Specification: Black or dark blue ballpoint pen on unruled white printer paper.",
-        "Prohibited: Capital block letter signatures (must be natural running handwriting), red/green ink, or pencil marks."
-      ]
-    }
-  ],
-  "faqs": [
-    {
-      "question": "What is the exact photo and signature size required for SSC CGL 2026?",
-      "answer": "For SSC CGL 2026, the passport photo must be between 20.0 KB and 50.0 KB with dimensions of 3.5 cm (width) × 4.5 cm (height) in JPG/JPEG format. The signature scan must be between 10.0 KB and 20.0 KB with dimensions of 4.0 cm × 2.0 cm (around 140 × 60 pixels)."
-    },
-    {
-      "question": "Will SSC reject my application if I wear spectacles in the photo?",
-      "answer": "YES. SSC has strictly disallowed spectacles, sunglasses, caps, hats, or headgear in application photographs. Flash reflections on spectacle lenses prevent iris recognition and biometric matching, leading to immediate rejection during scrutiny."
-    },
-    {
-      "question": "Is candidate Name and Date of Photo (DOP) mandatory for SSC CGL?",
-      "answer": "Yes. Most SSC notifications explicitly require candidate full name in capital letters and the Date of Photograph (DOP) printed clearly at the bottom. The date must be within 3 months prior to the date of publication of the examination notice."
-    },
-    {
-      "question": "How to reduce photo size to 20 to 50 KB without losing clarity?",
-      "answer": "Upload your portrait to FileZenith's SSC CGL resizer. Our canvas engine maintains high 300 DPI resolution while performing intelligent iterative JPEG compression, achieving an optimal ~42 KB file with crisp facial details."
-    },
-    {
-      "question": "Can I sign in CAPITAL LETTERS for SSC CGL?",
-      "answer": "No. The Staff Selection Commission explicitly prohibits signatures written in capital letters. Applications with block-letter signatures are rejected as invalid. Your signature must be in your natural running handwriting style."
-    },
-    {
-      "question": "What background color is accepted for SSC CGL photographs?",
-      "answer": "The photograph must be taken against a plain, light white or off-white background with uniform lighting. Dark, patterned, or colored backgrounds (such as blue, red, or outdoor settings) are not permitted."
-    },
-    {
-      "question": "What should I do if the SSC portal shows 'Photo size cannot exceed 50KB'?",
-      "answer": "Use FileZenith's slider to set your target weight to 42 KB. Our engine ensures that the exported JPEG strictly caps at 42 KB, preventing browser rounding errors that cause 50.1 KB portal upload rejections."
-    },
-    {
-      "question": "Are my personal exam photos uploaded to any external server?",
-      "answer": "Never. All cropping, background cleaning, Name & Date stamping, and JPEG compression take place 100% within your local browser memory using HTML5 Canvas. Zero bytes are uploaded to external servers."
-    }
-  ]
-},
-"/tools/upsc-otr-photo-resizer": {
-  "slug": "/tools/upsc-otr-photo-resizer",
-  "badge": "UPSC OTR 1:1 Square Standards",
-  "heading": "Official UPSC OTR Photo & Signature Resizer Guidelines (Civil Services, NDA, CDS)",
-  "subheading": "Complete technical manual for Union Public Service Commission One Time Registration: 350×350 px square aspect ratio, 20KB–300KB file weights, and 10-day DOP capture mandate.",
-  "sections": [
-    {
-      "title": "1. UPSC OTR Photographic Norms: 1:1 Square Ratio & 10-Day Recency Mandate",
-      "paragraphs": [
-        "The Union Public Service Commission (UPSC) One Time Registration (OTR) system governs applications across prestigious central examinations, including Civil Services Examination (CSE / IAS / IPS), National Defence Academy (NDA), Combined Defence Services (CDS), and Engineering Services (ESE). In recent circulars, UPSC introduced modernized biometric capture standards to prevent fraudulent candidate substitution.",
-        "Unlike state recruitment boards that utilize rectangular 3.5×4.5 cm portraits, UPSC mandates an exact 1:1 square aspect ratio. The minimum permissible pixel dimensions are 350 × 350 pixels, and the maximum is 1000 × 1000 pixels. The file weight must strictly reside between 20.0 KB and 300.0 KB. Most critically, the photograph must not be more than 10 days old from the date of the online application form submission, and the candidate's facial image must occupy 3/4th (75%) of the total frame space."
-      ],
-      "bullets": [
-        "Aspect Ratio: Strictly 1:1 (Equal width and height).",
-        "Pixel Resolution: Minimum 350 × 350 px, maximum 1000 × 1000 px.",
-        "File Size Range: 20 KB minimum to 300 KB maximum in JPG/JPEG.",
-        "Recency Mandate: Captured within 10 days of filling the online application form."
-      ]
-    },
-    {
-      "title": "2. UPSC Candidate Name & Capture Date Inscription Rules",
-      "paragraphs": [
-        "UPSC OTR guidelines mandate that the candidate's full legal name along with the exact date on which the photograph was taken must be clearly inscribed at the bottom of the square photograph. The date must reflect recent capture (within the 10-day window) to ensure that the candidate's physical appearance on exam day (beard, hairstyle, facial contours) matches the uploaded digital record.",
-        "FileZenith automatically adapts your portrait to an exact 350 × 350 square canvas. When you enable the Name & Date toggle, our system overlays candidate details in compliant bold sans-serif font over a crisp white baseline, ensuring effortless scrutiny validation by UPSC verification officers."
-      ],
-      "bullets": [
-        "Inscription Content: Full legal name as registered in Class 10 certificate + Date of Photo.",
-        "Prohibited Elements: Dark shades, theatrical filters, tilted selfies, or artistic portrait blur.",
-        "Lighting: Clear, diffuse illumination without hard cheek or nose shadows."
-      ]
-    },
-    {
-      "title": "3. UPSC Signature Specifications (20KB to 300KB)",
-      "paragraphs": [
-        "The UPSC signature upload parameters mirror the file weight constraints of the photograph (20 KB to 300 KB), requiring minimum pixel dimensions of 350 × 350 pixels. Signatures must be executed in black ballpoint ink on crisp white paper. Scanning signatures with mobile devices often yields files smaller than 20 KB or blurry 72 DPI artifacts that fail portal validation.",
-        "FileZenith provides specialized canvas upsampling and background cleanup. If your cropped signature is only 15 KB, our engine intelligently embeds standard color metadata and clean padding to elevate file weight comfortably into the compliant 40–80 KB bracket while maintaining pristine stroke sharpness."
-      ],
-      "bullets": [
-        "Signature Dimensions: Minimum 350 × 350 px, square bounding box.",
-        "File Size: 20 KB to 300 KB.",
-        "Stroke Quality: Unbroken black ink lines on pure white background."
-      ]
-    }
-  ],
-  "faqs": [
-    {
-      "question": "What are the exact dimensions for UPSC OTR photograph?",
-      "answer": "UPSC OTR requires a 1:1 square photograph with minimum dimensions of 350 × 350 pixels and maximum dimensions of 1000 × 1000 pixels. The file weight must be between 20 KB and 300 KB in JPG/JPEG format."
-    },
-    {
-      "question": "How old can the photograph be for UPSC Civil Services 2026?",
-      "answer": "Under official UPSC instructions, the photograph must not be more than 10 days old from the commencement of the online application process for the respective examination."
-    },
-    {
-      "question": "Is candidate Name and Date mandatory on UPSC OTR photo?",
-      "answer": "Yes. UPSC guidelines explicitly require the candidate's full name and the date of photograph capture to be clearly printed at the bottom of the photograph."
-    },
-    {
-      "question": "What is the signature requirement for UPSC OTR?",
-      "answer": "UPSC signature must be between 20 KB and 300 KB with minimum dimensions of 350 × 350 pixels in JPG/JPEG format, signed in black ink on white paper."
-    },
-    {
-      "question": "Why does the UPSC portal reject my photo when it looks clear?",
-      "answer": "The most common rejection causes are non-square aspect ratio (e.g., standard 3:4 instead of 1:1), file size below 20 KB, or pixel dimensions under 350 × 350 px. FileZenith automatically forces exact 1:1 ratio and compliant byte sizing."
-    },
-    {
-      "question": "Can I use a beard photo if I usually shave?",
-      "answer": "UPSC advises that candidate appearance on the exam day must match the uploaded photograph. If you have a beard in the photograph, you should appear with a beard at the examination center and vice versa."
-    },
-    {
-      "question": "Does FileZenith store my UPSC candidate details?",
-      "answer": "No. All canvas transformations, name stamping, and JPEG formatting occur entirely in your browser's local memory with zero network uploads."
-    },
-    {
-      "question": "Can the same OTR photo be used for both Prelims and Mains?",
-      "answer": "Yes. Once uploaded to your verified UPSC OTR profile, the photo and signature are automatically linked to your Prelims, Mains, and Personality Test (Interview) application records."
-    }
-  ]
-},
-"/tools/ctet-photo-signature-resizer": {
-  "slug": "/tools/ctet-photo-signature-resizer",
-  "badge": "CBSE CTET 2026 Standards",
-  "heading": "Official CBSE CTET Photo & Signature Resizer Specifications & Upload Manual",
-  "subheading": "Authoritative guide for Central Teacher Eligibility Test candidates: 10KB–100KB passport photo formatting, 3KB–30KB signature cleanup, and 3.5×4.5 cm aspect ratio compliance.",
-  "sections": [
-    {
-      "title": "1. CTET Candidate Photograph Specifications (10KB to 100KB)",
-      "paragraphs": [
-        "The Central Teacher Eligibility Test (CTET), administered by the Central Board of Secondary Education (CBSE), requires hundreds of thousands of aspiring school educators to submit verified digital credentials. The CTET application portal applies automated file verification filters upon file selection. Uploads that deviate from authorized aspect ratios or file weights produce immediate validation errors.",
-        "Candidate photographs must be in JPG/JPEG format with file size strictly between 10.0 KB and 100.0 KB. The standard geometric dimensions are 3.5 cm in width by 4.5 cm in height. The photograph must be a clear portrait with 70% facial coverage against a light or white background. Candidates must face forward with a neutral expression and unblocked eye contact."
-      ],
-      "bullets": [
-        "File Size Range: 10.0 KB minimum to 100.0 KB maximum.",
-        "Physical Dimensions: 3.5 cm (width) × 4.5 cm (height).",
-        "Facial Coverage: 70% to 80% facial framing from forehead to chin.",
-        "Accepted Formats: JPG / JPEG only."
-      ]
-    },
-    {
-      "title": "2. CTET Signature Scan Requirements (3KB to 30KB)",
-      "paragraphs": [
-        "CBSE enforces distinct dimensional criteria for CTET signatures. The signature image file size must reside between 3.0 KB and 30.0 KB, with dimensions of 3.5 cm in width by 1.5 cm in height. Signatures must be executed on pure white unruled paper using a black ink ballpoint pen.",
-        "FileZenith crops your signature to exact 3.5 × 1.5 cm proportions, suppresses background paper shadows, and optimizes the compression curve to achieve a crisp 15–25 KB file weight that uploads effortlessly without rejection."
-      ],
-      "bullets": [
-        "Signature Size Range: 3.0 KB to 30.0 KB strictly.",
-        "Dimensions: 3.5 cm (width) × 1.5 cm (height).",
-        "Color: Crisp black or dark blue ink on clean white background."
-      ]
-    }
-  ],
-  "faqs": [
-    {
-      "question": "What is the photo size for CTET 2026 application form?",
-      "answer": "For CTET 2026, the photograph must be in JPG/JPEG format sized between 10 KB and 100 KB with dimensions of 3.5 cm × 4.5 cm."
-    },
-    {
-      "question": "What is the signature file size and dimension for CTET?",
-      "answer": "CTET signature must be between 3 KB and 30 KB in JPG/JPEG format with dimensions of 3.5 cm width × 1.5 cm height."
-    },
-    {
-      "question": "Can I take a CTET photo on mobile and compress it here?",
-      "answer": "Yes! Upload your mobile camera portrait to FileZenith's CTET resizer. Our engine automatically crops the image to 3.5×4.5 cm and compresses it to an optimal ~50 KB file."
-    },
-    {
-      "question": "Is Name and Date of Photo mandatory for CTET?",
-      "answer": "CBSE does not strictly mandate Name and Date on CTET photos, but your face must be clearly visible occupying 70% of the frame against a white background."
-    },
-    {
-      "question": "Why does the CTET portal say 'Invalid image format or size'?",
-      "answer": "This error occurs if your image is saved in PNG/WEBP format or exceeds the 100 KB limit for photos or 30 KB limit for signatures. FileZenith automatically outputs 100% compliant JPG."
-    },
-    {
-      "question": "Can I wear religious headgear in the CTET photograph?",
-      "answer": "Yes, religious headwear (such as a turban or hijab) is permitted provided the full face from forehead to chin and both cheeks are completely visible without casting shadows."
-    },
-    {
-      "question": "What resolution should I use for CTET signature scanning?",
-      "answer": "A scanning resolution of 200 to 300 DPI is ideal. FileZenith automatically optimizes the pixel density to prevent pixelation on candidate admit cards."
-    },
-    {
-      "question": "Are my files stored on FileZenith during compression?",
-      "answer": "No. All CTET image resizing and cropping take place locally in your browser memory with zero server uploads."
-    }
-  ]
-},
+    ],
+    "faqs": [
+      {
+        "question": "What is the exact photo and signature size required for SSC CGL 2026?",
+        "answer": "For SSC CGL 2026, the passport photo must be between 20.0 KB and 50.0 KB with dimensions of 3.5 cm (width) \u00d7 4.5 cm (height) in JPG/JPEG format. The signature scan must be between 10.0 KB and 20.0 KB with dimensions of 4.0 cm \u00d7 2.0 cm (around 140 \u00d7 60 pixels)."
+      },
+      {
+        "question": "Will SSC reject my application if I wear spectacles in the photo?",
+        "answer": "YES. SSC has strictly disallowed spectacles, sunglasses, caps, hats, or headgear in application photographs. Flash reflections on spectacle lenses prevent iris recognition and biometric matching, leading to immediate rejection during scrutiny."
+      },
+      {
+        "question": "Is candidate Name and Date of Photo (DOP) mandatory for SSC CGL?",
+        "answer": "Yes. Most SSC notifications explicitly require candidate full name in capital letters and the Date of Photograph (DOP) printed clearly at the bottom. The date must be within 3 months prior to the date of publication of the examination notice."
+      },
+      {
+        "question": "How to reduce photo size to 20 to 50 KB without losing clarity?",
+        "answer": "Upload your portrait to FileZenith's SSC CGL resizer. Our canvas engine maintains high 300 DPI resolution while performing intelligent iterative JPEG compression, achieving an optimal ~42 KB file with crisp facial details."
+      },
+      {
+        "question": "Can I sign in CAPITAL LETTERS for SSC CGL?",
+        "answer": "No. The Staff Selection Commission explicitly prohibits signatures written in capital letters. Applications with block-letter signatures are rejected as invalid. Your signature must be in your natural running handwriting style."
+      },
+      {
+        "question": "What background color is accepted for SSC CGL photographs?",
+        "answer": "The photograph must be taken against a plain, light white or off-white background with uniform lighting. Dark, patterned, or colored backgrounds (such as blue, red, or outdoor settings) are not permitted."
+      },
+      {
+        "question": "What should I do if the SSC portal shows 'Photo size cannot exceed 50KB'?",
+        "answer": "Use FileZenith's slider to set your target weight to 42 KB. Our engine ensures that the exported JPEG strictly caps at 42 KB, preventing browser rounding errors that cause 50.1 KB portal upload rejections."
+      },
+      {
+        "question": "Are my personal exam photos uploaded to any external server?",
+        "answer": "Never. All cropping, background cleaning, Name & Date stamping, and JPEG compression take place 100% within your local browser memory using HTML5 Canvas. Zero bytes are uploaded to external servers."
+      }
+    ]
+  },
+  "/tools/upsc-otr-photo-resizer": {
+    "slug": "/tools/upsc-otr-photo-resizer",
+    "badge": "UPSC OTR 1:1 Square Standards",
+    "heading": "Official UPSC OTR Photo & Signature Resizer Guidelines (Civil Services, NDA, CDS)",
+    "subheading": "Complete technical manual for Union Public Service Commission One Time Registration: 350\u00d7350 px square aspect ratio, 20KB\u2013300KB file weights, and 10-day DOP capture mandate.",
+    "sections": [
+      {
+        "title": "1. UPSC OTR Photographic Norms: 1:1 Square Ratio & 10-Day Recency Mandate",
+        "paragraphs": [
+          "The Union Public Service Commission (UPSC) One Time Registration (OTR) system governs applications across prestigious central examinations, including Civil Services Examination (CSE / IAS / IPS), National Defence Academy (NDA), Combined Defence Services (CDS), and Engineering Services (ESE). In recent circulars, UPSC introduced modernized biometric capture standards to prevent fraudulent candidate substitution.",
+          "Unlike state recruitment boards that utilize rectangular 3.5\u00d74.5 cm portraits, UPSC mandates an exact 1:1 square aspect ratio. The minimum permissible pixel dimensions are 350 \u00d7 350 pixels, and the maximum is 1000 \u00d7 1000 pixels. The file weight must strictly reside between 20.0 KB and 300.0 KB. Most critically, the photograph must not be more than 10 days old from the date of the online application form submission, and the candidate's facial image must occupy 3/4th (75%) of the total frame space."
+        ],
+        "bullets": [
+          "Aspect Ratio: Strictly 1:1 (Equal width and height).",
+          "Pixel Resolution: Minimum 350 \u00d7 350 px, maximum 1000 \u00d7 1000 px.",
+          "File Size Range: 20 KB minimum to 300 KB maximum in JPG/JPEG.",
+          "Recency Mandate: Captured within 10 days of filling the online application form."
+        ]
+      },
+      {
+        "title": "2. UPSC Candidate Name & Capture Date Inscription Rules",
+        "paragraphs": [
+          "UPSC OTR guidelines mandate that the candidate's full legal name along with the exact date on which the photograph was taken must be clearly inscribed at the bottom of the square photograph. The date must reflect recent capture (within the 10-day window) to ensure that the candidate's physical appearance on exam day (beard, hairstyle, facial contours) matches the uploaded digital record.",
+          "FileZenith automatically adapts your portrait to an exact 350 \u00d7 350 square canvas. When you enable the Name & Date toggle, our system overlays candidate details in compliant bold sans-serif font over a crisp white baseline, ensuring effortless scrutiny validation by UPSC verification officers."
+        ],
+        "bullets": [
+          "Inscription Content: Full legal name as registered in Class 10 certificate + Date of Photo.",
+          "Prohibited Elements: Dark shades, theatrical filters, tilted selfies, or artistic portrait blur.",
+          "Lighting: Clear, diffuse illumination without hard cheek or nose shadows."
+        ]
+      },
+      {
+        "title": "3. UPSC Signature Specifications (20KB to 300KB)",
+        "paragraphs": [
+          "The UPSC signature upload parameters mirror the file weight constraints of the photograph (20 KB to 300 KB), requiring minimum pixel dimensions of 350 \u00d7 350 pixels. Signatures must be executed in black ballpoint ink on crisp white paper. Scanning signatures with mobile devices often yields files smaller than 20 KB or blurry 72 DPI artifacts that fail portal validation.",
+          "FileZenith provides specialized canvas upsampling and background cleanup. If your cropped signature is only 15 KB, our engine intelligently embeds standard color metadata and clean padding to elevate file weight comfortably into the compliant 40\u201380 KB bracket while maintaining pristine stroke sharpness."
+        ],
+        "bullets": [
+          "Signature Dimensions: Minimum 350 \u00d7 350 px, square bounding box.",
+          "File Size: 20 KB to 300 KB.",
+          "Stroke Quality: Unbroken black ink lines on pure white background."
+        ]
+      },
+      {
+        "title": "4. UPSC One Time Registration (OTR) Lifetime Profile Verification & Common Disqualifications",
+        "paragraphs": [
+          "Unlike departmental recruitment examinations that require fresh application uploads for every distinct post, the Union Public Service Commission mandates an all-in-one One Time Registration (OTR) profile. The photograph and signature assets registered on the UPSC OTR portal (upsconline.nic.in) serve as the permanent biometric anchor for every subsequent examination\u2014including Civil Services Examination (CSE / IAS / IPS), National Defence Academy (NDA), Combined Defence Services (CDS), Indian Forest Service (IFS), and Combined Medical Services (CMS).",
+          "Because an OTR profile remains active for the candidate's entire competitive examination lifecycle, errors in initial image formatting can lead to repeated administrative delays or profile lockouts across multiple annual recruitment cycles. UPSC strictly enforces a 10-day recency rule for photographs, mandates that 3/4th of the frame must encompass the applicant's face without lateral head tilt, and requires signatures to be cleanly signed with black ink. FileZenith provides the exact 350\u00d7350 pixel square canvas and 20KB\u2013300KB compression window required for lifetime OTR acceptance."
+        ],
+        "bullets": [
+          "Lifetime OTR Integrity: Formats biometric profile assets to permanently eliminate re-upload errors across all future UPSC examination cycles.",
+          "10-Day Recency Inscription: Provides dedicated text fields to imprint candidate name and the exact photo capture date compliant with Commission guidelines.",
+          "High-DPI Signature Vectorization: Enhances black ink contrast while suppressing paper shadow, ensuring flawless signature matching during personality interviews."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What are the exact dimensions for UPSC OTR photograph?",
+        "answer": "UPSC OTR requires a 1:1 square photograph with minimum dimensions of 350 \u00d7 350 pixels and maximum dimensions of 1000 \u00d7 1000 pixels. The file weight must be between 20 KB and 300 KB in JPG/JPEG format."
+      },
+      {
+        "question": "How old can the photograph be for UPSC Civil Services 2026?",
+        "answer": "Under official UPSC instructions, the photograph must not be more than 10 days old from the commencement of the online application process for the respective examination."
+      },
+      {
+        "question": "Is candidate Name and Date mandatory on UPSC OTR photo?",
+        "answer": "Yes. UPSC guidelines explicitly require the candidate's full name and the date of photograph capture to be clearly printed at the bottom of the photograph."
+      },
+      {
+        "question": "What is the signature requirement for UPSC OTR?",
+        "answer": "UPSC signature must be between 20 KB and 300 KB with minimum dimensions of 350 \u00d7 350 pixels in JPG/JPEG format, signed in black ink on white paper."
+      },
+      {
+        "question": "Why does the UPSC portal reject my photo when it looks clear?",
+        "answer": "The most common rejection causes are non-square aspect ratio (e.g., standard 3:4 instead of 1:1), file size below 20 KB, or pixel dimensions under 350 \u00d7 350 px. FileZenith automatically forces exact 1:1 ratio and compliant byte sizing."
+      },
+      {
+        "question": "Can I use a beard photo if I usually shave?",
+        "answer": "UPSC advises that candidate appearance on the exam day must match the uploaded photograph. If you have a beard in the photograph, you should appear with a beard at the examination center and vice versa."
+      },
+      {
+        "question": "Does FileZenith store my UPSC candidate details?",
+        "answer": "No. All canvas transformations, name stamping, and JPEG formatting occur entirely in your browser's local memory with zero network uploads."
+      },
+      {
+        "question": "Can the same OTR photo be used for both Prelims and Mains?",
+        "answer": "Yes. Once uploaded to your verified UPSC OTR profile, the photo and signature are automatically linked to your Prelims, Mains, and Personality Test (Interview) application records."
+      }
+    ]
+  },
+  "/tools/ctet-photo-signature-resizer": {
+    "slug": "/tools/ctet-photo-signature-resizer",
+    "badge": "CBSE CTET 2026 Standards",
+    "heading": "Official CBSE CTET Photo & Signature Resizer Specifications & Upload Manual",
+    "subheading": "Authoritative guide for Central Teacher Eligibility Test candidates: 10KB\u2013100KB passport photo formatting, 3KB\u201330KB signature cleanup, and 3.5\u00d74.5 cm aspect ratio compliance.",
+    "sections": [
+      {
+        "title": "1. CTET Candidate Photograph Specifications (10KB to 100KB)",
+        "paragraphs": [
+          "The Central Teacher Eligibility Test (CTET), administered by the Central Board of Secondary Education (CBSE), requires hundreds of thousands of aspiring school educators to submit verified digital credentials. The CTET application portal applies automated file verification filters upon file selection. Uploads that deviate from authorized aspect ratios or file weights produce immediate validation errors.",
+          "Candidate photographs must be in JPG/JPEG format with file size strictly between 10.0 KB and 100.0 KB. The standard geometric dimensions are 3.5 cm in width by 4.5 cm in height. The photograph must be a clear portrait with 70% facial coverage against a light or white background. Candidates must face forward with a neutral expression and unblocked eye contact."
+        ],
+        "bullets": [
+          "File Size Range: 10.0 KB minimum to 100.0 KB maximum.",
+          "Physical Dimensions: 3.5 cm (width) \u00d7 4.5 cm (height).",
+          "Facial Coverage: 70% to 80% facial framing from forehead to chin.",
+          "Accepted Formats: JPG / JPEG only."
+        ]
+      },
+      {
+        "title": "2. CTET Signature Scan Requirements (3KB to 30KB)",
+        "paragraphs": [
+          "CBSE enforces distinct dimensional criteria for CTET signatures. The signature image file size must reside between 3.0 KB and 30.0 KB, with dimensions of 3.5 cm in width by 1.5 cm in height. Signatures must be executed on pure white unruled paper using a black ink ballpoint pen.",
+          "FileZenith crops your signature to exact 3.5 \u00d7 1.5 cm proportions, suppresses background paper shadows, and optimizes the compression curve to achieve a crisp 15\u201325 KB file weight that uploads effortlessly without rejection."
+        ],
+        "bullets": [
+          "Signature Size Range: 3.0 KB to 30.0 KB strictly.",
+          "Dimensions: 3.5 cm (width) \u00d7 1.5 cm (height).",
+          "Color: Crisp black or dark blue ink on clean white background."
+        ]
+      },
+      {
+        "title": "3. CBSE Gateway Upload Validation Engine & Error Code Mitigation",
+        "paragraphs": [
+          "The Central Board of Secondary Education (CBSE) utilizes an automated server-side pre-validation script on the CTET application portal (ctet.nic.in). During document upload, this gateway inspects the incoming multipart HTTP payload against four strict binary criteria: exact byte size boundaries (photograph: 10,240 to 102,400 bytes; signature: 3,072 to 30,720 bytes), JPEG image header magic bytes (FF D8 FF), dimensional bounding ratios (3.5 cm width by 4.5 cm height for photographs), and MIME content-type headers.",
+          "If a candidate's file deviates by even a single byte\u2014such as an image measuring 10.1 KB or 102.5 KB\u2014the portal rejects the submission with generic error codes such as 'Invalid Image Format', 'Upload Failed: Size Out of Range', or 'Image Dimension Mismatch'. FileZenith's specialized CTET engine applies deterministic binary-search compression loops to ensure the final exported file lands squarely in the center of the permissible buffer range (e.g., ~45KB for photographs and ~15KB for signatures), guaranteeing 100% first-pass acceptance without server rejection."
+        ],
+        "bullets": [
+          "Byte Range Safeguard: Automatically targets the median buffer zone (30KB\u201360KB for photos, 10KB\u201320KB for signatures) to eliminate boundary rejection.",
+          "MIME Header Normalization: Strips non-standard container metadata and forces compliant baseline JPEG JFIF headers (0xFFD8FFE0).",
+          "Direct Portal Calibration: Formatted specifically for CTET July & December examination cycles administered by CBSE."
+        ]
+      },
+      {
+        "title": "4. CTET Admittance Card Biometric Facial Recognition & Exam Hall Verification",
+        "paragraphs": [
+          "Photograph compliance for CTET is not merely an administrative portal formality\u2014it is the foundational biometric identity record printed onto the candidate's CTET Admit Card (Hall Ticket) and Certificate of Eligibility. At the examination center, invigilators compare the printed photograph against the candidate's physical appearance and government identity proof (Aadhaar Card, Voter ID, or Passport).",
+          "Photographs featuring excessive digital beauty filtering, skewed selfie angles, heavy headwear, dark sunglasses, or poor contrast can lead to candidate disqualification or biometric mismatch flags during digital center entry. By adhering to the 3.5\u00d74.5 cm format with a clear, neutral white background and crisp facial visibility across 80% of the image frame, candidates prevent exam-day administrative disputes and ensure smooth credential verification for subsequent teacher recruitment selections (KVS, NVS, DSSSB, and state public schools)."
+        ],
+        "bullets": [
+          "Facial Frame Ratio: Calibrated for 80% vertical face coverage from crown to chin, complying with CBSE biometric guidelines.",
+          "Neutral Contrast Profile: Balances shadows and skin tones without artificial smoothing, ensuring verifiable facial feature clarity.",
+          "Lifetime Credential Validity: Produces clean, professional image assets that reproduce faithfully on printed CTET eligibility certificates."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the photo size for CTET 2026 application form?",
+        "answer": "For CTET 2026, the photograph must be in JPG/JPEG format sized between 10 KB and 100 KB with dimensions of 3.5 cm \u00d7 4.5 cm."
+      },
+      {
+        "question": "What is the signature file size and dimension for CTET?",
+        "answer": "CTET signature must be between 3 KB and 30 KB in JPG/JPEG format with dimensions of 3.5 cm width \u00d7 1.5 cm height."
+      },
+      {
+        "question": "Can I take a CTET photo on mobile and compress it here?",
+        "answer": "Yes! Upload your mobile camera portrait to FileZenith's CTET resizer. Our engine automatically crops the image to 3.5\u00d74.5 cm and compresses it to an optimal ~50 KB file."
+      },
+      {
+        "question": "Is Name and Date of Photo mandatory for CTET?",
+        "answer": "CBSE does not strictly mandate Name and Date on CTET photos, but your face must be clearly visible occupying 70% of the frame against a white background."
+      },
+      {
+        "question": "Why does the CTET portal say 'Invalid image format or size'?",
+        "answer": "This error occurs if your image is saved in PNG/WEBP format or exceeds the 100 KB limit for photos or 30 KB limit for signatures. FileZenith automatically outputs 100% compliant JPG."
+      },
+      {
+        "question": "Can I wear religious headgear in the CTET photograph?",
+        "answer": "Yes, religious headwear (such as a turban or hijab) is permitted provided the full face from forehead to chin and both cheeks are completely visible without casting shadows."
+      },
+      {
+        "question": "What resolution should I use for CTET signature scanning?",
+        "answer": "A scanning resolution of 200 to 300 DPI is ideal. FileZenith automatically optimizes the pixel density to prevent pixelation on candidate admit cards."
+      },
+      {
+        "question": "Are my files stored on FileZenith during compression?",
+        "answer": "No. All CTET image resizing and cropping take place locally in your browser memory with zero server uploads."
+      }
+    ]
+  },
   "/pdf/habit-tracker-planner": {
     "slug": "/pdf/habit-tracker-planner",
     "badge": "300 DPI Vector Print Engine",
@@ -9438,7 +9611,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       {
         "title": "2. The Cue-Routine-Reward Loop & Micro-Habit Architecture",
         "paragraphs": [
-          "All behavioral patterns operate on the foundational neurological triad identified by Dr. Ann Graybiel at MIT: Cue, Routine, and Reward. To make a new habit permanent, behavioral scientist Dr. BJ Fogg introduced the Tiny Habits paradigm—scaling habits down to micro-increments (such as reading 2 pages, drinking 1 glass of water, or doing 5 push-ups) to reduce activation energy to near-zero.",
+          "All behavioral patterns operate on the foundational neurological triad identified by Dr. Ann Graybiel at MIT: Cue, Routine, and Reward. To make a new habit permanent, behavioral scientist Dr. BJ Fogg introduced the Tiny Habits paradigm\u2014scaling habits down to micro-increments (such as reading 2 pages, drinking 1 glass of water, or doing 5 push-ups) to reduce activation energy to near-zero.",
           "FileZenith's Printable Habit Tracker incorporates structured habit stacking zones. By linking a new micro-action directly after an established anchor routine (for example: 'After I brew morning coffee, I will write down 3 priority tasks'), the brain utilizes established neuro-pathways, ensuring adherence even during periods of low willpower or high stress."
         ],
         "bullets": [
@@ -9451,7 +9624,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
         "title": "3. ISO 216 A4 & US Letter Physical Vector Typography Calibration",
         "paragraphs": [
           "A major flaw with generic printable PDFs downloaded from internet forums is improper typographic scaling. When templates designed for on-screen RGB monitors are sent to 600 DPI laser or inkjet printers, thin grid lines frequently vanish, fonts pixelate, and border margins fall outside printer printable hardware limits (clip zones), resulting in cut-off days or misaligned columns.",
-          "FileZenith's generator compiles ISO 32000 vector streams mathematically calibrated for standard ISO 216 A4 (210 × 297 mm) and North American US Letter (8.5 × 11 in) paper stocks. Grid strokes are defined in exact point units (0.75 pt hairline width) with guaranteed 12.7 mm (0.5 in) safe non-clipping margins. Text strings are rendered using clean vector typography, ensuring laser-crisp edges even when scaled or bound in bullet journal binders."
+          "FileZenith's generator compiles ISO 32000 vector streams mathematically calibrated for standard ISO 216 A4 (210 \u00d7 297 mm) and North American US Letter (8.5 \u00d7 11 in) paper stocks. Grid strokes are defined in exact point units (0.75 pt hairline width) with guaranteed 12.7 mm (0.5 in) safe non-clipping margins. Text strings are rendered using clean vector typography, ensuring laser-crisp edges even when scaled or bound in bullet journal binders."
         ],
         "bullets": [
           "Safe Hardware Margins: 12.7mm border clearance prevents edge-clipping on consumer printers.",
@@ -9462,7 +9635,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       {
         "title": "4. Sustainable Goal Structuring: The Two-Day Rule & Momentum Maintenance",
         "paragraphs": [
-          "The greatest killer of personal improvement plans is perfectionism. Research in behavioral economics shows that when individuals miss a single day of a rigid 30-day streak, cognitive dissonance causes them to abandon the entire regime—a phenomenon termed the 'what-the-hell effect'.",
+          "The greatest killer of personal improvement plans is perfectionism. Research in behavioral economics shows that when individuals miss a single day of a rigid 30-day streak, cognitive dissonance causes them to abandon the entire regime\u2014a phenomenon termed the 'what-the-hell effect'.",
           "Our planner design incorporates the acclaimed 'Two-Day Rule': you never allow yourself to miss two consecutive days. If illness or travel prevents you from completing a habit on Tuesday, your sole goal on Wednesday is simply checking the box. This preserves momentum, separates temporary lapses from systemic failure, and promotes long-term habit consolidation."
         ],
         "bullets": [
@@ -9479,7 +9652,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "What is the best paper weight for printing a daily habit tracker?",
-        "answer": "Standard 75–80 GSM copy paper works great for ballpoint pens. If you prefer gel pens, highlighters, or fountain pens, 100–120 GSM smooth paper prevents bleed-through and offers a luxurious bullet journal feel."
+        "answer": "Standard 75\u201380 GSM copy paper works great for ballpoint pens. If you prefer gel pens, highlighters, or fountain pens, 100\u2013120 GSM smooth paper prevents bleed-through and offers a luxurious bullet journal feel."
       },
       {
         "question": "Can I customize the habit list and title for my specific goals?",
@@ -9516,11 +9689,11 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       {
         "title": "1. Physical Polaroid Geometry & The Mathematics of Border Ratios",
         "paragraphs": [
-          "The classic Polaroid instant photograph (formalized by Edwin Land in the 1972 SX-70 and later 600 series) established one of the most recognizable cultural silhouettes in photography. Unlike modern borderless digital displays, the authentic instant photo features an asymmetric border: uniform narrow borders on the top, left, and right (typically 5–6 mm), and an expansive lower border (19–21 mm) originally designed to house chemical development reagent pods.",
-          "FileZenith's Polaroid Studio accurately recreates these exact dimensional aspect ratios. When you upload a square or portrait photo, our Canvas 2D rendering pipeline computes the golden proportions of classic 88 × 107 mm (3.5 × 4.2 in) print frames, generating a dedicated lower caption zone where handwritten-style typography, anniversary dates, or custom love notes can be placed with authentic spacing."
+          "The classic Polaroid instant photograph (formalized by Edwin Land in the 1972 SX-70 and later 600 series) established one of the most recognizable cultural silhouettes in photography. Unlike modern borderless digital displays, the authentic instant photo features an asymmetric border: uniform narrow borders on the top, left, and right (typically 5\u20136 mm), and an expansive lower border (19\u201321 mm) originally designed to house chemical development reagent pods.",
+          "FileZenith's Polaroid Studio accurately recreates these exact dimensional aspect ratios. When you upload a square or portrait photo, our Canvas 2D rendering pipeline computes the golden proportions of classic 88 \u00d7 107 mm (3.5 \u00d7 4.2 in) print frames, generating a dedicated lower caption zone where handwritten-style typography, anniversary dates, or custom love notes can be placed with authentic spacing."
         ],
         "bullets": [
-          "Asymmetric Frame Geometry: Faithfully replicates classic 88×107 mm instant film physical margins.",
+          "Asymmetric Frame Geometry: Faithfully replicates classic 88\u00d7107 mm instant film physical margins.",
           "Lower Caption Pod: Proportional margin engineered specifically for heartfelt personal inscriptions and date stamps.",
           "Multiple Layout Modes: Switch between single Polaroid cards, couple duo frames, and 4-snap retro photobooth ribbons."
         ]
@@ -9528,8 +9701,8 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       {
         "title": "2. Subtractive Color Gamuts & High-DPI Printing (RGB vs CMYK)",
         "paragraphs": [
-          "Digital photos taken on smartphones exist in the additive sRGB color space, illuminated by luminous LED pixels. When these photos are printed on physical paper, the image is rendered using subtractive CMYK ink droplets. Without proper image resolution, digital photos printed on 4×6 photo paper often appear blurry or washed out.",
-          "FileZenith's canvas pipeline generates high-resolution 300 DPI raster buffers (up to 1800 × 2200 pixels per card) and offers an instant 'Print-Ready A4 PDF' mode. In this mode, multiple Polaroid prints are neatly arranged on a single ISO A4 page with faint dashed cutting guidelines, enabling anyone to print professional-grade photo cards at home or at a local photo studio using scissors or a craft cutter."
+          "Digital photos taken on smartphones exist in the additive sRGB color space, illuminated by luminous LED pixels. When these photos are printed on physical paper, the image is rendered using subtractive CMYK ink droplets. Without proper image resolution, digital photos printed on 4\u00d76 photo paper often appear blurry or washed out.",
+          "FileZenith's canvas pipeline generates high-resolution 300 DPI raster buffers (up to 1800 \u00d7 2200 pixels per card) and offers an instant 'Print-Ready A4 PDF' mode. In this mode, multiple Polaroid prints are neatly arranged on a single ISO A4 page with faint dashed cutting guidelines, enabling anyone to print professional-grade photo cards at home or at a local photo studio using scissors or a craft cutter."
         ],
         "bullets": [
           "300 DPI Print Density: Ensures razor-sharp photo clarity and authentic film tone reproduction.",
@@ -9552,13 +9725,13 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       {
         "title": "4. Paper Stock Selection: Glossy, Luster & Matte Density Comparison",
         "paragraphs": [
-          "To achieve the authentic tactile feel of vintage instant film, paper selection is paramount. Ordinary 80 GSM printer paper will curl and become translucent when saturated with inkjet photo ink. For authentic results, we recommend printing FileZenith PDF exports on 240–300 GSM photo paper.",
+          "To achieve the authentic tactile feel of vintage instant film, paper selection is paramount. Ordinary 80 GSM printer paper will curl and become translucent when saturated with inkjet photo ink. For authentic results, we recommend printing FileZenith PDF exports on 240\u2013300 GSM photo paper.",
           "Glossy paper provides deep blacks and high saturation, resembling modern Fuji Instax prints. Luster (semi-gloss/pearl) delivers professional exhibition-grade clarity while resisting fingerprint smudges. Heavyweight Matte (250 GSM) produces a gorgeous vintage, soft-contrast aesthetic ideal for scrapbooks, mood boards, and framed anniversary gifts."
         ],
         "bullets": [
-          "Glossy Photo Paper (240–280 GSM): High vibrant contrast resembling modern instant film.",
+          "Glossy Photo Paper (240\u2013280 GSM): High vibrant contrast resembling modern instant film.",
           "Luster / Pearl (260 GSM): Fingerprint-resistant, velvety sheen chosen by professional photographers.",
-          "Smooth Matte (230–300 GSM): Nostalgic retro feel, non-reflective, perfect for handwritten ink additions."
+          "Smooth Matte (230\u2013300 GSM): Nostalgic retro feel, non-reflective, perfect for handwritten ink additions."
         ]
       }
     ],
@@ -9569,11 +9742,11 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "How do I print the Polaroid cards on a standard home printer?",
-        "answer": "Click 'Download Print-Ready A4 PDF'. FileZenith arranges your Polaroid frames onto a standard A4 sheet with subtle dotted cutting guides. Load 200–260 GSM photo paper into your printer, print at '100% Actual Size', and trim with scissors."
+        "answer": "Click 'Download Print-Ready A4 PDF'. FileZenith arranges your Polaroid frames onto a standard A4 sheet with subtle dotted cutting guides. Load 200\u2013260 GSM photo paper into your printer, print at '100% Actual Size', and trim with scissors."
       },
       {
         "question": "Can I add custom text, love quotes, or anniversary dates to the card?",
-        "answer": "Yes! You can type any heartfelt caption, anniversary milestone (e.g. 'Since Oct 14, 2024 ❤️'), or customize the digital vintage date stamp in classic amber or minimalist script."
+        "answer": "Yes! You can type any heartfelt caption, anniversary milestone (e.g. 'Since Oct 14, 2024 \u2764\ufe0f'), or customize the digital vintage date stamp in classic amber or minimalist script."
       },
       {
         "question": "What layouts are available in the Polaroid maker?",
@@ -9606,7 +9779,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       {
         "title": "1. Bi-Fold Print Geometry & The Mathematics of Card Imposition",
         "paragraphs": [
-          "In commercial print production, creating a physical folding greeting card requires a layout technique known as imposition. When an A4 sheet (297 × 210 mm landscape) is folded down the center, it splits into two symmetrical 148.5 × 210 mm panels (A5 finished size). The right panel serves as the front cover (displaying the recipient headline, masked photo, and ornamental borders), while the left panel forms the back cover (featuring the keepsake quote and minimalist maker credit).",
+          "In commercial print production, creating a physical folding greeting card requires a layout technique known as imposition. When an A4 sheet (297 \u00d7 210 mm landscape) is folded down the center, it splits into two symmetrical 148.5 \u00d7 210 mm panels (A5 finished size). The right panel serves as the front cover (displaying the recipient headline, masked photo, and ornamental borders), while the left panel forms the back cover (featuring the keepsake quote and minimalist maker credit).",
           "FileZenith's Greeting Card Studio calculates these exact imposition boundaries automatically. The canvas pipeline maps high-resolution photo pixels into trending architectural silhouettes (such as arches, cameos, and heart masks) while embedding precision center fold crease marks and outer scissor trim guidelines directly on the exportable PDF."
         ],
         "bullets": [
@@ -9618,11 +9791,11 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       {
         "title": "2. High-DPI Color Reproduction & Cardstock Selection (GSM Guide)",
         "paragraphs": [
-          "Standard office copy paper (75–80 GSM) is too lightweight for physical greeting cards, causing ink bleed-through and creased edges. For a greeting card that feels luxurious and stands upright on a desk or mantelpiece, paper density and surface coating are critical factors.",
+          "Standard office copy paper (75\u201380 GSM) is too lightweight for physical greeting cards, causing ink bleed-through and creased edges. For a greeting card that feels luxurious and stands upright on a desk or mantelpiece, paper density and surface coating are critical factors.",
           "Our vector PDF rendering engine outputs clean, lossless 300 DPI raster streams embedded inside vector page definitions. We recommend printing on 220 to 300 GSM cardstock with a matte or satin finish. The high dot density ensures that cursive script lettering, gold accent borders, and couple skin tones reproduce with true-to-life fidelity."
         ],
         "bullets": [
-          "Recommended 240–300 GSM: Provides the rigid tactile hand-feel of premium boutique greeting cards.",
+          "Recommended 240\u2013300 GSM: Provides the rigid tactile hand-feel of premium boutique greeting cards.",
           "300 DPI Rendering Buffer: Ensures fine calligraphy lines and ornate flourishes print without pixelation.",
           "Dual Format Delivery: Instant lossless PNG for messaging apps and vector-embedded A4 PDF for printing."
         ]
@@ -9638,12 +9811,24 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
           "No Registration or Sign-In: Instant access without collecting email addresses or personal data.",
           "Zero Watermarks Forever: Clean, unbranded exports ready for heartfelt gifting."
         ]
+      },
+      {
+        "title": "4. CMYK Color Gamuts, Bleed Margins & Duplex Print Alignment",
+        "paragraphs": [
+          "Translating digital greeting card artwork from an RGB screen display to a physical printed card requires understanding the technical boundaries of color gamuts and printer mechanics. Computer screens and mobile displays emit light using additive RGB primaries (Red, Green, Blue), which produce vibrant neon hues and intense saturated tones. Desktop inkjet and commercial digital presses, however, utilize subtractive CMYK pigments (Cyan, Magenta, Yellow, Key Black) that absorb light reflected from paper fibers.",
+          "FileZenith's card generation engine embeds an optimized sRGB color profile calibrated for predictable rendering on standard color printers. In addition, our print-ready A4 imposition layout accounts for physical paper feed tolerances by providing safety margins around card folds and text blocks. This ensures that when you print a folding bi-fold card on 250\u2013300 GSM cardstock and fold it down the center score, your romantic love letters, anniversary messages, and high-resolution photographs align symmetrically without unsightly white edge slivers or cut-off typography."
+        ],
+        "bullets": [
+          "Gamut Optimization: Tone-maps ultra-saturated digital RGB colors into print-safe ink pigment densities to prevent muddy, over-inked prints.",
+          "Safety Border Allowance: Enforces a 5mm interior text margin to ensure headings and verses remain completely visible after center creasing.",
+          "Heavyweight Paper Compatibility: Formats high-contrast output suited for 220\u2013350 GSM matte, linen, or coated silk greeting card stock."
+        ]
       }
     ],
     "faqs": [
       {
         "question": "How do I print a bi-fold card at home so it folds correctly?",
-        "answer": "Select 'Print-Ready A4 PDF' and open the downloaded document. In your printer settings, choose 'Actual Size' (100% scale) rather than 'Fit to Page'. Print on 220–300 GSM cardstock, trim along the outer border, and gently score and fold down the center crease line."
+        "answer": "Select 'Print-Ready A4 PDF' and open the downloaded document. In your printer settings, choose 'Actual Size' (100% scale) rather than 'Fit to Page'. Print on 220\u2013300 GSM cardstock, trim along the outer border, and gently score and fold down the center crease line."
       },
       {
         "question": "Can I download the card as a digital image to send on WhatsApp or Instagram?",
@@ -9663,7 +9848,7 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       },
       {
         "question": "What size envelope should I use for a folded A4 greeting card?",
-        "answer": "When printed at 100% scale on A4, the folded card measures A5 (148 × 210 mm) and fits standard C5 envelopes. If you scale down to 70% in your print dialog, the card fits standard C6 greeting card envelopes."
+        "answer": "When printed at 100% scale on A4, the folded card measures A5 (148 \u00d7 210 mm) and fits standard C5 envelopes. If you scale down to 70% in your print dialog, the card fits standard C6 greeting card envelopes."
       },
       {
         "question": "Does this tool work on mobile phones (iPhone and Android)?",
@@ -9676,4 +9861,3 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
     ]
   }
 };
-
