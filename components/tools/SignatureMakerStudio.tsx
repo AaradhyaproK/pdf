@@ -9,6 +9,7 @@ import {
   UploadCloud,
   Download,
   RotateCcw,
+  RotateCw,
   Undo2,
   Trash2,
   Copy,
@@ -176,8 +177,11 @@ export function SignatureMakerStudio() {
 
   // Upload Clean Paper Signature State
   const uploadInputRef = useRef<HTMLInputElement>(null);
+  const paperCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const [uploadedImg, setUploadedImg] = useState<HTMLImageElement | null>(null);
   const [bwThreshold, setBwThreshold] = useState<number>(165);
+  const [paperPreviewBg, setPaperPreviewBg] = useState<'transparent' | 'white' | 'original'>('transparent');
+  const [paperRotation, setPaperRotation] = useState<number>(0);
 
   // Clipboard Copied Indicator
   const [isCopied, setIsCopied] = useState<boolean>(false);
@@ -345,6 +349,72 @@ export function SignatureMakerStudio() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, [setupCanvas]);
+
+  // Real-time render for Paper Signature Live Preview with Shadow Stripping
+  const renderPaperPreview = useCallback(() => {
+    const canvas = paperCanvasRef.current;
+    if (!canvas || !uploadedImg) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const isRotated = paperRotation % 180 !== 0;
+    const srcW = isRotated ? uploadedImg.naturalHeight : uploadedImg.naturalWidth;
+    const srcH = isRotated ? uploadedImg.naturalWidth : uploadedImg.naturalHeight;
+
+    const maxPreviewW = 900;
+    const maxPreviewH = 400;
+    const scale = Math.min(1, maxPreviewW / srcW, maxPreviewH / srcH);
+    const targetW = Math.max(10, Math.round(srcW * scale));
+    const targetH = Math.max(10, Math.round(srcH * scale));
+
+    canvas.width = targetW;
+    canvas.height = targetH;
+
+    ctx.clearRect(0, 0, targetW, targetH);
+
+    ctx.save();
+    ctx.translate(targetW / 2, targetH / 2);
+    ctx.rotate((paperRotation * Math.PI) / 180);
+    const drawW = isRotated ? targetH : targetW;
+    const drawH = isRotated ? targetW : targetH;
+    ctx.drawImage(uploadedImg, -drawW / 2, -drawH / 2, drawW, drawH);
+    ctx.restore();
+
+    if (paperPreviewBg === 'original') {
+      return;
+    }
+
+    const imgData = ctx.getImageData(0, 0, targetW, targetH);
+    const data = imgData.data;
+
+    for (let i = 0; i < data.length; i += 4) {
+      const l = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+      if (l > bwThreshold) {
+        if (paperPreviewBg === 'transparent') {
+          data[i + 3] = 0;
+        } else {
+          data[i] = 255;
+          data[i + 1] = 255;
+          data[i + 2] = 255;
+          data[i + 3] = 255;
+        }
+      } else {
+        data[i] = 15;
+        data[i + 1] = 23;
+        data[i + 2] = 42;
+        data[i + 3] = 255;
+      }
+    }
+
+    ctx.putImageData(imgData, 0, 0);
+  }, [uploadedImg, bwThreshold, paperPreviewBg, paperRotation]);
+
+  useEffect(() => {
+    if (activeTab === 'upload' && uploadedImg) {
+      renderPaperPreview();
+    }
+  }, [activeTab, uploadedImg, bwThreshold, paperPreviewBg, paperRotation, renderPaperPreview]);
 
   // Coordinate normalizer for pointer events (mouse, touch, stylus)
   const getCoordinates = (e: React.PointerEvent<HTMLCanvasElement>): Point => {
@@ -568,8 +638,11 @@ export function SignatureMakerStudio() {
       }
 
       if (activeTab === 'upload' && uploadedImg) {
-        const targetW = opts.targetW || uploadedImg.naturalWidth;
-        const targetH = opts.targetH || uploadedImg.naturalHeight;
+        const isRotated = paperRotation % 180 !== 0;
+        const naturalW = isRotated ? uploadedImg.naturalHeight : uploadedImg.naturalWidth;
+        const naturalH = isRotated ? uploadedImg.naturalWidth : uploadedImg.naturalHeight;
+        const targetW = opts.targetW || naturalW;
+        const targetH = opts.targetH || naturalH;
 
         master.width = targetW;
         master.height = targetH;
@@ -579,7 +652,13 @@ export function SignatureMakerStudio() {
           ctx.fillRect(0, 0, targetW, targetH);
         }
 
-        ctx.drawImage(uploadedImg, 0, 0, targetW, targetH);
+        ctx.save();
+        ctx.translate(targetW / 2, targetH / 2);
+        ctx.rotate((paperRotation * Math.PI) / 180);
+        const drawW = isRotated ? targetH : targetW;
+        const drawH = isRotated ? targetW : targetH;
+        ctx.drawImage(uploadedImg, -drawW / 2, -drawH / 2, drawW, drawH);
+        ctx.restore();
 
         const imgData = ctx.getImageData(0, 0, targetW, targetH);
         const data = imgData.data;
@@ -595,9 +674,9 @@ export function SignatureMakerStudio() {
               data[i + 2] = 255;
             }
           } else {
-            data[i] = 0;
-            data[i + 1] = 0;
-            data[i + 2] = 0;
+            data[i] = 15;
+            data[i + 1] = 23;
+            data[i + 2] = 42;
           }
         }
         ctx.putImageData(imgData, 0, 0);
@@ -616,6 +695,7 @@ export function SignatureMakerStudio() {
       typeSlant,
       uploadedImg,
       bwThreshold,
+      paperRotation,
     ]
   );
 
@@ -1229,39 +1309,176 @@ export function SignatureMakerStudio() {
               </span>
             </label>
           ) : (
-            <div className="space-y-4">
-              <div className="flex items-center justify-between pb-2 border-b border-slate-100">
-                <h4 className="text-sm font-black text-slate-900 flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-blue-600" />
-                  <span>Paper Shadow Stripper &amp; Transparency Tuning</span>
-                </h4>
-                <button
-                  type="button"
-                  onClick={() => uploadInputRef.current?.click()}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-blue-50 text-xs font-bold text-slate-700 hover:text-blue-700 transition-all cursor-pointer"
-                >
-                  <FileUp className="w-3.5 h-3.5" />
-                  <span>Replace Photo</span>
-                </button>
+            <div className="space-y-5">
+              {/* Top Action Bar */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+                <div className="flex items-center gap-2.5">
+                  <div className="p-2 rounded-xl bg-blue-100 text-blue-700 shrink-0">
+                    <Sparkles className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-black text-slate-900">
+                      Paper Shadow Stripper &amp; Transparency Tuning
+                    </h4>
+                    <p className="text-[11px] text-slate-500 font-medium">
+                      Real-time live preview • Moving the slider strips paper yellowing instantly
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => setPaperRotation((r) => (r + 90) % 360)}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-700 transition-all cursor-pointer active:scale-95"
+                    title="Rotate 90 degrees clockwise"
+                  >
+                    <RotateCw className="w-3.5 h-3.5" />
+                    <span>Rotate 90°</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => uploadInputRef.current?.click()}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-xs font-bold text-blue-700 transition-all cursor-pointer active:scale-95"
+                  >
+                    <FileUp className="w-3.5 h-3.5" />
+                    <span>Replace Photo</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setUploadedImg(null);
+                      setPaperRotation(0);
+                    }}
+                    className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-xs font-bold text-rose-600 transition-all cursor-pointer active:scale-95"
+                    title="Remove uploaded image"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                    <span className="hidden sm:inline">Remove</span>
+                  </button>
+                </div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/90 space-y-3">
-                <div className="space-y-1">
-                  <div className="flex items-center justify-between text-xs font-bold text-slate-700">
-                    <span>Paper Whiteness Cleanup Threshold</span>
-                    <span className="text-blue-900 font-black">{bwThreshold}</span>
+              {/* LIVE PREVIEW CANVAS CONTAINER */}
+              <div className="space-y-2">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-bold text-slate-600 px-1">
+                  <div className="flex items-center gap-2">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-800 border border-emerald-200">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                      Live Cleaned Preview
+                    </span>
+                    <span className="text-[11px] text-slate-400 font-medium">
+                      ({paperRotation % 180 !== 0 ? uploadedImg.naturalHeight : uploadedImg.naturalWidth} × {paperRotation % 180 !== 0 ? uploadedImg.naturalWidth : uploadedImg.naturalHeight} px)
+                    </span>
                   </div>
+
+                  {/* Background Mode Selector */}
+                  <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200/80 self-start sm:self-auto">
+                    <button
+                      type="button"
+                      onClick={() => setPaperPreviewBg('transparent')}
+                      className={`px-2.5 py-1 rounded-lg text-[10px] font-black transition-all cursor-pointer ${
+                        paperPreviewBg === 'transparent'
+                          ? 'bg-white text-blue-900 shadow-xs'
+                          : 'text-slate-600 hover:text-slate-900'
+                      }`}
+                    >
+                      Transparent PNG
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setPaperPreviewBg('white')}
+                      className={`px-2.5 py-1 rounded-lg text-[10px] font-black transition-all cursor-pointer ${
+                        paperPreviewBg === 'white'
+                          ? 'bg-white text-blue-900 shadow-xs'
+                          : 'text-slate-600 hover:text-slate-900'
+                      }`}
+                    >
+                      White Paper
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setPaperPreviewBg('original')}
+                      className={`px-2.5 py-1 rounded-lg text-[10px] font-black transition-all cursor-pointer ${
+                        paperPreviewBg === 'original'
+                          ? 'bg-white text-blue-900 shadow-xs'
+                          : 'text-slate-600 hover:text-slate-900'
+                      }`}
+                    >
+                      Original Photo
+                    </button>
+                  </div>
+                </div>
+
+                {/* THE CANVAS CARD */}
+                <div
+                  className={`min-h-[220px] sm:min-h-[260px] max-h-[360px] rounded-2xl border-2 border-slate-200/90 flex items-center justify-center p-4 relative overflow-hidden transition-all shadow-inner ${
+                    paperPreviewBg === 'transparent'
+                      ? 'bg-[linear-gradient(45deg,#f1f5f9_25%,transparent_25%),linear-gradient(-45deg,#f1f5f9_25%,transparent_25%),linear-gradient(45deg,transparent_75%,#f1f5f9_75%),linear-gradient(-45deg,transparent_75%,#f1f5f9_75%)] [background-size:16px_16px] [background-position:0_0,0_8px,8px_-8px,-8px_0px] bg-white'
+                      : paperPreviewBg === 'white'
+                      ? 'bg-white'
+                      : 'bg-amber-50/40'
+                  }`}
+                >
+                  <canvas
+                    ref={paperCanvasRef}
+                    className="max-h-[220px] sm:max-h-[280px] w-auto max-w-full object-contain mx-auto drop-shadow-sm select-none"
+                  />
+                </div>
+              </div>
+
+              {/* THRESHOLD SLIDER & PRESETS */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 space-y-3.5">
+                <div className="flex items-center justify-between">
+                  <div className="space-y-0.5">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-black text-slate-800">
+                        Paper Whiteness Cleanup Threshold
+                      </span>
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-black bg-blue-100 text-blue-800 border border-blue-200">
+                        {bwThreshold} / 255
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-slate-500 font-medium">
+                      Slide right to eliminate remaining grey shadows. Slide left if ink lines appear too thin.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
                   <input
                     type="range"
                     min="100"
-                    max="220"
+                    max="225"
+                    step="1"
                     value={bwThreshold}
                     onChange={(e) => setBwThreshold(parseInt(e.target.value))}
-                    className="w-full accent-blue-600 cursor-pointer"
+                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
                   />
-                  <p className="text-[11px] text-slate-500">
-                    Slide right to eliminate remaining dark paper shadows. Slide left if ink strokes appear too thin.
-                  </p>
+
+                  {/* Preset Threshold Buttons */}
+                  <div className="flex items-center gap-1.5 flex-wrap pt-1">
+                    <span className="text-[10px] font-bold text-slate-400 mr-1">Quick Presets:</span>
+                    {[
+                      { label: 'Light Paper (145)', val: 145 },
+                      { label: 'Standard Clean (165)', val: 165 },
+                      { label: 'Phone Shadows (185)', val: 185 },
+                      { label: 'Heavy Shadows (205)', val: 205 },
+                    ].map((preset) => (
+                      <button
+                        key={preset.val}
+                        type="button"
+                        onClick={() => setBwThreshold(preset.val)}
+                        className={`px-2.5 py-1 rounded-lg text-[10px] font-black transition-all cursor-pointer border ${
+                          bwThreshold === preset.val
+                            ? 'bg-blue-600 text-white border-blue-600 shadow-2xs'
+                            : 'bg-white hover:bg-slate-100 text-slate-700 border-slate-200'
+                        }`}
+                      >
+                        {preset.label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
