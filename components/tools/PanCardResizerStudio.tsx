@@ -23,6 +23,10 @@ import {
   Maximize2,
   FileText,
   FileCode,
+  Trash2,
+  RotateCcw,
+  FileUp,
+  X,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { triggerBrowserDownload } from '@/lib/download-helper';
@@ -150,6 +154,55 @@ export function PanCardResizerStudio() {
   const [isDraggingSig, setIsDraggingSig] = useState(false);
   const dragStartSig = useRef<{ x: number; y: number; offX: number; offY: number }>({ x: 0, y: 0, offX: 0, offY: 0 });
 
+  // File input refs for uploading & replacing files
+  const photoInputRef = useRef<HTMLInputElement>(null);
+  const sigInputRef = useRef<HTMLInputElement>(null);
+  const pdfInputRef = useRef<HTMLInputElement>(null);
+
+  // Reset Photo to clear file and restore fresh blank state
+  const resetPhoto = () => {
+    if (photoState.outputUrl) URL.revokeObjectURL(photoState.outputUrl);
+    setPhotoState(defaultPhotoState);
+    if (photoInputRef.current) photoInputRef.current.value = '';
+    toast.info('Photo removed. Ready to upload a new file.');
+  };
+
+  // Reset Signature to clear file and restore fresh blank state
+  const resetSignature = () => {
+    if (sigState.outputUrl) URL.revokeObjectURL(sigState.outputUrl);
+    setSigState(defaultSignatureState);
+    if (sigInputRef.current) sigInputRef.current.value = '';
+    toast.info('Signature removed. Ready to upload a new file.');
+  };
+
+  // Reset Supporting Documents PDF
+  const resetPdf = () => {
+    if (pdfOutputUrl) URL.revokeObjectURL(pdfOutputUrl);
+    setPdfFile(null);
+    setPdfOutputBlob(null);
+    setPdfOutputUrl(null);
+    setPdfOutputKB(0);
+    if (pdfInputRef.current) pdfInputRef.current.value = '';
+    toast.info('Supporting document removed.');
+  };
+
+  // Global Reset (clear all uploaded files for new customer)
+  const resetAll = () => {
+    if (photoState.outputUrl) URL.revokeObjectURL(photoState.outputUrl);
+    if (sigState.outputUrl) URL.revokeObjectURL(sigState.outputUrl);
+    if (pdfOutputUrl) URL.revokeObjectURL(pdfOutputUrl);
+    setPhotoState(defaultPhotoState);
+    setSigState(defaultSignatureState);
+    setPdfFile(null);
+    setPdfOutputBlob(null);
+    setPdfOutputUrl(null);
+    setPdfOutputKB(0);
+    if (photoInputRef.current) photoInputRef.current.value = '';
+    if (sigInputRef.current) sigInputRef.current.value = '';
+    if (pdfInputRef.current) pdfInputRef.current.value = '';
+    toast.success('All files cleared. Ready for a new fresh application!');
+  };
+
   // Load image helper
   const loadImageFromFile = (file: File): Promise<HTMLImageElement> => {
     return new Promise((resolve, reject) => {
@@ -171,8 +224,9 @@ export function PanCardResizerStudio() {
     if (!file) return;
     try {
       const img = await loadImageFromFile(file);
-      setPhotoState((prev) => ({
-        ...prev,
+      if (photoState.outputUrl) URL.revokeObjectURL(photoState.outputUrl);
+      setPhotoState({
+        ...defaultPhotoState,
         file,
         img,
         zoom: 1.0,
@@ -181,10 +235,12 @@ export function PanCardResizerStudio() {
         offsetY: 0,
         brightness: 0,
         contrast: 0,
-      }));
+      });
       toast.success('Photo loaded successfully! Adjust crop and position as needed.');
     } catch {
       toast.error('Could not load image file.');
+    } finally {
+      if (e.target) e.target.value = '';
     }
   };
 
@@ -194,8 +250,9 @@ export function PanCardResizerStudio() {
     if (!file) return;
     try {
       const img = await loadImageFromFile(file);
-      setSigState((prev) => ({
-        ...prev,
+      if (sigState.outputUrl) URL.revokeObjectURL(sigState.outputUrl);
+      setSigState({
+        ...defaultSignatureState,
         file,
         img,
         zoom: 1.0,
@@ -203,10 +260,13 @@ export function PanCardResizerStudio() {
         offsetX: 0,
         offsetY: 0,
         magicBW: true,
-      }));
+        bwThreshold: 160,
+      });
       toast.success('Signature loaded successfully! Magic B&W cleanup applied.');
     } catch {
       toast.error('Could not load signature file.');
+    } finally {
+      if (e.target) e.target.value = '';
     }
   };
 
@@ -424,6 +484,19 @@ export function PanCardResizerStudio() {
     }
   }, [renderSignature]);
 
+  // Handle PDF Supporting Document Upload
+  const handlePdfSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    if (pdfOutputUrl) URL.revokeObjectURL(pdfOutputUrl);
+    setPdfFile(f);
+    setPdfOutputBlob(null);
+    setPdfOutputUrl(null);
+    setPdfOutputKB(0);
+    toast.success('Supporting document loaded! Click Compress to format under 300 KB.');
+    if (e.target) e.target.value = '';
+  };
+
   // Handle PDF Documents Compression (<300KB)
   const handleCompressPdf = async () => {
     if (!pdfFile) {
@@ -531,27 +604,41 @@ export function PanCardResizerStudio() {
           </button>
         </div>
 
-        {/* Portal Standard Selector */}
-        <div className="flex items-center gap-1.5 bg-slate-100/90 p-1 rounded-xl text-[11px] font-bold text-slate-700">
-          <span className="text-[10px] text-slate-400 font-extrabold uppercase px-1.5">Portal:</span>
-          <button
-            type="button"
-            onClick={() => setPortalPreset('nsdl')}
-            className={`px-2 py-0.5 rounded-lg transition-all ${
-              portalPreset === 'nsdl' ? 'bg-white text-amber-900 font-black shadow-2xs' : 'text-slate-600'
-            }`}
-          >
-            NSDL Protean
-          </button>
-          <button
-            type="button"
-            onClick={() => setPortalPreset('utiitsl')}
-            className={`px-2 py-0.5 rounded-lg transition-all ${
-              portalPreset === 'utiitsl' ? 'bg-white text-amber-900 font-black shadow-2xs' : 'text-slate-600'
-            }`}
-          >
-            UTIITSL
-          </button>
+        {/* Portal Standard Selector & Global Reset Button */}
+        <div className="flex flex-wrap items-center gap-2">
+          <div className="flex items-center gap-1.5 bg-slate-100/90 p-1 rounded-xl text-[11px] font-bold text-slate-700">
+            <span className="text-[10px] text-slate-400 font-extrabold uppercase px-1.5">Portal:</span>
+            <button
+              type="button"
+              onClick={() => setPortalPreset('nsdl')}
+              className={`px-2 py-0.5 rounded-lg transition-all ${
+                portalPreset === 'nsdl' ? 'bg-white text-amber-900 font-black shadow-2xs' : 'text-slate-600'
+              }`}
+            >
+              NSDL Protean
+            </button>
+            <button
+              type="button"
+              onClick={() => setPortalPreset('utiitsl')}
+              className={`px-2 py-0.5 rounded-lg transition-all ${
+                portalPreset === 'utiitsl' ? 'bg-white text-amber-900 font-black shadow-2xs' : 'text-slate-600'
+              }`}
+            >
+              UTIITSL
+            </button>
+          </div>
+
+          {(photoState.img || sigState.img || pdfFile) && (
+            <button
+              type="button"
+              onClick={resetAll}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 transition-all cursor-pointer shadow-2xs active:scale-95"
+              title="Clear all uploaded files to start a fresh customer application"
+            >
+              <RotateCcw className="w-3.5 h-3.5 text-rose-600" />
+              <span>Reset All Files</span>
+            </button>
+          )}
         </div>
       </div>
 
@@ -575,23 +662,56 @@ export function PanCardResizerStudio() {
               </p>
             </div>
 
-            {/* Live Compliance Badges */}
-            <div className="flex flex-wrap items-center gap-1.5">
-              <span className="text-[10px] font-black px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
-                ✓ 213 × 213 px
-              </span>
-              <span className="text-[10px] font-black px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
-                ✓ 300 DPI Header
-              </span>
-              <span className="text-[10px] font-black px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
-                ✓ &lt; 50 KB Safe
-              </span>
+            {/* Live Compliance Badges & File Actions */}
+            <div className="flex flex-wrap items-center gap-2">
+              <div className="flex items-center gap-1.5">
+                <span className="text-[10px] font-black px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
+                  ✓ 213 × 213 px
+                </span>
+                <span className="text-[10px] font-black px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
+                  ✓ 300 DPI Header
+                </span>
+                <span className="text-[10px] font-black px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
+                  ✓ &lt; 50 KB Safe
+                </span>
+              </div>
+
+              {photoState.img && (
+                <div className="flex items-center gap-1.5 pl-1 sm:border-l sm:border-slate-200">
+                  <button
+                    type="button"
+                    onClick={() => photoInputRef.current?.click()}
+                    className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 text-xs font-bold transition-all cursor-pointer shadow-2xs active:scale-95"
+                    title="Replace with another photo"
+                  >
+                    <FileUp className="w-3.5 h-3.5 text-amber-700" />
+                    <span>Replace Photo</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={resetPhoto}
+                    className="flex items-center gap-1 px-2 py-1 rounded-lg bg-slate-50 hover:bg-rose-50 text-slate-600 hover:text-rose-700 border border-slate-200 hover:border-rose-300 text-xs font-bold transition-all cursor-pointer shadow-2xs active:scale-95"
+                    title="Remove current photo"
+                  >
+                    <Trash2 className="w-3.5 h-3.5 text-rose-500" />
+                    <span>Clear</span>
+                  </button>
+                </div>
+              )}
             </div>
           </div>
 
+          {/* Hidden Master Photo File Input */}
+          <input
+            ref={photoInputRef}
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            onChange={handlePhotoSelect}
+            className="hidden"
+          />
+
           {!photoState.img ? (
             <label className="flex flex-col items-center justify-center p-8 sm:p-12 border-2 border-dashed border-amber-300 hover:border-amber-500 rounded-3xl bg-amber-50/30 hover:bg-amber-50/60 transition-all cursor-pointer group text-center space-y-3">
-              <input type="file" accept="image/jpeg,image/png,image/webp" onChange={handlePhotoSelect} className="hidden" />
               <div className="w-14 h-14 rounded-2xl bg-amber-100 group-hover:bg-amber-200 text-amber-700 flex items-center justify-center shadow-xs transition-colors">
                 <UploadCloud className="w-7 h-7" />
               </div>
@@ -640,6 +760,27 @@ export function PanCardResizerStudio() {
                 <p className="text-[11px] text-slate-500 font-semibold text-center">
                   💡 Drag image to center face. Use zoom slider to fit within frame.
                 </p>
+
+                {/* Quick Replace & Clear Buttons under canvas */}
+                <div className="flex items-center gap-2 pt-1">
+                  <button
+                    type="button"
+                    onClick={() => photoInputRef.current?.click()}
+                    className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-amber-100 hover:text-amber-950 border border-slate-200 hover:border-amber-300 text-xs font-bold text-slate-700 flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs active:scale-95"
+                  >
+                    <FileUp className="w-3.5 h-3.5 text-amber-600" />
+                    <span>Replace with New File</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={resetPhoto}
+                    className="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-rose-50 hover:text-rose-700 border border-slate-200 hover:border-rose-300 text-xs font-bold text-slate-600 flex items-center gap-1 transition-all cursor-pointer shadow-2xs active:scale-95"
+                    title="Clear photo to upload fresh file"
+                  >
+                    <Trash2 className="w-3.5 h-3.5 text-rose-500" />
+                    <span>Clear</span>
+                  </button>
+                </div>
               </div>
 
               {/* Controls & Output Panel (7 Cols) */}
@@ -692,9 +833,10 @@ export function PanCardResizerStudio() {
                       type="button"
                       onClick={() => setPhotoState((p) => ({ ...p, zoom: 1.0, rotation: 0, offsetX: 0, offsetY: 0, brightness: 0, contrast: 0 }))}
                       className="px-3 py-1.5 rounded-xl bg-white hover:bg-slate-100 border border-slate-200 text-xs font-bold text-slate-600 flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs active:scale-95 ml-auto"
+                      title="Reset zoom, rotation, and brightness without removing image"
                     >
-                      <RefreshCw className="w-3.5 h-3.5" />
-                      <span>Reset</span>
+                      <RefreshCw className="w-3.5 h-3.5 text-slate-500" />
+                      <span>Reset Sliders</span>
                     </button>
                   </div>
 
@@ -796,22 +938,56 @@ export function PanCardResizerStudio() {
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-1.5">
-              <span className="text-[10px] font-black px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
-                ✓ 444 × 205 px
-              </span>
-              <span className="text-[10px] font-black px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
-                ✓ 300 DPI Header
-              </span>
-              <span className="text-[10px] font-black px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
-                ✓ Magic B&amp;W Clean
-              </span>
+            {/* Live Compliance Badges & File Actions */}
+            <div className="flex flex-wrap items-center gap-2">
+              <div className="flex items-center gap-1.5">
+                <span className="text-[10px] font-black px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
+                  ✓ 444 × 205 px
+                </span>
+                <span className="text-[10px] font-black px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
+                  ✓ 300 DPI Header
+                </span>
+                <span className="text-[10px] font-black px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
+                  ✓ Magic B&amp;W Clean
+                </span>
+              </div>
+
+              {sigState.img && (
+                <div className="flex items-center gap-1.5 pl-1 sm:border-l sm:border-slate-200">
+                  <button
+                    type="button"
+                    onClick={() => sigInputRef.current?.click()}
+                    className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 text-xs font-bold transition-all cursor-pointer shadow-2xs active:scale-95"
+                    title="Replace with another signature"
+                  >
+                    <FileUp className="w-3.5 h-3.5 text-amber-700" />
+                    <span>Replace Signature</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={resetSignature}
+                    className="flex items-center gap-1 px-2 py-1 rounded-lg bg-slate-50 hover:bg-rose-50 text-slate-600 hover:text-rose-700 border border-slate-200 hover:border-rose-300 text-xs font-bold transition-all cursor-pointer shadow-2xs active:scale-95"
+                    title="Remove current signature"
+                  >
+                    <Trash2 className="w-3.5 h-3.5 text-rose-500" />
+                    <span>Clear</span>
+                  </button>
+                </div>
+              )}
             </div>
           </div>
 
+          {/* Hidden Master Signature File Input */}
+          <input
+            ref={sigInputRef}
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            onChange={handleSignatureSelect}
+            className="hidden"
+          />
+
           {!sigState.img ? (
             <label className="flex flex-col items-center justify-center p-8 sm:p-12 border-2 border-dashed border-amber-300 hover:border-amber-500 rounded-3xl bg-amber-50/30 hover:bg-amber-50/60 transition-all cursor-pointer group text-center space-y-3">
-              <input type="file" accept="image/jpeg,image/png,image/webp" onChange={handleSignatureSelect} className="hidden" />
               <div className="w-14 h-14 rounded-2xl bg-amber-100 group-hover:bg-amber-200 text-amber-700 flex items-center justify-center shadow-xs transition-colors">
                 <UploadCloud className="w-7 h-7" />
               </div>
@@ -849,6 +1025,27 @@ export function PanCardResizerStudio() {
                 <p className="text-[11px] text-slate-500 font-semibold text-center">
                   💡 Drag to center signature strokes. Toggle Magic B&amp;W to erase grey paper tint.
                 </p>
+
+                {/* Quick Replace & Clear Buttons under canvas */}
+                <div className="flex items-center gap-2 pt-1">
+                  <button
+                    type="button"
+                    onClick={() => sigInputRef.current?.click()}
+                    className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-amber-100 hover:text-amber-950 border border-slate-200 hover:border-amber-300 text-xs font-bold text-slate-700 flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs active:scale-95"
+                  >
+                    <FileUp className="w-3.5 h-3.5 text-amber-600" />
+                    <span>Replace with New File</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={resetSignature}
+                    className="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-rose-50 hover:text-rose-700 border border-slate-200 hover:border-rose-300 text-xs font-bold text-slate-600 flex items-center gap-1 transition-all cursor-pointer shadow-2xs active:scale-95"
+                    title="Clear signature to upload fresh file"
+                  >
+                    <Trash2 className="w-3.5 h-3.5 text-rose-500" />
+                    <span>Clear</span>
+                  </button>
+                </div>
               </div>
 
               {/* Controls (6 Cols) */}
@@ -900,9 +1097,10 @@ export function PanCardResizerStudio() {
                       type="button"
                       onClick={() => setSigState((s) => ({ ...s, zoom: 1.0, rotation: 0, offsetX: 0, offsetY: 0, magicBW: true, bwThreshold: 160 }))}
                       className="px-3 py-1.5 rounded-xl bg-white hover:bg-slate-100 border border-slate-200 text-xs font-bold text-slate-600 flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs active:scale-95 ml-auto"
+                      title="Reset signature zoom and rotation"
                     >
-                      <RefreshCw className="w-3.5 h-3.5" />
-                      <span>Reset</span>
+                      <RefreshCw className="w-3.5 h-3.5 text-slate-500" />
+                      <span>Reset Sliders</span>
                     </button>
                   </div>
 
@@ -1031,22 +1229,48 @@ export function PanCardResizerStudio() {
               </p>
             </div>
 
-            <span className="text-[10px] font-black px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
-              Target: &lt; 300 KB
-            </span>
+            {/* Target Badge & Actions */}
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-[10px] font-black px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
+                Target: &lt; 300 KB
+              </span>
+
+              {pdfFile && (
+                <div className="flex items-center gap-1.5 pl-1 sm:border-l sm:border-slate-200">
+                  <button
+                    type="button"
+                    onClick={() => pdfInputRef.current?.click()}
+                    className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 text-xs font-bold transition-all cursor-pointer shadow-2xs active:scale-95"
+                    title="Replace with another PDF"
+                  >
+                    <FileUp className="w-3.5 h-3.5 text-amber-700" />
+                    <span>Replace PDF</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={resetPdf}
+                    className="flex items-center gap-1 px-2 py-1 rounded-lg bg-slate-50 hover:bg-rose-50 text-slate-600 hover:text-rose-700 border border-slate-200 hover:border-rose-300 text-xs font-bold transition-all cursor-pointer shadow-2xs active:scale-95"
+                    title="Remove current PDF"
+                  >
+                    <Trash2 className="w-3.5 h-3.5 text-rose-500" />
+                    <span>Clear</span>
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
+
+          {/* Hidden Master PDF File Input */}
+          <input
+            ref={pdfInputRef}
+            type="file"
+            accept="application/pdf"
+            onChange={handlePdfSelect}
+            className="hidden"
+          />
 
           {!pdfFile ? (
             <label className="flex flex-col items-center justify-center p-8 sm:p-12 border-2 border-dashed border-amber-300 hover:border-amber-500 rounded-3xl bg-amber-50/30 hover:bg-amber-50/60 transition-all cursor-pointer group text-center space-y-3">
-              <input
-                type="file"
-                accept="application/pdf"
-                onChange={(e) => {
-                  const f = e.target.files?.[0];
-                  if (f) setPdfFile(f);
-                }}
-                className="hidden"
-              />
               <div className="w-14 h-14 rounded-2xl bg-amber-100 group-hover:bg-amber-200 text-amber-700 flex items-center justify-center shadow-xs transition-colors">
                 <UploadCloud className="w-7 h-7" />
               </div>
@@ -1060,7 +1284,7 @@ export function PanCardResizerStudio() {
             </label>
           ) : (
             <div className="space-y-4">
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/90 flex items-center justify-between gap-3">
+              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/90 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-xs">
                     PDF
@@ -1071,18 +1295,24 @@ export function PanCardResizerStudio() {
                   </div>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={() => {
-                    setPdfFile(null);
-                    setPdfOutputBlob(null);
-                    if (pdfOutputUrl) URL.revokeObjectURL(pdfOutputUrl);
-                    setPdfOutputUrl(null);
-                  }}
-                  className="text-xs font-bold text-slate-500 hover:text-slate-800"
-                >
-                  Change
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => pdfInputRef.current?.click()}
+                    className="px-3 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-200 text-xs font-bold text-amber-900 flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs active:scale-95"
+                  >
+                    <FileUp className="w-3.5 h-3.5 text-amber-700" />
+                    <span>Replace File</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={resetPdf}
+                    className="px-3 py-1.5 rounded-xl bg-white hover:bg-rose-50 border border-slate-200 hover:border-rose-300 text-xs font-bold text-slate-600 hover:text-rose-700 flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs active:scale-95"
+                  >
+                    <Trash2 className="w-3.5 h-3.5 text-rose-500" />
+                    <span>Remove</span>
+                  </button>
+                </div>
               </div>
 
               <button
