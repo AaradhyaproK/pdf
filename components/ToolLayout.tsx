@@ -63,6 +63,8 @@ function getSidebarTools(slug: string, currentPath: string = '') {
     pool = [
       { name: 'Compress PDF Online', href: '/pdf/compress', desc: 'Slash document size up to 80%', badge: 'Popular' },
       { name: 'Compress PDF to 200KB', href: '/pdf/compress-to-200kb', desc: 'Exam & Sarkari portal target size', badge: 'Popular' },
+      { name: 'Compress PDF to 300KB', href: '/pdf/compress-to-300kb', desc: 'UPSC OTR & State PSC target size', badge: '300KB' },
+      { name: 'Compress PDF to 500KB', href: '/pdf/compress-to-500kb', desc: 'Passport Sewa & court e-filing', badge: '500KB' },
       { name: 'Merge Multiple PDFs', href: '/pdf/merge', desc: 'Combine multiple documents into one', badge: 'Fast' },
       { name: 'Edit PDF Online', href: '/pdf/edit', desc: 'Annotate, sign, whiteout & draw', badge: 'Interactive' },
       { name: 'Split PDF Pages', href: '/pdf/split', desc: 'Extract custom page ranges & sheets', badge: 'Extract' },

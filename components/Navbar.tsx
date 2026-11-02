@@ -86,6 +86,8 @@ const PDF_TOOLS = [
   { name: 'Password Protect PDF', slug: '/pdf/protect', desc: 'Encrypt PDF with password', icon: Lock, badge: 'Secure', category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'Remove PDF Password', slug: '/pdf/remove-password', desc: 'Unlock and remove password from PDF', icon: Unlock, badge: 'Unlock', category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'Compress PDF to 100KB', slug: '/pdf/compress-to-100kb', desc: 'Reduce PDF under 100KB for exam & govt portals', icon: Minimize2, badge: '100KB', category: 'pdf', catLabel: 'PDF Studio', keywords: ['compress pdf to 100kb', '100kb', 'sarkari', 'upsc', 'ssc', 'marksheet'] },
+  { name: 'Compress PDF to 300KB', slug: '/pdf/compress-to-300kb', desc: 'Target 300KB for UPSC OTR, State PSC & court e-filing', icon: Minimize2, badge: '300KB', category: 'pdf', catLabel: 'PDF Studio', keywords: ['compress pdf to 300kb', '300kb', 'upsc', 'otr', 'court', 'psc'] },
+  { name: 'Compress PDF to 500KB', slug: '/pdf/compress-to-500kb', desc: 'Target 500KB for Passport Sewa & high court filings', icon: Minimize2, badge: '500KB', category: 'pdf', catLabel: 'PDF Studio', keywords: ['compress pdf to 500kb', '500kb', 'passport sewa', 'court', 'admission'] },
   { name: 'Compress PDF to 1MB', slug: '/pdf/compress-to-1mb', desc: 'Compress multi-page PDF under 1MB for email attachments', icon: Minimize2, badge: '1MB', category: 'pdf', catLabel: 'PDF Studio', keywords: ['compress pdf to 1mb', '1mb', 'email', 'attachment', 'admission'] },
   { name: 'PDF to Word (DOCX)', slug: '/pdf/pdf-to-word', desc: 'Convert PDF to editable Word document', icon: FileText, badge: 'Popular', category: 'pdf', catLabel: 'PDF Studio' },
   { name: 'Word to PDF Converter', slug: '/pdf/word-to-pdf', desc: 'Convert Word DOCX to crisp PDF', icon: FileCode, badge: 'New', category: 'pdf', catLabel: 'PDF Studio' },
@@ -850,6 +852,64 @@ export function Navbar() {
             </div>
           </div>
 
+          {/* CSC & Cyber Cafe Toolkit Mobile Card */}
+          <div className="p-3.5 rounded-2xl bg-amber-50/80 border border-amber-200/90 space-y-2.5">
+            <div className="flex items-center justify-between">
+              <Link
+                href="/csc-cyber-cafe-tools"
+                onClick={closeAllNavbars}
+                className="flex items-center gap-2 group cursor-pointer"
+              >
+                <div className="p-2 rounded-xl bg-amber-100 text-amber-800 border border-amber-200">
+                  <Printer className="w-4 h-4" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-black text-slate-900 group-hover:text-amber-800 transition-colors">
+                    CSC &amp; Cyber Cafe Hub
+                  </h4>
+                  <p className="text-[10px] text-slate-600 font-medium">Aadhaar PVC, PAN 213x213 &amp; Marksheets</p>
+                </div>
+              </Link>
+              <Link
+                href="/csc-cyber-cafe-tools"
+                onClick={closeAllNavbars}
+                className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-white text-amber-800 border border-amber-200 shadow-2xs hover:bg-amber-50"
+              >
+                Open Hub →
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 gap-1.5 pt-1 border-t border-amber-200/60">
+              <Link
+                href="/tools/aadhaar-card-print"
+                onClick={closeAllNavbars}
+                className="p-2 rounded-xl bg-white hover:bg-amber-50/60 border border-amber-100 text-[11px] font-bold text-slate-800 truncate block active:scale-98 transition-all"
+              >
+                Aadhaar A4 &amp; PVC Print
+              </Link>
+              <Link
+                href="/tools/pan-card-photo-resizer"
+                onClick={closeAllNavbars}
+                className="p-2 rounded-xl bg-white hover:bg-amber-50/60 border border-amber-100 text-[11px] font-bold text-slate-800 truncate block active:scale-98 transition-all"
+              >
+                PAN Photo 213x213
+              </Link>
+              <Link
+                href="/pdf/combine-marksheets"
+                onClick={closeAllNavbars}
+                className="p-2 rounded-xl bg-white hover:bg-amber-50/60 border border-amber-100 text-[11px] font-bold text-slate-800 truncate block active:scale-98 transition-all"
+              >
+                Marksheets &lt;500KB
+              </Link>
+              <Link
+                href="/tools/signature-resizer-10-to-20kb"
+                onClick={closeAllNavbars}
+                className="p-2 rounded-xl bg-white hover:bg-amber-50/60 border border-amber-100 text-[11px] font-bold text-slate-800 truncate block active:scale-98 transition-all"
+              >
+                Signature 10-20KB
+              </Link>
+            </div>
+          </div>
+
           {/* Guides & Blog Mobile Card */}
           <div className="p-3.5 rounded-2xl bg-indigo-50/70 border border-indigo-200/80 space-y-2.5">
             <div className="flex items-center justify-between">
@@ -1254,6 +1314,25 @@ export function Navbar() {
             >
               <BookOpen className="w-4 h-4 text-slate-700 shrink-0" />
               <span>Guides &amp; Blog</span>
+            </Link>
+          </div>
+
+          {/* CSC & Cyber Cafe Fast Toolkit */}
+          <div className="relative py-4">
+            <Link
+              href="/csc-cyber-cafe-tools"
+              onClick={closeAllNavbars}
+              className={`flex items-center gap-1.5 px-2.5 lg:px-3 py-1.5 rounded-xl whitespace-nowrap shrink-0 transition-all cursor-pointer ${
+                isActive('/csc-cyber-cafe-tools')
+                  ? 'bg-amber-500/15 text-amber-950 font-extrabold border border-amber-500/30 backdrop-blur-sm'
+                  : 'hover:bg-amber-50/80 hover:text-amber-950 text-slate-700'
+              }`}
+            >
+              <Printer className="w-4 h-4 text-amber-600 shrink-0" />
+              <span>CSC &amp; Cafe</span>
+              <span className="text-[9px] font-black px-1.5 py-0.2 rounded-full bg-amber-100 text-amber-800 border border-amber-300/80 shadow-2xs">
+                Toolkit
+              </span>
             </Link>
           </div>
         </nav>

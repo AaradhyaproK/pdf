@@ -12,12 +12,13 @@ import {
   Wrench,
   Mail,
   ExternalLink,
+  Printer,
 } from 'lucide-react';
 
 export function Footer() {
-  const [openSection, setOpenSection] = useState<'pdf' | 'image' | 'company' | null>('pdf');
+  const [openSection, setOpenSection] = useState<'pdf' | 'image' | 'csc' | 'company' | null>('pdf');
 
-  const toggleSection = (section: 'pdf' | 'image' | 'company') => {
+  const toggleSection = (section: 'pdf' | 'image' | 'csc' | 'company') => {
     setOpenSection(openSection === section ? null : section);
   };
 
@@ -132,6 +133,37 @@ export function Footer() {
             )}
           </div>
 
+          {/* CSC & Govt Tools Accordion */}
+          <div className="border border-slate-200/90 rounded-2xl bg-white overflow-hidden shadow-2xs">
+            <button
+              onClick={() => toggleSection('csc')}
+              className="w-full p-4 flex items-center justify-between text-left font-black text-slate-900 bg-amber-50/40 hover:bg-amber-50/70 transition-colors"
+            >
+              <div className="flex items-center gap-2.5">
+                <div className="p-2 rounded-xl bg-amber-50 text-amber-700 border border-amber-200">
+                  <Printer className="w-4 h-4" />
+                </div>
+                <span className="text-xs font-black uppercase tracking-wider text-slate-900">CSC &amp; Govt Portals</span>
+                <span className="text-[10px] bg-amber-100 text-amber-800 font-extrabold px-2 py-0.5 rounded-full">Toolkit</span>
+              </div>
+              <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${openSection === 'csc' ? 'rotate-180 text-amber-700' : ''}`} />
+            </button>
+            {openSection === 'csc' && (
+              <div className="p-4 bg-white border-t border-slate-100 grid grid-cols-1 gap-2 animate-in fade-in duration-150">
+                <Link href="/csc-cyber-cafe-tools" className="p-2 rounded-xl text-xs font-bold text-amber-800 hover:bg-amber-50 transition-colors">CSC &amp; Cyber Cafe Hub →</Link>
+                <Link href="/govt-job-tools" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Govt Job Exam Tools Hub</Link>
+                <Link href="/tools/aadhaar-card-print" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Aadhaar Card Print (A4 &amp; PVC)</Link>
+                <Link href="/tools/pan-card-photo-resizer" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">PAN Photo Resizer (213x213)</Link>
+                <Link href="/tools/signature-resizer-10-to-20kb" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Signature Resizer 10 to 20KB</Link>
+                <Link href="/pdf/combine-marksheets" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Combine Marksheets (&lt;500KB)</Link>
+                <Link href="/tools/photo-name-date-generator" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Photo Name &amp; Date Stamp</Link>
+                <Link href="/tools/ssc-photo-resizer" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">SSC Photo Resizer (20-50KB)</Link>
+                <Link href="/pdf/compress-to-200kb" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress PDF to 200KB</Link>
+                <Link href="/pdf/mask-aadhaar" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Mask Aadhaar Card (Offline)</Link>
+              </div>
+            )}
+          </div>
+
           {/* Company & Legal Accordion */}
           <div className="border border-slate-200/90 rounded-2xl bg-white overflow-hidden shadow-2xs">
             <button
@@ -164,10 +196,10 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Desktop 4-Column Footer Navigation (Unified & Standardized) */}
-        <div className="hidden sm:grid sm:grid-cols-2 md:grid-cols-4 gap-8 lg:gap-10">
+        {/* Desktop 5-Column Footer Navigation (Unified & Standardized) */}
+        <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6">
           {/* Brand Column */}
-          <div className="space-y-4 md:col-span-1">
+          <div className="space-y-4 sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-2">
               <img src="/filezenith-logo.png" alt="FileZenith Logo" className="w-8 h-8 object-contain" />
               <span className="font-extrabold text-xl text-slate-900 tracking-tight">
@@ -287,6 +319,30 @@ export function Footer() {
               <li><Link href="/image/remove-background" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">AI Background Remover</Link></li>
               <li><Link href="/image/convert-heic" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Apple HEIC to JPG</Link></li>
               <li><Link href="/image/resize" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Resize Image (Pixels / %)</Link></li>
+            </ul>
+          </div>
+
+          {/* CSC & Govt Portals Links (Dedicated Column) */}
+          <div className="space-y-3.5">
+            <h4 className="text-xs font-black uppercase tracking-wider text-slate-900 flex items-center gap-1.5">
+              <span>CSC &amp; Govt Portals</span>
+              <span className="text-[9px] bg-amber-100 text-amber-800 font-extrabold px-1.5 py-0.2 rounded-full border border-amber-200">Hub</span>
+            </h4>
+            <ul className="space-y-2 text-xs">
+              <li><Link href="/csc-cyber-cafe-tools" className="text-amber-800 hover:text-amber-950 font-bold transition-colors">CSC &amp; Cyber Cafe Hub →</Link></li>
+              <li><Link href="/govt-job-tools" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Govt Job Exam Tools Hub</Link></li>
+              <li><Link href="/tools/aadhaar-card-print" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Aadhaar Card Print (A4 &amp; PVC)</Link></li>
+              <li><Link href="/tools/pan-card-photo-resizer" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">PAN Photo Resizer (213x213)</Link></li>
+              <li><Link href="/tools/signature-resizer-10-to-20kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Signature Resizer 10 to 20KB</Link></li>
+              <li><Link href="/pdf/combine-marksheets" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Combine Marksheets (&lt;500KB)</Link></li>
+              <li><Link href="/tools/photo-name-date-generator" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Photo Name &amp; Date Stamp</Link></li>
+              <li><Link href="/tools/ssc-photo-resizer" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">SSC Photo Resizer (20-50KB)</Link></li>
+              <li><Link href="/tools/photo-signature-joiner" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Photo &amp; Signature Joiner</Link></li>
+              <li><Link href="/tools/clean-black-white-signature" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Clean B&amp;W Signature Scan</Link></li>
+              <li><Link href="/tools/upsc-otr-photo-resizer" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">UPSC OTR Photo Resizer</Link></li>
+              <li><Link href="/pdf/compress-to-200kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress PDF to 200KB</Link></li>
+              <li><Link href="/pdf/compress-to-100kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress PDF to 100KB</Link></li>
+              <li><Link href="/pdf/mask-aadhaar" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Mask Aadhaar Card (Offline)</Link></li>
             </ul>
           </div>
 

@@ -51,6 +51,8 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
           { name: 'Compress PDF', slug: '/pdf/compress', description: 'Universal PDF compressor to shrink file size up to 80% without losing text sharpness or quality.', isPopular: true, badge: 'Popular', iconName: 'Minimize2' },
           { name: 'Compress PDF to 100KB', slug: '/pdf/compress-to-100kb', description: 'Target 100KB PDF compressor for sarkari exam, UPSC, SSC, and state recruitment portals.', isPopular: true, badge: 'Target 100KB', iconName: 'Minimize2' },
           { name: 'Compress PDF to 200KB', slug: '/pdf/compress-to-200kb', description: 'Target 200KB compressor for college admissions, job applications & visa portals.', isPopular: true, badge: 'Target 200KB', iconName: 'Minimize2' },
+          { name: 'Compress PDF to 300KB', slug: '/pdf/compress-to-300kb', description: 'Target 300KB compressor for UPSC OTR, State PSC forms & judicial e-filing.', isPopular: true, badge: 'UPSC 300KB', iconName: 'Minimize2' },
+          { name: 'Compress PDF to 500KB', slug: '/pdf/compress-to-500kb', description: 'Target 500KB compressor for Passport Sewa, High Courts & university submissions.', isPopular: true, badge: 'Target 500KB', iconName: 'Minimize2' },
           { name: 'Compress PDF to 1MB', slug: '/pdf/compress-to-1mb', description: 'Compress multi-page PDFs under 1MB for email attachments & corporate portal uploads.', isPopular: true, badge: 'Target 1MB', iconName: 'Minimize2' }
         ]
       },
@@ -1233,6 +1235,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
       }
     ],
     relatedCategories: [
+      { name: 'CSC & Cyber Cafe Tools', slug: '/csc-cyber-cafe-tools', desc: 'Aadhaar PVC print, marksheets & PAN 213x213.' },
       { name: 'Image Tools', slug: '/image-tools', desc: 'Compress, crop, and convert images.' },
       { name: 'PDF Tools', slug: '/pdf-tools', desc: 'Merge, split, and compress PDFs.' },
       { name: 'Daily Utilities', slug: '/utility', desc: 'Age, tax, and salary calculators.' }
@@ -1297,6 +1300,121 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
     relatedCategories: [
       { name: 'Image Tools', slug: '/image-tools', desc: 'Image compression and conversion.' },
       { name: 'PDF Tools', slug: '/pdf-tools', desc: 'Merge and split PDF files.' }
+    ]
+  },
+
+  'csc-cyber-cafe-tools': {
+    slug: 'csc-cyber-cafe-tools',
+    title: 'CSC & Cyber Cafe Fast Toolkit: 1-Click Aadhaar Print, PAN 213x213, Marksheet PDF Merger & Exam Resizers',
+    metaTitle: 'CSC & Cyber Cafe Fast Toolkit (Aadhaar Print, PAN 213x213, Marksheets) | FileZenith',
+    metaDescription: 'Essential daily toolkit for CSC VLEs & Cyber Cafe operators. 1-Click e-Aadhaar A4 & PVC Print, PAN Card 213x213 Cropper, Marksheets PDF Merger under 500KB, Photo & Signature Joiner, SSC DOP Date Stamp, and 10-20KB Signature Resizer.',
+    h1: 'CSC & Cyber Cafe Daily Fast Toolkit',
+    intro: 'High-speed daily workstation for CSC VLEs, Jan Seva Kendra operators, and Cyber Cafe owners. Format customer photos, resize signatures, merge educational marksheets under 500KB, crop e-Aadhaar for instant PVC / A4 printing, and prepare sarkari exam forms in seconds with 100% private in-browser processing.',
+    subgroups: [
+      {
+        title: 'Daily Customer ID & Card Printing',
+        description: 'Instant formatting for Aadhaar cards, PAN card photos, and identity documents without Photoshop.',
+        tools: [
+          { name: 'Aadhaar Card Print Tool (A4 & PVC)', slug: '/tools/aadhaar-card-print', description: 'Crop e-Aadhaar front & back with exact 85.6x54mm dimensions for PVC card printers and 5-copy A4 sheets.', isPopular: true, badge: 'A4 & PVC', iconName: 'Printer' },
+          { name: 'PAN Card Photo Resizer (213x213)', slug: '/tools/pan-card-photo-resizer', description: 'NSDL & UTIITSL standard 213x213 pixels, 300 DPI, under 50KB JPEG photo crop.', isPopular: true, badge: 'NSDL & UTI', iconName: 'UserCheck' },
+          { name: 'Mask Aadhaar Card', slug: '/pdf/mask-aadhaar', description: 'Conceal the first 8 digits (XXXX-XXXX-1234) offline for customer KYC & bank compliance.', isPopular: true, badge: 'UIDAI Ready', iconName: 'ShieldCheck' },
+          { name: 'Remove PDF Password', slug: '/pdf/remove-password', description: 'Instantly unlock password-protected e-Aadhaar PDFs, bank statements & salary slips in the browser.', isPopular: true, badge: 'Instant Unlock', iconName: 'Unlock' },
+          { name: 'Passport Photo Maker', slug: '/image/passport-maker', description: 'Standard 3.5x4.5cm passport photo crop with printable 8-photo grid for customer photo sheets.', isPopular: true, badge: '3.5x4.5cm', iconName: 'UserCheck' }
+        ]
+      },
+      {
+        title: 'Govt Exam Photo & Signature Resizers',
+        description: 'Meet strict sarkari recruitment portal KB requirements for SSC, UPSC, IBPS, and State PSCs.',
+        tools: [
+          { name: 'Signature Resizer 10 to 20KB', slug: '/tools/signature-resizer-10-to-20kb', description: 'Resize signature strictly between 10KB and 20KB with Magic B&W cleanup for dirty phone photos.', isPopular: true, badge: '10-20KB Safe', iconName: 'Stamp' },
+          { name: 'Photo & Signature Joiner', slug: '/tools/photo-signature-joiner', description: 'Merge customer photo (top) and signature (bottom) into one single file under 50KB for single-upload forms.', isPopular: true, badge: 'Single File', iconName: 'Combine' },
+          { name: 'Photo Name & Date Stamp Generator', slug: '/tools/photo-name-date-generator', description: 'Add candidate full name and Date of Photo (DOP) on white bottom strip without Photoshop.', isPopular: true, badge: 'SSC & Police', iconName: 'Calendar' },
+          { name: 'SSC Photo Resizer (20-50KB)', slug: '/tools/ssc-photo-resizer', description: '3.5x4.5cm photo (20-50KB) with mandatory name & date stamp for SSC CGL, CHSL, MTS & GD.', isPopular: true, badge: 'SSC 20-50KB', iconName: 'UserCheck' },
+          { name: 'Clean Black & White Signature', slug: '/tools/clean-black-white-signature', description: 'Turn phone camera shadow signatures on yellow paper into crisp pure white background black ink.', isPopular: false, badge: 'Magic B&W', iconName: 'Stamp' },
+          { name: 'UPSC OTR Photo Resizer (350x350)', slug: '/tools/upsc-otr-photo-resizer', description: 'Official square 350x350 pixel format (20-300KB) for UPSC One Time Registration.', isPopular: false, badge: 'OTR Square', iconName: 'UserCheck' }
+        ]
+      },
+      {
+        title: 'Customer Marksheet & Certificate PDF Preparation',
+        description: 'Merge and shrink multi-page documents to pass portal upload checks on the first attempt.',
+        tools: [
+          { name: 'Combine Marksheets into PDF (<500KB)', slug: '/pdf/combine-marksheets', description: 'Merge 10th, 12th & Degree certificates into 1 uniform A4 PDF strictly under 500KB.', isPopular: true, badge: 'College Ready', iconName: 'GraduationCap' },
+          { name: 'Compress PDF to 200KB', slug: '/pdf/compress-to-200kb', description: 'Shrink admission & caste certificate PDFs strictly under 200KB while keeping text crisp.', isPopular: true, badge: 'Govt Form Preset', iconName: 'Minimize2' },
+          { name: 'Compress PDF to 300KB', slug: '/pdf/compress-to-300kb', description: 'Compress documents under 300KB for UPSC OTR and State PSC recruitment portals.', isPopular: true, badge: 'UPSC 300KB', iconName: 'Minimize2' },
+          { name: 'Compress PDF to 500KB', slug: '/pdf/compress-to-500kb', description: 'Compress certificates under 500KB for Passport Sewa and high court submissions.', isPopular: true, badge: 'Target 500KB', iconName: 'Minimize2' },
+          { name: 'Compress PDF to 100KB', slug: '/pdf/compress-to-100kb', description: 'Aggressive compression under 100KB for strict state scholarship and teacher recruitment forms.', isPopular: true, badge: 'Target 100KB', iconName: 'Minimize2' },
+          { name: 'Pics to PDF Converter', slug: '/image/pics-to-pdf', description: 'Convert customer smartphone photos or flatbed scanner JPGs into a clean multi-page A4 PDF.', isPopular: true, badge: 'Multi-Scan', iconName: 'Camera' }
+        ]
+      },
+      {
+        title: 'Billing, Receipts & Document Utilities',
+        description: 'Generate customer receipts, extract text from printed scans, and secure documents.',
+        tools: [
+          { name: 'Free Invoice & Rent Receipt Generator', slug: '/utility/invoice-generator', description: 'Create print-ready HRA rent receipts, customer bills, and service invoices with shop details & seal.', isPopular: true, badge: 'HRA / Billing', iconName: 'FileText' },
+          { name: 'PDF OCR Text Extractor', slug: '/pdf/ocr', description: 'Extract selectable text from scanned customer notices, FIRs, and court papers in browser.', isPopular: false, badge: 'AI Wasm', iconName: 'FileCheck' },
+          { name: 'Password Protect PDF', slug: '/pdf/protect', description: 'Add strong password encryption to customer confidential records before emailing.', isPopular: false, badge: 'Secure', iconName: 'Lock' },
+          { name: 'Watermark PDF', slug: '/pdf/watermark', description: 'Add "VERIFIED COPY" or your cyber cafe name stamp diagonally across PDF pages.', isPopular: false, badge: 'Cafe Stamp', iconName: 'Stamp' }
+        ]
+      }
+    ],
+    popularTools: [
+      { name: 'Aadhaar Card Print Tool (A4 & PVC)', slug: '/tools/aadhaar-card-print', description: 'Print e-Aadhaar on PVC card (85.6x54mm) or 5-up sheet on A4 paper.' },
+      { name: 'PAN Card Photo Resizer (213x213)', slug: '/tools/pan-card-photo-resizer', description: 'NSDL & UTIITSL standard 213x213 px photo under 50KB.' },
+      { name: 'Combine Marksheets (<500KB)', slug: '/pdf/combine-marksheets', description: 'Merge 10th & 12th certificates in 1 A4 PDF under 500KB.' },
+      { name: 'Signature Resizer 10 to 20KB', slug: '/tools/signature-resizer-10-to-20kb', description: 'Clean and format signature for sarkari recruitment forms.' }
+    ],
+    faqs: [
+      {
+        question: 'How do cyber cafe operators print customer e-Aadhaar cards on PVC cards or A4 paper?',
+        answer: 'Our Aadhaar Card Print Tool accepts any UIDAI e-Aadhaar PDF or mobile camera scan. It automatically decrypts the file in-browser, crops the official front and back ID portion, and formats it to the exact ISO/IEC 7810 ID-1 standard (85.60 mm × 53.98 mm). You can output a 1-click print layout for direct PVC card printers or a 5-card layout on standard A4 photo paper for lamination.'
+      },
+      {
+        question: 'What are the exact photo and signature specifications for NSDL and UTIITSL PAN card applications?',
+        answer: 'Both NSDL e-Gov and UTIITSL portals require candidate photos to be exactly 213 × 213 pixels (2.5 cm × 2.5 cm) at 300 DPI, with file size strictly under 50KB in JPEG format. Signatures must be 444 × 205 pixels (under 50KB). Our PAN Card Photo Resizer automates this crop and byte limit in one second.'
+      },
+      {
+        question: 'How can cyber cafes merge 10th, 12th marksheets, and graduation degrees into one PDF under 500KB?',
+        answer: 'Use our Combine Marksheets tool. Simply upload multi-page phone scans or certificate photos in sequence. The engine rescales each image to standard A4 proportions, applies color balance, and compresses the final merged master PDF strictly under 500KB so it passes sarkari portal upload validation on the first attempt.'
+      },
+      {
+        question: 'How do I add Candidate Name and Date of Photo (DOP) on passport photos without Photoshop?',
+        answer: 'Open our Photo Name & Date Generator tool, upload the customer passport photo, type their full name and photo capture date. The tool instantly generates a clean white nameplate banner at the bottom with crisp sans-serif black lettering complying with SSC, UPSC, and state police recruitment standards.'
+      },
+      {
+        question: 'How do I resize a mobile phone photo of a signature to 10KB–20KB without blur?',
+        answer: 'Our Signature Resizer includes an automatic Magic B&W thresholding algorithm. It strips grey paper shadows, yellow light tints, and desk background noise, transforming dark pen strokes into crisp vector-like ink on a pure white background, then compresses the JPEG strictly between 10KB and 20KB.'
+      },
+      {
+        question: 'How does Photo & Signature Joiner combine two files into a single image?',
+        answer: 'Many state recruitment boards (such as MPPEB, UPSSSC, and Rajasthan RSMSSB) require photo and signature in a single uploaded image. Drop the candidate photo in top dropzone and signature in bottom dropzone; the tool stacks them with a clean border and compresses the combined file under 50KB.'
+      },
+      {
+        question: 'Is customer Aadhaar, PAN, and certificate data safe from data theft or leaks on FileZenith?',
+        answer: '100% safe! FileZenith operates entirely inside your local web browser using WebAssembly and client-side JavaScript. Customer documents, Aadhaar numbers, biometric photos, and bank statements are never transmitted over the internet or uploaded to any cloud server.'
+      },
+      {
+        question: 'Can CSC VLEs generate HRA rent receipts and customer service invoices with shop seals?',
+        answer: 'Yes! Our Free Invoice & Rent Receipt Generator lets cyber cafe owners create professional GST/non-GST receipts and monthly HRA rent receipts for customers. You can input shop name, customer details, amount in words, revenue stamp placeholder, and download an instant print-ready vector PDF.'
+      }
+    ],
+    relatedCategories: [
+      { name: 'Govt Job Tools', slug: '/govt-job-tools', desc: 'Resizers for SSC, UPSC, and state exams.' },
+      { name: 'PDF Tools', slug: '/pdf-tools', desc: 'Merge, split, compress, and edit PDF documents.' },
+      { name: 'Image Tools', slug: '/image-tools', desc: 'Crop, compress, and convert photo formats.' }
+    ],
+    keywords: [
+      'csc cyber cafe tools',
+      'csc aadhaar card print online',
+      'eaadhaar pvc card print software online free',
+      'cyber cafe tools online',
+      'pan card photo resizer 213x213 nsdl uti',
+      'photo signature joiner online',
+      'combine marksheets into pdf under 500kb',
+      'signature resizer 10 to 20 kb',
+      'ssc photo name date stamp generator',
+      'jan seva kendra online tools',
+      'csc center fast photo resizer',
+      'aadhaar card print action file alternative'
     ]
   }
 };

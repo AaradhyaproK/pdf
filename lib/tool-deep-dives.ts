@@ -446,6 +446,188 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       }
     ]
   },
+  "/pdf/compress-to-300kb": {
+    "slug": "/pdf/compress-to-300kb",
+    "badge": "UPSC & Sarkari Portal Specialist",
+    "heading": "In-Depth Technical Guide: Compressing PDF Documents Below 300KB for UPSC OTR & State PSCs",
+    "subheading": "Official technical guidelines for compressing academic certificates, caste documents, and ID proofs strictly between 20KB and 300KB without quality loss.",
+    "sections": [
+      {
+        "title": "1. The 300KB Specification in UPSC OTR & State Recruitment Gateways",
+        "paragraphs": [
+          "The Union Public Service Commission (UPSC) One Time Registration (OTR) system, along with prominent State Public Service Commissions (such as UPPSC, MPPSC, TNPSC, and BPSC) and judicial recruitment portals, establishes a strict 300KB upper limit on uploaded PDF documents. Under these digital verification guidelines, applicant certificates—including matriculation marksheets for date of birth verification, graduation degree certificates, caste/EWS certificates, and disability cards—must be provided in PDF format measuring between 20KB and 300KB.",
+          "Uploading a document that exceeds 300KB (even by a fraction of a kilobyte, such as 300.2KB) triggers immediate validation rejection by server-side firewalls. FileZenith’s dedicated 300KB PDF compression tool is precisely engineered to quantize file sizes into the 220KB–285KB window, providing a generous safety margin while keeping text, roll numbers, and official signatures razor-sharp."
+        ],
+        "bullets": [
+          "UPSC OTR Compliant: Calibrated strictly for the 20KB to 300KB window required by national recruitment portals.",
+          "Zero-Rejection Safety: Outputs files between 220KB and 285KB to avoid edge-case firewall rejections.",
+          "High-Precision Legibility: Keeps candidate names, examination percentages, and board signatures crisp and readable."
+        ]
+      },
+      {
+        "title": "2. Balancing Text Sharpness, Official Watermarks, and File Size",
+        "paragraphs": [
+          "Standard camera photos of marks cards and certificates from smartphones often contain heavy noise, uneven shadow gradients, and high resolution (3000x4000 pixels) that inflate a single document to 4MB–10MB. Generic compressors reduce file size by aggressively lowering JPEG quality across the entire canvas, introducing blurring artifacts that obscure critical numbers like examination roll numbers, passing year, and official university watermarks.",
+          "Our WebAssembly client-side engine uses selective spatial downsampling and adaptive dynamic range equalization. By resampling image layers to 150–200 DPI (the ideal resolution for official document verification) and applying intelligent luminance thresholding, file weight drops by 80%–95% while sharp black ink strokes and colorful government stamps remain completely clear."
+        ],
+        "bullets": [
+          "150-200 DPI Scaling: Retains official biometric verification and document audit quality standards.",
+          "Anti-Artifact Filter: Eliminates compression noise around critical text, numbers, and dates of birth.",
+          "Luminance Balance: Cleans gray scanner shadows while retaining state emblem and university seals."
+        ]
+      },
+      {
+        "title": "3. Step-by-Step Certificate Optimization Checklist",
+        "paragraphs": [
+          "To guarantee your PDF certificate passes portal upload validation on your first attempt, follow these verified steps. First, ensure your certificate scan is right-side up and cropped to eliminate excess table or background surface area. Second, drag your PDF into FileZenith’s 300KB compressor. The engine analyzes the internal PDF streams instantly.",
+          "Third, the system applies progressive quantization to hit the ideal 240KB–280KB size range. Fourth, inspect the rendered output to ensure all official signatures and stamp text are easily legible. Finally, click Download PDF and submit the optimized file directly to your UPSC or PSC recruitment portal."
+        ],
+        "bullets": [
+          "Step 1: Check Scan Quality - Ensure document is straight, clear, and cropped to official boundaries.",
+          "Step 2: Drag & Drop - Load your file instantly in browser memory with zero upload lag.",
+          "Step 3: Target Reduction - The engine automatically hits the safe 240KB–285KB range.",
+          "Step 4: Verify Clarity - Zoom into roll numbers and board seals to confirm 100% legibility.",
+          "Step 5: Portal Submission - Upload confidently to UPSC OTR or State PSC application portals."
+        ]
+      },
+      {
+        "title": "4. Multi-Page Document Compression Techniques",
+        "paragraphs": [
+          "When submitting multi-semester marksheets, consolidated grade cards, or multi-page court orders, the 300KB allowance must be distributed across all pages. For a 3-page marksheet, each page receives an approximate budget of 80KB–95KB.",
+          "If your multi-page document is unusually heavy (e.g. over 15MB), ensure that any blank back-pages or unnecessary promotional covers are removed using our Organize PDF tool before compression. Our engine intelligently balances compression across all pages to ensure no single page suffers disproportionate degradation."
+        ],
+        "bullets": [
+          "Even Budget Allocation: Distributes the 300KB quota proportionally across multi-page certificate dockets.",
+          "Prune Redundancy: Remove blank scanner pages and duplicate annexures prior to final compression.",
+          "Clean Typography: Mathematical vector text retains infinite sharpness regardless of file size reduction."
+        ]
+      },
+      {
+        "title": "5. Zero-Server Privacy for Confidential Identity Records",
+        "paragraphs": [
+          "Government recruitment and identity documents contain sensitive personally identifiable information (PII), such as candidate full names, parentage, Aadhaar numbers, caste classifications, and dates of birth. Uploading these documents to public cloud compression tools exposes candidates to severe privacy risks and potential identity fraud.",
+          "FileZenith is architected on a strict zero-server, 100% client-side philosophy. Your documents are decrypted, optimized, and saved entirely in your local browser memory using WebAssembly. Not a single byte is ever transmitted across the internet, ensuring your confidential documents remain strictly in your custody."
+        ],
+        "bullets": [
+          "100% Client-Side Execution: Zero cloud server uploads, zero logging, and zero data storage.",
+          "Complete Identity Protection: Sensitive Aadhaar numbers and caste details never leave your device.",
+          "No Watermarks: Export clean, publication-ready PDF files with no added logos or advertising text."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Why does the UPSC OTR portal require PDF certificates to be between 20KB and 300KB?",
+        "answer": "The UPSC portal handles millions of competitive exam candidates simultaneously. Enforcing a strict 20KB to 300KB range ensures fast page loading, minimizes server storage overhead, and prevents network timeouts during peak application deadlines."
+      },
+      {
+        "question": "Can I compress a 10MB scanned marksheet down to under 300KB?",
+        "answer": "Yes! FileZenith effortlessly shrinks high-resolution scans from 10MB–20MB down to under 300KB by downsampling raster images to 150 DPI and stripping redundant unreferenced font and metadata layers."
+      },
+      {
+        "question": "Will government verification officers be able to read my roll number and signature?",
+        "answer": "Yes. Our compression pipeline applies smart edge-sharpening filters specifically tuned for official document typography, keeping roll numbers, grades, dates, and official seals crisp and legible."
+      },
+      {
+        "question": "Does this tool watermark my PDF certificate?",
+        "answer": "Never. FileZenith does not place watermarks, advertisements, or promotional branding on your files. The downloaded document is completely clean and ready for official government submission."
+      },
+      {
+        "question": "Is it safe to compress Aadhaar, caste, or domicile certificates on FileZenith?",
+        "answer": "100% safe! All processing happens locally in your device's browser memory using WebAssembly. Your files are never uploaded to any server or shared with any third party."
+      }
+    ]
+  },
+  "/pdf/compress-to-500kb": {
+    "slug": "/pdf/compress-to-500kb",
+    "badge": "Passport Sewa & Judicial Gateway Standard",
+    "heading": "In-Depth Technical Guide: Compressing PDF Files Below 500KB for Passport Sewa & Legal Filings",
+    "subheading": "Exhaustive manual for compressing multi-page legal deeds, passport annexures, university theses, and court petitions under 500KB.",
+    "sections": [
+      {
+        "title": "1. The 500KB Threshold in Passport Sewa Kendra & Court E-Filing",
+        "paragraphs": [
+          "A 500KB file size ceiling is the universal gold standard for official institutional document portals including Passport Sewa Kendra (PSP), High Court and Supreme Court e-filing registries, state bar councils, university thesis repositories, and visa application centers (such as VFS Global). These systems demand higher graphic fidelity than standard job portals to allow legal clerks and passport officers to scrutinize intricate notary stamps, embossed government seals, and wet ink signatures.",
+          "However, modern desktop flatbed scanners and multifunction printers automatically export multi-page legal dockets at 300 DPI, generating PDF files of 8MB to 25MB that trigger immediate portal rejections. FileZenith's 500KB compression tool is calibrated to compress heavy multi-page legal petitions and passport annexures into the safe 380KB–485KB sweet spot."
+        ],
+        "bullets": [
+          "Passport Sewa Ready: Meets Ministry of External Affairs (MEA) portal upload requirements for passport supporting documents.",
+          "Judicial Registry Standard: Formats petitions, affidavits, and vakalatnamas to comply with court e-filing mandates.",
+          "Optimal 400-480KB Range: Delivers maximum visual clarity while staying strictly below the 500KB limit."
+        ]
+      },
+      {
+        "title": "2. Preserving Multi-Page Legal Filings & High-Resolution Scans",
+        "paragraphs": [
+          "Legal briefs, property sale deeds, and university dissertations routinely span multiple pages. In a 6-page legal document, compressing to 500KB allows approximately 80KB per page, which is ample for high-clarity document presentation if redundant scanner metadata and uncompressed raster layers are properly pruned.",
+          "Our client-side compression pipeline identifies and strips unreferenced font descriptors, embedded color profile tables (ICC profiles), and duplicate resource streams. Raster images are resampled to 180 DPI with optimized Huffman coding, ensuring notary revenue stamps and blue ballpoint ink signatures remain clearly distinguishable."
+        ],
+        "bullets": [
+          "Multi-Page Optimization: Efficiently balances bytes across multi-page legal dockets and academic mark sheets.",
+          "Notary Stamp Clarity: Preserves fine details in embossed state seals, revenue stamps, and advocate seals.",
+          "Metadata Scrubbing: Removes unnecessary camera and scanner EXIF metadata, reducing byte bloat."
+        ]
+      },
+      {
+        "title": "3. How Our Client-Side Canvas Engine Shrinks PDF Streams",
+        "paragraphs": [
+          "Unlike legacy online tools that rely on remote ghostscript servers, FileZenith executes entirely within modern web browsers via WebAssembly and HTML5 Canvas API. The engine parses the PDF object graph, decompresses FlateDecode streams, applies targeted spatial downsampling to embedded JPEG/PNG XObjects, and recompresses the stream using optimized DCT (Discrete Cosine Transform) quantization tables.",
+          "This local architecture means instantaneous processing with zero file size limits, zero queuing delays, and zero bandwidth costs for uploading heavy 30MB files over mobile internet."
+        ],
+        "bullets": [
+          "Zero Network Latency: No waiting for slow server uploads or server-side rendering queues.",
+          "Wasm Precision: High-performance compiled WebAssembly routines ensure smooth operation on laptops and phones.",
+          "Lossless Vector Preservation: True text and vector lines remain untouched while heavy image backgrounds are compressed."
+        ]
+      },
+      {
+        "title": "4. Best Practices for Clear Official Stamps and Notary Signatures",
+        "paragraphs": [
+          "When submitting documents to Passport Sewa or court registries, visual clarity on official stamps and signatures is essential to avoid application rejections or scrutiny objections. Follow these recommended practices: First, ensure scans are captured under bright, uniform lighting without glare on laminated paper.",
+          "Second, when uploading multi-page petitions, ensure pages are oriented correctly before running compression. Third, preview the compressed document at 100% zoom to verify that court case numbers, stamp dates, and notary registration numbers are legible before final portal upload."
+        ],
+        "bullets": [
+          "Even Illumination: Avoid shadows across notary seals and revenue stamps for optimal compression results.",
+          "Page Orientation: Ensure all pages are right-side up to facilitate easy review by verification officers.",
+          "Zoom Preview: Confirm that registration numbers and court case details remain sharp at 100% view."
+        ]
+      },
+      {
+        "title": "5. 100% Private Browser Execution for Confidential Legal Papers",
+        "paragraphs": [
+          "Legal affidavits, property titles, adoption records, and passport application documents contain highly sensitive personal and legal information. Uploading these documents to commercial cloud compressors creates serious liability and privacy exposure.",
+          "FileZenith guarantees total privacy: all document processing, rendering, and compression happen entirely inside your local device's memory. Your legal petitions and identity proofs are never transmitted across the network, stored on third-party servers, or accessible to anyone else."
+        ],
+        "bullets": [
+          "Total Confidentiality: Legal petitions, passport copies, and court orders never leave your browser.",
+          "Zero Cloud Storage: No copies, logs, or cached versions are ever retained on external servers.",
+          "Free and Unrestricted: Unlimited conversions with no daily quotas, subscriptions, or watermarks."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Which official platforms enforce a 500KB PDF upload limit?",
+        "answer": "Passport Sewa Kendra (PSP), Indian High Court and Supreme Court e-filing portals, state bar councils, and central university admission portals commonly enforce a 500KB maximum size."
+      },
+      {
+        "question": "How many pages can be compressed into a 500KB PDF file?",
+        "answer": "A 500KB budget comfortably accommodates 5 to 10 scanned pages or 50+ pages of vector text documents with high legibility for official submission."
+      },
+      {
+        "question": "Will notary seals and judicial revenue stamps remain visible at 500KB?",
+        "answer": "Yes. Our engine preserves 180 DPI resolution, ensuring that advocate seals, revenue stamps, and wet signatures remain clear and legible for verification officers."
+      },
+      {
+        "question": "Does this tool store copies of my passport application documents?",
+        "answer": "Never. All processing takes place locally in your browser memory. Your documents are never uploaded to any cloud server or stored anywhere."
+      },
+      {
+        "question": "How fast is in-browser 500KB PDF compression?",
+        "answer": "Because files are processed directly on your device using WebAssembly, compression completes in just 1 to 3 seconds without waiting for server queues."
+      }
+    ]
+  },
   "/pdf/compress-to-1mb": {
     "slug": "/pdf/compress-to-1mb",
     "badge": "Professional Document Optimizer",

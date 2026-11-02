@@ -16,6 +16,8 @@
 - **[Edit PDF Online](https://www.filezenith.com/pdf/edit):** Add custom text, signatures, highlights, and annotations directly inside browser memory.
 - **[Compress PDF (Auto)](https://www.filezenith.com/pdf/compress):** Shrink document file sizes up to 80% without degrading visual text readability.
 - **[Compress PDF to 200KB](https://www.filezenith.com/pdf/compress-to-200kb):** Pre-calibrated binary compression to fit government recruitment portals, college admissions, and scholarship uploads.
+- **[Compress PDF to 300KB](https://www.filezenith.com/pdf/compress-to-300kb):** Target 300KB compressor for UPSC OTR, State PSC forms, and judicial e-filing.
+- **[Compress PDF to 500KB](https://www.filezenith.com/pdf/compress-to-500kb):** Target 500KB compressor for Passport Sewa, High Court registries, and university submissions.
 - **[Compress PDF to 100KB](https://www.filezenith.com/pdf/compress-to-100kb):** Extreme high-efficiency compression targeting sub-100KB limits.
 - **[Compress PDF to 1MB](https://www.filezenith.com/pdf/compress-to-1mb):** Downscale multi-page legal documents and portfolios under 1MB for email attachments.
 - **[Merge PDF](https://www.filezenith.com/pdf/merge):** Combine multiple PDF documents into a single consolidated file in custom order.
@@ -47,8 +49,13 @@
 
 ---
 
-## 3. Government & Recruitment Exam Presets
+## 3. CSC & Cyber Cafe Fast Toolkit & Govt Exam Presets
+- **[CSC & Cyber Cafe Fast Toolkit](https://www.filezenith.com/csc-cyber-cafe-tools):** All-in-one daily workstation for CSC VLEs, Jan Seva Kendras, and Cyber Cafe operators: Aadhaar PVC prints, PAN 213x213 cropper, marksheet mergers, and 10-20KB signature resizers.
+- **[Govt Job Exam Tools Hub](https://www.filezenith.com/govt-job-tools):** Official directory of photo and signature resizers for SSC, UPSC, IBPS, and State PSCs.
 - **[Aadhaar Card Print Tool](https://www.filezenith.com/tools/aadhaar-card-print):** Format e-Aadhaar PDFs onto standard A4 paper and exact ISO 85.6 × 54.0 mm PVC card dimensions.
+- **[PAN Card Photo Resizer](https://www.filezenith.com/tools/pan-card-photo-resizer):** NSDL & UTIITSL standard 213x213 px, 300 DPI crop under 50KB.
+- **[Signature Resizer 10 to 20KB](https://www.filezenith.com/tools/signature-resizer-10-to-20kb):** Magic B&W cleanup for phone camera photos of pen signatures.
+- **[Photo & Signature Joiner](https://www.filezenith.com/tools/photo-signature-joiner):** Stack passport photo and signature into a single unified image file.
 - **[SSC GD Constable & CGL Photo Resizer](https://www.filezenith.com/tools/ssc-photo-resizer):** Pre-calibrated dimensions for Staff Selection Commission portals.
 - **[RRB Railway Photo & Signature Resizer](https://www.filezenith.com/tools/rrb-photo-resizer):** Tailored for RRB NTPC, Group D, and ALP guidelines.
 - **[UPSC OTR Photo & Signature Resizer](https://www.filezenith.com/tools/upsc-photo-resizer):** Configured for UPSC Civil Services One-Time Registration requirements.

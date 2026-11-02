@@ -2391,6 +2391,62 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
     ]
   },
 
+  '/pdf/compress-to-300kb': {
+    slug: '/pdf/compress-to-300kb',
+    title: 'Compress PDF to 300KB Online Free — UPSC & Govt Portal Optimizer',
+    metaTitle: 'Compress PDF to 300KB Free Online | FileZenith',
+    description: 'Compress PDF files strictly under 300KB online free. Tailored for UPSC OTR, State PSC certificates, high court filings, and job portals with zero server uploads.',
+    keywords: [
+      'compress pdf to 300kb',
+      'reduce pdf size to 300kb online free',
+      'compress pdf under 300kb upsc otr',
+      'upsc otr document compressor 300kb',
+      'shrink pdf under 300kb for government job',
+      'pdf compressor 300kb online without losing quality',
+      'sarkari result pdf compressor 300kb'
+    ],
+    category: 'pdf',
+    howToSteps: [
+      { title: 'Upload Your PDF File', text: 'Select or drag and drop your marksheet, caste certificate, or ID document into the 300KB compressor.' },
+      { title: 'Verify 300KB Target Setting', text: 'The target size is preset to 300KB to meet UPSC and PSC portal requirements.' },
+      { title: 'Compress & Download Instantly', text: 'Click Compress PDF to process in-browser and download your verified file under 300KB.' }
+    ],
+    faqs: [
+      { question: 'Why does UPSC OTR require document PDFs under 300KB?', answer: 'The Union Public Service Commission (UPSC) One Time Registration (OTR) portal mandates educational certificates, caste certificates, and identity documents to be between 20KB and 300KB to maintain server efficiency.' },
+      { question: 'How can I compress a scanned marksheet PDF under 300KB without blurry text?', answer: 'FileZenith uses intelligent WebAssembly canvas resampling to optimize background noise and compress heavy image streams while maintaining high contrast on roll numbers and signatures.' },
+      { question: 'Is my confidential UPSC certificate uploaded to any cloud server?', answer: 'Never! All compression executes 100% locally inside your browser memory using WebAssembly. Zero bytes are ever uploaded to any external server.' },
+      { question: 'Does this 300KB PDF compressor support multi-page PDFs?', answer: 'Yes! You can compress single-page or multi-page PDF documents down to the 300KB threshold in one click.' }
+    ]
+  },
+
+  '/pdf/compress-to-500kb': {
+    slug: '/pdf/compress-to-500kb',
+    title: 'Compress PDF to 500KB Online Free — Passport & University Submission',
+    metaTitle: 'Compress PDF to 500KB Free Online | FileZenith',
+    description: 'Compress PDF under 500KB online free in seconds. Optimized for Passport Sewa, Indian High Courts e-filing, university admissions, and visa portals with 100% private in-browser compression.',
+    keywords: [
+      'compress pdf to 500kb',
+      'reduce pdf size to 500kb online free',
+      'passport sewa pdf compressor 500kb',
+      'high court e filing pdf compressor 500kb',
+      'shrink pdf to 500kb free online',
+      'compress multi page pdf under 500kb',
+      'pdf size reducer below 500kb'
+    ],
+    category: 'pdf',
+    howToSteps: [
+      { title: 'Choose Your PDF Document', text: 'Select or drag and drop your legal petition, academic marksheet, or passport application PDF.' },
+      { title: 'Confirm 500KB Limit', text: 'Target size is preset to 500KB, the universal standard for passport portals and court registries.' },
+      { title: 'Download Compliant Document', text: 'Click Compress PDF to generate an optimized, high-resolution document ready for instant submission.' }
+    ],
+    faqs: [
+      { question: 'Which portals require PDF uploads under 500KB?', answer: 'Passport Sewa Kendra (PSP), Indian High Court and Supreme Court e-filing portals, state bar councils, and central university admission portals commonly enforce a 500KB maximum size.' },
+      { question: 'Can I compress a multi-page marksheet or legal deed under 500KB?', answer: 'Yes! Our compression engine strips redundant embedded font subsets and optimizes image resolution so multi-page legal or academic documents fit cleanly under 500KB.' },
+      { question: 'Are legal court files and passport PDFs safe on FileZenith?', answer: 'Yes, 100%. FileZenith operates on a 100% client-side zero-server architecture. Your sensitive legal filings and identity papers never leave your device.' },
+      { question: 'Is there any daily limit or cost for 500KB PDF compression?', answer: 'None at all. FileZenith is completely free, with unlimited document conversions and zero watermarks.' }
+    ]
+  },
+
   '/utility/electricity-bill-calculator': {
     slug: '/utility/electricity-bill-calculator',
     title: 'Electricity Bill Calculator (Slab Tariff & Appliance Power)',
