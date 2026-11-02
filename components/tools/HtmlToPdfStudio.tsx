@@ -35,7 +35,10 @@ import {
   Settings2,
   HelpCircle,
   AlertTriangle,
-  FolderOpen
+  FolderOpen,
+  Globe,
+  ArrowRight,
+  Link2
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { triggerBrowserDownload } from '@/lib/download-helper';
@@ -389,9 +392,14 @@ const MARGIN_MM: Record<MarginOption, number> = {
 };
 
 export function HtmlToPdfStudio() {
-  const [activeTab, setActiveTab] = useState<'editor' | 'upload'>('editor');
+  const [activeTab, setActiveTab] = useState<'editor' | 'upload' | 'url'>('editor');
   const [htmlCode, setHtmlCode] = useState<string>(STARTER_TEMPLATES.invoice.code);
   const [selectedTemplateKey, setSelectedTemplateKey] = useState<string>('invoice');
+
+  // URL Fetcher state
+  const [inputUrl, setInputUrl] = useState<string>('');
+  const [isFetchingUrl, setIsFetchingUrl] = useState<boolean>(false);
+  const [fetchedUrlDomain, setFetchedUrlDomain] = useState<string | null>(null);
   
   // Customization Options
   const [pageSize, setPageSize] = useState<PageSize>('a4');
@@ -509,7 +517,67 @@ export function HtmlToPdfStudio() {
   const handleSelectTemplate = (key: keyof typeof STARTER_TEMPLATES) => {
     setSelectedTemplateKey(key);
     setHtmlCode(STARTER_TEMPLATES[key].code);
+    setFetchedUrlDomain(null);
+    setUploadedFileName(null);
     toast.success(`Loaded ${STARTER_TEMPLATES[key].name} template`);
+  };
+
+  // Handle URL fetch
+  const handleFetchUrl = async () => {
+    const raw = inputUrl.trim();
+    if (!raw) {
+      toast.error('Please enter a website URL.');
+      return;
+    }
+
+    setIsFetchingUrl(true);
+    const toastId = toast.loading('Fetching webpage content & assets...');
+
+    try {
+      const res = await fetch('/api/fetch-url', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: raw }),
+      });
+
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || 'Failed to fetch webpage.');
+      }
+
+      setHtmlCode(data.html);
+      setSelectedTemplateKey('custom');
+      setUploadedFileName(null);
+
+      // Extract domain for badge
+      try {
+        const p = new URL(data.url);
+        setFetchedUrlDomain(p.hostname);
+        const namePart = (data.title || p.hostname)
+          .replace(/[^a-zA-Z0-9_\-\s]/g, '')
+          .trim()
+          .replace(/\s+/g, '-')
+          .toLowerCase()
+          .substring(0, 30);
+        if (namePart) setFileName(namePart);
+      } catch {
+        setFetchedUrlDomain(raw);
+      }
+
+      setActiveTab('editor');
+      toast.dismiss(toastId);
+      toast.success(`Loaded "${data.title || raw}" successfully!`);
+    } catch (err: any) {
+      toast.dismiss(toastId);
+      toast.error(err.message || 'Could not fetch URL. Make sure the website is public and accessible.');
+    } finally {
+      setIsFetchingUrl(false);
+    }
+  };
+
+  // Quick load demo URL
+  const handleLoadDemoUrl = (demoUrl: string) => {
+    setInputUrl(demoUrl);
   };
 
   // Handle file upload
@@ -518,7 +586,7 @@ export function HtmlToPdfStudio() {
     if (!file) return;
 
     setUploadedFileName(file.name);
-    // Auto set file name without extension
+    setFetchedUrlDomain(null);
     const cleanName = file.name.replace(/\.[^/.]+$/, '');
     if (cleanName) setFileName(cleanName);
 
@@ -544,11 +612,6 @@ export function HtmlToPdfStudio() {
     toast.success('Added page break snippet to document');
   };
 
-  // Format code (clean extra whitespace)
-  const handleFormatCode = () => {
-    toast.info('Code ready for PDF rendering');
-  };
-
   // Copy code
   const handleCopyCode = async () => {
     try {
@@ -564,6 +627,8 @@ export function HtmlToPdfStudio() {
     setHtmlCode(STARTER_TEMPLATES.invoice.code);
     setSelectedTemplateKey('invoice');
     setUploadedFileName(null);
+    setFetchedUrlDomain(null);
+    setInputUrl('');
     setFileName('document');
     toast.info('Reset to default invoice template');
   };
@@ -626,7 +691,6 @@ export function HtmlToPdfStudio() {
     const toastId = toast.loading('Generating high-resolution PDF...');
 
     try {
-      // Create a high-res off-screen container for rendering
       const previewIframe = iframePreviewRef.current;
       if (!previewIframe || !previewIframe.contentDocument) {
         throw new Error('Preview container not ready');
@@ -634,18 +698,13 @@ export function HtmlToPdfStudio() {
 
       const iframeBody = previewIframe.contentDocument.body;
       const scrollHeight = Math.max(iframeBody.scrollHeight, 600);
-      const scrollWidth = Math.max(iframeBody.scrollWidth, 800);
 
-      // Construct SVG with foreignObject for pixel-perfect in-browser rasterization
-      // We encode html safely
       const cleanHtmlBody = previewIframe.contentDocument.documentElement.outerHTML;
 
-      // Calculate page height in points and pixels (at 96 DPI: 1 pt = 96/72 px = 1.333 px)
       const ptToPx = 96 / 72;
       const targetPageWidthPx = pageW * ptToPx;
       const targetPageHeightPx = pageH * ptToPx;
 
-      // Create an SVG container
       const svgContent = `
         <svg xmlns="http://www.w3.org/2000/svg" width="${targetPageWidthPx}" height="${scrollHeight}">
           <foreignObject width="100%" height="100%">
@@ -664,7 +723,6 @@ export function HtmlToPdfStudio() {
       const renderPromise = new Promise<Uint8Array>((resolve, reject) => {
         img.onload = async () => {
           try {
-            // Render onto Canvas at 2x Retina scale for crisp lines
             const scaleFactor = 2;
             const fullCanvas = document.createElement('canvas');
             fullCanvas.width = targetPageWidthPx * scaleFactor;
@@ -683,7 +741,6 @@ export function HtmlToPdfStudio() {
 
             URL.revokeObjectURL(svgUrl);
 
-            // Assemble PDF using pdf-lib
             const pdfDoc = await PDFDocument.create();
             const totalPages = Math.max(1, Math.ceil(scrollHeight / targetPageHeightPx));
 
@@ -697,7 +754,6 @@ export function HtmlToPdfStudio() {
                 pageCtx.fillStyle = '#ffffff';
                 pageCtx.fillRect(0, 0, pageCanvas.width, pageCanvas.height);
 
-                // Slice region from full canvas
                 const sourceY = i * targetPageHeightPx * scaleFactor;
                 const sourceH = Math.min(
                   targetPageHeightPx * scaleFactor,
@@ -740,7 +796,6 @@ export function HtmlToPdfStudio() {
         };
 
         img.onerror = () => {
-          // If foreignObject is restricted by browser security policies, gracefully fallback to print
           reject(new Error('Canvas rasterization fallback'));
         };
       });
@@ -760,7 +815,6 @@ export function HtmlToPdfStudio() {
         confetti({ particleCount: 75, spread: 70, origin: { y: 0.6 } });
         setShowSuccessModal(true);
       } catch {
-        // Fallback gracefully to Vector Print if canvas blocked
         toast.dismiss(toastId);
         toast.info('Switching to Vector Print engine for maximum text sharpness...');
         handleVectorPrint();
@@ -768,7 +822,6 @@ export function HtmlToPdfStudio() {
     } catch (err) {
       console.error(err);
       toast.dismiss(toastId);
-      // Seamless fallback to Vector Print engine
       handleVectorPrint();
     } finally {
       setIsExporting(false);
@@ -784,21 +837,21 @@ export function HtmlToPdfStudio() {
   };
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div className="w-full space-y-6">
       {/* Studio Header Card */}
-      <div className="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 sm:p-8 mb-8 backdrop-blur-sm">
+      <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm p-6 sm:p-8 backdrop-blur-sm">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200/60 text-blue-700 text-xs font-semibold uppercase tracking-wider mb-3">
               <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-              100% In-Browser • Zero Server Uploads • Vector & Raster PDF
+              URL Link &bull; HTML Code &bull; Local Files &bull; Vector A4/Letter
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-              HTML to PDF Converter Studio
-            </h1>
-            <p className="mt-1.5 text-sm sm:text-base text-slate-600 max-w-2xl">
-              Convert raw HTML code, CSS, or `.html` files into crisp, publication-ready PDF documents.
-              Preserves background colors, typography, tables, and page breaks with zero watermarks.
+            <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+              HTML &amp; Webpage to PDF Conversion Studio
+            </h2>
+            <p className="mt-1 text-xs sm:text-sm text-slate-600 max-w-2xl leading-relaxed">
+              Fetch any live website link, paste raw HTML code, or upload local <code className="text-blue-600 font-semibold">.html</code> files.
+              Fine-tune paper sizes, margins, CSS background graphics, and page breaks with zero watermarks.
             </p>
           </div>
 
@@ -806,11 +859,11 @@ export function HtmlToPdfStudio() {
             <button
               onClick={handleVectorPrint}
               disabled={isExporting}
-              className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-sm shadow-sm transition-all hover:border-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 disabled:opacity-50"
+              className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-sm shadow-xs transition-all hover:border-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 disabled:opacity-50"
               title="Prints vector PDF with 100% selectable text & clickable links"
             >
               <Printer className="w-4 h-4 text-slate-600" />
-              <span>Vector Print / PDF</span>
+              <span>Vector Print</span>
             </button>
 
             <button
@@ -930,54 +983,67 @@ export function HtmlToPdfStudio() {
       </div>
 
       {/* Mobile Tab Switcher */}
-      <div className="lg:hidden flex rounded-xl bg-slate-200/80 p-1 mb-4">
+      <div className="lg:hidden flex rounded-xl bg-slate-200/80 p-1">
         <button
           onClick={() => setMobileView('editor')}
           className={`flex-1 py-2 text-xs font-semibold rounded-lg transition ${
-            mobileView === 'editor' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600'
+            mobileView === 'editor' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
           }`}
         >
-          HTML Code & Files
+          Input &amp; Source
         </button>
         <button
           onClick={() => setMobileView('preview')}
           className={`flex-1 py-2 text-xs font-semibold rounded-lg transition ${
-            mobileView === 'preview' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600'
+            mobileView === 'preview' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
           }`}
         >
-          Live PDF Sheet Preview
+          Live PDF Preview
         </button>
       </div>
 
       {/* Main Interactive Split Studio */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        {/* Left Column: Code Editor & Upload (Columns 1-6) */}
+        {/* Left Column: Code Editor, File Upload & URL Fetcher (Columns 1-6) */}
         <div className={`lg:col-span-6 space-y-4 ${mobileView === 'preview' ? 'hidden lg:block' : 'block'}`}>
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
-            {/* Editor Toolbar Header */}
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col">
+            {/* Input Method Navigation Tabs */}
             <div className="flex flex-wrap items-center justify-between px-4 py-3 border-b border-slate-200 bg-slate-50/70 gap-2">
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5 flex-wrap">
                 <button
                   onClick={() => setActiveTab('editor')}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
                     activeTab === 'editor'
-                      ? 'bg-white text-blue-600 shadow-sm border border-slate-200/80'
+                      ? 'bg-white text-blue-600 shadow-xs border border-slate-200/80'
                       : 'text-slate-600 hover:text-slate-900'
                   }`}
                 >
                   <Code2 className="w-3.5 h-3.5 inline-block mr-1.5" />
                   Code Editor
                 </button>
+
+                <button
+                  onClick={() => setActiveTab('url')}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
+                    activeTab === 'url'
+                      ? 'bg-white text-blue-600 shadow-xs border border-slate-200/80'
+                      : 'text-slate-600 hover:text-slate-900'
+                  }`}
+                >
+                  <Globe className="w-3.5 h-3.5 inline-block mr-1.5 text-emerald-600" />
+                  Fetch from URL
+                </button>
+
                 <button
                   onClick={() => setActiveTab('upload')}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
                     activeTab === 'upload'
-                      ? 'bg-white text-blue-600 shadow-sm border border-slate-200/80'
+                      ? 'bg-white text-blue-600 shadow-xs border border-slate-200/80'
                       : 'text-slate-600 hover:text-slate-900'
                   }`}
                 >
                   <UploadCloud className="w-3.5 h-3.5 inline-block mr-1.5" />
-                  Upload .HTML File
+                  Upload .HTML
                 </button>
               </div>
 
@@ -1008,49 +1074,164 @@ export function HtmlToPdfStudio() {
               </div>
             </div>
 
-            {/* Template Selector Bar */}
-            <div className="px-4 py-2.5 bg-slate-100/60 border-b border-slate-200 flex items-center gap-2 overflow-x-auto text-xs scrollbar-thin">
-              <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider shrink-0">Presets:</span>
-              {(Object.keys(STARTER_TEMPLATES) as Array<keyof typeof STARTER_TEMPLATES>).map((key) => {
-                const item = STARTER_TEMPLATES[key];
-                return (
-                  <button
-                    key={key}
-                    onClick={() => handleSelectTemplate(key)}
-                    className={`px-2.5 py-1 rounded-md text-xs font-medium whitespace-nowrap transition flex items-center gap-1.5 shrink-0 ${
-                      selectedTemplateKey === key
-                        ? 'bg-blue-600 text-white shadow-sm'
-                        : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
-                    }`}
-                  >
-                    <span>{item.icon}</span>
-                    <span>{item.name}</span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Tab 1: Code Textarea */}
+            {/* TAB 1: CODE EDITOR */}
             {activeTab === 'editor' && (
-              <div className="relative">
-                <textarea
-                  value={htmlCode}
-                  onChange={(e) => {
-                    setHtmlCode(e.target.value);
-                    setSelectedTemplateKey('custom');
-                  }}
-                  rows={20}
-                  spellCheck={false}
-                  placeholder="Paste or write HTML & CSS markup here..."
-                  className="w-full font-mono text-xs text-slate-800 bg-white p-4 focus:outline-none resize-y min-h-[460px] leading-relaxed selection:bg-blue-100"
-                />
-                <div className="absolute right-3 bottom-3 px-2 py-1 bg-slate-900/70 text-white text-[10px] rounded font-mono pointer-events-none">
-                  {htmlCode.length.toLocaleString()} characters
+              <>
+                {/* Template Selector Bar */}
+                <div className="px-4 py-2.5 bg-slate-100/60 border-b border-slate-200 flex items-center gap-2 overflow-x-auto text-xs scrollbar-thin">
+                  <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider shrink-0">Presets:</span>
+                  {(Object.keys(STARTER_TEMPLATES) as Array<keyof typeof STARTER_TEMPLATES>).map((key) => {
+                    const item = STARTER_TEMPLATES[key];
+                    return (
+                      <button
+                        key={key}
+                        onClick={() => handleSelectTemplate(key)}
+                        className={`px-2.5 py-1 rounded-md text-xs font-medium whitespace-nowrap transition flex items-center gap-1.5 shrink-0 ${
+                          selectedTemplateKey === key
+                            ? 'bg-blue-600 text-white shadow-xs'
+                            : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
+                        }`}
+                      >
+                        <span>{item.icon}</span>
+                        <span>{item.name}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Source status indicator if fetched from URL or file */}
+                {(fetchedUrlDomain || uploadedFileName) && (
+                  <div className="px-4 py-2 bg-emerald-50/90 border-b border-emerald-100 flex items-center justify-between text-xs text-emerald-800">
+                    <span className="flex items-center gap-1.5 font-medium">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                      Loaded from: <strong>{fetchedUrlDomain || uploadedFileName}</strong>
+                    </span>
+                    <button
+                      onClick={() => {
+                        setFetchedUrlDomain(null);
+                        setUploadedFileName(null);
+                      }}
+                      className="text-emerald-700 hover:text-emerald-900 text-[11px] font-semibold underline"
+                    >
+                      Clear
+                    </button>
+                  </div>
+                )}
+
+                <div className="relative">
+                  <textarea
+                    value={htmlCode}
+                    onChange={(e) => {
+                      setHtmlCode(e.target.value);
+                      setSelectedTemplateKey('custom');
+                    }}
+                    rows={20}
+                    spellCheck={false}
+                    placeholder="Paste or write HTML & CSS markup here..."
+                    className="w-full font-mono text-xs text-slate-800 bg-white p-4 focus:outline-none resize-y min-h-[460px] leading-relaxed selection:bg-blue-100"
+                  />
+                  <div className="absolute right-3 bottom-3 px-2 py-1 bg-slate-900/70 text-white text-[10px] rounded font-mono pointer-events-none">
+                    {htmlCode.length.toLocaleString()} characters
+                  </div>
+                </div>
+              </>
+            )}
+
+            {/* TAB 2: FETCH FROM URL */}
+            {activeTab === 'url' && (
+              <div className="p-6 space-y-6">
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Globe className="w-5 h-5 text-emerald-600" />
+                    <h3 className="font-bold text-slate-900 text-base">
+                      Convert Webpage URL Link to PDF
+                    </h3>
+                  </div>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    Enter any public webpage address. Our backend fetches the live HTML document, injects origin base paths for CSS and images, and loads it straight into the live PDF renderer.
+                  </p>
+                </div>
+
+                <div className="space-y-3">
+                  <label className="block text-xs font-semibold text-slate-700">
+                    Webpage URL Address
+                  </label>
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <div className="relative flex-1">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                        <Link2 className="w-4 h-4" />
+                      </div>
+                      <input
+                        type="url"
+                        value={inputUrl}
+                        onChange={(e) => setInputUrl(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') handleFetchUrl();
+                        }}
+                        placeholder="https://example.com/invoice-or-article"
+                        className="w-full pl-9 pr-3 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-300 rounded-xl text-slate-900 placeholder:text-slate-400 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                      />
+                    </div>
+                    <button
+                      onClick={handleFetchUrl}
+                      disabled={isFetchingUrl || !inputUrl.trim()}
+                      className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs sm:text-sm shadow-xs transition flex items-center justify-center gap-2 disabled:opacity-50"
+                    >
+                      {isFetchingUrl ? (
+                        <>
+                          <RefreshCw className="w-4 h-4 animate-spin" />
+                          <span>Fetching...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Globe className="w-4 h-4" />
+                          <span>Fetch &amp; Convert</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Popular sample URLs */}
+                <div className="pt-2 border-t border-slate-100">
+                  <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block mb-2">
+                    Quick Sample URLs:
+                  </span>
+                  <div className="flex flex-wrap gap-2 text-xs">
+                    <button
+                      onClick={() => handleLoadDemoUrl('https://en.wikipedia.org/wiki/Portable_Document_Format')}
+                      className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition"
+                    >
+                      Wikipedia: PDF Article
+                    </button>
+                    <button
+                      onClick={() => handleLoadDemoUrl('https://example.com')}
+                      className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition"
+                    >
+                      Example.com (Clean Minimal)
+                    </button>
+                    <button
+                      onClick={() => handleLoadDemoUrl('https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.html')}
+                      className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition"
+                    >
+                      W3C HTML Sample
+                    </button>
+                  </div>
+                </div>
+
+                <div className="p-3.5 bg-blue-50/70 border border-blue-200/60 rounded-xl text-xs text-blue-900 space-y-1">
+                  <div className="font-semibold flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+                    How URL to PDF works:
+                  </div>
+                  <p className="text-slate-600 leading-relaxed text-[11px]">
+                    Once fetched, you can edit the HTML text directly, adjust margins, and click <strong>Download PDF</strong> or <strong>Vector Print</strong> to save it as a cleanly formatted A4 document.
+                  </p>
                 </div>
               </div>
             )}
 
-            {/* Tab 2: File Upload Area */}
+            {/* TAB 3: FILE UPLOAD */}
             {activeTab === 'upload' && (
               <div className="p-6 text-center">
                 <input
@@ -1064,16 +1245,16 @@ export function HtmlToPdfStudio() {
                   onClick={() => fileInputRef.current?.click()}
                   className="border-2 border-dashed border-slate-300 hover:border-blue-500 bg-slate-50 hover:bg-blue-50/50 rounded-2xl p-8 cursor-pointer transition flex flex-col items-center justify-center group"
                 >
-                  <div className="w-14 h-14 rounded-2xl bg-white shadow-sm border border-slate-200 flex items-center justify-center text-blue-600 mb-4 group-hover:scale-105 transition">
+                  <div className="w-14 h-14 rounded-2xl bg-white shadow-xs border border-slate-200 flex items-center justify-center text-blue-600 mb-4 group-hover:scale-105 transition">
                     <FileCode className="w-7 h-7" />
                   </div>
                   <h3 className="font-bold text-slate-800 text-base mb-1">
                     Upload HTML Document
                   </h3>
                   <p className="text-xs text-slate-500 max-w-sm mb-4">
-                    Drag and drop your <code className="text-blue-600">.html</code>, <code className="text-blue-600">.htm</code>, or text file here, or click to browse from your device.
+                    Drag and drop your <code className="text-blue-600 font-semibold">.html</code>, <code className="text-blue-600 font-semibold">.htm</code>, or text file here, or click to browse.
                   </p>
-                  <span className="px-4 py-2 bg-blue-600 group-hover:bg-blue-700 text-white rounded-xl text-xs font-semibold shadow-sm transition">
+                  <span className="px-4 py-2 bg-blue-600 group-hover:bg-blue-700 text-white rounded-xl text-xs font-semibold shadow-xs transition">
                     Select Local File
                   </span>
                 </div>
@@ -1088,7 +1269,7 @@ export function HtmlToPdfStudio() {
                       onClick={() => setActiveTab('editor')}
                       className="text-emerald-700 hover:text-emerald-900 font-bold underline"
                     >
-                      View & Edit in Code Tab →
+                      View &amp; Edit in Code Tab &rarr;
                     </button>
                   </div>
                 )}
@@ -1113,7 +1294,7 @@ export function HtmlToPdfStudio() {
 
         {/* Right Column: Live Paper Sheet Preview (Columns 7-12) */}
         <div className={`lg:col-span-6 space-y-4 ${mobileView === 'editor' ? 'hidden lg:block' : 'block'}`}>
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col">
             {/* Preview Sheet Header */}
             <div className="px-4 py-3 border-b border-slate-200 bg-slate-50/70 flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -1143,7 +1324,7 @@ export function HtmlToPdfStudio() {
             <div className="bg-slate-200/50 p-4 sm:p-6 overflow-x-auto flex justify-center items-start min-h-[520px]">
               {/* Scaled Physical Paper Mockup */}
               <div
-                className="bg-white shadow-xl rounded-sm transition-all duration-200 relative overflow-hidden"
+                className="bg-white shadow-xl rounded-xs transition-all duration-200 relative overflow-hidden"
                 style={{
                   width: '100%',
                   maxWidth: orientation === 'portrait' ? '540px' : '720px',
@@ -1178,7 +1359,7 @@ export function HtmlToPdfStudio() {
                 <button
                   onClick={handleDownloadPdf}
                   disabled={isExporting}
-                  className="px-4 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs shadow-sm transition flex items-center gap-1.5"
+                  className="px-4 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs shadow-xs transition flex items-center gap-1.5"
                 >
                   <Download className="w-3.5 h-3.5" />
                   Download PDF
@@ -1238,7 +1419,7 @@ export function HtmlToPdfStudio() {
               </button>
               <button
                 onClick={() => setShowSuccessModal(false)}
-                className="flex-1 py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold transition shadow-sm"
+                className="flex-1 py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold transition shadow-xs"
               >
                 Done
               </button>
@@ -1249,4 +1430,3 @@ export function HtmlToPdfStudio() {
     </div>
   );
 }
-

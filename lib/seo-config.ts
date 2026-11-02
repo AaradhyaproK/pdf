@@ -2913,10 +2913,17 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
   '/tools/html-to-pdf': {
     slug: '/tools/html-to-pdf',
-    title: 'HTML to PDF Converter — Convert HTML Code & Files to PDF [Free, Instant & 100% Private]',
-    metaTitle: 'HTML to PDF Converter — Convert HTML Code & Files to PDF [Free, Instant & 100% Private]',
-    description: 'Convert HTML files, raw code, and web templates into high-resolution vector PDF documents. Support for A4, Letter, custom margins, CSS backgrounds, and starter templates. 100% private in-browser.',
+    title: 'HTML & URL to PDF Converter — Convert Webpage Link, Code & File [Free, No Watermark]',
+    metaTitle: 'HTML & URL to PDF Converter — Convert Webpage Link, Code & File [Free, No Watermark]',
+    description: 'Convert any webpage URL link, raw HTML code, or .html file into crisp A4/Letter vector PDF documents. 1-click web link fetcher, live split-screen paper preview, custom margins, and CSS backgrounds. 100% free, private in-browser, no watermarks.',
     keywords: [
+      'url to pdf converter',
+      'convert url to pdf online free',
+      'webpage to pdf converter',
+      'website to pdf converter free',
+      'save webpage as pdf',
+      'convert link to pdf',
+      'web link to pdf converter',
       'html to pdf',
       'html to pdf converter',
       'convert html to pdf online free',
@@ -2925,22 +2932,26 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       'html to pdf converter free without watermark',
       'raw html to pdf with css',
       'convert html file to pdf',
-      'html to pdf in browser client side',
-      'html to pdf a4 size',
+      'url to pdf a4 size',
+      'fetch url to pdf online',
+      'website link to pdf converter no watermark',
       'invoice html to pdf free',
       'convert htm to pdf free online',
       'html to pdf with background graphics',
       'export html table to pdf',
-      'html to pdf multi page breaks'
+      'html to pdf multi page breaks',
+      'convert article url to pdf',
+      'free html to pdf without signup'
     ],
     category: 'pdf',
     howToSteps: [
-      { title: 'Input HTML Content', text: 'Paste your HTML and CSS code, upload an .html file, or select a starter invoice or report preset.' },
-      { title: 'Customize Layout', text: 'Select paper format (A4, Letter, Legal), margins, orientation, and zoom scale with live sheet preview.' },
+      { title: 'Provide URL or HTML Content', text: 'Paste a public webpage URL in the Fetch from URL tab, enter HTML/CSS code in the Code Editor, or drag-and-drop a local .html file.' },
+      { title: 'Customize Layout & Margins', text: 'Select paper format (A4, Letter, Legal), margins, orientation, and zoom scale with live sheet preview.' },
       { title: 'Download PDF', text: 'Click Download PDF for instant file export or Vector Print for selectable text & clickable links.' }
     ],
     faqs: [
-      { question: 'Can I convert HTML to PDF without uploading files to a server?', answer: 'Yes! FileZenith compiles your HTML directly inside your web browser memory. Zero files are uploaded to any external server.' },
+      { question: 'Can I convert a webpage link (URL) directly into a PDF?', answer: 'Yes! Simply paste the website URL in the Fetch from URL tab. The tool loads the live HTML, links external styles & images, and provides an instant A4/Letter PDF preview.' },
+      { question: 'Can I convert HTML to PDF without uploading files to a server?', answer: 'Yes! FileZenith compiles your HTML directly inside your web browser memory. Zero files are uploaded or stored on any external server.' },
       { question: 'Does it support CSS background colors and images?', answer: 'Yes, our engine automatically enables exact print color adjustment so all background colors, gradients, and badges are preserved.' }
     ]
   }

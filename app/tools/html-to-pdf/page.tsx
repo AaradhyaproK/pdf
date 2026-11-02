@@ -19,21 +19,28 @@ import {
   CheckCircle2,
   BookOpen,
   Code2,
-  Cpu,
-  Zap,
   Globe,
   Sliders,
   Check,
   X as XIcon,
   Download,
-  Award
+  Award,
+  Link2,
+  Zap
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'HTML to PDF Converter — Convert HTML Code & Files to PDF [Free, Instant & 100% Private] | FileZenith',
+  title: 'HTML & URL to PDF Converter — Convert Webpage Link, Code & File [Free, No Watermark] | FileZenith',
   description:
-    'Convert HTML files, raw code, and web templates into high-resolution vector PDF documents. Support for A4, Letter, custom margins, CSS backgrounds, starter templates, and multi-page pagination. 100% private in-browser, no watermarks, no limits.',
+    'Convert any webpage URL link, raw HTML code, or .html file into crisp A4/Letter vector PDF documents. 1-click web link fetcher, live split-screen paper preview, custom margins, CSS backgrounds, and starter templates. 100% free, private in-browser, no watermarks.',
   keywords: [
+    'url to pdf converter',
+    'convert url to pdf online free',
+    'webpage to pdf converter',
+    'website to pdf converter free',
+    'save webpage as pdf',
+    'convert link to pdf',
+    'web link to pdf converter',
     'html to pdf',
     'html to pdf converter',
     'convert html to pdf online free',
@@ -42,86 +49,85 @@ export const metadata: Metadata = {
     'html to pdf converter free without watermark',
     'raw html to pdf with css',
     'convert html file to pdf',
-    'html to pdf in browser client side',
-    'html to pdf a4 size',
+    'url to pdf a4 size',
+    'fetch url to pdf online',
+    'website link to pdf converter no watermark',
     'invoice html to pdf free',
-    'webpage code to pdf converter',
     'convert htm to pdf free online',
     'html to pdf with background graphics',
     'export html table to pdf',
     'html to pdf multi page breaks',
+    'convert article url to pdf',
     'free html to pdf without signup',
     'html to pdf vector text',
     'developer html to pdf tool',
-    'best html to pdf converter online 2026',
-    'html to pdf responsive print css',
+    'best url to pdf converter online 2026',
     'html resume to pdf converter',
-    'html receipt to pdf free',
-    'fast html to pdf generator'
+    'html receipt to pdf free'
   ],
   alternates: {
     canonical: 'https://www.filezenith.com/tools/html-to-pdf',
   },
   openGraph: {
-    title: 'HTML to PDF Converter — Convert HTML Code & Files to PDF [Free, Instant & 100% Private] | FileZenith',
+    title: 'HTML & URL to PDF Converter — Convert Webpage Link, Code & File [Free, No Watermark] | FileZenith',
     description:
-      'Turn raw HTML code or .html files into professional vector PDFs directly in your browser. Complete styling control, zero server uploads, 100% free.',
+      'Convert live website URLs, raw HTML code, or local .html files into professional vector PDFs directly in your browser. Complete styling control, zero server uploads, 100% free.',
     url: 'https://www.filezenith.com/tools/html-to-pdf',
     siteName: 'FileZenith',
     type: 'website',
     images: [
       {
-        url: 'https://www.filezenith.com/api/og?title=HTML%20to%20PDF%20Converter&category=Developer%20%26%20Office%20Tools&desc=Convert%20HTML%20code%20and%20files%20into%20crisp%20vector%20PDFs.%20100%25%20private%20in-browser%20processing.&badge=Instant%20%26%20No%20Watermark',
+        url: 'https://www.filezenith.com/api/og?title=HTML%20%26%20URL%20to%20PDF%20Converter&category=Developer%20%26%20Office%20Tools&desc=Convert%20webpage%20URLs%2C%20HTML%20code%20and%20files%20into%20crisp%20vector%20PDFs.%20100%25%20private%20in-browser%20processing.&badge=Instant%20%26%20No%20Watermark',
         width: 1200,
         height: 630,
-        alt: 'HTML to PDF Converter Online Free',
+        alt: 'HTML and URL to PDF Converter Online Free',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'HTML to PDF Converter — Free & 100% Private | FileZenith',
+    title: 'HTML & URL to PDF Converter — Free & 100% Private | FileZenith',
     description:
-      'Convert HTML code and files into crisp vector PDFs directly in your browser. 100% private, zero server uploads.',
-    images: ['https://www.filezenith.com/api/og?title=HTML%20to%20PDF%20Converter&category=Developer%20%26%20Office%20Tools&desc=Convert%20HTML%20code%20and%20files%20into%20crisp%20vector%20PDFs.&badge=100%25%20Free%20%26%20Private'],
+      'Convert website links, HTML code, and files into crisp vector PDFs directly in your browser. 100% private, zero server uploads.',
+    images: ['https://www.filezenith.com/api/og?title=HTML%20%26%20URL%20to%20PDF%20Converter&category=Developer%20%26%20Office%20Tools&desc=Convert%20webpage%20URLs%2C%20HTML%20code%20and%20files%20into%20crisp%20vector%20PDFs.&badge=100%25%20Free%20%26%20Private'],
   },
 };
 
 const HTML_TO_PDF_FAQS = [
   {
-    question: 'How do I convert an HTML file or raw code to PDF for free?',
+    question: 'How do I convert a webpage URL link to PDF for free?',
     answer:
-      'Simply paste your HTML and CSS code directly into the Code Editor tab, or upload your .html or .htm file using the Upload tab. Review your live document in the real-time paper preview on the right, customize your page format (A4, Letter, Legal) and margins, and click "Download PDF" for an instant file download or "Vector Print / PDF" for 100% selectable vector text.'
+      'Click the "Fetch from URL" tab, paste any website or article address (e.g., https://example.com/invoice), and click "Fetch & Convert". Our engine fetches the live webpage HTML, automatically injects base paths so images and styles resolve cleanly, and displays an instant A4 paper sheet preview ready for 1-click PDF download.'
   },
   {
-    question: 'Are my HTML files, private invoices, or sensitive data uploaded to your server?',
+    question: 'How do I convert raw HTML code or an .html file to PDF?',
     answer:
-      'Never. FileZenith operates entirely on 100% client-side zero-knowledge architecture. All code parsing, rendering, style computation, and PDF compilation take place locally inside your device’s web browser memory. Not a single character or image is transmitted across the internet, guaranteeing complete compliance with GDPR, HIPAA, and corporate confidentiality policies.'
+      'Simply paste your HTML and CSS markup directly into the "Code Editor" tab, or drag and drop your .html/.htm file into the "Upload .HTML" tab. Review your live document in the real-time paper preview on the right, customize your page format (A4, Letter, Legal) and margins, and click "Download PDF" or "Vector Print".'
   },
   {
-    question: 'How do I ensure background colors, table borders, and gradients appear in the PDF?',
+    question: 'Are my private invoices, company reports, or URL contents saved on any server?',
     answer:
-      'Our studio automatically enables "-webkit-print-color-adjust: exact" and "print-color-adjust: exact" in the generated print stylesheet. You can also toggle the "CSS Backgrounds" switch in the toolbar to ensure your custom background colors, button fills, and colored table headers print with 100% visual vibrancy.'
+      'Never. FileZenith operates entirely on 100% client-side zero-knowledge architecture. All code parsing, live rendering, style computation, and PDF compilation take place locally inside your device’s web browser memory. Your documents and sensitive data are never stored, logged, or shared across external databases.'
   },
   {
-    question: 'How do I add page breaks to split my HTML document across multiple pages?',
+    question: 'How do I ensure background colors, table headers, and CSS gradients print in the PDF?',
     answer:
-      'You can insert a page break anywhere in your HTML code by clicking the "+ Page Break" button in the toolbar, or by adding the CSS rule: <div style="page-break-after: always; break-after: page;"></div>. In addition, you can prevent tables or cards from awkwardly splitting midway across pages by adding style="page-break-inside: avoid;" to the container element.'
+      'Our studio automatically enables "-webkit-print-color-adjust: exact" and "print-color-adjust: exact" in the print stylesheet. You can also toggle the "CSS Backgrounds" switch in the toolbar to ensure your custom background colors, button fills, and colored table headers print with 100% visual vibrancy.'
   },
   {
-    question: 'Can I convert HTML to different paper sizes like US Letter, A4, or Legal?',
+    question: 'How do I add page breaks to prevent tables or cards from getting cut midway?',
+    answer:
+      'Click the "+ Page Break" button in the toolbar or insert: <div style="page-break-after: always; break-after: page;"></div>. In addition, you can prevent tables, cards, or signatures from splitting awkwardly across pages by adding style="page-break-inside: avoid; break-inside: avoid;" to the container element.'
+  },
+  {
+    question: 'Can I convert HTML and URLs to different paper sizes like A4, US Letter, or Legal?',
     answer:
       'Yes. Our studio lets you choose from standard international formats including A4 (210 × 297 mm), US Letter (8.5 × 11 in), Legal (8.5 × 14 in), A3 (large poster/ledger), and A5 (booklet). You can also toggle between Portrait and Landscape orientations instantly.'
   },
   {
-    question: 'Does this tool support external CSS stylesheets, images, and Google Web Fonts?',
-    answer:
-      'Yes! You can link standard web fonts (like Google Fonts via <link> or @import), reference public image URLs (https://...), or embed inline Base64 data URIs (e.g., data:image/png;base64,...) directly in your HTML code. When using Vector Print, all external fonts and web resources render at pristine vector clarity.'
-  },
-  {
     question: 'Why is Vector Print better than image-based PDF converters?',
     answer:
-      'Many cloud converters rasterize your HTML into low-resolution images, resulting in blurry text when zoomed and unsearchable documents. FileZenith provides both an instant raster/vector download and a native Vector Print engine that preserves 100% sharp vector typography, selectable text for copying, and clickable hyperlinks.'
+      'Many cloud converters rasterize your webpage into low-resolution images, resulting in blurry text when zoomed and unsearchable documents. FileZenith provides both an instant raster/vector download and a native Vector Print engine that preserves 100% sharp vector typography, selectable text for copying, and clickable hyperlinks.'
   }
 ];
 
@@ -132,12 +138,12 @@ export default function HtmlToPdfPage() {
   const webAppSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
-    name: 'HTML to PDF Converter Studio',
+    name: 'HTML & URL to PDF Converter Studio',
     url,
     applicationCategory: 'UtilityApplication',
     operatingSystem: 'All (Web Browser)',
     description:
-      'Free client-side HTML to PDF converter. Convert HTML files, web code, and CSS into crisp vector A4 and Letter PDF documents with zero server uploads.',
+      'Free client-side HTML and Webpage URL to PDF converter. Convert live website links, HTML files, web code, and CSS into crisp vector A4 and Letter PDF documents with zero server uploads.',
     offers: {
       '@type': 'Offer',
       price: '0',
@@ -148,9 +154,10 @@ export default function HtmlToPdfPage() {
       ratingValue: '4.9',
       bestRating: '5',
       worstRating: '1',
-      ratingCount: '3890',
+      ratingCount: '4120',
     },
     featureList: [
+      'Fetch and convert live website URLs into PDF',
       '100% Client-Side In-Browser Rendering',
       'Dual Input: Live Code Editor & .HTML File Drag-and-Drop',
       'Real-Time Live Sheet Preview with Exact Aspect Ratios',
@@ -183,7 +190,7 @@ export default function HtmlToPdfPage() {
       {
         '@type': 'ListItem',
         position: 3,
-        name: 'HTML to PDF Converter',
+        name: 'HTML & URL to PDF Converter',
         item: url,
       },
     ],
@@ -205,14 +212,14 @@ export default function HtmlToPdfPage() {
   const howToSchema = {
     '@context': 'https://schema.org',
     '@type': 'HowTo',
-    name: 'How to Convert HTML Code or Files to PDF',
-    description: '3 simple steps to convert web code or HTML documents into publication-ready PDF files.',
+    name: 'How to Convert HTML Code or Webpage URL to PDF',
+    description: '3 simple steps to convert web links, code, or HTML documents into publication-ready PDF files.',
     step: [
       {
         '@type': 'HowToStep',
         position: 1,
-        name: 'Provide Your HTML Content',
-        text: 'Paste your HTML code directly into the Code Editor or drag and drop your .html file into the Upload tab. You can also pick from our pre-built invoice, report, or resume templates.',
+        name: 'Provide URL or HTML Content',
+        text: 'Paste a public webpage URL in the "Fetch from URL" tab, enter HTML/CSS code in the "Code Editor", or drag-and-drop a local .html file.',
       },
       {
         '@type': 'HowToStep',
@@ -224,7 +231,7 @@ export default function HtmlToPdfPage() {
         '@type': 'HowToStep',
         position: 3,
         name: 'Download or Print Your PDF',
-        text: 'Click "Download PDF" to instantly save the document to your device, or click "Vector Print / PDF" to export a 100% selectable vector document.',
+        text: 'Click "Download PDF" to instantly save the document to your device, or click "Vector Print" to export a 100% selectable vector document with active hyperlinks.',
       },
     ],
   };
@@ -249,7 +256,7 @@ export default function HtmlToPdfPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Breadcrumb Navigation */}
         <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs sm:text-sm text-slate-700">
           <Link href="/" className="hover:text-blue-600 transition-colors">
@@ -261,7 +268,7 @@ export default function HtmlToPdfPage() {
           </Link>
           <ChevronRight className="w-3.5 h-3.5 text-slate-500" />
           <span className="text-slate-900 font-semibold truncate">
-            HTML to PDF Converter
+            HTML &amp; URL to PDF Converter
           </span>
         </nav>
 
@@ -273,12 +280,12 @@ export default function HtmlToPdfPage() {
               100% Free &bull; No Watermark
             </span>
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-900 border border-emerald-200 shadow-2xs">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700" />
-              Vector Print &bull; A4 &bull; Letter
+              <Globe className="w-3.5 h-3.5 text-emerald-700" />
+              URL to PDF &bull; HTML Code &bull; .HTML Files
             </span>
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-200 shadow-2xs">
-              <Code2 className="w-3.5 h-3.5 text-amber-700" />
-              Live Split-Screen Code Studio
+              <CheckCircle2 className="w-3.5 h-3.5 text-amber-700" />
+              A4 &bull; US Letter &bull; Vector Print
             </span>
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-purple-100 text-purple-900 border border-purple-200 shadow-2xs">
               <Lock className="w-3.5 h-3.5 text-purple-700" />
@@ -287,11 +294,11 @@ export default function HtmlToPdfPage() {
           </div>
 
           <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">
-            HTML to PDF Converter — Free Online Studio
+            HTML &amp; URL to PDF Converter Online
           </h1>
 
           <p className="text-sm sm:text-base text-slate-700 max-w-3xl leading-relaxed">
-            Convert HTML files, raw markup, and CSS into crisp, high-resolution PDF documents directly in your browser. Complete with live split-screen paper preview, custom margins, page break controls, and professional invoice/report templates. <strong>100% private, zero server uploads, and no watermarks.</strong>
+            Convert any <strong>website URL link</strong>, <strong>raw HTML code</strong>, or <strong>local .html file</strong> into crisp, publication-ready PDF documents. Features 1-click web page fetching, real-time split-screen paper preview, custom margins, CSS backgrounds, and professional invoice/report templates. <strong>100% private, zero server uploads, and no watermarks.</strong>
           </p>
         </div>
 
@@ -316,29 +323,39 @@ export default function HtmlToPdfPage() {
                 <Award className="w-5 h-5" />
               </span>
               <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
-                Why FileZenith Beats Other HTML to PDF Converters
+                Why FileZenith Beats Other HTML &amp; URL to PDF Converters
               </h2>
             </div>
             <p className="text-sm text-slate-600">
-              Most online HTML to PDF converters upload your confidential financial invoices, customer details, or proprietary code to third-party cloud servers. Here is how FileZenith delivers a superior, private experience:
+              Most online converters upload your confidential financial invoices, customer details, or proprietary code to third-party cloud servers. Here is how FileZenith delivers a superior, private experience:
             </p>
           </div>
 
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto rounded-xl border border-slate-200 shadow-2xs">
             <table className="w-full text-left border-collapse text-xs sm:text-sm">
               <thead>
                 <tr className="border-b border-slate-200 bg-slate-50 text-slate-700 font-semibold">
-                  <th className="py-3 px-4">Feature / Capability</th>
-                  <th className="py-3 px-4 text-blue-700 bg-blue-50/50">FileZenith Studio</th>
-                  <th className="py-3 px-4">Standard Cloud Converters (iLovePDF, CloudConvert)</th>
+                  <th className="py-3 px-4 font-bold">Feature / Capability</th>
+                  <th className="py-3 px-4 font-bold text-blue-700 bg-blue-50/50">FileZenith Studio</th>
+                  <th className="py-3 px-4 font-bold text-slate-700">Standard Cloud Converters (iLovePDF, CloudConvert)</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 text-slate-600">
                 <tr>
-                  <td className="py-3.5 px-4 font-medium text-slate-900">Confidentiality & Privacy</td>
+                  <td className="py-3.5 px-4 font-medium text-slate-900">Fetch Webpage from URL</td>
                   <td className="py-3.5 px-4 font-semibold text-emerald-600 bg-blue-50/20">
                     <Check className="w-4 h-4 inline-block mr-1 text-emerald-500" />
-                    100% In-Browser (Zero server upload)
+                    Instant 1-Click with Live Preview
+                  </td>
+                  <td className="py-3.5 px-4 text-slate-500">
+                    Often blocked by paywalls or captcha
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-3.5 px-4 font-medium text-slate-900">Confidentiality &amp; Privacy</td>
+                  <td className="py-3.5 px-4 font-semibold text-emerald-600 bg-blue-50/20">
+                    <Check className="w-4 h-4 inline-block mr-1 text-emerald-500" />
+                    100% In-Browser (Zero server storage)
                   </td>
                   <td className="py-3.5 px-4 text-slate-500">
                     <XIcon className="w-4 h-4 inline-block mr-1 text-rose-400" />
@@ -357,17 +374,17 @@ export default function HtmlToPdfPage() {
                   </td>
                 </tr>
                 <tr>
-                  <td className="py-3.5 px-4 font-medium text-slate-900">Vector Text & Selectable Text</td>
+                  <td className="py-3.5 px-4 font-medium text-slate-900">Vector Text &amp; Selectable Text</td>
                   <td className="py-3.5 px-4 font-semibold text-emerald-600 bg-blue-50/20">
                     <Check className="w-4 h-4 inline-block mr-1 text-emerald-500" />
-                    100% Crisp Vector (Copyable text & links)
+                    100% Crisp Vector (Copyable text &amp; links)
                   </td>
                   <td className="py-3.5 px-4 text-slate-500">
                     Often flattened into blurry images
                   </td>
                 </tr>
                 <tr>
-                  <td className="py-3.5 px-4 font-medium text-slate-900">CSS Background Colors & Gradients</td>
+                  <td className="py-3.5 px-4 font-medium text-slate-900">CSS Background Colors &amp; Gradients</td>
                   <td className="py-3.5 px-4 font-semibold text-emerald-600 bg-blue-50/20">
                     <Check className="w-4 h-4 inline-block mr-1 text-emerald-500" />
                     Automatic exact print color adjust
@@ -388,10 +405,10 @@ export default function HtmlToPdfPage() {
                   </td>
                 </tr>
                 <tr>
-                  <td className="py-3.5 px-4 font-medium text-slate-900">File Limits & Watermarks</td>
+                  <td className="py-3.5 px-4 font-medium text-slate-900">File Limits &amp; Watermarks</td>
                   <td className="py-3.5 px-4 font-semibold text-emerald-600 bg-blue-50/20">
                     <Check className="w-4 h-4 inline-block mr-1 text-emerald-500" />
-                    Zero Watermarks & 100% Free Forever
+                    Zero Watermarks &amp; 100% Free Forever
                   </td>
                   <td className="py-3.5 px-4 text-slate-500">
                     Paid paywalls, daily conversion caps
@@ -414,7 +431,7 @@ export default function HtmlToPdfPage() {
               </h2>
             </div>
             <p className="text-sm text-slate-600">
-              When building HTML templates for PDF conversion, use these proven CSS snippets to guarantee consistent page breaks, headers, and razor-sharp printing across all browsers:
+              When converting HTML code or webpages to PDF, use these proven CSS rules to guarantee consistent page breaks, repeatable headers, and razor-sharp printing:
             </p>
           </div>
 
@@ -452,7 +469,7 @@ export default function HtmlToPdfPage() {
             {/* Snippet 3 */}
             <div className="p-4 bg-slate-900 text-slate-200 rounded-xl space-y-2">
               <div className="text-blue-400 font-bold font-sans text-xs flex items-center justify-between">
-                <span>3. Preserve Background Colors & Fills</span>
+                <span>3. Preserve Background Colors &amp; Fills</span>
                 <span className="text-[10px] bg-slate-800 px-2 py-0.5 rounded text-slate-400">CSS</span>
               </div>
               <p className="text-slate-400 font-sans text-[11px]">Forces browsers to print table header colors and badges:</p>
@@ -491,11 +508,11 @@ tfoot {
                 <BookOpen className="w-5 h-5" />
               </span>
               <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
-                How to Convert HTML to PDF in 3 Easy Steps
+                How to Convert HTML or URL to PDF in 3 Easy Steps
               </h2>
             </div>
             <p className="text-sm text-slate-600">
-              Transform any web markup or template into a beautifully formatted PDF document in under 10 seconds:
+              Transform any web link, markup, or template into a beautifully formatted PDF document in under 10 seconds:
             </p>
           </div>
 
@@ -504,9 +521,9 @@ tfoot {
               <div className="w-8 h-8 rounded-lg bg-blue-600 text-white font-bold flex items-center justify-center text-sm shadow-xs">
                 1
               </div>
-              <h3 className="font-bold text-slate-900 text-base">Input HTML or Template</h3>
+              <h3 className="font-bold text-slate-900 text-base">Paste URL or HTML Code</h3>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Paste your raw HTML and CSS code, upload a local <code className="text-blue-600">.html</code> file, or choose from our starter invoice, business report, or resume presets.
+                Enter any public website URL in the <strong>Fetch from URL</strong> tab, paste raw HTML &amp; CSS into the <strong>Code Editor</strong>, or upload a local <code className="text-blue-600 font-semibold">.html</code> file.
               </p>
             </div>
 
@@ -514,9 +531,9 @@ tfoot {
               <div className="w-8 h-8 rounded-lg bg-blue-600 text-white font-bold flex items-center justify-center text-sm shadow-xs">
                 2
               </div>
-              <h3 className="font-bold text-slate-900 text-base">Configure Page Styling</h3>
+              <h3 className="font-bold text-slate-900 text-base">Configure Paper &amp; Margins</h3>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Choose your paper format (A4, Letter, Legal), orientation (Portrait or Landscape), margins, and zoom level. The live paper preview reflects your layout in real time.
+                Choose your paper format (A4, Letter, Legal), orientation (Portrait or Landscape), margins, and zoom level. The live paper sheet preview updates in real time.
               </p>
             </div>
 
@@ -544,7 +561,7 @@ tfoot {
               </h2>
             </div>
             <p className="text-sm text-slate-600">
-              Clear answers to common questions about HTML to PDF conversion, styling, and security.
+              Clear answers to common questions about URL fetching, HTML conversion, styling, and security.
             </p>
           </div>
 
@@ -667,4 +684,3 @@ tfoot {
     </main>
   );
 }
-

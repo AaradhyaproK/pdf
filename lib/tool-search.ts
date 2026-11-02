@@ -100,6 +100,35 @@ export function isPicsToPdfQuery(query: string): boolean {
 }
 
 /**
+ * Detects if a search query is looking for HTML/URL/Webpage to PDF conversion.
+ */
+export function isHtmlOrUrlToPdfQuery(query: string): boolean {
+  const q = query.trim().toLowerCase().replace(/[-_]/g, ' ');
+  if (!q) return false;
+
+  const urlPdfTerms = [
+    'url to pdf',
+    'url2pdf',
+    'link to pdf',
+    'web to pdf',
+    'webpage to pdf',
+    'website to pdf',
+    'site to pdf',
+    'html to pdf',
+    'html2pdf',
+    'htm to pdf',
+    'code to pdf',
+    'page to pdf',
+    'save webpage as pdf',
+    'convert url to pdf',
+    'convert website to pdf',
+    'convert link to pdf'
+  ];
+
+  return urlPdfTerms.some((term) => q.includes(term) || term.includes(q));
+}
+
+/**
  * Intelligent tool search matcher that supports:
  * - Substring matching across name, desc, slug, badge
  * - Bidirectional keyword matching
@@ -118,6 +147,12 @@ export function matchTool(tool: GenericToolItem, query: string): boolean {
     tool.id === 'to-pdf';
 
   if (isImageToPdf && isPicsToPdfTool) {
+    return true;
+  }
+
+  const isUrlToPdf = isHtmlOrUrlToPdfQuery(q);
+  const isHtmlToPdfTool = tool.slug === '/tools/html-to-pdf';
+  if (isUrlToPdf && isHtmlToPdfTool) {
     return true;
   }
 
@@ -159,6 +194,7 @@ export function rankToolsForSearch<T extends GenericToolItem>(tools: T[], query:
   if (!q) return tools;
 
   const isImageToPdf = isPicsToPdfQuery(q);
+  const isUrlToPdf = isHtmlOrUrlToPdfQuery(q);
 
   return [...tools].sort((a, b) => {
     const aIsPics = a.slug === '/image/pics-to-pdf' || a.id === 'pics-to-pdf' || a.slug === '/image/to-pdf';
@@ -167,6 +203,14 @@ export function rankToolsForSearch<T extends GenericToolItem>(tools: T[], query:
     if (isImageToPdf) {
       if (aIsPics && !bIsPics) return -1;
       if (!aIsPics && bIsPics) return 1;
+    }
+
+    const aIsHtmlPdf = a.slug === '/tools/html-to-pdf';
+    const bIsHtmlPdf = b.slug === '/tools/html-to-pdf';
+
+    if (isUrlToPdf) {
+      if (aIsHtmlPdf && !bIsHtmlPdf) return -1;
+      if (!aIsHtmlPdf && bIsHtmlPdf) return 1;
     }
 
     // Exact name match priority
