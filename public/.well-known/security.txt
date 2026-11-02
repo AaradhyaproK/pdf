@@ -1,0 +1,9 @@
+Contact: mailto:aaradhya@snab.co.in
+Contact: mailto:hello@snab.co.in
+Expires: 2027-12-31T23:59:59.000Z
+Encryption: https://www.filezenith.com/security
+Preferred-Languages: en, hi
+Canonical: https://www.filezenith.com/.well-known/security.txt
+Policy: https://www.filezenith.com/security
+Hiring: https://www.snab.co.in
+Acknowledgments: https://www.filezenith.com/about

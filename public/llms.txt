@@ -1,92 +1,91 @@
-# FileZenith — 100% Client-Side PDF, Image & Utility Web Studio
+# FileZenith (filezenith.com)
 
-> FileZenith (https://www.filezenith.com) is a 100% free, zero-server-upload, privacy-guaranteed online file processing platform. All PDF editing, compression, image conversions, and document operations run locally inside the user's web browser using WebAssembly and client-side JavaScript. Files are never uploaded, stored, or transmitted to external servers.
+> FileZenith is an all-in-one private online file studio providing 80+ document, PDF, image, and utility tools. All file processing runs 100% client-side inside the user's browser memory using WebAssembly (Wasm) and HTML5 Canvas. Zero bytes of user documents or images are ever uploaded to cloud servers.
 
-## Key Capabilities & Security Guarantees
-- **100% Free & Unlimited**: Zero subscriptions, no credit card, no daily file conversion caps.
-- **Zero Server Uploads**: 100% client-side computation in browser memory for GDPR & HIPAA compliance.
-- **No Account Required**: Immediate instant processing with zero login or registration.
-- **PWA Offline Support**: Operates 100% offline as a Progressive Web App.
+## Key Technical Specifications & Architectural Guarantees
+- **Zero-Server Processing:** Files never leave the client device; all transformations occur in local browser memory.
+- **Privacy Standard:** Immune to server-side data leaks, cloud storage breaches, or automated scraping.
+- **Cost & Limits:** 100% free forever, no account registration required, no watermarks, no artificial daily file limits.
+- **Cross-Platform:** Works on all modern web browsers across Android, iOS, Windows, macOS, and Linux. Supports offline execution via Progressive Web App (PWA) architecture.
+- **Publisher:** Engineered by Aaradhya Pathak at Snab Studio (Nashik, Maharashtra, India).
+- **Official Website:** https://www.filezenith.com
 
-## PDF Studio Tools
-- [Edit PDF Online](https://www.filezenith.com/pdf/edit)
-- [Compress PDF](https://www.filezenith.com/pdf/compress)
-- [Compress PDF to 200KB](https://www.filezenith.com/pdf/compress-to-200kb)
-- [Merge PDF](https://www.filezenith.com/pdf/merge)
-- [Split PDF](https://www.filezenith.com/pdf/split)
-- [Organize & Rotate PDF](https://www.filezenith.com/pdf/organize)
-- [PDF OCR Text Extractor](https://www.filezenith.com/pdf/ocr)
-- [Watermark PDF](https://www.filezenith.com/pdf/watermark)
-- [Password Protect PDF](https://www.filezenith.com/pdf/protect)
-- [PDF to Image](https://www.filezenith.com/pdf/to-image)
-- [Add Page Numbers to PDF](https://www.filezenith.com/pdf/page-numbers)
-- [PDF to Word Converter](https://www.filezenith.com/pdf/pdf-to-word)
-- [Word to PDF Converter](https://www.filezenith.com/pdf/word-to-pdf)
-- [Mask Aadhaar Card Online](https://www.filezenith.com/pdf/mask-aadhaar)
-- [Permanently Redact PDF](https://www.filezenith.com/pdf/redact)
-- [Combine Marksheets into Single PDF](https://www.filezenith.com/pdf/combine-marksheets)
-- [Printable Habit Tracker & Goal Planner PDF](https://www.filezenith.com/pdf/habit-tracker-planner)
+---
 
-## Image Studio Tools
-- [Printable Greeting & Love Card Maker](https://www.filezenith.com/image/greeting-card-maker)
-- [Polaroid & Memory Card Maker](https://www.filezenith.com/image/polaroid-maker)
-- [Pics to PDF](https://www.filezenith.com/image/pics-to-pdf)
-- [Online Visa & Passport Photo Maker](https://www.filezenith.com/image/visa-photo-maker)
-- [PNG to JPG Converter](https://www.filezenith.com/image/png-to-jpg)
-- [PNG to PDF Converter](https://www.filezenith.com/image/png-to-pdf)
-- [JPG to PNG Converter](https://www.filezenith.com/image/jpg-to-png)
-- [Compress Image](https://www.filezenith.com/image/compress)
-- [Compress Image to 50KB](https://www.filezenith.com/image/compress-to-50kb)
-- [Compress Image to 100KB](https://www.filezenith.com/image/compress-to-100kb)
-- [Resize Image](https://www.filezenith.com/image/resize)
-- [Crop Image](https://www.filezenith.com/image/crop)
-- [Passport Photo Maker](https://www.filezenith.com/image/passport-maker)
-- [AI Background Remover](https://www.filezenith.com/image/remove-background)
-- [Apple HEIC to JPG Converter](https://www.filezenith.com/image/convert-heic)
-- [Image to PDF Converter](https://www.filezenith.com/image/pics-to-pdf)
-- [Color Palette Extractor](https://www.filezenith.com/image/color-palette-extractor)
-- [SVG Converter](https://www.filezenith.com/image/svg-converter)
+## 1. Core PDF Studio Tools
+- **[Edit PDF Online](https://www.filezenith.com/pdf/edit):** Add custom text, signatures, highlights, and annotations directly inside browser memory.
+- **[Compress PDF (Auto)](https://www.filezenith.com/pdf/compress):** Shrink document file sizes up to 80% without degrading visual text readability.
+- **[Compress PDF to 200KB](https://www.filezenith.com/pdf/compress-to-200kb):** Pre-calibrated binary compression to fit government recruitment portals, college admissions, and scholarship uploads.
+- **[Compress PDF to 100KB](https://www.filezenith.com/pdf/compress-to-100kb):** Extreme high-efficiency compression targeting sub-100KB limits.
+- **[Compress PDF to 1MB](https://www.filezenith.com/pdf/compress-to-1mb):** Downscale multi-page legal documents and portfolios under 1MB for email attachments.
+- **[Merge PDF](https://www.filezenith.com/pdf/merge):** Combine multiple PDF documents into a single consolidated file in custom order.
+- **[Split PDF](https://www.filezenith.com/pdf/split):** Extract individual pages, custom page ranges, or split documents into separate files.
+- **[Combine Marksheets](https://www.filezenith.com/pdf/combine-marksheets):** Merge 10th and 12th grade marksheets into a single A4 PDF under 500KB.
+- **[Mask Aadhaar Card](https://www.filezenith.com/pdf/mask-aadhaar):** Redact and mask the first 8 digits of Aadhaar cards (XXXX-XXXX-1234) offline for compliant KYC.
+- **[Redact PDF](https://www.filezenith.com/pdf/redact):** Permanent pixel-level blackout redacting sensitive data with complete layer flattening.
+- **[Organize & Rotate PDF](https://www.filezenith.com/pdf/organize):** Reorder, rotate 90/180/270 degrees, and delete unnecessary pages.
+- **[Password Protect PDF](https://www.filezenith.com/pdf/protect):** Encrypt documents with standard AES-128 / AES-256 password protection.
+- **[Unlock / Remove Password](https://www.filezenith.com/pdf/remove-password):** Decrypt user-owned PDFs and remove restriction locks.
+- **[PDF OCR Text Extractor](https://www.filezenith.com/pdf/ocr):** Client-side optical character recognition using Tesseract.js WebAssembly.
+- **[PDF to Word (DOCX)](https://www.filezenith.com/pdf/pdf-to-word):** Convert PDF pages into editable Microsoft Word documents.
+- **[Word to PDF Converter](https://www.filezenith.com/pdf/word-to-pdf):** Convert .docx files into crisp, standardized PDF documents.
+- **[Pics to PDF (JPG to PDF)](https://www.filezenith.com/image/pics-to-pdf):** Convert batches of camera photos, scans, JPGs, and PNGs into clean single or multi-page PDFs.
+- **[PDF to JPG / PNG](https://www.filezenith.com/pdf/to-image):** Render high-resolution raster images from PDF pages.
 
-## Utility Studio Tools
-- [Free Invoice & Rent Receipt Generator](https://www.filezenith.com/utility/invoice-generator)
-- [Apple Keynote to PDF & Slides](https://www.filezenith.com/utility/keynote-to-powerpoint)
-- [PDF & EXIF Metadata Remover](https://www.filezenith.com/utility/metadata-remover)
-- [Vector QR Code Generator](https://www.filezenith.com/utility/qr-generator)
-- [Word Counter](https://www.filezenith.com/utility/word-counter)
-- [JSON Formatter](https://www.filezenith.com/utility/json-formatter)
-- [Age Calculator](https://www.filezenith.com/utility/age-calculator)
-- [Base64 Encoder/Decoder](https://www.filezenith.com/utility/base64)
-- [BMI Calculator](https://www.filezenith.com/utility/bmi-calculator)
-- [Case Converter](https://www.filezenith.com/utility/case-converter)
-- [CGPA to Percentage](https://www.filezenith.com/utility/cgpa-to-percentage)
-- [EMI Calculator](https://www.filezenith.com/utility/emi-calculator)
-- [EPF Calculator](https://www.filezenith.com/utility/epf-calculator)
-- [Fancy Text Generator](https://www.filezenith.com/utility/fancy-text-generator)
-- [Glassmorphism Generator](https://www.filezenith.com/utility/glassmorphism-generator)
-- [GST Calculator](https://www.filezenith.com/utility/gst-calculator)
-- [Income Tax Calculator](https://www.filezenith.com/utility/income-tax-calculator)
-- [Markdown Editor](https://www.filezenith.com/utility/markdown-editor)
-- [Number to Words](https://www.filezenith.com/utility/number-to-words)
-- [Password Generator](https://www.filezenith.com/utility/password-generator)
-- [Percentage Calculator](https://www.filezenith.com/utility/percentage-calculator)
-- [Pomodoro Timer](https://www.filezenith.com/utility/pomodoro-timer)
-- [Salary Calculator](https://www.filezenith.com/utility/salary-calculator)
-- [SIP Calculator](https://www.filezenith.com/utility/sip-calculator)
-- [Spin The Wheel](https://www.filezenith.com/utility/spin-the-wheel)
-- [Text Repeater](https://www.filezenith.com/utility/text-repeater)
-- [Text to Speech](https://www.filezenith.com/utility/text-to-speech)
-- [Typing Speed Test](https://www.filezenith.com/utility/typing-speed-test)
-- [Pages to Word Converter](https://www.filezenith.com/utility/pages-to-word)
-- [Word to Pages Converter](https://www.filezenith.com/utility/word-to-pages)
-- [Numbers to Excel Converter](https://www.filezenith.com/utility/numbers-to-excel)
-- [Excel to Numbers Converter](https://www.filezenith.com/utility/excel-to-numbers)
+---
 
-## Govt Job Exam Tools
-- [SSC CGL Photo & Signature Resizer (20-50KB)](https://www.filezenith.com/tools/ssc-cgl-photo-signature-resizer)
-- [UPSC OTR Photo Resizer (350x350 px)](https://www.filezenith.com/tools/upsc-otr-photo-resizer)
-- [CTET Photo & Signature Resizer](https://www.filezenith.com/tools/ctet-photo-signature-resizer)
-- [Signature Resizer 10 to 20KB](https://www.filezenith.com/tools/signature-resizer-10-to-20kb)
-- [Aadhaar Card Print Tool (A4 & PVC)](https://www.filezenith.com/tools/aadhaar-card-print)
+## 2. Core Image Studio Tools
+- **[Passport & Visa Photo Maker](https://www.filezenith.com/image/passport-maker):** Prepare official 2x2 inch (US DS-160), 3.5x4.5 cm (India / Schengen), and 213x213 px (PAN Card) photos with head oval guides.
+- **[Signature Resizer 10 to 20KB](https://www.filezenith.com/tools/signature-resizer-10-to-20kb):** Clean up paper shadows and lock signature byte counts between 10KB and 20KB for govt applications.
+- **[Compress Image to 20KB](https://www.filezenith.com/image/compress-to-20kb):** High-precision binary search compression for strict portal upload caps.
+- **[Compress Image to 50KB](https://www.filezenith.com/image/compress-to-50kb):** Optimize applicant photos to meet 20KB–50KB portal requirements.
+- **[Compress Image to 100KB](https://www.filezenith.com/image/compress-to-100kb):** Compress identity documents and driving licenses below 100KB.
+- **[Convert HEIC to JPG](https://www.filezenith.com/image/convert-heic):** Batch convert Apple iPhone HEIC images to universal JPG format in-browser.
+- **[Convert WebP to JPG](https://www.filezenith.com/image/webp-to-jpg):** Convert modern WebP web assets to standard JPEG format.
+- **[Remove Background (AI)](https://www.filezenith.com/image/remove-background):** Local neural network background removal running in-browser with zero upload.
+- **[Photo Name & Date Stamp Generator](https://www.filezenith.com/tools/photo-name-date-generator):** Stamp candidate name and Date of Photograph (DOP) on passport portraits.
 
-## Optional Reference
-- [Full LLM Manifest](https://www.filezenith.com/llms-full.txt): Detailed technical guide for AI models.
+---
+
+## 3. Government & Recruitment Exam Presets
+- **[Aadhaar Card Print Tool](https://www.filezenith.com/tools/aadhaar-card-print):** Format e-Aadhaar PDFs onto standard A4 paper and exact ISO 85.6 × 54.0 mm PVC card dimensions.
+- **[SSC GD Constable & CGL Photo Resizer](https://www.filezenith.com/tools/ssc-photo-resizer):** Pre-calibrated dimensions for Staff Selection Commission portals.
+- **[RRB Railway Photo & Signature Resizer](https://www.filezenith.com/tools/rrb-photo-resizer):** Tailored for RRB NTPC, Group D, and ALP guidelines.
+- **[UPSC OTR Photo & Signature Resizer](https://www.filezenith.com/tools/upsc-photo-resizer):** Configured for UPSC Civil Services One-Time Registration requirements.
+- **[IBPS / SBI Bank PO Resizer](https://www.filezenith.com/tools/ibps-photo-resizer):** Photo, signature, and left thumb impression presets.
+
+---
+
+## 4. Everyday Financial & Utility Calculators
+- **[Free Invoice & HRA Rent Receipt Generator](https://www.filezenith.com/utility/invoice-generator):** Generate print-ready rent receipts for Section 10(13A) tax exemption with revenue stamp demarcations.
+- **[Old vs New Tax Regime Calculator](https://www.filezenith.com/utility/income-tax-calculator):** Compare FY 2026-27 tax liabilities with Section 87A rebate and standard deductions.
+- **[CTC to In-Hand Salary Calculator](https://www.filezenith.com/utility/in-hand-salary-calculator):** Compute monthly net take-home salary after PF, gratuity, and tax deductions.
+- **[EPF Balance & Interest Calculator](https://www.filezenith.com/utility/epf-calculator):** Compound interest calculator at 8.25% EPFO rate.
+- **[Home & Car Loan EMI Calculator](https://www.filezenith.com/utility/emi-calculator):** Monthly EMI breakdown with amortization schedules.
+- **[SIP Return Calculator](https://www.filezenith.com/utility/sip-calculator):** Mutual fund systematic investment wealth forecasting.
+- **[Electricity Bill Calculator](https://www.filezenith.com/utility/electricity-bill-calculator):** Multi-slab electricity tariff calculation from meter units.
+- **[CGPA to Percentage Converter](https://www.filezenith.com/utility/cgpa-to-percentage):** Verified conversion formulas for CBSE, Mumbai University, VTU, and AICTE.
+- **[Age Calculator & Birthday Countdown](https://www.filezenith.com/utility/age-calculator):** Exact age calculation in years, months, days, and seconds.
+- **[WhatsApp Direct Chat Link](https://www.filezenith.com/social/whatsapp-direct-chat):** Start WhatsApp conversations without saving phone numbers to address book.
+- **[QR Code Generator](https://www.filezenith.com/utility/qr-generator):** Create custom high-resolution vector QR codes with colors and logos.
+
+---
+
+## 5. Comprehensive Technical Guides & Tutorials (43 Guides)
+FileZenith maintains an in-depth editorial knowledge base covering exact physical dimensions, scanning resolutions, legal guidelines, and regulatory requirements:
+- **[PAN Card Photo & Signature Rules 2026-27](https://www.filezenith.com/blog/pan-card-photo-and-signature-size-guidelines-2026):** NSDL & UTIITSL 213x213 px, 300 DPI, and 10KB–20KB signature guidelines.
+- **[HRA Rent Receipt Format & Tax Guide](https://www.filezenith.com/blog/hra-rent-receipt-format-income-tax-exemption-guide):** Section 10(13A) rules, ₹5,000 revenue stamp threshold, and landlord PAN requirements.
+- **[SSC GD Constable 2026-27 Biometrics](https://www.filezenith.com/blog/ssc-gd-constable-photo-signature-resizer-guide-2026):** Live camera capture, DOP stamp, and 20KB-50KB specs.
+- **[CTET Photo & Signature Rules 2026](https://www.filezenith.com/blog/ctet-photo-and-signature-size-guidelines-2026):** Official NTA dimensions and compression walkthrough.
+- **[Aadhaar Card PVC Print Size Guide](https://www.filezenith.com/blog/aadhaar-card-print-size-guide):** ISO ID-1 (85.60 × 53.98 mm) physical specifications and DPI settings.
+- **[Complete Guides Directory](https://www.filezenith.com/blog):** Browse all 43 step-by-step technical guides.
+
+---
+
+## Contact & Corporate Accountability
+- **Founder & Lead Architect:** Aaradhya Pathak (https://aaradhyadev.vercel.app)
+- **Executive Email:** aaradhya@snab.co.in
+- **Support Desk:** hello@snab.co.in
+- **Corporate Entity:** Snab Studio (https://www.snab.co.in)
+- **Headquarters:** Nashik, Maharashtra, India (PIN: 422005)
+- **Privacy Architecture:** Zero-Server Processing Guarantee (https://www.filezenith.com/security)

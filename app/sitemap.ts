@@ -7,11 +7,14 @@ import { getAllPosts } from '@/lib/blog';
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.filezenith.com';
 
+  const defaultOgImage = `${baseUrl}/filezenith-og.png`;
+
   const categoryRoutes = Object.keys(CATEGORY_REGISTRY).map((slug) => ({
     url: `${baseUrl}/${slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.9,
+    images: [defaultOgImage],
   }));
 
   const toolRoutes = Object.entries(SEO_REGISTRY).map(([slug]) => ({
@@ -19,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(),
     changeFrequency: 'daily' as const,
     priority: slug.includes('compress') || slug.includes('edit') || slug.includes('pics-to-pdf') ? 0.95 : 0.85,
+    images: [defaultOgImage],
   }));
 
   const presetRoutes = Object.keys(PRESET_REGISTRY).map((slug) => ({
@@ -26,6 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.9,
+    images: [defaultOgImage],
   }));
 
   const staticRoutes = [
@@ -43,6 +48,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: route === '' ? 1.0 : route === '/blog' ? 0.85 : 0.7,
+    images: [defaultOgImage],
   }));
 
   const blogPosts = getAllPosts();
@@ -51,6 +57,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(post.date),
     changeFrequency: 'weekly' as const,
     priority: 0.85,
+    images: [post.image ? `${baseUrl}${post.image}` : defaultOgImage],
   }));
 
   // Explicitly exclude redirected URLs so sitemap only contains clean 200 OK canonicals
