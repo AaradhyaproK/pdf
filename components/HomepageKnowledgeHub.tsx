@@ -146,6 +146,8 @@ const KNOWLEDGE_CLUSTERS = [
   },
 ];
 
+const TOTAL_GUIDES_COUNT = KNOWLEDGE_CLUSTERS.reduce((acc, c) => acc + c.guides.length, 0);
+
 export function HomepageKnowledgeHub() {
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-12">
@@ -169,7 +171,7 @@ export function HomepageKnowledgeHub() {
             href="/blog"
             className="px-5 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs shadow-md transition-all flex items-center gap-2 shrink-0 group active:scale-95"
           >
-            <span>Explore All 37 Guides</span>
+            <span>Explore All {TOTAL_GUIDES_COUNT} Guides</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
@@ -181,7 +183,7 @@ export function HomepageKnowledgeHub() {
               Featured In-Depth Walkthroughs
             </h3>
             <span className="text-xs font-bold text-slate-400">
-              37 Comprehensive Articles Available
+              {TOTAL_GUIDES_COUNT} Comprehensive Articles Available
             </span>
           </div>
 
@@ -239,7 +241,7 @@ export function HomepageKnowledgeHub() {
           </div>
         </div>
 
-        {/* 3. Comprehensive 4-Category Directory (All 37 Guides Crawlable by Search Engines) */}
+        {/* 3. Comprehensive 4-Category Directory (All Guides Crawlable by Search Engines) */}
         <div className="pt-6 border-t border-slate-100 space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
@@ -247,7 +249,7 @@ export function HomepageKnowledgeHub() {
                 Browse Complete Guides Library by Domain
               </h3>
               <p className="text-xs text-slate-500 font-medium">
-                Direct access to all 37 specialized articles, regulatory specifications, and technical reference manuals.
+                Direct access to all {TOTAL_GUIDES_COUNT} specialized articles, regulatory specifications, and technical reference manuals.
               </p>
             </div>
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-extrabold w-fit">

@@ -6,7 +6,7 @@ import { BlogFilterableList } from '@/components/blog/BlogFilterableList';
 import { BookOpen, ShieldCheck, ArrowRight, Sparkles, Wrench, CheckCircle2, Lock, Zap } from 'lucide-react';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.filezenith.com';
-const blogOgImage = `${siteUrl}/api/og?title=${encodeURIComponent('Guides, Tutorials & Practical File Tips')}&category=${encodeURIComponent('Knowledge Hub')}&desc=${encodeURIComponent('Step-by-step exam photo resizing, 20KB/50KB compression & PDF optimization guides')}&badge=${encodeURIComponent('37+ Free Tutorials')}`;
+const blogOgImage = `${siteUrl}/api/og?title=${encodeURIComponent('Guides, Tutorials & Practical File Tips')}&category=${encodeURIComponent('Knowledge Hub')}&desc=${encodeURIComponent('Step-by-step exam photo resizing, 20KB/50KB compression & PDF optimization guides')}&badge=${encodeURIComponent('41+ Free Tutorials')}`;
 
 export const metadata: Metadata = {
   title: 'Guides, Tutorials & Practical File Tips: Compress, Convert & Resize | FileZenith',
@@ -166,7 +166,7 @@ export default function BlogIndexPage() {
           {/* Centered Trust Highlights Badges Strip */}
           <div className="pt-2 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 text-xs font-bold text-slate-700">
             <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-sm border border-slate-200 shadow-2xs">
-              <Sparkles className="w-3.5 h-3.5 text-amber-500" /> 37+ Verified Tutorials
+              <Sparkles className="w-3.5 h-3.5 text-amber-500" /> {posts.length}+ Verified Tutorials
             </span>
             <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-sm border border-slate-200 shadow-2xs">
               <Lock className="w-3.5 h-3.5 text-indigo-600" /> 100% Client-Side Privacy

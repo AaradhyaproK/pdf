@@ -202,7 +202,7 @@ export default function HomePage() {
       {/* Mobile App-Centric High-Trust Features Grid Section */}
       <HomepageTrustSection />
 
-      {/* Comprehensive Editorial Knowledge Base & Guides Hub (All 37 Guides Indexed) */}
+      {/* Comprehensive Editorial Knowledge Base & Guides Hub (All 41 Guides Indexed) */}
       <HomepageKnowledgeHub />
 
       {/* Interactive Mobile-Optimized FAQ Accordion Section */}
