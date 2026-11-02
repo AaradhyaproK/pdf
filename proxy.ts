@@ -22,7 +22,8 @@ export const config = {
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
+     * - public static files (*.svg, *.png, *.webp, *.jpg, *.mjs, *.wasm, etc.)
      */
-    '/((?!_next/static|_next/image|favicon.ico).*)',
+    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|avif|ico|woff|woff2|ttf|eot|mjs|wasm|txt|xml|json|css|js)$).*)',
   ],
 };

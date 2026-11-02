@@ -25,6 +25,7 @@ import {
 } from 'lucide-react';
 
 export const dynamic = 'force-static';
+export const dynamicParams = false;
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;

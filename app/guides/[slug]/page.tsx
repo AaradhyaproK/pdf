@@ -1,6 +1,9 @@
 import { permanentRedirect } from 'next/navigation';
 import { GUIDE_REGISTRY } from '@/lib/guides-data';
 
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
