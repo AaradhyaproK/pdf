@@ -857,29 +857,101 @@ export function HtmlToPdfStudio() {
   };
 
   return (
-    <div className="w-full space-y-6">
-      {/* Studio Header Card */}
-      <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm p-6 sm:p-8 backdrop-blur-sm">
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200/60 text-blue-700 text-xs font-semibold uppercase tracking-wider mb-3">
-              <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-              URL Link &bull; HTML Code &bull; Local Files &bull; Vector A4/Letter
-            </div>
-            <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-              HTML &amp; Webpage to PDF Conversion Studio
-            </h2>
-            <p className="mt-1 text-xs sm:text-sm text-slate-600 max-w-2xl leading-relaxed">
-              Fetch any live website link, paste raw HTML code, or upload local <code className="text-blue-600 font-semibold">.html</code> files.
-              Fine-tune paper sizes, margins, CSS background graphics, and page breaks with zero watermarks.
-            </p>
+    <div className="w-full space-y-5">
+      {/* 1. Main Navigation Mode Tabs (Matching FileZenith Signature & PAN Studio) */}
+      <div className="flex flex-wrap items-center justify-between gap-3 p-1.5 sm:p-2 bg-slate-200/60 rounded-2xl border border-slate-300/70">
+        <div className="flex items-center gap-1.5 flex-wrap">
+          <button
+            type="button"
+            onClick={() => setActiveTab('url')}
+            className={`px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer flex items-center gap-2 ${
+              activeTab === 'url'
+                ? 'bg-white text-blue-900 shadow-xs border border-white'
+                : 'text-slate-700 hover:text-slate-900'
+            }`}
+          >
+            <Globe className="w-4 h-4 text-emerald-600" />
+            <span>Fetch from URL</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setActiveTab('editor')}
+            className={`px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer flex items-center gap-2 ${
+              activeTab === 'editor'
+                ? 'bg-white text-blue-900 shadow-xs border border-white'
+                : 'text-slate-700 hover:text-slate-900'
+            }`}
+          >
+            <Code2 className="w-4 h-4 text-blue-600" />
+            <span>HTML &amp; CSS Editor</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setActiveTab('upload')}
+            className={`px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer flex items-center gap-2 ${
+              activeTab === 'upload'
+                ? 'bg-white text-blue-900 shadow-xs border border-white'
+                : 'text-slate-700 hover:text-slate-900'
+            }`}
+          >
+            <UploadCloud className="w-4 h-4 text-purple-600" />
+            <span>Upload .HTML File</span>
+          </button>
+        </div>
+
+        {/* Tab utility actions */}
+        <div className="flex items-center gap-1.5">
+          <button
+            type="button"
+            onClick={handleInsertPageBreak}
+            className="px-2.5 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-xs font-bold transition-all cursor-pointer shadow-2xs active:scale-95 flex items-center gap-1"
+            title="Insert a page break element"
+          >
+            <Split className="w-3.5 h-3.5 text-blue-600" />
+            <span className="hidden sm:inline">+ Page Break</span>
+          </button>
+          <button
+            type="button"
+            onClick={handleCopyCode}
+            className="px-2.5 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-xs font-bold transition-all cursor-pointer shadow-2xs active:scale-95 flex items-center gap-1"
+            title="Copy HTML to clipboard"
+          >
+            <Copy className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Copy</span>
+          </button>
+          <button
+            type="button"
+            onClick={handleReset}
+            className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-white hover:bg-rose-50 text-slate-700 hover:text-rose-700 border border-slate-200 text-xs font-bold transition-all cursor-pointer shadow-2xs active:scale-95"
+            title="Reset to default template"
+          >
+            <RotateCcw className="w-3.5 h-3.5 text-rose-500" />
+            <span>Reset</span>
+          </button>
+        </div>
+      </div>
+
+      {/* 2. Global Page Settings & Export Actions Toolbar */}
+      <div className="bg-white p-4 sm:p-5 rounded-2xl sm:rounded-3xl border border-slate-200 shadow-xs space-y-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-100 pb-3.5">
+          <div className="flex items-center gap-2">
+            <Sliders className="w-4 h-4 text-blue-600" />
+            <h3 className="font-extrabold text-xs sm:text-sm text-slate-900 uppercase tracking-wider">
+              Page Format &amp; Print Controls
+            </h3>
+            <span className="px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 font-extrabold text-[10px] border border-blue-200/60">
+              {PAGE_DIMENSIONS[pageSize].name}
+            </span>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto">
+          <div className="flex items-center gap-2.5 w-full sm:w-auto">
             <button
+              type="button"
               onClick={handleVectorPrint}
               disabled={isExporting}
-              className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-sm shadow-xs transition-all hover:border-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 disabled:opacity-50"
+              className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs sm:text-sm shadow-2xs transition active:scale-95 disabled:opacity-50 min-h-[40px]"
               title="Prints vector PDF with 100% selectable text & clickable links"
             >
               <Printer className="w-4 h-4 text-slate-600" />
@@ -887,9 +959,10 @@ export function HtmlToPdfStudio() {
             </button>
 
             <button
+              type="button"
               onClick={handleDownloadPdf}
               disabled={isExporting}
-              className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-sm shadow-blue-500/25 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
+              className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-sm shadow-blue-500/25 transition active:scale-95 disabled:opacity-50 min-h-[40px]"
             >
               {isExporting ? (
                 <>
@@ -907,7 +980,7 @@ export function HtmlToPdfStudio() {
         </div>
 
         {/* Global Configuration Controls Toolbar */}
-        <div className="mt-6 pt-6 border-t border-slate-100 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 text-xs">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 text-xs">
           {/* Page Format */}
           <div>
             <label className="block font-semibold text-slate-700 mb-1">Page Format</label>
@@ -1029,71 +1102,32 @@ export function HtmlToPdfStudio() {
         {/* Left Column: Code Editor, File Upload & URL Fetcher (Columns 1-6) */}
         <div className={`lg:col-span-6 space-y-4 ${mobileView === 'preview' ? 'hidden lg:block' : 'block'}`}>
           <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col">
-            {/* Input Method Navigation Tabs */}
-            <div className="flex flex-wrap items-center justify-between px-4 py-3 border-b border-slate-200 bg-slate-50/70 gap-2">
-              <div className="flex items-center gap-1.5 flex-wrap">
-                <button
-                  onClick={() => setActiveTab('editor')}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
-                    activeTab === 'editor'
-                      ? 'bg-white text-blue-600 shadow-xs border border-slate-200/80'
-                      : 'text-slate-600 hover:text-slate-900'
-                  }`}
-                >
-                  <Code2 className="w-3.5 h-3.5 inline-block mr-1.5" />
-                  Code Editor
-                </button>
-
-                <button
-                  onClick={() => setActiveTab('url')}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
-                    activeTab === 'url'
-                      ? 'bg-white text-blue-600 shadow-xs border border-slate-200/80'
-                      : 'text-slate-600 hover:text-slate-900'
-                  }`}
-                >
-                  <Globe className="w-3.5 h-3.5 inline-block mr-1.5 text-emerald-600" />
-                  Fetch from URL
-                </button>
-
-                <button
-                  onClick={() => setActiveTab('upload')}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
-                    activeTab === 'upload'
-                      ? 'bg-white text-blue-600 shadow-xs border border-slate-200/80'
-                      : 'text-slate-600 hover:text-slate-900'
-                  }`}
-                >
-                  <UploadCloud className="w-3.5 h-3.5 inline-block mr-1.5" />
-                  Upload .HTML
-                </button>
+            {/* Active Mode Header */}
+            <div className="px-4 py-3 border-b border-slate-200 bg-slate-50/70 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                {activeTab === 'url' ? (
+                  <>
+                    <Globe className="w-4 h-4 text-emerald-600" />
+                    <span className="font-bold text-xs text-slate-800">Webpage URL Link Source</span>
+                  </>
+                ) : activeTab === 'editor' ? (
+                  <>
+                    <Code2 className="w-4 h-4 text-blue-600" />
+                    <span className="font-bold text-xs text-slate-800">HTML &amp; CSS Source Code</span>
+                  </>
+                ) : (
+                  <>
+                    <UploadCloud className="w-4 h-4 text-purple-600" />
+                    <span className="font-bold text-xs text-slate-800">Uploaded .HTML Document</span>
+                  </>
+                )}
               </div>
 
-              {/* Action buttons */}
-              <div className="flex items-center gap-1">
-                <button
-                  onClick={handleInsertPageBreak}
-                  className="px-2.5 py-1 text-[11px] font-medium text-slate-700 bg-white border border-slate-200 rounded-md hover:bg-slate-100 transition"
-                  title="Insert a page break element"
-                >
-                  <Split className="w-3 h-3 inline-block mr-1" />
-                  + Page Break
-                </button>
-                <button
-                  onClick={handleCopyCode}
-                  className="p-1.5 text-slate-500 hover:text-slate-800 rounded-md hover:bg-slate-200/60 transition"
-                  title="Copy HTML to clipboard"
-                >
-                  <Copy className="w-3.5 h-3.5" />
-                </button>
-                <button
-                  onClick={handleReset}
-                  className="p-1.5 text-slate-500 hover:text-slate-800 rounded-md hover:bg-slate-200/60 transition"
-                  title="Reset to default template"
-                >
-                  <RotateCcw className="w-3.5 h-3.5" />
-                </button>
-              </div>
+              {activeTab === 'editor' && (
+                <div className="text-[11px] font-mono text-slate-500">
+                  {htmlCode.length.toLocaleString()} chars
+                </div>
+              )}
             </div>
 
             {/* TAB 1: CODE EDITOR */}

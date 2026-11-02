@@ -419,6 +419,49 @@ export default function HtmlToPdfPage() {
           </div>
         </section>
 
+        {/* 4 Practical Everyday Use Cases Grid */}
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-2xs space-y-2">
+            <div className="w-9 h-9 rounded-xl bg-blue-50 border border-blue-100 text-blue-600 flex items-center justify-center font-bold">
+              <FileText className="w-5 h-5" />
+            </div>
+            <h3 className="font-bold text-slate-900 text-sm">Invoices &amp; Billing Slips</h3>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Convert itemized client invoices, receipts, and order confirmations with exact CSS table background colors, borders, and payment details.
+            </p>
+          </div>
+
+          <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-2xs space-y-2">
+            <div className="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-100 text-emerald-600 flex items-center justify-center font-bold">
+              <Globe className="w-5 h-5" />
+            </div>
+            <h3 className="font-bold text-slate-900 text-sm">Web Articles &amp; Documentation</h3>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Fetch live Wikipedia articles, blog tutorials, and developer docs into cleanly paginated, printable reading sheets with working links.
+            </p>
+          </div>
+
+          <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-2xs space-y-2">
+            <div className="w-9 h-9 rounded-xl bg-purple-50 border border-purple-100 text-purple-600 flex items-center justify-center font-bold">
+              <Code2 className="w-5 h-5" />
+            </div>
+            <h3 className="font-bold text-slate-900 text-sm">Resumes &amp; Portfolios</h3>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Compile modern HTML/CSS developer resumes and CVs into razor-sharp vector A4 documents without blurry fonts or broken lines.
+            </p>
+          </div>
+
+          <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-2xs space-y-2">
+            <div className="w-9 h-9 rounded-xl bg-amber-50 border border-amber-100 text-amber-600 flex items-center justify-center font-bold">
+              <Layers className="w-5 h-5" />
+            </div>
+            <h3 className="font-bold text-slate-900 text-sm">Dashboards &amp; Receipts</h3>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Export data dashboards, transaction logs, and retail POS checkout slips with automated repeating table headers across every page.
+            </p>
+          </div>
+        </section>
+
         {/* Developer Print CSS Cheat Sheet Section */}
         <section className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-6">
           <div className="space-y-2">
@@ -504,7 +547,7 @@ tfoot {
         <section className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-6">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <span className="p-2 rounded-lg bg-emerald-50 text-emerald-600">
+              <span className="p-2 rounded-lg bg-blue-50 text-blue-600">
                 <BookOpen className="w-5 h-5" />
               </span>
               <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
@@ -549,128 +592,192 @@ tfoot {
           </div>
         </section>
 
-        {/* Comprehensive FAQs */}
+        {/* Deep-Dive FAQ Accordion Section (Matching PAN & Signature Tools) */}
         <section className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-6">
-          <div className="space-y-2">
+          <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <span className="p-2 rounded-lg bg-amber-50 text-amber-600">
-                <HelpCircle className="w-5 h-5" />
-              </span>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
-                Frequently Asked Questions (FAQs)
+              <HelpCircle className="w-5 h-5 text-blue-600" />
+              <h2 className="text-xl sm:text-2xl font-black text-slate-900">
+                Frequently Asked Questions (HTML &amp; URL to PDF)
               </h2>
             </div>
             <p className="text-sm text-slate-600">
-              Clear answers to common questions about URL fetching, HTML conversion, styling, and security.
+              Clear answers to the most common questions about URL fetching, page breaking, CSS background colors, and document security:
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {HTML_TO_PDF_FAQS.map((faq, index) => (
-              <div
-                key={index}
-                className="p-4 sm:p-5 rounded-xl bg-slate-50/80 border border-slate-200/70 space-y-2"
-              >
-                <h3 className="font-semibold text-slate-900 text-sm flex items-start gap-2">
-                  <span className="text-blue-600 shrink-0 font-bold">Q:</span>
-                  <span>{faq.question}</span>
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pl-5">
+          <div className="divide-y divide-slate-200">
+            {HTML_TO_PDF_FAQS.map((faq, idx) => (
+              <details key={idx} className="group py-4 cursor-pointer" open={idx < 2}>
+                <summary className="flex items-center justify-between font-bold text-slate-900 text-base group-hover:text-blue-600 transition-colors list-none">
+                  <span className="flex items-start gap-2.5">
+                    <span className="text-blue-600 font-black shrink-0 text-sm">Q{idx + 1}.</span>
+                    <span>{faq.question}</span>
+                  </span>
+                  <ChevronRight className="w-4 h-4 text-slate-500 group-open:rotate-90 transition-transform shrink-0 ml-4" />
+                </summary>
+                <p className="mt-3 text-sm text-slate-600 leading-relaxed pl-7 pr-4">
                   {faq.answer}
                 </p>
-              </div>
+              </details>
             ))}
           </div>
         </section>
 
-        {/* Cross-Tool Recommendations */}
-        <section className="bg-slate-900 rounded-3xl p-6 sm:p-10 text-white space-y-6 shadow-xl">
-          <div className="space-y-2 max-w-2xl">
-            <span className="text-blue-400 text-xs font-bold uppercase tracking-wider">
-              Complete Productivity Suite
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-              Explore More Free Client-Side Tools
+        {/* High-Traffic Search Keywords & Supported Queries Matrix (Goldmine SEO) */}
+        <section className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-4">
+          <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
+            <Sparkles className="w-5 h-5 text-blue-600" />
+            <h2 className="text-base sm:text-lg font-black text-slate-900">
+              High Search Intent Queries &bull; HTML &amp; Webpage PDF Conversion
             </h2>
-            <p className="text-sm text-slate-400">
-              Every tool on FileZenith operates 100% inside your browser memory for uncompromising privacy and speed.
+          </div>
+
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+            FileZenith’s in-browser conversion engine is calibrated for high-performance developer workflows, invoice printing, and public web article archiving:
+          </p>
+
+          <div className="flex flex-wrap gap-1.5 pt-1">
+            {[
+              'url to pdf converter',
+              'convert url to pdf online free',
+              'webpage to pdf converter',
+              'website to pdf converter free',
+              'save webpage as pdf a4',
+              'convert link to pdf',
+              'web link to pdf converter',
+              'html to pdf converter',
+              'convert html to pdf online free',
+              'html code to pdf',
+              'save html as pdf without watermark',
+              'raw html to pdf with css',
+              'convert html file to pdf',
+              'url to pdf a4 size',
+              'fetch url to pdf online',
+              'website link to pdf converter no watermark',
+              'invoice html to pdf free',
+              'convert htm to pdf free online',
+              'html to pdf with background graphics',
+              'export html table to pdf',
+              'html to pdf multi page breaks',
+              'convert article url to pdf',
+              'free html to pdf without signup',
+              'html to pdf vector text',
+              'developer html to pdf tool',
+              'html resume to pdf converter',
+              'html receipt to pdf free',
+              'best url to pdf converter online 2026'
+            ].map((kw, i) => (
+              <span
+                key={i}
+                className="px-2.5 py-1 rounded-full bg-slate-100 border border-slate-200/80 text-[10px] font-bold text-slate-600 hover:text-blue-600 transition-colors"
+              >
+                {kw}
+              </span>
+            ))}
+          </div>
+        </section>
+
+        {/* Related Document & PDF Tools Hub (Matching FileZenith Standards) */}
+        <section className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-6">
+          <div className="space-y-1">
+            <span className="text-xs font-black uppercase tracking-wider text-blue-600">
+              Productivity &amp; Document Suite
+            </span>
+            <h2 className="text-xl sm:text-2xl font-black text-slate-900">
+              Explore More Fast In-Browser File Tools
+            </h2>
+            <p className="text-sm text-slate-600">
+              Every tool on FileZenith operates 100% inside your browser memory for uncompromising privacy and speed:
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <Link
               href="/tools/online-signature-maker"
-              className="p-4 rounded-2xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 transition group flex flex-col justify-between"
+              className="group p-4 rounded-xl border border-slate-200 hover:border-blue-500 bg-slate-50 hover:bg-white transition-all shadow-2xs hover:shadow-sm flex flex-col justify-between"
             >
-              <div className="space-y-2">
-                <span className="text-xs font-semibold text-blue-400 uppercase">Signatures</span>
-                <h3 className="font-bold text-white text-base group-hover:text-blue-300 transition">
-                  Online Signature Maker
-                </h3>
-                <p className="text-xs text-slate-400 line-clamp-2">
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="p-1.5 rounded-lg bg-blue-100 text-blue-700">
+                    <FileText className="w-4 h-4" />
+                  </div>
+                  <h3 className="font-bold text-slate-900 text-sm group-hover:text-blue-600 transition-colors">
+                    Online Signature Maker
+                  </h3>
+                </div>
+                <p className="text-xs text-slate-600 leading-relaxed">
                   Draw or type authentic digital signatures and export as transparent PNG or 300 DPI JPEG.
                 </p>
               </div>
-              <div className="mt-4 flex items-center gap-1 text-xs text-blue-400 font-semibold group-hover:translate-x-1 transition-transform">
-                <span>Create Signature</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+              <div className="mt-3 flex items-center gap-1 text-xs text-blue-600 font-bold group-hover:translate-x-1 transition-transform">
+                <span>Create Signature &rarr;</span>
               </div>
             </Link>
 
             <Link
               href="/pdf/compress"
-              className="p-4 rounded-2xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 transition group flex flex-col justify-between"
+              className="group p-4 rounded-xl border border-slate-200 hover:border-emerald-500 bg-slate-50 hover:bg-white transition-all shadow-2xs hover:shadow-sm flex flex-col justify-between"
             >
-              <div className="space-y-2">
-                <span className="text-xs font-semibold text-emerald-400 uppercase">Optimization</span>
-                <h3 className="font-bold text-white text-base group-hover:text-emerald-300 transition">
-                  Compress PDF Online
-                </h3>
-                <p className="text-xs text-slate-400 line-clamp-2">
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="p-1.5 rounded-lg bg-emerald-100 text-emerald-700">
+                    <Layers className="w-4 h-4" />
+                  </div>
+                  <h3 className="font-bold text-slate-900 text-sm group-hover:text-emerald-600 transition-colors">
+                    Compress PDF Online
+                  </h3>
+                </div>
+                <p className="text-xs text-slate-600 leading-relaxed">
                   Reduce PDF document file size by up to 80% without losing readable text sharpness.
                 </p>
               </div>
-              <div className="mt-4 flex items-center gap-1 text-xs text-emerald-400 font-semibold group-hover:translate-x-1 transition-transform">
-                <span>Compress PDF</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+              <div className="mt-3 flex items-center gap-1 text-xs text-emerald-600 font-bold group-hover:translate-x-1 transition-transform">
+                <span>Compress PDF &rarr;</span>
               </div>
             </Link>
 
             <Link
               href="/pdf/merge"
-              className="p-4 rounded-2xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 transition group flex flex-col justify-between"
+              className="group p-4 rounded-xl border border-slate-200 hover:border-purple-500 bg-slate-50 hover:bg-white transition-all shadow-2xs hover:shadow-sm flex flex-col justify-between"
             >
-              <div className="space-y-2">
-                <span className="text-xs font-semibold text-purple-400 uppercase">Organization</span>
-                <h3 className="font-bold text-white text-base group-hover:text-purple-300 transition">
-                  Merge PDF Documents
-                </h3>
-                <p className="text-xs text-slate-400 line-clamp-2">
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="p-1.5 rounded-lg bg-purple-100 text-purple-700">
+                    <Layers className="w-4 h-4" />
+                  </div>
+                  <h3 className="font-bold text-slate-900 text-sm group-hover:text-purple-600 transition-colors">
+                    Merge PDF Documents
+                  </h3>
+                </div>
+                <p className="text-xs text-slate-600 leading-relaxed">
                   Combine multiple PDF pages, marksheets, and receipts into one uniform master file.
                 </p>
               </div>
-              <div className="mt-4 flex items-center gap-1 text-xs text-purple-400 font-semibold group-hover:translate-x-1 transition-transform">
-                <span>Merge Files</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+              <div className="mt-3 flex items-center gap-1 text-xs text-purple-600 font-bold group-hover:translate-x-1 transition-transform">
+                <span>Merge Files &rarr;</span>
               </div>
             </Link>
 
             <Link
               href="/pdf/pdf-to-word"
-              className="p-4 rounded-2xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 transition group flex flex-col justify-between"
+              className="group p-4 rounded-xl border border-slate-200 hover:border-amber-500 bg-slate-50 hover:bg-white transition-all shadow-2xs hover:shadow-sm flex flex-col justify-between"
             >
-              <div className="space-y-2">
-                <span className="text-xs font-semibold text-amber-400 uppercase">Conversion</span>
-                <h3 className="font-bold text-white text-base group-hover:text-amber-300 transition">
-                  PDF to Word DOCX
-                </h3>
-                <p className="text-xs text-slate-400 line-clamp-2">
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="p-1.5 rounded-lg bg-amber-100 text-amber-700">
+                    <FileCheck className="w-4 h-4" />
+                  </div>
+                  <h3 className="font-bold text-slate-900 text-sm group-hover:text-amber-600 transition-colors">
+                    PDF to Word DOCX
+                  </h3>
+                </div>
+                <p className="text-xs text-slate-600 leading-relaxed">
                   Convert PDF documents into fully editable Microsoft Word (.docx) files 100% offline.
                 </p>
               </div>
-              <div className="mt-4 flex items-center gap-1 text-xs text-amber-400 font-semibold group-hover:translate-x-1 transition-transform">
-                <span>Convert to DOCX</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+              <div className="mt-3 flex items-center gap-1 text-xs text-amber-600 font-bold group-hover:translate-x-1 transition-transform">
+                <span>Convert to DOCX &rarr;</span>
               </div>
             </Link>
           </div>
