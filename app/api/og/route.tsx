@@ -245,7 +245,7 @@ export async function GET(request: NextRequest) {
         width: 1200,
         height: 630,
         headers: {
-          'Cache-Control': 'public, max-age=31536000, s-maxage=31536000, immutable',
+          'Cache-Control': 'public, max-age=86400, s-maxage=2592000',
         },
       }
     );
