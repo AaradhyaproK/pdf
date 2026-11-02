@@ -71,6 +71,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
         title: 'PDF & Office Document Conversion',
         description: 'Convert between PDF and Microsoft Word DOCX, high-res images, and camera scans.',
         tools: [
+          { name: 'PDF to Excel Converter', slug: '/pdf/pdf-to-excel', description: 'Convert PDF tables into formula-ready Microsoft Excel (.xlsx), CSV & TSV spreadsheets with multi-line row stitching.', isPopular: true, badge: 'Popular', iconName: 'FileSpreadsheet' },
           { name: 'PDF to Word Converter', slug: '/pdf/pdf-to-word', description: 'Convert PDF documents into fully editable Microsoft Word (.docx) files 100% privately.', isPopular: true, badge: 'Popular', iconName: 'FileText' },
           { name: 'Word to PDF Converter', slug: '/pdf/word-to-pdf', description: 'Convert Word DOCX documents into crisp, publication-ready PDF files instantly.', isPopular: true, badge: 'New', iconName: 'FileCode' },
           { name: 'HTML & URL to PDF Converter', slug: '/tools/html-to-pdf', description: 'Convert website URLs, HTML code, templates & files into vector A4 & Letter PDF.', isPopular: true, badge: 'Popular', iconName: 'Globe' },
@@ -100,6 +101,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
       }
     ],
     popularTools: [
+      { name: 'PDF to Excel Converter', slug: '/pdf/pdf-to-excel', description: 'Extract tables from PDF to editable Excel XLSX & CSV with highest accuracy.' },
       { name: 'PDF to Word Converter', slug: '/pdf/pdf-to-word', description: 'Convert PDF to editable Word DOCX 100% privately without cloud uploads.' },
       { name: 'Merge PDF Files', slug: '/pdf/merge', description: 'Combine multiple PDF documents into one master file effortlessly.' },
       { name: 'Compress PDF to 200KB', slug: '/pdf/compress-to-200kb', description: 'Target 200KB PDF compressor for email, university, and job forms.' },
@@ -1355,6 +1357,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
         title: 'Billing, Receipts & Document Utilities',
         description: 'Generate customer receipts, extract text from printed scans, and secure documents.',
         tools: [
+          { name: 'Convert Bank Statement to Excel', slug: '/pdf/pdf-to-excel', description: 'Extract multi-page customer bank statements & tax invoices into clean Excel (.xlsx) spreadsheets.', isPopular: true, badge: 'Bank Stmt', iconName: 'FileSpreadsheet' },
           { name: 'Free Invoice & Rent Receipt Generator', slug: '/utility/invoice-generator', description: 'Create print-ready HRA rent receipts, customer bills, and service invoices with shop details & seal.', isPopular: true, badge: 'HRA / Billing', iconName: 'FileText' },
           { name: 'PDF OCR Text Extractor', slug: '/pdf/ocr', description: 'Extract selectable text from scanned customer notices, FIRs, and court papers in browser.', isPopular: false, badge: 'AI Wasm', iconName: 'FileCheck' },
           { name: 'Password Protect PDF', slug: '/pdf/protect', description: 'Add strong password encryption to customer confidential records before emailing.', isPopular: false, badge: 'Secure', iconName: 'Lock' },

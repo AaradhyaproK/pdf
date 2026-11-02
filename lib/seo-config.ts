@@ -928,21 +928,27 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/pdf/pdf-to-excel': {
     slug: '/pdf/pdf-to-excel',
     title: 'PDF to Excel Converter — Convert PDF to XLSX Spreadsheet Online Free',
-    metaTitle: 'PDF to Excel Converter — High Accuracy PDF to XLSX / CSV (Free)',
-    description: 'Convert PDF to Excel (.xlsx, .csv) with the highest table extraction accuracy. Free, fast, private in-browser table extractor with zero limits or cloud uploads.',
+    metaTitle: 'PDF to Excel Converter — 100% Free & High Accuracy (XLSX, CSV) | FileZenith',
+    description: 'Convert PDF to Excel (.xlsx, .csv) with the highest table extraction accuracy. 100% free, fast, private in-browser table extractor with zero limits, no signup, no file uploads.',
     keywords: [
       'pdf to excel',
       'convert pdf to excel',
       'pdf to excel converter',
       'pdf to xlsx',
       'pdf to excel online free',
-      'free pdf to excel converter without email',
+      'pdf to excel converter free',
+      'convert bank statement to excel',
+      'bank statement to excel converter',
       'convert bank statement pdf to excel free',
       'pdf table extractor to excel',
+      'extract table from pdf to excel',
       'accurate pdf to excel converter',
       'convert pdf to csv online',
+      'pdf to excel spreadsheet converter',
       'best pdf to excel converter no upload',
-      'pdf to excel spreadsheet converter'
+      'pdf to excel no sign up',
+      'pdf to excel no limit',
+      'convert pdf to xlsx free online'
     ],
     category: 'pdf',
     howToSteps: [

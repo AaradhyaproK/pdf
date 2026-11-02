@@ -57,7 +57,36 @@ function getRelatedGuidesAndArticles(slug: string, category: string): ArticleRec
     ];
   }
 
-  if (slug === '/pdf/pdf-to-word' || slug === '/pdf/word-to-pdf' || slug === '/pdf/ocr' || slug === '/pdf/pdf-to-excel') {
+  if (slug === '/pdf/pdf-to-excel') {
+    return [
+      {
+        title: 'How to Convert PDF to Excel Free Online (Without Losing Formatting)',
+        desc: 'Complete walkthrough to convert bank statements, invoices, and tables to clean Excel spreadsheets.',
+        url: '/blog/how-to-convert-pdf-to-excel-spreadsheet-free',
+        badge: 'Excel Guide',
+        readTime: '6 min read',
+        type: 'blog',
+      },
+      {
+        title: 'How to Remove Password from PDF Permanently',
+        desc: 'Unlock password-protected bank statements and payslips for instant table extraction.',
+        url: '/blog/how-to-remove-password-from-pdf',
+        badge: 'Security',
+        readTime: '5 min read',
+        type: 'blog',
+      },
+      {
+        title: 'How to Convert Scanned PDF to Editable Word',
+        desc: 'Step-by-step guide to extract and format text from image-only scans with zero data leakage.',
+        url: '/blog/how-to-convert-scanned-pdf-to-editable-word',
+        badge: 'Featured',
+        readTime: '6 min read',
+        type: 'blog',
+      },
+    ];
+  }
+
+  if (slug === '/pdf/pdf-to-word' || slug === '/pdf/word-to-pdf' || slug === '/pdf/ocr') {
     return [
       {
         title: 'How to Convert Scanned PDF to Editable Word',
@@ -601,18 +630,18 @@ export function SEOContent({ slug }: SEOContentProps) {
   const relatedTools = isIWorkOfficeTool
     ? iWorkOfficeCluster
         .filter((item) => item.slug !== slug)
-        .concat(
-          slug.includes('numbers') || slug.includes('excel')
-            ? [{ name: 'CSV to JSON / Formatter', slug: '/utility/json-formatter', desc: 'Convert spreadsheets and tabular records instantly.' }]
-            : [{ name: 'Word to PDF Converter', slug: '/pdf/word-to-pdf', desc: 'Save Word documents as high-quality PDF files.' }]
-        )
+        .concat([
+          { name: 'PDF to Excel Converter', slug: '/pdf/pdf-to-excel', desc: 'Extract PDF tables into formula-ready Excel XLSX spreadsheets.' },
+          { name: 'CSV to JSON / Formatter', slug: '/utility/json-formatter', desc: 'Convert spreadsheets and tabular records instantly.' },
+        ])
     : tool.category === 'pdf'
     ? [
+        { name: 'PDF to Excel Converter', slug: '/pdf/pdf-to-excel', desc: 'Extract PDF tables into formula-ready Excel XLSX & CSV.' },
+        { name: 'PDF to Word Converter', slug: '/pdf/pdf-to-word', desc: 'Convert PDF to editable Word DOCX 100% privately.' },
         { name: 'Compress PDF Online (Under 200KB)', slug: '/pdf/compress-to-200kb', desc: 'Reduce PDF file size for portal submissions.' },
+        { name: 'Unlock / Remove PDF Password', slug: '/pdf/remove-password', desc: 'Unlock password-protected bank statements & salary slips.' },
         { name: 'Merge PDF Files Free', slug: '/pdf/merge', desc: 'Combine multiple PDF documents into one.' },
-        { name: 'Convert PDF to Image (JPG/PNG)', slug: '/pdf/to-image', desc: 'Save PDF pages as high-resolution images.' },
-        { name: 'Interactive PDF Editor', slug: '/pdf/edit', desc: 'Add text, whiteout content, and draw annotations.' },
-      ]
+      ].filter((t) => t.slug !== slug)
     : tool.category === 'image'
     ? [
         { name: 'Convert PNG to JPG Online', slug: '/image/png-to-jpg', desc: 'Bulk convert PNG images to JPG with custom quality.' },
