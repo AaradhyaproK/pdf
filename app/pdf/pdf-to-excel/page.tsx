@@ -54,6 +54,7 @@ export default function PdfToExcelPage() {
   const [mergeMultiline, setMergeMultiline] = useState(true);
   const [formatHeaderRow, setFormatHeaderRow] = useState(true);
   const [deduplicateHeaders, setDeduplicateHeaders] = useState(true);
+  const [skipPreambleTitles, setSkipPreambleTitles] = useState(true);
 
   const handleFileSelect = async (selected: FileItem[]) => {
     setFiles(selected);
@@ -108,6 +109,7 @@ export default function PdfToExcelPage() {
         formatHeaderRow,
         deduplicateHeaders,
         trimWhitespace: true,
+        skipPreambleTitles,
       };
 
       const res = await convertPdfToExcel(sourceFile, options, (p, msg) => {
@@ -132,7 +134,13 @@ export default function PdfToExcelPage() {
   const handleCopyTable = () => {
     if (!result || !result.sheets[activePreviewSheet]) return;
     const currentSheet = result.sheets[activePreviewSheet];
-    const tsvData = currentSheet.rows
+    const hasHeaderInRows =
+      currentSheet.headers.length > 0 &&
+      currentSheet.headers.every(
+        (h, i) => String(currentSheet.rows[0]?.[i] || '').trim().toLowerCase() === h.trim().toLowerCase()
+      );
+    const rowsToExport = hasHeaderInRows ? currentSheet.rows : [currentSheet.headers, ...currentSheet.rows];
+    const tsvData = rowsToExport
       .map((row) => row.map((cell) => (cell === null || cell === undefined ? '' : String(cell))).join('\t'))
       .join('\n');
 
@@ -143,6 +151,23 @@ export default function PdfToExcelPage() {
   };
 
   const currentPreviewSheetData = result?.sheets[activePreviewSheet];
+
+  const isFirstRowHeader =
+    !!currentPreviewSheetData &&
+    currentPreviewSheetData.rows.length > 0 &&
+    currentPreviewSheetData.headers.length > 0 &&
+    currentPreviewSheetData.headers.every(
+      (h, i) =>
+        String(currentPreviewSheetData.rows[0]?.[i] || '')
+          .trim()
+          .toLowerCase() === h.trim().toLowerCase()
+    );
+
+  const previewDataRows = currentPreviewSheetData
+    ? isFirstRowHeader
+      ? currentPreviewSheetData.rows.slice(1)
+      : currentPreviewSheetData.rows
+    : [];
 
   return (
     <ToolLayout
@@ -417,6 +442,21 @@ export default function PdfToExcelPage() {
                         </span>
                       </div>
                     </label>
+
+                    <label className="flex items-start gap-2.5 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={skipPreambleTitles}
+                        onChange={(e) => setSkipPreambleTitles(e.target.checked)}
+                        className="mt-0.5 rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4 cursor-pointer"
+                      />
+                      <div>
+                        <span className="text-xs font-bold text-slate-900 block">Auto-Trim Title Preambles</span>
+                        <span className="text-[11px] text-slate-500 font-medium">
+                          Skips non-table preamble banners so row 1 starts cleanly with table columns.
+                        </span>
+                      </div>
+                    </label>
                   </div>
                 )}
               </div>
@@ -534,16 +574,19 @@ export default function PdfToExcelPage() {
                     <thead>
                       <tr className="bg-slate-900 text-white font-black sticky top-0 z-10">
                         <th className="p-2.5 border-b border-slate-800 w-12 text-center text-[10px] text-slate-400">#</th>
-                        {currentPreviewSheetData.rows[0]?.map((_, colIdx) => (
+                        {(currentPreviewSheetData.headers && currentPreviewSheetData.headers.length > 0
+                          ? currentPreviewSheetData.headers
+                          : currentPreviewSheetData.rows[0] || []
+                        ).map((h, colIdx) => (
                           <th key={colIdx} className="p-2.5 border-b border-slate-800 font-extrabold whitespace-nowrap">
-                            Col {String.fromCharCode(65 + (colIdx % 26))}
+                            {h ? String(h) : `Col ${String.fromCharCode(65 + (colIdx % 26))}`}
                           </th>
                         ))}
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-200/80 bg-white font-medium text-slate-800">
-                      {currentPreviewSheetData.rows.slice(0, 30).map((row, rIdx) => (
-                        <tr key={rIdx} className={rIdx === 0 ? 'bg-emerald-50/60 font-bold' : 'hover:bg-slate-50'}>
+                      {previewDataRows.slice(0, 30).map((row, rIdx) => (
+                        <tr key={rIdx} className="hover:bg-slate-50">
                           <td className="p-2.5 text-center text-[10px] text-slate-400 font-mono select-none bg-slate-50/70 border-r border-slate-200">
                             {rIdx + 1}
                           </td>
@@ -688,3 +731,4 @@ export default function PdfToExcelPage() {
     </ToolLayout>
   );
 }
+
