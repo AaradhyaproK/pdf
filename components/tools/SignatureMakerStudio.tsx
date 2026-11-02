@@ -182,6 +182,7 @@ export function SignatureMakerStudio() {
   const [bwThreshold, setBwThreshold] = useState<number>(165);
   const [paperPreviewBg, setPaperPreviewBg] = useState<'transparent' | 'white' | 'original'>('transparent');
   const [paperRotation, setPaperRotation] = useState<number>(0);
+  const [isDraggingOver, setIsDraggingOver] = useState<boolean>(false);
 
   // Clipboard Copied Indicator
   const [isCopied, setIsCopied] = useState<boolean>(false);
@@ -934,21 +935,61 @@ export function SignatureMakerStudio() {
     }
   };
 
-  // Upload Paper Image
-  const handlePaperImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  // Process and load paper signature file (file input or drag-and-drop)
+  const processPaperFile = (file: File) => {
+    if (!file.type.startsWith('image/')) {
+      toast.error('Please upload an image file (JPG, PNG, WebP).');
+      return;
+    }
     const reader = new FileReader();
     reader.onload = (ev) => {
       const img = new Image();
       img.onload = () => {
         setUploadedImg(img);
+        setPaperRotation(0);
         toast.success('Paper signature uploaded! Magic background cleaner applied.');
+      };
+      img.onerror = () => {
+        toast.error('Failed to load image. Please select a valid photo file.');
       };
       img.src = ev.target?.result as string;
     };
+    reader.onerror = () => {
+      toast.error('Failed to read file from disk.');
+    };
     reader.readAsDataURL(file);
+  };
+
+  // Upload Paper Image Handler
+  const handlePaperImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      processPaperFile(file);
+    }
     e.target.value = '';
+  };
+
+  // Drag and Drop Handlers for Paper Upload Zone
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDraggingOver(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDraggingOver(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDraggingOver(false);
+    const file = e.dataTransfer.files?.[0];
+    if (file) {
+      processPaperFile(file);
+    }
   };
 
   return (
@@ -1284,30 +1325,60 @@ export function SignatureMakerStudio() {
       {activeTab === 'upload' && (
         <div className="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-6">
           <input
+            id="paper-signature-upload-input"
             ref={uploadInputRef}
             type="file"
-            accept="image/jpeg,image/png,image/webp"
+            accept="image/*,.heic,.heif,.jpg,.jpeg,.png,.webp"
             onChange={handlePaperImageSelect}
             className="hidden"
           />
 
           {!uploadedImg ? (
-            <label className="flex flex-col items-center justify-center p-8 sm:p-14 border-2 border-dashed border-blue-300 hover:border-blue-500 rounded-3xl bg-blue-50/30 hover:bg-blue-50/60 transition-all cursor-pointer group text-center space-y-3">
-              <div className="w-16 h-16 rounded-2xl bg-blue-100 group-hover:bg-blue-200 text-blue-700 flex items-center justify-center shadow-xs transition-colors">
+            <div
+              role="button"
+              tabIndex={0}
+              onClick={() => uploadInputRef.current?.click()}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  uploadInputRef.current?.click();
+                }
+              }}
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+              className={`flex flex-col items-center justify-center p-8 sm:p-14 border-2 border-dashed rounded-3xl transition-all cursor-pointer group text-center space-y-4 select-none ${
+                isDraggingOver
+                  ? 'border-blue-600 bg-blue-100/70 scale-[1.01]'
+                  : 'border-blue-300 hover:border-blue-500 bg-blue-50/30 hover:bg-blue-50/60'
+              }`}
+            >
+              <div className="w-16 h-16 rounded-2xl bg-blue-100 group-hover:bg-blue-200 text-blue-700 flex items-center justify-center shadow-xs transition-transform group-hover:scale-105">
                 <UploadCloud className="w-8 h-8" />
               </div>
-              <div>
-                <p className="text-base font-black text-slate-900">
+              <div className="space-y-1 max-w-md">
+                <p className="text-base sm:text-lg font-black text-slate-900">
                   Upload Photo of Hand-Signed Signature on Paper
                 </p>
-                <p className="text-xs text-slate-500 font-medium mt-1">
-                  Takes any phone camera snapshot and wipes away room shadows, desk yellowing, and grey paper tint.
+                <p className="text-xs text-slate-500 font-medium leading-relaxed">
+                  Takes any phone camera snapshot or scan and automatically wipes away desk shadows, yellowing, and grey paper tint.
                 </p>
               </div>
-              <span className="px-5 py-2 rounded-xl bg-blue-600 group-hover:bg-blue-700 text-white font-black text-xs shadow-xs transition-all">
-                Select Photo File
-              </span>
-            </label>
+              <div className="flex flex-col sm:flex-row items-center gap-2 pt-1">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    uploadInputRef.current?.click();
+                  }}
+                  className="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-black text-xs shadow-md hover:shadow-lg transition-all cursor-pointer pointer-events-auto"
+                >
+                  Select Photo File
+                </button>
+                <span className="text-[11px] font-semibold text-slate-400">
+                  or drag &amp; drop here (JPG, PNG, WebP)
+                </span>
+              </div>
+            </div>
           ) : (
             <div className="space-y-5">
               {/* Top Action Bar */}
