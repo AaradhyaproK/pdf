@@ -73,6 +73,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
         tools: [
           { name: 'PDF to Word Converter', slug: '/pdf/pdf-to-word', description: 'Convert PDF documents into fully editable Microsoft Word (.docx) files 100% privately.', isPopular: true, badge: 'Popular', iconName: 'FileText' },
           { name: 'Word to PDF Converter', slug: '/pdf/word-to-pdf', description: 'Convert Word DOCX documents into crisp, publication-ready PDF files instantly.', isPopular: true, badge: 'New', iconName: 'FileCode' },
+          { name: 'HTML to PDF Converter', slug: '/tools/html-to-pdf', description: 'Convert HTML code, templates & .html files into vector A4 & Letter PDF 100% privately.', isPopular: true, badge: 'Hot', iconName: 'Code' },
           { name: 'PDF to JPG / PNG Converter', slug: '/pdf/to-image', description: 'Extract and convert every PDF page into high-resolution JPG or PNG image files.', iconName: 'FileImage' },
           { name: 'Pics to PDF Converter', slug: '/image/pics-to-pdf', description: 'Combine photos, camera scans, JPG, PNG & WebP images into a single clean PDF document.', isPopular: true, badge: 'Popular', iconName: 'Camera' }
         ]

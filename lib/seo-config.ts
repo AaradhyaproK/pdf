@@ -2910,6 +2910,39 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { question: 'How do I draw a signature online on mobile?', answer: 'Open the tool on your mobile browser and use your finger or stylus to draw smoothly on the canvas.' },
       { question: 'Why is transparent PNG best for signatures?', answer: 'Transparent PNG has zero background color, allowing it to overlay cleanly on Word documents and PDFs without a white box.' }
     ]
+  },
+  '/tools/html-to-pdf': {
+    slug: '/tools/html-to-pdf',
+    title: 'HTML to PDF Converter — Convert HTML Code & Files to PDF [Free, Instant & 100% Private]',
+    metaTitle: 'HTML to PDF Converter — Convert HTML Code & Files to PDF [Free, Instant & 100% Private]',
+    description: 'Convert HTML files, raw code, and web templates into high-resolution vector PDF documents. Support for A4, Letter, custom margins, CSS backgrounds, and starter templates. 100% private in-browser.',
+    keywords: [
+      'html to pdf',
+      'html to pdf converter',
+      'convert html to pdf online free',
+      'html code to pdf',
+      'save html as pdf',
+      'html to pdf converter free without watermark',
+      'raw html to pdf with css',
+      'convert html file to pdf',
+      'html to pdf in browser client side',
+      'html to pdf a4 size',
+      'invoice html to pdf free',
+      'convert htm to pdf free online',
+      'html to pdf with background graphics',
+      'export html table to pdf',
+      'html to pdf multi page breaks'
+    ],
+    category: 'pdf',
+    howToSteps: [
+      { title: 'Input HTML Content', text: 'Paste your HTML and CSS code, upload an .html file, or select a starter invoice or report preset.' },
+      { title: 'Customize Layout', text: 'Select paper format (A4, Letter, Legal), margins, orientation, and zoom scale with live sheet preview.' },
+      { title: 'Download PDF', text: 'Click Download PDF for instant file export or Vector Print for selectable text & clickable links.' }
+    ],
+    faqs: [
+      { question: 'Can I convert HTML to PDF without uploading files to a server?', answer: 'Yes! FileZenith compiles your HTML directly inside your web browser memory. Zero files are uploaded to any external server.' },
+      { question: 'Does it support CSS background colors and images?', answer: 'Yes, our engine automatically enables exact print color adjustment so all background colors, gradients, and badges are preserved.' }
+    ]
   }
 };
 
