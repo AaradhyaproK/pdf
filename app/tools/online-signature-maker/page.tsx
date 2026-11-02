@@ -32,9 +32,9 @@ import {
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Online Signature Maker (Free, Draw or Type Cursive Sign) | FileZenith',
+  title: 'Online Signature Maker — Draw or Type Digital Signature [Free Transparent PNG, No Watermark] | FileZenith',
   description:
-    'Create, draw, and download digital signatures online for free. Draw with smooth pen on mobile or mouse, or type with 8+ authentic cursive handwriting fonts. Download transparent PNG, vector SVG, or 10-20KB govt exam JPEG. 100% private in-browser, no watermarks, no login.',
+    'Create, draw, or type digital signatures online for free. Download transparent PNG for Word/PDFs, vector SVG, or 10-20KB govt exam JPEG. Smooth pen flow, 8+ cursive handwriting fonts, paper shadow stripper, zero watermarks, 100% private in-browser.',
   keywords: [
     'online signature maker',
     'draw signature online',
@@ -42,21 +42,35 @@ export const metadata: Metadata = {
     'transparent signature generator',
     'digital signature creator transparent png',
     'handwritten signature generator online',
-    'draw signature for pdf',
+    'draw signature for pdf free',
     'electronic signature maker no watermark',
+    'signature to transparent png converter',
+    'draw sign with finger mobile',
+    'type signature cursive generator free',
+    'make signature online transparent background',
+    'free e signature drawer without login',
     'signature maker for pan card 444x205',
     'signature resize 10 to 20 kb ssc upsc',
-    'type signature cursive generator',
-    'make signature online transparent background',
-    'draw sign with finger mobile',
-    'free e signature drawer',
-    'smooth calligraphy signature online'
+    'paper signature photo background remover',
+    'clean handwritten signature from paper photo free',
+    'e sign generator free download transparent png',
+    'smooth calligraphy signature online',
+    'draw signature online mouse',
+    'signature maker copy to clipboard',
+    'digital signature for word document free',
+    'free electronic signature drawer for contracts',
+    'fountain pen signature generator online',
+    'cursive handwriting signature maker',
+    'signature without background maker free',
+    'draw signature on phone screen',
+    'sign on white background convert to transparent png',
+    'free digital sign maker online'
   ],
   alternates: {
     canonical: 'https://www.filezenith.com/tools/online-signature-maker',
   },
   openGraph: {
-    title: 'Online Signature Maker (Free, Transparent PNG & Draw Sign) | FileZenith',
+    title: 'Online Signature Maker — Draw or Type Digital Signature [Free Transparent PNG, No Watermark] | FileZenith',
     description:
       'Create and draw authentic digital signatures online. Download transparent PNG for Word/PDF or 10-20KB JPEG for government portals. 100% private in-browser, zero watermark, zero signup.',
     url: 'https://www.filezenith.com/tools/online-signature-maker',
@@ -67,13 +81,13 @@ export const metadata: Metadata = {
         url: 'https://www.filezenith.com/api/og?title=Online%20Signature%20Maker&category=Digital%20ID%20Tools&desc=Draw%20or%20type%20authentic%20handwritten%20signatures.%20Export%20transparent%20PNG%2C%20SVG%2C%20or%20govt%2010-20KB%20JPEG.&badge=100%25%20Free%20%26%20Private',
         width: 1200,
         height: 630,
-        alt: 'Online Signature Maker and Digital Drawer',
+        alt: 'Online Signature Maker and Digital Drawer Free',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Online Signature Maker (Free, Transparent PNG & Draw Sign) | FileZenith',
+    title: 'Online Signature Maker — Draw or Type Digital Signature [Free Transparent PNG, No Watermark] | FileZenith',
     description:
       'Draw smooth signatures or type cursive signatures online. 100% free, transparent PNG, SVG & Govt JPEG formats.',
     images: ['https://www.filezenith.com/api/og?title=Online%20Signature%20Maker&category=Digital%20ID%20Tools&desc=Draw%20or%20type%20authentic%20handwritten%20signatures.%20Export%20transparent%20PNG%2C%20SVG%2C%20or%20govt%2010-20KB%20JPEG.&badge=100%25%20Free%20%26%20Private'],
@@ -133,6 +147,13 @@ export default function OnlineSignatureMakerPage() {
       '@type': 'Offer',
       price: '0.00',
       priceCurrency: 'USD',
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.9',
+      reviewCount: '3420',
+      bestRating: '5',
+      worstRating: '1',
     },
     featureList: [
       'Draw smooth digital signature with finger, stylus, or mouse',

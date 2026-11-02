@@ -589,14 +589,19 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
     ],
     keywords: [
       'pan card photo resizer 213x213',
+      'pan card signature resizer 444x205',
       'nsdl pan card photo dimension converter',
       'utiitsl pan photo size 213x213',
-      'pan card signature resizer 444x205',
       'pan card photo compressor under 50kb',
       'pan card photo size in cm 2.5 x 2.5',
+      'pan card signature size in cm 4.5 x 2.0',
       'how to resize photo for pan card online free',
       'nsdl uti pan card photo resizer 300 dpi',
-      'pan card application photo size converter'
+      'pan card application photo size converter',
+      'pan card photo 300 dpi converter free',
+      'form 49a photo resize online free',
+      'pan card document compressor 300 kb pdf',
+      'csc pan card photo signature tool'
     ]
   },
 

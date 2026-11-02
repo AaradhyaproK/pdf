@@ -2842,6 +2842,74 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { feature: 'Photo Privacy', omnitool: '100% Client-Side (Zero Server Upload)', standardCloud: 'Uploaded and processed on remote cloud servers' },
       { feature: 'Interactive Turn Page', omnitool: 'Inspect Front Cover, Inside Spread & Back', standardCloud: 'Static preview only' }
     ]
+  },
+  '/tools/pan-card-photo-resizer': {
+    slug: '/tools/pan-card-photo-resizer',
+    title: 'PAN Card Photo & Signature Resizer (213x213 & 300 DPI) — Free NSDL & UTI Tool',
+    metaTitle: 'PAN Card Photo & Signature Resizer (213x213 & 300 DPI) — Free NSDL & UTI Tool',
+    description: 'Resize photo to exact 213x213 px and signature to 444x205 px at 300 DPI (<50KB) for NSDL Protean & UTIITSL PAN card portals. Features paper shadow stripper & 300KB PDF compressor.',
+    keywords: [
+      'pan card photo resizer 213x213',
+      'pan card signature resizer 444x205',
+      'nsdl pan card photo resizer 300 dpi',
+      'utiitsl pan card photo signature resize',
+      'pan card photo size 213 x 213',
+      'pan card signature size 444 x 205',
+      'pan card photo and signature resizer online free',
+      'pan card photo size in cm 2.5 x 2.5',
+      'pan card signature size in cm 4.5 x 2.0',
+      'pan card photo compressor under 50kb',
+      'pan card signature resize 10 to 20 kb',
+      'pan card document resizer 300 kb pdf',
+      'uti pan card photo signature cropper online',
+      'nsdl protean pan card photo and sign crop tool',
+      'form 49a photo resize online free',
+      'pan card correction photo signature size online',
+      'sarkari result pan card photo maker'
+    ],
+    category: 'image',
+    howToSteps: [
+      { title: 'Upload Photo or Signature', text: 'Select either the Photo (213×213 px) or Signature (444×205 px) tab.' },
+      { title: 'Align and Adjust', text: 'Use the interactive zoom slider and rotation controls to position within official guides.' },
+      { title: 'Enhance & Clean Background', text: 'Enable Magic B&W cleanup to eliminate grey shadow gradients and produce pure white paper.' },
+      { title: 'Download Compliant JPEG', text: 'Download with embedded real 300 DPI binary JFIF headers under 50KB.' }
+    ],
+    faqs: [
+      { question: 'What are the exact photo specifications for PAN cards?', answer: 'NSDL and UTIITSL require photo to be exactly 213 × 213 pixels at 300 DPI in JPEG format under 50KB.' },
+      { question: 'What are the exact signature specifications for PAN cards?', answer: 'Signature must be exactly 444 × 205 pixels at 300 DPI in JPEG format under 50KB.' }
+    ]
+  },
+  '/tools/online-signature-maker': {
+    slug: '/tools/online-signature-maker',
+    title: 'Online Signature Maker — Draw or Type Digital Signature [Free Transparent PNG, No Watermark]',
+    metaTitle: 'Online Signature Maker — Draw or Type Digital Signature [Free Transparent PNG, No Watermark]',
+    description: 'Create, draw, or type digital signatures online for free. Download transparent PNG for Word/PDFs, vector SVG, or 10-20KB govt exam JPEG. Smooth pen flow, 8+ cursive fonts, zero watermarks.',
+    keywords: [
+      'online signature maker',
+      'draw signature online',
+      'create signature online free',
+      'transparent signature generator',
+      'digital signature creator transparent png',
+      'handwritten signature generator online',
+      'draw signature for pdf free',
+      'electronic signature maker no watermark',
+      'signature to transparent png converter',
+      'draw sign with finger mobile',
+      'type signature cursive generator free',
+      'signature resize 10 to 20 kb ssc upsc',
+      'paper signature photo background remover',
+      'free digital sign maker online'
+    ],
+    category: 'image',
+    howToSteps: [
+      { title: 'Choose Mode', text: 'Select Draw Signature (finger/mouse), Type Signature (8+ cursive fonts), or Clean Paper Sign.' },
+      { title: 'Customize Style & Color', text: 'Choose fountain pen, ballpoint, calligraphy, or change ink color to jet black or royal blue.' },
+      { title: 'Download or Copy', text: 'Export as transparent PNG, SVG vector, or 10-20KB government exam JPEG in 1 click.' }
+    ],
+    faqs: [
+      { question: 'How do I draw a signature online on mobile?', answer: 'Open the tool on your mobile browser and use your finger or stylus to draw smoothly on the canvas.' },
+      { question: 'Why is transparent PNG best for signatures?', answer: 'Transparent PNG has zero background color, allowing it to overlay cleanly on Word documents and PDFs without a white box.' }
+    ]
   }
 };
 
