@@ -1876,6 +1876,105 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
       }
     ]
   },
+  "/pdf/pdf-to-excel": {
+    "slug": "/pdf/pdf-to-excel",
+    "badge": "Vector PDF to OpenXML XLSX Compiler",
+    "heading": "In-Depth Technical Guide: Extracting Tables from PDF into High-Precision Excel (XLSX, CSV)",
+    "subheading": "Comprehensive engineering manual detailing geometric table detection, adaptive column track clustering, multi-line row stitching, and OpenXML formula synthesis.",
+    "sections": [
+      {
+        "title": "1. The Geometry of PDF Tables: Beyond Raw Character Streams",
+        "paragraphs": [
+          "Unlike standard HTML or spreadsheet formats, the Portable Document Format (PDF) specification does not possess a native <table> tag or inherent cell data structure. Instead, tabular information in a PDF is represented as a chaotic stream of individual text operators (Tj, TJ) placed at discrete 2D Cartesian coordinates (X, Y) alongside independent vector path strokes (/l line-to, /re rectangle). Low-tier cloud converters often naively dump text by visual proximity, resulting in merged columns, fragmented numbers, and misaligned financial totals.",
+          "FileZenith's client-side extraction engine executes deep geometric and spatial clustering. It first normalizes text token coordinates against the page viewport matrix, then performs horizontal histogram binning to discover stable column tracks. By measuring whitespace gutters and boundary alignments across all rows on the page, the engine discovers the exact tabular grid structure with sub-pixel precision."
+        ],
+        "bullets": [
+          "Spatial Coordinate Normalization: Translates arbitrary PDF transformation matrices into normalized, top-down Cartesian coordinates.",
+          "Adaptive Column Track Clustering: Automatically identifies column boundaries by analyzing text start-positions, centerpoints, and gutter spaces.",
+          "Vector Path Integration: Leverages underlying border rules and table lines to demarcate headers, column dividers, and cell boundaries."
+        ]
+      },
+      {
+        "title": "2. Multi-Line Row Wrap Stitching & Bank Statement Precision",
+        "paragraphs": [
+          "The most prevalent failure mode in commercial PDF-to-Excel converters is the treatment of multi-line cell entries. In financial bank statements, shipping manifests, and corporate purchase orders, narrative descriptions (such as vendor transaction memos or item details) frequently wrap across two or three lines, while adjacent monetary columns (Debits, Credits, Balances) only occupy a single baseline. Substandard converters erroneously fragment these wrapped lines into orphan rows, destroying the one-to-one accounting relationship.",
+          "FileZenith resolves this via intelligent heuristic row stitching. If a newly encountered text baseline contains text only within a descriptive column while leaving numerical and date columns vacant, and falls within a tight vertical line-height threshold (<= 1.4x font size), our engine automatically merges the text into the parent row with a clean newline character. This guarantees that your financial transaction ledgers remain clean, unbroken, and immediately auditable."
+        ],
+        "bullets": [
+          "Heuristic Multi-Line Merging: Synthesizes wrapped invoice descriptions and memo lines directly into the parent table row.",
+          "Prevention of Orphan Rows: Eliminates empty balance lines and misaligned debit/credit transactions in banking exports.",
+          "Deduplication of Recurring Headers: Stacks multi-page financial statements continuously while pruning repetitive page headers."
+        ]
+      },
+      {
+        "title": "3. Formula-Ready Data Type Normalization: Numbers, Currencies & Dates",
+        "paragraphs": [
+          "A major frustration when converting PDFs to Excel is receiving numerical data locked as static text strings, forcing users to manually clean cells before mathematical operations can execute. FileZenith features an integrated type inference pipeline that inspects every extracted cell value against strict statistical patterns.",
+          "Standard integers, decimal floats, accounting negative values enclosed in parentheses e.g. (1,250.00), percentages, and international currencies ($ USD, € EUR, £ GBP, ₹ INR, ¥ JPY) are converted into authentic native JavaScript numbers and tagged with standard OpenXML numeric format strings. The instant you open the workbook in Microsoft Excel or Google Sheets, functions like =SUM(), =AVERAGE(), and =VLOOKUP() calculate instantly without throwing #VALUE! errors."
+        ],
+        "bullets": [
+          "Formula-Ready Numeric Typing: Converts string numbers into true OpenXML numeric types (t='n') for immediate computation.",
+          "Currency & Accounting Detection: Intelligently handles symbols ($ € £ ₹) and accounting negative notation ((100.00) -> -100.00).",
+          "Automated Column Width Optimization: Analyzes cell contents and computes custom column character widths to prevent ### overflow errors."
+        ]
+      },
+      {
+        "title": "4. Step-by-Step Practical Conversion Workflow",
+        "paragraphs": [
+          "To transform any locked PDF table into an editable, formula-ready Excel workbook, follow this intuitive four-step workflow. First, drag and drop your PDF into FileZenith's table extractor. The client engine loads the document binary into local browser memory without transmitting a single byte over the network.",
+          "Second, select your preferred extraction strategy (Smart Grid, Spatial Columns, or Whitespace Gutters) and configure multi-page sheet preferences. Third, click 'Convert PDF to Excel' to watch the WebAssembly engine execute real-time geometry analysis. Finally, inspect the live in-browser table preview, copy data directly to your clipboard, or download the clean .xlsx or .csv workbook."
+        ],
+        "bullets": [
+          "Step 1: Document Ingestion - Drop any PDF document into local memory with zero file size or page restrictions.",
+          "Step 2: Customization Setup - Configure column track rules, number parsing, currency detection, and multi-page layout.",
+          "Step 3: WebAssembly Compilation - The client engine clusters coordinates and compiles clean OpenXML XLSX packages in seconds.",
+          "Step 4: Live Verification & Export - Review the interactive spreadsheet preview, copy directly with one click, or download XLSX/CSV."
+        ]
+      },
+      {
+        "title": "5. Zero Cloud Transmission & Strict Confidentiality Guarantees",
+        "paragraphs": [
+          "PDF tables routinely contain the most sensitive information an individual or enterprise owns: banking statements, employee salaries, tax filings, confidential audits, and supplier price lists. Uploading these documents to public cloud conversion services exposes confidential financial data to server-side retention, third-party breaches, and automated scraping.",
+          "FileZenith provides an ironclad architectural guarantee: 100% of PDF parsing, OCR, and Excel compilation runs locally inside your client device's browser memory via WebAssembly and HTML5 Canvas. Your documents are never uploaded, stored, or indexed on remote cloud infrastructure, guaranteeing strict compliance with GDPR, HIPAA, and internal corporate data protection policies."
+        ],
+        "bullets": [
+          "100% Client-Side Architecture: Memory-isolated execution ensures zero network egress of private financial records.",
+          "Regulatory Compliance: Inherently compliant with GDPR, HIPAA, and enterprise privacy standards.",
+          "No Software Installation: Operates natively in modern web browsers across Windows, macOS, Linux, iOS, and Android."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "How do I convert a PDF to Excel for free without software?",
+        "answer": "Upload your PDF to FileZenith's PDF to Excel converter, select your preferred table strategy, and click Convert. The WebAssembly engine analyzes the table geometry in your browser memory and generates an editable .xlsx workbook in seconds."
+      },
+      {
+        "question": "Can I convert a bank statement PDF into an Excel spreadsheet with working formulas?",
+        "answer": "Yes! FileZenith automatically detects numbers, currencies ($ € £ ₹), and negative accounting values, storing them as authentic numeric cells so formulas like =SUM() and =AVERAGE() calculate immediately in Excel and Google Sheets."
+      },
+      {
+        "question": "How does FileZenith prevent multi-line table cells from breaking across separate rows?",
+        "answer": "Our Smart Grid engine uses heuristic multi-line row stitching. If a row contains text only in a description column while adjacent date and amount columns are blank, the engine seamlessly merges it into the parent row, preserving clean accounting records."
+      },
+      {
+        "question": "Can I merge multi-page PDF tables into a single continuous Excel sheet?",
+        "answer": "Yes! Choose the 'Single Unified Sheet' option. FileZenith stacks all pages into one continuous worksheet and automatically removes recurring table headers from page 2 onwards."
+      },
+      {
+        "question": "Does FileZenith support exporting to CSV and TSV formats as well as XLSX?",
+        "answer": "Yes! In addition to modern Microsoft Excel (.xlsx), you can export directly to CSV (comma-separated), TSV (tab-delimited), HTML table, or structured JSON."
+      },
+      {
+        "question": "Are my confidential tax documents or salary slips uploaded to any server?",
+        "answer": "Never. FileZenith executes 100% in-browser using WebAssembly. Your files are processed entirely in your device RAM and are never transmitted to any external server or saved in databases."
+      },
+      {
+        "question": "Can I copy the extracted table directly to my clipboard without downloading a file?",
+        "answer": "Yes! FileZenith provides a live spreadsheet preview with a 'Copy to Clipboard' button. You can click it and immediately press Ctrl+V / Cmd+V directly into your open Excel or Google Sheets window."
+      }
+    ]
+  },
   "/pdf/word-to-pdf": {
     "slug": "/pdf/word-to-pdf",
     "badge": "OpenXML to ISO 32000 PDF Compiler",

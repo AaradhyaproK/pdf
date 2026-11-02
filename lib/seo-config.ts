@@ -925,6 +925,47 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { feature: 'Account / Email Requirement', omnitool: 'None (Instant Direct Download)', standardCloud: 'Email Registration or Paywall Prompts' }
     ]
   },
+  '/pdf/pdf-to-excel': {
+    slug: '/pdf/pdf-to-excel',
+    title: 'PDF to Excel Converter — Convert PDF to XLSX Spreadsheet Online Free',
+    metaTitle: 'PDF to Excel Converter — High Accuracy PDF to XLSX / CSV (Free)',
+    description: 'Convert PDF to Excel (.xlsx, .csv) with the highest table extraction accuracy. Free, fast, private in-browser table extractor with zero limits or cloud uploads.',
+    keywords: [
+      'pdf to excel',
+      'convert pdf to excel',
+      'pdf to excel converter',
+      'pdf to xlsx',
+      'pdf to excel online free',
+      'free pdf to excel converter without email',
+      'convert bank statement pdf to excel free',
+      'pdf table extractor to excel',
+      'accurate pdf to excel converter',
+      'convert pdf to csv online',
+      'best pdf to excel converter no upload',
+      'pdf to excel spreadsheet converter'
+    ],
+    category: 'pdf',
+    howToSteps: [
+      { title: 'Upload PDF Document or Table', text: 'Select or drag and drop any PDF file (bank statement, invoice, balance sheet, or tabular report) into the converter workspace.' },
+      { title: 'Configure Table Strategy & Number Rules', text: 'Choose between Smart Grid, Spatial Columns, or Whitespace Gutters, select single or multi-sheet mode, and enable automatic number and currency parsing.' },
+      { title: 'Convert & Download Excel Spreadsheet', text: 'Click Convert PDF to Excel to extract tabular coordinates locally and instantly download clean, editable .xlsx, .csv, or .tsv files.' }
+    ],
+    faqs: [
+      { question: 'Is this PDF to Excel converter completely free with no file limits?', answer: 'Yes! FileZenith PDF to Excel converter is 100% free forever with zero file size caps, no mandatory sign-ups, no email requirements, and no daily conversion limits.' },
+      { question: 'Does the converted XLSX file support Excel mathematical formulas?', answer: 'Yes! Our Smart Grid engine automatically detects and parses numbers, percentages, and currencies into authentic numeric cell values so formulas like =SUM(), =AVERAGE(), and =VLOOKUP() work immediately without type errors.' },
+      { question: 'Can I convert multi-page bank statements into one single continuous Excel sheet?', answer: 'Yes! Select the "Single Unified Sheet" option. The converter stacks all pages into one continuous worksheet and automatically deduplicates recurring table headers from page 2 onwards.' },
+      { question: 'How does FileZenith handle multi-line row wraps in table cells?', answer: 'Unlike competitors that scatter wrapped lines across empty new rows, FileZenith intelligently stitches multi-line text (such as long invoice descriptions or transaction memos) back into the primary row.' },
+      { question: 'Are my confidential financial statements or tax documents uploaded to any server?', answer: 'Never! All PDF parsing, coordinate clustering, and Excel workbook compilation run 100% locally inside your browser memory using WebAssembly. Zero bytes ever leave your device.' },
+      { question: 'Does this converter work on mobile phones and tablets?', answer: 'Yes! The responsive interface works smoothly across Android, iPhone, iPad, Mac, and Windows computers without installing any software or apps.' }
+    ],
+    comparisonTable: [
+      { feature: 'Data Privacy & Security', omnitool: '100% In-Browser Memory (Zero Cloud Uploads)', standardCloud: 'Sent to Third-Party Cloud Servers' },
+      { feature: 'File Size & Daily Limits', omnitool: 'Unlimited (Processed by Device RAM)', standardCloud: 'Capped at 15MB or 2 Files/Day' },
+      { feature: 'Multi-Line Row Stitching', omnitool: 'Included (Preserves Clean Row Alignment)', standardCloud: 'Breaks Wrapped Cells Into Fragmented Rows' },
+      { feature: 'Formula-Ready Number Parsing', omnitool: 'Real Numbers (=SUM & =AVERAGE Ready)', standardCloud: 'Often Exported as Static Text Strings' },
+      { feature: 'Instant In-Browser Table Preview', omnitool: 'Live Matrix Preview with 1-Click Copy', standardCloud: 'Must Download Entire File Blindly' }
+    ]
+  },
   '/pdf/word-to-pdf': {
     slug: '/pdf/word-to-pdf',
     title: 'Word to PDF Converter — Convert DOCX to PDF Online Free',

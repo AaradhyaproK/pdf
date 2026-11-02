@@ -57,7 +57,7 @@ function getRelatedGuidesAndArticles(slug: string, category: string): ArticleRec
     ];
   }
 
-  if (slug === '/pdf/pdf-to-word' || slug === '/pdf/word-to-pdf' || slug === '/pdf/ocr') {
+  if (slug === '/pdf/pdf-to-word' || slug === '/pdf/word-to-pdf' || slug === '/pdf/ocr' || slug === '/pdf/pdf-to-excel') {
     return [
       {
         title: 'How to Convert Scanned PDF to Editable Word',

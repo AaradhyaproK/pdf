@@ -59,6 +59,7 @@ import {
   Presentation,
   Globe,
   PenTool,
+  FileSpreadsheet,
 } from 'lucide-react';
 
 export interface ToolItem {
@@ -123,6 +124,21 @@ export const ALL_TOOLS: ToolItem[] = [
     hoverTitleClass: 'group-hover:text-emerald-600',
     badgeStyle: 'bg-emerald-50 text-emerald-700 border-emerald-200',
     keywords: ['html to pdf', 'url to pdf', 'convert url to pdf', 'webpage to pdf', 'save website as pdf', 'link to pdf', 'html code to pdf', 'convert html to pdf online'],
+  },
+  {
+    id: 'pdf-to-excel',
+    name: 'PDF to Excel Converter (XLSX, CSV)',
+    slug: '/pdf/pdf-to-excel',
+    desc: 'Extract tables from PDF into high-precision Excel (.xlsx), CSV, and TSV spreadsheets with multi-line row stitching.',
+    category: 'pdf',
+    tags: ['convert-from', 'organize'],
+    icon: FileSpreadsheet,
+    badge: 'XLSX & CSV',
+    colorClass: 'text-emerald-600',
+    iconBgClass: 'bg-emerald-50 text-emerald-600 border-emerald-100 group-hover:bg-emerald-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-emerald-600',
+    badgeStyle: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+    keywords: ['pdf to excel', 'convert pdf to excel', 'pdf to xlsx', 'pdf to csv', 'bank statement to excel', 'pdf table extractor', 'extract tables from pdf', 'free pdf to excel converter', 'pdf to spreadsheet'],
   },
   {
     id: 'compress-pdf-to-300kb',

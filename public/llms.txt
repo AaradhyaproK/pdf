@@ -30,6 +30,7 @@
 - **[Unlock / Remove Password](https://www.filezenith.com/pdf/remove-password):** Decrypt user-owned PDFs and remove restriction locks.
 - **[PDF OCR Text Extractor](https://www.filezenith.com/pdf/ocr):** Client-side optical character recognition using Tesseract.js WebAssembly.
 - **[PDF to Word (DOCX)](https://www.filezenith.com/pdf/pdf-to-word):** Convert PDF pages into editable Microsoft Word documents.
+- **[PDF to Excel (XLSX)](https://www.filezenith.com/pdf/pdf-to-excel):** Extract tables into editable Microsoft Excel (.xlsx), CSV, and TSV spreadsheets with multi-line row stitching.
 - **[Word to PDF Converter](https://www.filezenith.com/pdf/word-to-pdf):** Convert .docx files into crisp, standardized PDF documents.
 - **[Pics to PDF (JPG to PDF)](https://www.filezenith.com/image/pics-to-pdf):** Convert batches of camera photos, scans, JPGs, and PNGs into clean single or multi-page PDFs.
 - **[PDF to JPG / PNG](https://www.filezenith.com/pdf/to-image):** Render high-resolution raster images from PDF pages.
