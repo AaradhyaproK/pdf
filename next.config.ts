@@ -17,7 +17,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Cache-Control",
-            value: "public, max-age=86400, s-maxage=86400, stale-while-revalidate=86400",
+            value: "public, max-age=86400, s-maxage=86400",
           },
           {
             key: "Access-Control-Allow-Origin",
@@ -34,7 +34,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Cache-Control",
-            value: "public, max-age=86400, s-maxage=86400, stale-while-revalidate=86400",
+            value: "public, max-age=86400, s-maxage=86400",
           },
           {
             key: "Access-Control-Allow-Origin",
@@ -51,7 +51,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Cache-Control",
-            value: "public, max-age=86400, s-maxage=86400, stale-while-revalidate=86400",
+            value: "public, max-age=86400, s-maxage=86400",
           },
           {
             key: "Access-Control-Allow-Origin",
@@ -60,7 +60,7 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: "/:all*(svg|jpg|png|webp|ico|woff|woff2)",
+        source: "/:all*(svg|jpg|jpeg|png|webp|avif|ico|gif|woff|woff2|ttf|eot|wasm|mjs|mp3|mp4)",
         headers: [
           {
             key: "Cache-Control",

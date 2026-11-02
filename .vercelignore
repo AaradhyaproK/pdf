@@ -1,0 +1,13 @@
+.git
+.github
+.gemini
+.vscode
+.idea
+*.test.ts
+*.test.tsx
+tests/
+docs/
+scratch/
+tmp/
+*.log
+.DS_Store
