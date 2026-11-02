@@ -30,7 +30,12 @@ interface PageProps {
 
 export async function generateStaticParams() {
   return Object.keys(PRESET_REGISTRY)
-    .filter((slug) => slug !== 'aadhaar-card-print' && slug !== 'pan-card-photo-resizer')
+    .filter(
+      (slug) =>
+        slug !== 'aadhaar-card-print' &&
+        slug !== 'pan-card-photo-resizer' &&
+        slug !== 'online-signature-maker'
+    )
     .map((slug) => ({ slug }));
 }
 

@@ -53,6 +53,7 @@
 - **[CSC & Cyber Cafe Fast Toolkit](https://www.filezenith.com/csc-cyber-cafe-tools):** All-in-one daily workstation for CSC VLEs, Jan Seva Kendras, and Cyber Cafe operators: Aadhaar PVC prints, PAN 213x213 cropper, marksheet mergers, and 10-20KB signature resizers.
 - **[Govt Job Exam Tools Hub](https://www.filezenith.com/govt-job-tools):** Official directory of photo and signature resizers for SSC, UPSC, IBPS, and State PSCs.
 - **[Aadhaar Card Print Tool](https://www.filezenith.com/tools/aadhaar-card-print):** Format e-Aadhaar PDFs onto standard A4 paper and exact ISO 85.6 × 54.0 mm PVC card dimensions.
+- **[Online Signature Maker](https://www.filezenith.com/tools/online-signature-maker):** Draw digital signatures with smooth pen on mobile/mouse or type cursive handwriting signatures. 1-click export as transparent PNG, SVG, or 10-20KB govt JPEG.
 - **[PAN Card Photo Resizer](https://www.filezenith.com/tools/pan-card-photo-resizer):** NSDL & UTIITSL standard 213x213 px, 300 DPI crop under 50KB.
 - **[Signature Resizer 10 to 20KB](https://www.filezenith.com/tools/signature-resizer-10-to-20kb):** Magic B&W cleanup for phone camera photos of pen signatures.
 - **[Photo & Signature Joiner](https://www.filezenith.com/tools/photo-signature-joiner):** Stack passport photo and signature into a single unified image file.

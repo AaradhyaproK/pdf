@@ -89,6 +89,7 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
       { question: 'Is my signature uploaded or saved on any server?', answer: 'Never! All canvas processing runs 100% locally inside your web browser. Your signature never leaves your computer or phone.' }
     ],
     relatedTools: [
+      { name: 'Online Signature Maker (Draw & Type)', slug: '/tools/online-signature-maker', desc: 'Draw signature with mouse/finger or type in cursive.' },
       { name: 'Clean B&W Signature', slug: '/tools/clean-black-white-signature', desc: 'Remove gray paper background noise.' },
       { name: 'SSC Photo Resizer', slug: '/tools/ssc-photo-resizer', desc: 'SSC photo with name & date stamp.' },
       { name: 'Compress Image to 20KB', slug: '/image/compress-to-20kb', desc: 'Generic 20KB file size compressor.' },
@@ -582,6 +583,7 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
       { question: 'What is PAN card signature size?', answer: 'Signature size is 444 × 205 pixels, file size under 50KB.' }
     ],
     relatedTools: [
+      { name: 'Online Signature Maker (Draw & Type)', slug: '/tools/online-signature-maker', desc: 'Draw or type signature online.' },
       { name: 'Compress Image to 50KB', slug: '/image/compress-to-50kb', desc: 'Compress photo to 50KB.' },
       { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'PAN signature resizer.' }
     ],

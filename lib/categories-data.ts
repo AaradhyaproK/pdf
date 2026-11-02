@@ -227,7 +227,9 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
         title: 'Govt Job Exam Resizers & ID Tools',
         description: 'Specialized 100% in-browser photo, signature, and ID card tools for Indian recruitment portals.',
         tools: [
+          { name: 'Online Signature Maker (Draw & Type)', slug: '/tools/online-signature-maker', description: 'Draw or type smooth digital signatures with transparent PNG and 10-20KB govt JPEG export.', isPopular: true, badge: 'Draw & Type', iconName: 'PenTool' },
           { name: 'Aadhaar Card Print Tool (A4 & PVC)', slug: '/tools/aadhaar-card-print', description: 'Crop and print e-Aadhaar on A4 sheet & PVC card (85.6x54 mm).', isPopular: true, badge: 'A4 & PVC', iconName: 'Printer' },
+          { name: 'PAN Card Photo Resizer (213x213)', slug: '/tools/pan-card-photo-resizer', description: 'NSDL & UTIITSL standard 213x213 pixels, 300 DPI, under 50KB JPEG photo crop.', isPopular: true, badge: 'NSDL & UTI', iconName: 'UserCheck' },
           { name: 'SSC Photo Resizer (20-50KB)', slug: '/tools/ssc-photo-resizer', description: 'Format SSC CGL, CHSL, MTS photo with Name & Date stamp.', isPopular: true, badge: 'SSC 20-50KB', iconName: 'UserCheck' },
           { name: 'Signature Resizer 10 to 20KB', slug: '/tools/signature-resizer-10-to-20kb', description: 'Resize signature to 10-20KB with Magic B&W cleanup.', isPopular: true, badge: '10-20KB', iconName: 'Stamp' },
           { name: 'Railway RRB Photo Resizer', slug: '/tools/railway-rrb-photo-resizer', description: 'RRB NTPC, ALP, Group D 20-50KB photo resizer.', isPopular: true, badge: 'RRB 20-50KB', iconName: 'UserCheck' },
@@ -1169,6 +1171,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
         title: 'Govt Exam Photo & Signature Resizers',
         description: 'Exact dimensions, byte limits (KB), and formats for SSC, UPSC, IBPS, and State PSC recruitment portals.',
         tools: [
+          { name: 'Online Signature Maker (Draw & Type)', slug: '/tools/online-signature-maker', description: 'Draw or type digital signature with transparent PNG & 10-20KB govt exam JPEG.', isPopular: true, badge: 'Draw & Type', iconName: 'PenTool' },
           { name: 'SSC CGL Photo & Signature Resizer', slug: '/tools/ssc-cgl-photo-signature-resizer', description: 'Official 20-50KB photo with Name & DOP stamp and 10-20KB signature.', isPopular: true, badge: 'CGL 2026', iconName: 'UserCheck' },
           { name: 'UPSC OTR Photo Resizer (350x350)', slug: '/tools/upsc-otr-photo-resizer', description: 'Square 350x350 px photo (20-300KB) with candidate name and date.', isPopular: true, badge: 'OTR Square', iconName: 'UserCheck' },
           { name: 'CTET Photo & Signature Resizer', slug: '/tools/ctet-photo-signature-resizer', description: 'CBSE CTET 10-100KB photo and 3-30KB signature resizer.', badge: 'CTET 2026', iconName: 'UserCheck' },
@@ -1326,6 +1329,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
         title: 'Govt Exam Photo & Signature Resizers',
         description: 'Meet strict sarkari recruitment portal KB requirements for SSC, UPSC, IBPS, and State PSCs.',
         tools: [
+          { name: 'Online Signature Maker (Draw & Type)', slug: '/tools/online-signature-maker', description: 'Instant in-browser signature drawing canvas & cursive generator with transparent PNG & 10-20KB JPEG.', isPopular: true, badge: 'Draw & Type', iconName: 'PenTool' },
           { name: 'Signature Resizer 10 to 20KB', slug: '/tools/signature-resizer-10-to-20kb', description: 'Resize signature strictly between 10KB and 20KB with Magic B&W cleanup for dirty phone photos.', isPopular: true, badge: '10-20KB Safe', iconName: 'Stamp' },
           { name: 'Photo & Signature Joiner', slug: '/tools/photo-signature-joiner', description: 'Merge customer photo (top) and signature (bottom) into one single file under 50KB for single-upload forms.', isPopular: true, badge: 'Single File', iconName: 'Combine' },
           { name: 'Photo Name & Date Stamp Generator', slug: '/tools/photo-name-date-generator', description: 'Add candidate full name and Date of Photo (DOP) on white bottom strip without Photoshop.', isPopular: true, badge: 'SSC & Police', iconName: 'Calendar' },

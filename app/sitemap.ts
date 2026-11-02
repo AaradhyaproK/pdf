@@ -38,16 +38,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/about',
     '/blog',
     '/contact',
+    '/csc-cyber-cafe-tools',
     '/download-app',
     '/privacy',
     '/security',
     '/studio',
     '/terms',
+    '/tools/online-signature-maker',
+    '/tools/pan-card-photo-resizer',
+    '/tools/aadhaar-card-print',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
-    priority: route === '' ? 1.0 : route === '/blog' ? 0.85 : 0.7,
+    priority:
+      route === ''
+        ? 1.0
+        : route.startsWith('/tools/')
+          ? 0.95
+          : route === '/blog' || route === '/csc-cyber-cafe-tools'
+            ? 0.9
+            : 0.7,
     images: [defaultOgImage],
   }));
 
