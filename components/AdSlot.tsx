@@ -53,7 +53,7 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
       (slotType === 'sticky-sidebar' && !!config.customSidebarCode) ||
       (slotType === 'post-download' && !!config.customPostDownloadCode));
 
-  const hasValidAdSenseSlot = config.adProvider === 'adsense' && !!clientAdId;
+  const hasValidAdSenseSlot = config.adProvider === 'adsense' && !!config.publisherId;
 
   useEffect(() => {
     trackAdImpression(slotType);
@@ -150,7 +150,7 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
               className="adsbygoogle"
               style={{ display: 'block', width: '100%', minHeight: 0 }}
               data-ad-client={publisherId}
-              data-ad-slot={clientAdId}
+              {...(clientAdId ? { 'data-ad-slot': clientAdId } : {})}
               data-ad-format="auto"
               data-full-width-responsive="true"
             />
@@ -178,7 +178,7 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
               className="adsbygoogle"
               style={{ display: 'block', width: '100%', minHeight: 0 }}
               data-ad-client={publisherId}
-              data-ad-slot={clientAdId}
+              {...(clientAdId ? { 'data-ad-slot': clientAdId } : {})}
               data-ad-format="auto"
               data-full-width-responsive="true"
             />
@@ -206,7 +206,7 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
             className="adsbygoogle"
             style={{ display: 'block', width: '100%', minHeight: 0 }}
             data-ad-client={publisherId}
-            data-ad-slot={clientAdId}
+            {...(clientAdId ? { 'data-ad-slot': clientAdId } : {})}
             data-ad-format="auto"
             data-full-width-responsive="true"
           />

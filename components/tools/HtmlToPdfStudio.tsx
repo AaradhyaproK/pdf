@@ -412,6 +412,7 @@ export function HtmlToPdfStudio() {
   
   // Mobile tab preview toggle
   const [mobileView, setMobileView] = useState<'editor' | 'preview'>('preview');
+  const [isMobilePreviewModalOpen, setIsMobilePreviewModalOpen] = useState<boolean>(false);
 
   // Loading & Export state
   const [isExporting, setIsExporting] = useState<boolean>(false);
@@ -420,6 +421,7 @@ export function HtmlToPdfStudio() {
   const [lastDownloadedSize, setLastDownloadedSize] = useState<string>('');
 
   const iframePreviewRef = useRef<HTMLIFrameElement>(null);
+  const modalIframePreviewRef = useRef<HTMLIFrameElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Derive dimensions according to orientation
@@ -502,8 +504,8 @@ export function HtmlToPdfStudio() {
 
   // Update iframe preview when code or settings change
   useEffect(() => {
+    const fullDoc = buildCompleteHtml(htmlCode);
     if (iframePreviewRef.current) {
-      const fullDoc = buildCompleteHtml(htmlCode);
       const iframeDoc = iframePreviewRef.current.contentDocument || iframePreviewRef.current.contentWindow?.document;
       if (iframeDoc) {
         iframeDoc.open();
@@ -511,7 +513,15 @@ export function HtmlToPdfStudio() {
         iframeDoc.close();
       }
     }
-  }, [htmlCode, buildCompleteHtml]);
+    if (modalIframePreviewRef.current) {
+      const modalDoc = modalIframePreviewRef.current.contentDocument || modalIframePreviewRef.current.contentWindow?.document;
+      if (modalDoc) {
+        modalDoc.open();
+        modalDoc.write(fullDoc);
+        modalDoc.close();
+      }
+    }
+  }, [htmlCode, buildCompleteHtml, isMobilePreviewModalOpen]);
 
   // Handle template selection
   const handleSelectTemplate = (key: keyof typeof STARTER_TEMPLATES) => {
@@ -519,6 +529,9 @@ export function HtmlToPdfStudio() {
     setHtmlCode(STARTER_TEMPLATES[key].code);
     setFetchedUrlDomain(null);
     setUploadedFileName(null);
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+      setMobileView('preview');
+    }
     toast.success(`Loaded ${STARTER_TEMPLATES[key].name} template`);
   };
 
@@ -565,6 +578,10 @@ export function HtmlToPdfStudio() {
       }
 
       setActiveTab('editor');
+      // Auto-switch to preview on mobile so user immediately sees their rendered webpage
+      if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+        setMobileView('preview');
+      }
       toast.dismiss(toastId);
       toast.success(`Loaded "${data.title || raw}" successfully!`);
     } catch (err: any) {
@@ -596,6 +613,9 @@ export function HtmlToPdfStudio() {
       if (content) {
         setHtmlCode(content);
         setActiveTab('editor');
+        if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+          setMobileView('preview');
+        }
         toast.success(`Loaded "${file.name}" (${(file.size / 1024).toFixed(1)} KB)`);
       }
     };
@@ -894,7 +914,7 @@ export function HtmlToPdfStudio() {
             <select
               value={pageSize}
               onChange={(e) => setPageSize(e.target.value as PageSize)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-slate-800 font-medium focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none transition"
+              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 sm:py-1.5 text-base sm:text-xs text-slate-800 font-medium focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none transition min-h-[42px] sm:min-h-0"
             >
               <option value="a4">A4 (210×297 mm)</option>
               <option value="letter">US Letter (8.5×11")</option>
@@ -910,7 +930,7 @@ export function HtmlToPdfStudio() {
             <select
               value={orientation}
               onChange={(e) => setOrientation(e.target.value as PageOrientation)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-slate-800 font-medium focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none transition"
+              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 sm:py-1.5 text-base sm:text-xs text-slate-800 font-medium focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none transition min-h-[42px] sm:min-h-0"
             >
               <option value="portrait">Portrait</option>
               <option value="landscape">Landscape</option>
@@ -923,7 +943,7 @@ export function HtmlToPdfStudio() {
             <select
               value={margin}
               onChange={(e) => setMargin(e.target.value as MarginOption)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-slate-800 font-medium focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none transition"
+              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 sm:py-1.5 text-base sm:text-xs text-slate-800 font-medium focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none transition min-h-[42px] sm:min-h-0"
             >
               <option value="normal">Normal (15 mm)</option>
               <option value="narrow">Narrow (8 mm)</option>
@@ -938,7 +958,7 @@ export function HtmlToPdfStudio() {
             <select
               value={zoomScale}
               onChange={(e) => setZoomScale(Number(e.target.value))}
-              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-slate-800 font-medium focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none transition"
+              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 sm:py-1.5 text-base sm:text-xs text-slate-800 font-medium focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none transition min-h-[42px] sm:min-h-0"
             >
               <option value={75}>75% (Compact)</option>
               <option value={90}>90%</option>
@@ -954,13 +974,13 @@ export function HtmlToPdfStudio() {
             <button
               type="button"
               onClick={() => setEnableBackgrounds(!enableBackgrounds)}
-              className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg border font-medium transition ${
+              className={`w-full flex items-center justify-between px-2.5 py-2 sm:py-1.5 rounded-lg border font-medium transition min-h-[42px] sm:min-h-0 ${
                 enableBackgrounds
                   ? 'bg-blue-50 border-blue-200 text-blue-700'
                   : 'bg-slate-50 border-slate-200 text-slate-600'
               }`}
             >
-              <span>{enableBackgrounds ? 'Vibrant Colors' : 'Economy (White)'}</span>
+              <span className="text-xs">{enableBackgrounds ? 'Vibrant Colors' : 'Economy (White)'}</span>
               <Check className={`w-3.5 h-3.5 ${enableBackgrounds ? 'opacity-100' : 'opacity-0'}`} />
             </button>
           </div>
@@ -974,31 +994,33 @@ export function HtmlToPdfStudio() {
                 value={fileName}
                 onChange={(e) => setFileName(e.target.value)}
                 placeholder="document"
-                className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 pr-8 text-slate-800 font-medium focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none transition"
+                className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 sm:py-1.5 pr-8 text-base sm:text-xs text-slate-800 font-medium focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none transition min-h-[42px] sm:min-h-0"
               />
-              <span className="absolute right-2 top-1.5 text-slate-400 font-semibold text-[11px]">.pdf</span>
+              <span className="absolute right-2 top-2.5 sm:top-1.5 text-slate-400 font-semibold text-[11px]">.pdf</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Mobile Tab Switcher */}
-      <div className="lg:hidden flex rounded-xl bg-slate-200/80 p-1">
+      <div className="lg:hidden flex rounded-xl bg-slate-200/90 p-1 shadow-inner">
         <button
           onClick={() => setMobileView('editor')}
-          className={`flex-1 py-2 text-xs font-semibold rounded-lg transition ${
-            mobileView === 'editor' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+          className={`flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-lg transition flex items-center justify-center gap-1.5 min-h-[44px] ${
+            mobileView === 'editor' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-600 hover:text-slate-900'
           }`}
         >
-          Input &amp; Source
+          <Code2 className="w-4 h-4" />
+          <span>Input &amp; Source</span>
         </button>
         <button
           onClick={() => setMobileView('preview')}
-          className={`flex-1 py-2 text-xs font-semibold rounded-lg transition ${
-            mobileView === 'preview' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
+          className={`flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-lg transition flex items-center justify-center gap-1.5 min-h-[44px] ${
+            mobileView === 'preview' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-600 hover:text-slate-900'
           }`}
         >
-          Live PDF Preview
+          <Eye className="w-4 h-4" />
+          <span>Live PDF Preview</span>
         </button>
       </div>
 
@@ -1128,7 +1150,7 @@ export function HtmlToPdfStudio() {
                     rows={20}
                     spellCheck={false}
                     placeholder="Paste or write HTML & CSS markup here..."
-                    className="w-full font-mono text-xs text-slate-800 bg-white p-4 focus:outline-none resize-y min-h-[460px] leading-relaxed selection:bg-blue-100"
+                    className="w-full font-mono text-base sm:text-xs text-slate-800 bg-white p-4 focus:outline-none resize-y min-h-[420px] sm:min-h-[460px] leading-relaxed selection:bg-blue-100"
                   />
                   <div className="absolute right-3 bottom-3 px-2 py-1 bg-slate-900/70 text-white text-[10px] rounded font-mono pointer-events-none">
                     {htmlCode.length.toLocaleString()} characters
@@ -1169,13 +1191,13 @@ export function HtmlToPdfStudio() {
                           if (e.key === 'Enter') handleFetchUrl();
                         }}
                         placeholder="https://example.com/invoice-or-article"
-                        className="w-full pl-9 pr-3 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-300 rounded-xl text-slate-900 placeholder:text-slate-400 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                        className="w-full pl-9 pr-3 py-3 sm:py-2.5 text-base sm:text-sm bg-slate-50 border border-slate-300 rounded-xl text-slate-900 placeholder:text-slate-400 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition min-h-[46px]"
                       />
                     </div>
                     <button
                       onClick={handleFetchUrl}
                       disabled={isFetchingUrl || !inputUrl.trim()}
-                      className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs sm:text-sm shadow-xs transition flex items-center justify-center gap-2 disabled:opacity-50"
+                      className="px-5 py-3 sm:py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-xs transition flex items-center justify-center gap-2 disabled:opacity-50 min-h-[46px]"
                     >
                       {isFetchingUrl ? (
                         <>
@@ -1296,26 +1318,31 @@ export function HtmlToPdfStudio() {
         <div className={`lg:col-span-6 space-y-4 ${mobileView === 'editor' ? 'hidden lg:block' : 'block'}`}>
           <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col">
             {/* Preview Sheet Header */}
-            <div className="px-4 py-3 border-b border-slate-200 bg-slate-50/70 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Eye className="w-4 h-4 text-slate-500" />
-                <span className="font-bold text-xs text-slate-800">Live Paper Sheet Preview</span>
-                <span className="px-2 py-0.5 rounded-full bg-slate-200/80 text-[10px] font-semibold text-slate-600 uppercase">
+            <div className="px-4 py-3 border-b border-slate-200 bg-slate-50/70 flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2 min-w-0">
+                <Eye className="w-4 h-4 text-slate-500 shrink-0" />
+                <span className="font-bold text-xs text-slate-800 truncate">Live Paper Sheet Preview</span>
+                <span className="px-2 py-0.5 rounded-full bg-slate-200/80 text-[10px] font-semibold text-slate-600 uppercase shrink-0">
                   {pageSize.toUpperCase()} {orientation}
                 </span>
               </div>
 
-              <div className="flex items-center gap-2">
-                <span className="text-[11px] text-slate-500 hidden sm:inline">
-                  {PAGE_DIMENSIONS[pageSize].name}
-                </span>
+              <div className="flex items-center gap-1.5 shrink-0">
+                <button
+                  onClick={() => setIsMobilePreviewModalOpen(true)}
+                  className="px-2.5 py-1.5 text-xs font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-100 rounded-lg transition flex items-center gap-1 shadow-2xs"
+                  title="Expand to Fullscreen View"
+                >
+                  <Maximize2 className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">Fullscreen</span>
+                </button>
                 <button
                   onClick={handleVectorPrint}
-                  className="px-2.5 py-1 text-xs font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-md transition"
+                  className="px-2.5 py-1.5 text-xs font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-lg transition flex items-center gap-1"
                   title="Print preview"
                 >
-                  <Printer className="w-3.5 h-3.5 inline mr-1" />
-                  Print
+                  <Printer className="w-3.5 h-3.5" />
+                  <span>Print</span>
                 </button>
               </div>
             </div>
@@ -1349,26 +1376,90 @@ export function HtmlToPdfStudio() {
                 <span>Live Rendering Active</span>
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 w-full sm:w-auto">
                 <button
                   onClick={handleVectorPrint}
-                  className="px-3 py-1.5 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-xs transition"
+                  className="flex-1 sm:flex-none px-3.5 py-2.5 sm:py-1.5 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-xs sm:text-sm transition min-h-[44px] sm:min-h-0 flex items-center justify-center gap-1.5"
                 >
-                  Vector Print
+                  <Printer className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
+                  <span>Vector Print</span>
                 </button>
                 <button
                   onClick={handleDownloadPdf}
                   disabled={isExporting}
-                  className="px-4 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs shadow-xs transition flex items-center gap-1.5"
+                  className="flex-1 sm:flex-none px-4 py-2.5 sm:py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs sm:text-sm shadow-xs transition flex items-center justify-center gap-2 min-h-[44px] sm:min-h-0"
                 >
-                  <Download className="w-3.5 h-3.5" />
-                  Download PDF
+                  {isExporting ? (
+                    <RefreshCw className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <Download className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
+                  )}
+                  <span>Download PDF</span>
                 </button>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Fullscreen Document Preview Modal */}
+      {isMobilePreviewModalOpen && (
+        <div className="fixed inset-0 z-50 flex flex-col bg-slate-900/90 backdrop-blur-md animate-in fade-in duration-200">
+          {/* Modal Header */}
+          <div className="px-4 py-3 bg-slate-900 border-b border-slate-800 text-white flex items-center justify-between shrink-0">
+            <div className="flex items-center gap-2 min-w-0">
+              <Eye className="w-4 h-4 text-blue-400 shrink-0" />
+              <span className="font-bold text-sm truncate">
+                {fileName}.pdf — Preview ({pageSize.toUpperCase()} {orientation})
+              </span>
+            </div>
+
+            <div className="flex items-center gap-2 shrink-0">
+              <button
+                onClick={handleVectorPrint}
+                className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 flex items-center gap-1.5 transition"
+              >
+                <Printer className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Vector Print</span>
+              </button>
+              <button
+                onClick={handleDownloadPdf}
+                disabled={isExporting}
+                className="px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold flex items-center gap-1.5 transition shadow-xs"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>Download</span>
+              </button>
+              <button
+                onClick={() => setIsMobilePreviewModalOpen(false)}
+                className="p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition ml-1"
+                aria-label="Close Fullscreen Preview"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Modal Body: Scrollable Paper Sheet */}
+          <div className="flex-1 overflow-auto p-4 sm:p-8 flex justify-center items-start bg-slate-950/70">
+            <div
+              className="bg-white rounded-sm shadow-2xl relative overflow-hidden transition-all my-auto"
+              style={{
+                width: '100%',
+                maxWidth: orientation === 'portrait' ? '800px' : '1080px',
+                aspectRatio: `${pageW} / ${pageH}`,
+              }}
+            >
+              <iframe
+                ref={modalIframePreviewRef}
+                title="Fullscreen PDF Live Document Preview"
+                sandbox="allow-same-origin"
+                className="w-full h-full border-none block"
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Success Celebration Modal */}
       {showSuccessModal && (
