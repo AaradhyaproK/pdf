@@ -195,13 +195,13 @@ export default function HomePage() {
         <AdSlot slotType="header-leaderboard" />
       </div>
 
-      {/* CSC & Cyber Cafe Fast Daily Toolkit Spotlight Banner */}
-      <HomepageCSCBanner />
-
       {/* All Tools Showcase Section with Search & Category Filters (Immediate Focus on Mobile) */}
       <section className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2 sm:py-6">
         <LandingToolGrid />
       </section>
+
+      {/* CSC & Cyber Cafe Fast Daily Toolkit Spotlight Banner (Positioned right above Trust Section) */}
+      <HomepageCSCBanner />
 
       {/* Mobile App-Centric High-Trust Features Grid Section */}
       <HomepageTrustSection />
