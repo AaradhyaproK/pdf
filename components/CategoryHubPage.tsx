@@ -630,6 +630,37 @@ export function CategoryHubPage({ category }: { category: CategoryConfig }) {
           readTime: '3 min read',
         },
       ];
+    } else if (category.slug.includes('csc') || category.slug.includes('cafe')) {
+      return [
+        {
+          title: 'PAN Card Photo & Signature Size Guidelines 2026-27',
+          desc: 'Official NSDL & UTIITSL 213x213 px photo, 300 DPI, and 10KB–20KB signature guidelines.',
+          url: '/blog/pan-card-photo-and-signature-size-guidelines-2026',
+          tag: 'PAN Card',
+          readTime: '5 min read',
+        },
+        {
+          title: 'HRA Rent Receipt Format & Income Tax Exemption Guide',
+          desc: 'Section 10(13A) rules, revenue stamp guidelines, and instant print-ready receipts for customers.',
+          url: '/blog/hra-rent-receipt-format-income-tax-exemption-guide',
+          tag: 'Rent & Billing',
+          readTime: '6 min read',
+        },
+        {
+          title: 'How to Compress PDF to 200KB Online Free',
+          desc: 'Step-by-step instructions to compress PDFs for government and university portals without losing text sharpness.',
+          url: '/blog/how-to-compress-pdf-to-200kb-online',
+          tag: 'Marksheet PDF',
+          readTime: '5 min read',
+        },
+        {
+          title: 'The Ultimate Passport Size Photo Maker Guide',
+          desc: 'Official 3.5x4.5cm specs, white background rules, and print sheet grids for customer photos.',
+          url: '/blog/passport-size-photo-maker-guide',
+          tag: 'Passport Photo',
+          readTime: '6 min read',
+        },
+      ];
     } else {
       return [
         {
@@ -711,6 +742,7 @@ export function CategoryHubPage({ category }: { category: CategoryConfig }) {
 
   const hubBgImage = useMemo(() => {
     const s = category.slug.toLowerCase();
+    if (s.includes('csc') || s.includes('cyber') || s.includes('cafe')) return '/bg-csc.webp';
     if (s.includes('pdf')) return '/bg-pdf.webp';
     if (s.includes('image')) return '/bg-image.webp';
     if (s.includes('social')) return '/bg-social.webp';

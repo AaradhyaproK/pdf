@@ -1316,25 +1316,6 @@ export function Navbar() {
               <span>Guides &amp; Blog</span>
             </Link>
           </div>
-
-          {/* CSC & Cyber Cafe Fast Toolkit */}
-          <div className="relative py-4">
-            <Link
-              href="/csc-cyber-cafe-tools"
-              onClick={closeAllNavbars}
-              className={`flex items-center gap-1.5 px-2.5 lg:px-3 py-1.5 rounded-xl whitespace-nowrap shrink-0 transition-all cursor-pointer ${
-                isActive('/csc-cyber-cafe-tools')
-                  ? 'bg-amber-500/15 text-amber-950 font-extrabold border border-amber-500/30 backdrop-blur-sm'
-                  : 'hover:bg-amber-50/80 hover:text-amber-950 text-slate-700'
-              }`}
-            >
-              <Printer className="w-4 h-4 text-amber-600 shrink-0" />
-              <span>CSC &amp; Cafe</span>
-              <span className="text-[9px] font-black px-1.5 py-0.2 rounded-full bg-amber-100 text-amber-800 border border-amber-300/80 shadow-2xs">
-                Toolkit
-              </span>
-            </Link>
-          </div>
         </nav>
 
         <div ref={searchContainerRef} className="relative flex items-center w-40 lg:w-56 xl:w-64 shrink-0">

@@ -1543,6 +1543,13 @@ export function LandingToolGrid() {
               <UserCheck className="w-3.5 h-3.5 text-rose-600 group-hover:text-white transition-colors" />
               <span>Govt Job & ID Tools</span>
             </Link>
+            <Link
+              href="/csc-cyber-cafe-tools"
+              className="px-3 py-1.5 rounded-full bg-amber-50 text-amber-900 hover:bg-amber-600 hover:text-white border border-amber-300/80 shadow-2xs text-xs font-extrabold flex items-center gap-1.5 transition-all cursor-pointer group active:scale-95 shrink-0"
+            >
+              <Printer className="w-3.5 h-3.5 text-amber-600 group-hover:text-white transition-colors" />
+              <span>CSC &amp; Cyber Cafe Tools</span>
+            </Link>
           </div>
         </div>
       </div>

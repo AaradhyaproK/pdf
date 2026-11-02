@@ -4,6 +4,7 @@ import Script from 'next/script';
 import { PrivacyBadge } from '@/components/PrivacyBadge';
 import { AdSlot } from '@/components/AdSlot';
 import { LandingToolGrid } from '@/components/LandingToolGrid';
+import { HomepageCSCBanner } from '@/components/HomepageCSCBanner';
 import { HomepageTrustSection } from '@/components/HomepageTrustSection';
 import { HomepageFAQAccordion } from '@/components/HomepageFAQAccordion';
 import { HomepageKnowledgeHub } from '@/components/HomepageKnowledgeHub';
@@ -193,6 +194,9 @@ export default function HomePage() {
       <div className="max-w-7xl mx-auto px-3 sm:px-4 py-2 sm:py-6">
         <AdSlot slotType="header-leaderboard" />
       </div>
+
+      {/* CSC & Cyber Cafe Fast Daily Toolkit Spotlight Banner */}
+      <HomepageCSCBanner />
 
       {/* All Tools Showcase Section with Search & Category Filters (Immediate Focus on Mobile) */}
       <section className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2 sm:py-6">
