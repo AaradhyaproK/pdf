@@ -22,8 +22,9 @@ export const config = {
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
-     * - public static files (*.svg, *.png, *.webp, *.jpg, *.mjs, *.wasm, etc.)
+     * - heavy binary media and script assets (*.svg, *.png, *.webp, *.jpg, *.mjs, *.wasm, etc.)
+     * Note: .txt and .xml (robots.txt, sitemap.xml) are deliberately MATCHED so non-www to www 301 canonical redirects are guaranteed.
      */
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|avif|ico|woff|woff2|ttf|eot|mjs|wasm|txt|xml|json|css|js)$).*)',
+    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|avif|ico|woff|woff2|ttf|eot|mjs|wasm|json|css|js)$).*)',
   ],
 };
