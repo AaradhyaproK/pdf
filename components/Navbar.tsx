@@ -381,7 +381,7 @@ export function Navbar() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search 80+ PDF, Image & Utility tools..."
+                placeholder="Search 100+ PDF, Image & Utility tools..."
                 className="w-full pl-9 pr-9 py-2 bg-slate-100 border border-slate-200 rounded-full text-xs font-semibold text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-slate-900/20 focus:border-slate-900 transition-all shadow-inner"
                 autoFocus
               />
@@ -595,7 +595,7 @@ export function Navbar() {
               <img src="/filezenith-logo.png" alt="FileZenith Logo" className="w-6 h-6 object-contain" />
               <div>
                 <p className="text-xs font-black text-slate-900 uppercase tracking-wider leading-none">Navigation Menu</p>
-                <p className="text-[10px] text-slate-500 font-medium mt-0.5">Browse 80+ tools across 4 studios</p>
+                <p className="text-[10px] text-slate-500 font-medium mt-0.5">Browse 100+ tools across 4 studios</p>
               </div>
             </div>
             <button
@@ -1253,7 +1253,7 @@ export function Navbar() {
                 setSearchQuery(e.target.value);
                 if (!searchOpen) setSearchOpen(true);
               }}
-              placeholder="Search 80+ tools..."
+              placeholder="Search 100+ tools..."
               className="w-full pl-9 pr-14 py-1.5 bg-transparent text-xs font-semibold text-slate-900 placeholder:text-slate-400 focus:outline-none"
             />
             {searchQuery ? (

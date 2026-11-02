@@ -23,7 +23,7 @@ const HOMEPAGE_FAQS = [
   },
   {
     q: 'Is FileZenith really 100% free with no hidden fees or subscriptions?',
-    a: "Yes! FileZenith is 100% free forever. You don't need to register an account, enter a credit card, or pay any subscription fees to access all 80+ PDF, image, and utility tools with unlimited file sizes.",
+    a: "Yes! FileZenith is 100% free forever. You don't need to register an account, enter a credit card, or pay any subscription fees to access all 100+ PDF, image, and utility tools with unlimited file sizes.",
   },
   {
     q: 'Can I compress PDF files under 200KB for government job portals and college admissions?',
@@ -41,13 +41,13 @@ const HOMEPAGE_FAQS = [
 
 export const metadata: Metadata = {
   title: 'FileZenith — 100% Free Online PDF, Image & Utility Studio',
-  description: 'All-in-one private online file studio with 80+ tools. Compress PDF, convert images, resize exam photos, and calculate EMI/SIP/GST — 100% free, zero server upload.',
+  description: 'All-in-one private online file studio with 100+ tools. Compress PDF, convert images, resize exam photos, and calculate EMI/SIP/GST — 100% free, zero server upload.',
   alternates: {
     canonical: 'https://www.filezenith.com/',
   },
   openGraph: {
     title: 'FileZenith — 100% Free Online PDF, Image & Utility Studio',
-    description: 'All-in-one private online file studio with 80+ tools. Compress PDF, convert images, resize exam photos, and calculate EMI/SIP/GST — 100% free, zero server upload.',
+    description: 'All-in-one private online file studio with 100+ tools. Compress PDF, convert images, resize exam photos, and calculate EMI/SIP/GST — 100% free, zero server upload.',
     url: 'https://www.filezenith.com',
     siteName: 'FileZenith',
     images: [
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'FileZenith — 100% Free Online PDF, Image & Utility Studio',
-    description: 'All-in-one private online file studio. 80+ tools. Zero server upload.',
+    description: 'All-in-one private online file studio. 100+ tools. Zero server upload.',
     images: ['https://www.filezenith.com/filezenith-og.png'],
   },
 };

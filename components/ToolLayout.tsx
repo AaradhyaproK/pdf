@@ -343,7 +343,7 @@ export function ToolLayout({
                         </span>
                       </div>
                       <p className="text-[11px] text-slate-300 leading-relaxed font-medium">
-                        Install FileZenith on your computer or mobile to use our 80+ document &amp; photo tools anytime without internet.
+                        Install FileZenith on your computer or mobile to use our 100+ document &amp; photo tools anytime without internet.
                       </p>
                     </div>
                     <Link
@@ -538,7 +538,7 @@ export function ToolLayout({
                 </span>
               </div>
               <p className="text-[11px] text-slate-300 leading-relaxed font-medium">
-                Install FileZenith on your computer or smartphone to use all 80+ document and image tools anytime, anywhere.
+                Install FileZenith on your computer or smartphone to use all 100+ document and image tools anytime, anywhere.
               </p>
               <Link
                 href="/download-app"

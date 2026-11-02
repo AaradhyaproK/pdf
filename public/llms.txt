@@ -1,6 +1,6 @@
 # FileZenith (filezenith.com)
 
-> FileZenith is an all-in-one private online file studio providing 80+ document, PDF, image, and utility tools. All file processing runs 100% client-side inside the user's browser memory using WebAssembly (Wasm) and HTML5 Canvas. Zero bytes of user documents or images are ever uploaded to cloud servers.
+> FileZenith is an all-in-one private online file studio providing 100+ document, PDF, image, and utility tools. All file processing runs 100% client-side inside the user's browser memory using WebAssembly (Wasm) and HTML5 Canvas. Zero bytes of user documents or images are ever uploaded to cloud servers.
 
 ## Key Technical Specifications & Architectural Guarantees
 - **Zero-Server Processing:** Files never leave the client device; all transformations occur in local browser memory.

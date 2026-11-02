@@ -146,7 +146,7 @@ export default function AffiliateDisclosurePage() {
               FileZenith (filezenith.com), published by <strong>Snab Innovations</strong>, is dedicated to absolute transparency with our readers. This disclosure aligns with consumer protection frameworks, including the United States Federal Trade Commission (FTC) Guides Concerning the Use of Endorsements and Testimonials in Advertising, the UK Advertising Standards Authority (ASA), and Indian Consumer Protection (E-Commerce) Rules.
             </p>
             <p>
-              Our mission is to provide 80+ fast, private, and 100% free web utilities (including PDF compression, OCR, document conversion, passport photo makers, exam photo resizers, and financial calculators). To keep these tools entirely free and accessible with zero mandatory subscriptions, we offset infrastructure, research, and development costs through contextual advertisements and select affiliate partnerships.
+              Our mission is to provide 100+ fast, private, and 100% free web utilities (including PDF compression, OCR, document conversion, passport photo makers, exam photo resizers, and financial calculators). To keep these tools entirely free and accessible with zero mandatory subscriptions, we offset infrastructure, research, and development costs through contextual advertisements and select affiliate partnerships.
             </p>
           </section>
 
@@ -219,7 +219,7 @@ export default function AffiliateDisclosurePage() {
           <section className="space-y-3">
             <h2 className="text-xl font-black text-slate-900">5. Independent Verification with External Providers</h2>
             <p>
-              Software pricing, portal exam specifications, and statutory tax slabs evolve over time. While our editorial desk continually updates our 80+ tools and documentation, we strongly urge users to independently verify third-party pricing, terms of service, and official recruitment notifications directly on respective official government or provider portals.
+              Software pricing, portal exam specifications, and statutory tax slabs evolve over time. While our editorial desk continually updates our 100+ tools and documentation, we strongly urge users to independently verify third-party pricing, terms of service, and official recruitment notifications directly on respective official government or provider portals.
             </p>
           </section>
 

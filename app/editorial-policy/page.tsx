@@ -151,7 +151,7 @@ export default function EditorialPolicyPage() {
           <section className="space-y-3">
             <h2 className="text-xl font-black text-slate-900">1. Editorial Mission &amp; Purpose</h2>
             <p>
-              FileZenith (filezenith.com) is an independent client-side digital utility studio. We deliver 80+ document conversion tools, PDF manipulation tools, exam photo resizers, and financial calculators without requiring server uploads, logins, or paid subscription gates.
+              FileZenith (filezenith.com) is an independent client-side digital utility studio. We deliver 100+ document conversion tools, PDF manipulation tools, exam photo resizers, and financial calculators without requiring server uploads, logins, or paid subscription gates.
             </p>
             <p>
               Every tutorial, calculation preset, and guide on FileZenith is written to provide authoritative, step-by-step assistance. We strictly reject AI-generated generic filler, unverified hearsay, and uncorroborated specifications.

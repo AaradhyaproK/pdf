@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'FileZenith — 100% Free Online PDF, Image & Utility Studio',
-    description: 'All-in-one private online file studio with 80+ tools. Compress PDF, convert images, resize exam photos, and calculate EMI/SIP/GST — 100% free, zero server upload.',
+    description: 'All-in-one private online file studio with 100+ tools. Compress PDF, convert images, resize exam photos, and calculate EMI/SIP/GST — 100% free, zero server upload.',
     url: 'https://www.filezenith.com',
     siteName: 'FileZenith',
     images: [
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'FileZenith — 100% Free Online PDF, Image & Utility Studio',
-    description: 'All-in-one private online file studio. 80+ tools. Zero server upload.',
+    description: 'All-in-one private online file studio. 100+ tools. Zero server upload.',
     images: ['https://www.filezenith.com/filezenith-og.png'],
   },
   verification: {
