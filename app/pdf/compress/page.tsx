@@ -162,7 +162,7 @@ export default function CompressPDFPage() {
     >
       <div className="space-y-5">
         <FileUploader
-          accept=".pdf"
+          accept="application/pdf,image/*,.pdf,.png,.jpg,.jpeg,.webp,.heic,.heif,.bmp,.tiff,*"
           multiple={false}
           files={files}
           onFilesSelected={handleFileSelect}
@@ -172,7 +172,7 @@ export default function CompressPDFPage() {
             setResultInfo(null);
             setThumbnails([]);
           }}
-          title="Upload your PDF document"
+          title="Upload your file to compress (PDF or Image)"
           subtitle="Drag & drop single PDF file to compress"
         />
 

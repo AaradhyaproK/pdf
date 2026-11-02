@@ -163,16 +163,71 @@ export interface WatermarkOptions {
 }
 
 /**
- * Merges multiple PDF files into a single Uint8Array PDF document.
+ * Merges multiple PDF and image files into a single Uint8Array PDF document.
+ * Supports PDFs, JPGs, PNGs, WebP, and other image formats without restriction.
  */
 export async function mergePDFs(files: File[]): Promise<Uint8Array> {
   const mergedPdf = await PDFDocument.create();
 
   for (const file of files) {
-    const arrayBuffer = await file.arrayBuffer();
-    const pdf = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
-    const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
-    copiedPages.forEach((page) => mergedPdf.addPage(page));
+    const isImage = file.type.startsWith('image/') || /\.(jpe?g|png|webp|bmp|gif|heic|tiff?)$/i.test(file.name);
+
+    if (isImage) {
+      let embeddedImg;
+      const arrayBuffer = await file.arrayBuffer();
+
+      try {
+        if (file.type.includes('png') || file.name.toLowerCase().endsWith('.png')) {
+          embeddedImg = await mergedPdf.embedPng(arrayBuffer);
+        } else {
+          embeddedImg = await mergedPdf.embedJpg(arrayBuffer);
+        }
+      } catch {
+        // Fallback via HTML canvas for WebP, HEIC, or non-standard image encodings
+        const dataUrl = await new Promise<string>((resolve, reject) => {
+          const img = new Image();
+          const url = URL.createObjectURL(file);
+          img.onload = () => {
+            URL.revokeObjectURL(url);
+            const canvas = document.createElement('canvas');
+            canvas.width = img.naturalWidth || img.width;
+            canvas.height = img.naturalHeight || img.height;
+            const ctx = canvas.getContext('2d');
+            if (ctx) {
+              ctx.fillStyle = '#FFFFFF';
+              ctx.fillRect(0, 0, canvas.width, canvas.height);
+              ctx.drawImage(img, 0, 0);
+              resolve(canvas.toDataURL('image/jpeg', 0.92));
+            } else {
+              reject(new Error('Canvas context unavailable'));
+            }
+          };
+          img.onerror = () => {
+            URL.revokeObjectURL(url);
+            reject(new Error('Image decode failed'));
+          };
+          img.src = url;
+        });
+
+        const buf = await fetch(dataUrl).then((r) => r.arrayBuffer());
+        embeddedImg = await mergedPdf.embedJpg(buf);
+      }
+
+      if (embeddedImg) {
+        const page = mergedPdf.addPage([embeddedImg.width, embeddedImg.height]);
+        page.drawImage(embeddedImg, {
+          x: 0,
+          y: 0,
+          width: embeddedImg.width,
+          height: embeddedImg.height,
+        });
+      }
+    } else {
+      const arrayBuffer = await file.arrayBuffer();
+      const pdf = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+      const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+      copiedPages.forEach((page) => mergedPdf.addPage(page));
+    }
   }
 
   return await mergedPdf.save();
@@ -206,6 +261,86 @@ export async function compressPDF(
   preset: 'extreme' | 'recommended' | 'low' | 'target',
   targetKB?: number
 ): Promise<Uint8Array> {
+  const isImage = file.type.startsWith('image/') || /\.(jpe?g|png|webp|bmp|gif|heic|tiff?)$/i.test(file.name);
+  if (isImage) {
+    const img = await new Promise<HTMLImageElement>((resolve, reject) => {
+      const image = new Image();
+      const url = URL.createObjectURL(file);
+      image.onload = () => {
+        URL.revokeObjectURL(url);
+        resolve(image);
+      };
+      image.onerror = (e) => {
+        URL.revokeObjectURL(url);
+        reject(e);
+      };
+      image.src = url;
+    });
+
+    const origW = img.naturalWidth || img.width;
+    const origH = img.naturalHeight || img.height;
+
+    let s = 1.0;
+    let q = 0.65;
+    if (preset === 'extreme') {
+      s = 0.8;
+      q = 0.35;
+    } else if (preset === 'recommended') {
+      s = 1.0;
+      q = 0.55;
+    } else if (preset === 'low') {
+      s = 1.0;
+      q = 0.8;
+    } else if (preset === 'target' && targetKB && targetKB > 0) {
+      const origKB = file.size / 1024;
+      const ratio = targetKB / origKB;
+      if (ratio < 0.85) {
+        s = Math.max(0.45, Math.min(1.0, Math.sqrt(ratio)));
+        q = Math.max(0.2, Math.min(0.75, ratio * 0.6 + 0.15));
+      }
+    }
+
+    const renderImageToPdfBytes = async (scaleFactor: number, qualityFactor: number) => {
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.max(10, Math.round(origW * scaleFactor));
+      canvas.height = Math.max(10, Math.round(origH * scaleFactor));
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      }
+      const jpegUrl = canvas.toDataURL('image/jpeg', qualityFactor);
+      const res = await fetch(jpegUrl);
+      const jpgBuf = await res.arrayBuffer();
+
+      const newPdf = await PDFDocument.create();
+      const embeddedJpg = await newPdf.embedJpg(jpgBuf);
+      const newPage = newPdf.addPage([origW, origH]);
+      newPage.drawImage(embeddedJpg, {
+        x: 0,
+        y: 0,
+        width: origW,
+        height: origH,
+      });
+      newPdf.setTitle('Compressed PDF');
+      newPdf.setProducer('FileZenith Client-Side Compressed Engine');
+      newPdf.setCreator('FileZenith');
+      return await newPdf.save({ useObjectStreams: true });
+    };
+
+    let result = await renderImageToPdfBytes(s, q);
+    if (preset === 'target' && targetKB && targetKB > 0) {
+      const targetBytes = targetKB * 1024;
+      if (result.length > targetBytes * 1.05) {
+        s = Math.max(0.35, s * 0.8);
+        q = Math.max(0.15, q * 0.7);
+        result = await renderImageToPdfBytes(s, q);
+      }
+    }
+    return result;
+  }
+
   const pdfjsLib = await import('pdfjs-dist');
   if (typeof window !== 'undefined' && pdfjsLib?.GlobalWorkerOptions) {
     pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
@@ -503,6 +638,43 @@ export async function renderPDFPagesToImages(
   file: File,
   scale: number = 1.5
 ): Promise<{ pageNumber: number; dataUrl: string; width: number; height: number }[]> {
+  const isImage = file.type.startsWith('image/') || /\.(jpe?g|png|webp|gif|bmp|heic|tiff?)$/i.test(file.name);
+  if (isImage) {
+    return new Promise((resolve) => {
+      const img = new Image();
+      const url = URL.createObjectURL(file);
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+        const origW = img.naturalWidth || img.width;
+        const origH = img.naturalHeight || img.height;
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.max(10, Math.round(origW * (scale > 1.2 ? 1 : scale)));
+        canvas.height = Math.max(10, Math.round(origH * (scale > 1.2 ? 1 : scale)));
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          resolve([
+            {
+              pageNumber: 1,
+              dataUrl: canvas.toDataURL('image/jpeg', 0.92),
+              width: canvas.width,
+              height: canvas.height,
+            },
+          ]);
+        } else {
+          resolve([]);
+        }
+      };
+      img.onerror = () => {
+        URL.revokeObjectURL(url);
+        resolve([]);
+      };
+      img.src = url;
+    });
+  }
+
   const pdfjsLib = await import('pdfjs-dist');
   if (typeof window !== 'undefined' && pdfjsLib?.GlobalWorkerOptions) {
     pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';

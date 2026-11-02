@@ -39,7 +39,7 @@ export default function CompressImageTo20KBPage() {
     >
       <div className="space-y-6">
         <FileUploader
-          accept="image/*"
+          accept="image/*,application/pdf,.png,.jpg,.jpeg,.webp,.heic,.heif,.gif,.bmp,.svg,.pdf,*"
           multiple={false}
           files={files}
           onFilesSelected={(newFiles) => {
@@ -53,6 +53,7 @@ export default function CompressImageTo20KBPage() {
             setDownloadUrl(null);
           }}
           title="Upload signature or photo to compress under 20KB"
+          subtitle="Supports all image and document formats without restriction"
         />
 
         {files.length > 0 && !resultFile && (

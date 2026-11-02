@@ -36,7 +36,7 @@ export default function CompressImageTo50KBPage() {
     >
       <div className="space-y-6">
         <FileUploader
-          accept="image/*"
+          accept="image/*,application/pdf,.png,.jpg,.jpeg,.webp,.heic,.heif,.gif,.bmp,.svg,.pdf,*"
           multiple={false}
           files={files}
           onFilesSelected={setFiles}
@@ -45,6 +45,7 @@ export default function CompressImageTo50KBPage() {
             setDownloadUrl(null);
           }}
           title="Upload image to compress under 50KB"
+          subtitle="Supports all image and document formats without restriction"
         />
 
         {files.length > 0 && (

@@ -89,7 +89,7 @@ export default function CompressPDFTo100KBPage() {
       <div className="space-y-6">
         {/* Upload Container */}
         <FileUploader
-          accept="application/pdf"
+          accept="application/pdf,image/*,.pdf,.png,.jpg,.jpeg,.webp,.heic,.heif,.bmp,.tiff,*"
           multiple={false}
           files={files}
           onFilesSelected={setFiles}
@@ -98,8 +98,8 @@ export default function CompressPDFTo100KBPage() {
             setDownloadUrl(null);
             setResultInfo(null);
           }}
-          title="Upload PDF to compress under 100KB"
-          subtitle="Drag & drop single PDF file to compress for Sarkari & exam portals"
+          title="Upload file to compress under 100KB (PDF or Image)"
+          subtitle="Drag & drop or tap to browse all document and image types without restriction"
         />
 
         {/* Compression Controls */}

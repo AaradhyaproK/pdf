@@ -39,24 +39,17 @@ export default function WebPToJPGPage() {
 
   const handleFileSelect = (selectedFiles: FileList | null) => {
     if (!selectedFiles || !selectedFiles.length) return;
-    const webpFiles = Array.from(selectedFiles).filter(
-      (f) => f.type === 'image/webp' || f.name.toLowerCase().endsWith('.webp')
-    );
+    const incomingFiles = Array.from(selectedFiles);
 
-    if (!webpFiles.length) {
-      toast.error('Please select WebP image files (.webp).');
-      return;
-    }
-
-    setFiles((prev) => [...prev, ...webpFiles]);
+    setFiles((prev) => [...prev, ...incomingFiles]);
     setConverted([]);
-    toast.success(`Added ${webpFiles.length} WebP image${webpFiles.length > 1 ? 's' : ''}!`);
+    toast.success(`Added ${incomingFiles.length} image${incomingFiles.length > 1 ? 's' : ''}!`);
   };
 
   const handleConvert = async () => {
     if (!files.length) return;
     setIsProcessing(true);
-    toast.info('Converting WebP images to JPG...');
+    toast.info('Converting images to JPG...');
 
     try {
       const results: ConvertedItem[] = [];
@@ -66,16 +59,16 @@ export default function WebPToJPGPage() {
         const objectUrl = URL.createObjectURL(file);
         await new Promise((res, rej) => {
           image.onload = () => res(true);
-          image.onerror = () => rej(new Error('Failed to load image'));
+          image.onerror = () => res(false);
           image.src = objectUrl;
         });
 
         const canvas = document.createElement('canvas');
-        canvas.width = image.width;
-        canvas.height = image.height;
+        canvas.width = image.width || 800;
+        canvas.height = image.height || 600;
         const ctx = canvas.getContext('2d');
 
-        if (ctx) {
+        if (ctx && image.width) {
           ctx.fillStyle = bgColor;
           ctx.fillRect(0, 0, canvas.width, canvas.height);
           ctx.drawImage(image, 0, 0);
@@ -85,7 +78,7 @@ export default function WebPToJPGPage() {
           const estSize = Math.round((base64Length * 3) / 4);
 
           results.push({
-            originalName: file.name.replace(/\.webp$/i, '.jpg'),
+            originalName: file.name.replace(/\.[^/.]+$/, '') + '.jpg',
             originalSize: file.size,
             dataUrl: jpgDataUrl,
             newSize: estSize,
@@ -97,9 +90,9 @@ export default function WebPToJPGPage() {
       }
 
       setConverted(results);
-      toast.success(`Converted ${results.length} WebP images to JPG!`);
+      toast.success(`Converted ${results.length} images to JPG!`);
     } catch {
-      toast.error('Failed to convert some WebP images. Please verify files.');
+      toast.error('Failed to convert some images. Please verify files.');
     } finally {
       setIsProcessing(false);
     }
@@ -186,7 +179,7 @@ export default function WebPToJPGPage() {
               ref={fileInputRef}
               type="file"
               multiple
-              accept=".webp,image/webp"
+              accept="image/*,.webp,.jpg,.jpeg,.png,.heic,.heif,.gif,.bmp,.avif,*"
               onChange={(e) => handleFileSelect(e.target.files)}
               className="hidden"
             />
@@ -194,7 +187,7 @@ export default function WebPToJPGPage() {
               type="button"
               className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-sm shadow-md transition-all"
             >
-              Select WebP Images
+              Select Images (All Formats)
             </button>
           </div>
         ) : (
@@ -228,7 +221,7 @@ export default function WebPToJPGPage() {
                 ref={fileInputRef}
                 type="file"
                 multiple
-                accept=".webp,image/webp"
+                accept="image/*,.webp,.jpg,.jpeg,.png,.heic,.heif,.gif,.bmp,.avif,*"
                 onChange={(e) => handleFileSelect(e.target.files)}
                 className="hidden"
               />

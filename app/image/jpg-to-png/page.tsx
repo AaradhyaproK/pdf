@@ -20,25 +20,16 @@ export default function JPGToPNGPage() {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selected = Array.from(e.target.files || []);
     if (!selected.length) return;
-    const jpgs = selected.filter(
-      (f) =>
-        f.type === 'image/jpeg' ||
-        f.name.toLowerCase().endsWith('.jpg') ||
-        f.name.toLowerCase().endsWith('.jpeg')
-    );
-    if (!jpgs.length) {
-      toast.error('Please select JPG/JPEG image files.');
-      return;
-    }
-    setFiles(jpgs);
+    setFiles((prev) => [...prev, ...selected]);
     setConverted([]);
-    toast.success(`Loaded ${jpgs.length} JPG images.`);
+    toast.success(`Loaded ${selected.length} image file${selected.length > 1 ? 's' : ''}.`);
+    e.target.value = '';
   };
 
   const handleConvert = async () => {
     if (!files.length) return;
     setIsProcessing(true);
-    toast.info('Converting JPG images to PNG...');
+    toast.info('Converting images to PNG...');
 
     try {
       const results: ConvertedPNGFile[] = [];
@@ -48,22 +39,23 @@ export default function JPGToPNGPage() {
         const objectUrl = URL.createObjectURL(file);
         await new Promise((res) => {
           image.onload = res;
+          image.onerror = () => res(null);
           image.src = objectUrl;
         });
 
         const canvas = document.createElement('canvas');
-        canvas.width = image.width;
-        canvas.height = image.height;
+        canvas.width = image.width || 800;
+        canvas.height = image.height || 600;
         const ctx = canvas.getContext('2d');
 
-        if (ctx) {
+        if (ctx && image.width) {
           ctx.drawImage(image, 0, 0);
           const pngDataUrl = canvas.toDataURL('image/png');
           const base64Length = pngDataUrl.split(',')[1]?.length || 0;
           const estSize = Math.round((base64Length * 3) / 4);
 
           results.push({
-            originalName: file.name.replace(/\.(jpg|jpeg)$/i, '.png'),
+            originalName: file.name.replace(/\.[^/.]+$/, '') + '.png',
             dataUrl: pngDataUrl,
             size: estSize,
           });
@@ -106,8 +98,8 @@ export default function JPGToPNGPage() {
 
             <label className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm shadow-md transition-all cursor-pointer">
               <FileImage className="w-4 h-4" />
-              <span>Select JPG Files</span>
-              <input type="file" accept="image/jpeg" multiple onChange={handleFileChange} className="hidden" />
+              <span>Select Images (All Formats)</span>
+              <input type="file" accept="image/*,.jpg,.jpeg,.png,.webp,.heic,.heif,.gif,.bmp,.avif,*" multiple onChange={handleFileChange} className="hidden" />
             </label>
           </div>
         ) : (
@@ -116,11 +108,11 @@ export default function JPGToPNGPage() {
               <div className="flex items-center justify-between pb-4 border-b border-slate-100">
                 <div className="flex items-center gap-2 text-slate-900 font-extrabold text-sm">
                   <Layers className="w-4 h-4 text-indigo-600" />
-                  <span>Selected {files.length} JPG File(s)</span>
+                  <span>Selected {files.length} Image File(s)</span>
                 </div>
                 <label className="text-xs text-indigo-600 hover:text-indigo-700 font-bold cursor-pointer">
-                  + Add More JPGs
-                  <input type="file" accept="image/jpeg" multiple onChange={handleFileChange} className="hidden" />
+                  + Add More Files
+                  <input type="file" accept="image/*,.jpg,.jpeg,.png,.webp,.heic,.heif,.gif,.bmp,.avif,*" multiple onChange={handleFileChange} className="hidden" />
                 </label>
               </div>
 

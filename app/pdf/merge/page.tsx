@@ -57,18 +57,18 @@ export default function MergePDFPage() {
     <ToolLayout
       slug="/pdf/merge"
       title="Merge PDF Files Online"
-      subtitle="Combine multiple PDF documents into a single organized file directly in your browser. Reorder files easily."
+      subtitle="Combine multiple PDF documents, images, and photos into a single organized PDF directly in your browser. Reorder files easily."
     >
       <div className="space-y-5">
         <FileUploader
-          accept="application/pdf"
+          accept="application/pdf,image/*,.pdf,.png,.jpg,.jpeg,.webp,.heic,.heif,.bmp,.tiff,*"
           multiple={true}
           files={files}
           onFilesSelected={setFiles}
           onRemoveFile={(id) => setFiles(files.filter((f) => f.id !== id))}
           onReorderFiles={setFiles}
-          title="Upload multiple PDF files to merge"
-          subtitle="Drag & drop or tap to browse. Reorder sequence with # numbers."
+          title="Upload multiple files to merge (PDFs & Images)"
+          subtitle="Drag & drop or tap to browse all file types. Reorder sequence with # numbers."
         />
 
         {files.length === 1 && (

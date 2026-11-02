@@ -86,7 +86,7 @@ export default function CompressPDFTo1MBPage() {
       <div className="space-y-6">
         {/* Upload Container */}
         <FileUploader
-          accept="application/pdf"
+          accept="application/pdf,image/*,.pdf,.png,.jpg,.jpeg,.webp,.heic,.heif,.bmp,.tiff,*"
           multiple={false}
           files={files}
           onFilesSelected={setFiles}
@@ -95,8 +95,8 @@ export default function CompressPDFTo1MBPage() {
             setDownloadUrl(null);
             setResultInfo(null);
           }}
-          title="Upload PDF to compress under 1MB"
-          subtitle="Drag & drop single PDF file to compress for emails & portals"
+          title="Upload file to compress under 1MB (PDF or Image)"
+          subtitle="Drag & drop or tap to browse all document and image types without restriction"
         />
 
         {/* Compression Controls */}

@@ -38,23 +38,11 @@ export default function JPGToWebPPage() {
 
   const handleFileSelect = (selectedFiles: FileList | null) => {
     if (!selectedFiles || !selectedFiles.length) return;
-    const validImages = Array.from(selectedFiles).filter(
-      (f) =>
-        f.type === 'image/jpeg' ||
-        f.type === 'image/png' ||
-        f.name.toLowerCase().endsWith('.jpg') ||
-        f.name.toLowerCase().endsWith('.jpeg') ||
-        f.name.toLowerCase().endsWith('.png')
-    );
+    const incoming = Array.from(selectedFiles);
 
-    if (!validImages.length) {
-      toast.error('Please select JPG, JPEG, or PNG images.');
-      return;
-    }
-
-    setFiles((prev) => [...prev, ...validImages]);
+    setFiles((prev) => [...prev, ...incoming]);
     setConverted([]);
-    toast.success(`Loaded ${validImages.length} image${validImages.length > 1 ? 's' : ''}!`);
+    toast.success(`Loaded ${incoming.length} image${incoming.length > 1 ? 's' : ''}!`);
   };
 
   const handleConvert = async () => {
@@ -70,16 +58,16 @@ export default function JPGToWebPPage() {
         const objectUrl = URL.createObjectURL(file);
         await new Promise((res, rej) => {
           image.onload = () => res(true);
-          image.onerror = () => rej(new Error('Failed to load image'));
+          image.onerror = () => res(false);
           image.src = objectUrl;
         });
 
         const canvas = document.createElement('canvas');
-        canvas.width = image.width;
-        canvas.height = image.height;
+        canvas.width = image.width || 800;
+        canvas.height = image.height || 600;
         const ctx = canvas.getContext('2d');
 
-        if (ctx) {
+        if (ctx && image.width) {
           ctx.drawImage(image, 0, 0);
 
           const webpDataUrl = canvas.toDataURL('image/webp', quality);
@@ -88,7 +76,7 @@ export default function JPGToWebPPage() {
           const savedPct = Math.max(0, Math.round(((file.size - estSize) / file.size) * 100));
 
           results.push({
-            originalName: file.name.replace(/\.(jpe?g|png)$/i, '.webp'),
+            originalName: file.name.replace(/\.[^/.]+$/, '') + '.webp',
             originalSize: file.size,
             dataUrl: webpDataUrl,
             newSize: estSize,
@@ -197,7 +185,7 @@ export default function JPGToWebPPage() {
               ref={fileInputRef}
               type="file"
               multiple
-              accept="image/jpeg,image/png,.jpg,.jpeg,.png"
+              accept="image/*,.jpg,.jpeg,.png,.webp,.heic,.heif,.gif,.bmp,.avif,*"
               onChange={(e) => handleFileSelect(e.target.files)}
               className="hidden"
             />
@@ -205,7 +193,7 @@ export default function JPGToWebPPage() {
               type="button"
               className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-sm shadow-md transition-all"
             >
-              Select JPG / PNG Images
+              Select Images (All Formats)
             </button>
           </div>
         ) : (
@@ -239,7 +227,7 @@ export default function JPGToWebPPage() {
                 ref={fileInputRef}
                 type="file"
                 multiple
-                accept="image/jpeg,image/png,.jpg,.jpeg,.png"
+                accept="image/*,.jpg,.jpeg,.png,.webp,.heic,.heif,.gif,.bmp,.avif,*"
                 onChange={(e) => handleFileSelect(e.target.files)}
                 className="hidden"
               />

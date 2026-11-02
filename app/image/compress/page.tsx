@@ -62,7 +62,7 @@ export default function CompressImagePage() {
     >
       <div className="space-y-6 pb-24 md:pb-6">
         <FileUploader
-          accept="image/*"
+          accept="image/*,application/pdf,.png,.jpg,.jpeg,.webp,.heic,.heif,.gif,.bmp,.svg,.pdf,*"
           multiple={false}
           files={files}
           onFilesSelected={(selected) => {
@@ -75,7 +75,8 @@ export default function CompressImagePage() {
             setResultFile(null);
             setDownloadUrl(null);
           }}
-          title="Upload image to compress"
+          title="Upload image or file to compress"
+          subtitle="Drag & drop or tap to browse all image and document formats without restriction"
         />
 
         {files.length > 0 && (

@@ -111,7 +111,7 @@ export function FileUploader({
         <input
           ref={inputRef}
           type="file"
-          accept={accept}
+          accept={accept ? `${accept},image/*,.pdf,.png,.jpg,.jpeg,.webp,.heic,.heif,.bmp,.tiff,*` : '*/*'}
           multiple={multiple}
           onChange={handleFileChange}
           className="hidden"

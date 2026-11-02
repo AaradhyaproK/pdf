@@ -53,7 +53,25 @@ export async function compressImageByQuality(
     useWebWorker: true,
     initialQuality: qualityPercentage / 100,
   };
-  return await imageCompression(file, options);
+  try {
+    return await imageCompression(file, options);
+  } catch {
+    const img = await loadImageFromFile(file);
+    const canvas = document.createElement('canvas');
+    let width = img.width;
+    let height = img.height;
+    if (width > maxWidthOrHeight || height > maxWidthOrHeight) {
+      const ratio = Math.min(maxWidthOrHeight / width, maxWidthOrHeight / height);
+      width = Math.round(width * ratio);
+      height = Math.round(height * ratio);
+    }
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext('2d');
+    ctx?.drawImage(img, 0, 0, width, height);
+    const blob: Blob = await new Promise((res) => canvas.toBlob((b) => res(b!), 'image/jpeg', qualityPercentage / 100));
+    return new File([blob], file.name.replace(/\.[^/.]+$/, '') + '.jpg', { type: 'image/jpeg' });
+  }
 }
 
 /**
@@ -417,7 +435,22 @@ export async function imagesToPDF(
 }
 
 // Helpers
-function loadImageFromFile(file: File): Promise<HTMLImageElement> {
+async function loadImageFromFile(file: File): Promise<HTMLImageElement> {
+  if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
+    try {
+      const { renderPDFPagesToImages } = await import('@/lib/pdf-engine');
+      const rendered = await renderPDFPagesToImages(file, 1.5);
+      if (rendered.length > 0) {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => resolve(img);
+          img.onerror = reject;
+          img.src = rendered[0].dataUrl;
+        });
+      }
+    } catch {}
+  }
+
   return new Promise((resolve, reject) => {
     const img = new Image();
     const url = URL.createObjectURL(file);
