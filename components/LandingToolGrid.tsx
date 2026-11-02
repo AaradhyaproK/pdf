@@ -1878,6 +1878,7 @@ export function LandingToolGrid() {
                 >
                   <Link
                     href={tool.slug}
+                    prefetch={false}
                     className={`group relative bg-white border ${
                       isRecommended
                         ? 'border-emerald-300 ring-2 ring-emerald-400/25 shadow-lg'

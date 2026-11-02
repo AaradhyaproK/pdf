@@ -441,29 +441,6 @@ export function CategoryHubPage({ category }: { category: CategoryConfig }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSubgroupIndex, setSelectedSubgroupIndex] = useState<number | 'all'>('all');
 
-  // Fast background prefetch for top tools to guarantee lag-free instant navigation
-  useEffect(() => {
-    const prefetchTools = () => {
-      category.popularTools?.forEach((tool) => {
-        if (tool.slug) router.prefetch(tool.slug);
-      });
-      category.subgroups?.forEach((sub) => {
-        sub.tools.slice(0, 4).forEach((tool) => {
-          if (tool.slug) router.prefetch(tool.slug);
-        });
-      });
-    };
-
-    if (typeof window !== 'undefined') {
-      if ('requestIdleCallback' in window) {
-        (window as any).requestIdleCallback(prefetchTools, { timeout: 2000 });
-      } else {
-        const timer = setTimeout(prefetchTools, 500);
-        return () => clearTimeout(timer);
-      }
-    }
-  }, [category, router]);
-
   // 1. CollectionPage Schema
   const collectionSchema = {
     '@context': 'https://schema.org',
@@ -934,9 +911,7 @@ export function CategoryHubPage({ category }: { category: CategoryConfig }) {
                 <Link
                   key={idx}
                   href={pop.slug}
-                  prefetch={true}
-                  onMouseEnter={() => router.prefetch(pop.slug)}
-                  onTouchStart={() => router.prefetch(pop.slug)}
+                  prefetch={false}
                   className="p-5 rounded-2xl bg-gradient-to-br from-indigo-50/50 via-white to-slate-50/80 hover:from-white hover:to-indigo-50/70 border border-indigo-100 hover:border-indigo-400 shadow-2xs hover:shadow-md transition-all duration-150 group flex flex-col justify-between space-y-3 active:scale-[0.98]"
                 >
                   <div className="space-y-1.5">
@@ -1006,9 +981,7 @@ export function CategoryHubPage({ category }: { category: CategoryConfig }) {
                     <Link
                       key={tIdx}
                       href={t.slug}
-                      prefetch={true}
-                      onMouseEnter={() => router.prefetch(t.slug)}
-                      onTouchStart={() => router.prefetch(t.slug)}
+                      prefetch={false}
                       className="p-5 rounded-2xl bg-slate-50/70 border border-slate-200 hover:border-indigo-500 hover:bg-white shadow-2xs hover:shadow-md transition-all duration-150 group flex flex-col justify-between space-y-3 active:scale-[0.98]"
                     >
                       <div className="space-y-2">
@@ -1197,7 +1170,7 @@ export function CategoryHubPage({ category }: { category: CategoryConfig }) {
               </div>
               <Link
                 href="/blog"
-                prefetch={true}
+                prefetch={false}
                 className="text-xs font-black text-indigo-600 hover:text-indigo-800 flex items-center gap-1"
               >
                 <span>All Guides</span>
