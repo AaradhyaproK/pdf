@@ -29,7 +29,9 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  return Object.keys(PRESET_REGISTRY).map((slug) => ({ slug }));
+  return Object.keys(PRESET_REGISTRY)
+    .filter((slug) => slug !== 'aadhaar-card-print' && slug !== 'pan-card-photo-resizer')
+    .map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
