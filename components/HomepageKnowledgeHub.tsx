@@ -72,6 +72,7 @@ const KNOWLEDGE_CLUSTERS = [
     iconBg: 'bg-indigo-50 text-indigo-600',
     guides: [
       { slug: 'ssc-gd-constable-photo-signature-resizer-guide-2026', title: 'SSC GD Constable & CGL Photo/Signature Rules 2026-27', readTime: '7 min' },
+      { slug: 'pan-card-photo-and-signature-size-guidelines-2026', title: 'PAN Card Photo & Signature Size Rules (213x213 px 300 DPI)', readTime: '6 min' },
       { slug: 'ctet-photo-and-signature-size-guidelines-2026', title: 'CTET 2026 Photo & Signature Requirements (Dimensions & KB)', readTime: '6 min' },
       { slug: 'ssc-photo-size-requirements', title: 'SSC Photo & Signature Size Requirements (Official Rules)', readTime: '5 min' },
       { slug: 'rrb-ntpc-photo-signature-guidelines-2026', title: 'RRB NTPC & Group D Photo, Signature & Travel Pass Size', readTime: '7 min' },
@@ -136,6 +137,7 @@ const KNOWLEDGE_CLUSTERS = [
     iconBg: 'bg-amber-50 text-amber-600',
     guides: [
       { slug: 'old-vs-new-tax-regime-calculator-guide', title: 'Old vs New Tax Regime: Which Is Better for FY 2026-27?', readTime: '8 min' },
+      { slug: 'hra-rent-receipt-format-income-tax-exemption-guide', title: 'HRA Rent Receipt Format & Tax Exemption Guide (Sec 10(13A))', readTime: '7 min' },
       { slug: 'ctc-to-in-hand-salary-calculator-guide', title: 'CTC to In-Hand Salary Calculator Guide (PF, Gratuity, Tax)', readTime: '7 min' },
       { slug: 'how-to-calculate-electricity-bill-from-meter-reading', title: 'How to Calculate Electricity Bill from Meter Reading (Units & Slabs)', readTime: '7 min' },
       { slug: 'how-to-calculate-sip-returns-wealth-guide', title: 'How to Calculate SIP Returns (Mutual Fund Wealth Guide)', readTime: '6 min' },

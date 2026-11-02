@@ -865,7 +865,7 @@ export function Navbar() {
                   <h4 className="text-xs font-black text-slate-900 group-hover:text-indigo-600 transition-colors">
                     Guides &amp; Tutorials
                   </h4>
-                  <p className="text-[10px] text-slate-500 font-medium">41+ step-by-step exam &amp; file guides</p>
+                  <p className="text-[10px] text-slate-500 font-medium">43+ step-by-step exam &amp; file guides</p>
                 </div>
               </Link>
               <Link

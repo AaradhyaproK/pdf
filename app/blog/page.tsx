@@ -6,7 +6,7 @@ import { BlogFilterableList } from '@/components/blog/BlogFilterableList';
 import { BookOpen, ShieldCheck, ArrowRight, Sparkles, Wrench, CheckCircle2, Lock, Zap } from 'lucide-react';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.filezenith.com';
-const blogOgImage = `${siteUrl}/api/og?title=${encodeURIComponent('Guides, Tutorials & Practical File Tips')}&category=${encodeURIComponent('Knowledge Hub')}&desc=${encodeURIComponent('Step-by-step exam photo resizing, 20KB/50KB compression & PDF optimization guides')}&badge=${encodeURIComponent('41+ Free Tutorials')}`;
+const blogOgImage = `${siteUrl}/api/og?title=${encodeURIComponent('Guides, Tutorials & Practical File Tips')}&category=${encodeURIComponent('Knowledge Hub')}&desc=${encodeURIComponent('Step-by-step exam photo resizing, 20KB/50KB compression & PDF optimization guides')}&badge=${encodeURIComponent('43+ Free Tutorials')}`;
 
 export const metadata: Metadata = {
   title: 'Guides, Tutorials & Practical File Tips: Compress, Convert & Resize | FileZenith',
