@@ -63,116 +63,30 @@ import {
   ShieldCheck,
   Heart,
 } from 'lucide-react';
+import { ALL_TOOLS } from './LandingToolGrid';
 
-const PDF_TOOLS = [
-  { name: 'Edit PDF Online', slug: '/pdf/edit', desc: 'Add text, whiteout content, draw & sign', icon: Edit3, badge: 'Interactive', category: 'pdf', catLabel: 'PDF Studio' },
-  { name: 'Mask Aadhaar Card', slug: '/pdf/mask-aadhaar', desc: 'Hide first 8 digits of Aadhaar (XXXX-XXXX-1234) offline', icon: ShieldCheck, badge: 'UIDAI', category: 'pdf', catLabel: 'PDF Studio' },
-  { name: 'Redact PDF (Zero-Leak)', slug: '/pdf/redact', desc: 'Permanent blackout pixel flattening tool', icon: Eraser, badge: 'Zero-Leak', category: 'pdf', catLabel: 'PDF Studio' },
-  { name: 'Combine Marksheets', slug: '/pdf/combine-marksheets', desc: 'Merge 10th & 12th marksheets in 1 A4 PDF <500KB', icon: GraduationCap, badge: 'College Ready', category: 'pdf', catLabel: 'PDF Studio' },
-  { name: 'Compress PDF', slug: '/pdf/compress', desc: 'Shrink PDF size up to 80%', icon: Minimize2, badge: 'Popular', category: 'pdf', catLabel: 'PDF Studio' },
-  { name: 'Compress PDF to 200KB', slug: '/pdf/compress-to-200kb', desc: 'Target size for form uploads', icon: Minimize2, badge: 'Form Preset', category: 'pdf', catLabel: 'PDF Studio' },
-  { name: 'Merge PDF', slug: '/pdf/merge', desc: 'Combine multiple PDFs into one', icon: Combine, category: 'pdf', catLabel: 'PDF Studio' },
-  { name: 'Split PDF', slug: '/pdf/split', desc: 'Extract pages & custom page ranges', icon: Split, category: 'pdf', catLabel: 'PDF Studio' },
-  { name: 'Free Invoice & HRA Rent Receipt', slug: '/utility/invoice-generator', desc: 'Client invoice & HRA rent receipt with instant PDF', icon: Receipt, badge: 'PDF Invoice', category: 'pdf', catLabel: 'PDF Studio' },
-  { name: 'Apple Keynote to PDF & Slides', slug: '/utility/keynote-to-powerpoint', desc: 'Convert .key presentations on Windows & Android', icon: Presentation, badge: 'Keynote', category: 'pdf', catLabel: 'PDF Studio' },
-  { name: 'Markdown Editor & PDF', slug: '/utility/markdown-editor', desc: 'Live Markdown preview & vector PDF export', icon: FileText, badge: 'Editor', category: 'pdf', catLabel: 'PDF Studio' },
-  { name: 'Printable Habit & Goal Tracker', slug: '/pdf/habit-tracker-planner', desc: 'Design 30-day habit planner & resolution sheet in A4 PDF', icon: Calendar, badge: 'Printable A4', category: 'pdf', catLabel: 'PDF Studio', keywords: ['habit tracker', 'printable habit tracker', 'new year resolution', 'planner pdf'] },
-  { name: 'Pages to Word (DOCX)', slug: '/utility/pages-to-word', desc: 'Convert Apple Pages to editable Word', icon: FileText, badge: 'Apple', category: 'pdf', catLabel: 'PDF Studio' },
-  { name: 'Word to Pages Converter', slug: '/utility/word-to-pages', desc: 'Convert Word DOCX to Apple Pages', icon: FileCode, badge: 'New', category: 'pdf', catLabel: 'PDF Studio' },
-  { name: 'PDF & EXIF Metadata Remover', slug: '/utility/metadata-remover', desc: 'Scrub author, software & tracking from PDFs', icon: EyeOff, badge: 'Privacy Scrub', category: 'pdf', catLabel: 'PDF Studio' },
-  { name: 'PDF Page Numberer', slug: '/pdf/page-numbers', desc: 'Add Page X of Y & custom footers', icon: Hash, badge: 'New', category: 'pdf', catLabel: 'PDF Studio' },
-  { name: 'Organize PDF', slug: '/pdf/organize', desc: 'Rotate, reorder & delete pages', icon: Grid, category: 'pdf', catLabel: 'PDF Studio' },
-  { name: 'PDF OCR Text Extractor', slug: '/pdf/ocr', desc: 'Extract editable text via AI Tesseract', icon: FileCheck, badge: 'AI Wasm', category: 'pdf', catLabel: 'PDF Studio' },
-  { name: 'Watermark PDF', slug: '/pdf/watermark', desc: 'Add text watermark overlays', icon: Stamp, category: 'pdf', catLabel: 'PDF Studio' },
-  { name: 'Password Protect PDF', slug: '/pdf/protect', desc: 'Encrypt PDF with password', icon: Lock, badge: 'Secure', category: 'pdf', catLabel: 'PDF Studio' },
-  { name: 'Remove PDF Password', slug: '/pdf/remove-password', desc: 'Unlock and remove password from PDF', icon: Unlock, badge: 'Unlock', category: 'pdf', catLabel: 'PDF Studio' },
-  { name: 'Compress PDF to 100KB', slug: '/pdf/compress-to-100kb', desc: 'Reduce PDF under 100KB for exam & govt portals', icon: Minimize2, badge: '100KB', category: 'pdf', catLabel: 'PDF Studio', keywords: ['compress pdf to 100kb', '100kb', 'sarkari', 'upsc', 'ssc', 'marksheet'] },
-  { name: 'Compress PDF to 300KB', slug: '/pdf/compress-to-300kb', desc: 'Target 300KB for UPSC OTR, State PSC & court e-filing', icon: Minimize2, badge: '300KB', category: 'pdf', catLabel: 'PDF Studio', keywords: ['compress pdf to 300kb', '300kb', 'upsc', 'otr', 'court', 'psc'] },
-  { name: 'Compress PDF to 500KB', slug: '/pdf/compress-to-500kb', desc: 'Target 500KB for Passport Sewa & high court filings', icon: Minimize2, badge: '500KB', category: 'pdf', catLabel: 'PDF Studio', keywords: ['compress pdf to 500kb', '500kb', 'passport sewa', 'court', 'admission'] },
-  { name: 'Compress PDF to 1MB', slug: '/pdf/compress-to-1mb', desc: 'Compress multi-page PDF under 1MB for email attachments', icon: Minimize2, badge: '1MB', category: 'pdf', catLabel: 'PDF Studio', keywords: ['compress pdf to 1mb', '1mb', 'email', 'attachment', 'admission'] },
-  { name: 'PDF to Word (DOCX)', slug: '/pdf/pdf-to-word', desc: 'Convert PDF to editable Word document', icon: FileText, badge: 'Popular', category: 'pdf', catLabel: 'PDF Studio' },
-  { name: 'Word to PDF Converter', slug: '/pdf/word-to-pdf', desc: 'Convert Word DOCX to crisp PDF', icon: FileCode, badge: 'New', category: 'pdf', catLabel: 'PDF Studio' },
-  { name: 'PDF to JPG / PNG', slug: '/pdf/to-image', desc: 'Convert PDF pages into high-res images', icon: FileImage, category: 'pdf', catLabel: 'PDF Studio', keywords: ['pdf to jpg', 'pdf to png', 'pdf to image', 'convert pdf to jpg'] },
-  { name: 'Pics to PDF (JPG to PDF)', slug: '/image/pics-to-pdf', desc: 'Convert JPG, PNG, photos & camera scans into PDF', icon: Camera, badge: 'Popular', category: 'pdf', catLabel: 'PDF Studio', keywords: ['jpg to pdf', 'jpeg to pdf', 'png to pdf', 'image to pdf', 'images to pdf', 'photo to pdf', 'photos to pdf', 'pics to pdf', 'pictures to pdf', 'pic to pdf', 'picture to pdf', 'convert photo to pdf', 'convert jpg to pdf', 'convert png to pdf', 'jpg2pdf', 'png2pdf', 'jpeg2pdf', 'scan to pdf', 'heic to pdf', 'webp to pdf', 'photo pdf', 'jpg pdf', 'png pdf', 'camera to pdf'] },
-];
+export const ALL_SEARCHABLE_TOOLS = ALL_TOOLS.map((tool) => ({
+  name: tool.name,
+  slug: tool.slug,
+  desc: tool.desc,
+  icon: tool.icon,
+  badge: tool.badge,
+  category: tool.category,
+  catLabel:
+    tool.category === 'pdf'
+      ? 'PDF Studio'
+      : tool.category === 'image'
+      ? 'Image Studio'
+      : tool.category === 'social'
+      ? 'Social Studio'
+      : 'Daily Utility',
+  keywords: tool.keywords || [],
+}));
 
-const IMAGE_TOOLS = [
-  { name: 'Visa & Passport Photo Maker (2x2")', slug: '/image/visa-photo-maker', desc: 'US DS-160 (2x2"), Schengen, UK with head oval guide', icon: UserCheck, badge: 'US DS-160', category: 'image', catLabel: 'Image Studio' },
-  { name: 'Pics to PDF (JPG to PDF)', slug: '/image/pics-to-pdf', desc: 'Turn photos, scans, JPG, PNG & WebP into a clean PDF', icon: Camera, badge: 'Popular', category: 'image', catLabel: 'Image Studio', keywords: ['jpg to pdf', 'jpeg to pdf', 'png to pdf', 'image to pdf', 'images to pdf', 'photo to pdf', 'photos to pdf', 'pics to pdf', 'pictures to pdf', 'pic to pdf', 'picture to pdf', 'convert photo to pdf', 'convert jpg to pdf', 'convert png to pdf', 'jpg2pdf', 'png2pdf', 'jpeg2pdf', 'scan to pdf', 'heic to pdf', 'webp to pdf', 'photo pdf', 'jpg pdf', 'png pdf', 'camera to pdf'] },
-  { name: 'QR Code Generator', slug: '/utility/qr-generator', desc: 'Create custom vector QR codes with logo & colors', icon: QrCode, badge: 'Vector QR', category: 'image', catLabel: 'Image Studio' },
-  { name: 'Glassmorphism CSS Generator', slug: '/utility/glassmorphism-generator', desc: 'Frosted glass UI CSS graphic generator', icon: Hexagon, badge: 'UI Tool', category: 'image', catLabel: 'Image Studio' },
-  { name: 'Base64 Image Encoder', slug: '/utility/base64', desc: 'Convert photos & graphics to Data URL Base64', icon: Code2, badge: 'Data URI', category: 'image', catLabel: 'Image Studio' },
-  { name: 'WebP to JPG Converter', slug: '/image/webp-to-jpg', desc: 'Convert WebP images to JPG with white background fill', icon: FileImage, badge: 'Bulk', category: 'image', catLabel: 'Image Studio', keywords: ['webp to jpg', 'webp', 'jpeg', 'convert webp', 'save webp as jpg'] },
-  { name: 'JPG to WebP Converter', slug: '/image/jpg-to-webp', desc: 'Convert JPG/PNG to modern WebP (up to 80% smaller)', icon: Zap, badge: 'Web Vitals', category: 'image', catLabel: 'Image Studio', keywords: ['jpg to webp', 'png to webp', 'webp', 'compress', 'speed', 'core web vitals'] },
-  { name: 'Printable Greeting & Love Card Maker', slug: '/image/greeting-card-maker', desc: 'Design romantic love cards & birthday greetings with photo & A4 folding print', icon: Heart, badge: 'Printable A4', category: 'image', catLabel: 'Image Studio', keywords: ['greeting card', 'love card', 'printable card', 'birthday card', 'anniversary card', 'valentine card', 'card maker'] },
-  { name: 'Polaroid & Memory Card Maker', slug: '/image/polaroid-maker', desc: 'Turn photos into vintage Polaroid cards with captions & dates', icon: Camera, badge: 'Valentine', category: 'image', catLabel: 'Image Studio', keywords: ['polaroid', 'memory card', 'vintage photo', 'valentine', 'anniversary'] },
-  { name: 'Railway RRB Photo Resizer', slug: '/tools/railway-rrb-photo-resizer', desc: 'RRB NTPC, ALP, Group D 20-50KB photo resizer (320x240 px)', icon: UserCheck, badge: 'RRB 20-50KB', category: 'image', catLabel: 'Image Studio', keywords: ['railway', 'rrb', 'ntpc', 'alp', 'group d', 'technician', 'railway photo resizer'] },
-  { name: 'IBPS Photo Resizer', slug: '/tools/ibps-photo-resizer', desc: 'IBPS PO, Clerk, RRB 200x230 px (20-50KB) photo resizer', icon: UserCheck, badge: 'IBPS 20-50KB', category: 'image', catLabel: 'Image Studio', keywords: ['ibps', 'po', 'clerk', 'bank', 'thumb impression', 'handwritten declaration'] },
-  { name: 'SBI PO Photo Resizer', slug: '/tools/sbi-po-photo-resizer', desc: 'SBI PO & Clerk photo and signature resizer (20-50KB)', icon: UserCheck, badge: 'SBI PO', category: 'image', catLabel: 'Image Studio', keywords: ['sbi', 'sbi po', 'sbi clerk', 'junior associate', 'state bank'] },
-  { name: 'JEE Main Photo Resizer', slug: '/tools/jee-photo-resizer', desc: 'JEE Main & Advanced 10-200KB photo resizer with DOP stamp', icon: UserCheck, badge: 'JEE 10-200KB', category: 'image', catLabel: 'Image Studio', keywords: ['jee', 'jee main', 'jee advanced', 'nta', 'dop', 'engineering', 'iit'] },
-  { name: 'CUET Photo Resizer', slug: '/tools/cuet-photo-resizer', desc: 'CUET UG/PG 10-200KB photo & signature resizer', icon: UserCheck, badge: 'CUET NTA', category: 'image', catLabel: 'Image Studio', keywords: ['cuet', 'cuet ug', 'cuet pg', 'nta', 'entrance', 'university'] },
-  { name: 'Image Color Picker & Palette', slug: '/image/color-palette-extractor', desc: 'Extract hex colors from photos', icon: Palette, badge: 'Design', category: 'image', catLabel: 'Image Studio' },
-  { name: 'Image Cropper & Aspect', slug: '/image/crop', desc: 'Crop 1:1, 16:9, 4:3, rotate & flip', icon: Crop, badge: 'New', category: 'image', catLabel: 'Image Studio' },
-  { name: 'SVG Vector Converter', slug: '/image/svg-converter', desc: 'Convert SVG to 2x/4x PNG & JPG', icon: FileCode, badge: 'New', category: 'image', catLabel: 'Image Studio' },
-  { name: 'PNG to JPG Converter', slug: '/image/png-to-jpg', desc: 'Convert PNG to JPG with background color', icon: FileImage, badge: 'Bulk', category: 'image', catLabel: 'Image Studio' },
-  { name: 'JPG to PNG Converter', slug: '/image/jpg-to-png', desc: 'Lossless quality JPG to PNG conversion', icon: FileImage, category: 'image', catLabel: 'Image Studio' },
-  { name: 'Compress Image (Target KB)', slug: '/image/compress', desc: 'Compress to <20KB, <50KB, <100KB', icon: Minimize2, badge: 'Target KB', category: 'image', catLabel: 'Image Studio' },
-  { name: 'Compress Image to 50KB', slug: '/image/compress-to-50kb', desc: 'Shrink photo under 50KB for forms', icon: Minimize2, category: 'image', catLabel: 'Image Studio' },
-  { name: 'Compress Image to 100KB', slug: '/image/compress-to-100kb', desc: 'Shrink photo under 100KB for identity', icon: Minimize2, category: 'image', catLabel: 'Image Studio' },
-  { name: 'Passport Photo Maker', slug: '/image/passport-maker', desc: 'Crop to US, UK, Schengen & India specs', icon: UserCheck, badge: 'Presets', category: 'image', catLabel: 'Image Studio' },
-  { name: 'AI Background Remover', slug: '/image/remove-background', desc: 'Remove photo backgrounds 100% locally', icon: Scissors, badge: 'AI Wasm', category: 'image', catLabel: 'Image Studio' },
-  { name: 'Apple HEIC to JPG', slug: '/image/convert-heic', desc: 'Convert iPhone HEIC photos to JPG', icon: Smartphone, category: 'image', catLabel: 'Image Studio' },
-  { name: 'Resize Image (Pixels / %)', slug: '/image/resize', desc: 'Resize image dimensions cleanly', icon: Sliders, category: 'image', catLabel: 'Image Studio' },
-  { name: 'SSC Photo Resizer (20-50KB)', slug: '/tools/ssc-photo-resizer', desc: 'SSC CGL, CHSL 3.5x4.5cm with Name/Date', icon: UserCheck, badge: 'SSC 20-50KB', category: 'image', catLabel: 'Image Studio' },
-  { name: 'Online Signature Maker', slug: '/tools/online-signature-maker', desc: 'Draw or type signature with transparent PNG', icon: PenTool, badge: 'Draw & Type', category: 'image', catLabel: 'Image Studio', keywords: ['sign', 'signature', 'draw sign', 'online signature', 'cursive signature', 'digital sign', 'transparent sign', 'esig', 'signature maker'] },
-  { name: 'PAN Card Photo Resizer', slug: '/tools/pan-card-photo-resizer', desc: 'NSDL & UTIITSL exact 213x213 px photo at 300 DPI', icon: UserCheck, badge: 'NSDL & UTI', category: 'image', catLabel: 'Image Studio', keywords: ['pan', 'pan card', 'nsdl', 'uti', 'utiitsl', '213x213', '444x205', 'pan photo', 'protean'] },
-  { name: 'Signature Resizer 10 to 20KB', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Clean signature with Magic B&W for forms', icon: Stamp, badge: '10-20KB', category: 'image', catLabel: 'Image Studio' },
-  { name: 'Aadhaar Card Print Tool', slug: '/tools/aadhaar-card-print', desc: 'Crop & print e-Aadhaar on A4 & PVC (85.6x54mm)', icon: Printer, badge: 'A4 & PVC', category: 'image', catLabel: 'Image Studio' },
-  { name: 'UPSC Photo Resizer', slug: '/tools/upsc-photo-resizer', desc: 'UPSC IAS, CDS 350x350 px (20-300KB)', icon: UserCheck, badge: 'UPSC OTR', category: 'image', catLabel: 'Image Studio' },
-  { name: 'NEET Photo Resizer', slug: '/tools/neet-photo-resizer', desc: 'NEET passport & postcard 4"x6" with DOP stamp', icon: UserCheck, badge: 'NEET UG', category: 'image', catLabel: 'Image Studio' },
-  { name: 'Photo Name & Date Generator', slug: '/tools/photo-name-date-generator', desc: 'Add candidate name & DOP bar to photo', icon: Calendar, badge: 'Name & Date', category: 'image', catLabel: 'Image Studio' },
-];
-
-const UTILITY_TOOLS = [
-  { name: 'Electricity Bill Calculator', slug: '/utility/electricity-bill-calculator', desc: 'Calculate monthly electricity bill with state tariff slabs & subsidies', icon: DollarSign, badge: 'State Slabs', category: 'utility', catLabel: 'Daily Utility', keywords: ['electricity', 'bill', 'bijli', 'power', 'kwh', 'msedcl', 'bses', 'uppcl', 'bescom', 'tangedco', 'subsidy', 'ac'] },
-  { name: 'EPF Balance Growth Calculator', slug: '/utility/epf-calculator', desc: 'EPFO 8.25% retirement interest math', icon: Coins, badge: 'EPFO 8.25%', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Income Tax Calculator', slug: '/utility/income-tax-calculator', desc: 'Old vs New Regime tax savings FY 2026-27', icon: DollarSign, badge: 'Tax', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'EMI Loan Calculator', slug: '/utility/emi-calculator', desc: 'Home, car & personal loan monthly EMI math', icon: DollarSign, badge: 'Loan', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'SIP Mutual Fund Calculator', slug: '/utility/sip-calculator', desc: 'Compounding growth for monthly mutual funds', icon: DollarSign, badge: 'Wealth', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'CTC to In-Hand Salary Calculator', slug: '/utility/salary-calculator', desc: 'Monthly take-home salary after EPF & TDS', icon: DollarSign, badge: 'Salary', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'GST Tax Calculator', slug: '/utility/gst-calculator', desc: 'Add or Remove GST 5%, 12%, 18%, 28%', icon: Percent, badge: 'B2B', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Number to Words Converter', slug: '/utility/number-to-words', desc: 'Cheque & invoice amount words (Rupees/$)', icon: DollarSign, badge: 'Cheque', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Age Calculator & Birthday', slug: '/utility/age-calculator', desc: 'Years, months, days, seconds & zodiac', icon: Calendar, badge: '#1 Tool', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Percentage Calculator', slug: '/utility/percentage-calculator', desc: '% increase, discount, marks & ratio', icon: Percent, badge: 'Popular', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'CGPA to Percentage', slug: '/utility/cgpa-to-percentage', desc: 'CBSE, Mumbai Univ, VTU, DU & SGPA', icon: GraduationCap, badge: 'College', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'BMI & Health Calculator', slug: '/utility/bmi-calculator', desc: 'Body Mass Index & ideal weight range', icon: Zap, badge: 'Health', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Pomodoro Timer & Study Clock', slug: '/utility/pomodoro-timer', desc: 'Aesthetic 25m focus timer', icon: Brain, badge: 'Focus', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Coin Flip Online (3D Toss)', slug: '/utility/coin-flip', desc: '3D heads or tails decision simulator', icon: Coins, badge: '3D Toss', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Roll the Dice (1-12 Dice)', slug: '/utility/dice-roller', desc: 'Virtual 3D dice roller & RPG dice', icon: Dices, badge: '1-12 Dice', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Random Number Picker & RNG', slug: '/utility/random-number-picker', desc: 'Pick numbers without duplicates & PINs', icon: Hash, badge: 'RNG', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Password Generator', slug: '/utility/password-generator', desc: 'Generate strong passwords 100% offline', icon: Lock, badge: 'Secure', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Word & Character Counter', slug: '/utility/word-counter', desc: 'Real-time text stats, reading time & SEO', icon: Type, category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Text Case Converter', slug: '/utility/case-converter', desc: 'UPPER, lower, Title, camel & snake case', icon: Type, badge: 'Writing', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'URL Encoder & Decoder', slug: '/utility/url-encoder-decoder', desc: 'Encode or decode URLs and inspect query parameters', icon: FileCode, badge: 'RFC 3986', category: 'utility', catLabel: 'Daily Utility', keywords: ['url encode', 'url decode', 'urlencoder', 'urldecoder', 'percent encoding', 'encodeuricomponent', 'decodeuri'] },
-  { name: 'Hash Generator (MD5 / SHA)', slug: '/utility/hash-generator', desc: 'Generate MD5, SHA-1, SHA-256 and verify file checksums', icon: Hash, badge: 'Checksum', category: 'utility', catLabel: 'Daily Utility', keywords: ['hash', 'md5', 'sha256', 'sha1', 'sha512', 'checksum', 'digest'] },
-  { name: 'Numbers to Excel (XLSX)', slug: '/utility/numbers-to-excel', desc: 'Convert Apple Numbers to Excel', icon: Table, badge: 'Apple', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'Excel to Numbers Converter', slug: '/utility/excel-to-numbers', desc: 'Convert Excel workbook to Numbers', icon: Table, badge: 'New', category: 'utility', catLabel: 'Daily Utility' },
-  { name: 'JSON Formatter & Validator', slug: '/utility/json-formatter', desc: 'Beautify, minify, and validate JSON data', icon: Code2, category: 'utility', catLabel: 'Daily Utility' },
-];
-
-const SOCIAL_TOOLS = [
-  { name: 'WhatsApp Direct Chat Launcher', slug: '/social/whatsapp-direct-chat', desc: 'Chat without saving phone numbers', icon: MessageSquare, badge: 'wa.me', category: 'social', catLabel: 'Social Studio' },
-  { name: 'YouTube Thumbnail Preview', slug: '/social/youtube-thumbnail-downloader', desc: 'Preview 1080p HD video cover images', icon: Camera, badge: 'Thumbnails', category: 'social', catLabel: 'Social Studio' },
-  { name: 'YouTube Tag Extractor', slug: '/social/youtube-tag-extractor', desc: 'Extract SEO tags & keywords from video URL', icon: Hash, badge: 'SEO', category: 'social', catLabel: 'Social Studio' },
-  { name: 'Fancy Text Generator', slug: '/utility/fancy-text-generator', desc: '30+ Unicode font styles & gaming bios', icon: Sparkles, badge: 'Fonts', category: 'social', catLabel: 'Social Studio' },
-  { name: 'Text Repeater (10k Times)', slug: '/utility/text-repeater', desc: 'Repeat text & emojis up to 10,000 times', icon: Sparkles, badge: 'Viral', category: 'social', catLabel: 'Social Studio' },
-  { name: 'Free Text to Speech (TTS)', slug: '/utility/text-to-speech', desc: 'Voice AI audio generator for reels & videos', icon: Volume2, badge: 'Audio AI', category: 'social', catLabel: 'Social Studio' },
-  { name: 'Printable Greeting & Love Card Maker', slug: '/image/greeting-card-maker', desc: 'Create bi-fold A4 cards & digital love notes', icon: Sparkles, badge: 'Printable A4', category: 'image', catLabel: 'Image Studio' },
-  { name: 'Spin the Wheel & Name Picker', slug: '/utility/spin-the-wheel', desc: 'Random winner picker with confetti', icon: Dices, badge: 'Giveaway', category: 'social', catLabel: 'Social Studio' },
-  { name: 'Typing Speed Test (WPM Cert)', slug: '/utility/typing-speed-test', desc: 'Test WPM speed & export shareable cert', icon: Zap, badge: 'Viral Cert', category: 'social', catLabel: 'Social Studio' },
-];
-
-const ALL_SEARCHABLE_TOOLS = [...PDF_TOOLS, ...IMAGE_TOOLS, ...UTILITY_TOOLS, ...SOCIAL_TOOLS];
+const PDF_TOOLS = ALL_SEARCHABLE_TOOLS.filter((t) => t.category === 'pdf');
+const IMAGE_TOOLS = ALL_SEARCHABLE_TOOLS.filter((t) => t.category === 'image');
+const UTILITY_TOOLS = ALL_SEARCHABLE_TOOLS.filter((t) => t.category === 'utility');
+const SOCIAL_TOOLS = ALL_SEARCHABLE_TOOLS.filter((t) => t.category === 'social');
 
 export function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
