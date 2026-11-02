@@ -63,7 +63,7 @@ const DEFAULT_POST_IMAGES: Record<string, string> = {
   'how-to-mask-aadhaar-card-online-offline-protect-privacy': '/blog/aadhaar-card-print.webp',
   'ctet-photo-and-signature-size-guidelines-2026': '/blog/exam-guide.webp',
   'how-to-create-printable-habit-tracker-planner-pdf': '/blog/pdf-compression.webp',
-  'how-to-convert-pdf-to-excel-spreadsheet-free': '/blog/pdf-to-word.jpg',
+  'how-to-convert-pdf-to-excel-spreadsheet-free': '/blog/pdf-to-excel-guide.jpg',
 };
 
 // Helper function to extract FAQs for Google FAQPage Schema
