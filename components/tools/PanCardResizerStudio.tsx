@@ -1133,3 +1133,4 @@ export function PanCardResizerStudio() {
     </div>
   );
 }
+
