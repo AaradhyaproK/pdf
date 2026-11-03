@@ -888,51 +888,53 @@ export function CategoryHubPage({ category }: { category: CategoryConfig }) {
 
         {/* Popular Tools Showcase Section */}
         {category.popularTools && category.popularTools.length > 0 && selectedSubgroupIndex === 'all' && !searchQuery && (
-          <section className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xs space-y-5">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+          <section className="space-y-4 sm:space-y-5">
+            <div className="flex items-center justify-between border-b border-slate-200/80 pb-3">
               <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-xl bg-amber-50 border border-amber-200">
-                  <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
+                <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 shadow-2xs flex items-center justify-center">
+                  <Star className="w-5 h-5 text-amber-500 fill-amber-500" />
                 </div>
                 <div>
-                  <h2 className="text-base sm:text-lg font-black text-slate-900">
-                    Most Popular & Recommended Tools
+                  <h2 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
+                    Most Popular &amp; Recommended Tools
                   </h2>
-                  <p className="text-[11px] text-slate-500 font-medium">Top tools chosen by users every day</p>
+                  <p className="text-xs text-slate-500 font-medium">Top tools chosen by users every day</p>
                 </div>
               </div>
-              <span className="text-[10px] font-black text-amber-700 uppercase tracking-wider bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200">
+              <span className="text-[10px] font-black text-amber-700 uppercase tracking-wider bg-amber-50 px-3 py-1 rounded-full border border-amber-200 shadow-2xs">
                 ★ Top Rated
               </span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 sm:gap-5">
               {category.popularTools.map((pop, idx) => (
                 <Link
                   key={idx}
                   href={pop.slug}
                   prefetch={false}
-                  className="p-5 rounded-2xl bg-gradient-to-br from-indigo-50/50 via-white to-slate-50/80 hover:from-white hover:to-indigo-50/70 border border-indigo-100 hover:border-indigo-400 shadow-2xs hover:shadow-md transition-all duration-150 group flex flex-col justify-between space-y-3 active:scale-[0.98]"
+                  className="group relative bg-white border border-slate-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.04)] rounded-2xl sm:rounded-3xl p-5 sm:p-6 hover:shadow-xl hover:border-indigo-300 transition-all duration-200 flex flex-col justify-between space-y-4 h-full"
                 >
-                  <div className="space-y-1.5">
-                    <div className="flex items-start justify-between gap-2">
-                      <h3 className="font-extrabold text-sm text-slate-900 group-hover:text-indigo-700 transition-colors leading-snug">
-                        {pop.name}
-                      </h3>
-                      <div className="p-1.5 rounded-lg bg-indigo-50/80 border border-indigo-100 group-hover:bg-indigo-600 group-hover:border-indigo-600 transition-all shrink-0">
-                        <ArrowRight className="w-3.5 h-3.5 text-indigo-600 group-hover:text-white group-hover:translate-x-0.5 transition-all" />
+                  <div className="space-y-3 sm:space-y-4">
+                    {/* Top Row: Icon Container & Badge */}
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl border border-indigo-100 bg-indigo-50/80 text-indigo-600 flex items-center justify-center transition-all duration-200 shadow-2xs shrink-0 group-hover:scale-105 group-hover:bg-indigo-600 group-hover:text-white">
+                        <ToolIconComponent name={pop.iconName} className="w-5 h-5 sm:w-6 sm:h-6 transition-colors" />
                       </div>
+                      <span className="px-2.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-extrabold tracking-tight border shrink-0 bg-emerald-50 text-emerald-700 border-emerald-200 shadow-2xs">
+                        {pop.badge || 'Popular'}
+                      </span>
                     </div>
-                    <p className="text-[11px] text-slate-500 font-medium leading-relaxed">
-                      {pop.description}
-                    </p>
-                  </div>
-                  <div className="pt-2.5 border-t border-indigo-100/80 flex items-center justify-between">
-                    <span className="text-[11px] font-black text-indigo-600 group-hover:text-indigo-700 uppercase tracking-wider flex items-center gap-1">
-                      <span>Launch Tool</span>
-                      <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
-                    </span>
-                    <span className="text-[10px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">Free</span>
+
+                    {/* Title & Description */}
+                    <div>
+                      <h3 className="text-sm sm:text-base font-black text-slate-900 group-hover:text-indigo-600 transition-colors flex items-center justify-between gap-1 leading-snug">
+                        <span className="truncate">{pop.name}</span>
+                        <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-300 group-hover:text-indigo-600 group-hover:translate-x-1 transition-all shrink-0" />
+                      </h3>
+                      <p className="text-[11px] sm:text-xs text-slate-500 font-medium leading-relaxed mt-1.5 line-clamp-2">
+                        {pop.description}
+                      </p>
+                    </div>
                   </div>
                 </Link>
               ))}
@@ -941,7 +943,7 @@ export function CategoryHubPage({ category }: { category: CategoryConfig }) {
         )}
 
         {/* Subgrouped Full Tool Grid System */}
-        <div className="space-y-8">
+        <div className="space-y-10 sm:space-y-12">
           {filteredSubgroups.length === 0 ? (
             <div className="bg-white p-12 rounded-3xl border border-slate-200 text-center space-y-3">
               <Search className="w-8 h-8 text-slate-400 mx-auto" />
@@ -952,7 +954,7 @@ export function CategoryHubPage({ category }: { category: CategoryConfig }) {
                   setSearchQuery('');
                   setSelectedSubgroupIndex('all');
                 }}
-                className="mt-2 px-4 py-2 rounded-xl bg-indigo-50 text-indigo-700 font-black text-xs hover:bg-indigo-100 transition-colors"
+                className="mt-2 px-4 py-2 rounded-xl bg-indigo-50 text-indigo-700 font-black text-xs hover:bg-indigo-100 transition-colors cursor-pointer"
               >
                 Reset All Filters
               </button>
@@ -961,57 +963,56 @@ export function CategoryHubPage({ category }: { category: CategoryConfig }) {
             filteredSubgroups.map((sub, sIdx) => (
               <section
                 key={sIdx}
-                className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/90 shadow-xs space-y-5"
+                className="space-y-4 sm:space-y-5"
               >
-                <div className="border-b border-slate-100 pb-3 space-y-1">
-                  <div className="flex items-center justify-between">
-                    <h2 className="text-lg sm:text-xl font-black text-slate-900 flex items-center gap-2">
+                <div className="flex items-center justify-between border-b border-slate-200/80 pb-3">
+                  <div className="space-y-0.5">
+                    <h2 className="text-lg sm:text-xl font-black text-slate-900 flex items-center gap-2 tracking-tight">
                       <Sparkles className="w-5 h-5 text-indigo-600" />
                       <span>{sub.title}</span>
                     </h2>
-                    <span className="text-[11px] font-bold text-slate-400">
-                      {sub.tools.length} {sub.tools.length === 1 ? 'Tool' : 'Tools'}
-                    </span>
+                    <p className="text-xs text-slate-500 font-medium">{sub.description}</p>
                   </div>
-                  <p className="text-xs text-slate-500 font-medium">{sub.description}</p>
+                  <span className="text-xs font-bold text-slate-500 bg-white px-3 py-1 rounded-full border border-slate-200 shadow-2xs shrink-0">
+                    {sub.tools.length} {sub.tools.length === 1 ? 'Tool' : 'Tools'}
+                  </span>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
                   {sub.tools.map((t, tIdx) => (
                     <Link
                       key={tIdx}
                       href={t.slug}
                       prefetch={false}
-                      className="p-5 rounded-2xl bg-slate-50/70 border border-slate-200 hover:border-indigo-500 hover:bg-white shadow-2xs hover:shadow-md transition-all duration-150 group flex flex-col justify-between space-y-3 active:scale-[0.98]"
+                      className="group relative bg-white border border-slate-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.04)] rounded-2xl sm:rounded-3xl p-5 sm:p-6 hover:shadow-xl hover:border-indigo-300 transition-all duration-200 flex flex-col justify-between space-y-4 h-full"
                     >
-                      <div className="space-y-2">
-                        <div className="flex items-start justify-between gap-2">
-                          <div className="p-2 rounded-xl bg-white border border-slate-200/80 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors shrink-0">
-                            <ToolIconComponent name={t.iconName} className="w-4 h-4" />
+                      <div className="space-y-3 sm:space-y-4">
+                        {/* Top Row: Icon Container & Badge */}
+                        <div className="flex items-center justify-between gap-2">
+                          <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl border border-indigo-100 bg-indigo-50/80 text-indigo-600 flex items-center justify-center transition-all duration-200 shadow-2xs shrink-0 group-hover:scale-105 group-hover:bg-indigo-600 group-hover:text-white">
+                            <ToolIconComponent name={t.iconName} className="w-5 h-5 sm:w-6 sm:h-6 transition-colors" />
                           </div>
-                          {t.badge && (
-                            <span className="text-[9px] font-black uppercase text-indigo-700 bg-indigo-50 border border-indigo-100 px-2 py-0.5 rounded-full shrink-0">
+                          {t.badge ? (
+                            <span className="px-2.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-extrabold tracking-tight border shrink-0 bg-indigo-50 text-indigo-700 border-indigo-200 shadow-2xs">
                               {t.badge}
+                            </span>
+                          ) : (
+                            <span className="px-2.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-extrabold tracking-tight border shrink-0 bg-slate-50 text-slate-600 border-slate-200 shadow-2xs">
+                              Free
                             </span>
                           )}
                         </div>
 
+                        {/* Title & Description */}
                         <div>
-                          <h3 className="font-extrabold text-xs sm:text-sm text-slate-900 group-hover:text-indigo-600 transition-colors leading-snug">
-                            {t.name}
+                          <h3 className="text-sm sm:text-base font-black text-slate-900 group-hover:text-indigo-600 transition-colors flex items-center justify-between gap-1 leading-snug">
+                            <span className="truncate">{t.name}</span>
+                            <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-300 group-hover:text-indigo-600 group-hover:translate-x-1 transition-all shrink-0" />
                           </h3>
-                          <p className="text-[11px] text-slate-500 font-medium leading-relaxed line-clamp-2 mt-1">
+                          <p className="text-[11px] sm:text-xs text-slate-500 font-medium leading-relaxed mt-1.5 line-clamp-2">
                             {t.description}
                           </p>
                         </div>
-                      </div>
-
-                      <div className="pt-2.5 border-t border-slate-200/70 flex items-center justify-between">
-                        <span className="text-[11px] font-black text-indigo-600 group-hover:text-indigo-700 flex items-center gap-1">
-                          <span>Use Tool</span>
-                          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                        </span>
-                        <span className="text-[10px] font-bold text-slate-400">Free</span>
                       </div>
                     </Link>
                   ))}
