@@ -56,7 +56,7 @@ Clone the repository and run the local development server:
 # Clone the repository
 git clone https://github.com/AaradhyaproK/pdf.git
 
-# Navigate into the project
+# Navigate into the project.
 cd pdf
 
 # Install dependencies
