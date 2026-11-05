@@ -32,6 +32,9 @@ import {
   ExternalLink,
   Smartphone,
   Eye,
+  Pencil,
+  Feather,
+  Highlighter,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { triggerBrowserDownload } from '@/lib/download-helper';
@@ -153,6 +156,368 @@ const CURSIVE_FONTS = [
   },
 ];
 
+// Configuration and visual descriptors for the 4 Authentic Pen Styles
+export const PEN_STYLE_CONFIG: Record<
+  PenStyle,
+  {
+    name: string;
+    icon: typeof PenTool;
+    defaultWidth: number;
+    description: string;
+    badge: string;
+  }
+> = {
+  fountain: {
+    name: 'Fountain',
+    icon: PenTool,
+    defaultWidth: 3,
+    description: 'Dynamic flex nib with organic velocity & tapered ink flourishes',
+    badge: 'Smooth Flex',
+  },
+  ballpoint: {
+    name: 'Ballpoint',
+    icon: Pencil,
+    defaultWidth: 2,
+    description: 'Uniform, crisp 0.7mm line — recommended for PAN, SSC, Bank & Legal forms',
+    badge: 'Govt & Legal',
+  },
+  calligraphy: {
+    name: 'Calligraphy',
+    icon: Feather,
+    defaultWidth: 4,
+    description: '40° Chisel italic nib with bold downstrokes & hairline cross-strokes',
+    badge: '40° Chisel',
+  },
+  marker: {
+    name: 'Marker',
+    icon: Highlighter,
+    defaultWidth: 5,
+    description: 'Bold, saturated felt-tip stroke with smooth rounded ends for autographs',
+    badge: 'Bold Autograph',
+  },
+};
+
+// ---------------------------------------------------------------------------
+// Dedicated Pen Style Rendering Engines (Fountain, Ballpoint, Calligraphy, Marker)
+// ---------------------------------------------------------------------------
+
+// Style 1: Fountain Pen (Dynamic flex nib with velocity and pressure tapering)
+function drawFountainStroke(
+  ctx: CanvasRenderingContext2D,
+  pts: Point[],
+  color: string,
+  baseWidth: number,
+  scale = 1
+) {
+  if (pts.length === 0) return;
+  const width = baseWidth * scale;
+
+  ctx.save();
+  ctx.strokeStyle = color;
+  ctx.fillStyle = color;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+
+  if (pts.length === 1) {
+    ctx.beginPath();
+    ctx.arc(pts[0].x, pts[0].y, Math.max(1, width * 0.45), 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+    return;
+  }
+
+  // Pre-calculate dynamic widths with velocity and pressure tapering
+  const widths: number[] = [];
+  for (let i = 0; i < pts.length; i++) {
+    const p = pts[i];
+    let w = width;
+    if (p.pressure !== undefined && p.pressure > 0.05) {
+      w = width * (0.55 + p.pressure * 0.9);
+    } else if (i > 0) {
+      const prev = pts[i - 1];
+      const dist = Math.hypot(p.x - prev.x, p.y - prev.y);
+      const dt = Math.max(1, (p.time || 0) - (prev.time || 0));
+      const velocity = dist / dt;
+      // High speed = thin stroke; slow speed = richer ink pooling
+      const taper = Math.max(0.6, Math.min(1.4, 1.35 - velocity * 0.18));
+      w = width * taper;
+    }
+    // Entry & exit tapering
+    if (i === 0 && pts.length > 2) w *= 0.55;
+    if (i === pts.length - 1 && pts.length > 2) w *= 0.45;
+    widths.push(w);
+  }
+
+  // Draw continuous smooth quadratic segments with interpolated widths
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p1 = pts[i];
+    const p2 = pts[i + 1];
+    const segWidth = (widths[i] + widths[i + 1]) / 2;
+
+    const xc = (p1.x + p2.x) / 2;
+    const yc = (p1.y + p2.y) / 2;
+
+    ctx.lineWidth = segWidth;
+    ctx.beginPath();
+    if (i === 0) {
+      ctx.moveTo(p1.x, p1.y);
+      ctx.lineTo(xc, yc);
+    } else {
+      const prev = pts[i - 1];
+      const prevXc = (prev.x + p1.x) / 2;
+      const prevYc = (prev.y + p1.y) / 2;
+      ctx.moveTo(prevXc, prevYc);
+      ctx.quadraticCurveTo(p1.x, p1.y, xc, yc);
+    }
+    ctx.stroke();
+  }
+
+  if (pts.length > 2) {
+    const last = pts[pts.length - 1];
+    const secondLast = pts[pts.length - 2];
+    ctx.lineWidth = widths[widths.length - 1];
+    ctx.beginPath();
+    ctx.moveTo((secondLast.x + last.x) / 2, (secondLast.y + last.y) / 2);
+    ctx.lineTo(last.x, last.y);
+    ctx.stroke();
+  }
+
+  ctx.restore();
+}
+
+// Style 2: Ballpoint Pen (Uniform, crisp 0.7mm line — official Govt & Bank standard)
+function drawBallpointStroke(
+  ctx: CanvasRenderingContext2D,
+  pts: Point[],
+  color: string,
+  baseWidth: number,
+  scale = 1
+) {
+  if (pts.length === 0) return;
+  // Ballpoint is steady, uniform, and slightly tighter (0.78x base)
+  const width = Math.max(1.2, baseWidth * 0.78 * scale);
+
+  ctx.save();
+  ctx.strokeStyle = color;
+  ctx.fillStyle = color;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  ctx.lineWidth = width;
+
+  if (pts.length === 1) {
+    ctx.beginPath();
+    ctx.arc(pts[0].x, pts[0].y, width / 2, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+    return;
+  }
+
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p1 = pts[i];
+    const p2 = pts[i + 1];
+    const xc = (p1.x + p2.x) / 2;
+    const yc = (p1.y + p2.y) / 2;
+
+    ctx.beginPath();
+    if (i === 0) {
+      ctx.moveTo(p1.x, p1.y);
+      ctx.lineTo(xc, yc);
+    } else {
+      const prev = pts[i - 1];
+      const prevXc = (prev.x + p1.x) / 2;
+      const prevYc = (prev.y + p1.y) / 2;
+      ctx.moveTo(prevXc, prevYc);
+      ctx.quadraticCurveTo(p1.x, p1.y, xc, yc);
+    }
+    ctx.stroke();
+  }
+
+  if (pts.length > 2) {
+    const last = pts[pts.length - 1];
+    const secondLast = pts[pts.length - 2];
+    ctx.beginPath();
+    ctx.moveTo((secondLast.x + last.x) / 2, (secondLast.y + last.y) / 2);
+    ctx.lineTo(last.x, last.y);
+    ctx.stroke();
+  }
+
+  ctx.restore();
+}
+
+// Style 3: Calligraphy Pen (40° Chisel italic nib with striking thick-and-thin ribbon contrast)
+function drawCalligraphyStroke(
+  ctx: CanvasRenderingContext2D,
+  pts: Point[],
+  color: string,
+  baseWidth: number,
+  scale = 1
+) {
+  if (pts.length === 0) return;
+  const nibWidth = Math.max(2.8, baseWidth * 1.6 * scale);
+  const angle = (40 * Math.PI) / 180; // 40 degree classic italic chisel nib
+  const dx = (nibWidth / 2) * Math.cos(angle);
+  const dy = (nibWidth / 2) * Math.sin(angle);
+
+  ctx.save();
+  ctx.fillStyle = color;
+  ctx.strokeStyle = color;
+
+  if (pts.length === 1) {
+    ctx.beginPath();
+    ctx.moveTo(pts[0].x - dx, pts[0].y - dy);
+    ctx.lineTo(pts[0].x + dx, pts[0].y + dy);
+    ctx.lineWidth = Math.max(1, nibWidth * 0.25);
+    ctx.stroke();
+    ctx.restore();
+    return;
+  }
+
+  // Subsample curve points for ultra-smooth continuous ribbon geometry
+  const smoothPts: { x: number; y: number }[] = [];
+  smoothPts.push({ x: pts[0].x, y: pts[0].y });
+
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p1 = pts[i];
+    const p2 = pts[i + 1];
+    const dist = Math.hypot(p2.x - p1.x, p2.y - p1.y);
+    const steps = Math.max(2, Math.min(6, Math.floor(dist / 3)));
+
+    for (let step = 1; step <= steps; step++) {
+      const t = step / steps;
+      if (i === 0) {
+        smoothPts.push({
+          x: p1.x + (p2.x - p1.x) * t,
+          y: p1.y + (p2.y - p1.y) * t,
+        });
+      } else {
+        const prev = pts[i - 1];
+        const p0x = (prev.x + p1.x) / 2;
+        const p0y = (prev.y + p1.y) / 2;
+        const p2x = (p1.x + p2.x) / 2;
+        const p2y = (p1.y + p2.y) / 2;
+        const it = 1 - t;
+        const x = it * it * p0x + 2 * it * t * p1.x + t * t * p2x;
+        const y = it * it * p0y + 2 * it * t * p1.y + t * t * p2y;
+        smoothPts.push({ x, y });
+      }
+    }
+  }
+
+  // Draw filled quad ribbons between consecutive nib footprints
+  for (let i = 0; i < smoothPts.length - 1; i++) {
+    const p1 = smoothPts[i];
+    const p2 = smoothPts[i + 1];
+
+    const a1x = p1.x - dx;
+    const a1y = p1.y - dy;
+    const b1x = p1.x + dx;
+    const b1y = p1.y + dy;
+
+    const a2x = p2.x - dx;
+    const a2y = p2.y - dy;
+    const b2x = p2.x + dx;
+    const b2y = p2.y + dy;
+
+    ctx.beginPath();
+    ctx.moveTo(a1x, a1y);
+    ctx.lineTo(b1x, b1y);
+    ctx.lineTo(b2x, b2y);
+    ctx.lineTo(a2x, a2y);
+    ctx.closePath();
+    ctx.fill();
+
+    // Line cap stroke to seal sub-pixel rendering edges
+    ctx.beginPath();
+    ctx.moveTo(a1x, a1y);
+    ctx.lineTo(b1x, b1y);
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  ctx.restore();
+}
+
+// Style 4: Marker Pen (Bold, saturated felt-tip stroke with smooth rounded ends)
+function drawMarkerStroke(
+  ctx: CanvasRenderingContext2D,
+  pts: Point[],
+  color: string,
+  baseWidth: number,
+  scale = 1
+) {
+  if (pts.length === 0) return;
+  const width = Math.max(3, baseWidth * 1.45 * scale);
+
+  ctx.save();
+  ctx.strokeStyle = color;
+  ctx.fillStyle = color;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  ctx.lineWidth = width;
+
+  if (pts.length === 1) {
+    ctx.beginPath();
+    ctx.arc(pts[0].x, pts[0].y, width / 2, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+    return;
+  }
+
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p1 = pts[i];
+    const p2 = pts[i + 1];
+    const xc = (p1.x + p2.x) / 2;
+    const yc = (p1.y + p2.y) / 2;
+
+    ctx.beginPath();
+    if (i === 0) {
+      ctx.moveTo(p1.x, p1.y);
+      ctx.lineTo(xc, yc);
+    } else {
+      const prev = pts[i - 1];
+      const prevXc = (prev.x + p1.x) / 2;
+      const prevYc = (prev.y + p1.y) / 2;
+      ctx.moveTo(prevXc, prevYc);
+      ctx.quadraticCurveTo(p1.x, p1.y, xc, yc);
+    }
+    ctx.stroke();
+  }
+
+  if (pts.length > 2) {
+    const last = pts[pts.length - 1];
+    const secondLast = pts[pts.length - 2];
+    ctx.beginPath();
+    ctx.moveTo((secondLast.x + last.x) / 2, (secondLast.y + last.y) / 2);
+    ctx.lineTo(last.x, last.y);
+    ctx.stroke();
+  }
+
+  ctx.restore();
+}
+
+// Master Unified Signature Stroke Dispatcher
+function renderSignatureStroke(
+  ctx: CanvasRenderingContext2D,
+  stroke: Stroke,
+  scale = 1
+) {
+  switch (stroke.style) {
+    case 'ballpoint':
+      drawBallpointStroke(ctx, stroke.points, stroke.color, stroke.width, scale);
+      break;
+    case 'calligraphy':
+      drawCalligraphyStroke(ctx, stroke.points, stroke.color, stroke.width, scale);
+      break;
+    case 'marker':
+      drawMarkerStroke(ctx, stroke.points, stroke.color, stroke.width, scale);
+      break;
+    case 'fountain':
+    default:
+      drawFountainStroke(ctx, stroke.points, stroke.color, stroke.width, scale);
+      break;
+  }
+}
+
 export function SignatureMakerStudio() {
   const [activeTab, setActiveTab] = useState<TabType>('draw');
 
@@ -272,75 +637,9 @@ export function SignatureMakerStudio() {
       ctx.restore();
     }
 
-    // Render strokes with smooth quadratic Bezier curve math
+    // Render strokes with authentic pen-specific dynamics (Fountain, Ballpoint, Calligraphy, Marker)
     strokes.forEach((stroke) => {
-      const pts = stroke.points;
-      if (pts.length === 0) return;
-
-      ctx.save();
-      ctx.strokeStyle = stroke.color;
-      ctx.fillStyle = stroke.color;
-      ctx.lineCap = 'round';
-      ctx.lineJoin = 'round';
-
-      if (pts.length === 1) {
-        ctx.beginPath();
-        ctx.arc(pts[0].x, pts[0].y, stroke.width / 2, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-        return;
-      }
-
-      // Smooth midpoint curve rendering
-      for (let i = 0; i < pts.length - 1; i++) {
-        const p1 = pts[i];
-        const p2 = pts[i + 1];
-
-        // Velocity & pressure-sensitive line width variation for organic hand signature feel
-        let dynamicWidth = stroke.width;
-        if (p1.pressure !== undefined && p1.pressure > 0.05) {
-          dynamicWidth = stroke.width * (0.6 + p1.pressure * 0.8);
-        } else if (p1.time && p2.time) {
-          const dist = Math.hypot(p2.x - p1.x, p2.y - p1.y);
-          const dt = Math.max(1, p2.time - p1.time);
-          const velocity = dist / dt;
-          // Faster strokes are slightly thinner, mimicking fountain ink flow
-          const taper = Math.max(0.7, Math.min(1.3, 1.2 - velocity * 0.15));
-          dynamicWidth = stroke.width * taper;
-        }
-
-        ctx.lineWidth = dynamicWidth;
-
-        const xc = (p1.x + p2.x) / 2;
-        const yc = (p1.y + p2.y) / 2;
-
-        ctx.beginPath();
-        if (i === 0) {
-          ctx.moveTo(p1.x, p1.y);
-          ctx.lineTo(xc, yc);
-        } else {
-          const prev = pts[i - 1];
-          const prevXc = (prev.x + p1.x) / 2;
-          const prevYc = (prev.y + p1.y) / 2;
-          ctx.moveTo(prevXc, prevYc);
-          ctx.quadraticCurveTo(p1.x, p1.y, xc, yc);
-        }
-        ctx.stroke();
-      }
-
-      // Final tail segment
-      if (pts.length > 2) {
-        const last = pts[pts.length - 1];
-        const secondLast = pts[pts.length - 2];
-        const midX = (secondLast.x + last.x) / 2;
-        const midY = (secondLast.y + last.y) / 2;
-        ctx.beginPath();
-        ctx.moveTo(midX, midY);
-        ctx.lineTo(last.x, last.y);
-        ctx.stroke();
-      }
-
-      ctx.restore();
+      renderSignatureStroke(ctx, stroke, 1);
     });
   }, [strokes, showGuideLine]);
 
@@ -554,54 +853,7 @@ export function SignatureMakerStudio() {
         ctx.scale(scale, scale);
 
         strokes.forEach((stroke) => {
-          const pts = stroke.points;
-          if (pts.length === 0) return;
-
-          ctx.save();
-          ctx.strokeStyle = stroke.color;
-          ctx.fillStyle = stroke.color;
-          ctx.lineCap = 'round';
-          ctx.lineJoin = 'round';
-          ctx.lineWidth = stroke.width;
-
-          if (pts.length === 1) {
-            ctx.beginPath();
-            ctx.arc(pts[0].x, pts[0].y, stroke.width / 2, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.restore();
-            return;
-          }
-
-          for (let i = 0; i < pts.length - 1; i++) {
-            const p1 = pts[i];
-            const p2 = pts[i + 1];
-            const xc = (p1.x + p2.x) / 2;
-            const yc = (p1.y + p2.y) / 2;
-
-            ctx.beginPath();
-            if (i === 0) {
-              ctx.moveTo(p1.x, p1.y);
-              ctx.lineTo(xc, yc);
-            } else {
-              const prev = pts[i - 1];
-              const prevXc = (prev.x + p1.x) / 2;
-              const prevYc = (prev.y + p1.y) / 2;
-              ctx.moveTo(prevXc, prevYc);
-              ctx.quadraticCurveTo(p1.x, p1.y, xc, yc);
-            }
-            ctx.stroke();
-          }
-
-          if (pts.length > 2) {
-            const last = pts[pts.length - 1];
-            const secondLast = pts[pts.length - 2];
-            ctx.beginPath();
-            ctx.moveTo((secondLast.x + last.x) / 2, (secondLast.y + last.y) / 2);
-            ctx.lineTo(last.x, last.y);
-            ctx.stroke();
-          }
-
-          ctx.restore();
+          renderSignatureStroke(ctx, stroke, 1);
         });
         ctx.restore();
 
@@ -856,11 +1108,41 @@ export function SignatureMakerStudio() {
       let paths = '';
       strokes.forEach((s) => {
         if (s.points.length === 0) return;
-        let d = `M ${s.points[0].x - minX + pad} ${s.points[0].y - minY + pad}`;
-        for (let i = 1; i < s.points.length; i++) {
-          d += ` L ${s.points[i].x - minX + pad} ${s.points[i].y - minY + pad}`;
+
+        if (s.style === 'calligraphy') {
+          // Render SVG filled ribbon geometry for authentic calligraphy
+          const nibWidth = Math.max(2.8, s.width * 1.6);
+          const angle = (40 * Math.PI) / 180;
+          const dx = (nibWidth / 2) * Math.cos(angle);
+          const dy = (nibWidth / 2) * Math.sin(angle);
+
+          for (let i = 0; i < s.points.length - 1; i++) {
+            const p1x = s.points[i].x - minX + pad;
+            const p1y = s.points[i].y - minY + pad;
+            const p2x = s.points[i + 1].x - minX + pad;
+            const p2y = s.points[i + 1].y - minY + pad;
+
+            const a1x = (p1x - dx).toFixed(1);
+            const a1y = (p1y - dy).toFixed(1);
+            const b1x = (p1x + dx).toFixed(1);
+            const b1y = (p1y + dy).toFixed(1);
+            const a2x = (p2x - dx).toFixed(1);
+            const a2y = (p2y - dy).toFixed(1);
+            const b2x = (p2x + dx).toFixed(1);
+            const b2y = (p2y + dy).toFixed(1);
+
+            paths += `<polygon points="${a1x},${a1y} ${b1x},${b1y} ${b2x},${b2y} ${a2x},${a2y}" fill="${s.color}" />`;
+          }
+        } else {
+          let d = `M ${s.points[0].x - minX + pad} ${s.points[0].y - minY + pad}`;
+          for (let i = 1; i < s.points.length; i++) {
+            d += ` L ${s.points[i].x - minX + pad} ${s.points[i].y - minY + pad}`;
+          }
+          let sw = s.width;
+          if (s.style === 'ballpoint') sw = Math.max(1.2, s.width * 0.78);
+          if (s.style === 'marker') sw = Math.max(3, s.width * 1.45);
+          paths += `<path d="${d}" fill="none" stroke="${s.color}" stroke-width="${sw.toFixed(1)}" stroke-linecap="round" stroke-linejoin="round" />`;
         }
-        paths += `<path d="${d}" fill="none" stroke="${s.color}" stroke-width="${s.width}" stroke-linecap="round" stroke-linejoin="round" />`;
       });
 
       const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}">${paths}</svg>`;
@@ -1134,19 +1416,36 @@ export function SignatureMakerStudio() {
 
               {/* Row 2: Pen Style + Thickness Slider */}
               <div className="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-slate-200/60">
-                <div className="flex items-center gap-1 bg-white p-0.5 rounded-xl border border-slate-200 shadow-2xs overflow-x-auto max-w-full">
-                  {(['fountain', 'ballpoint', 'calligraphy', 'marker'] as PenStyle[]).map((st) => (
-                    <button
-                      key={st}
-                      type="button"
-                      onClick={() => setPenStyle(st)}
-                      className={`px-2 sm:px-2.5 py-1 rounded-lg text-[11px] sm:text-xs font-bold capitalize transition-all cursor-pointer shrink-0 ${
-                        penStyle === st ? 'bg-blue-600 text-white shadow-2xs' : 'text-slate-600 hover:text-slate-900'
-                      }`}
-                    >
-                      {st}
-                    </button>
-                  ))}
+                <div className="flex items-center gap-1 bg-white p-1 rounded-xl border border-slate-200 shadow-2xs overflow-x-auto max-w-full">
+                  {(['fountain', 'ballpoint', 'calligraphy', 'marker'] as PenStyle[]).map((st) => {
+                    const cfg = PEN_STYLE_CONFIG[st];
+                    const Icon = cfg.icon;
+                    const isActive = penStyle === st;
+                    return (
+                      <button
+                        key={st}
+                        type="button"
+                        onClick={() => {
+                          setPenStyle(st);
+                          setPenWidth(cfg.defaultWidth);
+                        }}
+                        className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold capitalize transition-all cursor-pointer shrink-0 ${
+                          isActive
+                            ? 'bg-blue-600 text-white shadow-xs'
+                            : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                        }`}
+                        title={cfg.description}
+                      >
+                        <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-white' : 'text-slate-500'}`} />
+                        <span>{cfg.name}</span>
+                        {isActive && (
+                          <span className="hidden md:inline-block text-[9px] px-1.5 py-0.5 rounded-full bg-blue-500 text-white font-extrabold ml-0.5">
+                            {cfg.badge}
+                          </span>
+                        )}
+                      </button>
+                    );
+                  })}
                 </div>
 
                 <div className="flex items-center gap-1.5 sm:gap-2">
@@ -1161,6 +1460,15 @@ export function SignatureMakerStudio() {
                   />
                   <span className="text-[11px] sm:text-xs font-black text-blue-900 w-4">{penWidth}px</span>
                 </div>
+              </div>
+
+              {/* Row 3: Pen Style Helper Description Pill */}
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200/70 text-[11px] text-slate-600">
+                <Sparkles className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                <span>
+                  <strong className="text-slate-900 font-extrabold">{PEN_STYLE_CONFIG[penStyle].name} Pen:</strong>{' '}
+                  {PEN_STYLE_CONFIG[penStyle].description}
+                </span>
               </div>
             </div>
 

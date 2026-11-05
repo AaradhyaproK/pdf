@@ -284,7 +284,7 @@ export default function OnlineSignatureMakerPage() {
             </span>
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-200 shadow-2xs">
               <PenTool className="w-3.5 h-3.5 text-amber-700" />
-              Smooth Liquid Ink Engine
+              4 Pen Styles (Fountain, Ballpoint, Calligraphy, Marker)
             </span>
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-purple-100 text-purple-900 border border-purple-200 shadow-2xs">
               <Lock className="w-3.5 h-3.5 text-purple-700" />
@@ -297,7 +297,7 @@ export default function OnlineSignatureMakerPage() {
           </h1>
 
           <p className="text-sm sm:text-base text-slate-700 max-w-3xl leading-relaxed">
-            Draw smooth handwritten signatures with your mouse or touchscreen, or type your name to generate authentic cursive calligraphy. Export in 1 click as a <strong>transparent PNG</strong> (for Word &amp; PDFs), <strong>high-res vector SVG</strong>, or <strong>10–20KB govt exam JPEG</strong> (for SSC, UPSC, and PAN Card). Completely private, instant, and free forever.
+            Draw smooth handwritten signatures with your mouse, stylus, or touchscreen using <strong>4 authentic pen styles (Fountain, Ballpoint, Calligraphy, Marker)</strong>, or type your name to generate cursive calligraphy. Export in 1 click as a <strong>transparent PNG</strong> (for Word &amp; PDFs), <strong>high-res vector SVG</strong>, or <strong>10–20KB govt exam JPEG</strong> (for SSC, UPSC, and PAN Card). Completely private, instant, and free forever.
           </p>
         </div>
 
