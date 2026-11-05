@@ -154,6 +154,11 @@ export function PanCardResizerStudio() {
   const [isDraggingSig, setIsDraggingSig] = useState(false);
   const dragStartSig = useRef<{ x: number; y: number; offX: number; offY: number }>({ x: 0, y: 0, offX: 0, offY: 0 });
 
+  // Drag over state for dropzone UI highlighting
+  const [isDragOverPhoto, setIsDragOverPhoto] = useState(false);
+  const [isDragOverSig, setIsDragOverSig] = useState(false);
+  const [isDragOverPdf, setIsDragOverPdf] = useState(false);
+
   // File input refs for uploading & replacing files
   const photoInputRef = useRef<HTMLInputElement>(null);
   const sigInputRef = useRef<HTMLInputElement>(null);
@@ -203,24 +208,32 @@ export function PanCardResizerStudio() {
     toast.success('All files cleared. Ready for a new fresh application!');
   };
 
-  // Load image helper
+  // Load image helper using ObjectURL with FileReader fallback
   const loadImageFromFile = (file: File): Promise<HTMLImageElement> => {
     return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const img = new Image();
-        img.onload = () => resolve(img);
-        img.onerror = () => reject(new Error('Failed to load image.'));
-        img.src = e.target?.result as string;
+      const objUrl = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => {
+        resolve(img);
       };
-      reader.onerror = () => reject(new Error('Failed to read file.'));
-      reader.readAsDataURL(file);
+      img.onerror = () => {
+        URL.revokeObjectURL(objUrl);
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const fallbackImg = new Image();
+          fallbackImg.onload = () => resolve(fallbackImg);
+          fallbackImg.onerror = () => reject(new Error('Failed to load image format.'));
+          fallbackImg.src = e.target?.result as string;
+        };
+        reader.onerror = () => reject(new Error('Failed to read file.'));
+        reader.readAsDataURL(file);
+      };
+      img.src = objUrl;
     });
   };
 
-  // Handle Photo File Upload
-  const handlePhotoSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+  // Process Photo File (shared by file input and drag-and-drop)
+  const processPhotoFile = async (file: File) => {
     if (!file) return;
     try {
       const img = await loadImageFromFile(file);
@@ -237,16 +250,13 @@ export function PanCardResizerStudio() {
         contrast: 0,
       });
       toast.success('Photo loaded successfully! Adjust crop and position as needed.');
-    } catch {
-      toast.error('Could not load image file.');
-    } finally {
-      if (e.target) e.target.value = '';
+    } catch (err: any) {
+      toast.error(err?.message || 'Could not load image file.');
     }
   };
 
-  // Handle Signature File Upload
-  const handleSignatureSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+  // Process Signature File (shared by file input and drag-and-drop)
+  const processSignatureFile = async (file: File) => {
     if (!file) return;
     try {
       const img = await loadImageFromFile(file);
@@ -263,11 +273,102 @@ export function PanCardResizerStudio() {
         bwThreshold: 160,
       });
       toast.success('Signature loaded successfully! Magic B&W cleanup applied.');
-    } catch {
-      toast.error('Could not load signature file.');
-    } finally {
-      if (e.target) e.target.value = '';
+    } catch (err: any) {
+      toast.error(err?.message || 'Could not load signature file.');
     }
+  };
+
+  // Process PDF File (shared by file input and drag-and-drop)
+  const processPdfFile = (file: File) => {
+    if (!file) return;
+    if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
+      toast.error('Please select a valid PDF document.');
+      return;
+    }
+    if (pdfOutputUrl) URL.revokeObjectURL(pdfOutputUrl);
+    setPdfFile(file);
+    setPdfOutputBlob(null);
+    setPdfOutputUrl(null);
+    setPdfOutputKB(0);
+    toast.success('Supporting document loaded! Click Compress to format under 300 KB.');
+  };
+
+  // Handle Photo File Upload from input
+  const handlePhotoSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) processPhotoFile(file);
+    if (e.target) e.target.value = '';
+  };
+
+  // Handle Signature File Upload from input
+  const handleSignatureSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) processSignatureFile(file);
+    if (e.target) e.target.value = '';
+  };
+
+  // Handle PDF Supporting Document Upload from input
+  const handlePdfSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) processPdfFile(file);
+    if (e.target) e.target.value = '';
+  };
+
+  // Photo Drag handlers
+  const handlePhotoDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOverPhoto(true);
+  };
+  const handlePhotoDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOverPhoto(false);
+  };
+  const handlePhotoDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOverPhoto(false);
+    const file = e.dataTransfer.files?.[0];
+    if (file) processPhotoFile(file);
+  };
+
+  // Sig Drag handlers
+  const handleSigDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOverSig(true);
+  };
+  const handleSigDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOverSig(false);
+  };
+  const handleSigDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOverSig(false);
+    const file = e.dataTransfer.files?.[0];
+    if (file) processSignatureFile(file);
+  };
+
+  // PDF Drag handlers
+  const handlePdfDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOverPdf(true);
+  };
+  const handlePdfDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOverPdf(false);
+  };
+  const handlePdfDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOverPdf(false);
+    const file = e.dataTransfer.files?.[0];
+    if (file) processPdfFile(file);
   };
 
   // Process Photo to Exact 213x213 px at 300 DPI (<50KB)
@@ -484,19 +585,6 @@ export function PanCardResizerStudio() {
     }
   }, [renderSignature]);
 
-  // Handle PDF Supporting Document Upload
-  const handlePdfSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const f = e.target.files?.[0];
-    if (!f) return;
-    if (pdfOutputUrl) URL.revokeObjectURL(pdfOutputUrl);
-    setPdfFile(f);
-    setPdfOutputBlob(null);
-    setPdfOutputUrl(null);
-    setPdfOutputKB(0);
-    toast.success('Supporting document loaded! Click Compress to format under 300 KB.');
-    if (e.target) e.target.value = '';
-  };
-
   // Handle PDF Documents Compression (<300KB)
   const handleCompressPdf = async () => {
     if (!pdfFile) {
@@ -704,25 +792,52 @@ export function PanCardResizerStudio() {
           {/* Hidden Master Photo File Input */}
           <input
             ref={photoInputRef}
+            id="pan-photo-file-input"
             type="file"
-            accept="image/jpeg,image/png,image/webp"
+            accept="image/*,.jpg,.jpeg,.png,.webp,.heic,.heif"
             onChange={handlePhotoSelect}
             className="hidden"
           />
 
           {!photoState.img ? (
-            <label className="flex flex-col items-center justify-center p-8 sm:p-12 border-2 border-dashed border-amber-300 hover:border-amber-500 rounded-3xl bg-amber-50/30 hover:bg-amber-50/60 transition-all cursor-pointer group text-center space-y-3">
+            <div
+              onClick={() => photoInputRef.current?.click()}
+              onDragOver={handlePhotoDragOver}
+              onDragLeave={handlePhotoDragLeave}
+              onDrop={handlePhotoDrop}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  photoInputRef.current?.click();
+                }
+              }}
+              className={`flex flex-col items-center justify-center p-8 sm:p-12 border-2 border-dashed rounded-3xl transition-all cursor-pointer group text-center space-y-3 ${
+                isDragOverPhoto
+                  ? 'border-amber-600 bg-amber-100/70 scale-[1.01] ring-4 ring-amber-500/10 shadow-md'
+                  : 'border-amber-300 hover:border-amber-500 bg-amber-50/30 hover:bg-amber-50/70'
+              }`}
+            >
               <div className="w-14 h-14 rounded-2xl bg-amber-100 group-hover:bg-amber-200 text-amber-700 flex items-center justify-center shadow-xs transition-colors">
                 <UploadCloud className="w-7 h-7" />
               </div>
               <div>
                 <p className="text-sm font-black text-slate-900">Upload Candidate Passport Photo</p>
-                <p className="text-xs text-slate-500 font-medium mt-0.5">Supports JPG, PNG, WebP or mobile camera selfies</p>
+                <p className="text-xs text-slate-500 font-medium mt-0.5">Drag &amp; drop or click to browse &bull; Supports JPG, PNG, WebP or phone photos</p>
               </div>
-              <span className="px-4 py-1.5 rounded-xl bg-amber-600 group-hover:bg-amber-700 text-white font-extrabold text-xs shadow-xs transition-all">
-                Select Photo File
-              </span>
-            </label>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  photoInputRef.current?.click();
+                }}
+                className="px-4 py-2 rounded-xl bg-amber-600 group-hover:bg-amber-700 text-white font-extrabold text-xs shadow-xs transition-all cursor-pointer flex items-center gap-1.5"
+              >
+                <FileUp className="w-4 h-4" />
+                <span>Select Photo File</span>
+              </button>
+            </div>
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
               {/* Interactive Viewport Canvas (5 Cols) */}
@@ -980,25 +1095,52 @@ export function PanCardResizerStudio() {
           {/* Hidden Master Signature File Input */}
           <input
             ref={sigInputRef}
+            id="pan-sig-file-input"
             type="file"
-            accept="image/jpeg,image/png,image/webp"
+            accept="image/*,.jpg,.jpeg,.png,.webp,.heic,.heif"
             onChange={handleSignatureSelect}
             className="hidden"
           />
 
           {!sigState.img ? (
-            <label className="flex flex-col items-center justify-center p-8 sm:p-12 border-2 border-dashed border-amber-300 hover:border-amber-500 rounded-3xl bg-amber-50/30 hover:bg-amber-50/60 transition-all cursor-pointer group text-center space-y-3">
+            <div
+              onClick={() => sigInputRef.current?.click()}
+              onDragOver={handleSigDragOver}
+              onDragLeave={handleSigDragLeave}
+              onDrop={handleSigDrop}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  sigInputRef.current?.click();
+                }
+              }}
+              className={`flex flex-col items-center justify-center p-8 sm:p-12 border-2 border-dashed rounded-3xl transition-all cursor-pointer group text-center space-y-3 ${
+                isDragOverSig
+                  ? 'border-amber-600 bg-amber-100/70 scale-[1.01] ring-4 ring-amber-500/10 shadow-md'
+                  : 'border-amber-300 hover:border-amber-500 bg-amber-50/30 hover:bg-amber-50/70'
+              }`}
+            >
               <div className="w-14 h-14 rounded-2xl bg-amber-100 group-hover:bg-amber-200 text-amber-700 flex items-center justify-center shadow-xs transition-colors">
                 <UploadCloud className="w-7 h-7" />
               </div>
               <div>
                 <p className="text-sm font-black text-slate-900">Upload Phone Photo of Signature on Paper</p>
-                <p className="text-xs text-slate-500 font-medium mt-0.5">Paper shadows and yellow light will be converted to crisp white</p>
+                <p className="text-xs text-slate-500 font-medium mt-0.5">Drag &amp; drop or click to browse &bull; Paper shadows and yellow light converted to pure white</p>
               </div>
-              <span className="px-4 py-1.5 rounded-xl bg-amber-600 group-hover:bg-amber-700 text-white font-extrabold text-xs shadow-xs transition-all">
-                Select Signature File
-              </span>
-            </label>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  sigInputRef.current?.click();
+                }}
+                className="px-4 py-2 rounded-xl bg-amber-600 group-hover:bg-amber-700 text-white font-extrabold text-xs shadow-xs transition-all cursor-pointer flex items-center gap-1.5"
+              >
+                <FileUp className="w-4 h-4" />
+                <span>Select Signature File</span>
+              </button>
+            </div>
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
               {/* Interactive Viewport Canvas (6 Cols) */}
@@ -1263,25 +1405,52 @@ export function PanCardResizerStudio() {
           {/* Hidden Master PDF File Input */}
           <input
             ref={pdfInputRef}
+            id="pan-pdf-file-input"
             type="file"
-            accept="application/pdf"
+            accept="application/pdf,.pdf"
             onChange={handlePdfSelect}
             className="hidden"
           />
 
           {!pdfFile ? (
-            <label className="flex flex-col items-center justify-center p-8 sm:p-12 border-2 border-dashed border-amber-300 hover:border-amber-500 rounded-3xl bg-amber-50/30 hover:bg-amber-50/60 transition-all cursor-pointer group text-center space-y-3">
+            <div
+              onClick={() => pdfInputRef.current?.click()}
+              onDragOver={handlePdfDragOver}
+              onDragLeave={handlePdfDragLeave}
+              onDrop={handlePdfDrop}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  pdfInputRef.current?.click();
+                }
+              }}
+              className={`flex flex-col items-center justify-center p-8 sm:p-12 border-2 border-dashed rounded-3xl transition-all cursor-pointer group text-center space-y-3 ${
+                isDragOverPdf
+                  ? 'border-amber-600 bg-amber-100/70 scale-[1.01] ring-4 ring-amber-500/10 shadow-md'
+                  : 'border-amber-300 hover:border-amber-500 bg-amber-50/30 hover:bg-amber-50/70'
+              }`}
+            >
               <div className="w-14 h-14 rounded-2xl bg-amber-100 group-hover:bg-amber-200 text-amber-700 flex items-center justify-center shadow-xs transition-colors">
                 <UploadCloud className="w-7 h-7" />
               </div>
               <div>
                 <p className="text-sm font-black text-slate-900">Upload Supporting Document PDF</p>
-                <p className="text-xs text-slate-500 font-medium mt-0.5">Aadhaar card copy, voter ID, driving license, or passport scan</p>
+                <p className="text-xs text-slate-500 font-medium mt-0.5">Drag &amp; drop or click to browse &bull; Aadhaar card copy, voter ID, driving license, or passport scan</p>
               </div>
-              <span className="px-4 py-1.5 rounded-xl bg-amber-600 group-hover:bg-amber-700 text-white font-extrabold text-xs shadow-xs transition-all">
-                Select PDF File
-              </span>
-            </label>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  pdfInputRef.current?.click();
+                }}
+                className="px-4 py-2 rounded-xl bg-amber-600 group-hover:bg-amber-700 text-white font-extrabold text-xs shadow-xs transition-all cursor-pointer flex items-center gap-1.5"
+              >
+                <FileUp className="w-4 h-4" />
+                <span>Select PDF File</span>
+              </button>
+            </div>
           ) : (
             <div className="space-y-4">
               <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/90 flex flex-col sm:flex-row sm:items-center justify-between gap-3">

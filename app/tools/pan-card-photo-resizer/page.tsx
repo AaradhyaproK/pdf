@@ -12,6 +12,7 @@ import {
   Lightbulb,
   ArrowRight,
   CheckCircle2,
+  XCircle,
   Lock,
   Table,
   Check,
@@ -23,6 +24,8 @@ import {
   UserCheck,
   Stamp,
   BookOpen,
+  Clock,
+  ExternalLink,
 } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -122,6 +125,31 @@ const OFFICIAL_FAQS = [
     question: 'Can I resize both photo and signature at the same time?',
     answer:
       'Yes! Use the "Dual Package (Both)" tab to upload both your photo and signature side-by-side. You can position, zoom, and enhance both images simultaneously, and click "Download Complete PAN Package" to get both perfectly calibrated files ready for immediate upload to the PAN portal.'
+  },
+  {
+    question: 'What are the rules for Minor PAN Card (under 18 years) photo and signature?',
+    answer:
+      'For applicants under 18 years of age (minor PAN card), the minor photograph is uploaded as usual (213×213 px, 300 DPI). However, the minor DOES NOT sign the application. Instead, the father, mother, or legal guardian (Representative Assessee) must sign in the signature box (444×205 px). When the physical PAN card is delivered, it displays the minor photograph with "NO SIGNATURE" or the guardian signature printed.'
+  },
+  {
+    question: 'Which documents are officially valid as Proof of Identity (POI), Address (POA), and DOB?',
+    answer:
+      'Under Rule 114 of Income Tax Rules 1962: Aadhaar Card is universally accepted for all three (POI, POA, and DOB). Other valid POI documents include Voter ID, Passport, Driving License, and Ration Card with applicant photo. Valid POA documents include Electricity Bill (<3 months old), Water Bill, Bank Passbook/Statement (<3 months old), and Domicile Certificate. Valid DOB documents include Matriculation (10th) mark sheet, Birth Certificate, and Passport.'
+  },
+  {
+    question: 'Can I use a blue ink pen for the PAN card signature or is black ink mandatory?',
+    answer:
+      'Both black and dark blue ink ballpoint pens are legally valid. However, Income Tax guidelines and CSC center operators strongly recommend a BLACK ballpoint pen because high-speed automated document scanners at NSDL and UTIITSL produce higher contrast scans with black ink, significantly reducing the chances of rejection or illegible printing on the PVC plastic card.'
+  },
+  {
+    question: 'How do I change an old or childhood photograph on my existing PAN card?',
+    answer:
+      'To update an old photo or signature, submit a "Request for New PAN Card with Changes or Correction in PAN Data" (Form CSF) on NSDL Protean or UTIITSL. Check the tick box next to "Photo Mismatch" and "Signature Mismatch", upload your newly formatted 213×213 px photo and 444×205 px signature via FileZenith, and provide your existing 10-digit PAN number along with Aadhaar verification.'
+  },
+  {
+    question: 'What is the difference between applying through NSDL (Protean) vs UTIITSL?',
+    answer:
+      'Both NSDL e-Gov (Protean) and UTIITSL are official authorized partners of the Income Tax Department of India for issuing Permanent Account Numbers (PAN). The document specifications (213×213 px photo, 444×205 px signature, 300 DPI, <50KB) and government fees (₹107 for physical delivery in India, ₹72 for e-PAN) are completely identical on both portals. You can apply on whichever portal you find more convenient.'
   }
 ];
 
@@ -252,7 +280,7 @@ export default function PanCardPhotoResizerPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
       />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
         {/* Breadcrumb Navigation */}
         <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs sm:text-sm text-slate-700">
           <Link href="/" className="hover:text-blue-600 transition-colors">
@@ -312,31 +340,33 @@ export default function PanCardPhotoResizerPage() {
         </div>
 
         {/* Official Portal Specifications Comparison Table */}
-        <section className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-6">
+        <section className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-9 shadow-sm space-y-6">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <Table className="w-5 h-5 text-blue-600" />
+              <span className="p-2 rounded-xl bg-blue-50 text-blue-700">
+                <Table className="w-5 h-5" />
+              </span>
               <h2 className="text-xl sm:text-2xl font-black text-slate-900">
                 Official NSDL (Protean) &amp; UTIITSL PAN Upload Guidelines
               </h2>
             </div>
-            <p className="text-sm text-slate-700">
+            <p className="text-sm text-slate-600 leading-relaxed">
               Government PAN application servers reject files that deviate even by 1 pixel or lack binary 300 DPI headers. Here is the official specification matrix verified for Form 49A, Form 49AA, and PAN Card correction requests:
             </p>
           </div>
 
-          <div className="overflow-x-auto rounded-xl border border-slate-200 shadow-2xs">
+          <div className="overflow-x-auto rounded-2xl border border-slate-200 shadow-2xs">
             <table className="w-full text-left text-sm border-collapse">
               <thead>
                 <tr className="bg-slate-100/80 border-b border-slate-200 text-slate-900">
-                  <th className="py-3 px-4 font-bold">Requirement</th>
-                  <th className="py-3 px-4 font-bold text-blue-900 bg-blue-50/60">
+                  <th className="py-3.5 px-4 font-bold">Requirement</th>
+                  <th className="py-3.5 px-4 font-bold text-blue-900 bg-blue-50/70">
                     Applicant Photograph
                   </th>
-                  <th className="py-3 px-4 font-bold text-amber-900 bg-amber-50/60">
+                  <th className="py-3.5 px-4 font-bold text-amber-900 bg-amber-50/70">
                     Applicant Signature
                   </th>
-                  <th className="py-3 px-4 font-bold text-emerald-900 bg-emerald-50/60">
+                  <th className="py-3.5 px-4 font-bold text-emerald-900 bg-emerald-50/70">
                     Supporting Documents
                   </th>
                 </tr>
@@ -356,8 +386,8 @@ export default function PanCardPhotoResizerPage() {
                 </tr>
                 <tr className="hover:bg-slate-50/60 transition-colors">
                   <td className="py-3 px-4 font-semibold text-slate-900">Physical Size (cm)</td>
-                  <td className="py-3 px-4 font-medium text-slate-800">2.5 cm × 2.5 cm</td>
-                  <td className="py-3 px-4 font-medium text-slate-800">4.5 cm × 2.0 cm</td>
+                  <td className="py-3 px-4 font-medium text-slate-800">2.5 cm × 2.5 cm (0.98 × 0.98 in)</td>
+                  <td className="py-3 px-4 font-medium text-slate-800">4.5 cm × 2.0 cm (1.77 × 0.8 in)</td>
                   <td className="py-3 px-4 text-slate-800">21.0 cm × 29.7 cm</td>
                 </tr>
                 <tr className="hover:bg-slate-50/60 transition-colors">
@@ -382,23 +412,122 @@ export default function PanCardPhotoResizerPage() {
                 </tr>
                 <tr className="hover:bg-slate-50/60 transition-colors">
                   <td className="py-3 px-4 font-semibold text-slate-900">Accepted Format</td>
-                  <td className="py-3 px-4 text-slate-800">JPEG / JPG</td>
-                  <td className="py-3 px-4 text-slate-800">JPEG / JPG</td>
-                  <td className="py-3 px-4 text-slate-800">Single PDF Document</td>
+                  <td className="py-3 px-4 text-slate-800 font-medium">JPEG / JPG</td>
+                  <td className="py-3 px-4 text-slate-800 font-medium">JPEG / JPG</td>
+                  <td className="py-3 px-4 text-slate-800 font-medium">Single Combined PDF</td>
                 </tr>
                 <tr className="hover:bg-slate-50/60 transition-colors">
                   <td className="py-3 px-4 font-semibold text-slate-900">Color Appearance</td>
-                  <td className="py-3 px-4 text-slate-800">Color with light / white background</td>
+                  <td className="py-3 px-4 text-slate-800">Color with light / pure white background</td>
                   <td className="py-3 px-4 text-slate-800">Black / Blue ink on pure white paper</td>
-                  <td className="py-3 px-4 text-slate-800">Greyscale / Black &amp; White</td>
+                  <td className="py-3 px-4 text-slate-800">Greyscale / Black &amp; White (Legible)</td>
+                </tr>
+                <tr className="hover:bg-slate-50/60 transition-colors">
+                  <td className="py-3 px-4 font-semibold text-slate-900">Applicable Forms</td>
+                  <td className="py-3 px-4 text-slate-700">Form 49A, Form 49AA, CSF (Correction)</td>
+                  <td className="py-3 px-4 text-slate-700">Form 49A, Form 49AA, CSF (Correction)</td>
+                  <td className="py-3 px-4 text-slate-700">Proof of Identity, Address &amp; DOB</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </section>
 
-        {/* Why Portals Reject & How FileZenith Solves It */}
-        <section className="bg-gradient-to-br from-slate-900 via-slate-850 to-blue-950 text-white rounded-2xl p-6 sm:p-8 shadow-md space-y-6">
+        {/* Portal-by-Portal Upload Procedure (NSDL vs UTIITSL) */}
+        <section className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-9 shadow-sm space-y-6">
+          <div className="space-y-2">
+            <span className="text-xs font-black uppercase tracking-wider text-amber-600">
+              Official Portal Walkthrough
+            </span>
+            <h2 className="text-xl sm:text-2xl font-black text-slate-900">
+              How to Upload Photo &amp; Signature on NSDL (Protean) and UTIITSL
+            </h2>
+            <p className="text-sm text-slate-600 leading-relaxed max-w-3xl">
+              Whether you are applying directly as an individual citizen or filing bulk applications through a CSC cyber cafe center, here is the exact portal navigation path:
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* NSDL Protean Box */}
+            <div className="p-6 rounded-2xl bg-gradient-to-b from-blue-50/40 to-white border border-blue-200/80 space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="px-3 py-1 rounded-lg bg-blue-600 text-white font-black text-xs">
+                  Portal 1: NSDL (Protean) e-Gov
+                </span>
+                <span className="text-[11px] font-bold text-blue-700">tin-nsdl.com</span>
+              </div>
+
+              <h3 className="font-extrabold text-slate-900 text-base">
+                Steps for NSDL Form 49A / Correction:
+              </h3>
+
+              <ol className="space-y-2.5 text-xs text-slate-700 leading-relaxed list-decimal list-inside font-medium">
+                <li>
+                  Go to the official Protean portal and choose <strong>&quot;Submit scanned images through e-Sign on document upload&quot;</strong>.
+                </li>
+                <li>
+                  Fill in your Personal, Contact, and AO Code details across Tabs 1 to 4.
+                </li>
+                <li>
+                  Navigate to <strong>&quot;Upload Photo / Signature and Documents&quot;</strong>.
+                </li>
+                <li>
+                  Click <strong>Choose File</strong> under Photograph and select the <strong>213 × 213 px</strong> file downloaded from FileZenith. Click <strong>Upload</strong>.
+                </li>
+                <li>
+                  Click <strong>Choose File</strong> under Signature and select the <strong>444 × 205 px</strong> file. Click <strong>Upload</strong>.
+                </li>
+                <li>
+                  Upload your Aadhaar/POI/POA/DOB supporting PDF (under 300 KB) compressed in our &quot;Supporting Docs&quot; tab.
+                </li>
+                <li>
+                  Complete payment (₹107) and authenticate with Aadhaar OTP e-Sign.
+                </li>
+              </ol>
+            </div>
+
+            {/* UTIITSL Box */}
+            <div className="p-6 rounded-2xl bg-gradient-to-b from-amber-50/40 to-white border border-amber-200/80 space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="px-3 py-1 rounded-lg bg-amber-600 text-white font-black text-xs">
+                  Portal 2: UTIITSL PAN Services
+                </span>
+                <span className="text-[11px] font-bold text-amber-700">utiitsl.com</span>
+              </div>
+
+              <h3 className="font-extrabold text-slate-900 text-base">
+                Steps for UTIITSL (PSA &amp; Citizen Mode):
+              </h3>
+
+              <ol className="space-y-2.5 text-xs text-slate-700 leading-relaxed list-decimal list-inside font-medium">
+                <li>
+                  Log in to UTIITSL citizen or PSA agent portal and select <strong>Apply PAN Card (Form 49A)</strong>.
+                </li>
+                <li>
+                  Select <strong>&quot;Digital Mode&quot;</strong> or <strong>&quot;Physical Mode&quot;</strong> and complete applicant information.
+                </li>
+                <li>
+                  On the <strong>&quot;Upload Documents&quot;</strong> screen, locate the applicant coupon number.
+                </li>
+                <li>
+                  Click the <strong>Upload</strong> button next to the application coupon.
+                </li>
+                <li>
+                  Select the Photo field $\rightarrow$ Browse and choose the <strong>213 × 213 px (300 DPI)</strong> file from FileZenith.
+                </li>
+                <li>
+                  Select Signature field $\rightarrow$ Browse and choose the <strong>444 × 205 px</strong> file.
+                </li>
+                <li>
+                  Attach the consolidated supporting documents PDF (&lt;300 KB) and click <strong>&quot;Upload Files&quot;</strong> for instant validation.
+                </li>
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        {/* Technical Deep Dive: Why Portals Reject & How FileZenith Solves It */}
+        <section className="bg-gradient-to-br from-slate-900 via-slate-850 to-blue-950 text-white rounded-3xl p-6 sm:p-9 shadow-md space-y-6">
           <div className="space-y-2">
             <span className="text-xs font-black uppercase tracking-wider text-amber-400">
               Technical Deep-Dive
@@ -407,102 +536,261 @@ export default function PanCardPhotoResizerPage() {
               Why 90% of Online Tools Fail the NSDL / UTIITSL DPI Check
             </h2>
             <p className="text-sm text-slate-300 leading-relaxed max-w-3xl">
-              Most online image converters crop images by re-rendering on a basic HTML5 canvas and calling <code className="text-amber-300 bg-white/10 px-1.5 py-0.5 rounded text-xs">canvas.toBlob(&apos;image/jpeg&apos;)</code>. In modern browsers (Chrome, Edge, Safari), this defaults to <strong>72 or 96 DPI</strong>. Here is why FileZenith guarantees zero rejections:
+              Most generic photo compressors and phone editors export images using default screen resolutions (<strong>72 or 96 DPI</strong>) without JFIF density markers. Here is how FileZenith ensures 100% compliance:
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-            <div className="bg-white/5 border border-white/10 rounded-xl p-5 space-y-3">
-              <div className="w-10 h-10 rounded-lg bg-blue-500/20 border border-blue-400/30 flex items-center justify-center text-blue-300 font-bold">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 text-sm">
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-blue-500/20 border border-blue-400/30 flex items-center justify-center text-blue-300 font-bold">
                 01
               </div>
               <h3 className="font-bold text-white text-base">Binary 300 DPI Injection</h3>
               <p className="text-xs text-slate-300 leading-relaxed">
-                When you click Download, our engine parses the raw JPEG byte stream and rewrites the JFIF APP0 marker, injecting <code className="text-blue-300">units = 1</code> (dots per inch) and <code className="text-blue-300">XDensity = 300, YDensity = 300</code>. When government scripts read the header, it passes the 300 DPI check every time.
+                When you click Download, our engine parses the raw JPEG byte stream and injects the JFIF APP0 marker with <code className="text-blue-300">units = 1</code> (dots per inch) and <code className="text-blue-300">XDensity = 300, YDensity = 300</code>. Portal validation scripts read the header and immediately pass the file.
               </p>
             </div>
 
-            <div className="bg-white/5 border border-white/10 rounded-xl p-5 space-y-3">
-              <div className="w-10 h-10 rounded-lg bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center text-emerald-300 font-bold">
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center text-emerald-300 font-bold">
                 02
               </div>
               <h3 className="font-bold text-white text-base">Magic B&amp;W Shadow Stripper</h3>
               <p className="text-xs text-slate-300 leading-relaxed">
-                Mobile phone camera snapshots of paper signatures inevitably have yellowish room lighting and camera shadows. Our mathematical luminance thresholding instantly isolates ink strokes and replaces all grey/yellow pixels with pure <code className="text-emerald-300">#FFFFFF</code> white.
+                Mobile phone snapshots of paper signatures inevitably have room lighting shadows and yellow paper tint. Our luminance formula calculates pixel thresholding, replacing ambient grey gradients with pure <code className="text-emerald-300">#FFFFFF</code> white and ink with crisp black.
               </p>
             </div>
 
-            <div className="bg-white/5 border border-white/10 rounded-xl p-5 space-y-3">
-              <div className="w-10 h-10 rounded-lg bg-amber-500/20 border border-amber-400/30 flex items-center justify-center text-amber-300 font-bold">
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-400/30 flex items-center justify-center text-amber-300 font-bold">
                 03
               </div>
               <h3 className="font-bold text-white text-base">Dual Package Bundling</h3>
               <p className="text-xs text-slate-300 leading-relaxed">
-                Cyber cafes and CSC operators handle dozens of PAN applications daily. Instead of resizing photos and signatures separately across multiple websites, our &quot;Dual Package&quot; tab lets you format both simultaneously and download them in 1 click.
+                CSC and cyber cafe operators manage dozens of PAN submissions daily. Instead of formatting photos and signatures separately across different tabs, our &quot;Dual Package&quot; tab lets you format both simultaneously and download them in 1 click.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Step-by-Step Instructions */}
-        <section className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-6">
+        {/* Detailed Do's and Don'ts Checklist */}
+        <section className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-9 shadow-sm space-y-6">
           <div className="space-y-2">
-            <div className="flex items-center gap-2">
-              <BookOpen className="w-5 h-5 text-blue-600" />
-              <h2 className="text-xl sm:text-2xl font-black text-slate-900">
-                How to Resize Photo &amp; Signature for PAN Card in 4 Steps
-              </h2>
-            </div>
-            <p className="text-sm text-slate-700">
-              Follow this step-by-step procedure to ensure your PAN application is approved on first submission:
+            <span className="text-xs font-black uppercase tracking-wider text-emerald-600">
+              Government Quality Standards
+            </span>
+            <h2 className="text-xl sm:text-2xl font-black text-slate-900">
+              PAN Photo &amp; Signature Quality Standards (Do&apos;s &amp; Don&apos;ts)
+            </h2>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              Follow these official Income Tax Department photo rules to avoid application rejection or delays in physical PVC card dispatch:
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="bg-slate-50 rounded-xl p-5 border border-slate-200 space-y-2">
-              <div className="w-8 h-8 rounded-full bg-blue-600 text-white font-black text-sm flex items-center justify-center shadow-xs">
-                1
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Photograph Rules */}
+            <div className="p-5 rounded-2xl border border-slate-200 space-y-4">
+              <div className="flex items-center gap-2">
+                <span className="p-2 rounded-xl bg-blue-100 text-blue-800">
+                  <UserCheck className="w-4 h-4" />
+                </span>
+                <h3 className="font-bold text-slate-900 text-base">Candidate Photograph Standards</h3>
               </div>
-              <h3 className="font-bold text-slate-900 text-sm">Upload Photo or Signature</h3>
-              <p className="text-xs text-slate-700 leading-relaxed">
-                Click upload or drag-and-drop your original passport photo or paper signature snapshot.
+
+              <div className="space-y-2.5 text-xs">
+                <div className="flex items-start gap-2 text-slate-700">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <span><strong>Clean white or light background:</strong> The background must be completely plain with no patterns, outdoor scenery, or harsh wall shadows.</span>
+                </div>
+                <div className="flex items-start gap-2 text-slate-700">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <span><strong>70%–80% face coverage:</strong> Head should be centered from the top of the hair to the bottom of the chin within the 213×213 px canvas.</span>
+                </div>
+                <div className="flex items-start gap-2 text-slate-700">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <span><strong>Both ears visible:</strong> Keep head straight facing the lens with eyes open and neutral facial expression.</span>
+                </div>
+                <div className="flex items-start gap-2 text-rose-700">
+                  <XCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                  <span><strong>No sunglasses, caps, or side angles:</strong> Prescribed medical spectacles are allowed only with clear non-tinted lenses and zero flash glare.</span>
+                </div>
+                <div className="flex items-start gap-2 text-rose-700">
+                  <XCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                  <span><strong>No selfies with filters or tilted heads:</strong> Use a straight portrait shot taken in good daylight.</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Signature Rules */}
+            <div className="p-5 rounded-2xl border border-slate-200 space-y-4">
+              <div className="flex items-center gap-2">
+                <span className="p-2 rounded-xl bg-amber-100 text-amber-800">
+                  <Stamp className="w-4 h-4" />
+                </span>
+                <h3 className="font-bold text-slate-900 text-base">Candidate Signature Standards</h3>
+              </div>
+
+              <div className="space-y-2.5 text-xs">
+                <div className="flex items-start gap-2 text-slate-700">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <span><strong>Black or dark blue ballpoint pen:</strong> Sign on an unruled, clean sheet of pure white paper with steady pen strokes.</span>
+                </div>
+                <div className="flex items-start gap-2 text-slate-700">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <span><strong>Stay within 444 × 205 px boundaries:</strong> Ensure the signature fits inside the box without touching edges or getting truncated.</span>
+                </div>
+                <div className="flex items-start gap-2 text-slate-700">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <span><strong>Minor PAN (Under 18 Years):</strong> Parent or legal guardian must sign as Representative Assessee. Minor does not sign.</span>
+                </div>
+                <div className="flex items-start gap-2 text-rose-700">
+                  <XCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                  <span><strong>No pencils, light sketch pens, or gel pens:</strong> Ink that bleeds or smudges on paper results in rejected scans.</span>
+                </div>
+                <div className="flex items-start gap-2 text-rose-700">
+                  <XCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                  <span><strong>No ruled lines or stamps underneath:</strong> Never sign over ruled notebook lines, rubber stamps, or official seals.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Supporting Documents Checklist (Rule 114) */}
+        <section className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-9 shadow-sm space-y-6">
+          <div className="space-y-2">
+            <span className="text-xs font-black uppercase tracking-wider text-blue-600">
+              Income Tax Rule 114 Checklist
+            </span>
+            <h2 className="text-xl sm:text-2xl font-black text-slate-900">
+              Valid Supporting Documents for PAN Card Application
+            </h2>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              When applying via NSDL or UTIITSL, you must combine all 3 mandatory proofs into <strong>1 single PDF strictly under 300 KB</strong>. Here are the officially recognized documents:
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+              <div className="flex items-center gap-2">
+                <FileCheck className="w-4 h-4 text-blue-600" />
+                <h3 className="font-bold text-slate-900 text-sm">1. Proof of Identity (POI)</h3>
+              </div>
+              <ul className="space-y-1.5 text-xs text-slate-700 list-disc list-inside">
+                <li>Aadhaar Card (UIDAI)</li>
+                <li>Electoral Voter Photo ID Card</li>
+                <li>Valid Indian Passport</li>
+                <li>Driving License (State RTO)</li>
+                <li>Ration Card with photo</li>
+                <li>Arm&apos;s License</li>
+                <li>Central/State Govt Photo ID Card</li>
+              </ul>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+              <div className="flex items-center gap-2">
+                <FileCheck className="w-4 h-4 text-amber-600" />
+                <h3 className="font-bold text-slate-900 text-sm">2. Proof of Address (POA)</h3>
+              </div>
+              <ul className="space-y-1.5 text-xs text-slate-700 list-disc list-inside">
+                <li>Aadhaar Card (UIDAI)</li>
+                <li>Electricity Bill (&lt;3 months old)</li>
+                <li>Water / Piped Gas Bill (&lt;3 mo)</li>
+                <li>Bank Account Statement (&lt;3 mo)</li>
+                <li>Landline / Broadband Bill</li>
+                <li>Post Office Savings Passbook</li>
+                <li>Domicile Certificate issued by Govt</li>
+              </ul>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+              <div className="flex items-center gap-2">
+                <FileCheck className="w-4 h-4 text-emerald-600" />
+                <h3 className="font-bold text-slate-900 text-sm">3. Proof of Date of Birth (DOB)</h3>
+              </div>
+              <ul className="space-y-1.5 text-xs text-slate-700 list-disc list-inside">
+                <li>Aadhaar Card with full DOB</li>
+                <li>10th / Matriculation Mark Sheet</li>
+                <li>Birth Certificate (Municipal Corp)</li>
+                <li>Valid Indian Passport</li>
+                <li>Driving License</li>
+                <li>Pension Payment Order (PPO)</li>
+                <li>Domicile Certificate showing DOB</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 flex items-start gap-3 text-xs text-amber-900">
+            <Info className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+            <div>
+              <strong>Pro Tip for CSC &amp; Cyber Cafe VLEs:</strong> Aadhaar Card is officially accepted as all three proofs (POI, POA, and DOB) simultaneously. If the candidate has an updated Aadhaar card with full Date of Birth (DD/MM/YYYY), scanning the front and back of the Aadhaar card into 1 page and compressing it under 300 KB in our &quot;Supporting Docs&quot; tab is all you need for instant approval.
+            </div>
+          </div>
+        </section>
+
+        {/* Common Portal Error Troubleshooting */}
+        <section className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-9 shadow-sm space-y-6">
+          <div className="space-y-2">
+            <span className="text-xs font-black uppercase tracking-wider text-rose-600">
+              Troubleshooting Guide
+            </span>
+            <h2 className="text-xl sm:text-2xl font-black text-slate-900">
+              Fix Common NSDL &amp; UTIITSL Portal Upload Errors
+            </h2>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              If the government portal rejects your file, here is the exact reason and instant 1-click fix:
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+            <div className="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-1.5">
+              <div className="flex items-center gap-2 text-rose-700 font-bold">
+                <AlertTriangle className="w-4 h-4" />
+                <span>Error: &quot;Photo dimensions should be 213 × 213 pixels&quot;</span>
+              </div>
+              <p className="text-slate-600">
+                <strong>Why it happens:</strong> Your image was cropped to a generic square (e.g. 200×200 or 300×300).<br />
+                <strong>Fix:</strong> FileZenith automatically hard-locks pixel dimensions to exact 213×213 px. Simply upload and click Download.
               </p>
             </div>
 
-            <div className="bg-slate-50 rounded-xl p-5 border border-slate-200 space-y-2">
-              <div className="w-8 h-8 rounded-full bg-blue-600 text-white font-black text-sm flex items-center justify-center shadow-xs">
-                2
+            <div className="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-1.5">
+              <div className="flex items-center gap-2 text-rose-700 font-bold">
+                <AlertTriangle className="w-4 h-4" />
+                <span>Error: &quot;Image DPI is not equal to 300&quot;</span>
               </div>
-              <h3 className="font-bold text-slate-900 text-sm">Align Within Guides</h3>
-              <p className="text-xs text-slate-700 leading-relaxed">
-                Use the drag handle to position your face within the official oval guide and adjust the zoom slider.
+              <p className="text-slate-600">
+                <strong>Why it happens:</strong> Standard canvas editors save files at 72 DPI screen resolution.<br />
+                <strong>Fix:</strong> Our tool injects binary APP0 JFIF density headers into the JPEG structure, making the portal verify 300 DPI immediately.
               </p>
             </div>
 
-            <div className="bg-slate-50 rounded-xl p-5 border border-slate-200 space-y-2">
-              <div className="w-8 h-8 rounded-full bg-blue-600 text-white font-black text-sm flex items-center justify-center shadow-xs">
-                3
+            <div className="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-1.5">
+              <div className="flex items-center gap-2 text-rose-700 font-bold">
+                <AlertTriangle className="w-4 h-4" />
+                <span>Error: &quot;File size should be less than 50 KB&quot;</span>
               </div>
-              <h3 className="font-bold text-slate-900 text-sm">Clean Signature Paper</h3>
-              <p className="text-xs text-slate-700 leading-relaxed">
-                For signatures, keep Magic B&amp;W enabled to wipe away paper shadows and yellow room tint.
+              <p className="text-slate-600">
+                <strong>Why it happens:</strong> High-resolution phone camera photos export at 80–200 KB.<br />
+                <strong>Fix:</strong> FileZenith executes progressive binary search compression, locking photo size to ~38–45 KB and signature to ~20–25 KB.
               </p>
             </div>
 
-            <div className="bg-slate-50 rounded-xl p-5 border border-slate-200 space-y-2">
-              <div className="w-8 h-8 rounded-full bg-emerald-600 text-white font-black text-sm flex items-center justify-center shadow-xs">
-                4
+            <div className="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-1.5">
+              <div className="flex items-center gap-2 text-rose-700 font-bold">
+                <AlertTriangle className="w-4 h-4" />
+                <span>Error: &quot;Document PDF size should not exceed 300 KB&quot;</span>
               </div>
-              <h3 className="font-bold text-slate-900 text-sm">Download 300 DPI JPEG</h3>
-              <p className="text-xs text-slate-700 leading-relaxed">
-                Click download to receive your compliant image under 50 KB with 300 DPI embedded JFIF markers.
+              <p className="text-slate-600">
+                <strong>Why it happens:</strong> Scanner software scans multi-page documents at 300 DPI into 2MB to 5MB PDFs.<br />
+                <strong>Fix:</strong> Switch to our &quot;Supporting Docs&quot; tab and compress your Aadhaar PDF down under 280 KB while keeping all text razor-sharp.
               </p>
             </div>
           </div>
         </section>
 
         {/* Related CSC & Cyber Cafe Tools Hub */}
-        <section className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-6">
+        <section className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-9 shadow-sm space-y-6">
           <div className="space-y-1">
             <span className="text-xs font-black uppercase tracking-wider text-blue-600">
               CSC Center &amp; Cyber Cafe Suite
@@ -510,7 +798,7 @@ export default function PanCardPhotoResizerPage() {
             <h2 className="text-xl sm:text-2xl font-black text-slate-900">
               More Fast Tools for Document Verification &amp; Printing
             </h2>
-            <p className="text-sm text-slate-700">
+            <p className="text-sm text-slate-600 leading-relaxed">
               Essential in-browser utilities tailored for Indian cyber cafes, CSC VLEs, and sarkari applicants:
             </p>
           </div>
@@ -518,7 +806,7 @@ export default function PanCardPhotoResizerPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <Link
               href="/tools/aadhaar-card-print"
-              className="group p-4 rounded-xl border border-slate-200 hover:border-blue-500 bg-slate-50 hover:bg-white transition-all shadow-2xs hover:shadow-sm"
+              className="group p-4 rounded-2xl border border-slate-200 hover:border-blue-500 bg-slate-50 hover:bg-white transition-all shadow-2xs hover:shadow-sm"
             >
               <div className="flex items-center gap-2 mb-2">
                 <Printer className="w-4 h-4 text-blue-600" />
@@ -526,14 +814,14 @@ export default function PanCardPhotoResizerPage() {
                   Aadhaar Card Print Tool
                 </h3>
               </div>
-              <p className="text-xs text-slate-700 leading-relaxed">
+              <p className="text-xs text-slate-600 leading-relaxed">
                 Print e-Aadhaar on PVC card (85.6×54 mm) or multi-copy A4 sheet with zero upload.
               </p>
             </Link>
 
             <Link
               href="/tools/signature-resizer-10-to-20kb"
-              className="group p-4 rounded-xl border border-slate-200 hover:border-blue-500 bg-slate-50 hover:bg-white transition-all shadow-2xs hover:shadow-sm"
+              className="group p-4 rounded-2xl border border-slate-200 hover:border-blue-500 bg-slate-50 hover:bg-white transition-all shadow-2xs hover:shadow-sm"
             >
               <div className="flex items-center gap-2 mb-2">
                 <Stamp className="w-4 h-4 text-amber-600" />
@@ -541,14 +829,14 @@ export default function PanCardPhotoResizerPage() {
                   Signature Resizer (10–20KB)
                 </h3>
               </div>
-              <p className="text-xs text-slate-700 leading-relaxed">
+              <p className="text-xs text-slate-600 leading-relaxed">
                 Clean and format signatures for SSC, UPSC OTR, and IBPS recruitment portals.
               </p>
             </Link>
 
             <Link
               href="/pdf/combine-marksheets"
-              className="group p-4 rounded-xl border border-slate-200 hover:border-blue-500 bg-slate-50 hover:bg-white transition-all shadow-2xs hover:shadow-sm"
+              className="group p-4 rounded-2xl border border-slate-200 hover:border-blue-500 bg-slate-50 hover:bg-white transition-all shadow-2xs hover:shadow-sm"
             >
               <div className="flex items-center gap-2 mb-2">
                 <Layers className="w-4 h-4 text-emerald-600" />
@@ -556,14 +844,14 @@ export default function PanCardPhotoResizerPage() {
                   Combine Marksheets (&lt;500KB)
                 </h3>
               </div>
-              <p className="text-xs text-slate-700 leading-relaxed">
+              <p className="text-xs text-slate-600 leading-relaxed">
                 Merge 10th and 12th marksheets into 1 clean A4 PDF strictly under 500 KB.
               </p>
             </Link>
 
             <Link
               href="/csc-cyber-cafe-tools"
-              className="group p-4 rounded-xl border border-amber-300 hover:border-amber-500 bg-amber-50/60 hover:bg-amber-50 transition-all shadow-2xs hover:shadow-sm"
+              className="group p-4 rounded-2xl border border-amber-300 hover:border-amber-500 bg-amber-50/60 hover:bg-amber-50 transition-all shadow-2xs hover:shadow-sm"
             >
               <div className="flex items-center gap-2 mb-2">
                 <Sparkles className="w-4 h-4 text-amber-700" />
@@ -579,27 +867,29 @@ export default function PanCardPhotoResizerPage() {
         </section>
 
         {/* Deep Dive FAQ Accordion */}
-        <section className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-6">
+        <section className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-9 shadow-sm space-y-6">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <HelpCircle className="w-5 h-5 text-blue-600" />
+              <span className="p-2 rounded-xl bg-blue-50 text-blue-700">
+                <HelpCircle className="w-5 h-5" />
+              </span>
               <h2 className="text-xl sm:text-2xl font-black text-slate-900">
                 Frequently Asked Questions (PAN Card Photo &amp; Signature Resizing)
               </h2>
             </div>
-            <p className="text-sm text-slate-700">
-              Clear answers to the most common issues faced during PAN card online application on NSDL and UTIITSL:
+            <p className="text-sm text-slate-600 leading-relaxed">
+              Clear answers to the most common issues faced during PAN card online applications on NSDL and UTIITSL:
             </p>
           </div>
 
           <div className="divide-y divide-slate-200">
             {OFFICIAL_FAQS.map((faq, idx) => (
               <details key={idx} className="group py-4 cursor-pointer">
-                <summary className="flex items-center justify-between font-bold text-slate-900 text-base group-hover:text-blue-600 transition-colors list-none">
+                <summary className="flex items-center justify-between font-bold text-slate-900 text-sm sm:text-base group-hover:text-blue-600 transition-colors list-none">
                   <span>{faq.question}</span>
                   <ChevronRight className="w-4 h-4 text-slate-500 group-open:rotate-90 transition-transform shrink-0 ml-4" />
                 </summary>
-                <p className="mt-3 text-sm text-slate-700 leading-relaxed pr-6">
+                <p className="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed pr-6">
                   {faq.answer}
                 </p>
               </details>
