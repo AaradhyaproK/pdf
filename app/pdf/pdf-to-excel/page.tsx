@@ -506,33 +506,33 @@ export default function PdfToExcelPage() {
 
             {/* Live Spreadsheet Preview */}
             {result && currentPreviewSheetData && (
-              <div className="p-5 sm:p-7 rounded-3xl bg-white border border-slate-200/90 shadow-xl space-y-4">
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
-                  <div className="space-y-1">
+              <div className="p-4 sm:p-6 lg:p-7 rounded-3xl bg-white border border-slate-200/90 shadow-xl space-y-4 overflow-hidden">
+                <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+                  <div className="space-y-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="p-1 rounded-lg bg-emerald-100 text-emerald-800">
+                      <span className="p-1 rounded-lg bg-emerald-100 text-emerald-800 shrink-0">
                         <Eye className="w-4 h-4" />
                       </span>
-                      <h3 className="text-base font-black text-slate-900">
+                      <h3 className="text-base font-black text-slate-900 tracking-tight">
                         Extracted Spreadsheet Preview
                       </h3>
-                      <span className="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-0.5 rounded-full font-bold">
+                      <span className="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-0.5 rounded-full font-bold whitespace-nowrap">
                         {result.totalRows} Rows Detected
                       </span>
-                      <span className="text-xs bg-indigo-50 text-indigo-700 border border-indigo-200 px-2.5 py-0.5 rounded-full font-bold">
+                      <span className="text-xs bg-indigo-50 text-indigo-700 border border-indigo-200 px-2.5 py-0.5 rounded-full font-bold whitespace-nowrap">
                         {result.totalCols} Columns
                       </span>
                     </div>
-                    <p className="text-xs text-slate-500 font-medium">
+                    <p className="text-xs text-slate-500 font-medium leading-relaxed">
                       Review extracted rows below or click Copy Table to paste directly into your existing spreadsheet.
                     </p>
                   </div>
 
-                  <div className="flex items-center gap-2 w-full sm:w-auto">
+                  <div className="flex items-center gap-2 shrink-0 w-full sm:w-auto sm:self-end xl:self-center">
                     <button
                       type="button"
                       onClick={handleCopyTable}
-                      className="flex-1 sm:flex-none py-2 px-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer"
+                      className="flex-1 sm:flex-initial py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer whitespace-nowrap shadow-2xs active:scale-95"
                     >
                       {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-slate-600" />}
                       <span>{copied ? 'Copied Table!' : 'Copy to Clipboard'}</span>
@@ -540,7 +540,7 @@ export default function PdfToExcelPage() {
                     <button
                       type="button"
                       onClick={() => triggerBrowserDownload(result.blob, result.fileName)}
-                      className="flex-1 sm:flex-none py-2 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black flex items-center justify-center gap-1.5 shadow-sm transition-all cursor-pointer"
+                      className="flex-1 sm:flex-initial py-2.5 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black flex items-center justify-center gap-1.5 shadow-sm transition-all cursor-pointer whitespace-nowrap active:scale-95"
                     >
                       <Download className="w-3.5 h-3.5" />
                       <span>Download {exportFormat.toUpperCase()}</span>
