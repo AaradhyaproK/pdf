@@ -15,7 +15,12 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/admin/', '/api/'],
       },
       {
-        userAgent: ['Bytespider', 'PetalBot', 'Amazonbot', 'ClaudeBot', 'GPTBot', 'CCBot'],
+        userAgent: ['GPTBot', 'ClaudeBot', 'PerplexityBot'],
+        allow: ['/llms.txt', '/llms-full.txt', '/llm.txt'],
+        disallow: ['/admin/', '/api/'],
+      },
+      {
+        userAgent: ['Bytespider', 'PetalBot', 'Amazonbot', 'CCBot'],
         disallow: '/',
       },
       {
