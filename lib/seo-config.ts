@@ -2008,36 +2008,32 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/tools/aadhaar-card-print': {
     slug: '/tools/aadhaar-card-print',
-    title: 'Aadhaar Card Print Tool (e-Aadhaar to A4 & PVC Card)',
-    metaTitle: 'Aadhaar Card Print Tool Online (A4 & PVC Ready) | FileZenith',
-    description: 'Crop and print e-Aadhaar PDF or scanned card on A4 paper and PVC card (exact 85.6x54 mm). 100% private in-browser password decryption, zero server uploads, 1-click print-ready A4 PDF for cyber cafes.',
+    title: 'e-Aadhaar PDF Cropper & Wallet Card Resizer (85.6x54 mm)',
+    metaTitle: 'e-Aadhaar PDF Cropper & Wallet Size Resizer (85.6x54 mm) | FileZenith',
+    description: 'Crop and format your official e-Aadhaar PDF into standard pocket wallet card size (85.6x54 mm) on A4 sheet. 100% private in-browser document cropping with zero server upload.',
     keywords: [
-      'aadhaar card print tool',
-      'eaadhaar to pvc card print',
-      'aadhaar card crop and print a4',
-      'aadhaar card print online',
+      'eaadhaar pdf cropper',
+      'aadhaar card crop to wallet size',
       'aadhaar card exact size 85.6x54 mm',
-      'print eaadhaar pdf without password',
-      'aadhaar card print action file photoshop alternative',
-      'print aadhaar card front and back on single page',
+      'crop eaadhaar front and back on a4',
+      'eaadhaar card formatting tool',
+      'print eaadhaar pdf layout a4',
       'aadhaar card lamination size 65x95',
       'eaadhaar pdf password format',
-      'aadhaar card a4 size print cyber cafe',
-      'print pvc aadhaar card at home',
-      'sarkari aadhaar card print tool',
-      'crop aadhaar card front and back online'
+      'crop aadhaar card front and back online',
+      'eaadhaar to a4 sheet layout tool',
+      'aadhaar card size in cm for print'
     ],
     category: 'utility',
     howToSteps: [
-      { title: 'Upload e-Aadhaar PDF or Images', text: 'Select your downloaded e-Aadhaar PDF or upload front and back photo scans.' },
+      { title: 'Select e-Aadhaar PDF or Image', text: 'Choose your downloaded official e-Aadhaar PDF or front and back scans locally.' },
       { title: 'Enter Password if Protected', text: 'First 4 letters of name in CAPITAL + 4-digit birth year (e.g. ANIL1995).' },
-      { title: 'Select Layout & Print', text: 'Choose A4 Sheet or PVC card size, then click Print Now or Download Print-Ready PDF.' }
+      { title: 'Format & Download PDF Layout', text: 'Select A4 Sheet or wallet pocket size, then download or print your formatted document.' }
     ],
     faqs: [
       { question: 'What is the password for e-Aadhaar PDF?', answer: 'The password is the first 4 letters of your name in capital letters followed by your birth year YYYY (e.g. SURE1990).' },
-      { question: 'What is the exact physical card size of Aadhaar?', answer: 'The standard card matches ISO/IEC 7810 ID-1 standard: exactly 85.60 mm x 53.98 mm (3.37 in x 2.125 in).' },
-      { question: 'Is my Aadhaar card uploaded to any server?', answer: 'No! All processing runs 100% locally inside your browser using HTML5 Canvas. Zero data is sent to any server.' },
-      { question: 'How do cyber cafes print 5 copies of Aadhaar on one A4 sheet?', answer: 'Choose "5 Copies (Cyber Cafe Batch Sheet)" layout to print 5 duplicate cards on a single A4 photo sheet to save paper and lamination cost.' },
+      { question: 'What is the standard physical size of a wallet card?', answer: 'The standard card matches ISO/IEC 7810 ID-1 standard: exactly 85.60 mm x 53.98 mm (3.37 in x 2.125 in).' },
+      { question: 'Is my Aadhaar document uploaded to any server?', answer: 'No! All processing runs 100% locally inside your browser using HTML5 Canvas. Zero data is sent to any server.' },
       { question: 'Why should I print at 100% scale instead of Fit to Page?', answer: 'Printing at 100% scale preserves the exact 85.60 mm x 53.98 mm physical size required for standard 65x95 mm lamination film pouches.' }
     ]
   },

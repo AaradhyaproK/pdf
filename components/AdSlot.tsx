@@ -53,7 +53,7 @@ export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
       (slotType === 'sticky-sidebar' && !!config.customSidebarCode) ||
       (slotType === 'post-download' && !!config.customPostDownloadCode));
 
-  const hasValidAdSenseSlot = config.adProvider === 'adsense' && !!config.publisherId;
+  const hasValidAdSenseSlot = config.adProvider === 'adsense' && !!config.publisherId && !!clientAdId;
 
   useEffect(() => {
     trackAdImpression(slotType);

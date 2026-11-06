@@ -23,36 +23,29 @@ import {
 import { TOOL_DEEP_DIVES } from '@/lib/tool-deep-dives';
 
 export const metadata: Metadata = {
-  title: 'Aadhaar Card Print Tool Online (e-Aadhaar to A4 & PVC Card) | FileZenith',
+  title: 'e-Aadhaar PDF Cropper & Wallet Card Resizer (85.6x54 mm) | FileZenith',
   description:
-    'Crop and print e-Aadhaar PDF or scanned card on A4 paper and PVC card (exact 85.6x54 mm). 100% private in-browser decryption, zero server uploads, 1-click print-ready PDF for cyber cafes.',
+    'Crop and format your official e-Aadhaar PDF into standard pocket wallet card size (85.6x54 mm) on A4 sheet. 100% private in-browser document cropping with zero server upload.',
   keywords: [
-    'aadhaar card print tool',
-    'eaadhaar to pvc card print',
-    'aadhaar card crop and print a4',
-    'aadhaar card print online',
+    'eaadhaar pdf cropper',
+    'aadhaar card crop to wallet size',
     'aadhaar card exact size 85.6x54 mm',
-    'print eaadhaar pdf without password',
-    'aadhaar card print action file photoshop alternative',
-    'print aadhaar card front and back on single page',
+    'crop eaadhaar front and back on a4',
+    'eaadhaar card formatting tool',
+    'print eaadhaar pdf layout a4',
     'aadhaar card lamination size 65x95',
     'eaadhaar pdf password format',
-    'aadhaar card a4 size print cyber cafe',
-    'print pvc aadhaar card at home',
-    'sarkari aadhaar card print tool',
     'crop aadhaar card front and back online',
-    'print 5 copies of aadhaar card on a4 paper',
-    'eaadhaar to a4 sheet instant print',
-    'aadhaar card size in cm for print',
-    'uidai eaadhaar print ready pdf'
+    'eaadhaar to a4 sheet layout tool',
+    'aadhaar card size in cm for print'
   ],
   alternates: {
     canonical: 'https://www.filezenith.com/tools/aadhaar-card-print',
   },
   openGraph: {
-    title: 'Aadhaar Card Print Tool Online (e-Aadhaar to A4 & PVC Card) | FileZenith',
+    title: 'e-Aadhaar PDF Cropper & Wallet Card Resizer (85.6x54 mm) | FileZenith',
     description:
-      'Crop and print e-Aadhaar PDF or scanned card on A4 paper and PVC card. 100% private in-browser decryption, zero server uploads.',
+      'Crop and format your official e-Aadhaar PDF into standard pocket wallet size on A4 sheet. 100% private in-browser document processing.',
     url: 'https://www.filezenith.com/tools/aadhaar-card-print',
     siteName: 'FileZenith',
     type: 'website',

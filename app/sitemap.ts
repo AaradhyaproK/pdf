@@ -40,6 +40,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/contact',
     '/csc-cyber-cafe-tools',
     '/download-app',
+    '/editorial-policy',
+    '/affiliate-disclosure',
     '/privacy',
     '/security',
     '/studio',
