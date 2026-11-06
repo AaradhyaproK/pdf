@@ -5,7 +5,7 @@ import { ToolLayout } from '@/components/ToolLayout';
 import {
   Play,
   Pause,
-  StopCircle,
+  Square,
   Volume2,
   VolumeX,
   Download,
@@ -13,7 +13,6 @@ import {
   Activity,
   FileText,
   Sparkles,
-  Mic,
   Radio,
   Sliders,
   Globe,
@@ -26,14 +25,22 @@ import {
   Music2,
   Trash2,
   Copy,
-  HelpCircle
+  HelpCircle,
+  Video,
+  Smartphone,
+  Mic,
+  Wind,
+  BookOpen,
+  Briefcase,
+  ShieldCheck,
+  Check
 } from 'lucide-react';
 import { toast } from 'sonner';
 import confetti from 'canvas-confetti';
 
 interface PresetScript {
   id: string;
-  emoji: string;
+  icon: React.ElementType;
   title: string;
   badge: string;
   rate: number;
@@ -44,25 +51,25 @@ interface PresetScript {
 const PRESETS: PresetScript[] = [
   {
     id: 'youtube',
-    emoji: '🎬',
+    icon: Video,
     title: 'YouTube Intro',
-    badge: 'High Engagement',
+    badge: 'High Retention',
     rate: 1.05,
     pitch: 1.0,
     text: "Welcome back to the channel! In today's video, we are breaking down the exact step-by-step blueprint to scale your digital presence from zero to full-time income in 2026. Make sure to hit subscribe, ring the bell, and let's dive right in!"
   },
   {
     id: 'reels',
-    emoji: '📱',
-    title: 'TikTok / Reels Hook',
-    badge: 'Viral Retention',
+    icon: Smartphone,
+    title: 'Shorts & Reels Hook',
+    badge: 'Viral Pacing',
     rate: 1.15,
     pitch: 1.05,
     text: "Stop scrolling! If you are still doing this manually in 2026, here is the secret high-speed workflow top digital creators use to automate their entire production in under sixty seconds."
   },
   {
     id: 'podcast',
-    emoji: '🎙️',
+    icon: Mic,
     title: 'Podcast Narration',
     badge: 'Conversational',
     rate: 1.0,
@@ -71,16 +78,16 @@ const PRESETS: PresetScript[] = [
   },
   {
     id: 'meditation',
-    emoji: '🧘',
+    icon: Wind,
     title: 'Meditation & Calm',
-    badge: 'Deep Relaxation',
+    badge: 'Relaxation',
     rate: 0.8,
     pitch: 0.9,
     text: "Take a slow, deep breath in through your nose... hold it for three gentle seconds... and slowly exhale through your mouth. Let go of all tension and allow your mind to settle peacefully in this present moment."
   },
   {
     id: 'audiobook',
-    emoji: '📚',
+    icon: BookOpen,
     title: 'Audiobook Chapter',
     badge: 'Storytelling',
     rate: 0.95,
@@ -89,7 +96,7 @@ const PRESETS: PresetScript[] = [
   },
   {
     id: 'business',
-    emoji: '💼',
+    icon: Briefcase,
     title: 'Executive Briefing',
     badge: 'Professional',
     rate: 1.0,
@@ -125,7 +132,7 @@ function audioBufferToWav(buffer: AudioBuffer): Blob {
 
   // Format chunk
   writeString(12, 'fmt ');
-  view.setUint32(16, 16, true); // 16 for PCM
+  view.setUint32(16, 16, true);
   view.setUint16(20, format, true);
   view.setUint16(22, numChannels, true);
   view.setUint32(24, sampleRate, true);
@@ -184,7 +191,7 @@ export default function TextToSpeechPage() {
   const [isRecording, setIsRecording] = useState<boolean>(false);
   const [recordingDuration, setRecordingDuration] = useState<number>(0);
   const [showRecordModal, setShowRecordModal] = useState<boolean>(false);
-  const [, setIsProcessingAudio] = useState<boolean>(false);
+  const [isProcessingAudio, setIsProcessingAudio] = useState<boolean>(false);
   const [recordedWavUrl, setRecordedWavUrl] = useState<string | null>(null);
   const [recordedWebmUrl, setRecordedWebmUrl] = useState<string | null>(null);
   const [recordedAudioSize, setRecordedAudioSize] = useState<string>('');
@@ -248,7 +255,6 @@ export default function TextToSpeechPage() {
   // Filtered voice list
   const filteredVoices = useMemo(() => {
     return voices.filter((voice) => {
-      // Language filter
       const lang = voice.lang.toLowerCase();
       let matchesLang = true;
       if (languageFilter === 'en-us') {
@@ -265,7 +271,6 @@ export default function TextToSpeechPage() {
         matchesLang = !lang.startsWith('en') && !lang.startsWith('es') && !lang.includes('-in') && !lang.startsWith('hi');
       }
 
-      // Search query filter
       let matchesSearch = true;
       if (searchVoiceQuery.trim()) {
         const q = searchVoiceQuery.toLowerCase();
@@ -281,7 +286,6 @@ export default function TextToSpeechPage() {
     const trimmed = text.trim();
     const words = trimmed ? trimmed.split(/\s+/).length : 0;
     const chars = text.length;
-    // Average speech speed ~ 140 words per minute at 1.0x rate
     const estimatedSeconds = words > 0 ? Math.ceil((words / (140 * rate)) * 60) : 0;
     const mins = Math.floor(estimatedSeconds / 60);
     const secs = estimatedSeconds % 60;
@@ -303,7 +307,6 @@ export default function TextToSpeechPage() {
       }
     }
 
-    // Cancel any previous voice queue
     synthRef.current.cancel();
 
     const utterance = new SpeechSynthesisUtterance(text);
@@ -391,7 +394,6 @@ export default function TextToSpeechPage() {
     setCharIndex(0);
     setCharLength(0);
 
-    // Stop recording if active
     if (isRecording) {
       stopRecordingSession();
     }
@@ -403,7 +405,7 @@ export default function TextToSpeechPage() {
     synthRef.current.cancel();
 
     const voice = voices.find((v) => v.name === selectedVoice);
-    const sampleText = `Hello! This is ${voice?.name || 'your chosen voice'} ready to narrate for you.`;
+    const sampleText = `Hello! This is ${voice?.name || 'your selected voice'} ready to speak your text.`;
     const utterance = new SpeechSynthesisUtterance(sampleText);
     if (voice) utterance.voice = voice;
     utterance.rate = rate;
@@ -423,7 +425,7 @@ export default function TextToSpeechPage() {
     setText(preset.text);
     setRate(preset.rate);
     setPitch(preset.pitch);
-    toast.success(`Loaded "${preset.title}" preset template!`);
+    toast.success(`Loaded "${preset.title}" template.`);
   };
 
   // Audio Recording Flow: Captures pristine tab audio while TTS plays and renders WAV / WebM
@@ -441,7 +443,6 @@ export default function TextToSpeechPage() {
     }
 
     try {
-      // Prompt user to pick this tab with audio enabled
       const stream = await navigator.mediaDevices.getDisplayMedia({
         video: true,
         audio: {
@@ -453,9 +454,8 @@ export default function TextToSpeechPage() {
 
       const audioTracks = stream.getAudioTracks();
       if (audioTracks.length === 0) {
-        // User forgot to check 'Share tab audio'
         stream.getTracks().forEach((track) => track.stop());
-        toast.error('No audio track detected! Please make sure "Share tab audio" is checked in the browser prompt.', {
+        toast.error('No audio track selected! Please ensure "Share tab audio" is enabled in the browser dialog.', {
           duration: 6000
         });
         return;
@@ -464,7 +464,6 @@ export default function TextToSpeechPage() {
       mediaStreamRef.current = stream;
       recordedChunksRef.current = [];
 
-      // Create audio-only media recorder
       const audioStream = new MediaStream(audioTracks);
       const mimeType = MediaRecorder.isTypeSupported('audio/webm;codecs=opus')
         ? 'audio/webm;codecs=opus'
@@ -498,20 +497,23 @@ export default function TextToSpeechPage() {
             const wavUrl = URL.createObjectURL(wavBlob);
             setRecordedWavUrl(wavUrl);
 
-            // Format size
             const sizeKb = (wavBlob.size / 1024).toFixed(1);
             setRecordedAudioSize(`${sizeKb} KB (WAV)`);
+
+            // Automatic download trigger
+            triggerDownload(wavUrl, 'wav');
           } catch (wavErr) {
             console.warn('WAV conversion fallback to WebM:', wavErr);
             setRecordedWavUrl(webmUrl);
             const sizeKb = (rawBlob.size / 1024).toFixed(1);
             setRecordedAudioSize(`${sizeKb} KB (WebM)`);
+            triggerDownload(webmUrl, 'webm');
           }
 
-          toast.success('Audio recording complete! Ready for download.');
+          toast.success('Audio generated and downloaded successfully!');
           confetti({
-            particleCount: 60,
-            spread: 70,
+            particleCount: 50,
+            spread: 60,
             origin: { y: 0.7 }
           });
         } catch (err) {
@@ -519,7 +521,6 @@ export default function TextToSpeechPage() {
           toast.error('Failed to process recorded audio.');
         } finally {
           setIsProcessingAudio(false);
-          // Stop stream tracks
           if (mediaStreamRef.current) {
             mediaStreamRef.current.getTracks().forEach((track) => track.stop());
             mediaStreamRef.current = null;
@@ -527,17 +528,14 @@ export default function TextToSpeechPage() {
         }
       };
 
-      // Start recording
       recorder.start(100);
       setIsRecording(true);
       setRecordingDuration(0);
 
-      // Start duration ticker
       recordTimerRef.current = setInterval(() => {
         setRecordingDuration((prev) => prev + 1);
       }, 1000);
 
-      // Handle user stopping stream from browser UI bar
       stream.getVideoTracks()[0]?.addEventListener('ended', () => {
         stopRecordingSession();
       });
@@ -573,10 +571,9 @@ export default function TextToSpeechPage() {
           setIsPaused(false);
           setCharIndex(0);
           setCharLength(0);
-          // Automatically finish recording after 0.5s padding
           setTimeout(() => {
             stopRecordingSession();
-          }, 500);
+          }, 400);
         };
 
         utterance.onerror = () => {
@@ -591,7 +588,7 @@ export default function TextToSpeechPage() {
     } catch (err) {
       console.error('Recording initialization error:', err);
       setIsRecording(false);
-      toast.info('Recording cancelled or screen share declined.');
+      toast.info('Recording cancelled.');
     }
   };
 
@@ -599,23 +596,17 @@ export default function TextToSpeechPage() {
   const triggerDownload = (url: string, extension: string) => {
     const a = document.createElement('a');
     a.href = url;
-    const cleanName = text.slice(0, 20).replace(/[^a-zA-Z0-9]/g, '_') || 'filezenith_tts';
+    const cleanName = text.slice(0, 24).replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() || 'speech_audio';
     a.download = `${cleanName}.${extension}`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    confetti({
-      particleCount: 50,
-      spread: 60,
-      origin: { y: 0.8 }
-    });
-    toast.success(`Downloaded ${extension.toUpperCase()} audio file!`);
   };
 
   // Copy text to clipboard
   const copyText = () => {
     navigator.clipboard.writeText(text);
-    toast.success('Script copied to clipboard!');
+    toast.success('Script copied to clipboard.');
   };
 
   // Format recording seconds
@@ -637,22 +628,22 @@ export default function TextToSpeechPage() {
     const after = text.slice(charIndex + (charLength || 6));
 
     return (
-      <div className="absolute inset-0 p-6 overflow-y-auto bg-slate-900/95 text-slate-100 text-lg leading-relaxed rounded-2xl select-none z-10 backdrop-blur-md">
-        <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-700/60">
-          <div className="flex items-center gap-2 text-indigo-400 font-semibold text-sm">
-            <Radio className="w-4 h-4 animate-pulse text-rose-400" />
-            <span>Live Prompter Tracking</span>
+      <div className="absolute inset-0 p-5 overflow-y-auto bg-slate-900/95 text-slate-100 text-base leading-relaxed rounded-2xl select-none z-10 backdrop-blur-md">
+        <div className="flex items-center justify-between pb-2.5 mb-3 border-b border-slate-700/60">
+          <div className="flex items-center gap-2 text-indigo-400 font-semibold text-xs">
+            <Radio className="w-3.5 h-3.5 animate-pulse text-rose-400" />
+            <span>Prompter Tracking</span>
           </div>
           <button
             onClick={() => setPrompterMode(false)}
-            className="text-xs text-slate-400 hover:text-white px-2.5 py-1 rounded-lg bg-slate-800 transition-colors"
+            className="text-xs text-slate-400 hover:text-white px-2 py-0.5 rounded-lg bg-slate-800 transition-colors"
           >
-            Switch to Editor View
+            Editor View
           </button>
         </div>
         <p className="font-normal text-slate-300">
           <span>{before}</span>
-          <span className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold px-2 py-1 rounded-md shadow-lg shadow-indigo-500/40 inline-block scale-105 mx-0.5 transition-all">
+          <span className="bg-indigo-600 text-white font-bold px-1.5 py-0.5 rounded shadow inline-block mx-0.5">
             {active}
           </span>
           <span>{after}</span>
@@ -664,107 +655,123 @@ export default function TextToSpeechPage() {
   return (
     <ToolLayout
       slug="/utility/text-to-speech"
-      title="Free AI Text to Speech Generator with Audio Download"
-      subtitle="Convert text to ultra-natural human voices with studio audio download (WAV/WebM). Zero character caps, 100+ global accents, live karaoke word highlighting, and speed tuning for YouTube, Reels & podcasts."
-      badgeText="Direct Audio Download"
+      title="Free Text to Speech Online with Audio Download"
+      subtitle="Convert text to natural human speech with direct audio export (WAV/WebM). Zero character caps, global voice accents, teleprompter tracking, and speed modulation."
+      badgeText="Audio Download"
     >
-      <div className="max-w-6xl mx-auto space-y-8">
-        {/* Creator Template Bar */}
-        <div className="bg-gradient-to-r from-indigo-900 via-slate-900 to-purple-900 rounded-3xl p-6 text-white shadow-xl border border-indigo-800/40">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2.5 bg-indigo-500/20 border border-indigo-400/30 rounded-2xl text-indigo-300">
-                <Sparkles className="w-5 h-5" />
-              </div>
-              <div>
-                <h2 className="font-bold text-lg text-white">Creator Quick-Start Presets</h2>
-                <p className="text-xs text-slate-300">1-click scripts with calibrated reading speeds for viral retention</p>
-              </div>
+      <div className="max-w-6xl mx-auto space-y-6">
+        {/* Clean Quick-Start Templates Bar (No Emojis, No Heavy Dark Box) */}
+        <div className="bg-white rounded-2xl border border-slate-200/90 p-4 sm:p-5 shadow-sm">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2 text-slate-800 font-bold text-sm">
+              <Sparkles className="w-4 h-4 text-indigo-600" />
+              <span>Voiceover Script Presets</span>
             </div>
-            <span className="text-xs font-semibold px-3 py-1 bg-white/10 rounded-full text-indigo-200 border border-white/10">
-              6 Pre-tuned Templates
-            </span>
+            <span className="text-xs text-slate-500 font-medium">Click to load script with calibrated speed</span>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5">
-            {PRESETS.map((p) => (
-              <button
-                key={p.id}
-                onClick={() => applyPreset(p)}
-                className="group flex flex-col items-start p-3 rounded-2xl bg-white/5 hover:bg-white/15 border border-white/10 hover:border-indigo-400/50 transition-all text-left active:scale-95"
-              >
-                <div className="flex items-center justify-between w-full mb-1.5">
-                  <span className="text-xl">{p.emoji}</span>
-                  <span className="text-[10px] font-bold text-indigo-300 bg-indigo-500/20 px-1.5 py-0.5 rounded">
-                    {p.rate}x
-                  </span>
-                </div>
-                <div className="font-bold text-xs text-white group-hover:text-indigo-300 transition-colors line-clamp-1">
-                  {p.title}
-                </div>
-                <div className="text-[10px] text-slate-400 line-clamp-1">{p.badge}</div>
-              </button>
-            ))}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+            {PRESETS.map((p) => {
+              const IconComp = p.icon;
+              return (
+                <button
+                  key={p.id}
+                  onClick={() => applyPreset(p)}
+                  className="flex flex-col items-start p-3 rounded-xl border border-slate-200/80 bg-slate-50/60 hover:bg-indigo-50/50 hover:border-indigo-300 transition-all text-left group"
+                >
+                  <div className="flex items-center justify-between w-full mb-1">
+                    <span className="p-1 rounded-md bg-white border border-slate-200 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                      <IconComp className="w-3.5 h-3.5" />
+                    </span>
+                    <span className="text-[10px] font-bold text-slate-600 bg-white border border-slate-200 px-1.5 py-0.5 rounded">
+                      {p.rate}x
+                    </span>
+                  </div>
+                  <div className="font-bold text-xs text-slate-800 group-hover:text-indigo-600 transition-colors line-clamp-1">
+                    {p.title}
+                  </div>
+                  <div className="text-[10px] text-slate-500 line-clamp-1">{p.badge}</div>
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {/* Main Studio Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        {/* Studio Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Left Column: Script Editor & Controls (7 Cols) */}
-          <div className="lg:col-span-7 flex flex-col gap-6">
-            <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
-              {/* Editor Header with Metrics */}
-              <div className="p-4 bg-slate-50 border-b border-slate-100 flex flex-wrap items-center justify-between gap-3">
+          <div className="lg:col-span-7 flex flex-col gap-4">
+            <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden flex flex-col">
+              {/* Editor Top Bar with Metrics & Tools */}
+              <div className="p-3 sm:p-4 bg-slate-50 border-b border-slate-200/80 flex flex-wrap items-center justify-between gap-2.5">
                 <div className="flex items-center gap-2">
                   <FileText className="w-4 h-4 text-indigo-600" />
                   <span className="font-bold text-slate-800 text-sm">Script Editor</span>
                 </div>
 
-                <div className="flex items-center gap-3 text-xs font-medium text-slate-500">
-                  <span className="bg-white px-2.5 py-1 rounded-lg border border-slate-200 font-semibold text-slate-700">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-semibold text-slate-600 bg-white border border-slate-200 px-2 py-1 rounded-lg">
                     {metrics.words} Words
                   </span>
-                  <span className="bg-white px-2.5 py-1 rounded-lg border border-slate-200 text-slate-600">
+                  <span className="text-xs text-slate-500 bg-white border border-slate-200 px-2 py-1 rounded-lg hidden sm:inline">
                     {metrics.chars} Chars
                   </span>
-                  <span className="bg-indigo-50 px-2.5 py-1 rounded-lg border border-indigo-100 text-indigo-700 font-bold flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5" />
+                  <span className="text-xs font-semibold text-indigo-700 bg-indigo-50 border border-indigo-100 px-2 py-1 rounded-lg flex items-center gap-1">
+                    <Clock className="w-3 h-3" />
                     ~{metrics.durationFormatted}
                   </span>
+
+                  <div className="h-4 w-[1px] bg-slate-300 mx-1 hidden sm:block" />
+
+                  <button
+                    onClick={() => setText('')}
+                    className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors text-xs flex items-center gap-1"
+                    title="Clear text"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                    <span className="hidden sm:inline">Clear</span>
+                  </button>
+                  <button
+                    onClick={copyText}
+                    className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-200 rounded-lg transition-colors text-xs flex items-center gap-1"
+                    title="Copy text"
+                  >
+                    <Copy className="w-3.5 h-3.5" />
+                    <span className="hidden sm:inline">Copy</span>
+                  </button>
                 </div>
               </div>
 
-              {/* Text Area with Live Highlighting Overlay */}
-              <div className="relative flex-1 min-h-[380px]">
+              {/* Textarea Area */}
+              <div className="relative flex-1 min-h-[260px] sm:min-h-[290px]">
                 {prompterMode && renderHighlightedScript()}
 
                 <textarea
                   value={text}
                   onChange={(e) => setText(e.target.value)}
-                  placeholder="Type or paste your script here... Zero character limits! Create audio for YouTube Shorts, Reels, audiobooks, presentations, or study notes."
-                  className="w-full h-full min-h-[380px] p-6 focus:outline-none resize-none text-slate-800 text-lg leading-relaxed placeholder:text-slate-300 font-normal bg-transparent"
+                  placeholder="Type or paste your text here... Zero character caps. Perfect for video voiceovers, audiobooks, presentations, and language learning."
+                  className="w-full h-full min-h-[260px] sm:min-h-[290px] p-5 focus:outline-none resize-none text-slate-800 text-base leading-relaxed placeholder:text-slate-300 font-normal bg-transparent"
                 />
               </div>
 
-              {/* Animated Sound Waveform (Active during speech/recording) */}
+              {/* Animated Equalizer Wave (Active during playback/recording) */}
               {(isSpeaking || isRecording) && (
-                <div className="px-6 py-3 bg-indigo-50/70 border-t border-indigo-100 flex items-center justify-between">
+                <div className="px-5 py-2.5 bg-indigo-50/80 border-t border-indigo-100 flex items-center justify-between">
                   <div className="flex items-center gap-2 text-indigo-700 text-xs font-bold">
-                    <Activity className="w-4 h-4 animate-spin text-indigo-600" />
+                    <Activity className="w-3.5 h-3.5 animate-spin text-indigo-600" />
                     <span>
-                      {isRecording ? `Recording Audio (${formatSeconds(recordingDuration)})` : 'Synthesizing Speech...'}
+                      {isRecording ? `Recording Audio (${formatSeconds(recordingDuration)})` : 'Playing Speech...'}
                     </span>
                   </div>
-                  {/* Waveform bars */}
                   <div className="flex items-center gap-1">
-                    {[12, 24, 16, 32, 20, 28, 14, 30, 22, 18, 26, 15, 34, 20, 12].map((height, i) => (
+                    {[10, 20, 14, 28, 16, 24, 12, 26, 18, 14, 22, 12, 28, 16, 10].map((h, i) => (
                       <span
                         key={i}
                         className="w-1 bg-indigo-600 rounded-full animate-pulse"
                         style={{
-                          height: `${height}px`,
-                          animationDelay: `${i * 80}ms`,
-                          animationDuration: '600ms'
+                          height: `${h}px`,
+                          animationDelay: `${i * 70}ms`,
+                          animationDuration: '550ms'
                         }}
                       />
                     ))}
@@ -772,99 +779,95 @@ export default function TextToSpeechPage() {
                 </div>
               )}
 
-              {/* Editor Bottom Actions */}
-              <div className="p-4 bg-slate-50/80 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={() => setText('')}
-                    className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-colors text-xs font-medium flex items-center gap-1.5"
-                    title="Clear text"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                    <span className="hidden sm:inline">Clear</span>
-                  </button>
-                  <button
-                    onClick={copyText}
-                    className="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-200/60 rounded-xl transition-colors text-xs font-medium flex items-center gap-1.5"
-                    title="Copy text"
-                  >
-                    <Copy className="w-4 h-4" />
-                    <span className="hidden sm:inline">Copy</span>
-                  </button>
-                  <button
-                    onClick={() => setPrompterMode(!prompterMode)}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
-                      prompterMode
-                        ? 'bg-indigo-600 text-white shadow-sm'
-                        : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-100'
-                    }`}
-                  >
-                    <Radio className="w-3.5 h-3.5" />
-                    <span>Prompter Mode</span>
-                  </button>
-                </div>
+              {/* Main Action Bar (Always Visible, Well-Spaced, Never Cut Off) */}
+              <div className="p-3 sm:p-4 bg-slate-50 border-t border-slate-200/90 flex flex-wrap items-center justify-between gap-3">
+                {/* Prompter Toggle */}
+                <button
+                  onClick={() => setPrompterMode(!prompterMode)}
+                  className={`px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                    prompterMode
+                      ? 'bg-indigo-600 text-white shadow-sm'
+                      : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-100'
+                  }`}
+                >
+                  <Radio className="w-3.5 h-3.5" />
+                  <span>Prompter View</span>
+                </button>
 
-                {/* Primary Playback Controls */}
-                <div className="flex items-center gap-2">
+                {/* Primary Action Buttons */}
+                <div className="flex items-center gap-2.5">
                   <button
                     onClick={handleStop}
                     disabled={!isSpeaking && !isPaused && !isRecording}
-                    className="p-3 rounded-xl bg-slate-200 text-slate-700 hover:bg-rose-100 hover:text-rose-600 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-                    title="Stop speech"
+                    className="p-2.5 rounded-xl bg-slate-200 text-slate-700 hover:bg-rose-100 hover:text-rose-600 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                    title="Stop playback"
                   >
-                    <StopCircle className="w-5 h-5" />
+                    <Square className="w-4 h-4 fill-current" />
                   </button>
 
+                  {/* Play / Pause Button */}
                   {isSpeaking ? (
                     <button
                       onClick={handlePause}
-                      className="px-6 py-3 rounded-2xl bg-amber-500 text-white font-bold flex items-center gap-2 hover:bg-amber-600 transition-all shadow-md shadow-amber-500/20 active:scale-95"
+                      className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-sm flex items-center gap-2 shadow-sm transition-all active:scale-95"
                     >
                       <Pause className="w-4 h-4 fill-current" />
-                      <span>PAUSE</span>
+                      <span>Pause</span>
                     </button>
                   ) : (
                     <button
                       onClick={handlePlay}
                       disabled={!text.trim()}
-                      className="px-6 py-3 rounded-2xl bg-gradient-to-r from-indigo-600 to-indigo-700 text-white font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-indigo-500/25 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm flex items-center gap-2 shadow-sm transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <Play className="w-4 h-4 fill-current" />
-                      <span>{isPaused ? 'RESUME' : 'PLAY AUDIO'}</span>
+                      <span>{isPaused ? 'Resume' : 'Play Audio'}</span>
                     </button>
                   )}
 
-                  {/* High Crowd Magnet: Studio Audio Download Button */}
-                  <button
-                    onClick={() => setShowRecordModal(true)}
-                    disabled={!text.trim() || isRecording}
-                    className="px-6 py-3 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-emerald-500/25 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed group relative overflow-hidden"
-                  >
-                    <div className="absolute inset-0 bg-white/15 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                    <Download className="w-4 h-4 relative" />
-                    <span className="relative">RECORD & DOWNLOAD</span>
-                  </button>
+                  {/* Proper Download Button */}
+                  {isRecording ? (
+                    <button
+                      onClick={stopRecordingSession}
+                      className="px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-sm flex items-center gap-2 shadow-md animate-pulse transition-all active:scale-95"
+                    >
+                      <span className="w-2.5 h-2.5 rounded-full bg-white animate-ping" />
+                      <span>Stop & Save Audio</span>
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => setShowRecordModal(true)}
+                      disabled={!text.trim() || isProcessingAudio}
+                      className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm flex items-center gap-2 shadow-sm transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <Download className="w-4 h-4" />
+                      <span>Download Audio</span>
+                      <span className="text-[10px] bg-emerald-700/60 px-1.5 py-0.5 rounded font-extrabold uppercase">
+                        WAV
+                      </span>
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
 
             {/* Generated Audio Card (Appears after recording) */}
             {recordedWavUrl && (
-              <div className="bg-emerald-50 border-2 border-emerald-300 rounded-3xl p-6 shadow-md space-y-4 animate-in fade-in slide-in-from-bottom duration-300">
+              <div className="bg-emerald-50/70 border border-emerald-300 rounded-2xl p-4 sm:p-5 shadow-sm space-y-3">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div className="flex items-center gap-3">
-                    <div className="p-3 bg-emerald-600 text-white rounded-2xl shadow-sm">
-                      <Music2 className="w-6 h-6" />
+                    <div className="p-2.5 bg-emerald-600 text-white rounded-xl shadow-sm">
+                      <Music2 className="w-5 h-5" />
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <h3 className="font-bold text-emerald-950 text-base">Studio Audio Ready!</h3>
-                        <span className="text-[11px] font-bold bg-emerald-200 text-emerald-900 px-2 py-0.5 rounded-full">
+                        <h4 className="font-bold text-emerald-950 text-sm">Audio File Ready</h4>
+                        <span className="text-[11px] font-bold bg-emerald-200 text-emerald-900 px-2 py-0.5 rounded-md">
                           {recordedAudioSize}
                         </span>
                       </div>
                       <p className="text-xs text-emerald-800">
-                        Pristine lossless recording. Ready for CapCut, Premiere, DaVinci & mobile apps.
+                        Universal 16-bit PCM WAV. Compatible with CapCut, Premiere, DaVinci & phone editors.
                       </p>
                     </div>
                   </div>
@@ -872,66 +875,65 @@ export default function TextToSpeechPage() {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => triggerDownload(recordedWavUrl, 'wav')}
-                      className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center gap-2 shadow-sm transition-all active:scale-95"
+                      className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm transition-all active:scale-95"
                     >
-                      <Download className="w-4 h-4" />
-                      <span>DOWNLOAD WAV</span>
+                      <Download className="w-3.5 h-3.5" />
+                      <span>Save WAV</span>
                     </button>
                     {recordedWebmUrl && (
                       <button
                         onClick={() => triggerDownload(recordedWebmUrl, 'webm')}
-                        className="px-3.5 py-2.5 rounded-xl bg-white border border-emerald-300 hover:bg-emerald-100 text-emerald-900 font-semibold text-xs flex items-center gap-1.5 transition-colors"
+                        className="px-3 py-2 rounded-xl bg-white border border-emerald-300 hover:bg-emerald-100 text-emerald-900 font-semibold text-xs flex items-center gap-1 transition-colors"
                         title="Download WebM format"
                       >
-                        <Download className="w-3.5 h-3.5" />
-                        <span>WEBM</span>
+                        <Download className="w-3 h-3" />
+                        <span>WebM</span>
                       </button>
                     )}
                   </div>
                 </div>
 
-                {/* Inline HTML5 Audio Player */}
-                <div className="pt-2 border-t border-emerald-200/60">
+                <div className="pt-2 border-t border-emerald-200">
                   <audio
                     ref={audioPreviewRef}
                     src={recordedWavUrl}
                     controls
-                    className="w-full h-11 rounded-xl accent-emerald-600"
+                    className="w-full h-10 rounded-lg accent-emerald-600"
                   />
                 </div>
               </div>
             )}
           </div>
 
-          {/* Right Column: Voice Library & Audio Modulation (5 Cols) */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
-              {/* Panel Header */}
-              <div className="flex items-center justify-between">
-                <h3 className="font-bold text-slate-800 flex items-center gap-2 text-base">
-                  <Volume2 className="w-5 h-5 text-indigo-600" />
-                  Voice & Acoustic Engine
+          {/* Right Column: Voice & Audio Settings (5 Cols) */}
+          <div className="lg:col-span-5 space-y-4">
+            <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm space-y-5">
+              {/* Header */}
+              <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+                <h3 className="font-bold text-slate-800 flex items-center gap-2 text-sm">
+                  <Volume2 className="w-4 h-4 text-indigo-600" />
+                  Voice & Accent Engine
                 </h3>
-                <span className="text-xs font-bold text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-full border border-indigo-100">
+                <span className="text-xs font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">
                   {voices.length} Voices Detected
                 </span>
               </div>
 
-              {/* Language Filter Tabs */}
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
-                  <Globe className="w-3.5 h-3.5 text-slate-400" />
+              {/* Accent / Region Filter Tabs (No Emojis) */}
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                  <Globe className="w-3 h-3 text-slate-400" />
                   Filter by Accent / Region
                 </label>
                 <div className="flex flex-wrap gap-1.5">
                   {[
                     { id: 'all', label: 'All' },
-                    { id: 'en-us', label: 'US 🇺🇸' },
-                    { id: 'en-uk', label: 'UK 🇬🇧' },
-                    { id: 'in', label: 'India 🇮🇳' },
-                    { id: 'es', label: 'Spanish 🇪🇸' },
-                    { id: 'euro', label: 'Euro 🇪🇺' },
-                    { id: 'other', label: 'More 🌐' }
+                    { id: 'en-us', label: 'US English' },
+                    { id: 'en-uk', label: 'UK English' },
+                    { id: 'in', label: 'Indian (Hindi / en-IN)' },
+                    { id: 'es', label: 'Spanish' },
+                    { id: 'euro', label: 'European' },
+                    { id: 'other', label: 'Global' }
                   ].map((tab) => (
                     <button
                       key={tab.id}
@@ -965,7 +967,7 @@ export default function TextToSpeechPage() {
                   <select
                     value={selectedVoice}
                     onChange={(e) => setSelectedVoice(e.target.value)}
-                    className="w-full p-3 pr-10 rounded-2xl border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 appearance-none bg-slate-50 font-medium text-slate-800 text-sm cursor-pointer"
+                    className="w-full p-2.5 pr-8 rounded-xl border border-slate-200 focus:border-indigo-500 appearance-none bg-slate-50 font-medium text-slate-800 text-xs cursor-pointer"
                   >
                     {filteredVoices.map((voice) => (
                       <option key={voice.name} value={voice.name}>
@@ -978,28 +980,27 @@ export default function TextToSpeechPage() {
                       </option>
                     )}
                   </select>
-                  <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <ChevronDown className="w-4 h-4 text-slate-400 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                 </div>
 
-                {/* Voice Mini Test Button */}
                 <button
                   onClick={handleTestVoice}
                   disabled={isTestingVoice || !selectedVoice}
-                  className="w-full py-2 px-3 rounded-xl bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 text-slate-600 font-semibold text-xs transition-colors flex items-center justify-center gap-2 border border-slate-200/80"
+                  className="w-full py-2 px-3 rounded-xl bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 text-slate-600 font-semibold text-xs transition-colors flex items-center justify-center gap-1.5 border border-slate-200/80"
                 >
                   <Headphones className="w-3.5 h-3.5" />
                   <span>{isTestingVoice ? 'Speaking sample...' : 'Test Selected Voice (1-sec sample)'}</span>
                 </button>
               </div>
 
-              {/* Reading Speed with Quick Presets */}
-              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 space-y-3">
+              {/* Speed / Rate */}
+              <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 space-y-2.5">
                 <div className="flex justify-between items-center text-xs">
-                  <label className="font-bold text-slate-700 flex items-center gap-1.5">
+                  <label className="font-bold text-slate-700 flex items-center gap-1">
                     <Zap className="w-3.5 h-3.5 text-amber-500" />
                     Reading Speed
                   </label>
-                  <span className="font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md border border-indigo-100 text-sm">
+                  <span className="font-bold text-indigo-600 bg-indigo-50 border border-indigo-100 px-2 py-0.5 rounded text-xs">
                     {rate.toFixed(2)}x
                   </span>
                 </div>
@@ -1011,16 +1012,15 @@ export default function TextToSpeechPage() {
                   step="0.05"
                   value={rate}
                   onChange={(e) => setRate(parseFloat(e.target.value))}
-                  className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+                  className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
                 />
 
-                {/* Speed Shortcut Chips */}
-                <div className="flex items-center justify-between gap-1 pt-1">
+                <div className="flex items-center justify-between gap-1 pt-0.5">
                   {[0.75, 1.0, 1.15, 1.25, 1.5, 2.0].map((s) => (
                     <button
                       key={s}
                       onClick={() => setRate(s)}
-                      className={`text-[11px] px-2 py-1 rounded-lg font-bold transition-colors ${
+                      className={`text-[11px] px-2 py-0.5 rounded font-bold transition-colors ${
                         rate === s
                           ? 'bg-indigo-600 text-white'
                           : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-100'
@@ -1032,15 +1032,15 @@ export default function TextToSpeechPage() {
                 </div>
               </div>
 
-              {/* Voice Pitch */}
-              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 space-y-3">
+              {/* Pitch */}
+              <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 space-y-2">
                 <div className="flex justify-between items-center text-xs">
-                  <label className="font-bold text-slate-700 flex items-center gap-1.5">
+                  <label className="font-bold text-slate-700 flex items-center gap-1">
                     <Sliders className="w-3.5 h-3.5 text-indigo-500" />
-                    Voice Pitch Modulation
+                    Pitch Modulation
                   </label>
                   <span className="font-bold text-indigo-600 text-xs">
-                    {pitch < 0.9 ? 'Deep / Warm' : pitch > 1.1 ? 'High / Energetic' : 'Natural'} ({pitch.toFixed(1)})
+                    {pitch < 0.9 ? 'Deeper' : pitch > 1.1 ? 'Higher' : 'Balanced'} ({pitch.toFixed(1)})
                   </span>
                 </div>
 
@@ -1051,27 +1051,22 @@ export default function TextToSpeechPage() {
                   step="0.1"
                   value={pitch}
                   onChange={(e) => setPitch(parseFloat(e.target.value))}
-                  className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+                  className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
                 />
-                <div className="flex justify-between text-[10px] font-semibold text-slate-400">
-                  <span>Deeper (0.6x)</span>
-                  <span>Normal (1.0x)</span>
-                  <span>Higher (1.6x)</span>
-                </div>
               </div>
 
-              {/* Volume Slider & Mute */}
-              <div className="flex items-center gap-3 bg-slate-50 p-3 rounded-2xl border border-slate-100">
+              {/* Volume & Mute */}
+              <div className="flex items-center gap-2.5 bg-slate-50 p-3 rounded-xl border border-slate-200/80">
                 <button
                   onClick={() => setIsMuted(!isMuted)}
-                  className="p-2 bg-white rounded-xl border border-slate-200 text-slate-600 hover:text-indigo-600 transition-colors"
+                  className="p-1.5 bg-white rounded-lg border border-slate-200 text-slate-600 hover:text-indigo-600 transition-colors"
                   title={isMuted ? 'Unmute' : 'Mute'}
                 >
                   {isMuted ? <VolumeX className="w-4 h-4 text-rose-500" /> : <Volume2 className="w-4 h-4" />}
                 </button>
                 <div className="flex-1">
                   <div className="flex justify-between text-[11px] font-semibold text-slate-500 mb-1">
-                    <span>Output Volume</span>
+                    <span>Volume</span>
                     <span>{isMuted ? 'Muted' : `${Math.round(volume * 100)}%`}</span>
                   </div>
                   <input
@@ -1087,288 +1082,200 @@ export default function TextToSpeechPage() {
                 </div>
               </div>
 
-              {/* Reset Controls Button */}
+              {/* Reset */}
               <button
                 onClick={() => {
                   setRate(1.0);
                   setPitch(1.0);
                   setVolume(1.0);
                   setIsMuted(false);
-                  toast.success('Settings reset to default!');
+                  toast.success('Settings reset.');
                 }}
-                className="w-full py-2.5 rounded-2xl border border-slate-200 text-slate-500 font-semibold text-xs hover:bg-slate-50 hover:text-slate-800 transition-colors flex items-center justify-center gap-2"
+                className="w-full py-2 rounded-xl border border-slate-200 text-slate-500 font-semibold text-xs hover:bg-slate-50 hover:text-slate-700 transition-colors flex items-center justify-center gap-1.5"
               >
                 <RefreshCcw className="w-3.5 h-3.5" />
-                Reset Voice Parameters
+                Reset Parameters
               </button>
             </div>
 
-            {/* Direct Download Benefits Pill */}
-            <div className="bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-100 rounded-3xl p-5 space-y-3">
-              <div className="flex items-center gap-2.5 text-indigo-900 font-bold text-sm">
-                <div className="p-2 bg-indigo-600 text-white rounded-xl shadow-sm">
-                  <Sparkles className="w-4 h-4" />
-                </div>
-                <span>Why FileZenith Audio Studio?</span>
+            {/* Quick Benefits */}
+            <div className="bg-slate-50 rounded-2xl border border-slate-200/90 p-4 space-y-2.5">
+              <div className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                <span>Private & Unlimited</span>
               </div>
-              <ul className="space-y-2 text-xs text-indigo-900/80 font-medium">
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span>
-                    <strong>100% Free Forever:</strong> Zero character limits, zero monthly API fees, zero credit cards.
-                  </span>
+              <ul className="space-y-1.5 text-xs text-slate-600">
+                <li className="flex items-start gap-1.5">
+                  <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                  <span>Zero character limits or word caps.</span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span>
-                    <strong>Studio Lossless WAV:</strong> Universal 16-bit PCM audio export ready for CapCut, Premiere, & DaVinci.
-                  </span>
+                <li className="flex items-start gap-1.5">
+                  <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                  <span>Direct 16-bit PCM WAV audio download.</span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span>
-                    <strong>100% Client-Side Privacy:</strong> Your confidential scripts and books never upload to any server.
-                  </span>
+                <li className="flex items-start gap-1.5">
+                  <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                  <span>100% client-side privacy. No remote logging.</span>
                 </li>
               </ul>
             </div>
           </div>
         </div>
 
-        {/* Audio Recording Modal Guidance */}
+        {/* Modal: Audio Download Instructions */}
         {showRecordModal && (
-          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200">
-            <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 space-y-6">
-              <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-                <div className="flex items-center gap-3">
-                  <div className="p-3 bg-indigo-100 text-indigo-700 rounded-2xl">
-                    <Mic className="w-6 h-6" />
+          <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-150">
+            <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl border border-slate-200 space-y-5">
+              <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+                <div className="flex items-center gap-2.5">
+                  <div className="p-2 bg-emerald-100 text-emerald-700 rounded-xl">
+                    <Download className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-slate-900 text-lg">Studio Audio Recorder</h3>
-                    <p className="text-xs text-slate-500">Record in lossless quality directly in your browser</p>
+                    <h3 className="font-bold text-slate-900 text-base">Export Audio (.WAV)</h3>
+                    <p className="text-xs text-slate-500">Record high-definition audio directly in browser</p>
                   </div>
                 </div>
                 <button
                   onClick={() => setShowRecordModal(false)}
-                  className="p-2 text-slate-400 hover:text-slate-600 rounded-full"
+                  className="p-1.5 text-slate-400 hover:text-slate-600 rounded-lg text-sm"
                 >
                   ✕
                 </button>
               </div>
 
-              <div className="space-y-4 text-sm text-slate-700">
-                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                  How In-Browser Audio Capture Works:
-                </p>
-
-                <div className="space-y-3">
-                  <div className="flex items-start gap-3 p-3.5 bg-slate-50 rounded-2xl border border-slate-200/80">
-                    <div className="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-xs shrink-0">
+              <div className="space-y-3 text-xs text-slate-600">
+                <p className="font-semibold text-slate-700">Follow these 2 steps in the browser prompt:</p>
+                <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/80 space-y-2">
+                  <div className="flex items-start gap-2">
+                    <span className="w-5 h-5 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">
                       1
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-slate-800 text-xs">Click Start Recording</h4>
-                      <p className="text-xs text-slate-600 mt-0.5">
-                        Your browser will ask which screen or tab you wish to share audio from.
-                      </p>
-                    </div>
+                    </span>
+                    <span>Select <strong>"This Tab"</strong> (or Current Tab).</span>
                   </div>
-
-                  <div className="flex items-start gap-3 p-3.5 bg-indigo-50/70 rounded-2xl border border-indigo-200">
-                    <div className="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-xs shrink-0">
+                  <div className="flex items-start gap-2">
+                    <span className="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">
                       2
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-indigo-950 text-xs">
-                        Select "This Tab" & check "Share tab audio"
-                      </h4>
-                      <p className="text-xs text-indigo-800 mt-0.5">
-                        Pick this browser tab and toggle the <strong>"Also share tab audio"</strong> switch ON.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3 p-3.5 bg-slate-50 rounded-2xl border border-slate-200/80">
-                    <div className="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-xs shrink-0">
-                      3
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-slate-800 text-xs">Automatic Capture & Download</h4>
-                      <p className="text-xs text-slate-600 mt-0.5">
-                        Speech will play. When it finishes, FileZenith automatically stops and generates your downloadable{' '}
-                        <strong>.WAV</strong> file!
-                      </p>
-                    </div>
+                    </span>
+                    <span>Toggle <strong>"Share tab audio"</strong> to ON.</span>
                   </div>
                 </div>
+                <p className="text-[11px] text-slate-500 leading-relaxed">
+                  Speech will play and capture automatically. Once finished, your <strong>.WAV</strong> file will download instantly.
+                </p>
               </div>
 
-              <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2.5 pt-2 border-t border-slate-100">
                 <button
                   onClick={() => setShowRecordModal(false)}
-                  className="px-5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-100 font-semibold text-xs transition-colors"
+                  className="px-4 py-2 rounded-xl text-slate-600 hover:bg-slate-100 font-semibold text-xs transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={startRecordingSession}
-                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold text-xs shadow-md shadow-emerald-500/20 hover:shadow-lg transition-all active:scale-95 flex items-center gap-2"
+                  className="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-sm transition-all active:scale-95 flex items-center gap-1.5"
                 >
-                  <Download className="w-4 h-4" />
-                  <span>Start Recording Now</span>
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Start & Download</span>
                 </button>
               </div>
             </div>
           </div>
         )}
 
-        {/* Creator Deep Dive & Educational Guide */}
-        <div className="mt-12 bg-white rounded-3xl border border-slate-200 p-8 sm:p-10 shadow-sm space-y-8">
+        {/* Creator Guide Section (No Emojis, Clean Layout) */}
+        <div className="mt-8 bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-sm space-y-6">
           <div>
-            <span className="text-xs font-bold text-indigo-600 uppercase tracking-wider bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
-              Creator Masterclass
+            <span className="text-xs font-bold text-indigo-600 uppercase tracking-wider bg-indigo-50 px-2.5 py-1 rounded-md border border-indigo-100">
+              Creator Workflow
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-3">
-              How to Leverage Free AI Text to Speech for Content Creation & Monetization
+            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 mt-2">
+              Using Text to Speech for Video Production & Monetization
             </h2>
-            <p className="text-slate-600 text-sm mt-2 max-w-3xl leading-relaxed">
-              Discover how modern creators build faceless YouTube channels, viral TikTok reels, automated podcasts, and
-              audiobooks with zero recording equipment and zero monthly SaaS costs.
+            <p className="text-slate-600 text-xs sm:text-sm mt-1 max-w-3xl leading-relaxed">
+              Build faceless YouTube channels, high-retention Shorts, and automated audiobooks with zero external microphone equipment.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center font-bold">
-                📱
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-4 bg-slate-50 rounded-xl border border-slate-200/80 space-y-2">
+              <div className="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center">
+                <Smartphone className="w-4 h-4" />
               </div>
-              <h3 className="font-bold text-slate-800 text-base">Viral TikTok & Shorts Pacing</h3>
+              <h3 className="font-bold text-slate-800 text-sm">Short-Form Pacing</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Short-form video retention drops when narration is sluggish. Setting the reading speed between{' '}
-                <strong>1.1x and 1.25x</strong> keeps audience retention above 75%, which signals the algorithm to push your
-                video to the For You Page.
+                Short-form video retention drops when narration is slow. Setting the reading speed between{' '}
+                <strong>1.1x and 1.25x</strong> maintains engagement above 75%, helping satisfy algorithmic benchmarks.
               </p>
             </div>
 
-            <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold">
-                🎬
+            <div className="p-4 bg-slate-50 rounded-xl border border-slate-200/80 space-y-2">
+              <div className="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center">
+                <Video className="w-4 h-4" />
               </div>
-              <h3 className="font-bold text-slate-800 text-base">YouTube Monetization Safe</h3>
+              <h3 className="font-bold text-slate-800 text-sm">Monetization Compliance</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                YouTube's partner program approves monetization for channels using synthetic voices as long as you provide
-                original scripting, relevant B-roll footage, and dynamic editing rather than generic spam slides.
+                YouTube approves monetization for synthetic voices when accompanied by original scripting, relevant
+                B-roll footage, and dynamic editing rather than static slides.
               </p>
             </div>
 
-            <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">
-                🔒
+            <div className="p-4 bg-slate-50 rounded-xl border border-slate-200/80 space-y-2">
+              <div className="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center">
+                <ShieldCheck className="w-4 h-4" />
               </div>
-              <h3 className="font-bold text-slate-800 text-base">Client-Side Privacy Advantage</h3>
+              <h3 className="font-bold text-slate-800 text-sm">Local Client-Side Privacy</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Unlike cloud TTS vendors who store your text in their training datasets, FileZenith processes everything
-                locally inside your browser. No private scripts, unreleased books, or business reports leave your device.
+                Unlike cloud TTS vendors that train on user inputs, FileZenith processes everything locally inside your
+                browser sandbox. No manuscripts or proprietary notes leave your machine.
               </p>
-            </div>
-          </div>
-
-          {/* Step by step workflow */}
-          <div className="pt-6 border-t border-slate-100">
-            <h3 className="text-lg font-bold text-slate-900 mb-4">
-              3-Step Video Voiceover Workflow with CapCut / Premiere Pro
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="flex items-start gap-3 p-4 bg-slate-50 rounded-2xl">
-                <span className="w-7 h-7 rounded-xl bg-indigo-600 text-white font-bold text-xs flex items-center justify-center shrink-0">
-                  1
-                </span>
-                <div>
-                  <h4 className="font-bold text-xs text-slate-800">Generate & Tune Script</h4>
-                  <p className="text-xs text-slate-500 mt-1">
-                    Paste your script, adjust speed to 1.1x, and test with your preferred regional voice accent.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3 p-4 bg-slate-50 rounded-2xl">
-                <span className="w-7 h-7 rounded-xl bg-indigo-600 text-white font-bold text-xs flex items-center justify-center shrink-0">
-                  2
-                </span>
-                <div>
-                  <h4 className="font-bold text-xs text-slate-800">Record & Download WAV</h4>
-                  <p className="text-xs text-slate-500 mt-1">
-                    Click Record & Download Audio. FileZenith automatically captures the pristine digital audio as a .WAV file.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3 p-4 bg-slate-50 rounded-2xl">
-                <span className="w-7 h-7 rounded-xl bg-indigo-600 text-white font-bold text-xs flex items-center justify-center shrink-0">
-                  3
-                </span>
-                <div>
-                  <h4 className="font-bold text-xs text-slate-800">Drop into Video Editor</h4>
-                  <p className="text-xs text-slate-500 mt-1">
-                    Import the WAV file into CapCut or Premiere. Auto-generate captions and match with B-roll.
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
 
-        {/* Extensive Creator FAQ Accordion */}
-        <div className="bg-white rounded-3xl border border-slate-200 p-8 sm:p-10 shadow-sm space-y-6">
-          <div className="flex items-center gap-3">
-            <div className="p-3 bg-indigo-100 text-indigo-700 rounded-2xl">
-              <HelpCircle className="w-6 h-6" />
+        {/* FAQ Accordion */}
+        <div className="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-sm space-y-4">
+          <div className="flex items-center gap-2.5">
+            <div className="p-2 bg-indigo-100 text-indigo-700 rounded-xl">
+              <HelpCircle className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-xl font-extrabold text-slate-900">Frequently Asked Questions</h3>
-              <p className="text-xs text-slate-500">Everything you need to know about FileZenith Text to Speech & Audio Export</p>
+              <h3 className="text-lg font-bold text-slate-900">Frequently Asked Questions</h3>
+              <p className="text-xs text-slate-500">Audio export, character limits, and commercial usage</p>
             </div>
           </div>
 
-          <div className="space-y-3 pt-2">
+          <div className="space-y-2.5 pt-2">
             {[
               {
-                q: 'How do I download the speech as an audio file (.WAV / .WebM)?',
-                a: 'Click the "RECORD & DOWNLOAD" button next to Play. In the browser dialog, select "This Tab" and ensure the "Share tab audio" toggle is checked. FileZenith will record the voice in real time and automatically render a pristine, lossless 16-bit PCM WAV audio file with zero quality degradation.'
+                q: 'How do I download the speech as an audio file (.WAV)?',
+                a: 'Click "Download Audio". In the browser dialog, pick "This Tab" and enable "Share tab audio". FileZenith records the voice in real time and automatically exports a lossless 16-bit PCM WAV audio file directly to your downloads folder.'
               },
               {
-                q: 'Is this text to speech generator truly unlimited with no character caps?',
-                a: 'Yes, 100%! Unlike commercial SaaS tools like ElevenLabs or Murf that charge monthly subscriptions or cap text at 300 characters, FileZenith utilizes your device\'s native neural speech synthesis engine. There are zero artificial character caps, zero API tokens, and no account signup required.'
+                q: 'Are there any character limits or subscription fees?',
+                a: 'No. FileZenith utilizes your device native neural speech engine. There are zero artificial character caps, zero monthly subscriptions, and no sign-up required.'
               },
               {
                 q: 'Can I monetize YouTube Shorts, TikToks, and Reels using these voices?',
-                a: 'Yes! YouTube\'s monetization policies explicitly permit synthetic speech provided the video offers original educational or entertainment value (e.g. customized script, relevant B-roll, captions, sound effects). Thousands of successful faceless YouTube channels use native TTS voices.'
+                a: 'Yes. YouTube monetization policies permit synthetic voiceovers as long as the video provides original value (e.g. customized scripts, captions, and curated footage).'
               },
               {
-                q: 'How do I get high-quality natural voices like Google Neural or Microsoft Natural?',
-                a: 'The available voices depend on your operating system and browser. In Google Chrome and Microsoft Edge, you will see high-fidelity voices like "Google US English", "Microsoft Jenny Natural", and "Apple Samantha". Selecting these produces natural, expressive human-grade intonation.'
+                q: 'How do I access natural neural voices like Google or Microsoft Natural?',
+                a: 'Voices are powered by your operating system and browser. In Google Chrome and Microsoft Edge, you will see natural voices like "Google US English" and "Microsoft Natural" in the voice dropdown.'
               },
               {
-                q: 'Does FileZenith store or upload my text scripts to any remote server?',
-                a: 'No. FileZenith operates under a strict privacy-first architecture. All text processing, speech generation, and audio recording take place entirely client-side inside your browser sandbox. Your scripts never touch our servers.'
-              },
-              {
-                q: 'What is Prompter Mode with karaoke highlighting?',
-                a: 'Prompter Mode illuminates each word in an energetic indigo badge in real time as it is spoken. This is ideal for practicing pronunciation, rehearsing voiceovers, or proofreading manuscripts by reading and listening simultaneously.'
-              },
-              {
-                q: 'Can I use this on mobile phones (Android / iPhone)?',
-                a: 'Yes! Playback and prompter highlighting work natively across iOS Safari and Android Chrome. For direct audio recording, desktop browsers (Chrome, Edge, Firefox) provide the cleanest tab audio capture.'
+                q: 'Does FileZenith upload or store my text on any remote server?',
+                a: 'No. All speech synthesis and audio recording take place entirely client-side inside your browser sandbox. Your private notes and scripts never leave your device.'
               }
             ].map((faq, idx) => (
               <div
                 key={idx}
-                className="border border-slate-200/80 rounded-2xl overflow-hidden transition-colors"
+                className="border border-slate-200/80 rounded-xl overflow-hidden transition-colors"
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                  className="w-full p-4 sm:p-5 text-left font-bold text-slate-800 text-sm sm:text-base flex items-center justify-between gap-4 hover:bg-slate-50 transition-colors"
+                  className="w-full p-4 text-left font-bold text-slate-800 text-xs sm:text-sm flex items-center justify-between gap-3 hover:bg-slate-50 transition-colors"
                 >
                   <span>{faq.q}</span>
                   <ChevronDown
@@ -1378,7 +1285,7 @@ export default function TextToSpeechPage() {
                   />
                 </button>
                 {openFaq === idx && (
-                  <div className="p-4 sm:p-5 pt-0 text-slate-600 text-xs sm:text-sm leading-relaxed border-t border-slate-100 bg-slate-50/50">
+                  <div className="p-4 pt-0 text-slate-600 text-xs leading-relaxed border-t border-slate-100 bg-slate-50/50">
                     {faq.a}
                   </div>
                 )}
