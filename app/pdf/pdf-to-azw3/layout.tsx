@@ -8,3 +8,4 @@ export function generateMetadata(): Metadata {
 export default function Layout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
+
