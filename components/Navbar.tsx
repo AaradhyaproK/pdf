@@ -456,8 +456,7 @@ export function Navbar() {
               filteredTools.map((tool) => {
                 const Icon = tool.icon;
                 return (
-                  <Link
-                    key={tool.slug}
+                  <Link prefetch={false} key={tool.slug}
                     href={tool.slug}
                     onClick={(e) => {
                       if (isDraggingRef.current) {
@@ -522,7 +521,7 @@ export function Navbar() {
               >
                 <ArrowLeft className="w-5 h-5 text-slate-900 stroke-[2.5]" />
               </button>
-              <Link href="/" className="flex items-center gap-1.5 min-w-0 shrink active:scale-95 transition-transform">
+              <Link prefetch={false} href="/" className="flex items-center gap-1.5 min-w-0 shrink active:scale-95 transition-transform">
                 <img src="/filezenith-logo.png" alt="FileZenith Logo" className="w-6 h-6 object-contain shrink-0" />
                 <span className="font-black text-xs sm:text-sm text-slate-900 truncate tracking-tight">
                   FileZenith
@@ -530,7 +529,7 @@ export function Navbar() {
               </Link>
             </div>
           ) : (
-            <Link href="/" className="flex items-center gap-2 group shrink-0 active:scale-95 transition-transform duration-200">
+            <Link prefetch={false} href="/" className="flex items-center gap-2 group shrink-0 active:scale-95 transition-transform duration-200">
               <img
                 src="/filezenith-logo.png"
                 alt="FileZenith Logo"
@@ -612,8 +611,7 @@ export function Navbar() {
           {/* PDF Studio Mobile Card */}
           <div className="p-3.5 rounded-2xl bg-slate-50/80 border border-slate-200/80 space-y-2.5">
             <div className="flex items-center justify-between">
-              <Link
-                href="/pdf-tools"
+              <Link prefetch={false} href="/pdf-tools"
                 onClick={closeAllNavbars}
                 className="flex items-center gap-2 group cursor-pointer"
               >
@@ -627,8 +625,7 @@ export function Navbar() {
                   <p className="text-[10px] text-slate-500 font-medium">Merge, compress, edit & OCR</p>
                 </div>
               </Link>
-              <Link
-                href="/pdf-tools"
+              <Link prefetch={false} href="/pdf-tools"
                 onClick={closeAllNavbars}
                 className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-white text-rose-600 border border-rose-200 shadow-2xs hover:bg-rose-50"
               >
@@ -637,8 +634,7 @@ export function Navbar() {
             </div>
             <div className="grid grid-cols-2 gap-1.5 pt-1 border-t border-slate-200/50">
               {PDF_TOOLS.slice(0, 6).map((tool) => (
-                <Link
-                  key={tool.slug}
+                <Link prefetch={false} key={tool.slug}
                   href={tool.slug}
                   onClick={closeAllNavbars}
                   className="p-2 rounded-xl bg-white hover:bg-slate-100 border border-slate-200/70 text-[11px] font-bold text-slate-800 truncate block active:scale-98 transition-all"
@@ -652,8 +648,7 @@ export function Navbar() {
           {/* Image Studio Mobile Card */}
           <div className="p-3.5 rounded-2xl bg-slate-50/80 border border-slate-200/80 space-y-2.5">
             <div className="flex items-center justify-between">
-              <Link
-                href="/image-tools"
+              <Link prefetch={false} href="/image-tools"
                 onClick={closeAllNavbars}
                 className="flex items-center gap-2 group cursor-pointer"
               >
@@ -667,8 +662,7 @@ export function Navbar() {
                   <p className="text-[10px] text-slate-500 font-medium">Compress, convert & passport photos</p>
                 </div>
               </Link>
-              <Link
-                href="/image-tools"
+              <Link prefetch={false} href="/image-tools"
                 onClick={closeAllNavbars}
                 className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-white text-sky-600 border border-sky-200 shadow-2xs hover:bg-sky-50"
               >
@@ -677,8 +671,7 @@ export function Navbar() {
             </div>
             <div className="grid grid-cols-2 gap-1.5 pt-1 border-t border-slate-200/50">
               {IMAGE_TOOLS.slice(0, 6).map((tool) => (
-                <Link
-                  key={tool.slug}
+                <Link prefetch={false} key={tool.slug}
                   href={tool.slug}
                   onClick={closeAllNavbars}
                   className="p-2 rounded-xl bg-white hover:bg-slate-100 border border-slate-200/70 text-[11px] font-bold text-slate-800 truncate block active:scale-98 transition-all"
@@ -692,8 +685,7 @@ export function Navbar() {
           {/* Daily Utilities Mobile Card */}
           <div className="p-3.5 rounded-2xl bg-slate-50/80 border border-slate-200/80 space-y-2.5">
             <div className="flex items-center justify-between">
-              <Link
-                href="/utility-tools"
+              <Link prefetch={false} href="/utility-tools"
                 onClick={closeAllNavbars}
                 className="flex items-center gap-2 group cursor-pointer"
               >
@@ -707,8 +699,7 @@ export function Navbar() {
                   <p className="text-[10px] text-slate-500 font-medium">Bills, EMI, Age, QR & Converters</p>
                 </div>
               </Link>
-              <Link
-                href="/utility-tools"
+              <Link prefetch={false} href="/utility-tools"
                 onClick={closeAllNavbars}
                 className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-white text-emerald-600 border border-emerald-200 shadow-2xs hover:bg-emerald-50"
               >
@@ -717,8 +708,7 @@ export function Navbar() {
             </div>
             <div className="grid grid-cols-2 gap-1.5 pt-1 border-t border-slate-200/50">
               {UTILITY_TOOLS.slice(0, 6).map((tool) => (
-                <Link
-                  key={tool.slug}
+                <Link prefetch={false} key={tool.slug}
                   href={tool.slug}
                   onClick={closeAllNavbars}
                   className="p-2 rounded-xl bg-white hover:bg-slate-100 border border-slate-200/70 text-[11px] font-bold text-slate-800 truncate block active:scale-98 transition-all"
@@ -732,8 +722,7 @@ export function Navbar() {
           {/* Social Tools Mobile Card */}
           <div className="p-3.5 rounded-2xl bg-slate-50/80 border border-slate-200/80 space-y-2.5">
             <div className="flex items-center justify-between">
-              <Link
-                href="/social-tools"
+              <Link prefetch={false} href="/social-tools"
                 onClick={closeAllNavbars}
                 className="flex items-center gap-2 group cursor-pointer"
               >
@@ -747,8 +736,7 @@ export function Navbar() {
                   <p className="text-[10px] text-slate-500 font-medium">WhatsApp direct, YouTube covers</p>
                 </div>
               </Link>
-              <Link
-                href="/social-tools"
+              <Link prefetch={false} href="/social-tools"
                 onClick={closeAllNavbars}
                 className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-white text-pink-600 border border-pink-200 shadow-2xs hover:bg-pink-50"
               >
@@ -757,8 +745,7 @@ export function Navbar() {
             </div>
             <div className="grid grid-cols-2 gap-1.5 pt-1 border-t border-slate-200/50">
               {SOCIAL_TOOLS.map((tool) => (
-                <Link
-                  key={tool.slug}
+                <Link prefetch={false} key={tool.slug}
                   href={tool.slug}
                   onClick={closeAllNavbars}
                   className="p-2 rounded-xl bg-white hover:bg-slate-100 border border-slate-200/70 text-[11px] font-bold text-slate-800 truncate block active:scale-98 transition-all"
@@ -772,8 +759,7 @@ export function Navbar() {
           {/* CSC & Cyber Cafe Toolkit Mobile Card */}
           <div className="p-3.5 rounded-2xl bg-amber-50/80 border border-amber-200/90 space-y-2.5">
             <div className="flex items-center justify-between">
-              <Link
-                href="/csc-cyber-cafe-tools"
+              <Link prefetch={false} href="/csc-cyber-cafe-tools"
                 onClick={closeAllNavbars}
                 className="flex items-center gap-2 group cursor-pointer"
               >
@@ -787,8 +773,7 @@ export function Navbar() {
                   <p className="text-[10px] text-slate-600 font-medium">Aadhaar PVC, PAN 213x213 &amp; Marksheets</p>
                 </div>
               </Link>
-              <Link
-                href="/csc-cyber-cafe-tools"
+              <Link prefetch={false} href="/csc-cyber-cafe-tools"
                 onClick={closeAllNavbars}
                 className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-white text-amber-800 border border-amber-200 shadow-2xs hover:bg-amber-50"
               >
@@ -796,29 +781,25 @@ export function Navbar() {
               </Link>
             </div>
             <div className="grid grid-cols-2 gap-1.5 pt-1 border-t border-amber-200/60">
-              <Link
-                href="/tools/aadhaar-card-print"
+              <Link prefetch={false} href="/tools/aadhaar-card-print"
                 onClick={closeAllNavbars}
                 className="p-2 rounded-xl bg-white hover:bg-amber-50/60 border border-amber-100 text-[11px] font-bold text-slate-800 truncate block active:scale-98 transition-all"
               >
                 Aadhaar A4 &amp; PVC Print
               </Link>
-              <Link
-                href="/tools/pan-card-photo-resizer"
+              <Link prefetch={false} href="/tools/pan-card-photo-resizer"
                 onClick={closeAllNavbars}
                 className="p-2 rounded-xl bg-white hover:bg-amber-50/60 border border-amber-100 text-[11px] font-bold text-slate-800 truncate block active:scale-98 transition-all"
               >
                 PAN Photo 213x213
               </Link>
-              <Link
-                href="/pdf/combine-marksheets"
+              <Link prefetch={false} href="/pdf/combine-marksheets"
                 onClick={closeAllNavbars}
                 className="p-2 rounded-xl bg-white hover:bg-amber-50/60 border border-amber-100 text-[11px] font-bold text-slate-800 truncate block active:scale-98 transition-all"
               >
                 Marksheets &lt;500KB
               </Link>
-              <Link
-                href="/tools/signature-resizer-10-to-20kb"
+              <Link prefetch={false} href="/tools/signature-resizer-10-to-20kb"
                 onClick={closeAllNavbars}
                 className="p-2 rounded-xl bg-white hover:bg-amber-50/60 border border-amber-100 text-[11px] font-bold text-slate-800 truncate block active:scale-98 transition-all"
               >
@@ -830,8 +811,7 @@ export function Navbar() {
           {/* Guides & Blog Mobile Card */}
           <div className="p-3.5 rounded-2xl bg-indigo-50/70 border border-indigo-200/80 space-y-2.5">
             <div className="flex items-center justify-between">
-              <Link
-                href="/blog"
+              <Link prefetch={false} href="/blog"
                 onClick={closeAllNavbars}
                 className="flex items-center gap-2 group cursor-pointer"
               >
@@ -845,8 +825,7 @@ export function Navbar() {
                   <p className="text-[10px] text-slate-500 font-medium">43+ step-by-step exam &amp; file guides</p>
                 </div>
               </Link>
-              <Link
-                href="/blog"
+              <Link prefetch={false} href="/blog"
                 onClick={closeAllNavbars}
                 className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-white text-indigo-600 border border-indigo-200 shadow-2xs hover:bg-indigo-50"
               >
@@ -854,29 +833,25 @@ export function Navbar() {
               </Link>
             </div>
             <div className="grid grid-cols-2 gap-1.5 pt-1 border-t border-indigo-100">
-              <Link
-                href="/blog/how-to-compress-image-to-20kb"
+              <Link prefetch={false} href="/blog/how-to-compress-image-to-20kb"
                 onClick={closeAllNavbars}
                 className="p-2 rounded-xl bg-white hover:bg-indigo-50 border border-indigo-100 text-[11px] font-bold text-slate-800 truncate block active:scale-98 transition-all"
               >
                 Compress Image to 20KB
               </Link>
-              <Link
-                href="/blog/how-to-compress-pdf-to-200kb-online"
+              <Link prefetch={false} href="/blog/how-to-compress-pdf-to-200kb-online"
                 onClick={closeAllNavbars}
                 className="p-2 rounded-xl bg-white hover:bg-indigo-50 border border-indigo-100 text-[11px] font-bold text-slate-800 truncate block active:scale-98 transition-all"
               >
                 Compress PDF to 200KB
               </Link>
-              <Link
-                href="/blog/passport-size-photo-maker-guide"
+              <Link prefetch={false} href="/blog/passport-size-photo-maker-guide"
                 onClick={closeAllNavbars}
                 className="p-2 rounded-xl bg-white hover:bg-indigo-50 border border-indigo-100 text-[11px] font-bold text-slate-800 truncate block active:scale-98 transition-all"
               >
                 Passport Photo Specs
               </Link>
-              <Link
-                href="/blog/rrb-ntpc-photo-signature-guidelines-2026"
+              <Link prefetch={false} href="/blog/rrb-ntpc-photo-signature-guidelines-2026"
                 onClick={closeAllNavbars}
                 className="p-2 rounded-xl bg-white hover:bg-indigo-50 border border-indigo-100 text-[11px] font-bold text-slate-800 truncate block active:scale-98 transition-all"
               >
@@ -889,7 +864,7 @@ export function Navbar() {
       )}
 
       <div className="hidden md:flex max-w-7xl mx-auto px-4 lg:px-8 h-16 items-center justify-between gap-2 lg:gap-4">
-        <Link href="/" className="flex items-center gap-2.5 group shrink-0 active:scale-95 transition-transform duration-200">
+        <Link prefetch={false} href="/" className="flex items-center gap-2.5 group shrink-0 active:scale-95 transition-transform duration-200">
           <img
             src="/filezenith-logo.png"
             alt="FileZenith Logo"
@@ -912,8 +887,7 @@ export function Navbar() {
             onMouseEnter={() => handleMouseEnter('pdf')}
             onMouseLeave={handleMouseLeave}
           >
-            <Link
-              href="/pdf-tools"
+            <Link prefetch={false} href="/pdf-tools"
               onClick={closeAllNavbars}
               className={`flex items-center gap-1.5 px-2.5 lg:px-3 py-1.5 rounded-xl whitespace-nowrap shrink-0 transition-all cursor-pointer ${
                 isActive('/pdf')
@@ -938,8 +912,7 @@ export function Navbar() {
               }`}
             >
               <div className="px-3 py-2 flex items-center justify-between border-b border-slate-100 shrink-0 mb-1.5">
-                <Link
-                  href="/pdf-tools"
+                <Link prefetch={false} href="/pdf-tools"
                   onClick={closeAllNavbars}
                   className="text-xs font-black uppercase tracking-wider text-slate-900 hover:text-indigo-600 flex items-center gap-1.5 transition-colors cursor-pointer"
                 >
@@ -954,8 +927,7 @@ export function Navbar() {
                 {PDF_TOOLS.map((tool) => {
                   const Icon = tool.icon;
                   return (
-                    <Link
-                      key={tool.slug}
+                    <Link prefetch={false} key={tool.slug}
                       href={tool.slug}
                       onClick={closeAllNavbars}
                       className="p-2 rounded-xl hover:bg-slate-100/90 transition-all flex items-center gap-2.5 group/item border border-transparent hover:border-slate-200/80 cursor-pointer"
@@ -989,8 +961,7 @@ export function Navbar() {
             onMouseEnter={() => handleMouseEnter('image')}
             onMouseLeave={handleMouseLeave}
           >
-            <Link
-              href="/image-tools"
+            <Link prefetch={false} href="/image-tools"
               onClick={closeAllNavbars}
               className={`flex items-center gap-1.5 px-2.5 lg:px-3 py-1.5 rounded-xl whitespace-nowrap shrink-0 transition-all cursor-pointer ${
                 isActive('/image')
@@ -1017,8 +988,7 @@ export function Navbar() {
               {/* Center Pointer Notch directly below Image Studio hover */}
               <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-t border-l border-slate-200/90 rotate-45 pointer-events-none" />
               <div className="px-3 py-2 flex items-center justify-between border-b border-slate-100 shrink-0 mb-1.5">
-                <Link
-                  href="/image-tools"
+                <Link prefetch={false} href="/image-tools"
                   onClick={closeAllNavbars}
                   className="text-xs font-black uppercase tracking-wider text-slate-900 hover:text-indigo-600 flex items-center gap-1.5 transition-colors cursor-pointer"
                 >
@@ -1033,8 +1003,7 @@ export function Navbar() {
                 {IMAGE_TOOLS.map((tool) => {
                   const Icon = tool.icon;
                   return (
-                    <Link
-                      key={tool.slug}
+                    <Link prefetch={false} key={tool.slug}
                       href={tool.slug}
                       onClick={closeAllNavbars}
                       className="p-2 rounded-xl hover:bg-slate-100/90 transition-all flex items-center gap-2.5 group/item border border-transparent hover:border-slate-200/80 cursor-pointer"
@@ -1068,8 +1037,7 @@ export function Navbar() {
             onMouseEnter={() => handleMouseEnter('utility')}
             onMouseLeave={handleMouseLeave}
           >
-            <Link
-              href="/utility-tools"
+            <Link prefetch={false} href="/utility-tools"
               onClick={closeAllNavbars}
               className={`flex items-center gap-1.5 px-2.5 lg:px-3 py-1.5 rounded-xl whitespace-nowrap shrink-0 transition-all cursor-pointer ${
                 isActive('/utility')
@@ -1096,8 +1064,7 @@ export function Navbar() {
               {/* Center Pointer Notch directly below Daily Utilities hover */}
               <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-t border-l border-slate-200/90 rotate-45 pointer-events-none" />
               <div className="px-3 py-2 flex items-center justify-between border-b border-slate-100 shrink-0 mb-1.5">
-                <Link
-                  href="/utility-tools"
+                <Link prefetch={false} href="/utility-tools"
                   onClick={closeAllNavbars}
                   className="text-xs font-black uppercase tracking-wider text-slate-900 hover:text-indigo-600 flex items-center gap-1.5 transition-colors cursor-pointer"
                 >
@@ -1112,8 +1079,7 @@ export function Navbar() {
                 {UTILITY_TOOLS.map((tool) => {
                   const Icon = tool.icon;
                   return (
-                    <Link
-                      key={tool.slug}
+                    <Link prefetch={false} key={tool.slug}
                       href={tool.slug}
                       onClick={closeAllNavbars}
                       className="p-2 rounded-xl hover:bg-slate-100/90 transition-all flex items-center gap-2.5 group/item border border-transparent hover:border-slate-200/80 cursor-pointer"
@@ -1147,8 +1113,7 @@ export function Navbar() {
             onMouseEnter={() => handleMouseEnter('social')}
             onMouseLeave={handleMouseLeave}
           >
-            <Link
-              href="/social-tools"
+            <Link prefetch={false} href="/social-tools"
               onClick={closeAllNavbars}
               className={`flex items-center gap-1.5 px-2.5 lg:px-3 py-1.5 rounded-xl whitespace-nowrap shrink-0 transition-all cursor-pointer ${
                 isActive('/social')
@@ -1175,8 +1140,7 @@ export function Navbar() {
               {/* Center Pointer Notch directly below Social Tools hover */}
               <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-t border-l border-slate-200/90 rotate-45 pointer-events-none" />
               <div className="px-3 py-2 flex items-center justify-between border-b border-slate-100 shrink-0 mb-1.5">
-                <Link
-                  href="/social-tools"
+                <Link prefetch={false} href="/social-tools"
                   onClick={closeAllNavbars}
                   className="text-xs font-black uppercase tracking-wider text-slate-900 hover:text-indigo-600 flex items-center gap-1.5 transition-colors cursor-pointer"
                 >
@@ -1189,8 +1153,7 @@ export function Navbar() {
                 {SOCIAL_TOOLS.map((tool) => {
                   const Icon = tool.icon;
                   return (
-                    <Link
-                      key={tool.slug}
+                    <Link prefetch={false} key={tool.slug}
                       href={tool.slug}
                       onClick={closeAllNavbars}
                       className="p-2 rounded-xl hover:bg-slate-100/90 transition-all flex items-center gap-2.5 group/item border border-transparent hover:border-slate-200/80 cursor-pointer"
@@ -1220,8 +1183,7 @@ export function Navbar() {
 
           {/* Guides & Blog Direct Link */}
           <div className="relative py-4">
-            <Link
-              href="/blog"
+            <Link prefetch={false} href="/blog"
               onClick={closeAllNavbars}
               className={`flex items-center gap-1.5 px-2.5 lg:px-3 py-1.5 rounded-xl whitespace-nowrap shrink-0 transition-all cursor-pointer ${
                 isActive('/blog')
@@ -1334,8 +1296,7 @@ export function Navbar() {
                     const isSelected = idx === selectedIndex;
 
                     return (
-                      <Link
-                        key={tool.slug}
+                      <Link prefetch={false} key={tool.slug}
                         href={tool.slug}
                         onClick={(e) => {
                           if (isDraggingRef.current) {

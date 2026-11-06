@@ -31,8 +31,7 @@ export function RelatedToolsSection({ currentSlug }: RelatedToolsSectionProps) {
         </div>
 
         {/* View All Link */}
-        <Link
-          href="/"
+        <Link prefetch={false} href="/"
           className="inline-flex items-center gap-1.5 text-xs font-black text-rose-600 hover:text-rose-700 bg-rose-50 hover:bg-rose-100/80 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl border border-rose-200/80 transition-all duration-200 active:scale-95 shrink-0 shadow-2xs"
         >
           <span>View All</span>
@@ -45,8 +44,7 @@ export function RelatedToolsSection({ currentSlug }: RelatedToolsSectionProps) {
         {relatedTools.map((tool) => {
           const Icon = tool.icon;
           return (
-            <Link
-              key={tool.id}
+            <Link prefetch={false} key={tool.id}
               href={tool.slug}
               className="w-[82%] sm:w-auto shrink-0 sm:shrink snap-start p-3.5 rounded-2xl bg-white border border-slate-200/90 hover:border-rose-400/60 shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col justify-between group relative overflow-hidden"
             >

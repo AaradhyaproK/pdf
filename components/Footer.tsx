@@ -82,18 +82,18 @@ export function Footer() {
             </button>
             {openSection === 'pdf' && (
               <div className="p-4 bg-white border-t border-slate-100 grid grid-cols-1 gap-2 animate-in fade-in duration-150">
-                <Link href="/pdf/edit" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Edit PDF Online</Link>
-                <Link href="/pdf/pdf-to-word" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">PDF to Word (DOCX)</Link>
-                <Link href="/pdf/word-to-pdf" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Word to PDF Converter</Link>
-                <Link href="/pdf/compress" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress PDF (Auto)</Link>
-                <Link href="/pdf/compress-to-100kb" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress PDF to 100KB</Link>
-                <Link href="/pdf/compress-to-200kb" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress PDF to 200KB</Link>
-                <Link href="/pdf/merge" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Merge PDF</Link>
-                <Link href="/pdf/split" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Split PDF</Link>
-                <Link href="/pdf/organize" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Organize &amp; Rotate PDF</Link>
-                <Link href="/pdf/ocr" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">PDF OCR (Text Extractor)</Link>
-                <Link href="/pdf/protect" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Password Protect PDF</Link>
-                <Link href="/pdf/remove-password" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Unlock / Remove Password</Link>
+                <Link prefetch={false} href="/pdf/edit" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Edit PDF Online</Link>
+                <Link prefetch={false} href="/pdf/pdf-to-word" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">PDF to Word (DOCX)</Link>
+                <Link prefetch={false} href="/pdf/word-to-pdf" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Word to PDF Converter</Link>
+                <Link prefetch={false} href="/pdf/compress" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress PDF (Auto)</Link>
+                <Link prefetch={false} href="/pdf/compress-to-100kb" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress PDF to 100KB</Link>
+                <Link prefetch={false} href="/pdf/compress-to-200kb" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress PDF to 200KB</Link>
+                <Link prefetch={false} href="/pdf/merge" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Merge PDF</Link>
+                <Link prefetch={false} href="/pdf/split" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Split PDF</Link>
+                <Link prefetch={false} href="/pdf/organize" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Organize &amp; Rotate PDF</Link>
+                <Link prefetch={false} href="/pdf/ocr" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">PDF OCR (Text Extractor)</Link>
+                <Link prefetch={false} href="/pdf/protect" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Password Protect PDF</Link>
+                <Link prefetch={false} href="/pdf/remove-password" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Unlock / Remove Password</Link>
               </div>
             )}
           </div>
@@ -115,20 +115,20 @@ export function Footer() {
             </button>
             {openSection === 'image' && (
               <div className="p-4 bg-white border-t border-slate-100 grid grid-cols-1 gap-2 animate-in fade-in duration-150">
-                <Link href="/image/greeting-card-maker" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Printable Greeting &amp; Love Card Maker</Link>
-                <Link href="/image/polaroid-maker" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Polaroid &amp; Memory Card Maker</Link>
-                <Link href="/image/pics-to-pdf" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Pics to PDF (Photos to PDF)</Link>
-                <Link href="/image/webp-to-jpg" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">WebP to JPG Converter</Link>
-                <Link href="/image/jpg-to-webp" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">JPG to WebP Converter</Link>
-                <Link href="/image/png-to-jpg" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">PNG to JPG Converter</Link>
-                <Link href="/image/png-to-pdf" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">PNG to PDF Converter</Link>
-                <Link href="/image/jpg-to-png" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">JPG to PNG Converter</Link>
-                <Link href="/image/compress" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress Image (Target KB)</Link>
-                <Link href="/image/compress-to-50kb" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress Image to 50KB</Link>
-                <Link href="/image/compress-to-100kb" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress Image to 100KB</Link>
-                <Link href="/image/passport-maker" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Passport Photo Maker</Link>
-                <Link href="/image/remove-background" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">AI Background Remover</Link>
-                <Link href="/image/convert-heic" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Apple HEIC to JPG</Link>
+                <Link prefetch={false} href="/image/greeting-card-maker" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Printable Greeting &amp; Love Card Maker</Link>
+                <Link prefetch={false} href="/image/polaroid-maker" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Polaroid &amp; Memory Card Maker</Link>
+                <Link prefetch={false} href="/image/pics-to-pdf" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Pics to PDF (Photos to PDF)</Link>
+                <Link prefetch={false} href="/image/webp-to-jpg" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">WebP to JPG Converter</Link>
+                <Link prefetch={false} href="/image/jpg-to-webp" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">JPG to WebP Converter</Link>
+                <Link prefetch={false} href="/image/png-to-jpg" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">PNG to JPG Converter</Link>
+                <Link prefetch={false} href="/image/png-to-pdf" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">PNG to PDF Converter</Link>
+                <Link prefetch={false} href="/image/jpg-to-png" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">JPG to PNG Converter</Link>
+                <Link prefetch={false} href="/image/compress" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress Image (Target KB)</Link>
+                <Link prefetch={false} href="/image/compress-to-50kb" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress Image to 50KB</Link>
+                <Link prefetch={false} href="/image/compress-to-100kb" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress Image to 100KB</Link>
+                <Link prefetch={false} href="/image/passport-maker" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Passport Photo Maker</Link>
+                <Link prefetch={false} href="/image/remove-background" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">AI Background Remover</Link>
+                <Link prefetch={false} href="/image/convert-heic" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Apple HEIC to JPG</Link>
               </div>
             )}
           </div>
@@ -150,16 +150,16 @@ export function Footer() {
             </button>
             {openSection === 'csc' && (
               <div className="p-4 bg-white border-t border-slate-100 grid grid-cols-1 gap-2 animate-in fade-in duration-150">
-                <Link href="/csc-cyber-cafe-tools" className="p-2 rounded-xl text-xs font-bold text-amber-800 hover:bg-amber-50 transition-colors">CSC &amp; Cyber Cafe Hub →</Link>
-                <Link href="/govt-job-tools" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Govt Job Exam Tools Hub</Link>
-                <Link href="/tools/aadhaar-card-print" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Aadhaar Card Print (A4 &amp; PVC)</Link>
-                <Link href="/tools/pan-card-photo-resizer" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">PAN Photo Resizer (213x213)</Link>
-                <Link href="/tools/signature-resizer-10-to-20kb" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Signature Resizer 10 to 20KB</Link>
-                <Link href="/pdf/combine-marksheets" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Combine Marksheets (&lt;500KB)</Link>
-                <Link href="/tools/photo-name-date-generator" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Photo Name &amp; Date Stamp</Link>
-                <Link href="/tools/ssc-photo-resizer" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">SSC Photo Resizer (20-50KB)</Link>
-                <Link href="/pdf/compress-to-200kb" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress PDF to 200KB</Link>
-                <Link href="/pdf/mask-aadhaar" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Mask Aadhaar Card (Offline)</Link>
+                <Link prefetch={false} href="/csc-cyber-cafe-tools" className="p-2 rounded-xl text-xs font-bold text-amber-800 hover:bg-amber-50 transition-colors">CSC &amp; Cyber Cafe Hub →</Link>
+                <Link prefetch={false} href="/govt-job-tools" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Govt Job Exam Tools Hub</Link>
+                <Link prefetch={false} href="/tools/aadhaar-card-print" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Aadhaar Card Print (A4 &amp; PVC)</Link>
+                <Link prefetch={false} href="/tools/pan-card-photo-resizer" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">PAN Photo Resizer (213x213)</Link>
+                <Link prefetch={false} href="/tools/signature-resizer-10-to-20kb" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Signature Resizer 10 to 20KB</Link>
+                <Link prefetch={false} href="/pdf/combine-marksheets" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Combine Marksheets (&lt;500KB)</Link>
+                <Link prefetch={false} href="/tools/photo-name-date-generator" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Photo Name &amp; Date Stamp</Link>
+                <Link prefetch={false} href="/tools/ssc-photo-resizer" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">SSC Photo Resizer (20-50KB)</Link>
+                <Link prefetch={false} href="/pdf/compress-to-200kb" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress PDF to 200KB</Link>
+                <Link prefetch={false} href="/pdf/mask-aadhaar" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Mask Aadhaar Card (Offline)</Link>
               </div>
             )}
           </div>
@@ -180,13 +180,13 @@ export function Footer() {
             </button>
             {openSection === 'company' && (
               <div className="p-4 bg-white border-t border-slate-100 grid grid-cols-1 gap-2 animate-in fade-in duration-150">
-                <Link href="/about" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">About Us (Founder &amp; Team)</Link>
-                <Link href="/contact" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Contact Support</Link>
-                <Link href="/security" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Security &amp; Zero-Server Architecture</Link>
-                <Link href="/privacy" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Privacy Policy</Link>
-                <Link href="/terms" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Terms of Service</Link>
-                <Link href="/blog" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Guides &amp; Exam Blog</Link>
-                <Link href="/download-app" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Download Offline Mobile App</Link>
+                <Link prefetch={false} href="/about" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">About Us (Founder &amp; Team)</Link>
+                <Link prefetch={false} href="/contact" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Contact Support</Link>
+                <Link prefetch={false} href="/security" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Security &amp; Zero-Server Architecture</Link>
+                <Link prefetch={false} href="/privacy" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Privacy Policy</Link>
+                <Link prefetch={false} href="/terms" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Terms of Service</Link>
+                <Link prefetch={false} href="/blog" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Guides &amp; Exam Blog</Link>
+                <Link prefetch={false} href="/download-app" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Download Offline Mobile App</Link>
                 <a href="mailto:hello@snab.co.in" className="p-2 rounded-xl text-xs font-medium text-indigo-600 hover:underline flex items-center gap-1.5">
                   <Mail className="w-3.5 h-3.5" />
                   <span>hello@snab.co.in</span>
@@ -277,23 +277,23 @@ export function Footer() {
               PDF Studio
             </h4>
             <ul className="space-y-2 text-xs">
-              <li><Link href="/pdf/habit-tracker-planner" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Printable Habit Tracker PDF</Link></li>
-              <li><Link href="/pdf/edit" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Edit PDF Online</Link></li>
-              <li><Link href="/pdf/mask-aadhaar" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Mask Aadhaar Card (Offline)</Link></li>
-              <li><Link href="/pdf/redact" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Permanently Redact PDF</Link></li>
-              <li><Link href="/pdf/combine-marksheets" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Combine Marksheets (&lt;500KB)</Link></li>
-              <li><Link href="/pdf/pdf-to-word" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">PDF to Word (DOCX)</Link></li>
-              <li><Link href="/pdf/word-to-pdf" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Word to PDF Converter</Link></li>
-              <li><Link href="/pdf/compress" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress PDF (Auto)</Link></li>
-              <li><Link href="/pdf/compress-to-100kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress PDF to 100KB</Link></li>
-              <li><Link href="/pdf/compress-to-200kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress PDF to 200KB</Link></li>
-              <li><Link href="/pdf/merge" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Merge PDF</Link></li>
-              <li><Link href="/pdf/split" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Split PDF</Link></li>
-              <li><Link href="/pdf/organize" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Organize &amp; Rotate PDF</Link></li>
-              <li><Link href="/pdf/ocr" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">PDF OCR (Text Extractor)</Link></li>
-              <li><Link href="/pdf/watermark" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Watermark PDF</Link></li>
-              <li><Link href="/pdf/protect" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Password Protect PDF</Link></li>
-              <li><Link href="/pdf/remove-password" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Unlock / Remove Password</Link></li>
+              <li><Link prefetch={false} href="/pdf/habit-tracker-planner" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Printable Habit Tracker PDF</Link></li>
+              <li><Link prefetch={false} href="/pdf/edit" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Edit PDF Online</Link></li>
+              <li><Link prefetch={false} href="/pdf/mask-aadhaar" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Mask Aadhaar Card (Offline)</Link></li>
+              <li><Link prefetch={false} href="/pdf/redact" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Permanently Redact PDF</Link></li>
+              <li><Link prefetch={false} href="/pdf/combine-marksheets" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Combine Marksheets (&lt;500KB)</Link></li>
+              <li><Link prefetch={false} href="/pdf/pdf-to-word" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">PDF to Word (DOCX)</Link></li>
+              <li><Link prefetch={false} href="/pdf/word-to-pdf" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Word to PDF Converter</Link></li>
+              <li><Link prefetch={false} href="/pdf/compress" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress PDF (Auto)</Link></li>
+              <li><Link prefetch={false} href="/pdf/compress-to-100kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress PDF to 100KB</Link></li>
+              <li><Link prefetch={false} href="/pdf/compress-to-200kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress PDF to 200KB</Link></li>
+              <li><Link prefetch={false} href="/pdf/merge" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Merge PDF</Link></li>
+              <li><Link prefetch={false} href="/pdf/split" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Split PDF</Link></li>
+              <li><Link prefetch={false} href="/pdf/organize" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Organize &amp; Rotate PDF</Link></li>
+              <li><Link prefetch={false} href="/pdf/ocr" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">PDF OCR (Text Extractor)</Link></li>
+              <li><Link prefetch={false} href="/pdf/watermark" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Watermark PDF</Link></li>
+              <li><Link prefetch={false} href="/pdf/protect" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Password Protect PDF</Link></li>
+              <li><Link prefetch={false} href="/pdf/remove-password" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Unlock / Remove Password</Link></li>
             </ul>
           </div>
 
@@ -303,22 +303,22 @@ export function Footer() {
               Image Studio
             </h4>
             <ul className="space-y-2 text-xs">
-              <li><Link href="/image/greeting-card-maker" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Printable Greeting &amp; Love Card Maker</Link></li>
-              <li><Link href="/image/polaroid-maker" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Polaroid &amp; Memory Card Maker</Link></li>
-              <li><Link href="/image/visa-photo-maker" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Visa &amp; Passport Photo (2x2&quot;)</Link></li>
-              <li><Link href="/image/pics-to-pdf" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Pics to PDF (Photos to PDF)</Link></li>
-              <li><Link href="/image/webp-to-jpg" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">WebP to JPG Converter</Link></li>
-              <li><Link href="/image/jpg-to-webp" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">JPG to WebP Converter</Link></li>
-              <li><Link href="/image/png-to-jpg" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">PNG to JPG Converter</Link></li>
-              <li><Link href="/image/png-to-pdf" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">PNG to PDF Converter</Link></li>
-              <li><Link href="/image/jpg-to-png" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">JPG to PNG Converter</Link></li>
-              <li><Link href="/image/compress" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress Image (Target KB)</Link></li>
-              <li><Link href="/image/compress-to-50kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress Image to 50KB</Link></li>
-              <li><Link href="/image/compress-to-100kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress Image to 100KB</Link></li>
-              <li><Link href="/image/passport-maker" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Passport Photo Maker</Link></li>
-              <li><Link href="/image/remove-background" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">AI Background Remover</Link></li>
-              <li><Link href="/image/convert-heic" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Apple HEIC to JPG</Link></li>
-              <li><Link href="/image/resize" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Resize Image (Pixels / %)</Link></li>
+              <li><Link prefetch={false} href="/image/greeting-card-maker" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Printable Greeting &amp; Love Card Maker</Link></li>
+              <li><Link prefetch={false} href="/image/polaroid-maker" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Polaroid &amp; Memory Card Maker</Link></li>
+              <li><Link prefetch={false} href="/image/visa-photo-maker" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Visa &amp; Passport Photo (2x2&quot;)</Link></li>
+              <li><Link prefetch={false} href="/image/pics-to-pdf" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Pics to PDF (Photos to PDF)</Link></li>
+              <li><Link prefetch={false} href="/image/webp-to-jpg" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">WebP to JPG Converter</Link></li>
+              <li><Link prefetch={false} href="/image/jpg-to-webp" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">JPG to WebP Converter</Link></li>
+              <li><Link prefetch={false} href="/image/png-to-jpg" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">PNG to JPG Converter</Link></li>
+              <li><Link prefetch={false} href="/image/png-to-pdf" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">PNG to PDF Converter</Link></li>
+              <li><Link prefetch={false} href="/image/jpg-to-png" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">JPG to PNG Converter</Link></li>
+              <li><Link prefetch={false} href="/image/compress" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress Image (Target KB)</Link></li>
+              <li><Link prefetch={false} href="/image/compress-to-50kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress Image to 50KB</Link></li>
+              <li><Link prefetch={false} href="/image/compress-to-100kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress Image to 100KB</Link></li>
+              <li><Link prefetch={false} href="/image/passport-maker" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Passport Photo Maker</Link></li>
+              <li><Link prefetch={false} href="/image/remove-background" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">AI Background Remover</Link></li>
+              <li><Link prefetch={false} href="/image/convert-heic" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Apple HEIC to JPG</Link></li>
+              <li><Link prefetch={false} href="/image/resize" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Resize Image (Pixels / %)</Link></li>
             </ul>
           </div>
 
@@ -329,20 +329,20 @@ export function Footer() {
               <span className="text-[9px] bg-amber-100 text-amber-800 font-extrabold px-1.5 py-0.2 rounded-full border border-amber-200">Hub</span>
             </h4>
             <ul className="space-y-2 text-xs">
-              <li><Link href="/csc-cyber-cafe-tools" className="text-amber-800 hover:text-amber-950 font-bold transition-colors">CSC &amp; Cyber Cafe Hub →</Link></li>
-              <li><Link href="/govt-job-tools" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Govt Job Exam Tools Hub</Link></li>
-              <li><Link href="/tools/aadhaar-card-print" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Aadhaar Card Print (A4 &amp; PVC)</Link></li>
-              <li><Link href="/tools/pan-card-photo-resizer" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">PAN Photo Resizer (213x213)</Link></li>
-              <li><Link href="/tools/signature-resizer-10-to-20kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Signature Resizer 10 to 20KB</Link></li>
-              <li><Link href="/pdf/combine-marksheets" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Combine Marksheets (&lt;500KB)</Link></li>
-              <li><Link href="/tools/photo-name-date-generator" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Photo Name &amp; Date Stamp</Link></li>
-              <li><Link href="/tools/ssc-photo-resizer" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">SSC Photo Resizer (20-50KB)</Link></li>
-              <li><Link href="/tools/photo-signature-joiner" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Photo &amp; Signature Joiner</Link></li>
-              <li><Link href="/tools/clean-black-white-signature" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Clean B&amp;W Signature Scan</Link></li>
-              <li><Link href="/tools/upsc-otr-photo-resizer" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">UPSC OTR Photo Resizer</Link></li>
-              <li><Link href="/pdf/compress-to-200kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress PDF to 200KB</Link></li>
-              <li><Link href="/pdf/compress-to-100kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress PDF to 100KB</Link></li>
-              <li><Link href="/pdf/mask-aadhaar" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Mask Aadhaar Card (Offline)</Link></li>
+              <li><Link prefetch={false} href="/csc-cyber-cafe-tools" className="text-amber-800 hover:text-amber-950 font-bold transition-colors">CSC &amp; Cyber Cafe Hub →</Link></li>
+              <li><Link prefetch={false} href="/govt-job-tools" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Govt Job Exam Tools Hub</Link></li>
+              <li><Link prefetch={false} href="/tools/aadhaar-card-print" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Aadhaar Card Print (A4 &amp; PVC)</Link></li>
+              <li><Link prefetch={false} href="/tools/pan-card-photo-resizer" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">PAN Photo Resizer (213x213)</Link></li>
+              <li><Link prefetch={false} href="/tools/signature-resizer-10-to-20kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Signature Resizer 10 to 20KB</Link></li>
+              <li><Link prefetch={false} href="/pdf/combine-marksheets" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Combine Marksheets (&lt;500KB)</Link></li>
+              <li><Link prefetch={false} href="/tools/photo-name-date-generator" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Photo Name &amp; Date Stamp</Link></li>
+              <li><Link prefetch={false} href="/tools/ssc-photo-resizer" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">SSC Photo Resizer (20-50KB)</Link></li>
+              <li><Link prefetch={false} href="/tools/photo-signature-joiner" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Photo &amp; Signature Joiner</Link></li>
+              <li><Link prefetch={false} href="/tools/clean-black-white-signature" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Clean B&amp;W Signature Scan</Link></li>
+              <li><Link prefetch={false} href="/tools/upsc-otr-photo-resizer" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">UPSC OTR Photo Resizer</Link></li>
+              <li><Link prefetch={false} href="/pdf/compress-to-200kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress PDF to 200KB</Link></li>
+              <li><Link prefetch={false} href="/pdf/compress-to-100kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress PDF to 100KB</Link></li>
+              <li><Link prefetch={false} href="/pdf/mask-aadhaar" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Mask Aadhaar Card (Offline)</Link></li>
             </ul>
           </div>
 
@@ -352,21 +352,21 @@ export function Footer() {
               Company &amp; Legal
             </h4>
             <ul className="space-y-2 text-xs">
-              <li><Link href="/about" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">About Us (Founder &amp; Team)</Link></li>
-              <li><Link href="/contact" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Contact Support</Link></li>
-              <li><Link href="/security" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Security &amp; Zero-Server Tech</Link></li>
-              <li><Link href="/privacy" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/terms" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Terms of Service</Link></li>
-              <li><Link href="/blog" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Guides &amp; Exam Blog</Link></li>
-              <li><Link href="/download-app" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Download Offline App (PWA)</Link></li>
-              <li><Link href="/utility/invoice-generator" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Free Invoice &amp; Rent Receipt</Link></li>
-              <li><Link href="/utility/keynote-to-powerpoint" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Apple Keynote to PDF (.key)</Link></li>
-              <li><Link href="/utility/metadata-remover" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">PDF &amp; EXIF Metadata Remover</Link></li>
-              <li><Link href="/utility/electricity-bill-calculator" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Electricity Bill Calculator</Link></li>
-              <li><Link href="/utility/epf-calculator" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">EPF Balance Calculator</Link></li>
-              <li><Link href="/utility/age-calculator" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Age Calculator &amp; Birthday</Link></li>
-              <li><Link href="/utility/percentage-calculator" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Percentage Calculator</Link></li>
-              <li><Link href="/social/whatsapp-direct-chat" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">WhatsApp Direct Chat</Link></li>
+              <li><Link prefetch={false} href="/about" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">About Us (Founder &amp; Team)</Link></li>
+              <li><Link prefetch={false} href="/contact" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Contact Support</Link></li>
+              <li><Link prefetch={false} href="/security" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Security &amp; Zero-Server Tech</Link></li>
+              <li><Link prefetch={false} href="/privacy" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Privacy Policy</Link></li>
+              <li><Link prefetch={false} href="/terms" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Terms of Service</Link></li>
+              <li><Link prefetch={false} href="/blog" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Guides &amp; Exam Blog</Link></li>
+              <li><Link prefetch={false} href="/download-app" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Download Offline App (PWA)</Link></li>
+              <li><Link prefetch={false} href="/utility/invoice-generator" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Free Invoice &amp; Rent Receipt</Link></li>
+              <li><Link prefetch={false} href="/utility/keynote-to-powerpoint" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Apple Keynote to PDF (.key)</Link></li>
+              <li><Link prefetch={false} href="/utility/metadata-remover" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">PDF &amp; EXIF Metadata Remover</Link></li>
+              <li><Link prefetch={false} href="/utility/electricity-bill-calculator" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Electricity Bill Calculator</Link></li>
+              <li><Link prefetch={false} href="/utility/epf-calculator" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">EPF Balance Calculator</Link></li>
+              <li><Link prefetch={false} href="/utility/age-calculator" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Age Calculator &amp; Birthday</Link></li>
+              <li><Link prefetch={false} href="/utility/percentage-calculator" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Percentage Calculator</Link></li>
+              <li><Link prefetch={false} href="/social/whatsapp-direct-chat" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">WhatsApp Direct Chat</Link></li>
               <li>
                 <a
                   href="https://www.snab.co.in"
@@ -401,8 +401,7 @@ export function Footer() {
             </div>
           </div>
 
-          <Link
-            href="/download-app"
+          <Link prefetch={false} href="/download-app"
             className="w-full md:w-auto px-5 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs shadow-lg transition-all flex items-center justify-center gap-2 shrink-0 cursor-pointer active:scale-95"
           >
             <Download className="w-4 h-4 text-indigo-200" />
@@ -436,19 +435,19 @@ export function Footer() {
               <span>Instagram</span>
             </a>
             <span>&bull;</span>
-            <Link href="/about" className="hover:text-indigo-600 transition-colors">About Us</Link>
+            <Link prefetch={false} href="/about" className="hover:text-indigo-600 transition-colors">About Us</Link>
             <span>&bull;</span>
-            <Link href="/contact" className="hover:text-indigo-600 transition-colors">Contact</Link>
+            <Link prefetch={false} href="/contact" className="hover:text-indigo-600 transition-colors">Contact</Link>
             <span>&bull;</span>
-            <Link href="/editorial-policy" className="hover:text-indigo-600 transition-colors">Editorial Policy</Link>
+            <Link prefetch={false} href="/editorial-policy" className="hover:text-indigo-600 transition-colors">Editorial Policy</Link>
             <span>&bull;</span>
-            <Link href="/affiliate-disclosure" className="hover:text-indigo-600 transition-colors">Affiliate Disclosure</Link>
+            <Link prefetch={false} href="/affiliate-disclosure" className="hover:text-indigo-600 transition-colors">Affiliate Disclosure</Link>
             <span>&bull;</span>
-            <Link href="/privacy" className="hover:text-indigo-600 transition-colors">Privacy Policy</Link>
+            <Link prefetch={false} href="/privacy" className="hover:text-indigo-600 transition-colors">Privacy Policy</Link>
             <span>&bull;</span>
-            <Link href="/terms" className="hover:text-indigo-600 transition-colors">Terms</Link>
+            <Link prefetch={false} href="/terms" className="hover:text-indigo-600 transition-colors">Terms</Link>
             <span>&bull;</span>
-            <Link href="/security" className="hover:text-indigo-600 transition-colors">Security</Link>
+            <Link prefetch={false} href="/security" className="hover:text-indigo-600 transition-colors">Security</Link>
           </div>
         </div>
       </div>

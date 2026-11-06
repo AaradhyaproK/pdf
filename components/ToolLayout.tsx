@@ -303,8 +303,7 @@ export function ToolLayout({
                             Helpful Guides
                           </h4>
                         </div>
-                        <Link
-                          href="/blog"
+                        <Link prefetch={false} href="/blog"
                           className="text-[10px] font-bold text-indigo-600 hover:underline flex items-center gap-0.5"
                         >
                           View All →
@@ -313,8 +312,7 @@ export function ToolLayout({
                       <ul className="space-y-2 text-xs">
                         {sidebarGuides.map((guide, gIdx) => (
                           <li key={gIdx}>
-                            <Link
-                              href={guide.href}
+                            <Link prefetch={false} href={guide.href}
                               className="p-2 rounded-xl bg-slate-50 hover:bg-indigo-50 hover:text-indigo-600 flex items-center justify-between border border-slate-200/70 transition-colors group"
                             >
                               <span className="font-semibold text-slate-800 group-hover:text-indigo-600 truncate mr-2">{guide.title}</span>
@@ -346,8 +344,7 @@ export function ToolLayout({
                         Install FileZenith on your computer or mobile to use our 100+ document &amp; photo tools anytime without internet.
                       </p>
                     </div>
-                    <Link
-                      href="/download-app"
+                    <Link prefetch={false} href="/download-app"
                       className="w-full py-2 px-3 rounded-xl bg-white hover:bg-slate-100 text-slate-900 text-xs font-black text-center flex items-center justify-center gap-1.5 transition-all shadow-xs"
                     >
                       <Download className="w-3.5 h-3.5" />
@@ -404,8 +401,7 @@ export function ToolLayout({
                     Helpful Guides
                   </h3>
                 </div>
-                <Link
-                  href="/blog"
+                <Link prefetch={false} href="/blog"
                   className="text-[10px] font-bold text-indigo-600 hover:underline flex items-center gap-0.5"
                 >
                   View All →
@@ -414,8 +410,7 @@ export function ToolLayout({
               <ul className="space-y-2 text-xs">
                 {sidebarGuides.map((guide, gIdx) => (
                   <li key={gIdx}>
-                    <Link
-                      href={guide.href}
+                    <Link prefetch={false} href={guide.href}
                       className="p-2 rounded-xl bg-slate-50 hover:bg-indigo-50 hover:text-indigo-600 flex items-center justify-between border border-slate-200/70 transition-colors group"
                     >
                       <span className="font-semibold text-slate-800 group-hover:text-indigo-600">{guide.title}</span>
@@ -437,8 +432,7 @@ export function ToolLayout({
                     Popular File Tools
                   </h3>
                 </div>
-                <Link
-                  href={slug.includes('image') ? '/image-tools' : slug.includes('utility') ? '/utility-tools' : '/pdf-tools'}
+                <Link prefetch={false} href={slug.includes('image') ? '/image-tools' : slug.includes('utility') ? '/utility-tools' : '/pdf-tools'}
                   className="text-[10px] font-bold text-rose-600 hover:underline flex items-center gap-0.5"
                 >
                   Explore Hub →
@@ -447,8 +441,7 @@ export function ToolLayout({
               <ul className="space-y-2 text-xs">
                 {sidebarTools.map((tool) => (
                   <li key={tool.href}>
-                    <Link
-                      href={tool.href}
+                    <Link prefetch={false} href={tool.href}
                       className="p-2.5 rounded-xl bg-slate-50 hover:bg-rose-50/70 hover:text-rose-700 flex items-center justify-between border border-slate-200/70 transition-colors group"
                     >
                       <div className="min-w-0 pr-2">
@@ -540,8 +533,7 @@ export function ToolLayout({
               <p className="text-[11px] text-slate-300 leading-relaxed font-medium">
                 Install FileZenith on your computer or smartphone to use all 100+ document and image tools anytime, anywhere.
               </p>
-              <Link
-                href="/download-app"
+              <Link prefetch={false} href="/download-app"
                 className="w-full py-2 px-3 rounded-xl bg-white hover:bg-slate-100 text-slate-900 text-xs font-black text-center flex items-center justify-center gap-1.5 transition-all shadow-xs"
               >
                 <Download className="w-3.5 h-3.5" />

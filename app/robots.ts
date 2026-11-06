@@ -10,6 +10,15 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
       },
       {
+        userAgent: 'Googlebot',
+        allow: '/',
+        disallow: ['/admin/', '/api/'],
+      },
+      {
+        userAgent: ['Bytespider', 'PetalBot', 'Amazonbot', 'ClaudeBot', 'GPTBot', 'CCBot'],
+        disallow: '/',
+      },
+      {
         userAgent: '*',
         allow: '/',
         disallow: ['/admin/', '/api/'],

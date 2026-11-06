@@ -264,8 +264,7 @@ export function MobileBottomNav() {
 
             {/* Header */}
             <div className="px-5 py-3 border-b border-slate-200/60 flex items-center justify-between shrink-0">
-              <Link
-                href={
+              <Link prefetch={false} href={
                   activeDrawer === 'pdf'
                     ? '/pdf-tools'
                     : activeDrawer === 'image'
@@ -348,8 +347,7 @@ export function MobileBottomNav() {
                   const badgeStyle = 'bg-slate-100 text-slate-700 border-slate-200/80';
 
                   return (
-                    <Link
-                      key={tool.slug}
+                    <Link prefetch={false} key={tool.slug}
                       href={tool.slug}
                       onClick={(e) => {
                         // Prevent navigation if the user was dragging/scrolling the list
@@ -404,8 +402,7 @@ export function MobileBottomNav() {
       >
         <div className="grid grid-cols-5 gap-1 items-center relative">
           {/* 1. Home Tab */}
-          <Link
-            href="/"
+          <Link prefetch={false} href="/"
             className={`relative flex flex-col items-center justify-center py-2 px-1 rounded-full transition-all duration-200 active:scale-90 ${
               activeTab === 'home' ? 'text-slate-900 font-extrabold' : 'text-slate-600 hover:text-slate-900'
             }`}
@@ -440,8 +437,7 @@ export function MobileBottomNav() {
           </button>
 
           {/* 3. Create PDF (Center Highlighted Transparent Liquid Glass Orb) */}
-          <Link
-            href="/image/pics-to-pdf"
+          <Link prefetch={false} href="/image/pics-to-pdf"
             className="relative flex flex-col items-center justify-center -mt-5 active:scale-90 transition-transform duration-150 group"
           >
             <div className="w-12 h-12 rounded-full liquid-orb-glow flex items-center justify-center relative group-hover:scale-105 transition-transform">

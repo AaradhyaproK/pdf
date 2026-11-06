@@ -6,12 +6,12 @@ import { getAllPosts } from '@/lib/blog';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.filezenith.com';
-
   const defaultOgImage = `${baseUrl}/filezenith-og.png`;
+  const siteBuildDate = new Date('2026-11-06T00:00:00.000Z');
 
   const categoryRoutes = Object.keys(CATEGORY_REGISTRY).map((slug) => ({
     url: `${baseUrl}/${slug}`,
-    lastModified: new Date(),
+    lastModified: siteBuildDate,
     changeFrequency: 'weekly' as const,
     priority: 0.9,
     images: [defaultOgImage],
@@ -19,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const toolRoutes = Object.entries(SEO_REGISTRY).map(([slug]) => ({
     url: `${baseUrl}${slug}`,
-    lastModified: new Date(),
+    lastModified: siteBuildDate,
     changeFrequency: 'daily' as const,
     priority: slug.includes('compress') || slug.includes('edit') || slug.includes('pics-to-pdf') || slug.includes('excel') ? 0.95 : 0.85,
     images: [defaultOgImage],
@@ -27,7 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const presetRoutes = Object.keys(PRESET_REGISTRY).map((slug) => ({
     url: `${baseUrl}/tools/${slug}`,
-    lastModified: new Date(),
+    lastModified: siteBuildDate,
     changeFrequency: 'weekly' as const,
     priority: 0.9,
     images: [defaultOgImage],
@@ -51,7 +51,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/tools/aadhaar-card-print',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: new Date(),
+    lastModified: siteBuildDate,
     changeFrequency: 'weekly' as const,
     priority:
       route === ''
