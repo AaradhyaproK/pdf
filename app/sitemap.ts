@@ -21,7 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}${slug}`,
     lastModified: siteBuildDate,
     changeFrequency: 'daily' as const,
-    priority: slug.includes('compress') || slug.includes('edit') || slug.includes('pics-to-pdf') || slug.includes('excel') ? 0.95 : 0.85,
+    priority: slug.includes('compress') || slug.includes('edit') || slug.includes('pics-to-pdf') || slug.includes('excel') || slug.includes('azw3') ? 0.95 : 0.85,
     images: [defaultOgImage],
   }));
 

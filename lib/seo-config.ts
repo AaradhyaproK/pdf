@@ -925,6 +925,48 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { feature: 'Account / Email Requirement', omnitool: 'None (Instant Direct Download)', standardCloud: 'Email Registration or Paywall Prompts' }
     ]
   },
+  '/pdf/pdf-to-azw3': {
+    slug: '/pdf/pdf-to-azw3',
+    title: 'PDF to AZW3 Converter — Convert PDF to Kindle eBook Online Free',
+    metaTitle: 'PDF to AZW3 Converter — 100% Free Kindle eBook Reflow Engine | FileZenith',
+    description: 'Convert PDF to AZW3 (KF8) and Kindle-optimized EPUB online free. Reflows fixed PDF pages into genuine Kindle eBooks with Bookerly fonts, adjustable text, and zero server uploads.',
+    keywords: [
+      'pdf to azw3',
+      'convert pdf to azw3',
+      'pdf to azw3 converter',
+      'pdf to kindle converter',
+      'convert pdf to kindle azw3 online free',
+      'pdf to azw3 calibre alternative',
+      'read pdf on kindle paperwhite',
+      'pdf to reflowable kindle ebook',
+      'convert pdf to kindle without email',
+      'pdf to azw3 online no limit',
+      'pdf to kf8 converter',
+      'send to kindle pdf converter',
+      'kindle paperwhite pdf to azw3',
+      'pdf to mobi azw3 converter free'
+    ],
+    category: 'pdf',
+    howToSteps: [
+      { title: 'Upload PDF Document', text: 'Select or drag and drop your PDF book, research paper, or textbook into the client-side Kindle converter workspace.' },
+      { title: 'Select Kindle Model & Typography Presets', text: 'Choose your Kindle device (Paperwhite, Basic, Oasis, Scribe), select preferred font (Bookerly, Amazon Ember, Caecilia), and choose indented literary or block paragraphs.' },
+      { title: 'Convert & Download AZW3 or EPUB', text: 'Click Convert to Kindle eBook. Preview chapters in the simulated e-ink reader and download your .azw3 (for USB transfer) or .epub (for Amazon Send to Kindle).' }
+    ],
+    faqs: [
+      { question: 'Why should I convert a PDF to AZW3 instead of reading raw PDF on Kindle?', answer: 'PDFs have fixed page layouts that force tiny, unreadable text on 6-inch e-ink screens. Converting to AZW3 (Kindle Format 8) reflows the text so you can change font size, adjust margins, look up words in the Kindle dictionary, and read comfortably without pinch-zooming.' },
+      { question: 'How do I transfer the converted AZW3 file to my Kindle?', answer: 'For direct USB transfer: plug your Kindle into your computer with a USB cable and drag the .azw3 file into the "documents" folder. For wireless transfer: download the .epub file and drag it into amazon.com/sendtokindle.' },
+      { question: 'Is FileZenith PDF to AZW3 converter 100% free with no file size limits?', answer: 'Yes! FileZenith is completely free with no file size caps, no conversion limits, no watermarks, and no registration or email requirements.' },
+      { question: 'What is the difference between AZW3 and EPUB for Kindle?', answer: 'AZW3 (KF8) is Amazon\'s native binary eBook format for direct USB sideloading onto Kindle hardware. EPUB is the modern standard used for Amazon\'s wireless "Send to Kindle" service.' },
+      { question: 'Are my confidential books or documents uploaded to any remote server?', answer: 'No! FileZenith operates 100% in your local web browser RAM via client-side JavaScript. Your documents never leave your computer or phone.' },
+      { question: 'Which Kindle e-reader models are supported?', answer: 'All Kindle devices are supported, including Kindle Paperwhite (all generations), Kindle Basic, Kindle Oasis, Kindle Scribe, Kindle Voyage, and the Kindle app on iOS and Android.' }
+    ],
+    comparisonTable: [
+      { feature: 'Reading Experience on Kindle', omnitool: 'Reflowable Text, Custom Bookerly Font & Full Dictionary Lookup', standardCloud: 'Fixed Rigid Layout with Slow Pinch-and-Zoom Lag' },
+      { feature: 'Data Privacy', omnitool: '100% Client-Side in Browser RAM (Zero Server Uploads)', standardCloud: 'Uploaded and Stored on Third-Party Cloud Servers' },
+      { feature: 'File Size Limits', omnitool: 'Unlimited (Constrained Only by Device RAM)', standardCloud: 'Restricted to 25MB - 50MB Free Tiers' },
+      { feature: 'Kindle Formats Supported', omnitool: 'Dual Export: Native AZW3 (USB) & Kindle EPUB (Send to Kindle)', standardCloud: 'Single Format with Mandatory Email Submissions' }
+    ]
+  },
   '/pdf/pdf-to-excel': {
     slug: '/pdf/pdf-to-excel',
     title: 'PDF to Excel Converter — Convert PDF to XLSX Spreadsheet Online Free',

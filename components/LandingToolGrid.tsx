@@ -60,6 +60,7 @@ import {
   Globe,
   PenTool,
   FileSpreadsheet,
+  BookOpen,
 } from 'lucide-react';
 
 export interface ToolItem {
@@ -1413,6 +1414,20 @@ export const ALL_TOOLS: ToolItem[] = [
     iconBgClass: 'bg-blue-50 text-blue-600 border-blue-100 group-hover:bg-blue-600 group-hover:text-white',
     hoverTitleClass: 'group-hover:text-blue-600',
     badgeStyle: 'bg-blue-50 text-blue-700 border-blue-200',
+  },
+  {
+    id: 'pdf-to-azw3',
+    name: 'PDF to AZW3 (Kindle)',
+    slug: '/pdf/pdf-to-azw3',
+    desc: 'Convert PDF to reflowable Kindle eBook (AZW3 & EPUB).',
+    category: 'pdf',
+    tags: ['convert-from'],
+    icon: BookOpen,
+    badge: 'Kindle KF8',
+    colorClass: 'text-amber-600',
+    iconBgClass: 'bg-amber-50 text-amber-600 border-amber-100 group-hover:bg-amber-600 group-hover:text-white',
+    hoverTitleClass: 'group-hover:text-amber-600',
+    badgeStyle: 'bg-amber-50 text-amber-700 border-amber-200',
   },
   {
     id: 'word-to-pdf',

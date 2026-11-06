@@ -83,6 +83,7 @@ export function Footer() {
             {openSection === 'pdf' && (
               <div className="p-4 bg-white border-t border-slate-100 grid grid-cols-1 gap-2 animate-in fade-in duration-150">
                 <Link prefetch={false} href="/pdf/edit" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Edit PDF Online</Link>
+                <Link prefetch={false} href="/pdf/pdf-to-azw3" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">PDF to AZW3 (Kindle eBook)</Link>
                 <Link prefetch={false} href="/pdf/pdf-to-word" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">PDF to Word (DOCX)</Link>
                 <Link prefetch={false} href="/pdf/word-to-pdf" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Word to PDF Converter</Link>
                 <Link prefetch={false} href="/pdf/compress" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress PDF (Auto)</Link>
@@ -282,6 +283,7 @@ export function Footer() {
               <li><Link prefetch={false} href="/pdf/mask-aadhaar" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Mask Aadhaar Card (Offline)</Link></li>
               <li><Link prefetch={false} href="/pdf/redact" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Permanently Redact PDF</Link></li>
               <li><Link prefetch={false} href="/pdf/combine-marksheets" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Combine Marksheets (&lt;500KB)</Link></li>
+              <li><Link prefetch={false} href="/pdf/pdf-to-azw3" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">PDF to AZW3 (Kindle eBook)</Link></li>
               <li><Link prefetch={false} href="/pdf/pdf-to-word" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">PDF to Word (DOCX)</Link></li>
               <li><Link prefetch={false} href="/pdf/word-to-pdf" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Word to PDF Converter</Link></li>
               <li><Link prefetch={false} href="/pdf/compress" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress PDF (Auto)</Link></li>

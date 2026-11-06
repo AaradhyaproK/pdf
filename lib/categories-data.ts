@@ -76,7 +76,8 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
           { name: 'Word to PDF Converter', slug: '/pdf/word-to-pdf', description: 'Convert Word DOCX documents into crisp, publication-ready PDF files instantly.', isPopular: true, badge: 'New', iconName: 'FileCode' },
           { name: 'HTML & URL to PDF Converter', slug: '/tools/html-to-pdf', description: 'Convert website URLs, HTML code, templates & files into vector A4 & Letter PDF.', isPopular: true, badge: 'Popular', iconName: 'Globe' },
           { name: 'PDF to JPG / PNG Converter', slug: '/pdf/to-image', description: 'Extract and convert every PDF page into high-resolution JPG or PNG image files.', iconName: 'FileImage' },
-          { name: 'Pics to PDF Converter', slug: '/image/pics-to-pdf', description: 'Combine photos, camera scans, JPG, PNG & WebP images into a single clean PDF document.', isPopular: true, badge: 'Popular', iconName: 'Camera' }
+          { name: 'Pics to PDF Converter', slug: '/image/pics-to-pdf', description: 'Combine photos, camera scans, JPG, PNG & WebP images into a single clean PDF document.', isPopular: true, badge: 'Popular', iconName: 'Camera' },
+          { name: 'PDF to AZW3 (Kindle eBook)', slug: '/pdf/pdf-to-azw3', description: 'Convert PDF documents into reflowable Kindle eBooks (.azw3, .epub) with Bookerly fonts for Paperwhite & Oasis.', isPopular: true, badge: 'Kindle KF8', iconName: 'BookOpen' }
         ]
       },
       {
