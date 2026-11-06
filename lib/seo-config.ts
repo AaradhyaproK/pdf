@@ -1929,26 +1929,32 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
   '/utility/text-to-speech': {
     slug: '/utility/text-to-speech',
-    title: 'Free Text to Speech (TTS) Online Generator | No Limits',
-    metaTitle: 'Free Text to Speech Online | Best AI Voice Generator No Limit',
-    description: 'Convert text to speech online free with human-like AI voices. No character limits, no sign-up required. Best free text to voice generator for YouTube, TikTok, and presentations.',
+    title: 'Free AI Text to Speech (TTS) Online Generator with Audio Download',
+    metaTitle: 'Free Text to Speech Online with Audio Download | Best AI Voice Generator',
+    description: 'Convert text to natural human speech online with direct audio download (WAV/WebM). Zero character limits, 100+ natural accents, live karaoke word highlighting, and speed tuning for YouTube, Reels & podcasts.',
     keywords: [
       'free text to speech online no limit',
+      'text to speech with audio download',
+      'text to speech download mp3 free',
       'text to voice generator free',
-      'ai text to speech free',
+      'ai text to speech free download',
       'convert text to audio free online',
+      'free tts wav generator',
       'human sounding text to speech',
-      'text to speech reader'
+      'text to speech for youtube shorts',
+      'text to voice reader online'
     ],
     category: 'utility',
     howToSteps: [
-      { title: 'Type or Paste Text', text: 'Enter the text you want to be read aloud in the provided text area.' },
-      { title: 'Select a Voice', text: 'Choose from dozens of natural-sounding languages and accents provided by your browser.' },
-      { title: 'Play Audio', text: 'Click Play to hear your text spoken instantly. Adjust the speed and pitch for custom voice effects.' }
+      { title: 'Enter Your Script', text: 'Type, paste, or select from one-click creator templates for YouTube, TikTok hooks, meditation, or podcast narration.' },
+      { title: 'Customize Voice & Accent', text: 'Select from hundreds of natural neural accents (US, UK, Indian, Spanish, etc.), and calibrate speed and pitch.' },
+      { title: 'Listen & Download Audio', text: 'Play with live karaoke-style word highlighting, or click Record & Download to export crystal-clear studio-grade WAV/WebM audio.' }
     ],
     faqs: [
-      { question: 'Is this text to speech generator really free with no limits?', answer: 'Yes! It utilizes your native device Text-to-Speech engine, which means there are absolutely zero character limits and zero API costs. It is 100% free forever.' },
-      { question: 'Can I use these voices for YouTube or TikTok?', answer: 'Yes, because the voices are generated locally by your device OS (Windows, Mac, iOS, Android), you can use system audio recorders to capture the audio and use it in your videos.' }
+      { question: 'Can I download the generated audio directly?', answer: 'Yes! FileZenith features an in-browser audio capture studio that records the high-fidelity neural voice in real time and lets you download standard WAV or WebM audio files ready for Premiere, CapCut, DaVinci Resolve, or Final Cut Pro.' },
+      { question: 'Are there any character limits or subscription fees?', answer: 'No! Unlike ElevenLabs or Murf that charge monthly subscriptions or cap text at 300 characters, FileZenith runs 100% locally in your browser with zero character limits, zero API billing, and no sign-up required.' },
+      { question: 'Can I monetize YouTube Shorts, Reels, and TikTok videos using these voices?', answer: 'Yes! Content creators use FileZenith voices for monetized YouTube Shorts, TikToks, Reels, audiobooks, and e-learning courses without copyright issues.' },
+      { question: 'Is my text private and secure?', answer: 'Absolutely. All speech synthesis and audio recording happen locally on your device. Your scripts, private notes, and documents are never uploaded to any remote server or stored in any database.' }
     ]
   },
   '/image/color-palette-extractor': {
