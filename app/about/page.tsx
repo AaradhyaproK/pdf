@@ -248,6 +248,25 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* How FileZenith Is Funded (Transparency & Ethics) */}
+      <section className="p-6 sm:p-10 rounded-3xl bg-slate-50 border border-slate-200/90 shadow-2xs space-y-3">
+        <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-emerald-700">
+          <ShieldCheck className="w-4 h-4 text-emerald-600" />
+          <span>Funding & Sustainability Model</span>
+        </div>
+        <h2 className="text-xl sm:text-2xl font-black text-slate-900">
+          How FileZenith Is Funded
+        </h2>
+        <div className="space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+          <p>
+            FileZenith is 100% free for all students, job applicants, and professionals. We do not charge subscription fees, sell user data, or hide essential features behind credit-card paywalls.
+          </p>
+          <p>
+            To sustainably cover our domain registration, edge hosting, and continuous software development costs, we display non-intrusive contextual advertisements served through Google AdSense. This advertising model allows us to keep all document tools, examination photo resizers, and conversion utilities accessible to everyone without cost.
+          </p>
+        </div>
+      </section>
+
       {/* Corporate Identity & Physical Address */}
       <section className="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-6 sm:p-10 space-y-5 shadow-xl border border-slate-800">
         <div className="flex items-center gap-2 text-[10px] sm:text-xs font-black text-indigo-300 uppercase tracking-wider bg-indigo-500/20 px-3 py-1 rounded-full w-fit border border-indigo-500/30">

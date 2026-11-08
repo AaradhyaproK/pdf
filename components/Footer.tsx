@@ -443,8 +443,6 @@ export function Footer() {
             <span>&bull;</span>
             <Link prefetch={false} href="/editorial-policy" className="hover:text-indigo-600 transition-colors">Editorial Policy</Link>
             <span>&bull;</span>
-            <Link prefetch={false} href="/affiliate-disclosure" className="hover:text-indigo-600 transition-colors">Affiliate Disclosure</Link>
-            <span>&bull;</span>
             <Link prefetch={false} href="/privacy" className="hover:text-indigo-600 transition-colors">Privacy Policy</Link>
             <span>&bull;</span>
             <Link prefetch={false} href="/terms" className="hover:text-indigo-600 transition-colors">Terms</Link>

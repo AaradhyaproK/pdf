@@ -359,6 +359,11 @@ const nextConfig: NextConfig = {
         destination: '/about',
         permanent: true,
       },
+      {
+        source: '/affiliate-disclosure',
+        destination: '/editorial-policy',
+        permanent: true,
+      },
     ];
   },
 };

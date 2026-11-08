@@ -169,13 +169,6 @@ export default function PanCardPhotoResizerPage() {
       price: '0.00',
       priceCurrency: 'INR',
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      reviewCount: '2180',
-      bestRating: '5',
-      worstRating: '1',
-    },
     featureList: [
       'Exact 213x213 pixels 300 DPI photo resizing for NSDL & UTIITSL',
       'Exact 444x205 pixels 300 DPI signature cropping',

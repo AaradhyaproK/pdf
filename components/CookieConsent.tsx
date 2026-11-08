@@ -21,6 +21,17 @@ export function CookieConsent() {
     }
   }, []);
 
+  const dispatchConsent = (analytics: boolean, ads: boolean) => {
+    if (typeof window !== 'undefined' && typeof (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag === 'function') {
+      (window as unknown as { gtag: (...args: unknown[]) => void }).gtag('consent', 'update', {
+        ad_storage: ads ? 'granted' : 'denied',
+        ad_user_data: ads ? 'granted' : 'denied',
+        ad_personalization: ads ? 'granted' : 'denied',
+        analytics_storage: analytics ? 'granted' : 'denied',
+      });
+    }
+  };
+
   const handleConsentAll = () => {
     localStorage.setItem('filezenith_cmp_consent', JSON.stringify({
       status: 'accepted_all',
@@ -28,6 +39,7 @@ export function CookieConsent() {
       analytics: true,
       personalizedAds: true,
     }));
+    dispatchConsent(true, true);
     setShow(false);
     setShowManageModal(false);
   };
@@ -39,6 +51,7 @@ export function CookieConsent() {
       analytics: false,
       personalizedAds: false,
     }));
+    dispatchConsent(false, false);
     setShow(false);
     setShowManageModal(false);
   };
@@ -50,6 +63,7 @@ export function CookieConsent() {
       analytics: preferences.analytics,
       personalizedAds: preferences.personalizedAds,
     }));
+    dispatchConsent(preferences.analytics, preferences.personalizedAds);
     setShow(false);
     setShowManageModal(false);
   };

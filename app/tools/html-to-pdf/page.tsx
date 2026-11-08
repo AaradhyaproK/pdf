@@ -149,13 +149,6 @@ export default function HtmlToPdfPage() {
       price: '0',
       priceCurrency: 'USD',
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      bestRating: '5',
-      worstRating: '1',
-      ratingCount: '4120',
-    },
     featureList: [
       'Fetch and convert live website URLs into PDF',
       '100% Client-Side In-Browser Rendering',

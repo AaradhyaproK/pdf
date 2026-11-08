@@ -102,6 +102,17 @@ export default function PrivacyPolicyPage() {
           <li>
             <strong>Opting Out of Personalized Advertising:</strong> Users may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline font-semibold">Google Ads Settings</a>. Alternatively, you can opt out of third-party vendor use of cookies for personalized advertising by visiting <a href="http://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline font-semibold">www.aboutads.info</a>.
           </li>
+          <li>
+            <strong>Google Partner Sites Policy:</strong> To learn how Google collects, uses, and protects data when you visit sites that display Google AdSense ads, please visit Google&apos;s official policy page:{' '}
+            <a
+              href="https://policies.google.com/technologies/partner-sites"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-indigo-600 hover:underline font-semibold inline-flex items-center gap-1"
+            >
+              How Google uses information from sites or apps that use our services
+            </a>.
+          </li>
         </ul>
       </section>
 

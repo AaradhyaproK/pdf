@@ -88,11 +88,6 @@ const JSON_LD_SCHEMAS = [
     name: 'FileZenith Online PDF & Image Studio',
     operatingSystem: 'Any (Web Browser)',
     applicationCategory: 'BusinessApplication',
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      reviewCount: '58420',
-    },
     offers: {
       '@type': 'Offer',
       price: '0',

@@ -148,13 +148,6 @@ export default function OnlineSignatureMakerPage() {
       price: '0.00',
       priceCurrency: 'USD',
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      reviewCount: '3420',
-      bestRating: '5',
-      worstRating: '1',
-    },
     featureList: [
       'Draw smooth digital signature with finger, stylus, or mouse',
       'Smooth Bezier curve ink interpolation',

@@ -41,7 +41,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/csc-cyber-cafe-tools',
     '/download-app',
     '/editorial-policy',
-    '/affiliate-disclosure',
     '/privacy',
     '/security',
     '/studio',
@@ -124,6 +123,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/utility/love-calculator',
     '/presets/ssc-pdf-200kb',
     '/presets/upsc-pdf-300kb',
+    '/affiliate-disclosure',
   ]);
 
   const allRoutes = [...staticRoutes, ...categoryRoutes, ...toolRoutes, ...presetRoutes, ...blogRoutes].filter((item) => {
