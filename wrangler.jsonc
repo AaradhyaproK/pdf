@@ -10,6 +10,16 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
+  "routes": [
+    {
+      "pattern": "filezenith.com",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.filezenith.com",
+      "custom_domain": true
+    }
+  ],
   "observability": {
     "enabled": true
   }
