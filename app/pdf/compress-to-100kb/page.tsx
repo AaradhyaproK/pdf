@@ -156,13 +156,13 @@ export default function CompressPDFTo100KBPage() {
           <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500 pt-2 border-t border-slate-100">
             <span>Other common targets:</span>
             <Link
-              href="/pdf/compress-to-200kb"
+              href="/pdf/compress#200kb"
               className="px-2.5 py-1 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 text-slate-700 rounded-lg font-medium transition-colors"
             >
               Compress to 200KB →
             </Link>
             <Link
-              href="/pdf/compress-to-1mb"
+              href="/pdf/compress#1mb"
               className="px-2.5 py-1 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 text-slate-700 rounded-lg font-medium transition-colors"
             >
               Compress to 1MB →

@@ -480,7 +480,7 @@ export default function AadhaarCardPrintPage() {
                   },
                   {
                     name: 'Signature Resizer 10 to 20KB',
-                    slug: '/tools/signature-resizer-10-to-20kb',
+                    slug: '/tools/online-signature-maker#resize',
                     desc: 'Clean signature scan with Magic B&W cleanup.',
                   },
                   {

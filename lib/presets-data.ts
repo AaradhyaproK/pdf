@@ -90,10 +90,10 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
     ],
     relatedTools: [
       { name: 'Online Signature Maker (Draw & Type)', slug: '/tools/online-signature-maker', desc: 'Draw signature with mouse/finger or type in cursive.' },
-      { name: 'Clean B&W Signature', slug: '/tools/clean-black-white-signature', desc: 'Remove gray paper background noise.' },
+      { name: 'Clean B&W Signature', slug: '/tools/online-signature-maker#clean', desc: 'Remove gray paper background noise.' },
       { name: 'SSC Photo Resizer', slug: '/tools/ssc-photo-resizer', desc: 'SSC photo with name & date stamp.' },
-      { name: 'Compress Image to 20KB', slug: '/image/compress-to-20kb', desc: 'Generic 20KB file size compressor.' },
-      { name: 'GATE Signature Resizer', slug: '/tools/gate-signature-resizer', desc: 'GATE 560x160 px signature format.' }
+      { name: 'Compress Image to 20KB', slug: '/image/compress#20kb', desc: 'Generic 20KB file size compressor.' },
+      { name: 'GATE Signature Resizer', slug: '/tools/online-signature-maker#gate', desc: 'GATE 560x160 px signature format.' }
     ],
     keywords: [
       'signature resizer 10 to 20kb',
@@ -169,9 +169,9 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
       { question: 'How old can the photograph be for SSC forms?', answer: 'The photograph must not be more than 3 months old from the date of publication of the examination notice.' }
     ],
     relatedTools: [
-      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Format signature for SSC portal.' },
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/online-signature-maker#resize', desc: 'Format signature for SSC portal.' },
       { name: 'Photo Name & Date Generator', slug: '/tools/photo-name-date-generator', desc: 'Add candidate name bar to photo.' },
-      { name: 'Compress Image to 50KB', slug: '/image/compress-to-50kb', desc: 'Compress image under 50KB limit.' },
+      { name: 'Compress Image to 50KB', slug: '/image/compress#50kb', desc: 'Compress image under 50KB limit.' },
       { name: 'Aadhaar Card Print Tool', slug: '/tools/aadhaar-card-print', desc: 'Print Aadhaar ID card for exam center entry.' }
     ],
     keywords: [
@@ -248,9 +248,9 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
       { question: 'Can I upload photo with spectacles in UPSC OTR?', answer: 'UPSC advises against spectacles or tinted glasses to prevent flash reflection over the eyes. If you wear prescription spectacles regularly, ensure eyes are clearly visible without glare.' }
     ],
     relatedTools: [
-      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Resize signature file.' },
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/online-signature-maker#resize', desc: 'Resize signature file.' },
       { name: 'Photo & Signature Joiner', slug: '/tools/photo-signature-joiner', desc: 'Combine photo & signature.' },
-      { name: 'Compress Image to 100KB', slug: '/image/compress-to-100kb', desc: 'Target 100KB compressor.' },
+      { name: 'Compress Image to 100KB', slug: '/image/compress#100kb', desc: 'Target 100KB compressor.' },
       { name: 'Aadhaar Card Print Tool', slug: '/tools/aadhaar-card-print', desc: 'Format Aadhaar card for UPSC verification.' }
     ],
     keywords: [
@@ -316,8 +316,8 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
       { question: 'Why does IBPS portal show "File size not within limit" error?', answer: 'This occurs if the photo is over 50KB or under 20KB. Our engine automatically binary searches quality to land at ~45KB.' }
     ],
     relatedTools: [
-      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Format IBPS signature.' },
-      { name: 'Compress Image to 50KB', slug: '/image/compress-to-50kb', desc: '50KB size ceiling.' }
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/online-signature-maker#resize', desc: 'Format IBPS signature.' },
+      { name: 'Compress Image to 50KB', slug: '/image/compress#50kb', desc: '50KB size ceiling.' }
     ],
     keywords: [
       'ibps photo resizer 20 to 50kb',
@@ -373,8 +373,8 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
       { question: 'Can I use photo with cap or dark glasses?', answer: 'No, Railway board strictly rejects photographs with caps, goggles, or heavy shadows.' }
     ],
     relatedTools: [
-      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Format RRB signature.' },
-      { name: 'Compress Image to 50KB', slug: '/image/compress-to-50kb', desc: 'Shrink photo under 50KB.' }
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/online-signature-maker#resize', desc: 'Format RRB signature.' },
+      { name: 'Compress Image to 50KB', slug: '/image/compress#50kb', desc: 'Shrink photo under 50KB.' }
     ],
     keywords: [
       'rrb photo resizer 30 to 50kb',
@@ -439,8 +439,8 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
     ],
     relatedTools: [
       { name: 'Photo Name & Date Generator', slug: '/tools/photo-name-date-generator', desc: 'Add candidate name stamp.' },
-      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'NEET signature resizer.' },
-      { name: 'Compress Image to 100KB', slug: '/image/compress-to-100kb', desc: 'Postcard photo compressor.' },
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/online-signature-maker#resize', desc: 'NEET signature resizer.' },
+      { name: 'Compress Image to 100KB', slug: '/image/compress#100kb', desc: 'Postcard photo compressor.' },
       { name: 'Aadhaar Card Print Tool', slug: '/tools/aadhaar-card-print', desc: 'Print Aadhaar card for NEET center entry.' }
     ],
     keywords: [
@@ -495,8 +495,8 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
       { question: 'What are BPSC signature requirements in Hindi and English?', answer: 'BPSC requires both English and Hindi signatures in separate boxes between 10KB and 20KB.' }
     ],
     relatedTools: [
-      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'BPSC signature size tool.' },
-      { name: 'Compress Image to 50KB', slug: '/image/compress-to-50kb', desc: 'Compress image under 50KB.' }
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/online-signature-maker#resize', desc: 'BPSC signature size tool.' },
+      { name: 'Compress Image to 50KB', slug: '/image/compress#50kb', desc: 'Compress image under 50KB.' }
     ],
     keywords: [
       'bpsc photo resizer 20 to 50kb',
@@ -540,8 +540,8 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
       { question: 'What is MPSC photo aspect ratio?', answer: 'Standard 3.5 cm width to 4.5 cm height (approx 1:1.28 ratio).' }
     ],
     relatedTools: [
-      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'MPSC signature resizer.' },
-      { name: 'Compress Image to 50KB', slug: '/image/compress-to-50kb', desc: 'Shrink photo size.' }
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/online-signature-maker#resize', desc: 'MPSC signature resizer.' },
+      { name: 'Compress Image to 50KB', slug: '/image/compress#50kb', desc: 'Shrink photo size.' }
     ],
     keywords: [
       'mpsc photo resizer 20 to 50kb',
@@ -584,8 +584,8 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
     ],
     relatedTools: [
       { name: 'Online Signature Maker (Draw & Type)', slug: '/tools/online-signature-maker', desc: 'Draw or type signature online.' },
-      { name: 'Compress Image to 50KB', slug: '/image/compress-to-50kb', desc: 'Compress photo to 50KB.' },
-      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'PAN signature resizer.' }
+      { name: 'Compress Image to 50KB', slug: '/image/compress#50kb', desc: 'Compress photo to 50KB.' },
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/online-signature-maker#resize', desc: 'PAN signature resizer.' }
     ],
     keywords: [
       'pan card photo resizer 213x213',
@@ -635,8 +635,8 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
       { question: 'Why does GOAPS reject my signature aspect ratio?', answer: 'GATE requires strict 3.5:1 rectangle aspect ratio (e.g. 560×160 pixels). Our tool locks this ratio automatically.' }
     ],
     relatedTools: [
-      { name: 'Clean B&W Signature', slug: '/tools/clean-black-white-signature', desc: 'Signature background cleaner.' },
-      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Bank signature resizer.' }
+      { name: 'Clean B&W Signature', slug: '/tools/online-signature-maker#clean', desc: 'Signature background cleaner.' },
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/online-signature-maker#resize', desc: 'Bank signature resizer.' }
     ],
     keywords: [
       'gate signature resizer 560x160',
@@ -688,7 +688,7 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
     relatedTools: [
       { name: 'SSC Photo Resizer', slug: '/tools/ssc-photo-resizer', desc: 'SSC photo with stamp.' },
       { name: 'NEET Photo Resizer', slug: '/tools/neet-photo-resizer', desc: 'NEET photo format.' },
-      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Clean signature scan.' }
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/online-signature-maker#resize', desc: 'Clean signature scan.' }
     ],
     keywords: [
       'photo name and date generator online free',
@@ -734,7 +734,7 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
       { question: 'How does Photo and Signature Joiner work?', answer: 'Upload your photo in dropzone 1 and signature in dropzone 2. The canvas stacks them vertically into one combined JPEG file under 50KB.' }
     ],
     relatedTools: [
-      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Signature size tool.' },
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/online-signature-maker#resize', desc: 'Signature size tool.' },
       { name: 'SSC Photo Resizer', slug: '/tools/ssc-photo-resizer', desc: 'SSC photo tool.' }
     ],
     keywords: [
@@ -775,8 +775,8 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
       { question: 'How to make phone photo signature clean white background?', answer: 'Upload phone photo of signature, enable Magic B&W cleanup toggle, and download crisp black ink on pure white background.' }
     ],
     relatedTools: [
-      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: '10-20KB signature resizer.' },
-      { name: 'GATE Signature Resizer', slug: '/tools/gate-signature-resizer', desc: 'GATE 560x160 signature.' }
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/online-signature-maker#resize', desc: '10-20KB signature resizer.' },
+      { name: 'GATE Signature Resizer', slug: '/tools/online-signature-maker#gate', desc: 'GATE 560x160 signature.' }
     ],
     keywords: [
       'clean signature photo background online',
@@ -831,8 +831,8 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
     ],
     relatedTools: [
       { name: 'SSC Photo Resizer', slug: '/tools/ssc-photo-resizer', desc: 'SSC photo tool.' },
-      { name: 'Signature Resizer 10 to 20KB', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Signature tool.' },
-      { name: 'Compress PDF to 200KB', slug: '/pdf/compress-to-200kb', desc: 'Compress govt document scans.' }
+      { name: 'Signature Resizer 10 to 20KB', slug: '/tools/online-signature-maker#resize', desc: 'Signature tool.' },
+      { name: 'Compress PDF to 200KB', slug: '/pdf/compress#200kb', desc: 'Compress govt document scans.' }
     ],
     keywords: [
       'aadhaar card print tool',
@@ -902,8 +902,8 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
       { question: 'Is my photo uploaded to any server?', answer: 'No! All processing runs 100% locally inside your web browser. Your photo is completely private.' }
     ],
     relatedTools: [
-      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Format RRB signature scan.' },
-      { name: 'Compress Image to 50KB', slug: '/image/compress-to-50kb', desc: 'Compress image under 50KB.' },
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/online-signature-maker#resize', desc: 'Format RRB signature scan.' },
+      { name: 'Compress Image to 50KB', slug: '/image/compress#50kb', desc: 'Compress image under 50KB.' },
       { name: 'Aadhaar Card Print Tool', slug: '/tools/aadhaar-card-print', desc: 'Aadhaar print for exam day.' }
     ],
     keywords: [
@@ -963,9 +963,9 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
       { question: 'Is this IBPS photo resizer free and secure?', answer: 'Yes, 100% free with zero registration. All resizing happens on your device using client-side JavaScript, ensuring complete confidentiality.' }
     ],
     relatedTools: [
-      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Format IBPS signature.' },
-      { name: 'Compress Image to 50KB', slug: '/image/compress-to-50kb', desc: 'Compress image under 50KB.' },
-      { name: 'Compress Image to 100KB', slug: '/image/compress-to-100kb', desc: 'Handwritten declaration (50-100KB).' }
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/online-signature-maker#resize', desc: 'Format IBPS signature.' },
+      { name: 'Compress Image to 50KB', slug: '/image/compress#50kb', desc: 'Compress image under 50KB.' },
+      { name: 'Compress Image to 100KB', slug: '/image/compress#100kb', desc: 'Handwritten declaration (50-100KB).' }
     ],
     keywords: [
       'ibps photo resizer',
@@ -1020,8 +1020,8 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
       { question: 'Does SBI allow photos taken with a smartphone?', answer: 'Yes, as long as it has good lighting, a plain white background, and clear contrast.' }
     ],
     relatedTools: [
-      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Format SBI signature.' },
-      { name: 'IBPS Photo Resizer', slug: '/tools/ibps-photo-resizer', desc: 'IBPS exam photo resizer.' }
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/online-signature-maker#resize', desc: 'Format SBI signature.' },
+      { name: 'IBPS Photo Resizer', slug: '/tools/ibps-sbi-photo-resizer', desc: 'IBPS exam photo resizer.' }
     ],
     keywords: [
       'sbi po photo resizer',
@@ -1078,9 +1078,9 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
       { question: 'What is the postcard photo size for JEE Main?', answer: 'If required for center verification, the 4"×6" postcard photo file size must be between 10 KB and 200 KB.' }
     ],
     relatedTools: [
-      { name: 'CUET Photo Resizer', slug: '/tools/cuet-photo-resizer', desc: 'CUET UG/PG photo resizer.' },
+      { name: 'CUET Photo Resizer', slug: '/tools/jee-cuet-photo-resizer#cuet', desc: 'CUET UG/PG photo resizer.' },
       { name: 'NEET Photo Resizer', slug: '/tools/neet-photo-resizer', desc: 'NEET passport & postcard size.' },
-      { name: 'Signature Resizer 10 to 20KB', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Signature resizer.' },
+      { name: 'Signature Resizer 10 to 20KB', slug: '/tools/online-signature-maker#resize', desc: 'Signature resizer.' },
       { name: 'Aadhaar Card Print Tool', slug: '/tools/aadhaar-card-print', desc: 'Print Aadhaar for exam center.' }
     ],
     keywords: [
@@ -1139,9 +1139,9 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
       { question: 'Can I upload a smartphone selfie for CUET?', answer: 'Yes, if taken against a plain white wall with sharp focus and even lighting.' }
     ],
     relatedTools: [
-      { name: 'JEE Photo Resizer', slug: '/tools/jee-photo-resizer', desc: 'JEE Main photo resizer.' },
+      { name: 'JEE Photo Resizer', slug: '/tools/jee-cuet-photo-resizer#jee', desc: 'JEE Main photo resizer.' },
       { name: 'NEET Photo Resizer', slug: '/tools/neet-photo-resizer', desc: 'NEET photo resizer.' },
-      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Signature tool.' }
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/online-signature-maker#resize', desc: 'Signature tool.' }
     ],
     keywords: [
       'cuet photo resizer',
@@ -1192,8 +1192,8 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
       { question: 'Can the same photo be used for both JEE Main and CUET?', answer: 'Yes! Both JEE and CUET are conducted by NTA and share the exact same photo specifications (10–200 KB, 80% face coverage on white background).' }
     ],
     relatedTools: [
-      { name: 'JEE Photo Resizer', slug: '/tools/jee-photo-resizer', desc: 'JEE Main photo tool.' },
-      { name: 'CUET Photo Resizer', slug: '/tools/cuet-photo-resizer', desc: 'CUET photo tool.' },
+      { name: 'JEE Photo Resizer', slug: '/tools/jee-cuet-photo-resizer#jee', desc: 'JEE Main photo tool.' },
+      { name: 'CUET Photo Resizer', slug: '/tools/jee-cuet-photo-resizer#cuet', desc: 'CUET photo tool.' },
       { name: 'NEET Photo Resizer', slug: '/tools/neet-photo-resizer', desc: 'NEET photo tool.' }
     ],
     keywords: [
@@ -1249,8 +1249,8 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
       { question: 'What are the dimensions and size for SSC CGL signature?', answer: 'SSC CGL signature must be between 10 KB and 20 KB with dimensions of 4.0 cm width × 2.0 cm height (around 140 × 60 pixels).' }
     ],
     relatedTools: [
-      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'SSC signature converter.' },
-      { name: 'UPSC OTR Photo Resizer', slug: '/tools/upsc-otr-photo-resizer', desc: 'UPSC 350x350 resizer.' },
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/online-signature-maker#resize', desc: 'SSC signature converter.' },
+      { name: 'UPSC OTR Photo Resizer', slug: '/tools/upsc-photo-resizer#otr', desc: 'UPSC 350x350 resizer.' },
       { name: 'Aadhaar Card Print Tool', slug: '/tools/aadhaar-card-print', desc: 'Print Aadhaar card for exam center.' }
     ],
     keywords: [
@@ -1309,8 +1309,8 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
       { question: 'How old can the UPSC photograph be?', answer: 'The photograph must not be more than 10 days old from the commencement of the online application process.' }
     ],
     relatedTools: [
-      { name: 'SSC CGL Photo Resizer', slug: '/tools/ssc-cgl-photo-signature-resizer', desc: 'SSC 3.5x4.5cm photo.' },
-      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Signature tool.' },
+      { name: 'SSC CGL Photo Resizer', slug: '/tools/ssc-photo-resizer#cgl', desc: 'SSC 3.5x4.5cm photo.' },
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/online-signature-maker#resize', desc: 'Signature tool.' },
       { name: 'Aadhaar Card Print Tool', slug: '/tools/aadhaar-card-print', desc: 'Print Aadhaar card.' }
     ],
     keywords: [
@@ -1366,8 +1366,8 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
       { question: 'What is the signature size for CTET?', answer: 'CTET signature scan must be between 3 KB and 30 KB with dimensions of 3.5 cm × 1.5 cm.' }
     ],
     relatedTools: [
-      { name: 'SSC CGL Photo Resizer', slug: '/tools/ssc-cgl-photo-signature-resizer', desc: 'SSC photo tool.' },
-      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Signature tool.' }
+      { name: 'SSC CGL Photo Resizer', slug: '/tools/ssc-photo-resizer#cgl', desc: 'SSC photo tool.' },
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/online-signature-maker#resize', desc: 'Signature tool.' }
     ],
     keywords: [
       'ctet photo resizer',

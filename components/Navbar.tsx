@@ -799,7 +799,7 @@ export function Navbar() {
               >
                 Marksheets &lt;500KB
               </Link>
-              <Link prefetch={false} href="/tools/signature-resizer-10-to-20kb"
+              <Link prefetch={false} href="/tools/online-signature-maker#resize"
                 onClick={closeAllNavbars}
                 className="p-2 rounded-xl bg-white hover:bg-amber-50/60 border border-amber-100 text-[11px] font-bold text-slate-800 truncate block active:scale-98 transition-all"
               >

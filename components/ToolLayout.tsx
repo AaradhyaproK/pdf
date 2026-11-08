@@ -8,6 +8,7 @@ import { AdSlot } from './AdSlot';
 import { RelatedToolsSection } from './RelatedToolsSection';
 import { SEOContent } from './SEOContent';
 import { trackVisitorHeartbeat } from '@/lib/admin-store';
+import { NOINDEX_SLUGS } from '@/lib/seo-config';
 import {
   ShieldCheck,
   Zap,
@@ -117,6 +118,7 @@ export function ToolLayout({
   children,
 }: ToolLayoutProps) {
   const pathname = usePathname();
+  const isNoindexTool = NOINDEX_SLUGS.has(slug) || (pathname ? NOINDEX_SLUGS.has(pathname) : false);
 
   // Live Visitor Real-Time Heartbeat Registration
   useEffect(() => {
@@ -212,8 +214,14 @@ export function ToolLayout({
         transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
         className="max-w-7xl mx-auto space-y-3 sm:space-y-6"
       >
-        {/* Header Leaderboard Ad Slot (CLS = 0) */}
-        <AdSlot slotType="header-leaderboard" />
+        {isNoindexTool && (
+          <head>
+            <meta name="robots" content="noindex, follow" />
+          </head>
+        )}
+
+        {/* Header Leaderboard Ad Slot (CLS = 0) - suppressed on noindex tools */}
+        {!isNoindexTool && <AdSlot slotType="header-leaderboard" />}
 
         {/* Main Grid: Workspace & Sticky Sidebar */}
         <div className={`grid grid-cols-1 ${hideSidebar ? 'w-full' : 'lg:grid-cols-12'} gap-3 sm:gap-6 items-start`}>
@@ -249,9 +257,11 @@ export function ToolLayout({
             )}
 
             {/* Post-Download In-Feed Ad Slot (Strictly >= 25px clear margin to prevent accidental clicks) */}
-            <div className="pt-4 sm:pt-6">
-              <AdSlot slotType="post-download" />
-            </div>
+            {!isNoindexTool && (
+              <div className="pt-4 sm:pt-6">
+                <AdSlot slotType="post-download" />
+              </div>
+            )}
 
             {/* When hideSidebar is true, render the sidebar guides, privacy & PWA cards cleanly below the studio */}
             {hideSidebar && (
@@ -542,7 +552,7 @@ export function ToolLayout({
             </div>
 
             {/* 6. Sticky Sidebar Ad Unit */}
-            <AdSlot slotType="sticky-sidebar" />
+            {!isNoindexTool && <AdSlot slotType="sticky-sidebar" />}
           </div>
           )}
         </div>

@@ -206,7 +206,7 @@ export default function BlogIndexPage() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/tools/signature-resizer-10-to-20kb" className="p-3 rounded-2xl bg-slate-50 hover:bg-indigo-50 hover:text-indigo-600 flex items-center justify-between border border-slate-200/80 transition-colors group">
+                  <Link href="/tools/online-signature-maker#resize" className="p-3 rounded-2xl bg-slate-50 hover:bg-indigo-50 hover:text-indigo-600 flex items-center justify-between border border-slate-200/80 transition-colors group">
                     <span>Signature Resizer (10-20KB)</span>
                     <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-indigo-600 group-hover:translate-x-0.5 transition-all" />
                   </Link>
@@ -224,13 +224,13 @@ export default function BlogIndexPage() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/image/compress-to-20kb" className="p-3 rounded-2xl bg-slate-50 hover:bg-indigo-50 hover:text-indigo-600 flex items-center justify-between border border-slate-200/80 transition-colors group">
+                  <Link href="/image/compress#20kb" className="p-3 rounded-2xl bg-slate-50 hover:bg-indigo-50 hover:text-indigo-600 flex items-center justify-between border border-slate-200/80 transition-colors group">
                     <span>Compress Image to 20KB</span>
                     <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-indigo-600 group-hover:translate-x-0.5 transition-all" />
                   </Link>
                 </li>
                 <li>
-                  <Link href="/image/compress-to-50kb" className="p-3 rounded-2xl bg-slate-50 hover:bg-indigo-50 hover:text-indigo-600 flex items-center justify-between border border-slate-200/80 transition-colors group">
+                  <Link href="/image/compress#50kb" className="p-3 rounded-2xl bg-slate-50 hover:bg-indigo-50 hover:text-indigo-600 flex items-center justify-between border border-slate-200/80 transition-colors group">
                     <span>Compress Image to 50KB</span>
                     <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-indigo-600 group-hover:translate-x-0.5 transition-all" />
                   </Link>

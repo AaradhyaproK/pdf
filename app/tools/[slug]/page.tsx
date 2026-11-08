@@ -31,14 +31,25 @@ interface PageProps {
 export const dynamic = 'force-static';
 export const dynamicParams = false;
 
+const CONSOLIDATED_PRESET_SLUGS = new Set([
+  'aadhaar-card-print',
+  'pan-card-photo-resizer',
+  'online-signature-maker',
+  'railway-rrb-photo-resizer',
+  'ibps-photo-resizer',
+  'sbi-po-photo-resizer',
+  'ssc-cgl-photo-signature-resizer',
+  'upsc-otr-photo-resizer',
+  'jee-photo-resizer',
+  'cuet-photo-resizer',
+  'signature-resizer-10-to-20kb',
+  'gate-signature-resizer',
+  'clean-black-white-signature',
+]);
+
 export async function generateStaticParams() {
   return Object.keys(PRESET_REGISTRY)
-    .filter(
-      (slug) =>
-        slug !== 'aadhaar-card-print' &&
-        slug !== 'pan-card-photo-resizer' &&
-        slug !== 'online-signature-maker'
-    )
+    .filter((slug) => !CONSOLIDATED_PRESET_SLUGS.has(slug))
     .map((slug) => ({ slug }));
 }
 

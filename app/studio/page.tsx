@@ -35,7 +35,7 @@ import { imagesToPDF } from '@/lib/image-engine';
 export const MASTER_TOOLS = [
   { id: 'edit-pdf', name: 'Edit PDF Online', slug: '/pdf/edit', desc: 'Add text, whiteout content, draw & sign', icon: Edit3, category: 'pdf', badge: 'Interactive' },
   { id: 'compress-pdf', name: 'Compress PDF', slug: '/pdf/compress', desc: 'Shrink PDF size up to 80%', icon: Minimize2, category: 'pdf', badge: 'Popular' },
-  { id: 'compress-200kb', name: 'Compress PDF to 200KB', slug: '/pdf/compress-to-200kb', desc: 'Target size for form uploads', icon: Minimize2, category: 'pdf' },
+  { id: 'compress-200kb', name: 'Compress PDF to 200KB', slug: '/pdf/compress#200kb', desc: 'Target size for form uploads', icon: Minimize2, category: 'pdf' },
   { id: 'merge-pdf', name: 'Merge PDF', slug: '/pdf/merge', desc: 'Combine multiple PDFs into one', icon: Combine, category: 'pdf' },
   { id: 'split-pdf', name: 'Split PDF', slug: '/pdf/split', desc: 'Extract pages & custom page ranges', icon: Split, category: 'pdf' },
   { id: 'organize-pdf', name: 'Organize PDF', slug: '/pdf/organize', desc: 'Rotate, reorder & delete pages', icon: Grid, category: 'pdf' },

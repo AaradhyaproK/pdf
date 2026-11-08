@@ -87,8 +87,8 @@ export function Footer() {
                 <Link prefetch={false} href="/pdf/pdf-to-word" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">PDF to Word (DOCX)</Link>
                 <Link prefetch={false} href="/pdf/word-to-pdf" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Word to PDF Converter</Link>
                 <Link prefetch={false} href="/pdf/compress" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress PDF (Auto)</Link>
-                <Link prefetch={false} href="/pdf/compress-to-100kb" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress PDF to 100KB</Link>
-                <Link prefetch={false} href="/pdf/compress-to-200kb" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress PDF to 200KB</Link>
+                <Link prefetch={false} href="/pdf/compress#100kb" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress PDF to 100KB</Link>
+                <Link prefetch={false} href="/pdf/compress#200kb" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress PDF to 200KB</Link>
                 <Link prefetch={false} href="/pdf/merge" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Merge PDF</Link>
                 <Link prefetch={false} href="/pdf/split" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Split PDF</Link>
                 <Link prefetch={false} href="/pdf/organize" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Organize &amp; Rotate PDF</Link>
@@ -125,8 +125,8 @@ export function Footer() {
                 <Link prefetch={false} href="/image/png-to-pdf" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">PNG to PDF Converter</Link>
                 <Link prefetch={false} href="/image/jpg-to-png" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">JPG to PNG Converter</Link>
                 <Link prefetch={false} href="/image/compress" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress Image (Target KB)</Link>
-                <Link prefetch={false} href="/image/compress-to-50kb" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress Image to 50KB</Link>
-                <Link prefetch={false} href="/image/compress-to-100kb" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress Image to 100KB</Link>
+                <Link prefetch={false} href="/image/compress#50kb" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress Image to 50KB</Link>
+                <Link prefetch={false} href="/image/compress#100kb" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress Image to 100KB</Link>
                 <Link prefetch={false} href="/image/passport-maker" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Passport Photo Maker</Link>
                 <Link prefetch={false} href="/image/remove-background" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">AI Background Remover</Link>
                 <Link prefetch={false} href="/image/convert-heic" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Apple HEIC to JPG</Link>
@@ -155,11 +155,11 @@ export function Footer() {
                 <Link prefetch={false} href="/govt-job-tools" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Govt Job Exam Tools Hub</Link>
                 <Link prefetch={false} href="/tools/aadhaar-card-print" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Aadhaar Card Print (A4 &amp; PVC)</Link>
                 <Link prefetch={false} href="/tools/pan-card-photo-resizer" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">PAN Photo Resizer (213x213)</Link>
-                <Link prefetch={false} href="/tools/signature-resizer-10-to-20kb" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Signature Resizer 10 to 20KB</Link>
+                <Link prefetch={false} href="/tools/online-signature-maker#resize" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Signature Resizer 10 to 20KB</Link>
                 <Link prefetch={false} href="/pdf/combine-marksheets" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Combine Marksheets (&lt;500KB)</Link>
                 <Link prefetch={false} href="/tools/photo-name-date-generator" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Photo Name &amp; Date Stamp</Link>
                 <Link prefetch={false} href="/tools/ssc-photo-resizer" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">SSC Photo Resizer (20-50KB)</Link>
-                <Link prefetch={false} href="/pdf/compress-to-200kb" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress PDF to 200KB</Link>
+                <Link prefetch={false} href="/pdf/compress#200kb" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Compress PDF to 200KB</Link>
                 <Link prefetch={false} href="/pdf/mask-aadhaar" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Mask Aadhaar Card (Offline)</Link>
               </div>
             )}
@@ -287,8 +287,8 @@ export function Footer() {
               <li><Link prefetch={false} href="/pdf/pdf-to-word" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">PDF to Word (DOCX)</Link></li>
               <li><Link prefetch={false} href="/pdf/word-to-pdf" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Word to PDF Converter</Link></li>
               <li><Link prefetch={false} href="/pdf/compress" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress PDF (Auto)</Link></li>
-              <li><Link prefetch={false} href="/pdf/compress-to-100kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress PDF to 100KB</Link></li>
-              <li><Link prefetch={false} href="/pdf/compress-to-200kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress PDF to 200KB</Link></li>
+              <li><Link prefetch={false} href="/pdf/compress#100kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress PDF to 100KB</Link></li>
+              <li><Link prefetch={false} href="/pdf/compress#200kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress PDF to 200KB</Link></li>
               <li><Link prefetch={false} href="/pdf/merge" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Merge PDF</Link></li>
               <li><Link prefetch={false} href="/pdf/split" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Split PDF</Link></li>
               <li><Link prefetch={false} href="/pdf/organize" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Organize &amp; Rotate PDF</Link></li>
@@ -315,8 +315,8 @@ export function Footer() {
               <li><Link prefetch={false} href="/image/png-to-pdf" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">PNG to PDF Converter</Link></li>
               <li><Link prefetch={false} href="/image/jpg-to-png" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">JPG to PNG Converter</Link></li>
               <li><Link prefetch={false} href="/image/compress" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress Image (Target KB)</Link></li>
-              <li><Link prefetch={false} href="/image/compress-to-50kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress Image to 50KB</Link></li>
-              <li><Link prefetch={false} href="/image/compress-to-100kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress Image to 100KB</Link></li>
+              <li><Link prefetch={false} href="/image/compress#50kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress Image to 50KB</Link></li>
+              <li><Link prefetch={false} href="/image/compress#100kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress Image to 100KB</Link></li>
               <li><Link prefetch={false} href="/image/passport-maker" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Passport Photo Maker</Link></li>
               <li><Link prefetch={false} href="/image/remove-background" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">AI Background Remover</Link></li>
               <li><Link prefetch={false} href="/image/convert-heic" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Apple HEIC to JPG</Link></li>
@@ -335,15 +335,15 @@ export function Footer() {
               <li><Link prefetch={false} href="/govt-job-tools" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Govt Job Exam Tools Hub</Link></li>
               <li><Link prefetch={false} href="/tools/aadhaar-card-print" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Aadhaar Card Print (A4 &amp; PVC)</Link></li>
               <li><Link prefetch={false} href="/tools/pan-card-photo-resizer" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">PAN Photo Resizer (213x213)</Link></li>
-              <li><Link prefetch={false} href="/tools/signature-resizer-10-to-20kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Signature Resizer 10 to 20KB</Link></li>
+              <li><Link prefetch={false} href="/tools/online-signature-maker#resize" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Signature Resizer 10 to 20KB</Link></li>
               <li><Link prefetch={false} href="/pdf/combine-marksheets" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Combine Marksheets (&lt;500KB)</Link></li>
               <li><Link prefetch={false} href="/tools/photo-name-date-generator" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Photo Name &amp; Date Stamp</Link></li>
               <li><Link prefetch={false} href="/tools/ssc-photo-resizer" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">SSC Photo Resizer (20-50KB)</Link></li>
               <li><Link prefetch={false} href="/tools/photo-signature-joiner" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Photo &amp; Signature Joiner</Link></li>
-              <li><Link prefetch={false} href="/tools/clean-black-white-signature" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Clean B&amp;W Signature Scan</Link></li>
-              <li><Link prefetch={false} href="/tools/upsc-otr-photo-resizer" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">UPSC OTR Photo Resizer</Link></li>
-              <li><Link prefetch={false} href="/pdf/compress-to-200kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress PDF to 200KB</Link></li>
-              <li><Link prefetch={false} href="/pdf/compress-to-100kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress PDF to 100KB</Link></li>
+              <li><Link prefetch={false} href="/tools/online-signature-maker#clean" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Clean B&amp;W Signature Scan</Link></li>
+              <li><Link prefetch={false} href="/tools/upsc-photo-resizer#otr" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">UPSC OTR Photo Resizer</Link></li>
+              <li><Link prefetch={false} href="/pdf/compress#200kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress PDF to 200KB</Link></li>
+              <li><Link prefetch={false} href="/pdf/compress#100kb" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Compress PDF to 100KB</Link></li>
               <li><Link prefetch={false} href="/pdf/mask-aadhaar" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Mask Aadhaar Card (Offline)</Link></li>
             </ul>
           </div>

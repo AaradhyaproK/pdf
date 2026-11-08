@@ -1,0 +1,141 @@
+[
+  {
+    "source": "/pdf/compress-to-100kb",
+    "destination": "/pdf/compress#100kb",
+    "statusCode": 301,
+    "cluster": "PDF Target Size Consolidation"
+  },
+  {
+    "source": "/pdf/compress-to-200kb",
+    "destination": "/pdf/compress#200kb",
+    "statusCode": 301,
+    "cluster": "PDF Target Size Consolidation"
+  },
+  {
+    "source": "/pdf/compress-to-300kb",
+    "destination": "/pdf/compress#300kb",
+    "statusCode": 301,
+    "cluster": "PDF Target Size Consolidation"
+  },
+  {
+    "source": "/pdf/compress-to-500kb",
+    "destination": "/pdf/compress#500kb",
+    "statusCode": 301,
+    "cluster": "PDF Target Size Consolidation"
+  },
+  {
+    "source": "/pdf/compress-to-1mb",
+    "destination": "/pdf/compress#1mb",
+    "statusCode": 301,
+    "cluster": "PDF Target Size Consolidation"
+  },
+  {
+    "source": "/image/compress-to-20kb",
+    "destination": "/image/compress#20kb",
+    "statusCode": 301,
+    "cluster": "Image Target Size Consolidation"
+  },
+  {
+    "source": "/image/compress-to-50kb",
+    "destination": "/image/compress#50kb",
+    "statusCode": 301,
+    "cluster": "Image Target Size Consolidation"
+  },
+  {
+    "source": "/image/compress-to-100kb",
+    "destination": "/image/compress#100kb",
+    "statusCode": 301,
+    "cluster": "Image Target Size Consolidation"
+  },
+  {
+    "source": "/tools/railway-rrb-photo-resizer",
+    "destination": "/tools/rrb-railway-photo-resizer",
+    "statusCode": 301,
+    "cluster": "Exam Preset Duplicate Consolidation"
+  },
+  {
+    "source": "/tools/ibps-photo-resizer",
+    "destination": "/tools/ibps-sbi-photo-resizer",
+    "statusCode": 301,
+    "cluster": "Exam Preset Duplicate Consolidation"
+  },
+  {
+    "source": "/tools/sbi-po-photo-resizer",
+    "destination": "/tools/ibps-sbi-photo-resizer",
+    "statusCode": 301,
+    "cluster": "Exam Preset Duplicate Consolidation"
+  },
+  {
+    "source": "/tools/ssc-cgl-photo-signature-resizer",
+    "destination": "/tools/ssc-photo-resizer#cgl",
+    "statusCode": 301,
+    "cluster": "Exam Preset Duplicate Consolidation"
+  },
+  {
+    "source": "/tools/upsc-otr-photo-resizer",
+    "destination": "/tools/upsc-photo-resizer#otr",
+    "statusCode": 301,
+    "cluster": "Exam Preset Duplicate Consolidation"
+  },
+  {
+    "source": "/tools/jee-photo-resizer",
+    "destination": "/tools/jee-cuet-photo-resizer#jee",
+    "statusCode": 301,
+    "cluster": "Exam Preset Duplicate Consolidation"
+  },
+  {
+    "source": "/tools/cuet-photo-resizer",
+    "destination": "/tools/jee-cuet-photo-resizer#cuet",
+    "statusCode": 301,
+    "cluster": "Exam Preset Duplicate Consolidation"
+  },
+  {
+    "source": "/tools/signature-resizer-10-to-20kb",
+    "destination": "/tools/online-signature-maker#resize",
+    "statusCode": 301,
+    "cluster": "Signature Suite Consolidation"
+  },
+  {
+    "source": "/tools/gate-signature-resizer",
+    "destination": "/tools/online-signature-maker#gate",
+    "statusCode": 301,
+    "cluster": "Signature Suite Consolidation"
+  },
+  {
+    "source": "/tools/clean-black-white-signature",
+    "destination": "/tools/online-signature-maker#clean",
+    "statusCode": 301,
+    "cluster": "Signature Suite Consolidation"
+  },
+  {
+    "source": "/utility/roll-the-dice",
+    "destination": "/utility/dice-roller",
+    "statusCode": 301,
+    "cluster": "Novelty Duplicate Consolidation"
+  },
+  {
+    "source": "/pdf",
+    "destination": "/pdf-tools",
+    "statusCode": 301,
+    "cluster": "Category Hub Alias Consolidation"
+  },
+  {
+    "source": "/image",
+    "destination": "/image-tools",
+    "statusCode": 301,
+    "cluster": "Category Hub Alias Consolidation"
+  },
+  {
+    "source": "/utility",
+    "destination": "/utility-tools",
+    "statusCode": 301,
+    "cluster": "Category Hub Alias Consolidation"
+  },
+  {
+    "source": "/social",
+    "destination": "/social-tools",
+    "statusCode": 301,
+    "cluster": "Category Hub Alias Consolidation"
+  }
+]
+

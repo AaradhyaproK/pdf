@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { SEO_REGISTRY } from '@/lib/seo-config';
+import { SEO_REGISTRY, NOINDEX_SLUGS } from '@/lib/seo-config';
 import { PRESET_REGISTRY } from '@/lib/presets-data';
 import { CATEGORY_REGISTRY } from '@/lib/categories-data';
 import { getAllPosts } from '@/lib/blog';
@@ -7,7 +7,7 @@ import { getAllPosts } from '@/lib/blog';
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.filezenith.com';
   const defaultOgImage = `${baseUrl}/filezenith-og.png`;
-  const siteBuildDate = new Date('2026-11-06T00:00:00.000Z');
+  const siteBuildDate = new Date('2026-11-08T00:00:00.000Z');
 
   const categoryRoutes = Object.keys(CATEGORY_REGISTRY).map((slug) => ({
     url: `${baseUrl}/${slug}`,
@@ -75,6 +75,42 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Explicitly exclude redirected URLs so sitemap only contains clean 200 OK canonicals
   const REDIRECTED_SLUGS = new Set([
+    // Category Aliases
+    '/pdf',
+    '/image',
+    '/utility',
+    '/social',
+
+    // PDF Compression Consolidations
+    '/pdf/compress-to-100kb',
+    '/pdf/compress-to-200kb',
+    '/pdf/compress-to-300kb',
+    '/pdf/compress-to-500kb',
+    '/pdf/compress-to-1mb',
+
+    // Image Compression Consolidations
+    '/image/compress-to-20kb',
+    '/image/compress-to-50kb',
+    '/image/compress-to-100kb',
+
+    // Exam Resizer Consolidations
+    '/tools/railway-rrb-photo-resizer',
+    '/tools/ibps-photo-resizer',
+    '/tools/sbi-po-photo-resizer',
+    '/tools/ssc-cgl-photo-signature-resizer',
+    '/tools/upsc-otr-photo-resizer',
+    '/tools/jee-photo-resizer',
+    '/tools/cuet-photo-resizer',
+
+    // Signature Suite Consolidations
+    '/tools/signature-resizer-10-to-20kb',
+    '/tools/gate-signature-resizer',
+    '/tools/clean-black-white-signature',
+
+    // Novelty Duplicates
+    '/utility/roll-the-dice',
+
+    // Legacy Redirects
     '/image/to-pdf',
     '/image/png-to-pdf',
     '/image/heic-to-jpg',
@@ -90,9 +126,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/presets/upsc-pdf-300kb',
   ]);
 
-  const allRoutes = [...staticRoutes, ...categoryRoutes, ...toolRoutes, ...presetRoutes, ...blogRoutes].filter(
-    (item) => !REDIRECTED_SLUGS.has(item.url.replace(baseUrl, ''))
-  );
+  const allRoutes = [...staticRoutes, ...categoryRoutes, ...toolRoutes, ...presetRoutes, ...blogRoutes].filter((item) => {
+    const slug = item.url.replace(baseUrl, '');
+    return !REDIRECTED_SLUGS.has(slug) && !NOINDEX_SLUGS.has(slug);
+  });
 
   // Deduplicate by URL (preserving higher priority)
   const routeMap = new Map<string, MetadataRoute.Sitemap[number]>();

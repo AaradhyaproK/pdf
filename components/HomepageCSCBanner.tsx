@@ -34,7 +34,7 @@ export function HomepageCSCBanner() {
     },
     {
       name: 'Signature Resizer 10-20KB',
-      slug: '/tools/signature-resizer-10-to-20kb',
+      slug: '/tools/online-signature-maker#resize',
       badge: '10-20KB',
       icon: Stamp,
     },

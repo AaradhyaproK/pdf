@@ -54,7 +54,7 @@ import {
 const PDF_TOOLS = [
   { name: 'Edit PDF Online', slug: '/pdf/edit', desc: 'Add text, whiteout & sign', icon: Edit3, badge: 'Popular' },
   { name: 'Compress PDF', slug: '/pdf/compress', desc: 'Shrink PDF up to 80%', icon: Minimize2, badge: 'Popular' },
-  { name: 'Compress PDF to 200KB', slug: '/pdf/compress-to-200kb', desc: 'Target portal size', icon: Minimize2 },
+  { name: 'Compress PDF to 200KB', slug: '/pdf/compress#200kb', desc: 'Target portal size', icon: Minimize2 },
   { name: 'Merge PDF', slug: '/pdf/merge', desc: 'Combine multiple PDFs', icon: Combine },
   { name: 'Split PDF', slug: '/pdf/split', desc: 'Extract pages & ranges', icon: Split },
   { name: 'PDF Page Numberer', slug: '/pdf/page-numbers', desc: 'Add Page X of Y & footers', icon: Hash, badge: 'New' },
@@ -63,8 +63,8 @@ const PDF_TOOLS = [
   { name: 'Watermark PDF', slug: '/pdf/watermark', desc: 'Add watermark overlay', icon: Stamp },
   { name: 'Password Protect PDF', slug: '/pdf/protect', desc: 'Encrypt PDF with password', icon: Lock },
   { name: 'Remove PDF Password', slug: '/pdf/remove-password', desc: 'Unlock secured PDF', icon: Unlock, badge: 'Unlock' },
-  { name: 'Compress PDF to 100KB', slug: '/pdf/compress-to-100kb', desc: 'Target 100KB for exam & govt portals', icon: Minimize2, badge: '100KB' },
-  { name: 'Compress PDF to 1MB', slug: '/pdf/compress-to-1mb', desc: 'Compress multi-page PDF under 1MB', icon: Minimize2, badge: '1MB' },
+  { name: 'Compress PDF to 100KB', slug: '/pdf/compress#100kb', desc: 'Target 100KB for exam & govt portals', icon: Minimize2, badge: '100KB' },
+  { name: 'Compress PDF to 1MB', slug: '/pdf/compress#1mb', desc: 'Compress multi-page PDF under 1MB', icon: Minimize2, badge: '1MB' },
   { name: 'PDF to Word (DOCX)', slug: '/pdf/pdf-to-word', desc: 'Convert PDF to editable Word', icon: FileText, badge: 'Popular' },
   { name: 'Word to PDF Converter', slug: '/pdf/word-to-pdf', desc: 'Convert Word DOCX to PDF', icon: FileCode, badge: 'New' },
   { name: 'PDF to JPG / PNG', slug: '/pdf/to-image', desc: 'Convert PDF to images', icon: ImageIcon },
@@ -74,11 +74,11 @@ const PDF_TOOLS = [
 const IMAGE_TOOLS = [
   { name: 'WebP to JPG Converter', slug: '/image/webp-to-jpg', desc: 'Convert WebP to JPG format', icon: FileImage, badge: 'Bulk' },
   { name: 'JPG to WebP Converter', slug: '/image/jpg-to-webp', desc: 'Convert JPG/PNG to modern WebP', icon: Zap, badge: 'Fast Web' },
-  { name: 'Railway RRB Photo Resizer', slug: '/tools/railway-rrb-photo-resizer', desc: 'RRB NTPC, ALP, Group D 20-50KB photo', icon: UserCheck, badge: 'RRB 20-50KB' },
-  { name: 'IBPS Photo Resizer', slug: '/tools/ibps-photo-resizer', desc: 'IBPS PO, Clerk, RRB 20-50KB photo', icon: UserCheck, badge: 'IBPS 20-50KB' },
-  { name: 'SBI PO Photo Resizer', slug: '/tools/sbi-po-photo-resizer', desc: 'SBI PO & Clerk photo & signature', icon: UserCheck, badge: 'SBI PO' },
-  { name: 'JEE Main Photo Resizer', slug: '/tools/jee-photo-resizer', desc: 'JEE 10-200KB photo resizer with DOP', icon: UserCheck, badge: 'JEE 10-200KB' },
-  { name: 'CUET Photo Resizer', slug: '/tools/cuet-photo-resizer', desc: 'CUET UG/PG 10-200KB photo & signature', icon: UserCheck, badge: 'CUET NTA' },
+  { name: 'Railway RRB Photo Resizer', slug: '/tools/rrb-railway-photo-resizer', desc: 'RRB NTPC, ALP, Group D 20-50KB photo', icon: UserCheck, badge: 'RRB 20-50KB' },
+  { name: 'IBPS Photo Resizer', slug: '/tools/ibps-sbi-photo-resizer', desc: 'IBPS PO, Clerk, RRB 20-50KB photo', icon: UserCheck, badge: 'IBPS 20-50KB' },
+  { name: 'SBI PO Photo Resizer', slug: '/tools/ibps-sbi-photo-resizer', desc: 'SBI PO & Clerk photo & signature', icon: UserCheck, badge: 'SBI PO' },
+  { name: 'JEE Main Photo Resizer', slug: '/tools/jee-cuet-photo-resizer#jee', desc: 'JEE 10-200KB photo resizer with DOP', icon: UserCheck, badge: 'JEE 10-200KB' },
+  { name: 'CUET Photo Resizer', slug: '/tools/jee-cuet-photo-resizer#cuet', desc: 'CUET UG/PG 10-200KB photo & signature', icon: UserCheck, badge: 'CUET NTA' },
   { name: 'Image Cropper & Aspect', slug: '/image/crop', desc: 'Crop 1:1, 16:9, rotate & flip', icon: CropIcon, badge: 'New' },
   { name: 'Color Palette Extractor', slug: '/image/color-palette-extractor', desc: 'Extract HEX color codes from photos', icon: Palette, badge: 'Design' },
   { name: 'SVG Vector Converter', slug: '/image/svg-converter', desc: 'Convert SVG to 2x/4x PNG/JPG', icon: FileCode, badge: 'New' },
@@ -91,6 +91,8 @@ const IMAGE_TOOLS = [
   { name: 'Apple HEIC to JPG', slug: '/image/convert-heic', desc: 'Convert iPhone HEIC photos', icon: Smartphone },
   { name: 'Resize Image', slug: '/image/resize', desc: 'Resize pixels & percent', icon: ImageIcon },
 ];
+
+import { NOINDEX_SLUGS } from '@/lib/seo-config';
 
 const UTILITY_TOOLS = [
   { name: 'Electricity Bill Calculator', slug: '/utility/electricity-bill-calculator', desc: 'Calculate electricity bill with state slabs', icon: DollarSign, badge: 'State Slabs' },
@@ -231,7 +233,7 @@ export function MobileBottomNav() {
   const getToolsForCategory = () => {
     if (activeDrawer === 'pdf') return PDF_TOOLS;
     if (activeDrawer === 'image') return IMAGE_TOOLS;
-    if (activeDrawer === 'utility') return UTILITY_TOOLS;
+    if (activeDrawer === 'utility') return UTILITY_TOOLS.filter((t) => !NOINDEX_SLUGS.has(t.slug));
     return [];
   };
 

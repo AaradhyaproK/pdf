@@ -49,11 +49,11 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
         description: 'Reduce PDF file size for email attachments, university submissions, and sarkari portal uploads.',
         tools: [
           { name: 'Compress PDF', slug: '/pdf/compress', description: 'Universal PDF compressor to shrink file size up to 80% without losing text sharpness or quality.', isPopular: true, badge: 'Popular', iconName: 'Minimize2' },
-          { name: 'Compress PDF to 100KB', slug: '/pdf/compress-to-100kb', description: 'Target 100KB PDF compressor for sarkari exam, UPSC, SSC, and state recruitment portals.', isPopular: true, badge: 'Target 100KB', iconName: 'Minimize2' },
-          { name: 'Compress PDF to 200KB', slug: '/pdf/compress-to-200kb', description: 'Target 200KB compressor for college admissions, job applications & visa portals.', isPopular: true, badge: 'Target 200KB', iconName: 'Minimize2' },
-          { name: 'Compress PDF to 300KB', slug: '/pdf/compress-to-300kb', description: 'Target 300KB compressor for UPSC OTR, State PSC forms & judicial e-filing.', isPopular: true, badge: 'UPSC 300KB', iconName: 'Minimize2' },
-          { name: 'Compress PDF to 500KB', slug: '/pdf/compress-to-500kb', description: 'Target 500KB compressor for Passport Sewa, High Courts & university submissions.', isPopular: true, badge: 'Target 500KB', iconName: 'Minimize2' },
-          { name: 'Compress PDF to 1MB', slug: '/pdf/compress-to-1mb', description: 'Compress multi-page PDFs under 1MB for email attachments & corporate portal uploads.', isPopular: true, badge: 'Target 1MB', iconName: 'Minimize2' }
+          { name: 'Compress PDF to 100KB', slug: '/pdf/compress#100kb', description: 'Target 100KB PDF compressor for sarkari exam, UPSC, SSC, and state recruitment portals.', isPopular: true, badge: 'Target 100KB', iconName: 'Minimize2' },
+          { name: 'Compress PDF to 200KB', slug: '/pdf/compress#200kb', description: 'Target 200KB compressor for college admissions, job applications & visa portals.', isPopular: true, badge: 'Target 200KB', iconName: 'Minimize2' },
+          { name: 'Compress PDF to 300KB', slug: '/pdf/compress#300kb', description: 'Target 300KB compressor for UPSC OTR, State PSC forms & judicial e-filing.', isPopular: true, badge: 'UPSC 300KB', iconName: 'Minimize2' },
+          { name: 'Compress PDF to 500KB', slug: '/pdf/compress#500kb', description: 'Target 500KB compressor for Passport Sewa, High Courts & university submissions.', isPopular: true, badge: 'Target 500KB', iconName: 'Minimize2' },
+          { name: 'Compress PDF to 1MB', slug: '/pdf/compress#1mb', description: 'Compress multi-page PDFs under 1MB for email attachments & corporate portal uploads.', isPopular: true, badge: 'Target 1MB', iconName: 'Minimize2' }
         ]
       },
       {
@@ -105,7 +105,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
       { name: 'PDF to Excel Converter', slug: '/pdf/pdf-to-excel', description: 'Extract tables from PDF to editable Excel XLSX & CSV with highest accuracy.' },
       { name: 'PDF to Word Converter', slug: '/pdf/pdf-to-word', description: 'Convert PDF to editable Word DOCX 100% privately without cloud uploads.' },
       { name: 'Merge PDF Files', slug: '/pdf/merge', description: 'Combine multiple PDF documents into one master file effortlessly.' },
-      { name: 'Compress PDF to 200KB', slug: '/pdf/compress-to-200kb', description: 'Target 200KB PDF compressor for email, university, and job forms.' },
+      { name: 'Compress PDF to 200KB', slug: '/pdf/compress#200kb', description: 'Target 200KB PDF compressor for email, university, and job forms.' },
       { name: 'Edit PDF Online', slug: '/pdf/edit', description: 'Annotate, sign, whiteout, and add text to PDF documents in your browser.' },
       { name: 'Word to PDF Converter', slug: '/pdf/word-to-pdf', description: 'Convert Word documents to high-quality PDF files with perfect styling.' },
       { name: 'Pics to PDF (JPG to PDF)', slug: '/image/pics-to-pdf', description: 'Convert camera photos, scans, and images into a single organized PDF.' }
@@ -146,8 +146,8 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
     ],
     relatedCategories: [
       { name: 'Image Tools', slug: '/image-tools', desc: 'Compress photos, convert HEIC, and resize passport images.' },
-      { name: 'Utility & Calculators', slug: '/utility', desc: 'Financial calculators, converters, and daily productivity tools.' },
-      { name: 'Social Media Tools', slug: '/social', desc: 'WhatsApp direct chat, thumbnail downloads, and bio fonts.' },
+      { name: 'Utility & Calculators', slug: '/utility-tools', desc: 'Financial calculators, converters, and daily productivity tools.' },
+      { name: 'Social Media Tools', slug: '/social-tools', desc: 'WhatsApp direct chat, thumbnail downloads, and bio fonts.' },
       { name: 'Govt Job Exam Tools', slug: '/govt-job-tools', desc: 'SSC, UPSC, Aadhaar print, and signature resizers.' }
     ],
     keywords: [
@@ -197,9 +197,9 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
         description: 'Reduce image file size in KB while preserving sharp visual quality.',
         tools: [
           { name: 'Compress Image', slug: '/image/compress', description: 'Universal JPEG/PNG image compressor with interactive quality slider.', isPopular: true, badge: 'Popular', iconName: 'Minimize2' },
-          { name: 'Compress Image to 20KB', slug: '/image/compress-to-20kb', description: 'Compress signature & photo under 20KB for online forms.', isPopular: true, badge: 'Target 20KB', iconName: 'Minimize2' },
-          { name: 'Compress Image to 50KB', slug: '/image/compress-to-50kb', description: 'Target 50KB passport photo compressor for recruitment portals.', isPopular: true, badge: 'Target 50KB', iconName: 'Minimize2' },
-          { name: 'Compress Image to 100KB', slug: '/image/compress-to-100kb', description: 'Compress document scans and certificates under 100KB.', iconName: 'Minimize2' }
+          { name: 'Compress Image to 20KB', slug: '/image/compress#20kb', description: 'Compress signature & photo under 20KB for online forms.', isPopular: true, badge: 'Target 20KB', iconName: 'Minimize2' },
+          { name: 'Compress Image to 50KB', slug: '/image/compress#50kb', description: 'Target 50KB passport photo compressor for recruitment portals.', isPopular: true, badge: 'Target 50KB', iconName: 'Minimize2' },
+          { name: 'Compress Image to 100KB', slug: '/image/compress#100kb', description: 'Compress document scans and certificates under 100KB.', iconName: 'Minimize2' }
         ]
       },
       {
@@ -235,12 +235,12 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
           { name: 'Aadhaar Card Print Tool (A4 & PVC)', slug: '/tools/aadhaar-card-print', description: 'Crop and print e-Aadhaar on A4 sheet & PVC card (85.6x54 mm).', isPopular: true, badge: 'A4 & PVC', iconName: 'Printer' },
           { name: 'PAN Card Photo Resizer (213x213)', slug: '/tools/pan-card-photo-resizer', description: 'NSDL & UTIITSL standard 213x213 pixels, 300 DPI, under 50KB JPEG photo crop.', isPopular: true, badge: 'NSDL & UTI', iconName: 'UserCheck' },
           { name: 'SSC Photo Resizer (20-50KB)', slug: '/tools/ssc-photo-resizer', description: 'Format SSC CGL, CHSL, MTS photo with Name & Date stamp.', isPopular: true, badge: 'SSC 20-50KB', iconName: 'UserCheck' },
-          { name: 'Signature Resizer 10 to 20KB', slug: '/tools/signature-resizer-10-to-20kb', description: 'Resize signature to 10-20KB with Magic B&W cleanup.', isPopular: true, badge: '10-20KB', iconName: 'Stamp' },
-          { name: 'Railway RRB Photo Resizer', slug: '/tools/railway-rrb-photo-resizer', description: 'RRB NTPC, ALP, Group D 20-50KB photo resizer.', isPopular: true, badge: 'RRB 20-50KB', iconName: 'UserCheck' },
-          { name: 'IBPS Photo Resizer', slug: '/tools/ibps-photo-resizer', description: 'IBPS PO, Clerk, RRB 200x230 px photo resizer.', isPopular: true, badge: 'IBPS 20-50KB', iconName: 'UserCheck' },
-          { name: 'SBI PO Photo Resizer', slug: '/tools/sbi-po-photo-resizer', description: 'SBI PO & Clerk photo & signature resizer.', badge: 'SBI PO', iconName: 'UserCheck' },
-          { name: 'JEE Main Photo Resizer', slug: '/tools/jee-photo-resizer', description: 'JEE Main & Advanced 10-200KB photo resizer with DOP.', isPopular: true, badge: 'JEE 10-200KB', iconName: 'UserCheck' },
-          { name: 'CUET Photo Resizer', slug: '/tools/cuet-photo-resizer', description: 'CUET UG/PG 10-200KB photo & signature resizer.', badge: 'CUET NTA', iconName: 'UserCheck' },
+          { name: 'Signature Resizer 10 to 20KB', slug: '/tools/online-signature-maker#resize', description: 'Resize signature to 10-20KB with Magic B&W cleanup.', isPopular: true, badge: '10-20KB', iconName: 'Stamp' },
+          { name: 'Railway RRB Photo Resizer', slug: '/tools/rrb-railway-photo-resizer', description: 'RRB NTPC, ALP, Group D 20-50KB photo resizer.', isPopular: true, badge: 'RRB 20-50KB', iconName: 'UserCheck' },
+          { name: 'IBPS Photo Resizer', slug: '/tools/ibps-sbi-photo-resizer', description: 'IBPS PO, Clerk, RRB 200x230 px photo resizer.', isPopular: true, badge: 'IBPS 20-50KB', iconName: 'UserCheck' },
+          { name: 'SBI PO Photo Resizer', slug: '/tools/ibps-sbi-photo-resizer', description: 'SBI PO & Clerk photo & signature resizer.', badge: 'SBI PO', iconName: 'UserCheck' },
+          { name: 'JEE Main Photo Resizer', slug: '/tools/jee-cuet-photo-resizer#jee', description: 'JEE Main & Advanced 10-200KB photo resizer with DOP.', isPopular: true, badge: 'JEE 10-200KB', iconName: 'UserCheck' },
+          { name: 'CUET Photo Resizer', slug: '/tools/jee-cuet-photo-resizer#cuet', description: 'CUET UG/PG 10-200KB photo & signature resizer.', badge: 'CUET NTA', iconName: 'UserCheck' },
           { name: 'UPSC Photo Resizer', slug: '/tools/upsc-photo-resizer', description: '350x350 px OTR square photo format with Name & Date.', badge: 'UPSC OTR', iconName: 'UserCheck' },
           { name: 'NEET Photo Resizer', slug: '/tools/neet-photo-resizer', description: 'NEET passport & postcard 4"x6" photo with DOP stamp.', badge: 'NEET UG', iconName: 'UserCheck' },
           { name: 'Photo Name & Date Generator', slug: '/tools/photo-name-date-generator', description: 'Overlay candidate full name and date on passport photos.', badge: 'Name & Date', iconName: 'Calendar' }
@@ -256,11 +256,11 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
       }
     ],
     popularTools: [
-      { name: 'Compress Image to 50KB', slug: '/image/compress-to-50kb', description: 'Target 50KB for SSC, IBPS, and Railway application forms.' },
+      { name: 'Compress Image to 50KB', slug: '/image/compress#50kb', description: 'Target 50KB for SSC, IBPS, and Railway application forms.' },
       { name: 'Apple HEIC to JPG Converter', slug: '/image/convert-heic', description: 'Convert Apple iPhone HEIC photos to JPG format instantly.' },
       { name: 'Passport Photo Maker', slug: '/image/passport-maker', description: 'Format passport size photos for job forms with official specs.' },
       { name: 'Aadhaar Card Print Tool', slug: '/tools/aadhaar-card-print', description: 'Crop & print e-Aadhaar on A4 sheet or PVC card.' },
-      { name: 'Signature Resizer 10 to 20KB', slug: '/tools/signature-resizer-10-to-20kb', description: 'Clean signature with Magic B&W cleanup for portals.' },
+      { name: 'Signature Resizer 10 to 20KB', slug: '/tools/online-signature-maker#resize', description: 'Clean signature with Magic B&W cleanup for portals.' },
       { name: 'AI Background Remover', slug: '/image/remove-background', description: 'Remove backgrounds 100% in-browser with zero uploads.' }
     ],
     faqs: [
@@ -300,8 +300,8 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
     relatedCategories: [
       { name: 'PDF Tools', slug: '/pdf-tools', desc: 'Merge, split, and compress PDF documents.' },
       { name: 'Govt Job Exam Tools', slug: '/govt-job-tools', desc: 'SSC, UPSC, Aadhaar print, and signature resizers.' },
-      { name: 'Utility & Calculators', slug: '/utility', desc: 'Calculators, converters, and daily productivity tools.' },
-      { name: 'Social Media Tools', slug: '/social', desc: 'WhatsApp direct chat, thumbnail downloads, and bio fonts.' }
+      { name: 'Utility & Calculators', slug: '/utility-tools', desc: 'Calculators, converters, and daily productivity tools.' },
+      { name: 'Social Media Tools', slug: '/social-tools', desc: 'WhatsApp direct chat, thumbnail downloads, and bio fonts.' }
     ],
     keywords: [
       'free online image tools',
@@ -385,7 +385,6 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
           { name: 'Fancy Text Generator', slug: '/utility/fancy-text-generator', description: 'Generate 30+ stylish Unicode fonts for Instagram bio and WhatsApp.', isPopular: true, badge: 'Cool Fonts', iconName: 'Sparkles' },
           { name: 'Number to Words Converter', slug: '/utility/number-to-words', description: 'Convert numbers into words and currency cheques (USD / INR Lakhs & Crores).', isPopular: true, badge: 'Cheque Tool', iconName: 'DollarSign' },
           { name: 'Text Case Converter', slug: '/utility/case-converter', description: 'Convert text to UPPERCASE, lowercase, Title Case, camelCase, and snake_case.', badge: 'Writing', iconName: 'Type' },
-          { name: 'Text Repeater (10,000x)', slug: '/utility/text-repeater', description: 'Repeat messages, emojis, and text strings up to 10,000 times for messaging.', badge: 'Viral', iconName: 'Sparkles' },
           { name: 'Free Text to Speech (TTS)', slug: '/utility/text-to-speech', description: 'Browser-based voice synthesizer with zero character caps.', badge: 'No Limit', iconName: 'Volume2' }
         ]
       },
@@ -399,19 +398,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
           { name: 'JSON Formatter & Validator', slug: '/utility/json-formatter', description: 'Format, beautify, minify, and validate JSON data with syntax highlighting.', isPopular: true, badge: 'Popular', iconName: 'Code2' },
           { name: 'Base64 Encoder / Decoder', slug: '/utility/base64', description: 'Encode or decode text, files, and images into Base64 format securely.', isPopular: true, iconName: 'Code2' },
           { name: 'Hash Generator (MD5 / SHA)', slug: '/utility/hash-generator', description: 'Generate MD5, SHA-1, SHA-256 and verify file checksum integrity.', isPopular: true, badge: 'Checksum', iconName: 'Hash' },
-          { name: 'URL Encoder / Decoder', slug: '/utility/url-encoder-decoder', description: 'Encode or decode URLs and inspect query parameters cleanly.', isPopular: true, badge: 'RFC 3986', iconName: 'FileCode' },
-          { name: 'Glassmorphism CSS Generator', slug: '/utility/glassmorphism-generator', description: 'Generate frosted glass CSS backdrop-filter snippets interactively.', badge: 'UI Tool', iconName: 'Hexagon' }
-        ]
-      },
-      {
-        title: 'Interactive Decision & Focus Tools',
-        description: 'Fun, engaging tools for daily productivity, study focus, and decisions.',
-        tools: [
-          { name: 'Pomodoro Timer & Study Clock', slug: '/utility/pomodoro-timer', description: 'Aesthetic 25-minute productivity timer with break alarms.', badge: 'Focus', iconName: 'Brain' },
-          { name: 'Spin the Wheel & Name Picker', slug: '/utility/spin-the-wheel', description: 'Random winner decision picker with custom slices and confetti.', badge: 'Viral Tool', iconName: 'Dices' },
-          { name: 'Coin Flip Online (3D Toss)', slug: '/utility/coin-flip', description: 'Realistic 3D heads or tails decision coin toss simulator.', badge: '3D Toss', iconName: 'Coins' },
-          { name: 'Virtual Dice Roller (1-12 Dice)', slug: '/utility/dice-roller', description: 'Roll virtual 3D dice for board games and RPG tabletop gaming.', badge: '1-12 Dice', iconName: 'Dices' },
-          { name: 'Random Number Picker & RNG', slug: '/utility/random-number-picker', description: 'Pick random numbers without duplicates and generate random PINs.', badge: 'RNG', iconName: 'Hash' }
+          { name: 'URL Encoder / Decoder', slug: '/utility/url-encoder-decoder', description: 'Encode or decode URLs and inspect query parameters cleanly.', isPopular: true, badge: 'RFC 3986', iconName: 'FileCode' }
         ]
       }
     ],
@@ -460,7 +447,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
     relatedCategories: [
       { name: 'PDF Tools', slug: '/pdf-tools', desc: 'Merge, split, and compress PDF documents.' },
       { name: 'Image Tools', slug: '/image-tools', desc: 'Compress, convert, and resize images.' },
-      { name: 'Social Media Tools', slug: '/social', desc: 'WhatsApp direct chat, thumbnail downloads, and bio fonts.' },
+      { name: 'Social Media Tools', slug: '/social-tools', desc: 'WhatsApp direct chat, thumbnail downloads, and bio fonts.' },
       { name: 'Govt Job Exam Tools', slug: '/govt-job-tools', desc: 'SSC, UPSC, Aadhaar print, and signature resizers.' }
     ],
     keywords: [
@@ -551,7 +538,6 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
           { name: 'Fancy Text Generator', slug: '/utility/fancy-text-generator', description: 'Generate 30+ stylish Unicode fonts for Instagram bio and WhatsApp.', isPopular: true, badge: 'Cool Fonts', iconName: 'Sparkles' },
           { name: 'Number to Words Converter', slug: '/utility/number-to-words', description: 'Convert numbers into words and currency cheques (USD / INR Lakhs & Crores).', isPopular: true, badge: 'Cheque Tool', iconName: 'DollarSign' },
           { name: 'Text Case Converter', slug: '/utility/case-converter', description: 'Convert text to UPPERCASE, lowercase, Title Case, camelCase, and snake_case.', badge: 'Writing', iconName: 'Type' },
-          { name: 'Text Repeater (10,000x)', slug: '/utility/text-repeater', description: 'Repeat messages, emojis, and text strings up to 10,000 times for messaging.', badge: 'Viral', iconName: 'Sparkles' },
           { name: 'Free Text to Speech (TTS)', slug: '/utility/text-to-speech', description: 'Browser-based voice synthesizer with zero character caps.', badge: 'No Limit', iconName: 'Volume2' }
         ]
       },
@@ -565,19 +551,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
           { name: 'JSON Formatter & Validator', slug: '/utility/json-formatter', description: 'Format, beautify, minify, and validate JSON data with syntax highlighting.', isPopular: true, badge: 'Popular', iconName: 'Code2' },
           { name: 'Base64 Encoder / Decoder', slug: '/utility/base64', description: 'Encode or decode text, files, and images into Base64 format securely.', isPopular: true, iconName: 'Code2' },
           { name: 'Hash Generator (MD5 / SHA)', slug: '/utility/hash-generator', description: 'Generate MD5, SHA-1, SHA-256 and verify file checksum integrity.', isPopular: true, badge: 'Checksum', iconName: 'Hash' },
-          { name: 'URL Encoder / Decoder', slug: '/utility/url-encoder-decoder', description: 'Encode or decode URLs and inspect query parameters cleanly.', isPopular: true, badge: 'RFC 3986', iconName: 'FileCode' },
-          { name: 'Glassmorphism CSS Generator', slug: '/utility/glassmorphism-generator', description: 'Generate frosted glass CSS backdrop-filter snippets interactively.', badge: 'UI Tool', iconName: 'Hexagon' }
-        ]
-      },
-      {
-        title: 'Interactive Decision & Focus Tools',
-        description: 'Fun, engaging tools for daily productivity, study focus, and decisions.',
-        tools: [
-          { name: 'Pomodoro Timer & Study Clock', slug: '/utility/pomodoro-timer', description: 'Aesthetic 25-minute productivity timer with break alarms.', badge: 'Focus', iconName: 'Brain' },
-          { name: 'Spin the Wheel & Name Picker', slug: '/utility/spin-the-wheel', description: 'Random winner decision picker with custom slices and confetti.', badge: 'Viral Tool', iconName: 'Dices' },
-          { name: 'Coin Flip Online (3D Toss)', slug: '/utility/coin-flip', description: 'Realistic 3D heads or tails decision coin toss simulator.', badge: '3D Toss', iconName: 'Coins' },
-          { name: 'Virtual Dice Roller (1-12 Dice)', slug: '/utility/dice-roller', description: 'Roll virtual 3D dice for board games and RPG tabletop gaming.', badge: '1-12 Dice', iconName: 'Dices' },
-          { name: 'Random Number Picker & RNG', slug: '/utility/random-number-picker', description: 'Pick random numbers without duplicates and generate random PINs.', badge: 'RNG', iconName: 'Hash' }
+          { name: 'URL Encoder / Decoder', slug: '/utility/url-encoder-decoder', description: 'Encode or decode URLs and inspect query parameters cleanly.', isPopular: true, badge: 'RFC 3986', iconName: 'FileCode' }
         ]
       }
     ],
@@ -672,215 +646,121 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
 
   'social': {
     slug: 'social',
-    title: 'Free Online Social Media Tools: WhatsApp Direct, Thumbnail Preview & Bio Fonts',
-    metaTitle: 'Free Online Social Media Tools: WhatsApp Direct, HD Thumbnails & Bio Fonts | FileZenith',
-    metaDescription: '100% Free online social media creator tools: Send WhatsApp messages without saving numbers (wa.me), inspect & preview 1080p YouTube video covers, extract viral SEO tags, and format aesthetic bio fonts.',
-    h1: 'Free Online Social Media Utilities & Creator Tools',
-    intro: 'Streamline your social media workflow with instant, client-side tools. Start WhatsApp chats with unsaved numbers, preview crystal-clear 1080p YouTube video thumbnails, extract ranking tags, and format eye-catching bio fonts — no app installs or logins required.',
+    title: 'Free Online Creator Utilities: QR Codes, Link Cleaners & Content Tools',
+    metaTitle: 'Free Online Creator Utilities: QR Codes, Link Cleaners & Content Tools | FileZenith',
+    metaDescription: '100% Free online creator tools: Custom QR codes, URL encoders, clean link utilities, and Markdown content tools — no app installs or logins required.',
+    h1: 'Free Online Creator Utilities & Link Tools',
+    intro: 'Streamline your publishing and link-sharing workflow with instant, client-side tools. Generate branded QR codes, clean UTM links, encode URLs, and format Markdown content with 100% in-browser privacy.',
     subgroups: [
       {
-        title: 'WhatsApp & Messaging Helpers',
-        description: 'Chat directly without cluttering your address book contacts.',
+        title: 'Publishing & Link Utilities',
+        description: 'Clean URLs, encode parameters, and generate scannable links.',
         tools: [
-          { name: 'WhatsApp Direct Chat Launcher', slug: '/social/whatsapp-direct-chat', description: 'Open WhatsApp chats directly with any phone number without saving it to your contacts.', isPopular: true, badge: 'wa.me', iconName: 'MessageSquare' }
+          { name: 'Custom QR Code Generator', slug: '/utility/qr-generator', description: 'Generate custom QR codes linking to your social profiles, Linktree, and channels.', isPopular: true, badge: 'Custom QR', iconName: 'QrCode' },
+          { name: 'URL Encoder / Decoder', slug: '/utility/url-encoder-decoder', description: 'Encode campaign UTM parameters and inspect query strings cleanly.', isPopular: true, badge: 'RFC 3986', iconName: 'FileCode' },
+          { name: 'Base64 Encoder / Decoder', slug: '/utility/base64', description: 'Encode or decode text, files, and images into Base64 format securely.', isPopular: true, badge: 'Base64', iconName: 'Code2' }
         ]
       },
       {
-        title: 'Video Thumbnail Preview & SEO Tags',
-        description: 'Inspect HD video covers and extract keywords to analyze video SEO.',
+        title: 'Content & Privacy Tools',
+        description: 'Format documents and scrub metadata before publishing online.',
         tools: [
-          { name: 'YouTube 1080p Thumbnail Preview', slug: '/social/youtube-thumbnail-downloader', description: 'Preview maximum resolution (1080p Full HD) thumbnail cover images from any YouTube video URL.', isPopular: true, badge: '1080p HD', iconName: 'Camera' },
-          { name: 'YouTube SEO Tag Extractor', slug: '/social/youtube-tag-extractor', description: 'Extract ranking keywords, video tags, and metadata to boost your video SEO and visibility.', isPopular: true, badge: 'SEO Tags', iconName: 'Hash' }
-        ]
-      },
-      {
-        title: 'Creator Fonts, Bios & Profile Links',
-        description: 'Format bios, generate viral text, and encode clean links for social profiles.',
-        tools: [
-          { name: 'Instagram Caption Copier', slug: '/social/instagram-caption-copier', description: 'Copy clean Instagram captions, quotes, and hashtags with proper line breaks.', isPopular: true, badge: 'Captions', iconName: 'Type' },
-          { name: 'Fancy Text & Bio Font Generator', slug: '/utility/fancy-text-generator', description: 'Generate 30+ stylish Unicode fonts and gaming nicknames for Instagram, TikTok, and WhatsApp bios.', isPopular: true, badge: 'Cool Fonts', iconName: 'Sparkles' },
-          { name: 'Custom QR Code Generator', slug: '/utility/qr-generator', description: 'Generate custom QR codes linking to your social profiles, Linktree, and YouTube channel.', isPopular: true, badge: 'Custom QR', iconName: 'QrCode' },
-          { name: 'URL Encoder / Decoder', slug: '/utility/url-encoder-decoder', description: 'Encode social campaign UTM parameters and clean redirected URLs cleanly.', badge: 'RFC 3986', iconName: 'FileCode' },
-          { name: 'Text Repeater (10,000x)', slug: '/utility/text-repeater', description: 'Repeat viral messages, emojis, and fun text chains up to 10,000 times for WhatsApp and Telegram.', badge: 'Viral', iconName: 'Sparkles' }
+          { name: 'Markdown Editor & PDF', slug: '/utility/markdown-editor', description: 'Write Markdown with real-time live preview and export to styled PDF.', isPopular: true, badge: 'Markdown', iconName: 'FileText' },
+          { name: 'PDF & EXIF Metadata Remover', slug: '/utility/metadata-remover', description: 'Scrub hidden camera EXIF, GPS location, author name, and software tags.', isPopular: true, badge: 'Privacy Scrub', iconName: 'EyeOff' },
+          { name: 'Free Text to Speech (TTS)', slug: '/utility/text-to-speech', description: 'Browser-based voice synthesizer with zero character caps.', isPopular: true, badge: 'No Limit', iconName: 'Volume2' }
         ]
       }
     ],
     popularTools: [
-      { name: 'WhatsApp Direct Chat Launcher', slug: '/social/whatsapp-direct-chat', description: 'Chat on WhatsApp without saving strangers or business numbers.' },
-      { name: 'YouTube 1080p Thumbnail Preview', slug: '/social/youtube-thumbnail-downloader', description: 'Preview Full HD 1080p cover images from any YouTube video URL.' },
-      { name: 'YouTube SEO Tag Extractor', slug: '/social/youtube-tag-extractor', description: 'Find competitor video tags and viral keywords with one click.' },
-      { name: 'Fancy Text Generator', slug: '/utility/fancy-text-generator', description: 'Generate stylish aesthetic Unicode fonts for Instagram & TikTok bios.' }
+      { name: 'Custom QR Code Generator', slug: '/utility/qr-generator', description: 'Generate custom QR codes linking to your social profiles and websites.' },
+      { name: 'URL Encoder / Decoder', slug: '/utility/url-encoder-decoder', description: 'Encode campaign UTM parameters and clean redirected URLs.' },
+      { name: 'Markdown Editor & PDF', slug: '/utility/markdown-editor', description: 'Live Markdown writing with instant PDF export.' },
+      { name: 'PDF & EXIF Metadata Remover', slug: '/utility/metadata-remover', description: 'Scrub sensitive camera metadata and author names before sharing.' }
     ],
     faqs: [
       {
-        question: 'How does WhatsApp Direct Chat work without saving the phone number?',
-        answer: 'WhatsApp provides an official deep link API ("https://wa.me/<number>"). Our tool formats the international country code and phone number, allowing your phone or WhatsApp Web to launch an instant conversation without creating a new address book entry.'
+        question: 'How does the Custom QR Code Generator work?',
+        answer: 'Our tool generates vector QR codes entirely in your browser using pure JavaScript. You can embed URLs, Wi-Fi credentials, or vCards and download crisp SVG or PNG images.'
       },
       {
-        question: 'Does FileZenith store or access my WhatsApp messages or contacts?',
-        answer: 'Never. FileZenith simply generates the official WhatsApp deep link locally in your browser. We never have access to your contacts, chat history, or personal messages.'
+        question: 'Why should I remove EXIF metadata before posting files online?',
+        answer: 'Camera and smartphone photos store hidden EXIF metadata containing exact GPS coordinates, camera serial numbers, and capture timestamps. Removing this data prevents inadvertent location leakage.'
       },
       {
-        question: 'Is it legal to inspect YouTube video thumbnail covers?',
-        answer: 'YouTube thumbnails are publicly accessible media assets. Viewing and inspecting thumbnails for personal reference, fair use analysis, design inspiration, or backup of your own content is generally permitted. However, re-uploading other creators artwork as your own may infringe on copyright.'
-      },
-      {
-        question: 'What resolution thumbnail will I see in the YouTube Thumbnail Preview tool?',
-        answer: 'Our tool fetches the highest available quality from YouTube public CDN, starting with maximum resolution 1080p ("maxresdefault.jpg" at 1920x1080). If the creator uploaded a lower-res image, it seamlessly falls back to 720p or standard high definition.'
-      },
-      {
-        question: 'How can I use the extracted YouTube tags to rank my own videos?',
-        answer: 'Enter the URL of high-ranking competitor videos in your niche. Our Tag Extractor reveals the hidden keywords and search terms the creator tagged. You can analyze their keyword strategy, identify missing topic clusters, and incorporate relevant keywords into your own video titles and descriptions.'
-      },
-      {
-        question: 'Do fancy Unicode fonts work on all phones (iPhone and Android)?',
-        answer: 'Yes! Fancy text relies on universal Unicode alphanumeric mathematical symbols that are natively supported on modern iOS, Android, macOS, and Windows operating systems. They display properly in Instagram bios, TikTok profiles, Discord usernames, and WhatsApp messages.'
-      },
-      {
-        question: 'Why do line breaks disappear on Instagram captions, and how does your tool fix it?',
-        answer: 'Instagram default text parser frequently collapses blank returns and empty line breaks. Our Instagram Caption tool inserts invisible whitespace characters (such as non-breaking space and zero-width joiners) between paragraphs so your formatting stays perfectly structured.'
-      },
-      {
-        question: 'Are there daily limits on using these social media tools?',
-        answer: 'No! All social media utilities on FileZenith are completely free with zero limits on searches, previews, or chat launches.'
+        question: 'Are my converted links or files logged on any server?',
+        answer: 'Never. All conversions and code generation execute entirely inside your local browser memory. No links, text, or files are ever transmitted or saved to external databases.'
       }
     ],
     relatedCategories: [
-      { name: 'Utility Tools', slug: '/utility', desc: 'Calculators, text formatters, and password generators.' },
-      { name: 'Image Tools', slug: '/image-tools', desc: 'Compress, crop, and convert images.' },
-      { name: 'PDF Tools', slug: '/pdf-tools', desc: 'Merge, split, and compress PDF documents.' }
+      { name: 'Utility Studio', slug: '/utility-tools', desc: 'Calculators, formatting & office tools' },
+      { name: 'Developer Tools', slug: '/developer-tools', desc: 'Formatting, encoding & testing utilities' }
     ],
     keywords: [
-      'free online social media tools',
-      'social media creator utilities',
-      'whatsapp direct chat without saving number',
-      'send whatsapp message without saving contact wa.me',
-      'open whatsapp chat without contact',
-      'whatsapp link generator free',
-      'youtube thumbnail preview 1080p full hd',
-      'view youtube video cover image high resolution',
-      'youtube video thumbnail downloader inspector',
-      'youtube tag extractor seo tool',
-      'extract tags from youtube video url',
-      'find competitor youtube video tags',
-      'instagram caption copier with clean line breaks',
-      'copy instagram captions with spaces',
-      'fancy text generator for instagram bio',
-      'aesthetic unicode fonts for instagram and tiktok',
-      'stylish font generator for whatsapp bio',
-      'cool nickname fonts for pubg free fire discord',
-      'text repeater 10000 times copy and paste',
-      'free text to speech voice generator for reels shorts',
-      'spin the wheel giveaway random winner picker',
-      'social media profile qr code generator',
-      'utm campaign link builder clean url encoder'
+      'custom vector qr code generator with logo colors',
+      'utm campaign link builder clean url encoder',
+      'markdown editor online live preview pdf export',
+      'exif metadata remover photo privacy scrub',
+      'base64 encoder decoder browser'
     ]
   },
 
   'social-tools': {
     slug: 'social-tools',
-    title: 'Free Online Social Media Tools: WhatsApp Direct, Thumbnail Preview & Bio Fonts',
-    metaTitle: 'Free Online Social Media Tools: WhatsApp Direct, HD Thumbnails & Bio Fonts | FileZenith',
-    metaDescription: '100% Free online social media creator tools: Send WhatsApp messages without saving numbers (wa.me), inspect & preview 1080p YouTube video covers, extract viral SEO tags, and format aesthetic bio fonts.',
-    h1: 'Free Online Social Media Utilities & Creator Tools',
-    intro: 'Streamline your social media workflow with instant, client-side tools. Start WhatsApp chats with unsaved numbers, preview crystal-clear 1080p YouTube video thumbnails, extract ranking tags, and format eye-catching bio fonts — no app installs or logins required.',
+    title: 'Free Online Creator Utilities: QR Codes, Link Cleaners & Content Tools',
+    metaTitle: 'Free Online Creator Utilities: QR Codes, Link Cleaners & Content Tools | FileZenith',
+    metaDescription: '100% Free online creator tools: Custom QR codes, URL encoders, clean link utilities, and Markdown content tools — no app installs or logins required.',
+    h1: 'Free Online Creator Utilities & Link Tools',
+    intro: 'Streamline your publishing and link-sharing workflow with instant, client-side tools. Generate branded QR codes, clean UTM links, encode URLs, and format Markdown content with 100% in-browser privacy.',
     subgroups: [
       {
-        title: 'WhatsApp & Messaging Helpers',
-        description: 'Chat directly without cluttering your address book contacts.',
+        title: 'Publishing & Link Utilities',
+        description: 'Clean URLs, encode parameters, and generate scannable links.',
         tools: [
-          { name: 'WhatsApp Direct Chat Launcher', slug: '/social/whatsapp-direct-chat', description: 'Open WhatsApp chats directly with any phone number without saving it to your contacts.', isPopular: true, badge: 'wa.me', iconName: 'MessageSquare' }
+          { name: 'Custom QR Code Generator', slug: '/utility/qr-generator', description: 'Generate custom QR codes linking to your social profiles, Linktree, and channels.', isPopular: true, badge: 'Custom QR', iconName: 'QrCode' },
+          { name: 'URL Encoder / Decoder', slug: '/utility/url-encoder-decoder', description: 'Encode campaign UTM parameters and inspect query strings cleanly.', isPopular: true, badge: 'RFC 3986', iconName: 'FileCode' },
+          { name: 'Base64 Encoder / Decoder', slug: '/utility/base64', description: 'Encode or decode text, files, and images into Base64 format securely.', isPopular: true, badge: 'Base64', iconName: 'Code2' }
         ]
       },
       {
-        title: 'Video Thumbnail Preview & SEO Tags',
-        description: 'Inspect HD video covers and extract keywords to analyze video SEO.',
+        title: 'Content & Privacy Tools',
+        description: 'Format documents and scrub metadata before publishing online.',
         tools: [
-          { name: 'YouTube 1080p Thumbnail Preview', slug: '/social/youtube-thumbnail-downloader', description: 'Preview maximum resolution (1080p Full HD) thumbnail cover images from any YouTube video URL.', isPopular: true, badge: '1080p HD', iconName: 'Camera' },
-          { name: 'YouTube SEO Tag Extractor', slug: '/social/youtube-tag-extractor', description: 'Extract ranking keywords, video tags, and metadata to boost your video SEO and visibility.', isPopular: true, badge: 'SEO Tags', iconName: 'Hash' }
-        ]
-      },
-      {
-        title: 'Creator Fonts, Bios & Profile Links',
-        description: 'Format bios, generate viral text, and encode clean links for social profiles.',
-        tools: [
-          { name: 'Instagram Caption Copier', slug: '/social/instagram-caption-copier', description: 'Copy clean Instagram captions, quotes, and hashtags with proper line breaks.', isPopular: true, badge: 'Captions', iconName: 'Type' },
-          { name: 'Fancy Text & Bio Font Generator', slug: '/utility/fancy-text-generator', description: 'Generate 30+ stylish Unicode fonts and gaming nicknames for Instagram, TikTok, and WhatsApp bios.', isPopular: true, badge: 'Cool Fonts', iconName: 'Sparkles' },
-          { name: 'Custom QR Code Generator', slug: '/utility/qr-generator', description: 'Generate custom QR codes linking to your social profiles, Linktree, and YouTube channel.', isPopular: true, badge: 'Custom QR', iconName: 'QrCode' },
-          { name: 'URL Encoder / Decoder', slug: '/utility/url-encoder-decoder', description: 'Encode social campaign UTM parameters and clean redirected URLs cleanly.', badge: 'RFC 3986', iconName: 'FileCode' },
-          { name: 'Text Repeater (10,000x)', slug: '/utility/text-repeater', description: 'Repeat viral messages, emojis, and fun text chains up to 10,000 times for WhatsApp and Telegram.', badge: 'Viral', iconName: 'Sparkles' }
+          { name: 'Markdown Editor & PDF', slug: '/utility/markdown-editor', description: 'Write Markdown with real-time live preview and export to styled PDF.', isPopular: true, badge: 'Markdown', iconName: 'FileText' },
+          { name: 'PDF & EXIF Metadata Remover', slug: '/utility/metadata-remover', description: 'Scrub hidden camera EXIF, GPS location, author name, and software tags.', isPopular: true, badge: 'Privacy Scrub', iconName: 'EyeOff' },
+          { name: 'Free Text to Speech (TTS)', slug: '/utility/text-to-speech', description: 'Browser-based voice synthesizer with zero character caps.', isPopular: true, badge: 'No Limit', iconName: 'Volume2' }
         ]
       }
     ],
     popularTools: [
-      { name: 'WhatsApp Direct Chat Launcher', slug: '/social/whatsapp-direct-chat', description: 'Chat on WhatsApp without saving strangers or business numbers.' },
-      { name: 'YouTube 1080p Thumbnail Preview', slug: '/social/youtube-thumbnail-downloader', description: 'Preview Full HD 1080p cover images from any YouTube video URL.' },
-      { name: 'YouTube SEO Tag Extractor', slug: '/social/youtube-tag-extractor', description: 'Find competitor video tags and viral keywords with one click.' },
-      { name: 'Fancy Text Generator', slug: '/utility/fancy-text-generator', description: 'Generate stylish aesthetic Unicode fonts for Instagram & TikTok bios.' }
+      { name: 'Custom QR Code Generator', slug: '/utility/qr-generator', description: 'Generate custom QR codes linking to your social profiles and websites.' },
+      { name: 'URL Encoder / Decoder', slug: '/utility/url-encoder-decoder', description: 'Encode campaign UTM parameters and clean redirected URLs.' },
+      { name: 'Markdown Editor & PDF', slug: '/utility/markdown-editor', description: 'Live Markdown writing with instant PDF export.' },
+      { name: 'PDF & EXIF Metadata Remover', slug: '/utility/metadata-remover', description: 'Scrub sensitive camera metadata and author names before sharing.' }
     ],
     faqs: [
       {
-        question: 'How does WhatsApp Direct Chat work without saving the phone number?',
-        answer: 'WhatsApp provides an official deep link API ("https://wa.me/<number>"). Our tool formats the international country code and phone number, allowing your phone or WhatsApp Web to launch an instant conversation without creating a new address book entry.'
+        question: 'How does the Custom QR Code Generator work?',
+        answer: 'Our tool generates vector QR codes entirely in your browser using pure JavaScript. You can embed URLs, Wi-Fi credentials, or vCards and download crisp SVG or PNG images.'
       },
       {
-        question: 'Does FileZenith store or access my WhatsApp messages or contacts?',
-        answer: 'Never. FileZenith simply generates the official WhatsApp deep link locally in your browser. We never have access to your contacts, chat history, or personal messages.'
+        question: 'Why should I remove EXIF metadata before posting files online?',
+        answer: 'Camera and smartphone photos store hidden EXIF metadata containing exact GPS coordinates, camera serial numbers, and capture timestamps. Removing this data prevents inadvertent location leakage.'
       },
       {
-        question: 'Is it legal to inspect YouTube video thumbnail covers?',
-        answer: 'YouTube thumbnails are publicly accessible media assets. Viewing and inspecting thumbnails for personal reference, fair use analysis, design inspiration, or backup of your own content is generally permitted. However, re-uploading other creators artwork as your own may infringe on copyright.'
-      },
-      {
-        question: 'What resolution thumbnail will I see in the YouTube Thumbnail Preview tool?',
-        answer: 'Our tool fetches the highest available quality from YouTube public CDN, starting with maximum resolution 1080p ("maxresdefault.jpg" at 1920x1080). If the creator uploaded a lower-res image, it seamlessly falls back to 720p or standard high definition.'
-      },
-      {
-        question: 'How can I use the extracted YouTube tags to rank my own videos?',
-        answer: 'Enter the URL of high-ranking competitor videos in your niche. Our Tag Extractor reveals the hidden keywords and search terms the creator tagged. You can analyze their keyword strategy, identify missing topic clusters, and incorporate relevant keywords into your own video titles and descriptions.'
-      },
-      {
-        question: 'Do fancy Unicode fonts work on all phones (iPhone and Android)?',
-        answer: 'Yes! Fancy text relies on universal Unicode alphanumeric mathematical symbols that are natively supported on modern iOS, Android, macOS, and Windows operating systems. They display properly in Instagram bios, TikTok profiles, Discord usernames, and WhatsApp messages.'
-      },
-      {
-        question: 'Why do line breaks disappear on Instagram captions, and how does your tool fix it?',
-        answer: 'Instagram default text parser frequently collapses blank returns and empty line breaks. Our Instagram Caption tool inserts invisible whitespace characters (such as non-breaking space and zero-width joiners) between paragraphs so your formatting stays perfectly structured.'
-      },
-      {
-        question: 'Are there daily limits on using these social media tools?',
-        answer: 'No! All social media utilities on FileZenith are completely free with zero limits on searches, previews, or chat launches.'
+        question: 'Are my converted links or files logged on any server?',
+        answer: 'Never. All conversions and code generation execute entirely inside your local browser memory. No links, text, or files are ever transmitted or saved to external databases.'
       }
     ],
     relatedCategories: [
-      { name: 'Utility Tools', slug: '/utility-tools', desc: 'Calculators, text formatters, and password generators.' },
-      { name: 'Image Tools', slug: '/image-tools', desc: 'Compress, crop, and convert images.' },
-      { name: 'PDF Tools', slug: '/pdf-tools', desc: 'Merge, split, and compress PDF documents.' }
+      { name: 'Utility Studio', slug: '/utility-tools', desc: 'Calculators, formatting & office tools' },
+      { name: 'Developer Tools', slug: '/developer-tools', desc: 'Formatting, encoding & testing utilities' }
     ],
     keywords: [
-      'free online social media tools',
-      'social media creator utilities',
-      'whatsapp direct chat without saving number',
-      'send whatsapp message without saving contact wa.me',
-      'open whatsapp chat without contact',
-      'whatsapp link generator free',
-      'youtube thumbnail preview 1080p full hd',
-      'view youtube video cover image high resolution',
-      'youtube video thumbnail downloader inspector',
-      'youtube tag extractor seo tool',
-      'extract tags from youtube video url',
-      'find competitor youtube video tags',
-      'instagram caption copier with clean line breaks',
-      'copy instagram captions with spaces',
-      'fancy text generator for instagram bio',
-      'aesthetic unicode fonts for instagram and tiktok',
-      'stylish font generator for whatsapp bio',
-      'cool nickname fonts for pubg free fire discord',
-      'text repeater 10000 times copy and paste',
-      'free text to speech voice generator for reels shorts',
-      'spin the wheel giveaway random winner picker',
-      'social media profile qr code generator',
-      'utm campaign link builder clean url encoder'
+      'custom vector qr code generator with logo colors',
+      'utm campaign link builder clean url encoder',
+      'markdown editor online live preview pdf export',
+      'exif metadata remover photo privacy scrub',
+      'base64 encoder decoder browser'
     ]
   },
 
@@ -954,7 +834,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
       }
     ],
     relatedCategories: [
-      { name: 'Daily Utilities', slug: '/utility', desc: 'Calculators, text formatters, and utilities.' },
+      { name: 'Daily Utilities', slug: '/utility-tools', desc: 'Calculators, text formatters, and utilities.' },
       { name: 'PDF Tools', slug: '/pdf-tools', desc: 'Merge, split, and compress PDFs.' },
       { name: 'Developer Tools', slug: '/developer-tools', desc: 'Developer encoding utilities.' }
     ]
@@ -1027,7 +907,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
       }
     ],
     relatedCategories: [
-      { name: 'Daily Utilities', slug: '/utility', desc: 'Calculators, text formatters, and utilities.' },
+      { name: 'Daily Utilities', slug: '/utility-tools', desc: 'Calculators, text formatters, and utilities.' },
       { name: 'Text Tools', slug: '/text-tools', desc: 'Word counters and text generators.' },
       { name: 'Developer Tools', slug: '/developer-tools', desc: 'JSON formatters and Base64 encoders.' }
     ]
@@ -1094,7 +974,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
     ],
     relatedCategories: [
       { name: 'Productivity Tools', slug: '/productivity-tools', desc: 'Password generator and utility tools.' },
-      { name: 'Daily Utilities', slug: '/utility', desc: 'Financial calculators and converters.' }
+      { name: 'Daily Utilities', slug: '/utility-tools', desc: 'Financial calculators and converters.' }
     ]
   },
 
@@ -1158,7 +1038,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
       }
     ],
     relatedCategories: [
-      { name: 'Daily Utilities', slug: '/utility', desc: 'Calculators and daily utilities.' },
+      { name: 'Daily Utilities', slug: '/utility-tools', desc: 'Calculators and daily utilities.' },
       { name: 'Calculators', slug: '/calculators', desc: 'Financial and student calculators.' }
     ]
   },
@@ -1176,16 +1056,16 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
         description: 'Exact dimensions, byte limits (KB), and formats for SSC, UPSC, IBPS, and State PSC recruitment portals.',
         tools: [
           { name: 'Online Signature Maker (Draw & Type)', slug: '/tools/online-signature-maker', description: 'Draw or type digital signature with transparent PNG & 10-20KB govt exam JPEG.', isPopular: true, badge: 'Draw & Type', iconName: 'PenTool' },
-          { name: 'SSC CGL Photo & Signature Resizer', slug: '/tools/ssc-cgl-photo-signature-resizer', description: 'Official 20-50KB photo with Name & DOP stamp and 10-20KB signature.', isPopular: true, badge: 'CGL 2026', iconName: 'UserCheck' },
-          { name: 'UPSC OTR Photo Resizer (350x350)', slug: '/tools/upsc-otr-photo-resizer', description: 'Square 350x350 px photo (20-300KB) with candidate name and date.', isPopular: true, badge: 'OTR Square', iconName: 'UserCheck' },
+          { name: 'SSC CGL Photo & Signature Resizer', slug: '/tools/ssc-photo-resizer#cgl', description: 'Official 20-50KB photo with Name & DOP stamp and 10-20KB signature.', isPopular: true, badge: 'CGL 2026', iconName: 'UserCheck' },
+          { name: 'UPSC OTR Photo Resizer (350x350)', slug: '/tools/upsc-photo-resizer#otr', description: 'Square 350x350 px photo (20-300KB) with candidate name and date.', isPopular: true, badge: 'OTR Square', iconName: 'UserCheck' },
           { name: 'CTET Photo & Signature Resizer', slug: '/tools/ctet-photo-signature-resizer', description: 'CBSE CTET 10-100KB photo and 3-30KB signature resizer.', badge: 'CTET 2026', iconName: 'UserCheck' },
           { name: 'SSC Photo Resizer (20-50KB)', slug: '/tools/ssc-photo-resizer', description: 'Format SSC CGL, CHSL, MTS 3.5x4.5cm photo with Name & Date stamp.', isPopular: true, badge: 'SSC 20-50KB', iconName: 'UserCheck' },
-          { name: 'Signature Resizer 10 to 20KB', slug: '/tools/signature-resizer-10-to-20kb', description: 'Resize signature to 10-20KB with Magic B&W cleanup.', isPopular: true, badge: '10-20KB', iconName: 'Stamp' },
+          { name: 'Signature Resizer 10 to 20KB', slug: '/tools/online-signature-maker#resize', description: 'Resize signature to 10-20KB with Magic B&W cleanup.', isPopular: true, badge: '10-20KB', iconName: 'Stamp' },
           { name: 'UPSC Photo Resizer', slug: '/tools/upsc-photo-resizer', description: '350x350 px OTR square photo format with Name & Date.', isPopular: true, badge: 'UPSC OTR', iconName: 'UserCheck' },
           { name: 'NEET Photo Resizer', slug: '/tools/neet-photo-resizer', description: 'NEET passport & postcard 4"x6" photo with DOP stamp.', badge: 'NEET UG', iconName: 'UserCheck' },
           { name: 'Photo Name & Date Generator', slug: '/tools/photo-name-date-generator', description: 'Overlay candidate full name and date on passport photos.', badge: 'Name & Date', iconName: 'Calendar' },
-          { name: 'Compress Image to 50KB', slug: '/image/compress-to-50kb', description: 'General passport photo compressor under 50KB.', badge: 'Target 50KB', iconName: 'Minimize2' },
-          { name: 'Compress Image to 20KB', slug: '/image/compress-to-20kb', description: 'Compress signature & photo under 20KB.', badge: 'Target 20KB', iconName: 'Minimize2' },
+          { name: 'Compress Image to 50KB', slug: '/image/compress#50kb', description: 'General passport photo compressor under 50KB.', badge: 'Target 50KB', iconName: 'Minimize2' },
+          { name: 'Compress Image to 20KB', slug: '/image/compress#20kb', description: 'Compress signature & photo under 20KB.', badge: 'Target 20KB', iconName: 'Minimize2' },
           { name: 'Passport Photo Maker', slug: '/image/passport-maker', description: 'Crop to standard 3.5x4.5cm official passport photo.', badge: '3.5x4.5cm', iconName: 'UserCheck' }
         ]
       },
@@ -1194,7 +1074,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
         description: 'Tools for cyber cafes, CSC centers, and citizens to prepare ID cards and forms.',
         tools: [
           { name: 'Aadhaar Card Print Tool (A4 & PVC)', slug: '/tools/aadhaar-card-print', description: 'Crop and print e-Aadhaar on A4 sheet & PVC card (85.6x54 mm).', isPopular: true, badge: 'A4 & PVC', iconName: 'Printer' },
-          { name: 'Compress PDF to 200KB', slug: '/pdf/compress-to-200kb', description: 'Reduce document size under 200KB for portal uploads.', isPopular: true, badge: 'Form Preset', iconName: 'Minimize2' },
+          { name: 'Compress PDF to 200KB', slug: '/pdf/compress#200kb', description: 'Reduce document size under 200KB for portal uploads.', isPopular: true, badge: 'Form Preset', iconName: 'Minimize2' },
           { name: 'Pics to PDF Converter', slug: '/image/pics-to-pdf', description: 'Combine marksheets and certificates into single PDF.', badge: 'Documents', iconName: 'Camera' },
           { name: 'Password Protect PDF', slug: '/pdf/protect', description: 'Encrypt documents before sharing.', badge: 'Secure', iconName: 'Lock' },
           { name: 'Remove PDF Password', slug: '/pdf/remove-password', description: 'Unlock encrypted PDF documents offline.', iconName: 'Unlock' }
@@ -1204,7 +1084,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
     popularTools: [
       { name: 'Aadhaar Card Print Tool', slug: '/tools/aadhaar-card-print', description: 'Print e-Aadhaar on A4 sheet or PVC card.' },
       { name: 'SSC Photo Resizer (20-50KB)', slug: '/tools/ssc-photo-resizer', description: '3.5x4.5cm photo with candidate name & date.' },
-      { name: 'Signature Resizer 10 to 20KB', slug: '/tools/signature-resizer-10-to-20kb', description: 'Clean signature with Magic B&W cleanup.' },
+      { name: 'Signature Resizer 10 to 20KB', slug: '/tools/online-signature-maker#resize', description: 'Clean signature with Magic B&W cleanup.' },
       { name: 'UPSC Photo Resizer', slug: '/tools/upsc-photo-resizer', description: 'Square 350x350 px photo for UPSC OTR.' }
     ],
     faqs: [
@@ -1245,7 +1125,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
       { name: 'CSC & Cyber Cafe Tools', slug: '/csc-cyber-cafe-tools', desc: 'Aadhaar PVC print, marksheets & PAN 213x213.' },
       { name: 'Image Tools', slug: '/image-tools', desc: 'Compress, crop, and convert images.' },
       { name: 'PDF Tools', slug: '/pdf-tools', desc: 'Merge, split, and compress PDFs.' },
-      { name: 'Daily Utilities', slug: '/utility', desc: 'Age, tax, and salary calculators.' }
+      { name: 'Daily Utilities', slug: '/utility-tools', desc: 'Age, tax, and salary calculators.' }
     ]
   },
 
@@ -1334,12 +1214,12 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
         description: 'Meet strict sarkari recruitment portal KB requirements for SSC, UPSC, IBPS, and State PSCs.',
         tools: [
           { name: 'Online Signature Maker (Draw & Type)', slug: '/tools/online-signature-maker', description: 'Instant in-browser signature drawing canvas & cursive generator with transparent PNG & 10-20KB JPEG.', isPopular: true, badge: 'Draw & Type', iconName: 'PenTool' },
-          { name: 'Signature Resizer 10 to 20KB', slug: '/tools/signature-resizer-10-to-20kb', description: 'Resize signature strictly between 10KB and 20KB with Magic B&W cleanup for dirty phone photos.', isPopular: true, badge: '10-20KB Safe', iconName: 'Stamp' },
+          { name: 'Signature Resizer 10 to 20KB', slug: '/tools/online-signature-maker#resize', description: 'Resize signature strictly between 10KB and 20KB with Magic B&W cleanup for dirty phone photos.', isPopular: true, badge: '10-20KB Safe', iconName: 'Stamp' },
           { name: 'Photo & Signature Joiner', slug: '/tools/photo-signature-joiner', description: 'Merge customer photo (top) and signature (bottom) into one single file under 50KB for single-upload forms.', isPopular: true, badge: 'Single File', iconName: 'Combine' },
           { name: 'Photo Name & Date Stamp Generator', slug: '/tools/photo-name-date-generator', description: 'Add candidate full name and Date of Photo (DOP) on white bottom strip without Photoshop.', isPopular: true, badge: 'SSC & Police', iconName: 'Calendar' },
           { name: 'SSC Photo Resizer (20-50KB)', slug: '/tools/ssc-photo-resizer', description: '3.5x4.5cm photo (20-50KB) with mandatory name & date stamp for SSC CGL, CHSL, MTS & GD.', isPopular: true, badge: 'SSC 20-50KB', iconName: 'UserCheck' },
-          { name: 'Clean Black & White Signature', slug: '/tools/clean-black-white-signature', description: 'Turn phone camera shadow signatures on yellow paper into crisp pure white background black ink.', isPopular: false, badge: 'Magic B&W', iconName: 'Stamp' },
-          { name: 'UPSC OTR Photo Resizer (350x350)', slug: '/tools/upsc-otr-photo-resizer', description: 'Official square 350x350 pixel format (20-300KB) for UPSC One Time Registration.', isPopular: false, badge: 'OTR Square', iconName: 'UserCheck' }
+          { name: 'Clean Black & White Signature', slug: '/tools/online-signature-maker#clean', description: 'Turn phone camera shadow signatures on yellow paper into crisp pure white background black ink.', isPopular: false, badge: 'Magic B&W', iconName: 'Stamp' },
+          { name: 'UPSC OTR Photo Resizer (350x350)', slug: '/tools/upsc-photo-resizer#otr', description: 'Official square 350x350 pixel format (20-300KB) for UPSC One Time Registration.', isPopular: false, badge: 'OTR Square', iconName: 'UserCheck' }
         ]
       },
       {
@@ -1347,10 +1227,10 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
         description: 'Merge and shrink multi-page documents to pass portal upload checks on the first attempt.',
         tools: [
           { name: 'Combine Marksheets into PDF (<500KB)', slug: '/pdf/combine-marksheets', description: 'Merge 10th, 12th & Degree certificates into 1 uniform A4 PDF strictly under 500KB.', isPopular: true, badge: 'College Ready', iconName: 'GraduationCap' },
-          { name: 'Compress PDF to 200KB', slug: '/pdf/compress-to-200kb', description: 'Shrink admission & caste certificate PDFs strictly under 200KB while keeping text crisp.', isPopular: true, badge: 'Govt Form Preset', iconName: 'Minimize2' },
-          { name: 'Compress PDF to 300KB', slug: '/pdf/compress-to-300kb', description: 'Compress documents under 300KB for UPSC OTR and State PSC recruitment portals.', isPopular: true, badge: 'UPSC 300KB', iconName: 'Minimize2' },
-          { name: 'Compress PDF to 500KB', slug: '/pdf/compress-to-500kb', description: 'Compress certificates under 500KB for Passport Sewa and high court submissions.', isPopular: true, badge: 'Target 500KB', iconName: 'Minimize2' },
-          { name: 'Compress PDF to 100KB', slug: '/pdf/compress-to-100kb', description: 'Aggressive compression under 100KB for strict state scholarship and teacher recruitment forms.', isPopular: true, badge: 'Target 100KB', iconName: 'Minimize2' },
+          { name: 'Compress PDF to 200KB', slug: '/pdf/compress#200kb', description: 'Shrink admission & caste certificate PDFs strictly under 200KB while keeping text crisp.', isPopular: true, badge: 'Govt Form Preset', iconName: 'Minimize2' },
+          { name: 'Compress PDF to 300KB', slug: '/pdf/compress#300kb', description: 'Compress documents under 300KB for UPSC OTR and State PSC recruitment portals.', isPopular: true, badge: 'UPSC 300KB', iconName: 'Minimize2' },
+          { name: 'Compress PDF to 500KB', slug: '/pdf/compress#500kb', description: 'Compress certificates under 500KB for Passport Sewa and high court submissions.', isPopular: true, badge: 'Target 500KB', iconName: 'Minimize2' },
+          { name: 'Compress PDF to 100KB', slug: '/pdf/compress#100kb', description: 'Aggressive compression under 100KB for strict state scholarship and teacher recruitment forms.', isPopular: true, badge: 'Target 100KB', iconName: 'Minimize2' },
           { name: 'Pics to PDF Converter', slug: '/image/pics-to-pdf', description: 'Convert customer smartphone photos or flatbed scanner JPGs into a clean multi-page A4 PDF.', isPopular: true, badge: 'Multi-Scan', iconName: 'Camera' }
         ]
       },
@@ -1370,7 +1250,7 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
       { name: 'Aadhaar Card Print Tool (A4 & PVC)', slug: '/tools/aadhaar-card-print', description: 'Print e-Aadhaar on PVC card (85.6x54mm) or 5-up sheet on A4 paper.' },
       { name: 'PAN Card Photo Resizer (213x213)', slug: '/tools/pan-card-photo-resizer', description: 'NSDL & UTIITSL standard 213x213 px photo under 50KB.' },
       { name: 'Combine Marksheets (<500KB)', slug: '/pdf/combine-marksheets', description: 'Merge 10th & 12th certificates in 1 A4 PDF under 500KB.' },
-      { name: 'Signature Resizer 10 to 20KB', slug: '/tools/signature-resizer-10-to-20kb', description: 'Clean and format signature for sarkari recruitment forms.' }
+      { name: 'Signature Resizer 10 to 20KB', slug: '/tools/online-signature-maker#resize', description: 'Clean and format signature for sarkari recruitment forms.' }
     ],
     faqs: [
       {

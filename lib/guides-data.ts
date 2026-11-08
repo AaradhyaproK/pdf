@@ -72,8 +72,8 @@ export const GUIDE_REGISTRY: Record<string, GuideConfig> = {
       { question: 'What is the best format for 20KB limit?', answer: 'JPEG (.jpg) is universally accepted and yields the smallest byte size at 20KB limits.' }
     ],
     relatedTools: [
-      { name: 'Compress Image to 20KB Tool', slug: '/image/compress-to-20kb', desc: 'Instant 20KB target compressor.' },
-      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Format signature 10KB-20KB.' }
+      { name: 'Compress Image to 20KB Tool', slug: '/image/compress#20kb', desc: 'Instant 20KB target compressor.' },
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/online-signature-maker#resize', desc: 'Format signature 10KB-20KB.' }
     ],
     relatedGuides: [
       { name: 'How to Resize Signature Online', slug: '/blog/how-to-resize-signature-online', desc: 'Complete guide for signature cleanup.' },
@@ -143,7 +143,7 @@ export const GUIDE_REGISTRY: Record<string, GuideConfig> = {
       { question: 'Can marks sheets compressed to 100KB be read clearly?', answer: 'Yes, if resolution is kept around 1000px width and JPEG quality is kept around 0.70–0.85.' }
     ],
     relatedTools: [
-      { name: 'Compress Image to 100KB Tool', slug: '/image/compress-to-100kb', desc: 'Target 100KB compressor.' },
+      { name: 'Compress Image to 100KB Tool', slug: '/image/compress#100kb', desc: 'Target 100KB compressor.' },
       { name: 'UPSC Photo Resizer', slug: '/tools/upsc-photo-resizer', desc: 'UPSC OTR photo tool.' }
     ],
     relatedGuides: [
@@ -217,8 +217,8 @@ export const GUIDE_REGISTRY: Record<string, GuideConfig> = {
       { question: 'Can I upload signature signed with blue pen?', answer: 'Most portals accept black or dark blue ink. Avoid light blue or red ink.' }
     ],
     relatedTools: [
-      { name: 'Clean B&W Signature', slug: '/tools/clean-black-white-signature', desc: 'Clean paper shadow.' },
-      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Resize to 10-20KB.' }
+      { name: 'Clean B&W Signature', slug: '/tools/online-signature-maker#clean', desc: 'Clean paper shadow.' },
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/online-signature-maker#resize', desc: 'Resize to 10-20KB.' }
     ],
     relatedGuides: [
       { name: 'How to Compress Image to 20KB', slug: '/blog/how-to-compress-image-to-20kb', desc: 'Compress signature 20KB.' }
@@ -253,7 +253,7 @@ export const GUIDE_REGISTRY: Record<string, GuideConfig> = {
       { question: 'Why does portal reject my PNG image?', answer: 'Many legacy portals only accept .jpg or .jpeg extensions. Convert your PNG to JPEG using FileZenith studio.' }
     ],
     relatedTools: [
-      { name: 'Compress Image to 20KB', slug: '/image/compress-to-20kb', desc: 'Convert & compress JPEG.' }
+      { name: 'Compress Image to 20KB', slug: '/image/compress#20kb', desc: 'Convert & compress JPEG.' }
     ],
     relatedGuides: [
       { name: 'Photo Size & File Size Explained', slug: '/blog/photo-size-and-file-size-explained', desc: 'Understand file specs.' }
@@ -319,8 +319,8 @@ export const GUIDE_REGISTRY: Record<string, GuideConfig> = {
       { question: 'What is the optimal JPEG quality for web forms?', answer: 'Quality between 0.75 and 0.85 offers the best balance of tiny file size and sharp visual clarity.' }
     ],
     relatedTools: [
-      { name: 'Compress Image to 50KB', slug: '/image/compress-to-50kb', desc: '50KB target tool.' },
-      { name: 'Compress Image to 100KB', slug: '/image/compress-to-100kb', desc: '100KB target tool.' }
+      { name: 'Compress Image to 50KB', slug: '/image/compress#50kb', desc: '50KB target tool.' },
+      { name: 'Compress Image to 100KB', slug: '/image/compress#100kb', desc: '100KB target tool.' }
     ],
     relatedGuides: [
       { name: 'How to Compress Image to 20KB', slug: '/blog/how-to-compress-image-to-20kb', desc: '20KB guide.' }
@@ -358,7 +358,7 @@ export const GUIDE_REGISTRY: Record<string, GuideConfig> = {
     ],
     relatedTools: [
       { name: 'SSC Photo Resizer Tool', slug: '/tools/ssc-photo-resizer', desc: 'Format SSC photo 20-50KB.' },
-      { name: 'Signature Resizer (10-20KB)', slug: '/tools/signature-resizer-10-to-20kb', desc: 'Format SSC signature.' }
+      { name: 'Signature Resizer (10-20KB)', slug: '/tools/online-signature-maker#resize', desc: 'Format SSC signature.' }
     ],
     relatedGuides: [
       { name: 'How to Compress Image to 50KB', slug: '/blog/how-to-compress-image-to-50kb', desc: '50KB compression guide.' }

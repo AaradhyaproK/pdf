@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ToolLayout } from '@/components/ToolLayout';
 import { FileUploader, FileItem } from '@/components/FileUploader';
 import { compressImageToTargetKB, compressImageByQuality } from '@/lib/image-engine';
@@ -17,6 +17,33 @@ export default function CompressImagePage() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [resultFile, setResultFile] = useState<File | null>(null);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    const applyHashTarget = () => {
+      if (typeof window === 'undefined') return;
+      const h = window.location.hash.toLowerCase();
+      if (h === '#20kb') {
+        setMode('target');
+        setTargetKB(20);
+      } else if (h === '#50kb') {
+        setMode('target');
+        setTargetKB(50);
+      } else if (h === '#100kb') {
+        setMode('target');
+        setTargetKB(100);
+      } else if (h === '#200kb') {
+        setMode('target');
+        setTargetKB(200);
+      } else if (h === '#500kb') {
+        setMode('target');
+        setTargetKB(500);
+      }
+    };
+
+    applyHashTarget();
+    window.addEventListener('hashchange', applyHashTarget);
+    return () => window.removeEventListener('hashchange', applyHashTarget);
+  }, []);
 
   const handleCompress = async () => {
     if (files.length === 0) {

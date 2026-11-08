@@ -24,12 +24,48 @@ export default function CompressPDFPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
+    const applyHashTarget = () => {
+      if (typeof window === 'undefined') return;
+      const h = window.location.hash.toLowerCase();
+      if (h === '#50kb') {
+        setMode('target');
+        setTargetVal(50);
+        setTargetUnit('KB');
+      } else if (h === '#100kb') {
+        setMode('target');
+        setTargetVal(100);
+        setTargetUnit('KB');
+      } else if (h === '#200kb') {
+        setMode('target');
+        setTargetVal(200);
+        setTargetUnit('KB');
+      } else if (h === '#300kb') {
+        setMode('target');
+        setTargetVal(300);
+        setTargetUnit('KB');
+      } else if (h === '#500kb') {
+        setMode('target');
+        setTargetVal(500);
+        setTargetUnit('KB');
+      } else if (h === '#1mb') {
+        setMode('target');
+        setTargetVal(1);
+        setTargetUnit('MB');
+      }
+    };
+
+    applyHashTarget();
+    window.addEventListener('hashchange', applyHashTarget);
+
     const handleOpenCustom = () => {
       setMode('target');
       setIsSettingsModalOpen(true);
     };
     window.addEventListener('open-compress-custom-size', handleOpenCustom);
-    return () => window.removeEventListener('open-compress-custom-size', handleOpenCustom);
+    return () => {
+      window.removeEventListener('hashchange', applyHashTarget);
+      window.removeEventListener('open-compress-custom-size', handleOpenCustom);
+    };
   }, []);
 
   const handleFileSelect = async (selected: FileItem[]) => {

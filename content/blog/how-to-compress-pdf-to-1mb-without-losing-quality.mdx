@@ -32,7 +32,7 @@ To understand how to compress a PDF down to 1MB effectively, you need to underst
 3. **Hidden Revision History & Metadata:** Modern PDF editing software stores undo states, color profiles, thumbnails, and XML metadata streams that silently add megabytes of invisible weight.
 4. **Duplicate Object Streams:** Multi-page documents frequently replicate identical header logos and background graphics on every single page instead of reusing a shared XObject reference.
 
-By applying target-driven compression through the [FileZenith Compress PDF to 1MB Tool](/pdf/compress-to-1mb), unnecessary metadata is stripped, font subsets are deduplicated, and image streams are intelligently resampled to hit the exact target size without sacrificing typographic clarity.
+By applying target-driven compression through the [FileZenith Compress PDF to 1MB Tool](/pdf/compress#1mb), unnecessary metadata is stripped, font subsets are deduplicated, and image streams are intelligently resampled to hit the exact target size without sacrificing typographic clarity.
 
 ---
 
@@ -53,10 +53,10 @@ Here is how different compression thresholds affect a typical 8-page corporate p
 Using FileZenith's dedicated preset, you do not need to guess quality percentages or calculate mathematical ratios:
 
 ### Step 1: Upload Your PDF File
-Navigate to the [FileZenith Compress PDF to 1MB Tool](/pdf/compress-to-1mb). Drag and drop your document into the dashed upload area, or click **Select PDF File** to browse your local device.
+Navigate to the [FileZenith Compress PDF to 1MB Tool](/pdf/compress#1mb). Drag and drop your document into the dashed upload area, or click **Select PDF File** to browse your local device.
 
 ### Step 2: Select 1MB Preset (or Fine-Tune)
-The tool automatically configures the compression algorithm to hit an output threshold between **800KB and 980KB** (safely below the 1,024KB limit enforced by portal upload validators). If your portal has even stricter caps, you can switch with one click to the [Compress PDF to 100KB](/pdf/compress-to-100kb) or [Compress PDF to 200KB](/pdf/compress-to-200kb) presets.
+The tool automatically configures the compression algorithm to hit an output threshold between **800KB and 980KB** (safely below the 1,024KB limit enforced by portal upload validators). If your portal has even stricter caps, you can switch with one click to the [Compress PDF to 100KB](/pdf/compress#100kb) or [Compress PDF to 200KB](/pdf/compress#200kb) presets.
 
 ### Step 3: Download Your Optimized PDF
 Click **Compress to 1MB**. The WebAssembly PDF engine processes the document streams locally inside your browser memory in just 2 to 4 seconds. Click **Download PDF** to save your ultra-compact, portal-ready document.

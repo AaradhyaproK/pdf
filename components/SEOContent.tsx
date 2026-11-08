@@ -41,7 +41,7 @@ function getRelatedGuidesAndArticles(slug: string, category: string): ArticleRec
       {
         title: 'SSC CGL/CHSL PDF 200KB Preset',
         desc: 'Pre-configured compression target for Staff Selection Commission.',
-        url: '/pdf/compress-to-200kb',
+        url: '/pdf/compress#200kb',
         badge: 'Official Preset',
         readTime: 'Direct Tool',
         type: 'preset'
@@ -638,7 +638,7 @@ export function SEOContent({ slug }: SEOContentProps) {
     ? [
         { name: 'PDF to Excel Converter', slug: '/pdf/pdf-to-excel', desc: 'Extract PDF tables into formula-ready Excel XLSX & CSV.' },
         { name: 'PDF to Word Converter', slug: '/pdf/pdf-to-word', desc: 'Convert PDF to editable Word DOCX 100% privately.' },
-        { name: 'Compress PDF Online (Under 200KB)', slug: '/pdf/compress-to-200kb', desc: 'Reduce PDF file size for portal submissions.' },
+        { name: 'Compress PDF Online (Under 200KB)', slug: '/pdf/compress#200kb', desc: 'Reduce PDF file size for portal submissions.' },
         { name: 'Unlock / Remove PDF Password', slug: '/pdf/remove-password', desc: 'Unlock password-protected bank statements & salary slips.' },
         { name: 'Merge PDF Files Free', slug: '/pdf/merge', desc: 'Combine multiple PDF documents into one.' },
       ].filter((t) => t.slug !== slug)

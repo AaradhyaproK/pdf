@@ -144,7 +144,7 @@ export const ALL_TOOLS: ToolItem[] = [
   {
     id: 'compress-pdf-to-300kb',
     name: 'Compress PDF to 300KB',
-    slug: '/pdf/compress-to-300kb',
+    slug: '/pdf/compress#300kb',
     desc: 'Target 300KB compressor for UPSC OTR, State PSC forms & judicial e-filing.',
     category: 'pdf',
     tags: ['compress', 'exam'],
@@ -159,7 +159,7 @@ export const ALL_TOOLS: ToolItem[] = [
   {
     id: 'compress-pdf-to-500kb',
     name: 'Compress PDF to 500KB',
-    slug: '/pdf/compress-to-500kb',
+    slug: '/pdf/compress#500kb',
     desc: 'Target 500KB compressor for Passport Sewa, High Courts & university portal submissions.',
     category: 'pdf',
     tags: ['compress', 'exam'],
@@ -174,7 +174,7 @@ export const ALL_TOOLS: ToolItem[] = [
   {
     id: 'sbi-po-photo-resizer',
     name: 'SBI PO & Clerk Photo Resizer',
-    slug: '/tools/sbi-po-photo-resizer',
+    slug: '/tools/ibps-sbi-photo-resizer',
     desc: 'SBI PO, Clerk & Junior Associate photo (20-50KB) and signature (10-20KB) resizer.',
     category: 'image',
     tags: ['image', 'exam'],
@@ -189,7 +189,7 @@ export const ALL_TOOLS: ToolItem[] = [
   {
     id: 'cuet-photo-resizer',
     name: 'CUET NTA Photo & Sign Resizer',
-    slug: '/tools/cuet-photo-resizer',
+    slug: '/tools/jee-cuet-photo-resizer#cuet',
     desc: 'CUET UG/PG 10-200KB photo & signature resizer with date of photograph stamp.',
     category: 'image',
     tags: ['image', 'exam'],
@@ -204,7 +204,7 @@ export const ALL_TOOLS: ToolItem[] = [
   {
     id: 'clean-black-white-signature',
     name: 'Clean B&W Signature Paper Cleaner',
-    slug: '/tools/clean-black-white-signature',
+    slug: '/tools/online-signature-maker#clean',
     desc: 'Wipe away mobile shadows, paper tint & desk yellowing into crisp black ink on pure white.',
     category: 'image',
     tags: ['image', 'exam'],
@@ -219,7 +219,7 @@ export const ALL_TOOLS: ToolItem[] = [
   {
     id: 'gate-signature-resizer',
     name: 'IIT GATE Signature Resizer',
-    slug: '/tools/gate-signature-resizer',
+    slug: '/tools/online-signature-maker#gate',
     desc: 'IIT GATE GOAPS 560x160 px signature format under 80KB with aspect ratio 3.5:1.',
     category: 'image',
     tags: ['image', 'exam'],
@@ -294,7 +294,7 @@ export const ALL_TOOLS: ToolItem[] = [
   {
     id: 'ssc-cgl-photo-signature-resizer',
     name: 'SSC CGL Photo & Sign Resizer',
-    slug: '/tools/ssc-cgl-photo-signature-resizer',
+    slug: '/tools/ssc-photo-resizer#cgl',
     desc: 'SSC CGL, CHSL, MTS & GD Constable 20-50KB photo and 10-20KB signature resizer.',
     category: 'image',
     tags: ['image', 'exam'],
@@ -309,7 +309,7 @@ export const ALL_TOOLS: ToolItem[] = [
   {
     id: 'upsc-otr-photo-resizer',
     name: 'UPSC OTR Photo & Sign Resizer',
-    slug: '/tools/upsc-otr-photo-resizer',
+    slug: '/tools/upsc-photo-resizer#otr',
     desc: 'UPSC One Time Registration (OTR) 350x350 px photo (20-300KB) and signature.',
     category: 'image',
     tags: ['image', 'exam'],
@@ -540,7 +540,7 @@ export const ALL_TOOLS: ToolItem[] = [
   {
     id: 'signature-resizer-10-to-20kb',
     name: 'Signature Resizer 10 to 20KB',
-    slug: '/tools/signature-resizer-10-to-20kb',
+    slug: '/tools/online-signature-maker#resize',
     desc: 'Resize signature to 10KB-20KB for govt job portals with Magic B&W cleanup.',
     category: 'image',
     tags: ['image', 'compress', 'exam'],
@@ -568,7 +568,7 @@ export const ALL_TOOLS: ToolItem[] = [
   {
     id: 'railway-rrb-photo-resizer',
     name: 'Railway RRB Photo Resizer (20 to 50KB)',
-    slug: '/tools/railway-rrb-photo-resizer',
+    slug: '/tools/rrb-railway-photo-resizer',
     desc: 'Resize photo (320x240 px, 20-50KB) for RRB NTPC, Group D, ALP, and Technician.',
     category: 'image',
     tags: ['image', 'compress', 'exam'],
@@ -582,7 +582,7 @@ export const ALL_TOOLS: ToolItem[] = [
   {
     id: 'ibps-photo-resizer',
     name: 'IBPS / SBI PO Photo Resizer (20 to 50KB)',
-    slug: '/tools/ibps-photo-resizer',
+    slug: '/tools/ibps-sbi-photo-resizer',
     desc: 'Format passport photos to 200x230 px (20-50KB) for IBPS PO, Clerk, and SBI.',
     category: 'image',
     tags: ['image', 'compress', 'exam'],
@@ -596,7 +596,7 @@ export const ALL_TOOLS: ToolItem[] = [
   {
     id: 'jee-photo-resizer',
     name: 'JEE / CUET Photo Resizer (10 to 200KB)',
-    slug: '/tools/jee-photo-resizer',
+    slug: '/tools/jee-cuet-photo-resizer#jee',
     desc: 'Format passport photo (3.5x4.5cm, 10-200KB, 80% face) with DOP stamp for NTA JEE & CUET.',
     category: 'image',
     tags: ['image', 'compress', 'exam'],
@@ -638,7 +638,7 @@ export const ALL_TOOLS: ToolItem[] = [
   {
     id: 'compress-pdf-to-100kb',
     name: 'Compress PDF to 100KB',
-    slug: '/pdf/compress-to-100kb',
+    slug: '/pdf/compress#100kb',
     desc: 'Reduce PDF document file size under 100KB for government and sarkari exam portals.',
     category: 'pdf',
     tags: ['compress', 'exam'],
@@ -652,7 +652,7 @@ export const ALL_TOOLS: ToolItem[] = [
   {
     id: 'compress-pdf-to-1mb',
     name: 'Compress PDF to 1MB',
-    slug: '/pdf/compress-to-1mb',
+    slug: '/pdf/compress#1mb',
     desc: 'Compress large multi-page PDF documents under 1MB for email attachments and uploads.',
     category: 'pdf',
     tags: ['compress'],
@@ -788,62 +788,6 @@ export const ALL_TOOLS: ToolItem[] = [
     iconBgClass: 'bg-rose-50 text-rose-600 border-rose-100 group-hover:bg-rose-600 group-hover:text-white',
     hoverTitleClass: 'group-hover:text-rose-600',
     badgeStyle: 'bg-rose-50 text-rose-700 border-rose-200',
-  },
-  {
-    id: 'spin-the-wheel',
-    name: 'Spin the Wheel & Name Picker',
-    slug: '/utility/spin-the-wheel',
-    desc: 'Enter names and pick a random winner instantly with a spinning wheel and confetti.',
-    category: 'utility',
-    tags: ['utility'],
-    icon: Dices,
-    badge: 'Viral Tool',
-    colorClass: 'text-indigo-600',
-    iconBgClass: 'bg-indigo-50 text-indigo-600 border-indigo-100 group-hover:bg-indigo-600 group-hover:text-white',
-    hoverTitleClass: 'group-hover:text-indigo-600',
-    badgeStyle: 'bg-indigo-50 text-indigo-700 border-indigo-200',
-  },
-  {
-    id: 'coin-flip',
-    name: 'Coin Flip Online (3D Toss)',
-    slug: '/utility/coin-flip',
-    desc: 'Flip a coin with realistic 3D physics, sounds, yes/no decisions, and live streaks.',
-    category: 'utility',
-    tags: ['utility'],
-    icon: Coins,
-    badge: '3D Toss',
-    colorClass: 'text-amber-600',
-    iconBgClass: 'bg-amber-50 text-amber-600 border-amber-100 group-hover:bg-amber-600 group-hover:text-white',
-    hoverTitleClass: 'group-hover:text-amber-600',
-    badgeStyle: 'bg-amber-50 text-amber-700 border-amber-200',
-  },
-  {
-    id: 'dice-roller',
-    name: 'Roll the Dice (1-12 Dice)',
-    slug: '/utility/dice-roller',
-    desc: 'Roll 1 to 12 virtual dice with 3D tumbling physics, sound effects, and tabletop RPG modes.',
-    category: 'utility',
-    tags: ['utility'],
-    icon: Dices,
-    badge: '1-12 Dice',
-    colorClass: 'text-rose-600',
-    iconBgClass: 'bg-rose-50 text-rose-600 border-rose-100 group-hover:bg-rose-600 group-hover:text-white',
-    hoverTitleClass: 'group-hover:text-rose-600',
-    badgeStyle: 'bg-rose-50 text-rose-700 border-rose-200',
-  },
-  {
-    id: 'random-number-picker',
-    name: 'Random Number Picker & RNG',
-    slug: '/utility/random-number-picker',
-    desc: 'Pick truly random numbers between any range without duplicates, lottery draws, and PINs.',
-    category: 'utility',
-    tags: ['utility'],
-    icon: Hash,
-    badge: 'No Repeats',
-    colorClass: 'text-emerald-600',
-    iconBgClass: 'bg-emerald-50 text-emerald-600 border-emerald-100 group-hover:bg-emerald-600 group-hover:text-white',
-    hoverTitleClass: 'group-hover:text-emerald-600',
-    badgeStyle: 'bg-emerald-50 text-emerald-700 border-emerald-200',
   },
   {
     id: 'epf-calculator',
@@ -1139,48 +1083,6 @@ export const ALL_TOOLS: ToolItem[] = [
     hoverTitleClass: 'group-hover:text-emerald-600',
     badgeStyle: 'bg-indigo-50 text-indigo-700 border-indigo-200',
   },
-  {
-    id: 'text-repeater',
-    name: 'Text Repeater (10k Times)',
-    slug: '/utility/text-repeater',
-    desc: 'Repeat words, text, or emojis up to 10,000 times for WhatsApp & social posts.',
-    category: 'utility',
-    tags: ['utility'],
-    icon: Sparkles,
-    badge: 'Viral Spam',
-    colorClass: 'text-emerald-600',
-    iconBgClass: 'bg-emerald-50 text-emerald-600 border-emerald-100 group-hover:bg-emerald-600 group-hover:text-white',
-    hoverTitleClass: 'group-hover:text-emerald-600',
-    badgeStyle: 'bg-rose-50 text-rose-700 border-rose-200',
-  },
-  {
-    id: 'youtube-thumbnail-downloader',
-    name: 'YouTube 1080p Thumbnail Preview',
-    slug: '/social/youtube-thumbnail-downloader',
-    desc: 'Preview YouTube video cover thumbnails in 1080p Full HD MaxRes & 640p HD.',
-    category: 'utility',
-    tags: ['utility'],
-    icon: Smartphone,
-    badge: '1080p HD',
-    colorClass: 'text-rose-600',
-    iconBgClass: 'bg-rose-50 text-rose-600 border-rose-100 group-hover:bg-rose-600 group-hover:text-white',
-    hoverTitleClass: 'group-hover:text-rose-600',
-    badgeStyle: 'bg-rose-50 text-rose-700 border-rose-200',
-  },
-  {
-    id: 'youtube-tag-extractor',
-    name: 'YouTube Tag Extractor & SEO',
-    slug: '/social/youtube-tag-extractor',
-    desc: 'Extract hidden SEO tags, keywords, and title topics from any YouTube video link.',
-    category: 'utility',
-    tags: ['utility'],
-    icon: Hash,
-    badge: 'SEO Tags',
-    colorClass: 'text-rose-600',
-    iconBgClass: 'bg-rose-50 text-rose-600 border-rose-100 group-hover:bg-rose-600 group-hover:text-white',
-    hoverTitleClass: 'group-hover:text-rose-600',
-    badgeStyle: 'bg-rose-50 text-rose-700 border-rose-200',
-  },
   // --- NEW FEATURE TOOLS ---
   {
     id: 'crop-image',
@@ -1298,7 +1200,7 @@ export const ALL_TOOLS: ToolItem[] = [
   {
     id: 'compress-to-200kb',
     name: 'Compress to 200KB',
-    slug: '/pdf/compress-to-200kb',
+    slug: '/pdf/compress#200kb',
     desc: 'Shrink PDFs under 200KB for official form uploads.',
     category: 'pdf',
     tags: ['compress'],
@@ -1528,7 +1430,7 @@ export const ALL_TOOLS: ToolItem[] = [
   {
     id: 'compress-image-20kb',
     name: 'Compress Image to 20KB',
-    slug: '/image/compress-to-20kb',
+    slug: '/image/compress#20kb',
     desc: 'Shrink signature and photo under 20KB for govt portals.',
     category: 'image',
     tags: ['compress', 'image', 'exam'],
@@ -1543,7 +1445,7 @@ export const ALL_TOOLS: ToolItem[] = [
   {
     id: 'compress-image-50kb',
     name: 'Compress Image to 50KB',
-    slug: '/image/compress-to-50kb',
+    slug: '/image/compress#50kb',
     desc: 'Shrink photo size under 50KB for online forms.',
     category: 'image',
     tags: ['compress', 'image'],
@@ -1555,7 +1457,7 @@ export const ALL_TOOLS: ToolItem[] = [
   {
     id: 'compress-image-100kb',
     name: 'Compress Image to 100KB',
-    slug: '/image/compress-to-100kb',
+    slug: '/image/compress#100kb',
     desc: 'Shrink photos under 100KB for identity verification.',
     category: 'image',
     tags: ['compress', 'image'],
@@ -1783,14 +1685,14 @@ export function LandingToolGrid() {
               <span>PDF Tools</span>
             </Link>
             <Link
-              href="/utility"
+              href="/utility-tools"
               className="px-3 py-1.5 rounded-full bg-white text-slate-700 hover:bg-slate-900 hover:text-white border border-slate-200/90 shadow-2xs text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer group active:scale-95 shrink-0"
             >
               <Calculator className="w-3.5 h-3.5 text-emerald-600 group-hover:text-white transition-colors" />
               <span>Daily Utilities</span>
             </Link>
             <Link
-              href="/social"
+              href="/social-tools"
               className="px-3 py-1.5 rounded-full bg-white text-slate-700 hover:bg-slate-900 hover:text-white border border-slate-200/90 shadow-2xs text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer group active:scale-95 shrink-0"
             >
               <Share2 className="w-3.5 h-3.5 text-pink-600 group-hover:text-white transition-colors" />

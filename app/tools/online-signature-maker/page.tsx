@@ -519,7 +519,7 @@ export default function OnlineSignatureMakerPage() {
             </Link>
 
             <Link
-              href="/tools/signature-resizer-10-to-20kb"
+              href="/tools/online-signature-maker#resize"
               className="group p-4 rounded-xl border border-slate-200 hover:border-blue-500 bg-slate-50 hover:bg-white transition-all shadow-2xs hover:shadow-sm"
             >
               <div className="flex items-center gap-2 mb-2">

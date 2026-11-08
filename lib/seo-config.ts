@@ -78,7 +78,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
 
   '/pdf/compress-to-200kb': {
-    slug: '/pdf/compress-to-200kb',
+    slug: '/pdf/compress#200kb',
     title: 'Compress PDF to 200KB Free Online — Form & Job Application Reducer',
     metaTitle: 'Compress PDF to 200KB Free Online — Exact Size for Forms',
     description: 'Compress PDF under 200KB online free for SSC, UPSC, and government job portals. Keep text crisp with 100% private in-browser compression. Zero upload.',
@@ -384,7 +384,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
 
   '/image/compress-to-20kb': {
-    slug: '/image/compress-to-20kb',
+    slug: '/image/compress#20kb',
     title: 'Compress Image to 20KB Online Free — Signature & Photo Reducer for Forms',
     metaTitle: 'Compress Image to 20KB Free Online — Signature & Photo Reducer',
     description: 'Compress image or signature under 20KB online free for SSC, UPSC, IBPS, and state recruitment portal uploads. 100% private in-browser compression.',
@@ -411,7 +411,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
 
   '/image/compress-to-50kb': {
-    slug: '/image/compress-to-50kb',
+    slug: '/image/compress#50kb',
     title: 'Compress Image to 50KB Free Online — Exact Photo Reducer for Forms',
     metaTitle: 'Compress Image to 50KB Free Online — Exact Size for Forms',
     description: 'Compress image under 50KB online free for SSC, UPSC, and government portal uploads. Keep facial details and signature crisp with 100% private in-browser compression.',
@@ -439,7 +439,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
 
   '/image/compress-to-100kb': {
-    slug: '/image/compress-to-100kb',
+    slug: '/image/compress#100kb',
     title: 'Compress Image to 100KB Online Free — Fast Photo Reducer for ID & Forms',
     metaTitle: 'Compress Image to 100KB Online Free — Fast Photo Reducer',
     description: 'Compress and resize photos under 100KB online for job applications, identity cards, and website uploads. 100% private, instant & lossless in-browser.',
@@ -2155,7 +2155,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
 
   '/tools/signature-resizer-10-to-20kb': {
-    slug: '/tools/signature-resizer-10-to-20kb',
+    slug: '/tools/online-signature-maker#resize',
     title: 'Signature Resizer 10 to 20KB Online Free (B&W Clean)',
     metaTitle: 'Signature Resizer 10 to 20KB Online Free — SSC, IBPS, UPSC',
     description: 'Resize signature to exact 10KB - 20KB online free for SSC, IBPS, SBI, and government forms. Auto B&W cleanup removes shadows & yellow paper tint instantly.',
@@ -2431,7 +2431,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
 
   '/pdf/compress-to-100kb': {
-    slug: '/pdf/compress-to-100kb',
+    slug: '/pdf/compress#100kb',
     title: 'Compress PDF to 100KB Online Free',
     metaTitle: 'Compress PDF to 100KB Free Online | FileZenith',
     description: 'Compress PDF file size under 100KB online free. Ideal for Sarkari job portals, UPSC, SSC, state PSC marks cards, certificates, and ID uploads with zero server uploads.',
@@ -2458,7 +2458,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
 
   '/pdf/compress-to-1mb': {
-    slug: '/pdf/compress-to-1mb',
+    slug: '/pdf/compress#1mb',
     title: 'Compress PDF to 1MB Online Free',
     metaTitle: 'Compress PDF to 1MB Free Online | FileZenith',
     description: 'Compress large PDF documents to under 1MB online free. Optimized for email attachments, university submissions, bank statements, and online applications with zero quality compromise.',
@@ -2483,7 +2483,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
 
   '/pdf/compress-to-300kb': {
-    slug: '/pdf/compress-to-300kb',
+    slug: '/pdf/compress#300kb',
     title: 'Compress PDF to 300KB Online Free — UPSC & Govt Portal Optimizer',
     metaTitle: 'Compress PDF to 300KB Free Online | FileZenith',
     description: 'Compress PDF files strictly under 300KB online free. Tailored for UPSC OTR, State PSC certificates, high court filings, and job portals with zero server uploads.',
@@ -2511,7 +2511,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
 
   '/pdf/compress-to-500kb': {
-    slug: '/pdf/compress-to-500kb',
+    slug: '/pdf/compress#500kb',
     title: 'Compress PDF to 500KB Online Free — Passport & University Submission',
     metaTitle: 'Compress PDF to 500KB Free Online | FileZenith',
     description: 'Compress PDF under 500KB online free in seconds. Optimized for Passport Sewa, Indian High Courts e-filing, university admissions, and visa portals with 100% private in-browser compression.',
@@ -3050,6 +3050,23 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
 
 
+export const NOINDEX_SLUGS = new Set<string>([
+  '/social/youtube-thumbnail-downloader',
+  '/social/youtube-tag-extractor',
+  '/utility/text-repeater',
+  '/utility/coin-flip',
+  '/utility/dice-roller',
+  '/utility/roll-the-dice',
+  '/utility/spin-the-wheel',
+  '/utility/random-number-picker',
+  '/utility/fancy-text-generator',
+  '/utility/glassmorphism-generator',
+  '/utility/pomodoro-timer',
+  '/utility/typing-speed-test',
+  '/social/whatsapp-direct-chat',
+  '/social/instagram-caption-copier',
+]);
+
 export function generateToolMetadata(slug: string): Metadata {
   const tool = SEO_REGISTRY[slug];
   if (!tool) {
@@ -3089,17 +3106,27 @@ export function generateToolMetadata(slug: string): Metadata {
       alternates: {
         canonical: canonicalUrl
       },
-      robots: {
-        index: true,
-        follow: true,
-        googleBot: {
-          index: true,
-          follow: true,
-          'max-video-preview': -1,
-          'max-image-preview': 'large' as const,
-          'max-snippet': -1,
-        },
-      },
+      robots: NOINDEX_SLUGS.has(slug)
+        ? {
+            index: false,
+            follow: true,
+            nocache: true,
+            googleBot: {
+              index: false,
+              follow: true,
+            },
+          }
+        : {
+            index: true,
+            follow: true,
+            googleBot: {
+              index: true,
+              follow: true,
+              'max-video-preview': -1,
+              'max-image-preview': 'large' as const,
+              'max-snippet': -1,
+            },
+          },
       openGraph: {
         title: absoluteTitle,
         description: tool.description,
