@@ -147,7 +147,7 @@ export default function PrivacyPolicyPage() {
           <span>8. Contact Information</span>
         </h2>
         <p className="text-sm text-slate-600 leading-relaxed">
-          FileZenith is developed and operated by <strong>Snab</strong> (Nashik, Maharashtra, India 422005). If you have any questions, privacy inquiries, or feedback regarding this Privacy Policy, please contact us via our <Link href="/contact" className="text-indigo-600 hover:underline font-semibold">Contact Page</Link>, visit <a href="https://www.snab.co.in/contact" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline font-semibold">Snab Contact Page</a>, or email us directly at <a href="mailto:hello@snab.co.in" className="text-indigo-600 hover:underline font-semibold">hello@snab.co.in</a>.
+          FileZenith is developed and operated by <strong>Snab</strong> (Nashik, Maharashtra, India 422005). If you have any questions, privacy inquiries, or data protection requests regarding this Privacy Policy, please contact us via our <Link href="/contact" className="text-indigo-600 hover:underline font-semibold">Contact Page</Link>, or email our dedicated data protection desk directly at <a href="mailto:privacy@filezenith.com" className="text-indigo-600 hover:underline font-semibold">privacy@filezenith.com</a>.
         </p>
       </section>
     </div>

@@ -41,11 +41,11 @@ export function Footer() {
           </p>
           <div className="pt-1 flex flex-wrap items-center justify-between gap-2 border-t border-slate-800 pt-3">
             <a
-              href="mailto:hello@snab.co.in"
+              href="mailto:contact@filezenith.com"
               className="inline-flex items-center gap-1.5 text-xs text-indigo-300 hover:text-white font-bold transition-colors"
             >
               <Mail className="w-3.5 h-3.5 text-indigo-400" />
-              <span>hello@snab.co.in</span>
+              <span>contact@filezenith.com</span>
             </a>
             <a
               href="https://www.instagram.com/file_zenith/"
@@ -188,9 +188,9 @@ export function Footer() {
                 <Link prefetch={false} href="/terms" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Terms of Service</Link>
                 <Link prefetch={false} href="/blog" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Guides &amp; Exam Blog</Link>
                 <Link prefetch={false} href="/download-app" className="p-2 rounded-xl text-xs font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-colors">Download Offline Mobile App</Link>
-                <a href="mailto:hello@snab.co.in" className="p-2 rounded-xl text-xs font-medium text-indigo-600 hover:underline flex items-center gap-1.5">
+                <a href="mailto:contact@filezenith.com" className="p-2 rounded-xl text-xs font-medium text-indigo-600 hover:underline flex items-center gap-1.5">
                   <Mail className="w-3.5 h-3.5" />
-                  <span>hello@snab.co.in</span>
+                  <span>contact@filezenith.com</span>
                 </a>
               </div>
             )}
@@ -219,11 +219,11 @@ export function Footer() {
             {/* Official Support Email */}
             <div className="pt-1">
               <a
-                href="mailto:hello@snab.co.in"
+                href="mailto:contact@filezenith.com"
                 className="inline-flex items-center gap-2 text-xs font-semibold text-slate-700 hover:text-indigo-600 transition-colors px-3 py-2 rounded-xl bg-slate-50 border border-slate-200/80 w-fit"
               >
                 <Mail className="w-3.5 h-3.5 text-indigo-600" />
-                <span>hello@snab.co.in</span>
+                <span>contact@filezenith.com</span>
               </a>
             </div>
 
@@ -418,9 +418,9 @@ export function Footer() {
             <p className="text-[11px] text-slate-400 font-medium">Nashik, Maharashtra, India (PIN: 422005) &bull; Zero Server Processing Architecture</p>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-3.5 text-[11px] sm:text-xs font-semibold">
-            <a href="mailto:hello@snab.co.in" className="text-indigo-600 hover:underline flex items-center gap-1 font-bold">
+            <a href="mailto:contact@filezenith.com" className="text-indigo-600 hover:underline flex items-center gap-1 font-bold">
               <Mail className="w-3 h-3 text-indigo-500" />
-              <span>hello@snab.co.in</span>
+              <span>contact@filezenith.com</span>
             </a>
             <span>&bull;</span>
             <a

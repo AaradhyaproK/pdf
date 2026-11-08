@@ -1,5 +1,6 @@
+Contact: mailto:security@filezenith.com
+Contact: mailto:contact@filezenith.com
 Contact: mailto:aaradhya@snab.co.in
-Contact: mailto:hello@snab.co.in
 Expires: 2027-12-31T23:59:59.000Z
 Encryption: https://www.filezenith.com/security
 Preferred-Languages: en, hi

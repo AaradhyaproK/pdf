@@ -75,10 +75,10 @@ export default function ContactPage() {
                 </div>
                 <div className="min-w-0 flex-1">
                   <a
-                    href="mailto:hello@snab.co.in"
+                    href="mailto:contact@filezenith.com"
                     className="text-xs sm:text-sm font-black text-indigo-700 hover:text-indigo-900 hover:underline truncate block"
                   >
-                    hello@snab.co.in
+                    contact@filezenith.com
                   </a>
                   <div className="flex items-center gap-1 text-[10px] text-slate-400 font-medium pt-0.5">
                     <Clock className="w-3 h-3 text-slate-400" />

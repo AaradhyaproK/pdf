@@ -283,8 +283,8 @@ export default function EditorialPolicyPage() {
               <div><strong>Corporate Address:</strong> Nashik, Maharashtra, India (PIN: 422005)</div>
               <div>
                 <strong>Editorial Contact &amp; Corrections:</strong>{' '}
-                <a href="mailto:hello@snab.co.in" className="text-indigo-600 underline font-bold hover:text-indigo-700">
-                  hello@snab.co.in
+                <a href="mailto:editorial@filezenith.com" className="text-indigo-600 underline font-bold hover:text-indigo-700">
+                  editorial@filezenith.com
                 </a>
               </div>
             </div>

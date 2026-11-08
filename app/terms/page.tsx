@@ -87,7 +87,7 @@ export default function TermsPage() {
       <section className="space-y-3 border-t border-slate-200 pt-6">
         <h2 className="text-xl font-extrabold text-slate-900">7. Contact Information</h2>
         <p className="text-sm text-slate-600 leading-relaxed">
-          FileZenith is a product by <strong>Snab</strong> (Nashik, Maharashtra, India 422005). Questions regarding these Terms of Service should be directed to us via our <Link href="/contact" className="text-indigo-600 hover:underline font-semibold">Contact Page</Link>, <a href="https://www.snab.co.in/contact" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline font-semibold">Snab Contact Page</a>, or via email at <a href="mailto:hello@snab.co.in" className="text-indigo-600 hover:underline font-semibold">hello@snab.co.in</a>.
+          FileZenith is a product by <strong>Snab</strong> (Nashik, Maharashtra, India 422005). Questions regarding these Terms of Service should be directed to us via our <Link href="/contact" className="text-indigo-600 hover:underline font-semibold">Contact Page</Link>, or via email at <a href="mailto:contact@filezenith.com" className="text-indigo-600 hover:underline font-semibold">contact@filezenith.com</a>.
         </p>
       </section>
     </div>
