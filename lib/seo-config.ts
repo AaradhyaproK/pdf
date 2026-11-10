@@ -45,10 +45,15 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
   '/pdf/compress': {
     slug: '/pdf/compress',
-    title: 'Compress PDF Online Free — Reduce File Size Without Quality Loss',
-    metaTitle: 'Compress PDF Online Free — Reduce PDF Size (Lossless & Fast)',
-    description: 'Compress PDF files online for free without losing quality. Shrink large PDFs up to 80% privately in browser. Zero server upload, unlimited & instant.',
+    title: 'Compress PDF to 200KB, 100KB, 500KB Online Free — Fast & Lossless',
+    metaTitle: 'Compress PDF to 200KB, 100KB, 500KB Online Free | FileZenith',
+    description: 'Compress PDF to 200KB, 100KB, 50KB or 500KB online for free without losing quality. Instant private in-browser compression for job portals and email attachments.',
     keywords: [
+      'compress pdf to 200kb',
+      'compress pdf to 100kb',
+      'compress pdf to 500kb',
+      'compress pdf to 300kb',
+      'compress pdf to 50kb',
       'compress pdf',
       'compress pdf online free without losing quality',
       'reduce pdf file size online free',
@@ -135,11 +140,12 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/pdf/split': {
     slug: '/pdf/split',
-    title: 'Split PDF Pages Online Free — Extract Pages in Seconds',
-    metaTitle: 'Split PDF Pages Free Online — Extract PDF Pages Instantly',
-    description: 'Split PDF pages free online in seconds. Extract specific page ranges or separate single PDF pages 100% privately in browser. Zero server upload, no limits.',
+    title: 'Split PDF Online Free — Separate & Extract PDF Pages Instantly',
+    metaTitle: 'Split PDF Online Free — Extract & Separate PDF Pages (No Limits)',
+    description: 'Split PDF pages online free in seconds. Extract specific page ranges or split PDF into single pages 100% privately in browser. Zero upload, fast & unlimited.',
     keywords: [
       'split pdf',
+      'online split pdf',
       'split pdf pages free online',
       'extract pages from pdf file online',
       'separate pdf pages no upload',
@@ -357,10 +363,18 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   // --- Image Studio ---
   '/image/compress': {
     slug: '/image/compress',
-    title: 'Smart Online Image Size Compressor',
-    metaTitle: 'Compress Image Free Online - Reduce Photo Size KB | FileZenith',
-    description: 'Compress image free online in seconds. Reduce JPG, PNG & WebP photo size in KB 100% privately with zero server uploads. Shrink your photo size now!',
+    title: 'Compress Image to 50KB, 20KB, 100KB Online — Free Photo Resizer',
+    metaTitle: 'Compress Image to 50KB, 20KB, 100KB Online Free (Photo Resizer)',
+    description: 'Compress image to 50KB, 20KB, 100KB, or 200KB online free. Fast JPG, PNG & WebP photo resizer in KB for govt exams, job applications, and official portals.',
     keywords: [
+      'compress image to 50kb',
+      'compress image to 20kb',
+      'photo resizer 50kb',
+      'photo resizer 100kb',
+      'image resizer 50kb',
+      'compress image to 100kb',
+      'photo resizer 20kb',
+      'compress image to 200kb',
       'compress image',
       'compress image online free in kb',
       'reduce image file size online free',
@@ -549,6 +563,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
     metaTitle: 'HEIC to JPG Converter Free Online — Batch Convert iPhone Photos',
     description: 'Convert HEIC to JPG free online in seconds. Turn Apple iPhone .heic & .heif photos into universal JPG images 100% privately in browser. Zero server upload, batch convert.',
     keywords: [
+      'how to convert heic to jpg',
       'heic to jpg',
       'heic to jpg converter free online',
       'convert iphone photos to jpg no upload',
@@ -573,10 +588,12 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/image/to-pdf': {
     slug: '/image/to-pdf',
-    title: 'Convert JPG & PNG Images to PDF Online Free',
-    metaTitle: 'Image to PDF Converter Free Online — JPG & PNG to PDF (Instant)',
-    description: 'Convert images to PDF free online in seconds. Combine JPG, PNG & WebP photos into one structured PDF document 100% privately with zero server upload. Free & fast.',
+    title: 'Convert JPG to PDF (300 KB & Custom Size) Online Free',
+    metaTitle: 'JPG to PDF Converter Free Online (300 KB & Fast PDF) | FileZenith',
+    description: 'Convert JPG, PNG, and photos to PDF online free. Target specific file sizes like JPG to PDF 300 KB or 100 KB 100% privately in your browser with zero uploads.',
     keywords: [
+      'jpg to pdf 300 kb',
+      'jpg to pdf',
       'image to pdf',
       'image to pdf converter free online',
       'convert jpg png photos to pdf no upload',
@@ -894,6 +911,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
     metaTitle: 'PDF to Word Converter — Convert PDF to Editable DOCX (100% Free)',
     description: 'Convert PDF to editable Word (.docx) free online. Preserves formatting, tables and paragraphs with zero server upload. No signup or email required.',
     keywords: [
+      'pdf to docx',
       'pdf to word converter',
       'convert pdf to word online free',
       'pdf to docx converter without email',
@@ -1325,6 +1343,8 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
     metaTitle: 'Age Calculator Free Online — Exact Age in Years, Months & Days',
     description: 'Calculate your exact age in years, months, days, hours, and seconds free online. Live next birthday countdown, zodiac sign & milestones with 100% privacy.',
     keywords: [
+      'age calculator',
+      'gestational age calculator',
       'age calculator online',
       'exact age calculator in years months days',
       'calculate age from date of birth',
@@ -1376,10 +1396,12 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
   '/utility/cgpa-to-percentage': {
     slug: '/utility/cgpa-to-percentage',
-    title: 'CGPA to Percentage Converter Free Online (CBSE & Universities)',
-    metaTitle: 'CGPA to Percentage Calculator — CBSE, Mumbai Univ, VTU & DU (Free)',
-    description: 'Convert CGPA to percentage online free for CBSE, Mumbai University, VTU, Delhi University, GTU, AKTU, and global GPA scales. Instant multi-semester calculator.',
+    title: 'CGPA to Percentage Calculator — Free 10 Point CGPA to % Converter',
+    metaTitle: 'CGPA to Percentage Calculator Online (Free CBSE & College Formula)',
+    description: 'Convert CGPA to percentage online free for CBSE, Mumbai University, VTU, Delhi University, and engineering colleges. Instant 10-point CGPA to percentage calculator.',
     keywords: [
+      'cgpa to percentage',
+      'cgpa to percentage calculator',
       'cgpa to percentage converter',
       'gpa to percentage converter worldwide',
       'convert 10 point cgpa into percentage',
@@ -1504,11 +1526,13 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/utility/emi-calculator': {
     slug: '/utility/emi-calculator',
-    title: 'Home Loan, Car Loan & Personal Loan EMI Calculator Online',
-    metaTitle: 'EMI Calculator Online — Home, Car & Personal Loan EMI (Free)',
-    description: 'Calculate monthly EMI for home loans, car loans, and personal loans free online. View complete yearly amortization schedule, interest breakdown & payoff charts.',
+    title: 'Loan EMI Calculator — Home, Car, Bike & Personal Loan Monthly EMI',
+    metaTitle: 'Loan & Bike EMI Calculator Online (Monthly EMI & Interest Table)',
+    description: 'Calculate monthly EMI for home loans, car loans, bike loans, and personal loans free online. View complete yearly amortization schedule & interest breakdown.',
     keywords: [
+      'bike emi calculator',
       'emi calculator',
+      'two wheeler loan emi calculator',
       'home loan emi calculator online free',
       'car loan emi calculator india',
       'personal loan emi calculation formula',
@@ -1555,11 +1579,13 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/utility/sip-calculator': {
     slug: '/utility/sip-calculator',
-    title: 'SIP Mutual Fund Calculator Online — Compounding Wealth Growth',
-    metaTitle: 'SIP Calculator Online — Mutual Fund Wealth & Return Calculator (Free)',
-    description: 'Calculate future returns on monthly Mutual Fund Systematic Investment Plans (SIP) free online. Compare invested amount vs estimated wealth gain with visual charts.',
+    title: 'SIP & Step Up SIP Calculator Online — Compounding Wealth Growth',
+    metaTitle: 'SIP & Step Up SIP Calculator Online (Mutual Fund Return Estimator)',
+    description: 'Calculate future returns on monthly Mutual Fund SIP and Step-Up SIP free online. Compare invested amount vs estimated wealth gain with visual charts.',
     keywords: [
+      'step up sip calculator',
       'sip calculator',
+      'top up sip calculator',
       'mutual fund sip calculator online free',
       'systematic investment plan return calculator',
       'calculate sip wealth growth 10 years 20 years',
@@ -2972,10 +2998,12 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
   '/tools/online-signature-maker': {
     slug: '/tools/online-signature-maker',
-    title: 'Online Signature Maker — Draw or Type Digital Signature [Free Transparent PNG, No Watermark]',
-    metaTitle: 'Online Signature Maker — Draw or Type Digital Signature [Free Transparent PNG, No Watermark]',
-    description: 'Create, draw, or type digital signatures online for free. Download transparent PNG for Word/PDFs, vector SVG, or 10-20KB govt exam JPEG. Smooth pen flow, 8+ cursive fonts, zero watermarks.',
+    title: 'Online Signature Maker & Resize Signature (10KB - 20KB) Free',
+    metaTitle: 'Online Signature Maker & Signature Resize (10KB - 20KB) Free',
+    description: 'Create, draw, or resize signature to 10-20KB online free for SSC, UPSC, and government exams. Download transparent PNG or 10KB-20KB exam signature JPEG.',
     keywords: [
+      'signature resize',
+      'signature resize 10 to 20 kb',
       'online signature maker',
       'draw signature online',
       'create signature online free',

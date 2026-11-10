@@ -193,8 +193,8 @@ export default function CompressPDFPage() {
   return (
     <ToolLayout
       slug="/pdf/compress"
-      title="Compress PDF Online"
-      subtitle="Reduce PDF file size to target KB/MB or compression levels without losing quality. 100% Client-Side Wasm."
+      title="Compress PDF to 200KB, 100KB, 500KB Online"
+      subtitle="Reduce PDF file size to exact target 50KB, 100KB, 200KB, or 500KB without losing quality. 100% private in-browser compression."
     >
       <div className="space-y-5">
         <FileUploader

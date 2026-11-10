@@ -83,9 +83,9 @@ export default function CompressImagePage() {
   return (
     <ToolLayout
       slug="/image/compress"
-      title="Smart Image Size Compressor (Target KB & %)"
-      subtitle="Compress JPG, PNG, and WebP photos to exact target file sizes (<20KB, <50KB, <100KB, <200KB, <500KB) or percentage quality. 100% Private."
-      badgeText="Target KB & % Compressor"
+      title="Compress Image to 50KB, 20KB, 100KB Online (Photo Resizer)"
+      subtitle="Compress JPG, PNG, and WebP photos to exact target file sizes (20KB, 50KB, 100KB, 200KB) or custom quality. Fast & 100% private."
+      badgeText="Target KB Photo Resizer"
     >
       <div className="space-y-6 pb-24 md:pb-6">
         <FileUploader

@@ -183,8 +183,8 @@ export default function SplitPDFPage() {
   return (
     <ToolLayout
       slug="/pdf/split"
-      title="Separate & Extract PDF Pages Online"
-      subtitle="Visual PDF splitter. Preview all PDF pages with checkmarks, adjust page zoom size, and select pages to extract."
+      title="Split PDF Online Free — Extract & Separate Pages"
+      subtitle="Visual PDF splitter. Preview all PDF pages with checkmarks, adjust page zoom size, and extract or split PDF pages instantly."
     >
       <div className="space-y-6">
         <FileUploader
