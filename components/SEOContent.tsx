@@ -653,6 +653,8 @@ export function SEOContent({ slug }: SEOContentProps) {
         { name: 'Free Vector QR Code Generator', slug: '/utility/qr-generator', desc: 'Create SVG/PNG QR codes with custom logos.' },
         { name: 'Word Counter & Density Analyzer', slug: '/utility/word-counter', desc: 'Count words, characters, reading speed, and SEO keywords.' },
         { name: 'JSON Formatter & CSV Converter', slug: '/utility/json-formatter', desc: 'Validate, format, and convert JSON arrays to CSV/YAML.' },
+        { name: 'Bike Loan EMI Calculator', slug: '/utility/bike-emi-calculator', desc: 'Two-wheeler EMI from on-road price, down payment and tenure.' },
+        { name: 'Step-Up SIP Calculator', slug: '/utility/step-up-sip-calculator', desc: 'Raise your SIP every year and project the corpus.' },
       ];
 
   const recommendedArticles = getRelatedGuidesAndArticles(slug, tool.category);

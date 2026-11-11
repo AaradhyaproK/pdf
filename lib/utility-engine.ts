@@ -1168,6 +1168,101 @@ export function calculateEMI(principal: number, annualInterestRate: number, tenu
   };
 }
 
+/* --------------------------------------------------------------------------
+   Two-Wheeler / Bike Loan EMI
+   -------------------------------------------------------------------------- */
+
+export interface BikeLoanResult {
+  /** Monthly EMI on the financed amount. */
+  monthlyEMI: number;
+  /** Amount actually borrowed (on-road price minus down payment). */
+  loanAmount: number;
+  /** Down payment paid upfront. */
+  downPayment: number;
+  /** Total on-road price including down payment. */
+  totalPrice: number;
+  /** Total interest over the tenure. */
+  totalInterest: number;
+  /** Total repayment (EMI x months + down payment). */
+  totalPayment: number;
+  /** Interest as a percentage of the loan amount. */
+  interestRatio: number;
+  annualRate: number;
+  tenureMonths: number;
+  schedule: { year: number; principalPaid: number; interestPaid: number; balance: number }[];
+}
+
+/**
+ * Calculates a two-wheeler (bike / scooter) loan EMI.
+ *
+ * Two-wheelers are financed on the **on-road price** (ex-showroom + RTO +
+ * insurance + accessories), and the buyer pays a down payment up front. The
+ * EMI is calculated on the remaining financed amount.
+ */
+export function calculateBikeLoan(
+  onRoadPrice: number,
+  downPaymentPercent: number,
+  annualInterestRate: number,
+  tenureMonths: number
+): BikeLoanResult {
+  const price = Math.max(0, onRoadPrice);
+  const dpPercent = Math.min(100, Math.max(0, downPaymentPercent));
+  const downPayment = Math.round((price * dpPercent) / 100);
+  const loanAmount = Math.max(0, price - downPayment);
+  const r = Math.max(0, annualInterestRate / 12 / 100);
+  const n = Math.max(1, Math.round(tenureMonths));
+
+  let emi = 0;
+  if (r === 0) {
+    emi = loanAmount / n;
+  } else {
+    emi = (loanAmount * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  }
+
+  const monthlyEMI = Math.round(emi);
+  const totalPayment = Math.round(monthlyEMI * n) + downPayment;
+  const totalInterest = Math.max(0, Math.round(monthlyEMI * n) - loanAmount);
+  const interestRatio = loanAmount > 0 ? (totalInterest / loanAmount) * 100 : 0;
+
+  const schedule: { year: number; principalPaid: number; interestPaid: number; balance: number }[] = [];
+  let currentBalance = loanAmount;
+  const numYears = Math.ceil(n / 12);
+
+  for (let year = 1; year <= numYears; year++) {
+    let yearPrincipal = 0;
+    let yearInterest = 0;
+    const monthsInYear = year === numYears && n % 12 !== 0 ? n % 12 : 12;
+
+    for (let m = 0; m < monthsInYear; m++) {
+      const interestForMonth = currentBalance * r;
+      const principalForMonth = Math.min(currentBalance, monthlyEMI - interestForMonth);
+      yearInterest += interestForMonth;
+      yearPrincipal += principalForMonth;
+      currentBalance = Math.max(0, currentBalance - principalForMonth);
+    }
+
+    schedule.push({
+      year,
+      principalPaid: Math.round(yearPrincipal),
+      interestPaid: Math.round(yearInterest),
+      balance: Math.round(currentBalance),
+    });
+  }
+
+  return {
+    monthlyEMI,
+    loanAmount,
+    downPayment,
+    totalPrice: price,
+    totalInterest,
+    totalPayment,
+    interestRatio,
+    annualRate: annualInterestRate,
+    tenureMonths: n,
+    schedule,
+  };
+}
+
 export interface IncomeTaxResult {
   grossIncome: number;
   totalDeductionsOld: number;
@@ -1290,6 +1385,98 @@ export function calculateSIP(monthlyInvestment: number, expectedReturnRate: numb
     monthlyInvestment: p,
     annualRate: expectedReturnRate,
     years: durationYears
+  };
+}
+
+/* --------------------------------------------------------------------------
+   Step-Up SIP
+   -------------------------------------------------------------------------- */
+
+export interface StepUpSIPYear {
+  year: number;
+  /** Monthly SIP amount contributed during this year. */
+  monthlySIP: number;
+  /** Cumulative amount invested up to and including this year. */
+  invested: number;
+  /** Estimated value of the portfolio at the end of this year. */
+  value: number;
+  /** Estimated gain over the invested amount. */
+  gains: number;
+}
+
+export interface StepUpSIPResult {
+  /** Final estimated corpus value. */
+  totalValue: number;
+  /** Total amount invested across the whole tenure. */
+  investedAmount: number;
+  /** Estimated returns (value - invested). */
+  estimatedReturns: number;
+  /** The monthly SIP amount in the final year. */
+  finalMonthlySIP: number;
+  /** The monthly SIP amount in the first year. */
+  startingMonthlySIP: number;
+  annualRate: number;
+  years: number;
+  stepUpPercentage: number;
+  schedule: StepUpSIPYear[];
+}
+
+/**
+ * Calculates a Step-Up SIP, where the monthly contribution is increased by a
+ * fixed percentage every year (the "step-up") to keep pace with inflation and
+ * rising income.
+ *
+ * Each year contributes 12 monthly payments at that year's rate, and the
+ * portfolio compounds monthly on the accumulated balance.
+ */
+export function calculateStepUpSIP(
+  monthlyInvestment: number,
+  expectedReturnRate: number,
+  durationYears: number,
+  stepUpPercentage: number
+): StepUpSIPResult {
+  const p = Math.max(0, monthlyInvestment);
+  const i = Math.max(0, expectedReturnRate / 12 / 100);
+  const years = Math.max(1, Math.round(durationYears));
+  const step = Math.max(0, stepUpPercentage) / 100;
+
+  const schedule: StepUpSIPYear[] = [];
+  let balance = 0;
+  let invested = 0;
+
+  for (let year = 1; year <= years; year++) {
+    const yearMonthlySIP = p * Math.pow(1 + step, year - 1);
+    let yearInvested = 0;
+
+    for (let month = 0; month < 12; month++) {
+      balance = balance * (1 + i) + yearMonthlySIP;
+      yearInvested += yearMonthlySIP;
+    }
+
+    invested += yearInvested;
+    const value = Math.round(balance);
+    schedule.push({
+      year,
+      monthlySIP: Math.round(yearMonthlySIP),
+      invested: Math.round(invested),
+      value,
+      gains: Math.max(0, value - Math.round(invested)),
+    });
+  }
+
+  const totalValue = Math.round(balance);
+  const investedAmount = Math.round(invested);
+
+  return {
+    totalValue,
+    investedAmount,
+    estimatedReturns: Math.max(0, totalValue - investedAmount),
+    finalMonthlySIP: Math.round(p * Math.pow(1 + step, years - 1)),
+    startingMonthlySIP: Math.round(p),
+    annualRate: expectedReturnRate,
+    years,
+    stepUpPercentage,
+    schedule,
   };
 }
 

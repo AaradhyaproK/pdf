@@ -1527,13 +1527,11 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/utility/emi-calculator': {
     slug: '/utility/emi-calculator',
-    title: 'Loan EMI Calculator — Home, Car, Bike & Personal Loan Monthly EMI',
-    metaTitle: 'Loan & Bike EMI Calculator Online (Monthly EMI & Interest Table)',
-    description: 'Calculate monthly EMI for home loans, car loans, bike loans, and personal loans free online. View complete yearly amortization schedule & interest breakdown.',
+    title: 'Loan EMI Calculator — Home, Car & Personal Loan Monthly EMI',
+    metaTitle: 'Loan EMI Calculator — Monthly Instalment & Interest',
+    description: 'Calculate monthly EMI for home loans, car loans, and personal loans free online. View a complete yearly amortization schedule and total interest breakdown.',
     keywords: [
-      'bike emi calculator',
       'emi calculator',
-      'two wheeler loan emi calculator',
       'home loan emi calculator online free',
       'car loan emi calculator india',
       'personal loan emi calculation formula',
@@ -1549,7 +1547,90 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
     ],
     faqs: [
       { question: 'How is monthly EMI calculated?', answer: 'EMI is calculated using the formula: E = P × r × (1 + r)^n / ((1 + r)^n - 1), where P is principal, r is monthly interest rate, and n is total tenure in months.' },
-      { question: 'Does FileZenith EMI calculator work for all banks?', answer: 'Yes! It provides precise mathematical loan schedules suitable for SBI, HDFC, ICICI, Axis, Bajaj Finserv, and international banks.' }
+      { question: 'Does FileZenith EMI calculator work for all banks?', answer: 'Yes! It provides precise mathematical loan schedules suitable for SBI, HDFC, ICICI, Axis, Bajaj Finserv, and international banks.' },
+      { question: 'Looking specifically for a bike or scooter loan EMI?', answer: 'Use the dedicated Bike Loan EMI Calculator, which adds on-road price, down payment percentage, and a two-wheeler-specific repayment schedule.' }
+    ]
+  },
+
+  '/utility/bike-emi-calculator': {
+    slug: '/utility/bike-emi-calculator',
+    title: 'Bike Loan EMI Calculator — Two-Wheeler Monthly Instalment',
+    metaTitle: 'Bike Loan EMI Calculator — Two-Wheeler Instalment',
+    description: 'Calculate the exact monthly EMI on your bike or scooter loan from the on-road price, down payment, interest rate and tenure. Free two-wheeler EMI and interest calculator.',
+    keywords: [
+      'bike emi calculator',
+      'two wheeler loan emi calculator',
+      'bike loan emi calculator india',
+      'scooter emi calculator',
+      'bike loan monthly installment calculator',
+      'two wheeler finance calculator',
+      'bike loan interest calculation',
+      'vehicle loan emi calculator',
+      'bike emi and total interest calculator',
+      'zero down payment bike emi calculator'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Enter the On-Road Price', text: 'Type the full on-road price your dealer quoted — ex-showroom plus RTO, insurance, and accessories.' },
+      { title: 'Set Down Payment & Interest', text: 'Choose your down payment percentage and the annual interest rate offered by the dealer or lender.' },
+      { title: 'Pick the Loan Tenure', text: 'Select how many months you want to repay the loan over, from 12 to 84 months.' },
+      { title: 'Review EMI & Interest Split', text: 'See the monthly instalment, total interest, interest as a percentage of the loan, and a year-by-year repayment schedule.' }
+    ],
+    faqs: [
+      { question: 'How is a bike loan EMI different from a regular loan EMI?', answer: 'A two-wheeler loan is usually sanctioned on the on-road price rather than the ex-showroom price, and a down payment is deducted before the EMI is calculated. This calculator applies both, so the EMI matches what a dealer actually quotes.' },
+      { question: 'What interest rate do bike loans usually carry?', answer: 'Two-wheeler loans in India typically run between 9% and 14% per annum depending on the lender, the bike segment, and your credit profile. Newer electric models often qualify for the lower end.' },
+      { question: 'How much down payment is required for a bike loan?', answer: 'Most dealers ask for 15% to 25% of the on-road price upfront. Some lenders offer zero-down-payment options, in which case the entire on-road price becomes the financed amount and the total interest rises accordingly.' },
+      { question: 'Is it better to choose a longer tenure for a bike loan?', answer: 'A longer tenure lowers the monthly EMI but increases total interest, often substantially on two-wheeler loans because interest is charged on the reducing balance for the full period. Compare the total interest figure across tenures before deciding.' },
+      { question: 'Does the bike EMI calculator include insurance and RTO charges?', answer: 'Yes. Because the loan is calculated on the on-road price, the RTO, insurance, and accessory costs are financed along with the ex-showroom price, which is exactly how dealer financing works.' }
+    ],
+    comparisonTable: [
+      { feature: 'Loan Amount Basis', omnitool: 'On-road price minus down payment', standardCloud: 'A single manual loan amount' },
+      { feature: 'Down Payment Input', omnitool: 'Percentage with live rupee value', standardCloud: 'Not modelled at all' },
+      { feature: 'Interest as % of Loan', omnitool: 'Shown explicitly', standardCloud: 'Rarely surfaced' },
+      { feature: 'Two-Wheeler Tenure Range', omnitool: '12 to 84 months', standardCloud: 'Generic 1 to 30 years' },
+      { feature: 'RTO & Insurance Costs', omnitool: 'Financed automatically', standardCloud: 'Usually excluded' },
+      { feature: 'Runs In Browser', omnitool: 'Yes, fully private', standardCloud: 'Often requires sign-up' }
+    ]
+  },
+
+  '/utility/step-up-sip-calculator': {
+    slug: '/utility/step-up-sip-calculator',
+    title: 'Step-Up SIP Calculator — Increase Your SIP Every Year',
+    metaTitle: 'Step-Up SIP Calculator — Raise SIP Yearly',
+    description: 'Calculate how much a step-up SIP builds when you raise your monthly investment by a fixed percentage each year. See year-by-year SIP, invested amount, and estimated corpus value.',
+    keywords: [
+      'step up sip calculator',
+      'step up mutual fund calculator',
+      'sip step up calculator india',
+      'step up sip vs regular sip',
+      'increasing sip calculator',
+      'sip with annual step up calculator',
+      'best step up sip plan calculator',
+      'step up sip corpus calculator',
+      'annual step up percentage calculator',
+      'sip escalator calculator'
+    ],
+    category: 'utility',
+    howToSteps: [
+      { title: 'Set Your Starting SIP', text: 'Enter the monthly amount you are comfortable investing in year one.' },
+      { title: 'Choose the Annual Step-Up', text: 'Pick the percentage by which your SIP rises each year — 10% is the most commonly used.' },
+      { title: 'Add Expected Return & Tenure', text: 'Enter your expected annualised return and the number of years you plan to stay invested.' },
+      { title: 'Compare the Growth Path', text: 'Review a year-by-year table showing the rising SIP, cumulative investment, and estimated value in each year.' }
+    ],
+    faqs: [
+      { question: 'What is a step-up SIP?', answer: 'A step-up SIP is a systematic investment plan where the monthly contribution is increased by a fixed percentage every year, usually once annually. It keeps pace with inflation and rising income instead of investing the same flat amount forever.' },
+      { question: 'What is the difference between a regular SIP and a step-up SIP?', answer: 'A regular SIP invests a constant monthly amount, so its real value falls over time as inflation erodes purchasing power. A step-up SIP raises the contribution each year, which means more of your money is invested for longer and therefore compounds for longer.' },
+      { question: 'What step-up percentage should I choose?', answer: '10% per year is the most commonly used step-up and roughly matches typical annual salary revisions. Smaller step-ups (5%) are more conservative, while larger ones (15% or more) require genuinely fast-growing income.' },
+      { question: 'Is a step-up SIP always better than a regular SIP?', answer: 'For the same starting amount and tenure, a step-up always produces a larger corpus because you invest more in total. The trade-off is that it costs you more money per month, so affordability matters more than the projection.' },
+      { question: 'How often does the step-up happen?', answer: 'Most fund houses apply the step-up once a year, on a date you nominate — commonly 1 April or the anniversary of your first instalment. This calculator applies it annually at the start of each year.' },
+      { question: 'Are these returns guaranteed?', answer: 'No. The projection uses monthly compounding at the rate you enter. Mutual fund returns vary year to year and are not guaranteed, so treat the figures as a planning estimate rather than a promise.' }
+    ],
+    comparisonTable: [
+      { feature: 'Monthly Contribution', omnitool: 'Rises every year by your chosen %', standardCloud: 'Constant for the whole tenure' },
+      { feature: 'Year-by-Year Projection', omnitool: 'Full schedule with SIP, invested and value', standardCloud: 'Only a single final figure' },
+      { feature: 'Shows Final-Year SIP', omnitool: 'Yes, so you know your peak outflow', standardCloud: 'Not shown' },
+      { feature: 'Inflation Awareness', omnitool: 'Highlights the escalating outflow', standardCloud: 'Ignores rising costs' },
+      { feature: 'Runs In Browser', omnitool: 'Yes, fully private', standardCloud: 'Often requires sign-up' }
     ]
   },
 
@@ -1580,13 +1661,11 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/utility/sip-calculator': {
     slug: '/utility/sip-calculator',
-    title: 'SIP & Step Up SIP Calculator Online — Compounding Wealth Growth',
-    metaTitle: 'SIP & Step Up SIP Calculator Online (Mutual Fund Return Estimator)',
-    description: 'Calculate future returns on monthly Mutual Fund SIP and Step-Up SIP free online. Compare invested amount vs estimated wealth gain with visual charts.',
+    title: 'SIP Calculator — Monthly Mutual Fund Investment Growth',
+    metaTitle: 'SIP Calculator — Monthly Investment Growth & Returns',
+    description: 'Calculate the future value of your monthly Mutual Fund SIP free online. See total invested amount vs estimated wealth gain with a full compounding breakdown.',
     keywords: [
-      'step up sip calculator',
       'sip calculator',
-      'top up sip calculator',
       'mutual fund sip calculator online free',
       'systematic investment plan return calculator',
       'calculate sip wealth growth 10 years 20 years',
@@ -1600,7 +1679,8 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { title: 'Set Investment Tenure', text: 'Select investment duration in years to see total compounding growth.' }
     ],
     faqs: [
-      { question: 'What is a good expected return rate for equity mutual funds in India?', answer: 'Equity mutual funds in India historically yield an average CAGR of 12% to 15% over 5-10 year horizons.' }
+      { question: 'What is a good expected return rate for equity mutual funds in India?', answer: 'Equity mutual funds in India historically yield an average CAGR of 12% to 15% over 5-10 year horizons. Actual returns vary year to year and are not guaranteed.' },
+      { question: 'What if I raise my SIP amount every year?', answer: 'That is called a Step-Up SIP, and it produces a larger corpus than a flat SIP because you invest more each year. Use the dedicated Step-Up SIP Calculator for the year-by-year projection.' }
     ]
   },
 

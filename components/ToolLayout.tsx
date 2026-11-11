@@ -89,6 +89,8 @@ function getSidebarTools(slug: string, currentPath: string = '') {
       { name: 'WhatsApp Direct Chat', href: '/social/whatsapp-direct-chat', desc: 'Chat without saving contact number', badge: 'Social' },
       { name: 'QR Code Generator', href: '/utility/qr-generator', desc: 'Custom QR codes with colors & logo', badge: 'QR' },
       { name: 'EMI Loan Calculator', href: '/utility/emi-calculator', desc: 'Calculate monthly home/car loan EMI', badge: 'Finance' },
+      { name: 'Bike Loan EMI Calculator', href: '/utility/bike-emi-calculator', desc: 'Two-wheeler EMI from on-road price', badge: 'Bike' },
+      { name: 'Step-Up SIP Calculator', href: '/utility/step-up-sip-calculator', desc: 'Raise SIP yearly, project the corpus', badge: 'Step-Up' },
     ];
   }
 

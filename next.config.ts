@@ -139,6 +139,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/pdf/compress-to-50kb',
+        destination: '/pdf/compress#50kb',
+        permanent: true,
+      },
+      {
         source: '/pdf/compress-to-200kb',
         destination: '/pdf/compress#200kb',
         permanent: true,

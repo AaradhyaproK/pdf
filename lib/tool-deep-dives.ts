@@ -28,6 +28,8 @@ export interface ToolDeepDive {
   faqs: ToolDeepDiveFaq[];
 }
 
+import { FINANCIAL_TOOL_DEEP_DIVES } from './tool-deep-dives-financial';
+
 export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> = 
 {
   "/pdf/edit": {
@@ -10232,3 +10234,6 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
     ]
   }
 };
+
+// Merge the dedicated financial-tool deep dives into the main registry.
+Object.assign(TOOL_DEEP_DIVES, FINANCIAL_TOOL_DEEP_DIVES);
