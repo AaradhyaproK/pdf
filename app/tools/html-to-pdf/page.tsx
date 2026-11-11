@@ -303,8 +303,8 @@ export default function HtmlToPdfPage() {
         {/* The Core Interactive Studio */}
         <HtmlToPdfStudio />
 
-        {/* Mid-Content AdSlot */}
-        <div className="w-full">
+        {/* Mid-Content AdSlot — kept clear of the studio's download button */}
+        <div className="w-full pt-12 sm:pt-14 border-t border-slate-200/60">
           <AdSlot slotType="post-download" />
         </div>
 

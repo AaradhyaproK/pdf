@@ -9,7 +9,16 @@ export function proxy(request: NextRequest) {
     const url = request.nextUrl.clone();
     url.host = 'www.filezenith.com';
     url.port = '';
-    return NextResponse.redirect(url, 301);
+
+    // ads.txt / app-ads.txt must be served at the exact domain root without a
+    // redirect so that Google's ads.txt crawler always resolves the record.
+    // Serving the identical content on both hosts is the recommended setup.
+    const isAdsTxt =
+      url.pathname === '/ads.txt' || url.pathname === '/app-ads.txt';
+
+    if (!isAdsTxt) {
+      return NextResponse.redirect(url, 301);
+    }
   }
 
   return NextResponse.next();
@@ -23,7 +32,9 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      * - heavy binary media and script assets (*.svg, *.png, *.webp, *.jpg, *.mjs, *.wasm, etc.)
-     * Note: .txt and .xml (robots.txt, sitemap.xml) are deliberately MATCHED so non-www to www 301 canonical redirects are guaranteed.
+     * Note: .txt and .xml (robots.txt, sitemap.xml, ads.txt) are deliberately MATCHED so
+     * non-www to www 301 canonical redirects are guaranteed. ads.txt and app-ads.txt
+     * are explicitly allowed through without a redirect (see above).
      */
     '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|avif|ico|woff|woff2|ttf|eot|mjs|wasm|json|css|js)$).*)',
   ],

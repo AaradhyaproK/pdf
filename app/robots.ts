@@ -6,7 +6,9 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
-        userAgent: 'Mediapartners-Google',
+        // Google's advertising crawler. It must be able to reach every page,
+        // including ads.txt, or ad serving and the policy review are affected.
+        userAgent: ['Mediapartners-Google', 'AdsBot-Google'],
         allow: '/',
       },
       {

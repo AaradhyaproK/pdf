@@ -70,6 +70,69 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to view the 
 
 ---
 
+## 📢 Google AdSense Setup
+
+Ads are served exclusively through **Google AdSense**. There is no support for — and no code path
+for — any competing ad network, because serving them alongside AdSense breaches the AdSense
+programme policies.
+
+### 1. Environment variables
+
+Copy `.env.example` to `.env.local` and fill in the values. See
+[`.env.example`](.env.example) for the full annotated list.
+
+```bash
+cp .env.example .env.local
+```
+
+The variables that matter for ads:
+
+| Variable | Purpose |
+| --- | --- |
+| `NEXT_PUBLIC_ADSENSE_PUBLISHER_ID` | Your publisher id (`ca-pub-…`). Defaults to the current one. |
+| `NEXT_PUBLIC_ADSENSE_SLOT_HEADER` | Slot id for the 728×90 leaderboard. |
+| `NEXT_PUBLIC_ADSENSE_SLOT_SIDEBAR` | Slot id for the 300×600 sidebar unit. |
+| `NEXT_PUBLIC_ADSENSE_SLOT_POST_DOWNLOAD` | Slot id for the 336×280 in-feed unit. |
+
+**Each slot id is optional.** If a slot id is not set, that placement renders *nothing at all* —
+no empty `<ins>` unit is shipped. AdSense **Auto Ads** still work regardless, because they only
+require the `adsbygoogle.js` loader, which is present on every page.
+
+> All `NEXT_PUBLIC_*` values are inlined at **build** time. Changing a slot id requires a rebuild
+> and redeploy.
+
+### 2. AdSense console checklist
+
+1. **Privacy & messaging → European regulations**: enable a **Google-certified CMP** (Google
+   Funding Choices / UMP). This is required to serve ads to EEA, UK and Switzerland traffic.
+   The in-app cookie banner in `components/CookieConsent.tsx` is a *preferences manager*; it
+   mirrors your choice into Consent Mode v2 but it is **not** a certified CMP.
+2. **Privacy & messaging → Ads**: confirm the site URL and publisher id.
+3. **Ad units**: create the units and copy their numeric slot ids into the env vars above.
+4. **Auto ads**: optional. Enable if you want placements beyond the three built-in slots.
+
+### 3. What is already handled
+
+- ✅ `ads.txt` and `app-ads.txt` are served from the domain root and generated from the publisher
+  id, so they can never drift from the id used in the page tags.
+- ✅ `ads.txt` is served on **both** `filezenith.com` and `www.filezenith.com` without a redirect.
+- ✅ Consent Mode v2 defaults are set to `denied` **before** any Google tag executes.
+- ✅ Global Privacy Control (GPC) is honoured as a valid opt-out signal.
+- ✅ Every ad unit carries a visible, neutral **"Advertisement"** label.
+- ✅ Space is reserved up-front, so ads never shift the surrounding content (CLS = 0).
+- ✅ Ads are kept well clear of download buttons to avoid accidental clicks.
+- ✅ `ads_data_redaction` and `anonymize_ip` are enabled; Google Signals are disabled.
+- ✅ Users can revisit and withdraw consent via **Cookie Settings** in the footer.
+
+### 4. Contact form
+
+Set `CONTACT_WEBHOOK_URL` to an HTTPS endpoint that accepts a JSON POST (Formspree, Zapier, Make,
+Slack, Discord, …). Without it the form returns a clear "delivery not configured" error and asks
+the visitor to email `contact@filezenith.com` — it never claims a message was sent when it was
+not.
+
+---
+
 ## 👨‍💻 Founder & Creator
 
 * **Architect & Developer:** [Aaradhya Pathak](https://github.com/AaradhyaproK)

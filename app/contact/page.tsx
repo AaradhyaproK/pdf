@@ -19,16 +19,46 @@ import { toast } from 'sonner';
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+  const [isSending, setIsSending] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '', website: '' });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!formData.name || !formData.email || !formData.message) {
       toast.error('Please fill out all required fields.');
       return;
     }
-    setSubmitted(true);
-    toast.success('Thank you! Your message has been sent successfully.');
+
+    setIsSending(true);
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          website: formData.website,
+        }),
+      });
+
+      const data = (await res.json()) as { success?: boolean; error?: string };
+
+      if (!res.ok || !data.success) {
+        toast.error(data.error || 'Your message could not be sent. Please email contact@filezenith.com.');
+        return;
+      }
+
+      setSubmitted(true);
+      toast.success('Thank you! Your message has been sent successfully.');
+    } catch {
+      toast.error('Network error. Please email contact@filezenith.com instead.');
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -202,6 +232,8 @@ export default function ContactPage() {
                   <input
                     type="text"
                     required
+                    maxLength={100}
+                    autoComplete="name"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="John Doe"
@@ -213,6 +245,8 @@ export default function ContactPage() {
                   <input
                     type="email"
                     required
+                    maxLength={200}
+                    autoComplete="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="john@example.com"
@@ -221,10 +255,24 @@ export default function ContactPage() {
                 </div>
               </div>
 
+              {/* Honeypot — hidden from humans, catches naive bots. */}
+              <div className="absolute left-[-9999px] top-auto h-0 w-0 overflow-hidden" aria-hidden="true">
+                <label htmlFor="contact-website">Website</label>
+                <input
+                  id="contact-website"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={formData.website}
+                  onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                />
+              </div>
+
               <div className="space-y-1.5">
                 <label className="text-xs font-black text-slate-800">Subject</label>
                 <input
                   type="text"
+                  maxLength={200}
                   value={formData.subject}
                   onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                   placeholder="e.g. Feature request, bug report, or partnership"
@@ -237,6 +285,7 @@ export default function ContactPage() {
                 <textarea
                   required
                   rows={5}
+                  maxLength={5000}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="Describe your issue, feature suggestion, or question in detail..."
@@ -247,11 +296,28 @@ export default function ContactPage() {
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-black text-xs flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer active:scale-95"
+                  disabled={isSending}
+                  className="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-black text-xs flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  <Send className="w-4 h-4" />
-                  <span>Send Message</span>
+                  {isSending ? (
+                    <>
+                      <span className="w-4 h-4 rounded-full border-2 border-white/40 border-t-white animate-spin" />
+                      <span>Sending…</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4" />
+                      <span>Send Message</span>
+                    </>
+                  )}
                 </button>
+                <p className="text-[10px] text-slate-400 font-medium mt-3 leading-relaxed">
+                  We only use your details to reply to this enquiry. See our{' '}
+                  <Link href="/privacy" className="underline font-bold text-indigo-600">
+                    Privacy Policy
+                  </Link>
+                  .
+                </p>
               </div>
             </form>
           )}

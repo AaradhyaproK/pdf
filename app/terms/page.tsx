@@ -79,7 +79,11 @@ export default function TermsPage() {
       <section className="space-y-3">
         <h2 className="text-xl font-extrabold text-slate-900">6. Advertising & Third-Party Websites</h2>
         <p className="text-sm text-slate-600 leading-relaxed">
-          FileZenith displays advertisements via Google AdSense and third-party networks. Our site may contain links to external sites that are not operated by us. We have no control over and assume no responsibility for the content, privacy policies, or practices of third-party websites or services.
+          FileZenith displays advertisements via Google AdSense. Google and its certified ad vendors may use cookies or similar technologies to serve ads based on your prior visits to this or other websites. We do not control, and are not responsible for, the content or advertising practices of any third party. For details on how advertising cookies are used and how to opt out, please see our{' '}
+          <Link href="/privacy" className="text-indigo-600 hover:underline font-semibold">
+            Privacy Policy
+          </Link>
+          . Our site may contain links to external sites that are not operated by us. We have no control over and assume no responsibility for the content, privacy policies, or practices of third-party websites or services.
         </p>
       </section>
 

@@ -40,6 +40,23 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        source: "/app-ads.txt",
+        headers: [
+          {
+            key: "Content-Type",
+            value: "text/plain; charset=utf-8",
+          },
+          {
+            key: "Cache-Control",
+            value: "public, max-age=86400, s-maxage=86400",
+          },
+          {
+            key: "Access-Control-Allow-Origin",
+            value: "*",
+          },
+        ],
+      },
+      {
         source: "/llms.txt",
         headers: [
           {
@@ -96,6 +113,18 @@ const nextConfig: NextConfig = {
           {
             key: "Cross-Origin-Opener-Policy",
             value: "same-origin-allow-popups",
+          },
+          {
+            key: "X-Frame-Options",
+            value: "SAMEORIGIN",
+          },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=(), interest-cohort=()",
+          },
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
           },
         ],
       },
@@ -357,11 +386,6 @@ const nextConfig: NextConfig = {
       {
         source: '/about-us',
         destination: '/about',
-        permanent: true,
-      },
-      {
-        source: '/affiliate-disclosure',
-        destination: '/editorial-policy',
         permanent: true,
       },
     ];

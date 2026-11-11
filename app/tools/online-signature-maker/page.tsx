@@ -302,8 +302,8 @@ export default function OnlineSignatureMakerPage() {
         {/* The Core Interactive Signature Studio Suite */}
         <SignatureMakerStudio />
 
-        {/* Post-Tool Mid AdSlot */}
-        <div className="w-full">
+        {/* Post-Tool Mid AdSlot — kept clear of the studio's download button */}
+        <div className="w-full pt-12 sm:pt-14 border-t border-slate-200/60">
           <AdSlot slotType="post-download" />
         </div>
 

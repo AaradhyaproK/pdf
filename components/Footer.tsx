@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { openConsentSettings } from '@/lib/consent';
 import {
   ShieldCheck,
   Smartphone,
@@ -448,6 +449,15 @@ export function Footer() {
             <Link prefetch={false} href="/terms" className="hover:text-indigo-600 transition-colors">Terms</Link>
             <span>&bull;</span>
             <Link prefetch={false} href="/security" className="hover:text-indigo-600 transition-colors">Security</Link>
+            <span>&bull;</span>
+            <button
+              type="button"
+              onClick={openConsentSettings}
+              className="hover:text-indigo-600 transition-colors cursor-pointer"
+              title="Manage cookie and advertising preferences"
+            >
+              Cookie Settings
+            </button>
           </div>
         </div>
       </div>

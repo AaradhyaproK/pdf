@@ -6,6 +6,8 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { CookieConsent } from '@/components/CookieConsent';
 import { Toaster } from 'sonner';
+import { ADSENSE_PUBLISHER_ID } from '@/lib/ads-config';
+import { CONSENT_DEFAULT_SNIPPET } from '@/lib/consent';
 
 const inter = Inter({ subsets: ['latin'], display: 'swap' });
 
@@ -16,6 +18,8 @@ export const viewport: Viewport = {
   maximumScale: 5,
   viewportFit: 'cover',
 };
+
+const GA4_MEASUREMENT_ID = 'G-J7BLZG6H57';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.filezenith.com'),
@@ -32,6 +36,11 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
   alternates: {
     canonical: '/',
+    types: {
+      'application/opensearchdescription+xml': [
+        { url: '/opensearch.xml', title: 'FileZenith Tools' },
+      ],
+    },
   },
   robots: {
     index: true,
@@ -84,7 +93,7 @@ export const metadata: Metadata = {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',
   },
   other: {
-    'google-adsense-account': 'ca-pub-1291898061670715',
+    'google-adsense-account': ADSENSE_PUBLISHER_ID,
   },
 };
 
@@ -115,41 +124,43 @@ export default function RootLayout({
 
   return (
     <html lang="en" className="h-full scroll-smooth light">
+      {/*
+        Explicit <head> so the consent default can be emitted as a real,
+        synchronous inline script inside the document head.
+
+        The ordering here is REQUIRED by Google Consent Mode v2: the
+        `gtag('consent','default', ...)` call must execute *before* any Google
+        tag (gtag.js / adsbygoogle.js) runs, otherwise those tags fire with
+        implicit consent.
+
+        React 19 hoists raw `<script async src=...>` elements to the very top
+        of <head>, which would place them ahead of this snippet. The Google tag
+        loaders therefore use `next/script` with `strategy="afterInteractive"`
+        (bottom of <body>), so the Next.js runtime injects them only after the
+        document has been parsed and this consent default has already run.
+      */}
       <head>
-        <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Search FileZenith Tools" />
+        {/* 1. Consent Mode v2 defaults — MUST be the first script to run. */}
+        <script
+          id="google-consent-default"
+          dangerouslySetInnerHTML={{ __html: CONSENT_DEFAULT_SNIPPET }}
+        />
+
+        {/* 2. Resource hints for the Google origins we use. */}
         <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+        <link rel="preconnect" href="https://fundingchoicesmessages.google.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://fundingchoicesmessages.google.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <script
-          id="google-adsense"
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1291898061670715"
-          crossOrigin="anonymous"
-        />
-        {/* Google Analytics GA4 */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-J7BLZG6H57"
-        />
-        <script
-          id="google-analytics"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-J7BLZG6H57', {
-                page_path: window.location.pathname,
-              });
-            `,
-          }}
-        />
+
+        {/* 3. Site-wide structured data. */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
+
       <body className={`${inter.className} min-h-full flex flex-col bg-slate-50/70 text-slate-900 antialiased`}>
         <NavigationProgressBar />
         <CloudflareAnalytics />
@@ -158,8 +169,43 @@ export default function RootLayout({
         <Footer />
         <MobileBottomNav />
         <PWAInstaller />
+        <AppSplashScreen />
         <CookieConsent />
         <Toaster position="top-right" richColors />
+
+        {/*
+          4. Google AdSense loader. Present on every page so that AdSense Auto
+          Ads can place units anywhere, and so Google's certified CMP
+          (Funding Choices) can be served to EEA / UK / CH visitors.
+        */}
+        <Script
+          id="google-adsense"
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_PUBLISHER_ID}`}
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+
+        {/* 5. Google Analytics 4 loader + config. */}
+        <Script
+          id="ga4-loader"
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA4_MEASUREMENT_ID}', {
+              anonymize_ip: true,
+              allow_google_signals: false,
+              ads_data_redaction: true,
+              send_page_view: true,
+            });
+          `}
+        </Script>
       </body>
     </html>
   );

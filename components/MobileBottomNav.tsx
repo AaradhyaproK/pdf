@@ -75,8 +75,7 @@ const IMAGE_TOOLS = [
   { name: 'WebP to JPG Converter', slug: '/image/webp-to-jpg', desc: 'Convert WebP to JPG format', icon: FileImage, badge: 'Bulk' },
   { name: 'JPG to WebP Converter', slug: '/image/jpg-to-webp', desc: 'Convert JPG/PNG to modern WebP', icon: Zap, badge: 'Fast Web' },
   { name: 'Railway RRB Photo Resizer', slug: '/tools/rrb-railway-photo-resizer', desc: 'RRB NTPC, ALP, Group D 20-50KB photo', icon: UserCheck, badge: 'RRB 20-50KB' },
-  { name: 'IBPS Photo Resizer', slug: '/tools/ibps-sbi-photo-resizer', desc: 'IBPS PO, Clerk, RRB 20-50KB photo', icon: UserCheck, badge: 'IBPS 20-50KB' },
-  { name: 'SBI PO Photo Resizer', slug: '/tools/ibps-sbi-photo-resizer', desc: 'SBI PO & Clerk photo & signature', icon: UserCheck, badge: 'SBI PO' },
+  { name: 'IBPS & SBI PO Photo Resizer', slug: '/tools/ibps-sbi-photo-resizer', desc: 'IBPS PO, SBI PO, Clerk, RRB 20-50KB photo', icon: UserCheck, badge: 'IBPS/SBI' },
   { name: 'JEE Main Photo Resizer', slug: '/tools/jee-cuet-photo-resizer#jee', desc: 'JEE 10-200KB photo resizer with DOP', icon: UserCheck, badge: 'JEE 10-200KB' },
   { name: 'CUET Photo Resizer', slug: '/tools/jee-cuet-photo-resizer#cuet', desc: 'CUET UG/PG 10-200KB photo & signature', icon: UserCheck, badge: 'CUET NTA' },
   { name: 'Image Cropper & Aspect', slug: '/image/crop', desc: 'Crop 1:1, 16:9, rotate & flip', icon: CropIcon, badge: 'New' },
@@ -187,11 +186,16 @@ export function MobileBottomNav() {
     }
   }, [activeDrawer]);
 
-  // Close drawer on page route change
-  useEffect(() => {
+  // Close the drawer on route change.
+  // Resetting state during render (rather than in an effect) is React's
+  // recommended pattern for "adjust state when something changes" and avoids
+  // an extra render pass.
+  const [lastPathname, setLastPathname] = useState(pathname);
+  if (pathname !== lastPathname) {
+    setLastPathname(pathname);
     setActiveDrawer(null);
     setSearchQuery('');
-  }, [pathname]);
+  }
 
   // Hide bottom nav when scrolling into footer (#main-footer)
   useEffect(() => {
@@ -343,13 +347,13 @@ export function MobileBottomNav() {
                   No tools found matching &quot;{searchQuery}&quot;
                 </div>
               ) : (
-                filteredTools.map((tool) => {
+                filteredTools.map((tool, idx) => {
                   const Icon = tool.icon;
                   const iconStyle = 'bg-slate-100/90 text-slate-800 border-slate-200/80';
                   const badgeStyle = 'bg-slate-100 text-slate-700 border-slate-200/80';
 
                   return (
-                    <Link prefetch={false} key={tool.slug}
+                    <Link prefetch={false} key={`${tool.slug}-${idx}`}
                       href={tool.slug}
                       onClick={(e) => {
                         // Prevent navigation if the user was dragging/scrolling the list

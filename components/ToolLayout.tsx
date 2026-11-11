@@ -214,11 +214,12 @@ export function ToolLayout({
         transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
         className="max-w-7xl mx-auto space-y-3 sm:space-y-6"
       >
-        {isNoindexTool && (
-          <head>
-            <meta name="robots" content="noindex, follow" />
-          </head>
-        )}
+        {/*
+          No-index handling for thin/utility tools is done through the
+          Metadata API (see generateToolMetadata + NOINDEX_SLUGS in
+          lib/seo-config.ts). A <head> element is never rendered inside the
+          document body — that is invalid HTML.
+        */}
 
         {/* Header Leaderboard Ad Slot (CLS = 0) - suppressed on noindex tools */}
         {!isNoindexTool && <AdSlot slotType="header-leaderboard" />}
@@ -256,9 +257,15 @@ export function ToolLayout({
               </motion.div>
             )}
 
-            {/* Post-Download In-Feed Ad Slot (Strictly >= 25px clear margin to prevent accidental clicks) */}
+            {/*
+              Post-Download In-Feed Ad Slot.
+              The unit sits well clear of the download button (48px on mobile,
+              56px on desktop) so it can never be mistaken for an interactive
+              control, which is what Google means by "ads must not be placed in
+              a way that causes accidental clicks".
+            */}
             {!isNoindexTool && (
-              <div className="pt-4 sm:pt-6">
+              <div className="pt-12 sm:pt-14 border-t border-slate-200/60">
                 <AdSlot slotType="post-download" />
               </div>
             )}

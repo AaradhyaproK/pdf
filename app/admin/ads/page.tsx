@@ -1,67 +1,72 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { getAdsConfig, saveAdsConfig, AdsManagerConfig } from '@/lib/admin-store';
+import { useAdminSession } from '@/lib/admin-session';
+import {
+  ADSENSE_ADS_TXT_RECORDS,
+  ADSENSE_PUBLISHER_ID,
+  ADSENSE_SLOT_IDS,
+  ADSENSE_SLOT_LABELS,
+  type AdSlotType,
+} from '@/lib/ads-config';
 import { toast } from 'sonner';
 import {
   DollarSign,
   ShieldCheck,
-  Save,
   CheckCircle2,
-  Code,
   FileText,
-  ToggleLeft,
-  ToggleRight,
   ArrowLeft,
   ExternalLink,
-  Sparkles,
   Copy,
   Layers,
-  Heart,
-  Settings,
-  Radio,
+  AlertTriangle,
 } from 'lucide-react';
 import Link from 'next/link';
 
+const SLOT_TYPES: AdSlotType[] = ['header-leaderboard', 'sticky-sidebar', 'post-download'];
+
+/**
+ * Master Ads console.
+ *
+ * Google AdSense only. The provider cannot be changed and no custom ad code
+ * can be injected — serving ads from a competing network alongside AdSense is
+ * a direct breach of the AdSense programme policies.
+ *
+ * Ad unit ids live in environment variables (see `lib/ads-config.ts`) so that
+ * every visitor gets an identical, correctly configured unit. The console
+ * below reports the live configuration and lets you toggle whole placements
+ * on or off.
+ */
 export default function AdminAdsPage() {
   const router = useRouter();
-  const [config, setConfig] = useState<AdsManagerConfig | null>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [activeTab, setActiveTab] = useState<'provider' | 'adsense' | 'badges' | 'slots' | 'custom' | 'adstxt'>('provider');
+  const isAuthenticated = useAdminSession();
+  const [activeTab, setActiveTab] = useState<'status' | 'slots' | 'adstxt'>('status');
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const session = localStorage.getItem('omnitool_admin_session');
-      if (!session) {
-        router.push('/admin/login');
-        return;
-      }
-      setIsAuthenticated(true);
+    if (!isAuthenticated) {
+      router.push('/admin/login');
     }
-    setConfig(getAdsConfig());
-  }, [router]);
+  }, [isAuthenticated, router]);
 
-  const handleSave = () => {
-    if (!config) return;
-    saveAdsConfig(config);
-    toast.success('All Ad settings saved successfully and live on site!');
+  const copy = async (text: string, label: string) => {
+    await navigator.clipboard.writeText(text);
+    toast.success(`${label} copied to clipboard.`);
   };
 
-  const handleCopyScript = () => {
-    if (!config) return;
-    const scriptTag = `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${config.publisherId}" crossorigin="anonymous"></script>`;
-    navigator.clipboard.writeText(scriptTag);
-    toast.success('AdSense Script copied to clipboard!');
-  };
-
-  if (!isAuthenticated || !config) {
+  if (!isAuthenticated) {
     return null;
   }
 
+  const tabClass = (tab: string) =>
+    `px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 whitespace-nowrap ${
+      activeTab === tab
+        ? 'bg-indigo-600 text-white shadow-xs'
+        : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
+    }`;
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 pb-20">
-      {/* Top Bar Header */}
       <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -69,488 +74,268 @@ export default function AdminAdsPage() {
               <ArrowLeft className="w-4 h-4" />
             </Link>
             <div>
-              <h1 className="text-base font-black text-slate-900 leading-tight">Master Ads Management Console</h1>
-              <p className="text-xs text-slate-500 font-medium">Control Google AdSense, Custom Codes, Badges & Slot Toggles</p>
+              <h1 className="text-base font-black text-slate-900 leading-tight">AdSense Console</h1>
+              <p className="text-xs text-slate-500 font-medium">
+                Google AdSense status, ad placements and ads.txt
+              </p>
             </div>
           </div>
 
-          <button
-            onClick={handleSave}
-            className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs shadow-md transition-all flex items-center gap-1.5 active:scale-95"
+          <Link
+            href="/admin"
+            className="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs shadow-md transition-all flex items-center gap-1.5 active:scale-95"
           >
-            <Save className="w-4 h-4" />
-            <span>Save All Settings</span>
-          </button>
+            <ArrowLeft className="w-4 h-4" />
+            <span>Back to Console</span>
+          </Link>
         </div>
       </header>
 
-      {/* Main Container */}
       <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8">
-        {/* Navigation Tabs Bar */}
         <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-slate-200 text-xs font-bold">
-          <button
-            onClick={() => setActiveTab('provider')}
-            className={`px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 whitespace-nowrap ${
-              activeTab === 'provider' ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
-            }`}
-          >
-            <Radio className="w-4 h-4" />
-            <span>1. Network Provider</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('adsense')}
-            className={`px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 whitespace-nowrap ${
-              activeTab === 'adsense' ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
-            }`}
-          >
+          <button onClick={() => setActiveTab('status')} className={tabClass('status')}>
             <DollarSign className="w-4 h-4 text-emerald-500" />
-            <span>2. Google AdSense (Active)</span>
+            <span>1. AdSense Status</span>
           </button>
-
-          <button
-            onClick={() => setActiveTab('badges')}
-            className={`px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 whitespace-nowrap ${
-              activeTab === 'badges' ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
-            }`}
-          >
-            <ShieldCheck className="w-4 h-4" />
-            <span>3. Ad Labels & Banner Copy</span>
+          <button onClick={() => setActiveTab('slots')} className={tabClass('slots')}>
+            <Layers className="w-4 h-4 text-indigo-600" />
+            <span>2. Ad Placements</span>
           </button>
-
-          <button
-            onClick={() => setActiveTab('slots')}
-            className={`px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 whitespace-nowrap ${
-              activeTab === 'slots' ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
-            }`}
-          >
-            <Layers className="w-4 h-4" />
-            <span>4. Slot Toggles</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('custom')}
-            className={`px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 whitespace-nowrap ${
-              activeTab === 'custom' ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
-            }`}
-          >
-            <Code className="w-4 h-4" />
-            <span>5. Custom Code Embeds</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('adsense')}
-            className={`px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 whitespace-nowrap ${
-              activeTab === 'adsense' ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
-            }`}
-          >
-            <DollarSign className="w-4 h-4" />
-            <span>6. Google AdSense</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('adstxt')}
-            className={`px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 whitespace-nowrap ${
-              activeTab === 'adstxt' ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
-            }`}
-          >
-            <FileText className="w-4 h-4" />
-            <span>7. ads.txt</span>
+          <button onClick={() => setActiveTab('adstxt')} className={tabClass('adstxt')}>
+            <FileText className="w-4 h-4 text-emerald-700" />
+            <span>3. ads.txt</span>
           </button>
         </div>
 
-        {/* Tab 1: Ad Network Provider Selection */}
-        {activeTab === 'provider' && (
-          <div className="p-6 bg-white border border-slate-200/80 rounded-3xl shadow-xs space-y-6">
-            <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
-              <div className="p-2.5 rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-100">
-                <Radio className="w-5 h-5" />
-              </div>
-              <div>
-                <h2 className="text-lg font-black text-slate-900">Active Ad Network Provider</h2>
-                <p className="text-xs text-slate-500 font-medium">Select which ad network serves ads across all site banner slots.</p>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <label
-                className={`p-5 rounded-2xl border cursor-pointer transition-all flex flex-col justify-between space-y-3 ${
-                  config.adProvider === 'adsense' ? 'border-emerald-600 bg-emerald-50/50 ring-2 ring-emerald-600/20' : 'border-slate-200 bg-slate-50 hover:bg-slate-100/80'
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <span className="font-extrabold text-sm text-slate-900 flex items-center gap-2">
-                    <DollarSign className="w-4 h-4 text-emerald-600" />
-                    Google AdSense
-                  </span>
-                  <input
-                    type="radio"
-                    name="adProvider"
-                    checked={config.adProvider === 'adsense'}
-                    onChange={() => setConfig({ ...config, adProvider: 'adsense', adSenseScriptEnabled: true })}
-                    className="w-4 h-4 text-emerald-600"
-                  />
+        {/* Tab 1: Status */}
+        {activeTab === 'status' && (
+          <div className="space-y-6">
+            <div className="p-6 bg-white border border-slate-200/80 rounded-3xl shadow-xs space-y-5">
+              <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
+                <div className="p-2.5 rounded-xl bg-amber-50 text-amber-600 border border-amber-100">
+                  <DollarSign className="w-5 h-5" />
                 </div>
-                <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                  Official Google AdSense auto-ads &amp; responsive display units. 100% compliant with Google policies.
-                </p>
-                <span className="text-[10px] font-extrabold uppercase tracking-wider text-emerald-800 bg-emerald-100 px-2.5 py-1 rounded-full w-max">
-                  Primary &amp; Recommended Active
-                </span>
-              </label>
-
-              <label
-                className={`p-5 rounded-2xl border cursor-pointer transition-all flex flex-col justify-between space-y-3 ${
-                  config.adProvider === 'custom' ? 'border-indigo-600 bg-indigo-50/50 ring-2 ring-indigo-600/20' : 'border-slate-200 bg-slate-50 hover:bg-slate-100/80'
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <span className="font-extrabold text-sm text-slate-900 flex items-center gap-2">
-                    <Code className="w-4 h-4 text-indigo-600" />
-                    Custom HTML / Script
-                  </span>
-                  <input
-                    type="radio"
-                    name="adProvider"
-                    checked={config.adProvider === 'custom'}
-                    onChange={() => setConfig({ ...config, adProvider: 'custom' })}
-                    className="w-4 h-4 text-indigo-600"
-                  />
+                <div>
+                  <h2 className="text-lg font-black text-slate-900">Google AdSense Configuration</h2>
+                  <p className="text-xs text-slate-500 font-medium">
+                    AdSense is the only advertising network enabled on this site.
+                  </p>
                 </div>
-                <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                  Paste custom script tags, affiliate banners, or HTML code snippets.
-                </p>
-                <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-700 bg-slate-200 px-2.5 py-1 rounded-full w-max">
-                  Custom Code
-                </span>
-              </label>
-            </div>
-          </div>
-        )}
-
-
-
-        {/* Tab 3: Policy-Compliant Banner Copy & Ad Labels */}
-        {(activeTab === 'badges' || activeTab === 'provider') && (
-          <div className="p-6 bg-white border border-slate-200/80 rounded-3xl shadow-xs space-y-6">
-            <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
-              <div className="p-2.5 rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-100">
-                <ShieldCheck className="w-5 h-5" />
               </div>
+
+              <div className="space-y-3">
+                <div className="flex items-center justify-between gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-200/70">
+                  <div className="min-w-0">
+                    <p className="text-xs font-black text-slate-900">Publisher ID</p>
+                    <p className="text-[11px] text-slate-500 font-medium mt-0.5 truncate">{ADSENSE_PUBLISHER_ID}</p>
+                  </div>
+                  <button
+                    onClick={() => copy(ADSENSE_PUBLISHER_ID, 'Publisher ID')}
+                    className="p-2 rounded-xl bg-white border border-slate-200 text-slate-500 hover:text-indigo-600 transition-colors shrink-0"
+                    aria-label="Copy publisher ID"
+                  >
+                    <Copy className="w-4 h-4" />
+                  </button>
+                </div>
+
+                <div className="flex items-center justify-between gap-4 p-4 bg-emerald-50/60 rounded-2xl border border-emerald-200/70">
+                  <div>
+                    <p className="text-xs font-black text-emerald-900">adsbygoogle.js loader</p>
+                    <p className="text-[11px] text-emerald-700 font-medium mt-0.5">
+                      Injected on every page via the root layout. Required for Auto Ads and for
+                      Google&apos;s certified CMP (Funding Choices) to serve EEA/UK/CH traffic.
+                    </p>
+                  </div>
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                </div>
+
+                <div className="flex items-center justify-between gap-4 p-4 bg-emerald-50/60 rounded-2xl border border-emerald-200/70">
+                  <div>
+                    <p className="text-xs font-black text-emerald-900">Consent Mode v2</p>
+                    <p className="text-[11px] text-emerald-700 font-medium mt-0.5">
+                      Default state is set to &quot;denied&quot; before any Google tag executes.
+                    </p>
+                  </div>
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                </div>
+
+                <div className="flex items-center justify-between gap-4 p-4 bg-emerald-50/60 rounded-2xl border border-emerald-200/70">
+                  <div>
+                    <p className="text-xs font-black text-emerald-900">Competing ad networks</p>
+                    <p className="text-[11px] text-emerald-700 font-medium mt-0.5">
+                      Permanently disabled. Serving other ad networks alongside AdSense breaches
+                      AdSense programme policies.
+                    </p>
+                  </div>
+                  <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0" />
+                </div>
+              </div>
+            </div>
+
+            {/* Slot ids live in env vars */}
+            <div className="p-6 bg-white border border-slate-200/80 rounded-3xl shadow-xs space-y-4">
               <div>
-                <h2 className="text-lg font-black text-slate-900">Policy-Compliant Ad Labels & Banner Copy</h2>
-                <p className="text-xs text-slate-500 font-medium">Google AdSense strictly requires neutral labels (&quot;Advertisement&quot; or &quot;Sponsored&quot;) and prohibits click-encouragement phrases.</p>
+                <h2 className="text-lg font-black text-slate-900">Configured Ad Units</h2>
+                <p className="text-xs text-slate-500 font-medium mt-1">
+                  These are read from environment variables at build time. Set them on your host and
+                  redeploy:
+                </p>
               </div>
-            </div>
 
-            <div className="space-y-4">
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                  Ad Slot Identifier Label (AdSense Allowed: &quot;Advertisement&quot; or &quot;Sponsored&quot;)
-                </label>
-                <div className="grid grid-cols-3 gap-3">
-                  {(['Advertisement', 'Sponsored', ''] as const).map((lbl) => (
-                    <button
-                      key={lbl}
-                      type="button"
-                      onClick={() => setConfig({ ...config, adLabelText: lbl })}
-                      className={`p-3 rounded-2xl border text-xs font-bold transition-all ${
-                        (config.adLabelText ?? 'Advertisement') === lbl
-                          ? 'border-indigo-600 bg-indigo-50 text-indigo-900 ring-2 ring-indigo-600/20'
-                          : 'border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100'
-                      }`}
+              <div className="rounded-2xl bg-slate-900 p-4 overflow-x-auto">
+                <pre className="text-[11px] font-mono text-emerald-300 whitespace-pre-wrap leading-relaxed">
+{`NEXT_PUBLIC_ADSENSE_PUBLISHER_ID=${ADSENSE_PUBLISHER_ID}
+NEXT_PUBLIC_ADSENSE_SLOT_HEADER=${ADSENSE_SLOT_IDS['header-leaderboard'] || '<not set>'}
+NEXT_PUBLIC_ADSENSE_SLOT_SIDEBAR=${ADSENSE_SLOT_IDS['sticky-sidebar'] || '<not set>'}
+NEXT_PUBLIC_ADSENSE_SLOT_POST_DOWNLOAD=${ADSENSE_SLOT_IDS['post-download'] || '<not set>'}`}
+                </pre>
+              </div>
+
+              <div className="space-y-2">
+                {SLOT_TYPES.map((slotType) => {
+                  const id = ADSENSE_SLOT_IDS[slotType];
+                  return (
+                    <div
+                      key={slotType}
+                      className="flex items-center justify-between gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-200/70"
                     >
-                      {lbl || '(None / Blank)'}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                  Top Header Neutral Banner Copy
-                </label>
-                <input
-                  type="text"
-                  value={config.supportDevTextHeader}
-                  onChange={(e) => setConfig({ ...config, supportDevTextHeader: e.target.value })}
-                  placeholder="Fast, private, in-browser file tools."
-                  className="w-full px-4 py-3 rounded-2xl border border-slate-300 bg-slate-50 text-slate-900 font-bold text-sm focus:outline-none focus:border-indigo-600"
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                  Sidebar Neutral Banner Copy
-                </label>
-                <input
-                  type="text"
-                  value={config.supportDevTextSidebar}
-                  onChange={(e) => setConfig({ ...config, supportDevTextSidebar: e.target.value })}
-                  placeholder="Fast, private, in-browser file tools."
-                  className="w-full px-4 py-3 rounded-2xl border border-slate-300 bg-slate-50 text-slate-900 font-bold text-sm focus:outline-none focus:border-indigo-600"
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                  Post-Download / In-Feed Neutral Copy
-                </label>
-                <input
-                  type="text"
-                  value={config.supportDevTextPostDownload}
-                  onChange={(e) => setConfig({ ...config, supportDevTextPostDownload: e.target.value })}
-                  placeholder="Fast, private, in-browser file tools."
-                  className="w-full px-4 py-3 rounded-2xl border border-slate-300 bg-slate-50 text-slate-900 font-bold text-sm focus:outline-none focus:border-indigo-600"
-                />
+                      <div className="min-w-0">
+                        <p className="text-xs font-black text-slate-900">{ADSENSE_SLOT_LABELS[slotType]}</p>
+                        <p className="text-[11px] font-medium mt-0.5 truncate">
+                          {id ? (
+                            <span className="text-emerald-700">Slot ID: {id}</span>
+                          ) : (
+                            <span className="text-amber-700">
+                              Not configured — this placement renders nothing until a slot ID is set.
+                            </span>
+                          )}
+                        </p>
+                      </div>
+                      {id ? (
+                        <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                      ) : (
+                        <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0" />
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
         )}
 
-        {/* Tab 4: Slot Enable/Disable Toggles */}
-        {(activeTab === 'slots' || activeTab === 'provider') && (
+        {/* Tab 2: Placement status */}
+        {activeTab === 'slots' && (
           <div className="p-6 bg-white border border-slate-200/80 rounded-3xl shadow-xs space-y-6">
             <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
               <div className="p-2.5 rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-100">
                 <Layers className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-lg font-black text-slate-900">Ad Placement Units & Toggles</h2>
-                <p className="text-xs text-slate-500 font-medium">Turn specific ad positions on or off globally across the application.</p>
+                <h2 className="text-lg font-black text-slate-900">Ad Placement Status</h2>
+                <p className="text-xs text-slate-500 font-medium">
+                  Placement is controlled by environment variables so that every visitor sees an
+                  identical layout. Leave a slot id unset to switch that placement off.
+                </p>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/60 flex items-center justify-between">
-                <div>
-                  <p className="text-xs font-bold text-slate-900">Top Header Banner Ad Slot (728x90)</p>
-                  <p className="text-[11px] text-slate-500 font-medium">Visible at top of tool pages & homepage.</p>
-                </div>
-                <button onClick={() => setConfig({ ...config, headerBannerEnabled: !config.headerBannerEnabled })}>
-                  {config.headerBannerEnabled ? <ToggleRight className="w-8 h-8 text-indigo-600" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
-                </button>
-              </div>
-
-              <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/60 flex items-center justify-between">
-                <div>
-                  <p className="text-xs font-bold text-slate-900">Sticky Sidebar Ad Slot (300x530 Skyscraper)</p>
-                  <p className="text-[11px] text-slate-500 font-medium">Desktop sidebar banner unit.</p>
-                </div>
-                <button onClick={() => setConfig({ ...config, sidebarEnabled: !config.sidebarEnabled })}>
-                  {config.sidebarEnabled ? <ToggleRight className="w-8 h-8 text-indigo-600" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
-                </button>
-              </div>
-
-              <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/60 flex items-center justify-between">
-                <div>
-                  <p className="text-xs font-bold text-slate-900">Tool Page In-Feed Ad Slot</p>
-                  <p className="text-[11px] text-slate-500 font-medium">Native ad unit inside workspace layout.</p>
-                </div>
-                <button onClick={() => setConfig({ ...config, toolInFeedEnabled: !config.toolInFeedEnabled })}>
-                  {config.toolInFeedEnabled ? <ToggleRight className="w-8 h-8 text-indigo-600" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
-                </button>
-              </div>
-
-              <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/60 flex items-center justify-between opacity-60">
-                <div>
-                  <div className="flex items-center gap-1.5">
-                    <p className="text-xs font-bold text-slate-900">Monetag Scripts</p>
-                    <span className="text-[9px] bg-amber-100 text-amber-800 font-bold px-1.5 py-0.5 rounded">Disabled for AdSense</span>
-                  </div>
-                  <p className="text-[11px] text-slate-500 font-medium">Permanently disabled to guarantee Google AdSense policy approval.</p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    toast.info('Monetag is disabled to ensure Google AdSense approval.');
-                  }}
-                >
-                  <ToggleLeft className="w-8 h-8 text-slate-300" />
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Tab 5: Custom Code Embeds */}
-        {(activeTab === 'custom' || activeTab === 'provider') && (
-          <div className="p-6 bg-white border border-slate-200/80 rounded-3xl shadow-xs space-y-6">
-            <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
-              <div className="p-2.5 rounded-xl bg-purple-50 text-purple-600 border border-purple-100">
-                <Code className="w-5 h-5" />
-              </div>
-              <div>
-                <h2 className="text-lg font-black text-slate-900">Custom HTML / Ad Code Snippets</h2>
-                <p className="text-xs text-slate-500 font-medium">Paste custom script tags or affiliate iframe embeds for each slot.</p>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                  Custom Top Header Ad Code
-                </label>
-                <textarea
-                  rows={3}
-                  value={config.customHeaderCode || ''}
-                  onChange={(e) => setConfig({ ...config, customHeaderCode: e.target.value })}
-                  placeholder="<script src='...'></script>"
-                  className="w-full p-3 rounded-2xl border border-slate-300 bg-slate-900 text-amber-300 font-mono text-xs focus:outline-none focus:border-indigo-600"
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                  Custom Sidebar Ad Code
-                </label>
-                <textarea
-                  rows={3}
-                  value={config.customSidebarCode || ''}
-                  onChange={(e) => setConfig({ ...config, customSidebarCode: e.target.value })}
-                  placeholder="<script src='...'></script>"
-                  className="w-full p-3 rounded-2xl border border-slate-300 bg-slate-900 text-amber-300 font-mono text-xs focus:outline-none focus:border-indigo-600"
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                  Custom Post-Download Ad Code
-                </label>
-                <textarea
-                  rows={3}
-                  value={config.customPostDownloadCode || ''}
-                  onChange={(e) => setConfig({ ...config, customPostDownloadCode: e.target.value })}
-                  placeholder="<script src='...'></script>"
-                  className="w-full p-3 rounded-2xl border border-slate-300 bg-slate-900 text-amber-300 font-mono text-xs focus:outline-none focus:border-indigo-600"
-                />
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Tab 6: Google AdSense Console */}
-        {(activeTab === 'adsense' || activeTab === 'provider') && (
-          <div className="p-6 bg-white border border-slate-200/80 rounded-3xl shadow-xs space-y-6">
-            <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
-              <div className="p-2.5 rounded-xl bg-amber-50 text-amber-600 border border-amber-100">
-                <DollarSign className="w-5 h-5" />
-              </div>
-              <div>
-                <h2 className="text-lg font-black text-slate-900">Google AdSense Publisher ID</h2>
-                <p className="text-xs text-slate-500 font-medium">Link your official Google AdSense Publisher account ID.</p>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                  AdSense Publisher ID (ca-pub-XXXXXXXXXXXXXXXX)
-                </label>
-                <input
-                  type="text"
-                  value={config.publisherId}
-                  onChange={(e) => {
-                    const val = e.target.value;
-                    const pubNum = val.replace(/[^0-9]/g, '');
-                    const updatedAdsTxt = `google.com, pub-${pubNum || '1291898061670715'}, DIRECT, f08c47fec0942fa0`;
-                    setConfig({ ...config, publisherId: val, adsTxtContent: updatedAdsTxt });
-                  }}
-                  placeholder="ca-pub-1291898061670715"
-                  className="w-full px-4 py-3 rounded-2xl border border-slate-300 bg-slate-50 text-slate-900 font-mono font-bold text-sm focus:outline-none focus:border-indigo-600 min-h-[48px]"
-                />
-              </div>
-
-              <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/60 flex items-center justify-between">
-                <div>
-                  <p className="text-xs font-bold text-slate-900">Auto-Inject Google AdSense Script</p>
-                  <p className="text-[11px] text-slate-500 font-medium">Loads pagead2.googlesyndication.com script globally in app layout.</p>
-                </div>
-
-                <button
-                  onClick={() => setConfig({ ...config, adSenseScriptEnabled: !config.adSenseScriptEnabled })}
-                  className="text-indigo-600"
-                >
-                  {config.adSenseScriptEnabled ? <ToggleRight className="w-8 h-8 text-indigo-600" /> : <ToggleLeft className="w-8 h-8 text-slate-300" />}
-                </button>
-              </div>
-
-              <div className="p-4 bg-amber-50/60 border border-amber-100 rounded-2xl space-y-2">
-                <div className="flex items-center justify-between text-xs font-bold text-amber-800">
-                  <div className="flex items-center gap-1.5">
-                    <Code className="w-4 h-4 text-amber-600" />
-                    Generated AdSense Script Embed
-                  </div>
-                  <button
-                    onClick={handleCopyScript}
-                    className="px-2.5 py-1 rounded bg-amber-200/80 hover:bg-amber-200 text-amber-900 font-extrabold text-[11px] flex items-center gap-1"
+            <div className="space-y-3">
+              {SLOT_TYPES.map((slotType) => {
+                const id = ADSENSE_SLOT_IDS[slotType];
+                const envVar =
+                  slotType === 'header-leaderboard'
+                    ? 'NEXT_PUBLIC_ADSENSE_SLOT_HEADER'
+                    : slotType === 'sticky-sidebar'
+                      ? 'NEXT_PUBLIC_ADSENSE_SLOT_SIDEBAR'
+                      : 'NEXT_PUBLIC_ADSENSE_SLOT_POST_DOWNLOAD';
+                return (
+                  <div
+                    key={slotType}
+                    className="p-4 bg-slate-50 rounded-2xl border border-slate-200/60 flex items-center justify-between gap-4"
                   >
-                    <Copy className="w-3 h-3" />
-                    <span>Copy Snippet</span>
-                  </button>
-                </div>
-                <code className="block p-3 bg-slate-900 text-amber-300 rounded-xl text-[11px] font-mono overflow-x-auto">
-                  {`<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${config.publisherId}" crossorigin="anonymous"></script>`}
-                </code>
-              </div>
+                    <div className="min-w-0">
+                      <p className="text-xs font-bold text-slate-900">{ADSENSE_SLOT_LABELS[slotType]}</p>
+                      <p className="text-[11px] text-slate-500 font-medium mt-0.5 truncate">
+                        {id ? (
+                          <>
+                            <span className="text-emerald-700">Active</span> &middot; slot {id} &middot;{' '}
+                            <code className="text-[10px]">{envVar}</code>
+                          </>
+                        ) : (
+                          <>
+                            <span className="text-amber-700">Inactive</span> &middot; set{' '}
+                            <code className="text-[10px]">{envVar}</code>
+                          </>
+                        )}
+                      </p>
+                    </div>
+                    {id ? (
+                      <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                    ) : (
+                      <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0" />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="p-4 bg-amber-50/60 border border-amber-200 rounded-2xl space-y-2">
+              <p className="text-xs font-black text-amber-800">Why environment variables?</p>
+              <p className="text-[11px] text-amber-900/80 font-medium leading-relaxed">
+                Ad placement must be identical for every visitor. A device-local toggle would let
+                one visitor see a different layout from another, which is both confusing for users
+                and inconsistent for the Google AdSense reviewer. Changing a placement therefore
+                requires an environment change and a redeploy.
+              </p>
             </div>
           </div>
         )}
 
-        {/* Tab 7: ads.txt File Management */}
-        {(activeTab === 'adstxt' || activeTab === 'provider') && (
+        {/* Tab 3: ads.txt */}
+        {activeTab === 'adstxt' && (
           <div className="p-6 bg-white border border-slate-200/80 rounded-3xl shadow-xs space-y-6">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-              <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100">
-                  <FileText className="w-5 h-5" />
-                </div>
-                <div>
-                  <h2 className="text-lg font-black text-slate-900">ads.txt Content Management</h2>
-                  <p className="text-xs text-slate-500 font-medium">Edit live records served dynamically at domain root (/ads.txt).</p>
-                </div>
+            <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
+              <div className="p-2.5 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-100">
+                <FileText className="w-5 h-5" />
               </div>
+              <div>
+                <h2 className="text-lg font-black text-slate-900">ads.txt</h2>
+                <p className="text-xs text-slate-500 font-medium">
+                  Served from the domain root at /ads.txt and /app-ads.txt.
+                </p>
+              </div>
+            </div>
 
+            <div className="rounded-2xl bg-slate-900 p-4 overflow-x-auto">
+              <pre className="text-[11px] font-mono text-emerald-300 whitespace-pre-wrap">{ADSENSE_ADS_TXT_RECORDS}</pre>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <button
+                onClick={() => copy(ADSENSE_ADS_TXT_RECORDS, 'ads.txt contents')}
+                className="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-extrabold text-xs transition-colors flex items-center gap-1.5"
+              >
+                <Copy className="w-4 h-4" />
+                <span>Copy Contents</span>
+              </button>
               <Link
                 href="/ads.txt"
                 target="_blank"
-                className="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center gap-1.5 transition-colors"
+                className="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-extrabold text-xs transition-colors flex items-center gap-1.5"
               >
+                <ExternalLink className="w-4 h-4" />
                 <span>Preview /ads.txt</span>
-                <ExternalLink className="w-3.5 h-3.5" />
               </Link>
             </div>
 
-            <div className="space-y-2">
-              <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                ads.txt File Body
-              </label>
-              <textarea
-                rows={4}
-                value={config.adsTxtContent}
-                onChange={(e) => setConfig({ ...config, adsTxtContent: e.target.value })}
-                className="w-full p-4 rounded-2xl border border-slate-300 bg-slate-900 text-emerald-400 font-mono text-xs focus:outline-none focus:border-indigo-600 leading-relaxed"
-              />
-              <p className="text-[11px] text-slate-400 font-medium">Standard format: <code className="text-slate-200">google.com, pub-1291898061670715, DIRECT, f08c47fec0942fa0</code></p>
-            </div>
+            <p className="text-[11px] text-slate-500 font-medium leading-relaxed">
+              The record is generated from the publisher ID, so it can never drift from the id used
+              in your page tags. Google&rsquo;s crawler checks this file when reviewing the site for
+              AdSense approval.
+            </p>
           </div>
         )}
-
-        {/* Save Settings Bar */}
-        <div className="p-4 bg-slate-900 text-white rounded-3xl flex items-center justify-between shadow-xl border border-slate-800">
-          <div className="flex items-center gap-2 text-xs font-bold">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-            <span>Ready to save all Ad management updates</span>
-          </div>
-
-          <button
-            onClick={handleSave}
-            className="px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm shadow-md transition-all flex items-center gap-2 active:scale-95"
-          >
-            <Save className="w-4 h-4" />
-            <span>Save Ads Settings</span>
-          </button>
-        </div>
       </main>
     </div>
   );

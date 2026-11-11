@@ -1,37 +1,34 @@
+/**
+ * Local admin configuration store.
+ *
+ * Historically this file also held the ad-network provider selection
+ * (Adsterra / "Custom HTML"), which allowed arbitrary ad code to be injected
+ * into the page. Google AdSense forbids serving ads from competing networks
+ * alongside AdSense, so that capability has been removed permanently:
+ *
+ *  - `adProvider` is fixed to 'adsense'.
+ *  - All custom/adsterra code fields are gone.
+ *  - There is no longer any device-local ad configuration at all.
+ *
+ * Ad unit ids live in `lib/ads-config.ts` and are read from environment
+ * variables, so ad placement is identical for every visitor and can never
+ * drift between devices.
+ */
+
 export interface AdsManagerConfig {
-  // Active Ad Provider ('adsterra' | 'adsense' | 'custom')
-  adProvider: 'adsterra' | 'adsense' | 'custom';
+  /** Always 'adsense'. */
+  adProvider: 'adsense';
 
-  // Adsterra Settings
-  adsterraHeaderKey: string;
-  adsterraSidebarKey: string;
-  adsterraContainerScript: string;
-  adsterraContainerId: string;
-
-  // Custom Ad Code Embeds
-  customHeaderCode?: string;
-  customSidebarCode?: string;
-  customPostDownloadCode?: string;
-
-  // Policy-Compliant Banner Copy & Labeling Customizations
-  supportDevTextHeader: string;
-  supportDevTextSidebar: string;
-  supportDevTextPostDownload: string;
-  fallbackSupportUrl: string;
-  adLabelText?: 'Advertisement' | 'Sponsored' | '';
-
-  // Google AdSense Settings
+  /** Google AdSense publisher id, e.g. `ca-pub-1234567890123456`. */
   publisherId: string;
+
+  /** Whether the adsbygoogle.js loader should be injected. */
   adSenseScriptEnabled: boolean;
 
-  // Slot Enable/Disable Toggles
-  headerBannerEnabled: boolean;
-  toolInFeedEnabled: boolean;
-  sidebarEnabled: boolean;
-  monetagEnabled: boolean;
-  bottomStickyEnabled: boolean;
+  /** Neutral label rendered above each ad unit. */
+  adLabelText: 'Advertisement' | 'Sponsored' | '';
 
-  // ads.txt Content
+  /** The record served at /ads.txt. */
   adsTxtContent: string;
 }
 
@@ -39,64 +36,36 @@ export type GoogleAdsConfig = AdsManagerConfig;
 
 const DEFAULT_ADS_CONFIG: AdsManagerConfig = {
   adProvider: 'adsense',
-  adsterraHeaderKey: '',
-  adsterraSidebarKey: '',
-  adsterraContainerScript: '',
-  adsterraContainerId: '',
-  customHeaderCode: '',
-  customSidebarCode: '',
-  customPostDownloadCode: '',
-  supportDevTextHeader: 'Fast, private, in-browser file tools.',
-  supportDevTextSidebar: 'Fast, private, in-browser file tools.',
-  supportDevTextPostDownload: 'Fast, private, in-browser file tools.',
-  fallbackSupportUrl: '/',
-  adLabelText: '',
   publisherId: 'ca-pub-1291898061670715',
   adSenseScriptEnabled: true,
-  headerBannerEnabled: true,
-  toolInFeedEnabled: true,
-  sidebarEnabled: true,
-  monetagEnabled: false,
-  bottomStickyEnabled: true,
-  adsTxtContent: `google.com, pub-1291898061670715, DIRECT, f08c47fec0942fa0`,
+  adLabelText: 'Advertisement',
+  adsTxtContent: 'google.com, pub-1291898061670715, DIRECT, f08c47fec0942fa0',
 };
 
-// 1. Get Ads Config (Fast In-Memory / Local Storage, Zero Network)
+/**
+ * Returns the ad configuration.
+ *
+ * This is a read-only, constant configuration. Ad placement itself is
+ * controlled exclusively by the environment variables in `lib/ads-config.ts`.
+ */
+export function getAdsConfig(): AdsManagerConfig {
+  return DEFAULT_ADS_CONFIG;
+}
+
+/** Legacy async wrappers kept for API compatibility. */
 export async function getAdsConfigFromFirestore(): Promise<AdsManagerConfig> {
   return getAdsConfig();
 }
 
-// 2. Save Ads Config (Local Storage Only)
-export async function saveAdsConfigToFirestore(config: AdsManagerConfig): Promise<void> {
-  if (typeof window !== 'undefined') {
-    try {
-      localStorage.setItem('omnitool_ads_config', JSON.stringify(config));
-    } catch {
-      //
-    }
-  }
+export async function saveAdsConfigToFirestore(_config: AdsManagerConfig): Promise<void> {
+  // Ad configuration is no longer persisted — it is environment-driven.
 }
 
-export function getAdsConfig(): AdsManagerConfig {
-  if (typeof window === 'undefined') return DEFAULT_ADS_CONFIG;
-  try {
-    const saved = localStorage.getItem('omnitool_ads_config');
-    if (!saved) return DEFAULT_ADS_CONFIG;
-    const parsed = JSON.parse(saved);
-    if (parsed.adProvider === 'adsterra') parsed.adProvider = 'adsense';
-    parsed.adSenseScriptEnabled = true;
-    parsed.monetagEnabled = false;
-    return { ...DEFAULT_ADS_CONFIG, ...parsed };
-  } catch {
-    return DEFAULT_ADS_CONFIG;
-  }
-}
+// ---------------------------------------------------------------------------
+// Local, client-only analytics helpers.
+// ---------------------------------------------------------------------------
 
-export function saveAdsConfig(config: AdsManagerConfig): void {
-  saveAdsConfigToFirestore(config);
-}
-
-// 3. Track Pageview (Local Storage Only)
+/** Tracks a pageview in local storage. */
 export async function trackPageview(pagePath: string): Promise<void> {
   if (typeof window === 'undefined') return;
 
@@ -123,43 +92,43 @@ export async function trackPageview(pagePath: string): Promise<void> {
     if (pageLogs.length > 50) pageLogs.length = 50;
     localStorage.setItem('aurea_pageview_logs', JSON.stringify(pageLogs));
   } catch {
-    //
+    /* storage unavailable */
   }
 }
 
-// 4. Track Ad Impression (Local Storage Only)
+/** Records an ad impression locally. */
 export function trackAdImpression(_slotName = 'general'): void {
   if (typeof window === 'undefined') return;
   try {
     const currentImpressions = parseInt(localStorage.getItem('aurea_ad_impressions') || '0', 10);
     localStorage.setItem('aurea_ad_impressions', (currentImpressions + 1).toString());
   } catch {
-    //
+    /* storage unavailable */
   }
 }
 
-// 5. Real-Time Visitor Heartbeat (Local Storage Only)
+/** Real-time visitor heartbeat (local only). */
 export async function trackVisitorHeartbeat(pagePath: string): Promise<string | null> {
   if (typeof window === 'undefined') return null;
 
   try {
-    let visitorId = sessionStorage.getItem('omnitool_visitor_id');
+    const visitorId = sessionStorage.getItem('omnitool_visitor_id');
     if (!visitorId) {
-      visitorId = `v_${Math.random().toString(36).substring(2, 9)}_${Date.now()}`;
-      sessionStorage.setItem('omnitool_visitor_id', visitorId);
+      const id = `v_${Math.random().toString(36).substring(2, 9)}_${Date.now()}`;
+      sessionStorage.setItem('omnitool_visitor_id', id);
     }
 
     const existing = JSON.parse(localStorage.getItem('omnitool_active_visitors') || '{}');
-    existing[visitorId] = { page: pagePath, time: Date.now() };
+    existing[visitorId || 'unknown'] = { page: pagePath, time: Date.now() };
     localStorage.setItem('omnitool_active_visitors', JSON.stringify(existing));
 
-    return visitorId;
+    return visitorId || null;
   } catch {
     return null;
   }
 }
 
-// 6. Subscribe to Real-Time Live Visitors (Local Storage Simulation, Zero Network)
+/** Subscribes to the local-only "live visitors" counter. */
 export function subscribeLiveVisitors(onCountChange: (count: number) => void): () => void {
   try {
     const checkLocal = () => {
@@ -176,16 +145,15 @@ export function subscribeLiveVisitors(onCountChange: (count: number) => void): (
   }
 }
 
-// 7. Track Tool Execution Event (Local Storage Only)
+/** Records a tool execution locally. */
 export async function trackToolExecution(toolSlug: string, category: string): Promise<void> {
   if (typeof window === 'undefined') return;
-
   try {
     const localLogs = JSON.parse(localStorage.getItem('omnitool_tool_logs') || '[]');
     localLogs.push({ toolSlug, category, time: new Date().toISOString() });
     localStorage.setItem('omnitool_tool_logs', JSON.stringify(localLogs));
   } catch {
-    //
+    /* storage unavailable */
   }
 }
 
@@ -208,7 +176,14 @@ export interface AnalyticsSummary {
   recentVisits: { page: string; time: string; device: string; country: string }[];
 }
 
-// 8. Analytics Summary (Zero Network, 100% Client-Side Fast Engine)
+/**
+ * Builds the analytics summary from the visitor's own local storage.
+ *
+ * Note: this reflects only the current browser's activity. It is intentionally
+ * never rendered on public pages — showing made-up traffic numbers to
+ * visitors would be misleading, and the AdSense reviewer checks for exactly
+ * this kind of thing.
+ */
 export async function getRealAnalyticsSummary(): Promise<AnalyticsSummary> {
   const now = Date.now();
   let liveCount = 1;
@@ -217,7 +192,7 @@ export async function getRealAnalyticsSummary(): Promise<AnalyticsSummary> {
   let adImpressionsCount = 0;
   let totalExecutions = 0;
   let recentVisits: { page: string; time: string; device: string; country: string }[] = [];
-  const toolCounts: Record<string, { name: string; category: string; count: number }> = {};
+  const toolCounts: Record<string, { name: string; slug: string; category: string; count: number }> = {};
 
   let viewsLastHour = 0;
   let viewsToday = 0;
@@ -236,38 +211,27 @@ export async function getRealAnalyticsSummary(): Promise<AnalyticsSummary> {
 
     const pageLogs = JSON.parse(localStorage.getItem('aurea_pageview_logs') || '[]');
     if (pageLogs.length > 0) {
-      recentVisits = pageLogs.slice(0, 8).map((log: any) => ({
+      recentVisits = pageLogs.slice(0, 8).map((log: { page?: string; time?: string; device?: string }) => ({
         page: log.page || '/',
         time: log.time || 'Just now',
         device: log.device || 'Browser',
-        country: 'Live Session',
+        country: 'This device',
       }));
     }
 
-    let localLogs = JSON.parse(localStorage.getItem('omnitool_tool_logs') || '[]');
-
-    if (localLogs.length === 0) {
-      localLogs = [
-        { toolSlug: '/pdf/compress', category: 'PDF', time: new Date(now - 1000 * 60 * 5).toLocaleTimeString() },
-        { toolSlug: '/pdf/compress', category: 'PDF', time: new Date(now - 1000 * 60 * 12).toLocaleTimeString() },
-        { toolSlug: '/image/pics-to-pdf', category: 'Image', time: new Date(now - 1000 * 60 * 18).toLocaleTimeString() },
-        { toolSlug: '/pdf/edit', category: 'PDF', time: new Date(now - 1000 * 60 * 25).toLocaleTimeString() },
-        { toolSlug: '/image/passport-maker', category: 'Image', time: new Date(now - 1000 * 60 * 35).toLocaleTimeString() },
-        { toolSlug: '/image/remove-background', category: 'Image', time: new Date(now - 1000 * 60 * 45).toLocaleTimeString() },
-        { toolSlug: '/pdf/compress-to-200kb', category: 'PDF', time: new Date(now - 1000 * 60 * 55).toLocaleTimeString() },
-        { toolSlug: '/utility/json-formatter', category: 'Utility', time: new Date(now - 1000 * 60 * 70).toLocaleTimeString() },
-      ];
-      localStorage.setItem('omnitool_tool_logs', JSON.stringify(localLogs));
-    }
+    const localLogs: { toolSlug?: string; category?: string }[] = JSON.parse(
+      localStorage.getItem('omnitool_tool_logs') || '[]',
+    );
 
     totalExecutions = localLogs.length;
 
-    localLogs.forEach((log: any) => {
+    localLogs.forEach((log) => {
       if (log.toolSlug) {
         const rawName = log.toolSlug.split('/').pop() || log.toolSlug;
         if (!toolCounts[log.toolSlug]) {
           toolCounts[log.toolSlug] = {
             name: rawName.replace(/-/g, ' ').toUpperCase(),
+            slug: log.toolSlug,
             category: log.category || 'Tool',
             count: 0,
           };
@@ -275,12 +239,6 @@ export async function getRealAnalyticsSummary(): Promise<AnalyticsSummary> {
         toolCounts[log.toolSlug].count++;
       }
     });
-
-    adImpressionsCount = parseInt(localStorage.getItem('aurea_ad_impressions') || '0', 10);
-    if (adImpressionsCount === 0) {
-      adImpressionsCount = Math.max(14, Math.round(totalPageviewsCount * 2.5));
-      localStorage.setItem('aurea_ad_impressions', adImpressionsCount.toString());
-    }
 
     viewsLastHour = Math.max(1, Math.round(totalPageviewsCount * 0.12));
     viewsToday = Math.max(viewsLastHour, Math.round(totalPageviewsCount * 0.45));
@@ -327,20 +285,21 @@ export async function getRealAnalyticsSummary(): Promise<AnalyticsSummary> {
   };
 }
 
+/** Static, empty summary used during server rendering. */
 export function getAnalyticsSummary(): AnalyticsSummary {
   return {
-    liveVisitors: 1,
-    totalPageviews: 1,
-    uniqueVisitors: 1,
+    liveVisitors: 0,
+    totalPageviews: 0,
+    uniqueVisitors: 0,
     adImpressions: 0,
     totalToolExecutions: 0,
-    viewsLastHour: 1,
-    viewsToday: 1,
-    viewsThisMonth: 1,
-    viewsThisYear: 1,
-    mobilePercentage: 48,
-    desktopPercentage: 46,
-    tabletPercentage: 6,
+    viewsLastHour: 0,
+    viewsToday: 0,
+    viewsThisMonth: 0,
+    viewsThisYear: 0,
+    mobilePercentage: 0,
+    desktopPercentage: 0,
+    tabletPercentage: 0,
     hourlyTrends: [],
     categoryBreakdown: [],
     topTools: [],

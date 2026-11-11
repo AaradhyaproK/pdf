@@ -1,216 +1,137 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
-import { trackAdImpression, getAdsConfig, AdsManagerConfig } from '@/lib/admin-store';
+import { useEffect, useRef, useState } from 'react';
+import {
+  ADSENSE_AD_LABEL,
+  ADSENSE_PUBLISHER_ID,
+  ADSENSE_SLOT_IDS,
+  ADSENSE_SLOT_MAX_WIDTH,
+  ADSENSE_SLOT_RESERVED_HEIGHT,
+  type AdSlotType,
+} from '@/lib/ads-config';
 
 export interface AdSlotProps {
-  slotType: 'header-leaderboard' | 'sticky-sidebar' | 'post-download';
+  slotType: AdSlotType;
+  /**
+   * Optional explicit ad unit id. When omitted the id configured for
+   * `slotType` in `lib/ads-config.ts` is used.
+   */
   clientAdId?: string;
   className?: string;
+  /** Set to false to suppress the visible "Advertisement" label. */
+  showLabel?: boolean;
 }
 
-// Custom Code Embed Runner (when explicitly provided)
-function CustomAdEmbed({ code, height = 250 }: { code: string; height?: number }) {
-  const htmlContent = `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <meta charset="utf-8">
-        <style>
-          html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; display: flex; justify-content: center; align-items: center; background: transparent; font-family: system-ui, -apple-system, sans-serif; }
-        </style>
-      </head>
-      <body>
-        <div id="ad-box" style="width:100%; height:100%; display:flex; justify-content:center; align-items:center;">
-          ${code}
-        </div>
-      </body>
-    </html>
-  `;
+type AdStatus = 'loading' | 'filled' | 'unfilled';
 
-  return (
-    <div className="w-full flex justify-center items-center py-1">
-      <iframe
-        srcDoc={htmlContent}
-        width="100%"
-        height={height}
-        title="Custom Ad Embed"
-        className="border-0 overflow-hidden w-full rounded-2xl"
-        scrolling="no"
-      />
-    </div>
-  );
-}
+const STATUS_ATTRIBUTE = 'data-ad-status';
 
-export function AdSlot({ slotType, clientAdId, className = '' }: AdSlotProps) {
-  const [config, setConfig] = useState<AdsManagerConfig>(getAdsConfig());
-  const [isAdFilled, setIsAdFilled] = useState<boolean>(false);
+/**
+ * Renders a single Google AdSense display unit.
+ *
+ * Key behaviours:
+ *  - The space is RESERVED up-front (min-height) so the ad never shifts
+ *    surrounding content when it finishes loading (CLS stays at 0).
+ *  - A neutral "Advertisement" label is rendered above the unit so the ad is
+ *    clearly distinguishable from site content, as Google requires.
+ *  - If the unit reports `unfilled` the reserved space collapses, so users
+ *    never see an empty grey box.
+ *  - Nothing is rendered at all when no ad unit id is configured, which avoids
+ *    shipping empty ad units.
+ *
+ * Placement is fully deterministic (driven by build-time environment
+ * variables) so every visitor sees an identical layout. A placement can be
+ * switched off simply by leaving its slot id unset.
+ */
+export function AdSlot({ slotType, clientAdId, className = '', showLabel = true }: AdSlotProps) {
+  const adUnitId = (clientAdId ?? ADSENSE_SLOT_IDS[slotType] ?? '').trim();
   const containerRef = useRef<HTMLDivElement>(null);
+  const [status, setStatus] = useState<AdStatus>('loading');
 
-  const hasCustomCode =
-    config.adProvider === 'custom' &&
-    ((slotType === 'header-leaderboard' && !!config.customHeaderCode) ||
-      (slotType === 'sticky-sidebar' && !!config.customSidebarCode) ||
-      (slotType === 'post-download' && !!config.customPostDownloadCode));
-
-  const hasValidAdSenseSlot = config.adProvider === 'adsense' && !!config.publisherId && !!clientAdId;
+  const hasAdUnit = Boolean(adUnitId);
+  const reservedHeight = ADSENSE_SLOT_RESERVED_HEIGHT[slotType];
+  const maxWidth = ADSENSE_SLOT_MAX_WIDTH[slotType];
 
   useEffect(() => {
-    trackAdImpression(slotType);
-
-    if (hasCustomCode) {
-      setIsAdFilled(true);
-      return;
-    }
-
-    if (!hasValidAdSenseSlot) {
-      return;
-    }
-
-    // Request Google AdSense to fill slot only when a real clientAdId exists
-    try {
-      if (typeof window !== 'undefined') {
-        ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
-      }
-    } catch {
-      // Handled silently
-    }
+    if (!hasAdUnit) return;
 
     const container = containerRef.current;
     if (!container) return;
 
-    const checkFilled = () => {
-      const ins = container.querySelector('ins.adsbygoogle');
-      if (!ins) return;
+    let cancelled = false;
 
-      const status = ins.getAttribute('data-ad-status');
-      if (status === 'filled') {
-        setIsAdFilled(true);
-        return;
-      }
-      if (status === 'unfilled') {
-        setIsAdFilled(false);
-        return;
-      }
-
-      // Check for real rendered ad iframe with affirmative height
-      const iframe = container.querySelector('iframe');
-      if (iframe) {
-        const h = iframe.offsetHeight || parseInt(iframe.getAttribute('height') || '0', 10);
-        if (h > 20) {
-          setIsAdFilled(true);
-          return;
-        }
+    const readStatus = () => {
+      if (cancelled) return;
+      const ins = container.querySelector<HTMLElement>('ins.adsbygoogle');
+      const raw = ins?.getAttribute(STATUS_ATTRIBUTE);
+      if (raw === 'filled') {
+        setStatus('filled');
+      } else if (raw === 'unfilled') {
+        setStatus('unfilled');
       }
     };
 
-    checkFilled();
+    // Ask Google to fill the unit. The adsbygoogle.js script itself may not
+    // have executed yet — pushing onto the queue is the documented way to
+    // handle that, the script drains the queue once it loads.
+    try {
+      const w = window as Window & { adsbygoogle?: unknown[] };
+      w.adsbygoogle = w.adsbygoogle || [];
+      w.adsbygoogle.push({});
+    } catch {
+      /* queueing failed — the unit simply stays unrendered */
+    }
 
-    const observer = new MutationObserver(() => {
-      checkFilled();
-    });
+    readStatus();
 
+    const observer = new MutationObserver(readStatus);
     observer.observe(container, {
       childList: true,
       subtree: true,
       attributes: true,
-      attributeFilter: ['data-ad-status', 'data-adsbygoogle-status', 'style'],
+      attributeFilter: [STATUS_ATTRIBUTE, 'style'],
     });
 
-    const timer = setTimeout(checkFilled, 1500);
+    // Safety net: some browsers only apply `data-ad-status` late.
+    const timer = window.setTimeout(readStatus, 2000);
+    const retry = window.setInterval(readStatus, 1500);
 
     return () => {
+      cancelled = true;
       observer.disconnect();
-      clearTimeout(timer);
+      window.clearTimeout(timer);
+      window.clearInterval(retry);
     };
-  }, [slotType, config.adProvider, hasCustomCode, hasValidAdSenseSlot]);
+  }, [hasAdUnit, adUnitId]);
 
-  // If there is neither custom ad code nor an active AdSense ad unit slot ID, do not render empty markup
-  if (!hasCustomCode && !hasValidAdSenseSlot) {
-    return null;
-  }
+  // No ad unit configured for this slot -> render nothing at all.
+  if (!hasAdUnit) return null;
 
-  const publisherId = config?.publisherId || 'ca-pub-1291898061670715';
+  const collapsed = status === 'unfilled';
 
-  if (slotType === 'header-leaderboard') {
-    return (
-      <div
-        ref={containerRef}
-        className={`w-full max-w-[728px] mx-auto flex flex-col items-center justify-center transition-all duration-300 ${
-          isAdFilled
-            ? 'my-6 sm:my-8 opacity-100 overflow-visible'
-            : 'h-0 min-h-0 m-0 p-0 overflow-hidden opacity-0 pointer-events-none'
-        } ${className}`}
-      >
-        <div className="w-full flex items-center justify-center overflow-hidden">
-          {config.adProvider === 'custom' && config.customHeaderCode ? (
-            <CustomAdEmbed code={config.customHeaderCode} height={90} />
-          ) : (
-            <ins
-              className="adsbygoogle"
-              style={{ display: 'block', width: '100%', minHeight: 0 }}
-              data-ad-client={publisherId}
-              {...(clientAdId ? { 'data-ad-slot': clientAdId } : {})}
-              data-ad-format="auto"
-              data-full-width-responsive="true"
-            />
-          )}
-        </div>
-      </div>
-    );
-  }
-
-  if (slotType === 'sticky-sidebar') {
-    return (
-      <div
-        ref={containerRef}
-        className={`w-full max-w-[300px] mx-auto flex flex-col items-center justify-center text-center transition-all duration-300 ${
-          isAdFilled
-            ? 'my-4 opacity-100 overflow-visible'
-            : 'h-0 min-h-0 m-0 p-0 overflow-hidden opacity-0 pointer-events-none'
-        } ${className}`}
-      >
-        <div className="w-full flex flex-col items-center justify-center text-center overflow-hidden">
-          {config.adProvider === 'custom' && config.customSidebarCode ? (
-            <CustomAdEmbed code={config.customSidebarCode} height={600} />
-          ) : (
-            <ins
-              className="adsbygoogle"
-              style={{ display: 'block', width: '100%', minHeight: 0 }}
-              data-ad-client={publisherId}
-              {...(clientAdId ? { 'data-ad-slot': clientAdId } : {})}
-              data-ad-format="auto"
-              data-full-width-responsive="true"
-            />
-          )}
-        </div>
-      </div>
-    );
-  }
-
-  // Post-Download / In-Feed Banner Slot
   return (
     <div
       ref={containerRef}
-      className={`w-full max-w-4xl mx-auto flex flex-col items-center justify-center transition-all duration-300 ${
-        isAdFilled
-          ? 'my-6 sm:my-8 opacity-100 overflow-visible'
-          : 'h-0 min-h-0 m-0 p-0 overflow-hidden opacity-0 pointer-events-none'
-      } ${className}`}
+      className={`w-full mx-auto flex flex-col items-center ${className}`}
+      style={{ maxWidth: `${maxWidth}px` }}
     >
-      <div className="w-full flex items-center justify-center overflow-hidden">
-        {config.adProvider === 'custom' && config.customPostDownloadCode ? (
-          <CustomAdEmbed code={config.customPostDownloadCode} height={120} />
-        ) : (
-          <ins
-            className="adsbygoogle"
-            style={{ display: 'block', width: '100%', minHeight: 0 }}
-            data-ad-client={publisherId}
-            {...(clientAdId ? { 'data-ad-slot': clientAdId } : {})}
-            data-ad-format="auto"
-            data-full-width-responsive="true"
-          />
-        )}
+      {showLabel && (
+        <span className="block text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1 select-none">
+          {ADSENSE_AD_LABEL}
+        </span>
+      )}
+      <div
+        className="w-full overflow-hidden transition-[min-height] duration-200"
+        style={{ minHeight: collapsed ? 0 : `${reservedHeight}px` }}
+      >
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block', width: '100%', minHeight: collapsed ? 0 : `${reservedHeight}px` }}
+          data-ad-client={ADSENSE_PUBLISHER_ID}
+          data-ad-slot={adUnitId}
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        />
       </div>
     </div>
   );
