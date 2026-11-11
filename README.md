@@ -131,6 +131,20 @@ Slack, Discord, …). Without it the form returns a clear "delivery not configur
 the visitor to email `contact@filezenith.com` — it never claims a message was sent when it was
 not.
 
+### 5. Admin console
+
+The admin login at `/admin/login` is validated **on the server** by `POST /api/admin/login`.
+Set these server-side secrets (no `NEXT_PUBLIC_` prefix — they must never reach the browser):
+
+```bash
+ADMIN_EMAIL=admin@filezenith.com
+ADMIN_PASSWORD=<a long, unique passphrase>
+ADMIN_SESSION_SECRET=<optional, separate secret for signing session tokens>
+```
+
+If they are not configured, **every** login attempt is rejected. A successful login returns a
+signed, 8-hour session token; expired sessions are treated as signed out.
+
 ---
 
 ## 👨‍💻 Founder & Creator

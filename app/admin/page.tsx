@@ -9,6 +9,7 @@ import {
   GoogleAdsConfig,
   AnalyticsSummary,
 } from '@/lib/admin-store';
+import { clearAdminSession, useAdminSession, useHydrated } from '@/lib/admin-session';
 import { toast } from 'sonner';
 import {
   Users,
@@ -40,18 +41,18 @@ export default function AdminDashboardPage() {
   const [adsConfig, setAdsConfig] = useState<GoogleAdsConfig | null>(null);
   const [summary, setSummary] = useState<AnalyticsSummary | null>(null);
   const [liveCount, setLiveCount] = useState(0);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const isAuthenticated = useAdminSession();
+  const hydrated = useHydrated();
   const [selectedTimeRange, setSelectedTimeRange] = useState<'hour' | 'today' | 'month' | 'year' | 'all'>('all');
 
   useEffect(() => {
-    // Session Guard Check
-    if (typeof window !== 'undefined') {
-      const session = localStorage.getItem('omnitool_admin_session');
-      if (!session) {
-        router.push('/admin/login');
-        return;
-      }
-      setIsAuthenticated(true);
+    // Session Guard Check.
+    // Wait for hydration before deciding the user is signed out — the server
+    // snapshot of the session is always "signed out".
+    if (!hydrated) return;
+    if (!isAuthenticated) {
+      router.push('/admin/login');
+      return;
     }
 
     // Load Ads Config from Firestore
@@ -71,17 +72,15 @@ export default function AdminDashboardPage() {
     return () => {
       unsubscribeVisitors();
     };
-  }, [router]);
+  }, [hydrated, isAuthenticated, router]);
 
   const handleLogout = () => {
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem('omnitool_admin_session');
-    }
+    clearAdminSession();
     toast.success('Logged out of Admin console.');
     router.push('/admin/login');
   };
 
-  if (!isAuthenticated || !adsConfig || !summary) {
+  if (!hydrated || !isAuthenticated || !adsConfig || !summary) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
         <div className="flex items-center gap-2 text-indigo-600 font-bold text-sm">
@@ -237,16 +236,18 @@ export default function AdminDashboardPage() {
             </span>
 
             <div className="flex flex-wrap items-center gap-1.5 bg-white/10 p-1 rounded-2xl border border-white/10">
-              {[
-                { id: 'hour', label: 'Last 1 Hour', count: summary.viewsLastHour },
-                { id: 'today', label: 'Today (24h)', count: summary.viewsToday },
-                { id: 'month', label: 'This Month', count: summary.viewsThisMonth },
-                { id: 'year', label: 'This Year', count: summary.viewsThisYear },
-                { id: 'all', label: 'All-Time Total', count: summary.totalPageviews },
-              ].map((tab) => (
+              {(
+                [
+                  { id: 'hour', label: 'Last 1 Hour', count: summary.viewsLastHour },
+                  { id: 'today', label: 'Today (24h)', count: summary.viewsToday },
+                  { id: 'month', label: 'This Month', count: summary.viewsThisMonth },
+                  { id: 'year', label: 'This Year', count: summary.viewsThisYear },
+                  { id: 'all', label: 'All-Time Total', count: summary.totalPageviews },
+                ] as { id: 'hour' | 'today' | 'month' | 'year' | 'all'; label: string; count: number }[]
+              ).map((tab) => (
                 <button
                   key={tab.id}
-                  onClick={() => setSelectedTimeRange(tab.id as any)}
+                  onClick={() => setSelectedTimeRange(tab.id)}
                   className={`px-3.5 py-1.5 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1.5 ${
                     selectedTimeRange === tab.id
                       ? 'bg-indigo-600 text-white shadow-md'

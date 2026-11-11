@@ -5,10 +5,11 @@ import { useCallback, useSyncExternalStore } from 'react';
 /**
  * Admin session store.
  *
- * The admin console is a purely client-side tool, so the session lives in
- * localStorage. Reading it through an external store (rather than copying it
- * into state inside an effect) keeps the render output stable and avoids
- * cascading re-renders.
+ * The admin console is a purely client-side tool, but the *login* is
+ * validated on the server by `POST /api/admin/login`, which returns a signed,
+ * time-limited session token. This module stores that token and exposes the
+ * session through an external store so React can read it without a
+ * setState-in-effect.
  */
 
 const SESSION_KEY = 'omnitool_admin_session';
@@ -26,26 +27,70 @@ function subscribe(listener: () => void): () => void {
   };
 }
 
+interface StoredSession {
+  authenticated: boolean;
+  email: string;
+  token: string;
+  expiresAt: number;
+}
+
 function getSnapshot(): boolean {
   if (typeof window === 'undefined') return false;
-  return Boolean(localStorage.getItem(SESSION_KEY));
+  try {
+    const raw = localStorage.getItem(SESSION_KEY);
+    if (!raw) return false;
+    const parsed = JSON.parse(raw) as Partial<StoredSession>;
+    if (!parsed.token || !parsed.expiresAt) return false;
+    // Expired sessions are treated as signed out and cleaned up.
+    if (Date.now() > parsed.expiresAt) {
+      localStorage.removeItem(SESSION_KEY);
+      return false;
+    }
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 function getServerSnapshot(): boolean {
   return false;
 }
 
-/** True when a local admin session exists in this browser. */
+/** True when a valid, unexpired admin session exists in this browser. */
 export function useAdminSession(): boolean {
   return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }
 
-/** Creates a local admin session. */
-export function createAdminSession(email: string): void {
+/**
+ * True only after the client has hydrated.
+ *
+ * The server snapshot of `useAdminSession()` is always `false`, so a
+ * redirect guard must wait for hydration before deciding the user is signed
+ * out — otherwise a hard navigation to a protected page would bounce a
+ * signed-in user to the login screen.
+ */
+export function useHydrated(): boolean {
+  return useSyncExternalStore(
+    noopSubscribe,
+    clientTrue,
+    clientFalse,
+  );
+}
+
+const noopSubscribe = () => () => {};
+const clientTrue = () => true;
+const clientFalse = () => false;
+
+/**
+ * Stores a session returned by the login endpoint.
+ * The token is issued and signed by the server; the browser never decides
+ * whether a login is valid.
+ */
+export function createAdminSession(email: string, token: string, expiresAt: number): void {
   if (typeof window === 'undefined') return;
   localStorage.setItem(
     SESSION_KEY,
-    JSON.stringify({ authenticated: true, email, loginTime: new Date().toISOString() }),
+    JSON.stringify({ authenticated: true, email, token, expiresAt }),
   );
   emit();
 }

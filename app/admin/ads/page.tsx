@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAdminSession } from '@/lib/admin-session';
+import { useAdminSession, useHydrated } from '@/lib/admin-session';
 import {
   ADSENSE_ADS_TXT_RECORDS,
   ADSENSE_PUBLISHER_ID,
@@ -41,20 +41,23 @@ const SLOT_TYPES: AdSlotType[] = ['header-leaderboard', 'sticky-sidebar', 'post-
 export default function AdminAdsPage() {
   const router = useRouter();
   const isAuthenticated = useAdminSession();
+  const hydrated = useHydrated();
   const [activeTab, setActiveTab] = useState<'status' | 'slots' | 'adstxt'>('status');
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    // Wait for hydration before deciding the user is signed out — the server
+    // snapshot of the session is always "signed out".
+    if (hydrated && !isAuthenticated) {
       router.push('/admin/login');
     }
-  }, [isAuthenticated, router]);
+  }, [hydrated, isAuthenticated, router]);
 
   const copy = async (text: string, label: string) => {
     await navigator.clipboard.writeText(text);
     toast.success(`${label} copied to clipboard.`);
   };
 
-  if (!isAuthenticated) {
+  if (!hydrated || !isAuthenticated) {
     return null;
   }
 

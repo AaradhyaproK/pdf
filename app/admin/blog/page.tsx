@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import type { BlogPost } from '@/lib/blog';
 import { saveBlogPostToFirestore, deleteBlogPostFromFirestore, getFirestorePosts } from '@/lib/blog-client';
+import { useAdminSession, useHydrated } from '@/lib/admin-session';
 import { toast } from 'sonner';
 import {
   BookOpen,
@@ -23,7 +24,8 @@ import Link from 'next/link';
 
 export default function AdminBlogPage() {
   const router = useRouter();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const isAuthenticated = useAdminSession();
+  const hydrated = useHydrated();
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [isEditing, setIsEditing] = useState(false);
   const [currentPost, setCurrentPost] = useState<Partial<BlogPost>>({
@@ -37,22 +39,31 @@ export default function AdminBlogPage() {
   });
   const [tagsInput, setTagsInput] = useState('');
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const session = localStorage.getItem('omnitool_admin_session');
-      if (!session) {
-        router.push('/admin/login');
-        return;
-      }
-      setIsAuthenticated(true);
-    }
-    loadPosts();
-  }, [router]);
-
   const loadPosts = async () => {
     const firestorePosts = await getFirestorePosts();
     setPosts(firestorePosts);
   };
+
+  useEffect(() => {
+    // Wait for hydration before deciding the user is signed out — the server
+    // snapshot of the session is always "signed out".
+    if (!hydrated) return;
+    if (!isAuthenticated) {
+      router.push('/admin/login');
+      return;
+    }
+
+    // Fetch inside the effect so the state update happens in the promise
+    // callback rather than synchronously in the effect body.
+    let cancelled = false;
+    getFirestorePosts().then((firestorePosts) => {
+      if (!cancelled) setPosts(firestorePosts);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [hydrated, isAuthenticated, router]);
 
   const handleEdit = (post: BlogPost) => {
     setCurrentPost(post);
@@ -115,7 +126,7 @@ export default function AdminBlogPage() {
     }
   };
 
-  if (!isAuthenticated) return null;
+  if (!hydrated || !isAuthenticated) return null;
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 pb-20">

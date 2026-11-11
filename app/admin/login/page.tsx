@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { Lock, Mail, ArrowRight, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
+import { createAdminSession } from '@/lib/admin-session';
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -21,22 +22,31 @@ export default function AdminLoginPage() {
 
     setIsLoading(true);
     try {
-      // Direct fast local authentication check (Zero external Firebase latency or client-side blockers)
-      if (email.trim().length > 3 && password.trim().length >= 4) {
-        if (typeof window !== 'undefined') {
-          localStorage.setItem(
-            'omnitool_admin_session',
-            JSON.stringify({ authenticated: true, email, loginTime: new Date().toISOString() })
-          );
-        }
+      // Credentials are validated on the server. The browser never decides
+      // whether a login is valid.
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
 
-        toast.success('Authenticated as Administrator!');
-        router.push('/admin');
-      } else {
-        toast.error('Invalid credentials. Password must be at least 4 characters.');
+      const data = (await res.json()) as {
+        success?: boolean;
+        error?: string;
+        token?: string;
+        expiresAt?: number;
+      };
+
+      if (!res.ok || !data.success || !data.token || !data.expiresAt) {
+        toast.error(data.error || 'Invalid credentials.');
+        return;
       }
+
+      createAdminSession(email.trim().toLowerCase(), data.token, data.expiresAt);
+      toast.success('Authenticated as Administrator!');
+      router.push('/admin');
     } catch {
-      toast.error('Authentication failed.');
+      toast.error('Authentication failed. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -57,12 +67,18 @@ export default function AdminLoginPage() {
         <div className="p-6 sm:p-8 bg-white border border-slate-200/80 rounded-3xl shadow-sm space-y-6">
           <form onSubmit={handleLogin} className="space-y-4">
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+              <label
+                htmlFor="admin-email"
+                className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5"
+              >
                 <Mail className="w-3.5 h-3.5 text-indigo-600" />
                 Admin Email
               </label>
               <input
+                id="admin-email"
+                name="email"
                 type="email"
+                autoComplete="username"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter administrator email..."
@@ -72,12 +88,18 @@ export default function AdminLoginPage() {
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+              <label
+                htmlFor="admin-password"
+                className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5"
+              >
                 <Lock className="w-3.5 h-3.5 text-indigo-600" />
                 Password
               </label>
               <input
+                id="admin-password"
+                name="password"
                 type="password"
+                autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••••••"
