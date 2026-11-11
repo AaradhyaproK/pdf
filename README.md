@@ -131,19 +131,12 @@ Slack, Discord, …). Without it the form returns a clear "delivery not configur
 the visitor to email `contact@filezenith.com` — it never claims a message was sent when it was
 not.
 
-### 5. Admin console
+### 5. No admin console
 
-The admin login at `/admin/login` is validated **on the server** by `POST /api/admin/login`.
-Set these server-side secrets (no `NEXT_PUBLIC_` prefix — they must never reach the browser):
-
-```bash
-ADMIN_EMAIL=admin@filezenith.com
-ADMIN_PASSWORD=<a long, unique passphrase>
-ADMIN_SESSION_SECRET=<optional, separate secret for signing session tokens>
-```
-
-If they are not configured, **every** login attempt is rejected. A successful login returns a
-signed, 8-hour session token; expired sessions are treated as signed out.
+The site ships **without an admin panel or any privileged route**. There is no login form, no
+session token, and no write API exposed to the public internet. Ad configuration, ad placement and
+`ads.txt` are controlled entirely through environment variables and the source code, so there is
+nothing for an attacker (or a reviewer) to find.
 
 ---
 
@@ -179,14 +172,11 @@ Cloudflare dashboard will have no effect on the client-side code.
 | `NEXT_PUBLIC_SITE_URL` | build time |
 | `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | build time |
 | `NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN` | build time |
-| `ADMIN_EMAIL` / `ADMIN_PASSWORD` / `ADMIN_SESSION_SECRET` | runtime (Worker secret) |
 | `CONTACT_WEBHOOK_URL` | runtime (Worker secret) |
 
 Server-side secrets are set with Wrangler so they never enter the bundle:
 
 ```bash
-npx wrangler secret put ADMIN_PASSWORD
-npx wrangler secret put ADMIN_SESSION_SECRET
 npx wrangler secret put CONTACT_WEBHOOK_URL
 ```
 

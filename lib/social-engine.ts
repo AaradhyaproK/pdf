@@ -1,5 +1,5 @@
 import { toast } from 'sonner';
-import { trackToolExecution } from './admin-store';
+import { trackToolExecution } from './usage-store';
 import { triggerBrowserDownload } from './download-helper';
 
 export interface MediaFormat {

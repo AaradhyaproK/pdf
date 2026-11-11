@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { AdSlot } from './AdSlot';
 import { RelatedToolsSection } from './RelatedToolsSection';
 import { SEOContent } from './SEOContent';
-import { trackVisitorHeartbeat } from '@/lib/admin-store';
+import { trackVisitorHeartbeat } from '@/lib/usage-store';
 import { NOINDEX_SLUGS } from '@/lib/seo-config';
 import {
   ShieldCheck,

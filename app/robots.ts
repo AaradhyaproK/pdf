@@ -14,12 +14,12 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: 'Googlebot',
         allow: '/',
-        disallow: ['/admin/', '/api/'],
+        disallow: '/api/',
       },
       {
         userAgent: ['GPTBot', 'ClaudeBot', 'PerplexityBot'],
         allow: ['/llms.txt', '/llms-full.txt', '/llm.txt'],
-        disallow: ['/admin/', '/api/'],
+        disallow: '/api/',
       },
       {
         userAgent: ['Bytespider', 'PetalBot', 'Amazonbot', 'CCBot'],
@@ -28,7 +28,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/admin/', '/api/'],
+        disallow: '/api/',
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,

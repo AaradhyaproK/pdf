@@ -76,7 +76,7 @@ export const ADSENSE_SLOT_MAX_WIDTH: Record<AdSlotType, number> = {
   'post-download': 336,
 };
 
-/** Human-readable slot names, used by the admin console. */
+/** Human-readable slot names, used in documentation and tooling. */
 export const ADSENSE_SLOT_LABELS: Record<AdSlotType, string> = {
   'header-leaderboard': 'Header Leaderboard (728x90 responsive)',
   'sticky-sidebar': 'Sticky Sidebar (300x600 responsive)',
