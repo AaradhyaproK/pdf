@@ -11,7 +11,8 @@
     "preview:cloudflare": "opennextjs-cloudflare preview",
     "deploy": "npm run build:cloudflare && wrangler deploy",
     "deploy:dry": "npm run build:cloudflare && wrangler deploy --dry-run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "revenue:model": "node scripts/revenue-model.mjs"
   },
   "dependencies": {
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
