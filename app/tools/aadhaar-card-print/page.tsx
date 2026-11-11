@@ -23,7 +23,7 @@ import {
 import { TOOL_DEEP_DIVES } from '@/lib/tool-deep-dives';
 
 export const metadata: Metadata = {
-  title: 'e-Aadhaar PDF Cropper & Wallet Card Resizer (85.6x54 mm) | FileZenith',
+  title: 'e-Aadhaar PDF Cropper & Wallet Card Resizer',
   description:
     'Crop and format your official e-Aadhaar PDF into standard pocket wallet card size (85.6x54 mm) on A4 sheet. 100% private in-browser document cropping with zero server upload.',
   keywords: [
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.filezenith.com/tools/aadhaar-card-print',
   },
   openGraph: {
-    title: 'e-Aadhaar PDF Cropper & Wallet Card Resizer (85.6x54 mm) | FileZenith',
+    title: 'e-Aadhaar PDF Cropper & Wallet Card Resizer',
     description:
       'Crop and format your official e-Aadhaar PDF into standard pocket wallet size on A4 sheet. 100% private in-browser document processing.',
     url: 'https://www.filezenith.com/tools/aadhaar-card-print',
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Aadhaar Card Print Tool Online (e-Aadhaar to A4 & PVC Card) | FileZenith',
+    title: 'Aadhaar Card Print Tool Online (e-Aadhaar to A4 & PVC)',
     description:
       'Crop and print e-Aadhaar PDF or scanned card on A4 paper and PVC card (exact 85.6x54 mm). 100% client-side privacy.',
     images: ['https://www.filezenith.com/api/og?title=Aadhaar%20Card%20Print%20Tool&category=ID%20Card%20Studio&desc=Crop%20and%20print%20e-Aadhaar%20PDF%20on%20A4%20and%20PVC%20card%20(85.6x54mm).%20100%25%20private%20in-browser.'],

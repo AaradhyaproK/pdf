@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { PRESET_REGISTRY } from '@/lib/presets-data';
+import { normalizeTitle, metadataTitle, stripBrandSuffix } from '@/lib/seo-title';
 import { ExamResizerStudio } from '@/components/tools/ExamResizerStudio';
 import { AdSlot } from '@/components/AdSlot';
 import {
@@ -64,17 +65,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const ogImageUrl = `${siteUrl}/api/og?title=${encodeURIComponent(preset.h1)}&category=${encodeURIComponent('Govt Exam Tools')}&desc=${encodeURIComponent(preset.shortDescription)}&badge=${encodeURIComponent(preset.targetSize + ' Compliant')}`;
 
-  const cleanTitle = preset.title.replace(/\s*\|\s*FileZenith$/i, '');
+  const cleanTitle = stripBrandSuffix(preset.title);
 
   return {
-    title: cleanTitle,
+    title: metadataTitle(cleanTitle),
     description: preset.metaDescription,
     keywords: preset.keywords,
     alternates: {
       canonical: url,
     },
     openGraph: {
-      title: `${cleanTitle} | FileZenith`,
+      title: normalizeTitle(cleanTitle),
       description: preset.metaDescription,
       url: url,
       siteName: 'FileZenith',

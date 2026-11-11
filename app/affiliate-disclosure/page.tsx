@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Affiliate Disclosure & Commercial Transparency — FileZenith',
+  title: 'Affiliate Disclosure & Commercial Transparency',
   description:
     'Read FileZenith’s affiliate disclosure. Learn how we maintain editorial independence, evaluate digital tools, and disclose commercial compensation.',
   keywords: [

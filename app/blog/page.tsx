@@ -9,7 +9,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.filezenith.com'
 const blogOgImage = `${siteUrl}/api/og?title=${encodeURIComponent('Guides, Tutorials & Practical File Tips')}&category=${encodeURIComponent('Knowledge Hub')}&desc=${encodeURIComponent('Step-by-step exam photo resizing, 20KB/50KB compression & PDF optimization guides')}&badge=${encodeURIComponent('43+ Free Tutorials')}`;
 
 export const metadata: Metadata = {
-  title: 'Guides, Tutorials & Practical File Tips: Compress, Convert & Resize | FileZenith',
+  title: 'Guides, Tutorials & Practical File Tips',
   description: 'Step-by-step practical guides on compressing images to 20KB & 50KB, reducing PDF under 100KB & 200KB, passport photo specifications 2026, RRB NTPC/SSC photo guidelines, and in-browser privacy tips.',
   keywords: [
     'filezenith blog',
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     canonical: `${siteUrl}/blog`,
   },
   openGraph: {
-    title: 'Guides, Tutorials & Practical File Tips: Compress, Convert & Resize | FileZenith',
+    title: 'Guides, Tutorials & Practical File Tips',
     description: 'Step-by-step practical guides on compressing images to 20KB & 50KB, reducing PDF under 100KB & 200KB, passport photo specifications 2026, and in-browser privacy tips.',
     url: `${siteUrl}/blog`,
     siteName: 'FileZenith',
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Guides, Tutorials & Practical File Tips: Compress, Convert & Resize | FileZenith',
+    title: 'Guides, Tutorials & Practical File Tips',
     description: 'Step-by-step practical guides on compressing images to 20KB & 50KB, reducing PDF under 100KB & 200KB, and passport photo specifications.',
     images: [blogOgImage],
   },

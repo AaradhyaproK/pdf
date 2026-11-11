@@ -29,7 +29,7 @@ import {
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'PAN Card Photo & Signature Resizer (213x213 & 300 DPI) — Free NSDL & UTI Tool | FileZenith',
+  title: 'PAN Card Photo Resizer — 213x213 px, 300 DPI',
   description:
     'Resize photo to exact 213x213 px and signature to 444x205 px at 300 DPI (<50KB) for NSDL Protean & UTIITSL PAN cards. Free paper shadow stripper, 300KB PDF compressor & instant dual package. 100% free, private in-browser, no login.',
   keywords: [
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.filezenith.com/tools/pan-card-photo-resizer',
   },
   openGraph: {
-    title: 'PAN Card Photo & Signature Resizer (213x213 & 300 DPI) — Free NSDL & UTI Tool | FileZenith',
+    title: 'PAN Card Photo Resizer — 213x213 px, 300 DPI',
     description:
       'Exact 213x213 px photo & 444x205 px signature with 300 DPI JFIF injection for NSDL Protean & UTIITSL PAN Card portals. 100% free, instant & private.',
     url: 'https://www.filezenith.com/tools/pan-card-photo-resizer',
@@ -83,7 +83,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'PAN Card Photo & Signature Resizer (213x213 & 300 DPI) — Free NSDL & UTI Tool | FileZenith',
+    title: 'PAN Card Photo Resizer — 213x213 px, 300 DPI',
     description:
       'Resize photo and signature for NSDL & UTIITSL PAN cards. Exact 213x213 and 444x205 pixels at 300 DPI under 50KB with real JFIF header injection.',
     images: ['https://www.filezenith.com/api/og?title=PAN%20Card%20Photo%20%26%20Signature%20Resizer&category=Govt%20ID%20Tools&desc=Exact%20213x213px%20photo%2C%20444x205px%20signature%20%40%20300%20DPI%2C%20under%2050KB.&badge=300%20DPI%20Guaranteed'],

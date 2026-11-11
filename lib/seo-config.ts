@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { TOOL_DEEP_DIVES } from './tool-deep-dives';
+import { normalizeTitle, stripBrandSuffix } from './seo-title';
 
 export interface ToolSEO {
   slug: string;
@@ -3109,11 +3110,9 @@ export function generateToolMetadata(slug: string): Metadata {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.filezenith.com';
   const canonicalUrl = `${siteUrl}${slug}`;
 
-  // Ensure clean single brand suffix and avoid duplicate "| FileZenith | FileZenith" from template inheritance
-  const rawTitle = tool.metaTitle || tool.title;
-  const cleanTitle = rawTitle.replace(/\s*\|\s*FileZenith.*$/i, '').trim();
-  const absoluteTitle = `${cleanTitle} | FileZenith`;
-
+  // Ensure a clean single brand suffix (never "… | FileZenith | FileZenith")
+  // and keep the rendered title within the ~65 characters Google displays.
+  const absoluteTitle = normalizeTitle(tool.metaTitle || tool.title);
     const categoryLabel =
       tool.category === 'pdf'
         ? 'PDF Studio'
@@ -3123,14 +3122,13 @@ export function generateToolMetadata(slug: string): Metadata {
         ? 'Social Media Tools'
         : 'Online Utilities';
 
-    const ogImageUrl = `${siteUrl}/api/og?title=${encodeURIComponent(cleanTitle)}&category=${encodeURIComponent(categoryLabel)}&desc=${encodeURIComponent(tool.description)}&badge=${encodeURIComponent('100% Client-Side Engine')}`;
+    const ogImageUrl = `${siteUrl}/api/og?title=${encodeURIComponent(stripBrandSuffix(tool.metaTitle || tool.title))}&category=${encodeURIComponent(categoryLabel)}&desc=${encodeURIComponent(tool.description)}&badge=${encodeURIComponent('100% Client-Side Engine')}`;
 
     return {
       title: {
         absolute: absoluteTitle,
       },
-      description: tool.description,
-      keywords: tool.keywords.join(', '),
+      description: tool.description,      keywords: tool.keywords.join(', '),
       alternates: {
         canonical: canonicalUrl
       },
@@ -3167,7 +3165,7 @@ export function generateToolMetadata(slug: string): Metadata {
             url: ogImageUrl,
             width: 1200,
             height: 630,
-            alt: cleanTitle
+            alt: stripBrandSuffix(tool.metaTitle || tool.title)
           }
         ]
       },

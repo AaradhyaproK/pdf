@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { normalizeTitle } from './seo-title';
 
 export interface CategoryToolItem {
   name: string;
@@ -1317,7 +1318,7 @@ export function getCategoryMetadata(slug: string): Metadata {
 
   return {
     title: {
-      absolute: category.metaTitle,
+      absolute: normalizeTitle(category.metaTitle),
     },
     description: category.metaDescription,
     keywords: category.keywords,
@@ -1325,7 +1326,7 @@ export function getCategoryMetadata(slug: string): Metadata {
       canonical: url,
     },
     openGraph: {
-      title: category.metaTitle,
+      title: normalizeTitle(category.metaTitle),
       description: category.metaDescription,
       url: url,
       siteName: 'FileZenith',

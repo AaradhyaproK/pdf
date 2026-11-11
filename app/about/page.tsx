@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'About FileZenith - Founder, Team, Mission & Security Standards',
+  title: 'About Us — Founder, Team & Mission',
   description:
     'Meet the team behind FileZenith. Built by Aaradhya Pathak at Snab in Nashik, India. Learn how our zero-server WebAssembly architecture protects your document privacy.',
   alternates: {

@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from 'next';
-import Script from 'next/script';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Navbar } from '@/components/Navbar';
@@ -135,9 +134,14 @@ export default function RootLayout({
 
         React 19 hoists raw `<script async src=...>` elements to the very top
         of <head>, which would place them ahead of this snippet. The Google tag
-        loaders therefore use `next/script` with `strategy="afterInteractive"`
-        (bottom of <body>), so the Next.js runtime injects them only after the
-        document has been parsed and this consent default has already run.
+        loaders are therefore injected with a small inline loader that runs
+        immediately after the consent default, so the order is guaranteed.
+
+        They are also deliberately NOT rendered via `next/script`: Next's Script
+        component adds a `data-nscript` attribute, and the Google AdSense
+        loader explicitly rejects it ("AdSense head tag doesn't support
+        data-nscript attribute"), which stops it from being recognised as the
+        site-wide AdSense tag.
       */}
       <head>
         {/* 1. Consent Mode v2 defaults — MUST be the first script to run. */}
@@ -154,7 +158,65 @@ export default function RootLayout({
         <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
-        {/* 3. Site-wide structured data. */}
+        {/*
+          3. Google AdSense loader. Present on every page so that AdSense Auto
+          Ads can place units anywhere, and so Google's certified CMP
+          (Funding Choices) can be served to EEA / UK / CH visitors.
+
+          It is injected via an inline loader rather than a plain
+          `<script async src>` so that React cannot hoist it above the consent
+          default above, and it is NOT rendered through `next/script` because
+          that adds the `data-nscript` attribute the AdSense loader rejects.
+        */}
+        <script
+          id="google-adsense-loader"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function () {
+                var s = document.createElement('script');
+                s.async = true;
+                s.crossOrigin = 'anonymous';
+                s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_PUBLISHER_ID}';
+                var n = document.getElementsByTagName('script')[0];
+                n.parentNode.insertBefore(s, n);
+              })();
+            `,
+          }}
+        />
+
+        {/* 4. Google Analytics 4 loader + config. */}
+        <script
+          id="ga4-loader"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function () {
+                var s = document.createElement('script');
+                s.async = true;
+                s.src = 'https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}';
+                var n = document.getElementsByTagName('script')[0];
+                n.parentNode.insertBefore(s, n);
+              })();
+            `,
+          }}
+        />
+        <script
+          id="google-analytics"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GA4_MEASUREMENT_ID}', {
+                anonymize_ip: true,
+                allow_google_signals: false,
+                ads_data_redaction: true,
+                send_page_view: true,
+              });
+            `,
+          }}
+        />
+
+        {/* 5. Site-wide structured data. */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -172,40 +234,6 @@ export default function RootLayout({
         <AppSplashScreen />
         <CookieConsent />
         <Toaster position="top-right" richColors />
-
-        {/*
-          4. Google AdSense loader. Present on every page so that AdSense Auto
-          Ads can place units anywhere, and so Google's certified CMP
-          (Funding Choices) can be served to EEA / UK / CH visitors.
-        */}
-        <Script
-          id="google-adsense"
-          async
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_PUBLISHER_ID}`}
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
-
-        {/* 5. Google Analytics 4 loader + config. */}
-        <Script
-          id="ga4-loader"
-          async
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`}
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${GA4_MEASUREMENT_ID}', {
-              anonymize_ip: true,
-              allow_google_signals: false,
-              ads_data_redaction: true,
-              send_page_view: true,
-            });
-          `}
-        </Script>
       </body>
     </html>
   );

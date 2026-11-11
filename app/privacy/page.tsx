@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy - FileZenith',
+  title: 'Privacy Policy',
   description:
     'Learn about FileZenith privacy practices, 100% client-side zero-server file processing, cookie policies, Google AdSense and Google Analytics disclosures, and how to control your data.',
   alternates: {

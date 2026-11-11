@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Editorial Policy & Research Standards — FileZenith',
+  title: 'Editorial Policy & Research Standards',
   description:
     'Discover FileZenith’s editorial policy: our research methodology, primary sourcing standards, calculation verification, and editorial independence.',
   keywords: [

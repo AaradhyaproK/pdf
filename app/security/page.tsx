@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: '100% Secure Serverless Document Processing - FileZenith',
+  title: '100% Secure Serverless Document Processing',
   description:
     'Learn how FileZenith processes your PDFs and images 100% serverless directly in your browser. Zero cloud uploads, absolute data privacy, and instant speed.',
   alternates: {

@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import remarkGfm from 'remark-gfm';
 import { getAllPosts, getPostBySlug } from '@/lib/blog';
+import { metadataTitle, normalizeTitle } from '@/lib/seo-title';
 import { AdSlot } from '@/components/AdSlot';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
 import { AuthorBio } from '@/components/blog/AuthorBio';
@@ -143,7 +144,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const imageUrl = `${siteUrl}${post.image || '/blog/pdf-compression.jpg'}`;
 
   return {
-    title: post.title,
+    title: metadataTitle(post.title),
     description: post.description,
     keywords: post.tags.join(', '),
     authors: [{ name: 'Aaradhya Pathak', url: `${siteUrl}/about` }],
@@ -164,7 +165,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       },
     },
     openGraph: {
-      title: post.title,
+      title: normalizeTitle(post.title),
       description: post.description,
       type: 'article',
       url: postUrl,

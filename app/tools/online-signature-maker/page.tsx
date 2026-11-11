@@ -32,7 +32,7 @@ import {
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Online Signature Maker — Draw or Type Digital Signature [Free Transparent PNG, No Watermark] | FileZenith',
+  title: 'Online Signature Maker — Free Transparent PNG',
   description:
     'Create, draw, or type digital signatures online for free. Download transparent PNG for Word/PDFs, vector SVG, or 10-20KB govt exam JPEG. Smooth pen flow, 8+ cursive handwriting fonts, paper shadow stripper, zero watermarks, 100% private in-browser.',
   keywords: [
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.filezenith.com/tools/online-signature-maker',
   },
   openGraph: {
-    title: 'Online Signature Maker — Draw or Type Digital Signature [Free Transparent PNG, No Watermark] | FileZenith',
+    title: 'Online Signature Maker — Free Transparent PNG',
     description:
       'Create and draw authentic digital signatures online. Download transparent PNG for Word/PDF or 10-20KB JPEG for government portals. 100% private in-browser, zero watermark, zero signup.',
     url: 'https://www.filezenith.com/tools/online-signature-maker',
@@ -87,7 +87,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Online Signature Maker — Draw or Type Digital Signature [Free Transparent PNG, No Watermark] | FileZenith',
+    title: 'Online Signature Maker — Free Transparent PNG',
     description:
       'Draw smooth signatures or type cursive signatures online. 100% free, transparent PNG, SVG & Govt JPEG formats.',
     images: ['https://www.filezenith.com/api/og?title=Online%20Signature%20Maker&category=Digital%20ID%20Tools&desc=Draw%20or%20type%20authentic%20handwritten%20signatures.%20Export%20transparent%20PNG%2C%20SVG%2C%20or%20govt%2010-20KB%20JPEG.&badge=100%25%20Free%20%26%20Private'],

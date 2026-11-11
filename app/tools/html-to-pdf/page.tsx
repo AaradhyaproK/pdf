@@ -30,7 +30,7 @@ import {
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'HTML & URL to PDF Converter — Convert Webpage Link, Code & File [Free, No Watermark] | FileZenith',
+  title: 'HTML & URL to PDF Converter — Free, No Watermark',
   description:
     'Convert any webpage URL link, raw HTML code, or .html file into crisp A4/Letter vector PDF documents. 1-click web link fetcher, live split-screen paper preview, custom margins, CSS backgrounds, and starter templates. 100% free, private in-browser, no watermarks.',
   keywords: [
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.filezenith.com/tools/html-to-pdf',
   },
   openGraph: {
-    title: 'HTML & URL to PDF Converter — Convert Webpage Link, Code & File [Free, No Watermark] | FileZenith',
+    title: 'HTML & URL to PDF Converter — Free, No Watermark',
     description:
       'Convert live website URLs, raw HTML code, or local .html files into professional vector PDFs directly in your browser. Complete styling control, zero server uploads, 100% free.',
     url: 'https://www.filezenith.com/tools/html-to-pdf',
@@ -86,7 +86,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'HTML & URL to PDF Converter — Free & 100% Private | FileZenith',
+    title: 'HTML & URL to PDF Converter — Free & 100% Private',
     description:
       'Convert website links, HTML code, and files into crisp vector PDFs directly in your browser. 100% private, zero server uploads.',
     images: ['https://www.filezenith.com/api/og?title=HTML%20%26%20URL%20to%20PDF%20Converter&category=Developer%20%26%20Office%20Tools&desc=Convert%20webpage%20URLs%2C%20HTML%20code%20and%20files%20into%20crisp%20vector%20PDFs.&badge=100%25%20Free%20%26%20Private'],

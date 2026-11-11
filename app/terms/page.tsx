@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { FileText, ShieldAlert, CheckCircle, Scale } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service - FileZenith',
+  title: 'Terms of Service',
   description: 'Review the Terms of Service and usage conditions for FileZenith online PDF and image processing tools.',
   alternates: {
     canonical: 'https://www.filezenith.com/terms',
