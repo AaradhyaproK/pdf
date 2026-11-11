@@ -147,6 +147,54 @@ signed, 8-hour session token; expired sessions are treated as signed out.
 
 ---
 
+## 🚀 Deployment (Cloudflare Workers)
+
+The site runs on Cloudflare Workers via `@opennextjs/cloudflare`.
+
+```bash
+# 1. Install dependencies
+npm install
+
+# 2. Set the environment variables (see .env.example)
+cp .env.example .env.local
+
+# 3. Build + preview locally
+npm run build:cloudflare
+npm run preview:cloudflare
+
+# 4. Deploy
+npm run deploy
+```
+
+### Important: build-time vs runtime variables
+
+`NEXT_PUBLIC_*` variables are **inlined into the client bundle at build time**.
+Changing one requires a **rebuild and redeploy** — setting it only in the
+Cloudflare dashboard will have no effect on the client-side code.
+
+| Variable | When it takes effect |
+| --- | --- |
+| `NEXT_PUBLIC_ADSENSE_PUBLISHER_ID` | build time |
+| `NEXT_PUBLIC_ADSENSE_SLOT_*` | build time |
+| `NEXT_PUBLIC_SITE_URL` | build time |
+| `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | build time |
+| `NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN` | build time |
+| `ADMIN_EMAIL` / `ADMIN_PASSWORD` / `ADMIN_SESSION_SECRET` | runtime (Worker secret) |
+| `CONTACT_WEBHOOK_URL` | runtime (Worker secret) |
+
+Server-side secrets are set with Wrangler so they never enter the bundle:
+
+```bash
+npx wrangler secret put ADMIN_PASSWORD
+npx wrangler secret put ADMIN_SESSION_SECRET
+npx wrangler secret put CONTACT_WEBHOOK_URL
+```
+
+For build-time variables, put them in `.env.local` (or your CI's secret store)
+**before** running `npm run build:cloudflare`.
+
+---
+
 ## 👨‍💻 Founder & Creator
 
 * **Architect & Developer:** [Aaradhya Pathak](https://github.com/AaradhyaproK)

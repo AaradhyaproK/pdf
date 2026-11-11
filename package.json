@@ -6,7 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "build:cloudflare": "next build && opennextjs-cloudflare build",
+    "preview:cloudflare": "opennextjs-cloudflare preview",
+    "deploy": "npm run build:cloudflare && wrangler deploy",
+    "deploy:dry": "npm run build:cloudflare && wrangler deploy --dry-run",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
