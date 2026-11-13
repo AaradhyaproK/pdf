@@ -91,6 +91,8 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
     relatedTools: [
       { name: 'Online Signature Maker (Draw & Type)', slug: '/tools/online-signature-maker', desc: 'Draw signature with mouse/finger or type in cursive.' },
       { name: 'Clean B&W Signature', slug: '/tools/online-signature-maker#clean', desc: 'Remove gray paper background noise.' },
+      { name: 'Army Agniveer 2026 Guidelines', slug: '/blog/indian-army-agniveer-result-photo-guidelines-2026', desc: 'Agniveer photo, signature & CEE result.' },
+      { name: 'RRB NTPC & Group D 2026 Guide', slug: '/blog/rrb-group-d-exam-date-2026-ntpc-apply-result-guide', desc: 'Railway signature & photo rules.' },
       { name: 'SSC Photo Resizer', slug: '/tools/ssc-photo-resizer', desc: 'SSC photo with name & date stamp.' },
       { name: 'Compress Image to 20KB', slug: '/image/compress#20kb', desc: 'Generic 20KB file size compressor.' },
       { name: 'GATE Signature Resizer', slug: '/tools/online-signature-maker#gate', desc: 'GATE 560x160 px signature format.' }
@@ -248,6 +250,7 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
       { question: 'Can I upload photo with spectacles in UPSC OTR?', answer: 'UPSC advises against spectacles or tinted glasses to prevent flash reflection over the eyes. If you wear prescription spectacles regularly, ensure eyes are clearly visible without glare.' }
     ],
     relatedTools: [
+      { name: 'UPSC Prelims 2026 Guide', slug: '/blog/upsc-prelims-2026-exam-date-otr-registration-result-guide', desc: 'Exam date, OTR portal & result guide.' },
       { name: 'Signature Resizer (10-20KB)', slug: '/tools/online-signature-maker#resize', desc: 'Resize signature file.' },
       { name: 'Photo & Signature Joiner', slug: '/tools/photo-signature-joiner', desc: 'Combine photo & signature.' },
       { name: 'Compress Image to 100KB', slug: '/image/compress#100kb', desc: 'Target 100KB compressor.' },
@@ -373,6 +376,7 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
       { question: 'Can I use photo with cap or dark glasses?', answer: 'No, Railway board strictly rejects photographs with caps, goggles, or heavy shadows.' }
     ],
     relatedTools: [
+      { name: 'RRB NTPC & Group D 2026 Guide', slug: '/blog/rrb-group-d-exam-date-2026-ntpc-apply-result-guide', desc: 'Exam schedule, apply portal & results.' },
       { name: 'Signature Resizer (10-20KB)', slug: '/tools/online-signature-maker#resize', desc: 'Format RRB signature.' },
       { name: 'Compress Image to 50KB', slug: '/image/compress#50kb', desc: 'Shrink photo under 50KB.' }
     ],
@@ -902,6 +906,7 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
       { question: 'Is my photo uploaded to any server?', answer: 'No! All processing runs 100% locally inside your web browser. Your photo is completely private.' }
     ],
     relatedTools: [
+      { name: 'RRB Group D & NTPC 2026 Guide', slug: '/blog/rrb-group-d-exam-date-2026-ntpc-apply-result-guide', desc: 'Exam calendar, apply portal & results.' },
       { name: 'Signature Resizer (10-20KB)', slug: '/tools/online-signature-maker#resize', desc: 'Format RRB signature scan.' },
       { name: 'Compress Image to 50KB', slug: '/image/compress#50kb', desc: 'Compress image under 50KB.' },
       { name: 'Aadhaar Card Print Tool', slug: '/tools/aadhaar-card-print', desc: 'Aadhaar print for exam day.' }
@@ -1309,6 +1314,7 @@ export const PRESET_REGISTRY: Record<string, PresetConfig> = {
       { question: 'How old can the UPSC photograph be?', answer: 'The photograph must not be more than 10 days old from the commencement of the online application process.' }
     ],
     relatedTools: [
+      { name: 'UPSC Prelims 2026 Guide', slug: '/blog/upsc-prelims-2026-exam-date-otr-registration-result-guide', desc: 'Exam calendar, OTR rules & result updates.' },
       { name: 'SSC CGL Photo Resizer', slug: '/tools/ssc-photo-resizer#cgl', desc: 'SSC 3.5x4.5cm photo.' },
       { name: 'Signature Resizer (10-20KB)', slug: '/tools/online-signature-maker#resize', desc: 'Signature tool.' },
       { name: 'Aadhaar Card Print Tool', slug: '/tools/aadhaar-card-print', desc: 'Print Aadhaar card.' }

@@ -87,7 +87,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
     slug: '/pdf/compress#200kb',
     title: 'Compress PDF to 200KB Free Online — Form & Job Application Reducer',
     metaTitle: 'Compress PDF to 200KB Free Online — Exact Size for Forms',
-    description: 'Compress PDF under 200KB online free for SSC, UPSC, and government job portals. Keep text crisp with 100% private in-browser compression. Zero upload.',
+    description: 'Compress PDF under 200KB online free for SSC, UPSC, Maharashtra 7/12 land records, and government job portals. Keep text crisp with 100% private in-browser compression. Zero upload.',
     keywords: [
       'compress pdf to 200kb',
       'reduce pdf size to 200kb online free',
@@ -106,7 +106,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { question: 'How can I compress a PDF file under 200KB for free?', answer: 'Simply open FileZenith’s Compress PDF to 200KB tool, drag and drop your PDF document, select the 200KB target preset, and click download. Your file is resized instantly in your browser without any cost.' },
       { question: 'Will my signature and document text remain clear at 200KB?', answer: 'Yes. Our intelligent compression engine targets redundant metadata and heavy image layers while preserving the sharpness of text, official stamps, and handwritten signatures.' },
       { question: 'Is it safe to compress confidential passport and tax PDFs on this site?', answer: 'Yes, 100%. FileZenith uses 100% client-side technology. Your file is never sent across the internet to any server, making it the safest tool available for sensitive documents.' },
-      { question: 'Why do government job and university portals enforce a 200KB PDF limit?', answer: 'Many official portals enforce strict 200KB limits to manage server storage and ensure fast processing of thousands of applicant forms.' },
+      { question: 'Why do government job, land registry, and university portals enforce a 200KB PDF limit?', answer: 'Official portals like MahaDBT, Mahabhulekh (Digital 7/12 Satbara), SSC, and UPSC enforce strict 200KB limits to manage server storage and ensure fast processing of thousands of citizen forms.' },
       { question: 'Does this 200KB PDF compressor work on mobile phones?', answer: 'Yes. FileZenith works smoothly on all Android smartphones, iPhones, iPads, Windows laptops, and MacBooks without installing any app.' }
     ]
   },

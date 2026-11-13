@@ -467,6 +467,7 @@ export const GUIDE_REGISTRY: Record<string, GuideConfig> = {
       { name: 'RRB Railway Photo Resizer', slug: '/tools/rrb-railway-photo-resizer', desc: 'Format RRB photo.' }
     ],
     relatedGuides: [
+      { name: 'RRB Group D & NTPC 2026 Guide', slug: '/blog/rrb-group-d-exam-date-2026-ntpc-apply-result-guide', desc: 'Exam calendar, apply portal & results.' },
       { name: 'How to Compress Image to 50KB', slug: '/blog/how-to-compress-image-to-50kb', desc: '50KB guide.' }
     ]
   }
