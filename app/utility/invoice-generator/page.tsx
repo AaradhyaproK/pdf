@@ -18,6 +18,7 @@ import {
   Sparkles,
   ShieldCheck,
   Home,
+  ExternalLink,
 } from 'lucide-react';
 import { FileReadyModal } from '@/components/FileReadyModal';
 import { renderPDFPagesToImages } from '@/lib/pdf-engine';
@@ -30,7 +31,7 @@ interface InvoiceItem {
 }
 
 export default function InvoiceGeneratorPage() {
-  const [docType, setDocType] = useState<'invoice' | 'rent-receipt'>('invoice');
+  const [docType, setDocType] = useState<'invoice' | 'proforma' | 'rent-receipt'>('invoice');
 
   // Currency
   const [currency, setCurrency] = useState('$');
@@ -102,21 +103,23 @@ export default function InvoiceGeneratorPage() {
 
       const { width, height } = page.getSize();
 
-      if (docType === 'invoice') {
-        // --- DRAW INVOICE ---
+      if (docType === 'invoice' || docType === 'proforma') {
+        const isProforma = docType === 'proforma';
+
+        // --- DRAW INVOICE OR PROFORMA ---
         // Header Banner
         page.drawRectangle({
           x: 40,
           y: height - 100,
           width: width - 80,
           height: 60,
-          color: rgb(0.06, 0.09, 0.16), // Dark slate
+          color: isProforma ? rgb(0.08, 0.14, 0.22) : rgb(0.06, 0.09, 0.16),
         });
 
-        page.drawText('INVOICE', {
+        page.drawText(isProforma ? 'PROFORMA INVOICE' : 'TAX INVOICE', {
           x: 60,
           y: height - 68,
-          size: 24,
+          size: 22,
           font: fontBold,
           color: rgb(1, 1, 1),
         });
@@ -126,7 +129,7 @@ export default function InvoiceGeneratorPage() {
           y: height - 64,
           size: 14,
           font: fontBold,
-          color: rgb(0.38, 0.44, 0.99), // Indigo
+          color: isProforma ? rgb(0.2, 0.75, 0.55) : rgb(0.38, 0.44, 0.99),
         });
 
         // From / To Info
@@ -236,9 +239,15 @@ export default function InvoiceGeneratorPage() {
           y: y - 6,
           width: width - 400,
           height: 28,
-          color: rgb(0.31, 0.27, 0.9), // Indigo
+          color: isProforma ? rgb(0.12, 0.35, 0.28) : rgb(0.31, 0.27, 0.9),
         });
-        page.drawText(`TOTAL DUE:`, { x: 375, y: y + 2, size: 11, font: fontBold, color: rgb(1, 1, 1) });
+        page.drawText(isProforma ? `ESTIMATED TOTAL:` : `TOTAL DUE:`, {
+          x: 370,
+          y: y + 2,
+          size: isProforma ? 9.5 : 11,
+          font: fontBold,
+          color: rgb(1, 1, 1),
+        });
         page.drawText(`${currency}${totalAmount.toLocaleString()}`, {
           x: 470,
           y: y + 2,
@@ -248,13 +257,18 @@ export default function InvoiceGeneratorPage() {
         });
 
         // Footer
-        page.drawText('Thank you for your business! Generated with FileZenith (Zero Cloud Uploads).', {
-          x: 50,
-          y: 40,
-          size: 8,
-          font: fontRegular,
-          color: rgb(0.5, 0.5, 0.5),
-        });
+        page.drawText(
+          isProforma
+            ? 'Note: This Proforma Invoice is an advance quotation/estimate, not a formal tax demand. Generated with FileZenith.'
+            : 'Thank you for your business! Generated with FileZenith (Zero Cloud Uploads).',
+          {
+            x: 50,
+            y: 40,
+            size: 8,
+            font: fontRegular,
+            color: rgb(0.5, 0.5, 0.5),
+          }
+        );
       } else {
         // --- DRAW HRA RENT RECEIPT ---
         page.drawRectangle({
@@ -379,7 +393,9 @@ export default function InvoiceGeneratorPage() {
       const blob = new Blob([pdfBytes as Uint8Array<ArrayBuffer>], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
       const filename =
-        docType === 'invoice'
+        docType === 'proforma'
+          ? `${invoiceNumber}_Proforma_Invoice.pdf`
+          : docType === 'invoice'
           ? `${invoiceNumber}_Invoice.pdf`
           : `Rent_Receipt_${rentMonth.replace(/\s+/g, '_')}.pdf`;
 
@@ -411,9 +427,9 @@ export default function InvoiceGeneratorPage() {
   return (
     <ToolLayout
       slug="/utility/invoice-generator"
-      title="Free Invoice & Rent Receipt Generator (No Sign-Up, Instant PDF)"
-      subtitle="Create professional client invoices and HRA rent receipts for tax deductions. 100% free with instant clean vector PDF download—no account or login required."
-      badgeText="Zero Sign-Up Invoice Maker"
+      title="Free Proforma Invoice & Tax Invoice Generator (No Sign-Up PDF)"
+      subtitle="Create professional proforma invoices, freelance tax invoices, and HRA rent receipts for free. 100% free with instant clean vector PDF download—no account or login required."
+      badgeText="Zero Sign-Up Proforma & Invoice Maker"
     >
       <div className="space-y-6 text-slate-800">
         {/* Banner */}
@@ -430,34 +446,69 @@ export default function InvoiceGeneratorPage() {
         </div>
 
         {/* Mode Selector */}
-        <div className="bg-white p-4 rounded-3xl border border-slate-200 shadow-sm flex items-center gap-3">
+        <div className="bg-white p-3 sm:p-4 rounded-3xl border border-slate-200 shadow-sm grid grid-cols-1 sm:grid-cols-3 gap-2.5">
           <button
-            onClick={() => setDocType('invoice')}
-            className={`flex-1 py-3 px-4 rounded-2xl border text-xs font-black transition-all cursor-pointer flex items-center justify-center gap-2 ${
+            onClick={() => {
+              setDocType('invoice');
+              if (invoiceNumber.startsWith('PI-')) {
+                setInvoiceNumber(`INV-${new Date().getFullYear()}-001`);
+              }
+            }}
+            className={`py-3 px-4 rounded-2xl border text-xs font-black transition-all cursor-pointer flex items-center justify-center gap-2 ${
               docType === 'invoice'
-                ? 'border-indigo-600 bg-indigo-50/80 text-indigo-900 shadow-xs'
+                ? 'border-indigo-600 bg-indigo-50/80 text-indigo-900 shadow-xs ring-1 ring-indigo-500/20'
                 : 'border-slate-200 hover:border-slate-300 text-slate-600'
             }`}
           >
             <FileText className="w-4 h-4" />
-            <span>Freelance &amp; Business Invoice</span>
+            <span>Tax / Business Invoice</span>
+          </button>
+
+          <button
+            onClick={() => {
+              setDocType('proforma');
+              if (invoiceNumber.startsWith('INV-')) {
+                setInvoiceNumber(`PI-${new Date().getFullYear()}-001`);
+              }
+            }}
+            className={`py-3 px-4 rounded-2xl border text-xs font-black transition-all cursor-pointer flex items-center justify-center gap-2 ${
+              docType === 'proforma'
+                ? 'border-emerald-600 bg-emerald-50/80 text-emerald-900 shadow-xs ring-1 ring-emerald-500/20'
+                : 'border-slate-200 hover:border-slate-300 text-slate-600'
+            }`}
+          >
+            <Receipt className="w-4 h-4" />
+            <span>Proforma Invoice (Quotation)</span>
           </button>
 
           <button
             onClick={() => setDocType('rent-receipt')}
-            className={`flex-1 py-3 px-4 rounded-2xl border text-xs font-black transition-all cursor-pointer flex items-center justify-center gap-2 ${
+            className={`py-3 px-4 rounded-2xl border text-xs font-black transition-all cursor-pointer flex items-center justify-center gap-2 ${
               docType === 'rent-receipt'
-                ? 'border-indigo-600 bg-indigo-50/80 text-indigo-900 shadow-xs'
+                ? 'border-indigo-600 bg-indigo-50/80 text-indigo-900 shadow-xs ring-1 ring-indigo-500/20'
                 : 'border-slate-200 hover:border-slate-300 text-slate-600'
             }`}
           >
             <Home className="w-4 h-4" />
-            <span>HRA Rent Receipt (Tax Exemption)</span>
+            <span>HRA Rent Receipt (Tax)</span>
           </button>
         </div>
 
+        {/* Proforma Meaning & Guidance Banner */}
+        {docType === 'proforma' && (
+          <div className="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200/80 flex items-start gap-3">
+            <Sparkles className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+            <div className="text-xs text-emerald-950 space-y-1">
+              <p className="font-bold">What is a Proforma Invoice? (Meaning &amp; Usage)</p>
+              <p className="text-emerald-800 leading-relaxed">
+                A proforma invoice is a preliminary quotation or estimated bill sent to a buyer prior to shipment or work delivery. It details line items, estimated pricing, and terms so your customer can approve purchase orders, release advance milestone payments, or clear import customs. It is <strong>not a legally binding tax demand</strong>; once confirmed, issue a final <strong>Tax Invoice</strong>.
+              </p>
+            </div>
+          </div>
+        )}
+
         {/* Form Workspace */}
-        {docType === 'invoice' ? (
+        {docType === 'invoice' || docType === 'proforma' ? (
           <div className="space-y-5">
             {/* Header / Parties */}
             <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-5 text-xs">
@@ -748,8 +799,60 @@ export default function InvoiceGeneratorPage() {
             <Download className="w-4 h-4" />
             {isGenerating
               ? 'Rendering Vector PDF...'
-              : `Download Professional ${docType === 'invoice' ? 'Invoice' : 'Rent Receipt'} PDF`}
+              : `Download Professional ${
+                  docType === 'proforma'
+                    ? 'Proforma Invoice'
+                    : docType === 'invoice'
+                    ? 'Tax Invoice'
+                    : 'Rent Receipt'
+                } PDF`}
           </button>
+        </div>
+
+        {/* E-Invoice & Compliance Hub */}
+        <div className="bg-slate-50 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-200 pb-4">
+            <div>
+              <h3 className="text-sm font-black text-slate-900">
+                GST E-Invoice Rules &amp; Official Portal Access (einvoice1.gst.gov.in)
+              </h3>
+              <p className="text-xs text-slate-600 mt-0.5">
+                Understand invoice meanings and statutory requirements for B2B e-invoicing and E-Way bills.
+              </p>
+            </div>
+            <a
+              href="https://einvoice1.gst.gov.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shrink-0 transition"
+            >
+              <span>E-Invoice Portal Login</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div className="p-3.5 rounded-2xl bg-white border border-slate-200 space-y-1">
+              <p className="font-black text-slate-900">1. Invoice Meaning</p>
+              <p className="text-slate-600 text-[11px] leading-relaxed">
+                A commercial document detailing products, quantities, and agreed prices. Tax invoices are legal demands for payment; proforma invoices are advance estimates.
+              </p>
+            </div>
+
+            <div className="p-3.5 rounded-2xl bg-white border border-slate-200 space-y-1">
+              <p className="font-black text-slate-900">2. E-Invoice Portal (IRP)</p>
+              <p className="text-slate-600 text-[11px] leading-relaxed">
+                Under GST, businesses exceeding ₹5 Cr turnover must report B2B invoices to the Invoice Registration Portal (einvoice1.gst.gov.in) to generate a unique 64-character IRN and QR code.
+              </p>
+            </div>
+
+            <div className="p-3.5 rounded-2xl bg-white border border-slate-200 space-y-1">
+              <p className="font-black text-slate-900">3. E-Way Bill Auto-Generation</p>
+              <p className="text-slate-600 text-[11px] leading-relaxed">
+                When you register an e-invoice with transport details (vehicle number), Part A and Part B of the E-Way bill are generated simultaneously.
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Celebratory Completion Modal with Preview & Confetti */}
@@ -760,7 +863,13 @@ export default function InvoiceGeneratorPage() {
           fileName={downloadFileName || 'Invoice.pdf'}
           previewUrl={invoicePreviewUrl}
           fileType="pdf"
-          title={`Your ${docType === 'invoice' ? 'Invoice' : 'Rent Receipt'} is Ready`}
+          title={`Your ${
+            docType === 'proforma'
+              ? 'Proforma Invoice'
+              : docType === 'invoice'
+              ? 'Tax Invoice'
+              : 'Rent Receipt'
+          } is Ready`}
           subtitle="Rendered in clean vector PDF format with zero watermarks and zero cloud uploads."
         />
       </div>

@@ -2883,29 +2883,38 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
   '/utility/invoice-generator': {
     slug: '/utility/invoice-generator',
-    title: 'Free Invoice & Rent Receipt Generator (No Sign-Up, Instant PDF)',
-    metaTitle: 'Free Invoice & Rent Receipt Generator Online (Instant PDF No Login)',
-    description: 'Create professional client invoices and HRA rent receipts for tax deductions. 100% free with instant clean vector PDF download—no account or login required.',
+    title: 'Free Proforma Invoice & Tax Invoice Generator (No Sign-Up PDF)',
+    metaTitle: 'Free Proforma Invoice & Tax Invoice Maker (Instant PDF No Login) | FileZenith',
+    description: 'Generate proforma invoices, freelance tax invoices, and HRA rent receipts free online. Learn invoice meanings, verify e-invoice portal guidelines, and download vector PDFs with zero sign-up.',
     keywords: [
-      'free invoice generator no sign up',
+      'proforma invoice',
+      'e invoice',
+      'e invoice login',
+      'e invoice portal',
+      'invoice meaning',
+      'proforma invoice generator',
+      'free proforma invoice template pdf',
+      'proforma invoice vs tax invoice',
+      'e invoice format pdf',
+      'free invoice maker no login',
       'rent receipt generator for hra online',
-      'freelance invoice maker free pdf',
-      'hra rent receipt with landlord pan',
-      'instant invoice generator without watermark',
-      'simple invoice maker for small business'
+      'hra rent receipt with landlord pan'
     ],
     category: 'utility',
     howToSteps: [
-      { title: 'Choose Document Type', text: 'Select Freelance / Business Invoice or HRA Rent Receipt for tax deduction.' },
+      { title: 'Choose Document Type', text: 'Select Proforma Invoice (Quotation), Tax / Business Invoice, or HRA Rent Receipt.' },
       { title: 'Enter Client & Item Details', text: 'Fill in business details, line items, rates, taxes, or landlord PAN and rental address.' },
       { title: 'Instant Vector PDF Download', text: 'Click Download PDF to export a crisp, printable document with zero watermarks.' }
     ],
     faqs: [
-      { question: 'Is this invoice generator completely free without watermarks or login?', answer: 'Yes! You can create and download unlimited professional invoices and rent receipts with zero sign-up, zero credit card, and zero watermarks.' },
+      { question: 'What is the meaning of a proforma invoice vs a tax invoice?', answer: 'A proforma invoice is a preliminary estimated bill or quotation sent to a buyer before goods or services are delivered, commonly used for quotations and customs valuation. A tax invoice is the official commercial demand for payment issued after sale confirmation.' },
+      { question: 'What is an e-invoice and how do businesses access the e-invoice portal login?', answer: 'Under GST law, an e-invoice (electronic invoice) is a standard B2B invoice registered on the government Invoice Registration Portal (einvoice1.gst.gov.in). Once authenticated via e-invoice login, the portal returns a unique 64-character Invoice Reference Number (IRN) and QR code.' },
+      { question: 'Is this proforma and tax invoice generator completely free without watermarks or login?', answer: 'Yes! You can create and download unlimited professional proforma invoices, client invoices, and rent receipts with zero sign-up, zero credit card, and zero watermarks.' },
       { question: 'Is the rent receipt valid for Income Tax HRA exemption filing?', answer: 'Yes. The generated rent receipt complies with Section 10(13A) of the Income Tax Act, including landlord details, property address, and landlord PAN fields required for annual rent exceeding ₹1,00,000.' },
       { question: 'Are my financial numbers and client information kept private?', answer: 'Yes. The invoice PDF is compiled directly inside your browser memory using client-side vector engines. Your financial data is never transmitted to or stored on any server.' }
     ],
     comparisonTable: [
+      { feature: 'Proforma & Tax Invoices', omnitool: 'Both Proforma Quotation & Tax Invoice Modes', standardCloud: 'Only basic invoice with paid upgrades' },
       { feature: 'Account / Sign-Up', omnitool: 'Zero Sign-Up (Instant Generation)', standardCloud: 'Forces account creation and email capture' },
       { feature: 'Watermarks', omnitool: '100% Clean Vector PDF (No Watermarks)', standardCloud: 'Adds branding or requires paid subscription' },
       { feature: 'HRA Rent Receipt Mode', omnitool: 'Built-in Section 10(13A) IT Act Format', standardCloud: 'Only basic invoice templates' }
