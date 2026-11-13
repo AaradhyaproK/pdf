@@ -78,7 +78,7 @@ const DEFAULT_POST_IMAGES: Record<string, string> = {
 // Helper function to extract FAQs for Google FAQPage Schema
 export function extractFaqsFromContent(content: string): BlogFaq[] {
   const faqs: BlogFaq[] = [];
-  const parts = content.split(/## (?:Frequently Asked Questions|FAQ)/i);
+  const parts = content.split(/## [^a-zA-Z\n]*(?:Frequently Asked Questions|FAQ)/i);
   if (parts.length < 2) return faqs;
 
   // Only take content up to the next ## heading or horizontal rule divider
