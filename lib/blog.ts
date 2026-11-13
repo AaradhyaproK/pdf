@@ -64,6 +64,11 @@ const DEFAULT_POST_IMAGES: Record<string, string> = {
   'ctet-photo-and-signature-size-guidelines-2026': '/blog/exam-guide.webp',
   'how-to-create-printable-habit-tracker-planner-pdf': '/blog/pdf-compression.webp',
   'how-to-convert-pdf-to-excel-spreadsheet-free': '/blog/pdf-to-excel-guide.jpg',
+  'upsc-prelims-2026-exam-date-otr-registration-result-guide': '/blog/upsc-prelims-2026-guide.jpg',
+  'rrb-group-d-exam-date-2026-ntpc-apply-result-guide': '/blog/rrb-ntpc-group-d-guide.jpg',
+  'rrb-ntpc-photo-signature-guidelines-2026': '/blog/rrb-ntpc-group-d-guide.jpg',
+  'ssc-cgl-photo-signature-upload-rules-2026': '/blog/exam-guide.jpg',
+  'how-to-split-pdf-pages-online-free-privately': '/blog/pdf-merge.jpg',
 };
 
 // Helper function to extract FAQs for Google FAQPage Schema
