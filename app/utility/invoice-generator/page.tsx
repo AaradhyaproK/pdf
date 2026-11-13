@@ -30,6 +30,18 @@ interface InvoiceItem {
   rate: number;
 }
 
+// WinAnsi (StandardFonts.Helvetica in pdf-lib) cannot encode Unicode ₹ (0x20b9) or special typographic symbols
+function sanitizeForPdf(str: string): string {
+  if (!str) return '';
+  return str
+    .replace(/₹/g, 'Rs. ')
+    .replace(/[\u2018\u2019]/g, "'")
+    .replace(/[\u201C\u201D]/g, '"')
+    .replace(/[\u2013\u2014]/g, '-')
+    .replace(/…/g, '...')
+    .replace(/[^\x00-\x7F\xA0-\xFF]/g, '');
+}
+
 export default function InvoiceGeneratorPage() {
   const [docType, setDocType] = useState<'invoice' | 'proforma' | 'rent-receipt'>('invoice');
 
@@ -102,6 +114,7 @@ export default function InvoiceGeneratorPage() {
       const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
 
       const { width, height } = page.getSize();
+      const pdfCurrency = currency === '₹' ? 'Rs. ' : sanitizeForPdf(currency);
 
       if (docType === 'invoice' || docType === 'proforma') {
         const isProforma = docType === 'proforma';
@@ -124,7 +137,7 @@ export default function InvoiceGeneratorPage() {
           color: rgb(1, 1, 1),
         });
 
-        page.drawText(`#${invoiceNumber}`, {
+        page.drawText(`#${sanitizeForPdf(invoiceNumber)}`, {
           x: width - 200,
           y: height - 64,
           size: 14,
@@ -138,15 +151,15 @@ export default function InvoiceGeneratorPage() {
         page.drawText('BILLED TO:', { x: 300, y, size: 9, font: fontBold, color: rgb(0.4, 0.45, 0.5) });
 
         y -= 16;
-        page.drawText(fromName, { x: 50, y, size: 12, font: fontBold, color: rgb(0.1, 0.1, 0.1) });
-        page.drawText(toName, { x: 300, y, size: 12, font: fontBold, color: rgb(0.1, 0.1, 0.1) });
+        page.drawText(sanitizeForPdf(fromName), { x: 50, y, size: 12, font: fontBold, color: rgb(0.1, 0.1, 0.1) });
+        page.drawText(sanitizeForPdf(toName), { x: 300, y, size: 12, font: fontBold, color: rgb(0.1, 0.1, 0.1) });
 
         y -= 14;
-        page.drawText(fromEmail, { x: 50, y, size: 10, font: fontRegular, color: rgb(0.3, 0.3, 0.3) });
-        page.drawText(toEmail, { x: 300, y, size: 10, font: fontRegular, color: rgb(0.3, 0.3, 0.3) });
+        page.drawText(sanitizeForPdf(fromEmail), { x: 50, y, size: 10, font: fontRegular, color: rgb(0.3, 0.3, 0.3) });
+        page.drawText(sanitizeForPdf(toEmail), { x: 300, y, size: 10, font: fontRegular, color: rgb(0.3, 0.3, 0.3) });
 
         y -= 25;
-        page.drawText(`Date: ${invoiceDate}  |  Due Date: ${dueDate}`, {
+        page.drawText(`Date: ${sanitizeForPdf(invoiceDate)}  |  Due Date: ${sanitizeForPdf(dueDate)}`, {
           x: 50,
           y,
           size: 10,
@@ -173,7 +186,7 @@ export default function InvoiceGeneratorPage() {
         y -= 24;
         items.forEach((item) => {
           const itemTotal = item.quantity * item.rate;
-          page.drawText(item.description.substring(0, 48), {
+          page.drawText(sanitizeForPdf(item.description).substring(0, 48), {
             x: 50,
             y,
             size: 10,
@@ -181,14 +194,14 @@ export default function InvoiceGeneratorPage() {
             color: rgb(0.1, 0.1, 0.1),
           });
           page.drawText(`${item.quantity}`, { x: 340, y, size: 10, font: fontRegular, color: rgb(0.1, 0.1, 0.1) });
-          page.drawText(`${currency}${item.rate.toLocaleString()}`, {
+          page.drawText(`${pdfCurrency}${item.rate.toLocaleString()}`, {
             x: 420,
             y,
             size: 10,
             font: fontRegular,
             color: rgb(0.1, 0.1, 0.1),
           });
-          page.drawText(`${currency}${itemTotal.toLocaleString()}`, {
+          page.drawText(`${pdfCurrency}${itemTotal.toLocaleString()}`, {
             x: 490,
             y,
             size: 10,
@@ -209,7 +222,7 @@ export default function InvoiceGeneratorPage() {
         // Totals
         y -= 20;
         page.drawText(`Subtotal:`, { x: 380, y, size: 10, font: fontRegular, color: rgb(0.3, 0.3, 0.3) });
-        page.drawText(`${currency}${subtotal.toLocaleString()}`, {
+        page.drawText(`${pdfCurrency}${subtotal.toLocaleString()}`, {
           x: 470,
           y,
           size: 10,
@@ -225,7 +238,7 @@ export default function InvoiceGeneratorPage() {
           font: fontRegular,
           color: rgb(0.3, 0.3, 0.3),
         });
-        page.drawText(`${currency}${taxAmount.toLocaleString()}`, {
+        page.drawText(`${pdfCurrency}${taxAmount.toLocaleString()}`, {
           x: 470,
           y,
           size: 10,
@@ -248,7 +261,7 @@ export default function InvoiceGeneratorPage() {
           font: fontBold,
           color: rgb(1, 1, 1),
         });
-        page.drawText(`${currency}${totalAmount.toLocaleString()}`, {
+        page.drawText(`${pdfCurrency}${totalAmount.toLocaleString()}`, {
           x: 470,
           y: y + 2,
           size: 12,
@@ -306,7 +319,7 @@ export default function InvoiceGeneratorPage() {
 
         y -= 25;
         const text = `Received with thanks from ${tenantName} a sum of Rs. ${rentAmount.toLocaleString('en-IN')}/- (Rupees ${rentAmount.toLocaleString('en-IN')} only) towards the house rent for the month / period of ${rentMonth} for the residential premises situated at:`;
-        page.drawText(text, {
+        page.drawText(sanitizeForPdf(text), {
           x: 50,
           y,
           size: 10,
@@ -317,7 +330,7 @@ export default function InvoiceGeneratorPage() {
         });
 
         y -= 50;
-        page.drawText(`Address: ${propertyAddress}`, {
+        page.drawText(`Address: ${sanitizeForPdf(propertyAddress)}`, {
           x: 50,
           y,
           size: 10,
@@ -326,7 +339,7 @@ export default function InvoiceGeneratorPage() {
         });
 
         y -= 30;
-        page.drawText(`Landlord Name: ${landlordName}`, {
+        page.drawText(`Landlord Name: ${sanitizeForPdf(landlordName)}`, {
           x: 50,
           y,
           size: 10,
@@ -335,7 +348,7 @@ export default function InvoiceGeneratorPage() {
         });
 
         y -= 18;
-        page.drawText(`Landlord PAN Number: ${landlordPan} (Mandatory for rent > Rs. 1,00,000/yr)`, {
+        page.drawText(`Landlord PAN Number: ${sanitizeForPdf(landlordPan)} (Mandatory for rent > Rs. 1,00,000/yr)`, {
           x: 50,
           y,
           size: 10,
