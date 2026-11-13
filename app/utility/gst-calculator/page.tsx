@@ -1,10 +1,11 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import Link from 'next/link';
 import { ToolLayout } from '@/components/ToolLayout';
 import { calculateGST } from '@/lib/utility-engine';
 import { toast } from 'sonner';
-import { Receipt, Percent, Share2, Copy, Check, ShieldCheck } from 'lucide-react';
+import { Receipt, Percent, Share2, Copy, Check, ShieldCheck, Truck, ExternalLink, ArrowRight } from 'lucide-react';
 
 export default function GSTCalculatorPage() {
   const [amount, setAmount] = useState(10000);
@@ -126,6 +127,50 @@ export default function GSTCalculatorPage() {
               <p className="text-xs font-bold text-slate-400">SGST ({rate / 2}%)</p>
               <p className="text-xl font-black text-amber-400 mt-1">₹{gstData.sgst.toLocaleString('en-IN')}</p>
             </div>
+          </div>
+        </div>
+
+        {/* E-Way Bill Compliance Banner */}
+        <div className={`p-5 rounded-3xl border transition-all ${
+          gstData.totalAmount >= 50000
+            ? 'bg-amber-50 border-amber-300 text-amber-950 shadow-sm'
+            : 'bg-white border-slate-200 text-slate-800'
+        }`}>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="flex items-start gap-3">
+              <div className={`p-2.5 rounded-2xl shrink-0 ${
+                gstData.totalAmount >= 50000 ? 'bg-amber-100 text-amber-800' : 'bg-slate-100 text-slate-700'
+              }`}>
+                <Truck className="w-5 h-5" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h3 className="font-extrabold text-sm sm:text-base">
+                    {gstData.totalAmount >= 50000
+                      ? 'E-Way Bill Mandatory (Value Exceeds ₹50,000)'
+                      : 'GST E-Way Bill Rule 138 (₹50,000 Threshold)'}
+                  </h3>
+                  {gstData.totalAmount >= 50000 && (
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-black uppercase bg-amber-200 text-amber-900">
+                      Required
+                    </span>
+                  )}
+                </div>
+                <p className="text-xs text-slate-600 mt-1 max-w-2xl leading-relaxed">
+                  {gstData.totalAmount >= 50000
+                    ? `Your consignment total is ₹${gstData.totalAmount.toLocaleString('en-IN')}. Under GST rules, inter-state movement of goods exceeding ₹50,000 requires generating Part A & Part B on ewaybillgst.gov.in before physical dispatch.`
+                    : 'Moving goods across state lines? Any consignment valued above ₹50,000 requires generating an electronic E-Way bill with Part A invoice data and Part B vehicle details.'}
+                </p>
+              </div>
+            </div>
+
+            <Link
+              href="/blog/eway-bill-login-gst-portal-rules-pdf-download-guide"
+              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shrink-0 transition"
+            >
+              <span>E-Way Bill Login & Rules</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
         </div>
       </div>

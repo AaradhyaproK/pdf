@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import Link from 'next/link';
 import { ToolLayout } from '@/components/ToolLayout';
 import { toast } from 'sonner';
 import {
@@ -19,6 +20,7 @@ import {
   ShieldCheck,
   TrendingDown,
   Info,
+  ExternalLink,
 } from 'lucide-react';
 
 interface TariffState {
@@ -61,14 +63,27 @@ const TARIFF_PRESETS: Record<string, TariffState> = {
   },
   uttar_pradesh: {
     name: 'Uttar Pradesh',
-    discom: 'UPPCL (Urban Domestic)',
+    discom: 'UPPCL (Urban / Rural)',
     fixedCharge: 110,
     taxRate: 5,
+    subsidyNotes: 'UPPCL View Bill: 10-digit (Urban) or 12-digit (Rural) consumer ID. Slab rates apply across MVVNL, PVVNL, DVVNL & PuVVNL.',
     slabs: [
       { min: 0, max: 100, rate: 5.5 },
       { min: 101, max: 150, rate: 6.0 },
       { min: 151, max: 300, rate: 6.5 },
       { min: 301, max: Infinity, rate: 7.0 },
+    ],
+  },
+  assam: {
+    name: 'Assam',
+    discom: 'APDCL (Domestic-A)',
+    fixedCharge: 75,
+    taxRate: 5,
+    subsidyNotes: 'APDCL Bill: 12-digit consumer number lookup & smart prepaid meter recharge via apdcl.org.',
+    slabs: [
+      { min: 0, max: 120, rate: 5.40 },
+      { min: 121, max: 240, rate: 6.65 },
+      { min: 241, max: Infinity, rate: 7.65 },
     ],
   },
   karnataka: {
@@ -334,9 +349,19 @@ Calculated with FileZenith Electricity Bill Calculator`;
           </div>
 
           {TARIFF_PRESETS[selectedState]?.subsidyNotes && (
-            <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs font-semibold text-amber-900 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-amber-600 shrink-0" />
-              <span>{TARIFF_PRESETS[selectedState].subsidyNotes}</span>
+            <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs font-semibold text-amber-900 flex items-center justify-between flex-wrap gap-2">
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-amber-600 shrink-0" />
+                <span>{TARIFF_PRESETS[selectedState].subsidyNotes}</span>
+              </div>
+              {(selectedState === 'uttar_pradesh' || selectedState === 'assam') && (
+                <Link
+                  href="/blog/uppcl-view-bill-apdcl-bill-online-check-download-guide"
+                  className="inline-flex items-center gap-1 text-xs font-black text-amber-950 underline hover:text-amber-800"
+                >
+                  {selectedState === 'uttar_pradesh' ? 'UPPCL View Bill Guide & Portal' : 'APDCL Bill View & Pay Guide'} <ExternalLink className="w-3 h-3" />
+                </Link>
+              )}
             </div>
           )}
 

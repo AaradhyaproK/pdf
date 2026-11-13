@@ -71,6 +71,8 @@ const DEFAULT_POST_IMAGES: Record<string, string> = {
   'how-to-split-pdf-pages-online-free-privately': '/blog/pdf-merge.jpg',
   'maharashtra-7-12-digital-satbara-utara-guide': '/blog/maharashtra-7-12-digital-satbara-guide.jpg',
   'indian-army-agniveer-result-photo-guidelines-2026': '/blog/indian-army-agniveer-2026-guide.jpg',
+  'eway-bill-login-gst-portal-rules-pdf-download-guide': '/blog/eway-bill-guide.jpg',
+  'uppcl-view-bill-apdcl-bill-online-check-download-guide': '/blog/uppcl-apdcl-electricity-bill-guide.jpg',
 };
 
 // Helper function to extract FAQs for Google FAQPage Schema

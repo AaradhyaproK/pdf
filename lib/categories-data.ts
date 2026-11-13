@@ -1243,8 +1243,10 @@ export const CATEGORY_REGISTRY: Record<string, CategoryConfig> = {
       },
       {
         title: 'Billing, Receipts & Document Utilities',
-        description: 'Generate customer receipts, extract text from printed scans, and secure documents.',
+        description: 'Generate customer receipts, calculate GST & E-Way bill thresholds, check electricity bills, and secure documents.',
         tools: [
+          { name: 'GST & E-Way Bill Calculator', slug: '/utility/gst-calculator', description: 'Calculate 5%, 12%, 18% & 28% GST, CGST/SGST splits, and verify mandatory ₹50,000 E-Way Bill thresholds.', isPopular: true, badge: 'GST / E-Way Bill', iconName: 'Receipt' },
+          { name: 'Electricity Bill Calculator (UPPCL & APDCL)', slug: '/utility/electricity-bill-calculator', description: 'Estimate monthly power bills with official UPPCL UP, APDCL Assam, and state slab tariffs.', isPopular: true, badge: 'UPPCL & APDCL', iconName: 'Zap' },
           { name: 'Convert Bank Statement to Excel', slug: '/pdf/pdf-to-excel', description: 'Extract multi-page customer bank statements & tax invoices into clean Excel (.xlsx) spreadsheets.', isPopular: true, badge: 'Bank Stmt', iconName: 'FileSpreadsheet' },
           { name: 'Free Invoice & Rent Receipt Generator', slug: '/utility/invoice-generator', description: 'Create print-ready HRA rent receipts, customer bills, and service invoices with shop details & seal.', isPopular: true, badge: 'HRA / Billing', iconName: 'FileText' },
           { name: 'PDF OCR Text Extractor', slug: '/pdf/ocr', description: 'Extract selectable text from scanned customer notices, FIRs, and court papers in browser.', isPopular: false, badge: 'AI Wasm', iconName: 'FileCheck' },

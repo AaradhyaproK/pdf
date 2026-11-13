@@ -1711,14 +1711,21 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
     slug: '/utility/gst-calculator',
     title: 'GST Calculator Online (Add or Remove GST 5%, 12%, 18%, 28%)',
     metaTitle: 'GST Calculator Online Free — Add or Remove GST (5%, 12%, 18%, 28%)',
-    description: 'Calculate GST online free for 5%, 12%, 18%, and 28% slab rates. Instantly calculate GST Exclusive (Add GST) or GST Inclusive (Remove GST) with CGST and SGST split.',
+    description: 'Calculate GST online free for 5%, 12%, 18%, and 28% slab rates with CGST & SGST split. Verify E-Way bill ₹50,000 thresholds, inclusive/exclusive tax, and download PDF invoices.',
     keywords: [
       'gst calculator',
       'calculate gst online free',
+      'eway bill',
+      'e way bill',
+      'eway bill login',
+      'e way bill login',
+      'e-way bill',
       'gst calculator add remove gst',
       'gst inclusive exclusive calculator',
       'cgst sgst split tax calculator',
-      'gst rate 18 percent 12 percent 5 percent'
+      'gst rate 18 percent 12 percent 5 percent',
+      'gst eway bill threshold calculator',
+      'eway bill 50000 limit check'
     ],
     category: 'utility',
     howToSteps: [
@@ -1727,7 +1734,8 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       { title: 'Choose Mode', text: 'Select Add GST (Exclusive) or Remove GST (Inclusive) to get net, tax, and CGST/SGST amounts.' }
     ],
     faqs: [
-      { question: 'How do I remove GST from a total bill amount?', answer: 'Select "Remove GST (Inclusive)" mode. The formula used is Net Amount = Total Amount × 100 / (100 + GST Rate).' }
+      { question: 'How do I remove GST from a total bill amount?', answer: 'Select "Remove GST (Inclusive)" mode. The formula used is Net Amount = Total Amount × 100 / (100 + GST Rate).' },
+      { question: 'When is an E-Way Bill mandatory under GST?', answer: 'Under CGST Rule 138, generating an electronic e-way bill on ewaybillgst.gov.in is mandatory whenever goods consignment value exceeds ₹50,000 for inter-state transit (or state thresholds between ₹50,000 and ₹1,00,000 for intra-state movement).' }
     ]
   },
 
@@ -2647,16 +2655,21 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/utility/electricity-bill-calculator': {
     slug: '/utility/electricity-bill-calculator',
-    title: 'Electricity Bill Calculator (Slab Tariff & Appliance Power)',
-    metaTitle: 'Electricity Bill Calculator Online (India & Global) | FileZenith',
-    description: 'Calculate your monthly electricity bill online with state-wise tariff slabs (Maharashtra MSEDCL, Delhi BSES with subsidy, UPPCL, BESCOM, TANGEDCO) and home appliance power consumption estimator.',
+    title: 'Electricity Bill Calculator (Slab Tariff, UPPCL & APDCL Bill)',
+    metaTitle: 'Electricity Bill Calculator Online (UPPCL, APDCL, MSEDCL, Delhi) | FileZenith',
+    description: 'Calculate your monthly electricity bill online with state-wise tariff slabs (UPPCL Urban/Rural, APDCL Assam, Maharashtra MSEDCL, Delhi BSES with subsidy) and home appliance power consumption estimator.',
     keywords: [
       'electricity bill calculator',
+      'uppcl view bill',
+      'apdcl bill',
+      'uppcl view bill urban rural',
+      'apdcl bill online check quick pay',
       'bijli bill calculator online',
       'calculate electricity bill per unit',
       'msedcl bill calculator maharashtra',
       'delhi bses electricity bill calculator subsidy',
       'uppcl electricity bill calculator',
+      'apdcl smart meter recharge check',
       'appliance power consumption calculator',
       'kwh electricity cost calculator',
       'calculate power consumption of ac and fridge',
@@ -2664,19 +2677,21 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
     ],
     category: 'utility',
     howToSteps: [
-      { title: 'Choose Mode & State', text: 'Select whether to calculate by monthly kWh units or by home appliances, and choose your state electricity board (e.g. MSEDCL, Delhi BSES, UPPCL).' },
+      { title: 'Choose Mode & State', text: 'Select whether to calculate by monthly kWh units or by home appliances, and choose your state electricity board (e.g. UPPCL UP, APDCL Assam, MSEDCL, Delhi BSES).' },
       { title: 'Input Units or Appliance Usage', text: 'Adjust the monthly units slider, or enter appliance quantity and daily operating hours.' },
       { title: 'Review Bill & Share', text: 'View exact slab-wise energy charges, fixed charges, taxes, and government subsidies, and copy or share the summary via WhatsApp.' }
     ],
     faqs: [
       { question: 'How is an electricity bill calculated using slab rates?', answer: 'In progressive slab billing, consumed units are divided across rate tiers. For example, the first 100 units may be charged at ₹5/unit, the next 200 units at ₹8/unit, and units above 300 at ₹12/unit, plus fixed charges and state electricity duty.' },
+      { question: 'How can I check my UPPCL view bill without password?', answer: 'Urban consumers (10-digit account ID) and Rural consumers (12-digit account ID) can check current electricity dues on consumer.upegov.in or upenergy.in by entering their account ID and captcha without logging in.' },
+      { question: 'How do I view and pay my APDCL bill online?', answer: 'Assam power consumers can visit apdcl.org, enter their 12-digit Consumer Number under "View Bill & Pay", and instantly see net payable dues or recharge smart prepaid meters.' },
       { question: 'How does the Delhi government electricity subsidy work?', answer: 'In Delhi (BSES & TPDDL), domestic consumers using up to 200 units per month receive a 100% subsidy (₹0 bill). Consumers using between 201 and 400 units receive a 50% discount on energy charges up to a maximum of ₹800 per month.' },
       { question: 'How do I calculate electricity consumption for an AC or refrigerator?', answer: 'Multiply appliance wattage by hours of usage per day and divide by 1000 to get daily kWh (units). For example, a 1500W AC running 8 hours per day consumes (1500 × 8) / 1000 = 12 units (kWh) per day, or ~360 units per month.' },
       { question: 'Can I factor in solar rooftop net metering?', answer: 'Yes! Simply enter your monthly solar rooftop generation in the Solar Net Metering field, and the calculator automatically subtracts generated units from your grid consumption before calculating tariff slabs.' }
     ],
     comparisonTable: [
-      { feature: 'State Slab Presets', omnitool: 'MSEDCL, BSES Delhi, UPPCL, BESCOM, TANGEDCO, Gujarat', standardCloud: 'Generic flat rate only' },
-      { feature: 'Subsidy Support', omnitool: 'Delhi 200/400-Unit Subsidy Rules Integrated', standardCloud: 'No subsidy calculations' },
+      { feature: 'State Slab Presets', omnitool: 'UPPCL (UP), APDCL (Assam), MSEDCL, BSES Delhi, BESCOM, TANGEDCO, Gujarat', standardCloud: 'Generic flat rate only' },
+      { feature: 'Subsidy Support', omnitool: 'Delhi 200/400-Unit & APDCL Subsidy Rules Integrated', standardCloud: 'No subsidy calculations' },
       { feature: 'Appliance Breakdown', omnitool: 'Interactive AC, Fridge, Fan, Geyser Wattage Estimator', standardCloud: 'Requires manual unit entry' },
       { feature: 'WhatsApp Sharing', omnitool: '1-Click Formatted Summary Sharing', standardCloud: 'None' }
     ]
