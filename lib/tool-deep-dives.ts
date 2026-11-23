@@ -7747,6 +7747,14 @@ export const TOOL_DEEP_DIVES: Record<string, ToolDeepDive> =
     ],
     "faqs": [
       {
+        "question": "What is the exact Aadhaar card size in cm?",
+        "answer": "The official Aadhaar card size in cm is 8.56 cm in width by 5.40 cm in height (85.60 mm \u00d7 53.98 mm). This conforms to the universal ISO/IEC 7810 ID-1 standard, matching national identity cards, driving licenses, and ATM cards."
+      },
+      {
+        "question": "What is the Aadhaar card size in inches?",
+        "answer": "The exact Aadhaar card size in inches is 3.370 inches in width by 2.125 inches in height (approximately 3.37 \u00d7 2.13 in). At 300 DPI high-resolution printing, this corresponds to 1011 \u00d7 638 pixels."
+      },
+      {
         "question": "What is the password to open my e-Aadhaar PDF?",
         "answer": "The password for an e-Aadhaar PDF is standardized by UIDAI: the first four letters of your legal name in CAPITAL letters, followed immediately by your 4-digit Year of Birth (e.g., if your name is SURESH KUMAR born in 1990, your password is 'SURE1990')."
       },

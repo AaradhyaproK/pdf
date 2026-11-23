@@ -42,9 +42,9 @@ export default function YouTubeThumbnailDownloaderPage() {
   return (
     <ToolLayout
       slug="/social/youtube-thumbnail-downloader"
-      title="YouTube Thumbnail Viewer & HD Cover Preview"
-      subtitle="Preview and inspect YouTube video cover thumbnails in 1080p MaxRes, 640p HD, and 480p HQ resolutions."
-      badgeText="Social Media Tool"
+      title="YouTube Thumbnail & Photo Download (Full HD 1080p MaxRes)"
+      subtitle="Download YouTube video cover photos and thumbnails in 1080p Full HD MaxRes, 640p HD, and 480p HQ. 100% free with instant one-click save."
+      badgeText="Full HD 1080p Downloader"
     >
       <div className="space-y-6 text-slate-900">
         <div className="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-md space-y-4">

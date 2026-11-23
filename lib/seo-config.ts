@@ -1120,11 +1120,19 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
   '/utility/word-to-pages': {
     slug: '/utility/word-to-pages',
-    title: 'Word to Pages Converter — Convert DOCX to Pages Online Free',
-    metaTitle: 'Word to Pages Converter — Convert DOCX to Pages Free (100% Private)',
-    description: 'Convert Word (.docx) to Apple Pages (.pages) free online. 100% private in-browser conversion with zero file upload. Works on PC, Mac & iPad instantly.',
+    title: 'Word to Pages Converter — Convert Word & DOCX to Pages Online Free',
+    metaTitle: 'Word to Pages Converter — Convert Word & DOCX to Pages Free | FileZenith',
+    description: 'Convert Word to Pages online free. Easily convert Word (.docx, .doc) documents into Apple Pages (.pages) packages. 100% private in-browser conversion on PC & Mac.',
     keywords: [
+      'word to pages',
       'word to pages converter',
+      'docx to pages',
+      'convert word to pages',
+      'doc to pages',
+      'docx to pages converter',
+      'convert docx to pages',
+      'word to pages converter online free',
+      'docx to pages converter free',
       'convert word to pages online free',
       'docx to pages converter without mac',
       'convert docx to apple pages free',
@@ -1136,12 +1144,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       'how to convert docx to pages on pc',
       'word to apple pages converter online free',
       'export docx to iwork pages',
-      'convert docx to pages for ipad mac',
-      'word to pages package converter client side',
-      'convert word file to pages without icloud',
-      'online docx to pages creator',
-      'open docx file on mac pages smoothly',
-      'fast word to pages converter private'
+      'convert docx to pages for ipad mac'
     ],
     category: 'utility',
     howToSteps: [
@@ -1811,24 +1814,27 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/social/youtube-thumbnail-downloader': {
     slug: '/social/youtube-thumbnail-downloader',
-    title: 'YouTube Thumbnail Viewer & HD Cover Preview (1080p MaxRes)',
-    metaTitle: 'YouTube Thumbnail Viewer - Preview HD 1080p Video Covers | FileZenith',
-    description: 'Preview YouTube video cover thumbnails in 1080p Full HD (MaxRes), HD (640p), HQ, and standard quality. Inspect YouTube thumbnails and video assets for research and fair use.',
+    title: 'YouTube Thumbnail & Photo Download (Full HD 1080p MaxRes)',
+    metaTitle: 'YouTube Photo Download Full HD 1080p — Thumbnail Saver | FileZenith',
+    description: 'Download YouTube video cover photos and thumbnails in 1080p Full HD (MaxRes), 640p HD, and HQ. Free YouTube photo download tool for creators and fair use.',
     keywords: [
+      'youtube photo download full hd 1080p',
+      'youtube photo download',
+      'youtube thumbnail download full hd 1080p',
       'youtube thumbnail viewer',
       'youtube video cover preview hd 1080p',
       'view youtube thumbnail image free',
-      'youtube thumbnail inspect maxresdefault',
-      'youtube video cover photo preview'
+      'download youtube thumbnail full hd 1080p',
+      'youtube video cover photo download'
     ],
     category: 'social',
     howToSteps: [
       { title: 'Paste YouTube URL', text: 'Paste any YouTube video or Shorts link (e.g. https://www.youtube.com/watch?v=...)' },
-      { title: 'Inspect Resolutions', text: 'View 1080p MaxRes, 640p HD, and 480p HQ thumbnails.' },
-      { title: 'Save Cover Image', text: 'Save high-res JPG directly to device memory for reference.' }
+      { title: 'Choose 1080p Full HD', text: 'Inspect 1080p MaxRes Full HD, 640p HD, or 480p HQ cover photo resolutions.' },
+      { title: '1-Click Photo Download', text: 'Click Download to save the highest resolution full HD thumbnail directly to your device.' }
     ],
     faqs: [
-      { question: 'How do I view a YouTube thumbnail in 1080p max resolution?', answer: 'Just paste the YouTube URL. FileZenith automatically displays the maxresdefault.jpg file directly from public YouTube CDN.' }
+      { question: 'How do I download a YouTube photo / thumbnail in full HD 1080p?', answer: 'Paste the YouTube video or Shorts link into FileZenith. Our tool queries the official YouTube MaxRes stream and lets you download the uncompressed 1080p full HD cover photo with a single click.' }
     ]
   },
 
