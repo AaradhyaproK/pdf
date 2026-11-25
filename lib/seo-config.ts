@@ -89,7 +89,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
 
   '/pdf/compress-to-200kb': {
-    slug: '/pdf/compress#200kb',
+    slug: '/pdf/compress-to-200kb',
     title: 'Compress PDF to 200KB Free Online — Form & Job Application Reducer',
     metaTitle: 'Compress PDF to 200KB Free Online — Exact Size for Forms | FileZenith',
     description: 'Compress PDF under 200KB online free for SSC, UPSC, Maharashtra 7/12 land records, and government job portals. Keep text crisp with 100% private in-browser compression. Zero upload.',
@@ -414,7 +414,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
 
   '/image/compress-to-20kb': {
-    slug: '/image/compress#20kb',
+    slug: '/image/compress-to-20kb',
     title: 'Compress Image to 20KB Online Free — Signature & Photo Reducer for Forms',
     metaTitle: 'Compress Image to 20KB Free Online — Signature & Photo Reducer | FileZenith',
     description: 'Compress image or signature under 20KB online free for SSC, UPSC, IBPS, and state recruitment portal uploads. 100% private in-browser compression.',
@@ -445,7 +445,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
 
   '/image/compress-to-50kb': {
-    slug: '/image/compress#50kb',
+    slug: '/image/compress-to-50kb',
     title: 'Compress Image to 50KB Free Online — Exact Photo Reducer for Forms',
     metaTitle: 'Compress Image to 50KB Free Online — Exact Size for Forms',
     description: 'Compress image under 50KB online free for SSC, UPSC, and government portal uploads. Keep facial details and signature crisp with 100% private in-browser compression.',
@@ -479,7 +479,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
 
   '/image/compress-to-100kb': {
-    slug: '/image/compress#100kb',
+    slug: '/image/compress-to-100kb',
     title: 'Compress Image to 100KB Online Free — Fast Photo Reducer for ID & Forms',
     metaTitle: 'Compress Image to 100KB Online Free — Fast Photo Reducer | FileZenith',
     description: 'Compress and resize photos under 100KB online for job applications, identity cards, and website uploads. 100% private, instant & lossless in-browser.',
@@ -2215,20 +2215,25 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/tools/aadhaar-card-print': {
     slug: '/tools/aadhaar-card-print',
-    title: 'e-Aadhaar PDF Cropper & Wallet Card Resizer (85.6x54 mm)',
-    metaTitle: 'e-Aadhaar PDF Cropper & Wallet Size Resizer (85.6x54 mm) | FileZenith',
-    description: 'Crop and format your official e-Aadhaar PDF into standard pocket wallet card size (85.6x54 mm) on A4 sheet. 100% private in-browser document cropping with zero server upload.',
+    title: 'Aadhaar Card Print Size & e-Aadhaar PDF Cropper (8.56 × 5.4 cm)',
+    metaTitle: 'Aadhaar Card Print Size (8.56 × 5.4 cm) & e-Aadhaar PDF Cropper | FileZenith',
+    description: 'Crop and format your official e-Aadhaar PDF into standard pocket wallet card size (8.56 × 5.4 cm / 85.6 × 54 mm) on A4 sheet. 100% private in-browser document cropping with zero server upload.',
     keywords: [
+      'aadhaar card print size',
       'eaadhaar pdf cropper',
+      'aadhar card size in cm',
+      'aadhar card size in inch',
       'aadhaar card crop to wallet size',
-      'aadhaar card exact size 85.6x54 mm',
       'crop eaadhaar front and back on a4',
-      'eaadhaar card formatting tool',
-      'print eaadhaar pdf layout a4',
-      'aadhaar card lamination size 65x95',
-      'eaadhaar pdf password format',
+      'aadhar card pvc size in cm',
       'crop aadhaar card front and back online',
-      'eaadhaar to a4 sheet layout tool',
+      'print eaadhaar pdf layout a4',
+      'aadhaar card exact size 85.6x54 mm',
+      'eaadhaar card formatting tool',
+      'aadhaar card lamination size 65x95',
+      'pocket aadhaar card size',
+      'eaadhaar pdf password format',
+      'aadhaar card original size print',
       'aadhaar card size in cm for print'
     ],
     category: 'utility',
@@ -2596,7 +2601,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
 
   '/pdf/compress-to-100kb': {
-    slug: '/pdf/compress#100kb',
+    slug: '/pdf/compress-to-100kb',
     title: 'Compress PDF to 100KB Online Free',
     metaTitle: 'Compress PDF to 100KB Free Online | FileZenith',
     description: 'Compress PDF file size under 100KB online free. Ideal for Sarkari job portals, UPSC, SSC, state PSC marks cards, certificates, and ID uploads with zero server uploads.',
@@ -2623,7 +2628,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
 
   '/pdf/compress-to-1mb': {
-    slug: '/pdf/compress#1mb',
+    slug: '/pdf/compress-to-1mb',
     title: 'Compress PDF to 1MB Online Free',
     metaTitle: 'Compress PDF to 1MB Free Online | FileZenith',
     description: 'Compress large PDF documents to under 1MB online free. Optimized for email attachments, university submissions, bank statements, and online applications with zero quality compromise.',
@@ -2648,7 +2653,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
 
   '/pdf/compress-to-300kb': {
-    slug: '/pdf/compress#300kb',
+    slug: '/pdf/compress-to-300kb',
     title: 'Compress PDF to 300KB Online Free — UPSC & Govt Portal Optimizer',
     metaTitle: 'Compress PDF to 300KB Free Online | FileZenith',
     description: 'Compress PDF files strictly under 300KB online free. Tailored for UPSC OTR, State PSC certificates, high court filings, and job portals with zero server uploads.',
@@ -2676,7 +2681,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   },
 
   '/pdf/compress-to-500kb': {
-    slug: '/pdf/compress#500kb',
+    slug: '/pdf/compress-to-500kb',
     title: 'Compress PDF to 500KB Online Free — Passport & University Submission',
     metaTitle: 'Compress PDF to 500KB Free Online | FileZenith',
     description: 'Compress PDF under 500KB online free in seconds. Optimized for Passport Sewa, Indian High Courts e-filing, university admissions, and visa portals with 100% private in-browser compression.',
@@ -3234,20 +3239,11 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
 
 export const NOINDEX_SLUGS = new Set<string>([
-  '/social/youtube-thumbnail-downloader',
-  '/social/youtube-tag-extractor',
-  '/utility/text-repeater',
   '/utility/coin-flip',
-  '/utility/dice-roller',
   '/utility/roll-the-dice',
   '/utility/spin-the-wheel',
   '/utility/random-number-picker',
-  '/utility/fancy-text-generator',
   '/utility/glassmorphism-generator',
-  '/utility/pomodoro-timer',
-  '/utility/typing-speed-test',
-  '/social/whatsapp-direct-chat',
-  '/social/instagram-caption-copier',
 ]);
 
 export function generateToolMetadata(slug: string): Metadata {

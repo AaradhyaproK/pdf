@@ -533,7 +533,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: 'aadhaar-card-print',
-    name: 'Aadhaar Card Size & Print Cropper (8.56 × 5.4 cm)',
+    name: 'Aadhaar Card Print Size & Cropper (8.56 × 5.4 cm)',
     slug: '/tools/aadhaar-card-print',
     desc: 'Exact official dimensions (8.56 × 5.40 cm / 3.37 × 2.125 in). Crop & print e-Aadhaar PDF on A4 sheet & PVC card.',
     category: 'utility',
@@ -545,19 +545,15 @@ export const ALL_TOOLS: ToolItem[] = [
     hoverTitleClass: 'group-hover:text-rose-600',
     badgeStyle: 'bg-rose-50 text-rose-700 border-rose-200',
     keywords: [
+      'aadhaar card print size',
+      'eaadhaar pdf cropper',
       'aadhar card size in cm',
       'aadhar card size in inch',
-      'aadhar card print size',
-      'aadhar card print size width and height',
-      'aadhar print size',
+      'aadhaar card crop to wallet size',
+      'crop eaadhaar front and back on a4',
       'aadhar card pvc size in cm',
-      'aadhar card size in height and width',
-      'aadhar card original size',
-      'aadhar card print',
-      'pocket aadhaar card size',
-      'aadhaar card size in cm',
-      'aadhaar card size in inch',
-      'eaadhaar pdf cropper'
+      'print eaadhaar pdf layout a4',
+      'pocket aadhaar card size'
     ],
   },
   {

@@ -23,36 +23,34 @@ import {
 import { TOOL_DEEP_DIVES } from '@/lib/tool-deep-dives';
 
 export const metadata: Metadata = {
-  title: 'Aadhaar Card Size in CM, Inch & Print Size (8.56 × 5.4 cm)',
+  title: 'Aadhaar Card Print Size & e-Aadhaar PDF Cropper (8.56 × 5.4 cm)',
   description:
-    'Exact Aadhaar card size in cm (8.56 cm × 5.4 cm) and inches (3.37 × 2.125 in). Free online tool to crop and format e-Aadhaar PDF front and back for wallet PVC card and A4 print.',
+    'Crop and format your official e-Aadhaar PDF into standard pocket wallet card size (8.56 × 5.4 cm / 3.37 × 2.125 in) for A4 paper and PVC print. 100% private in-browser tool.',
   keywords: [
-    'aadhar card size in cm',
-    'aadhar card size in inch',
-    'aadhar card print size',
-    'aadhar card print size width and height',
-    'aadhar print size',
-    'aadhar card pvc size in cm',
-    'aadhar card size in height and width',
-    'aadhar card original size',
-    'aadhar card print',
-    'pocket aadhaar card size',
-    'aadhaar card size in cm',
-    'aadhaar card size in inch',
     'aadhaar card print size',
     'eaadhaar pdf cropper',
-    'aadhaar card exact size 85.6x54 mm',
+    'aadhar card size in cm',
+    'aadhar card size in inch',
+    'aadhaar card crop to wallet size',
     'crop eaadhaar front and back on a4',
+    'aadhar card pvc size in cm',
+    'crop aadhaar card front and back online',
+    'print eaadhaar pdf layout a4',
+    'aadhaar card exact size 85.6x54 mm',
     'eaadhaar card formatting tool',
-    'print eaadhaar pdf layout a4'
+    'aadhaar card lamination size 65x95',
+    'pocket aadhaar card size',
+    'eaadhaar pdf password format',
+    'aadhaar card original size print',
+    'aadhaar card size in cm for print'
   ],
   alternates: {
     canonical: 'https://www.filezenith.com/tools/aadhaar-card-print',
   },
   openGraph: {
-    title: 'Aadhaar Card Size in CM, Inch & Print Size (8.56 × 5.4 cm)',
+    title: 'Aadhaar Card Print Size & e-Aadhaar PDF Cropper (8.56 × 5.4 cm)',
     description:
-      'Exact official Aadhaar card size in cm (8.56 × 5.4 cm) and inches (3.37 × 2.125 in). Crop & print e-Aadhaar PDF front and back for wallet PVC card and A4 paper.',
+      'Exact official Aadhaar card dimensions (8.56 × 5.4 cm / 3.37 × 2.125 in). Crop & print e-Aadhaar PDF front and back for wallet PVC card and A4 paper.',
     url: 'https://www.filezenith.com/tools/aadhaar-card-print',
     siteName: 'FileZenith',
     type: 'website',
@@ -67,9 +65,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Aadhaar Card Print Tool Online (e-Aadhaar to A4 & PVC)',
+    title: 'Aadhaar Card Print Size & e-Aadhaar PDF Cropper (8.56 × 5.4 cm)',
     description:
-      'Crop and print e-Aadhaar PDF or scanned card on A4 paper and PVC card (exact 85.6x54 mm). 100% client-side privacy.',
+      'Crop and print e-Aadhaar PDF or scanned card on A4 paper and PVC card (exact 8.56 × 5.4 cm / 85.6 × 54 mm). 100% client-side privacy.',
     images: ['https://www.filezenith.com/api/og?title=Aadhaar%20Card%20Print%20Tool&category=ID%20Card%20Studio&desc=Crop%20and%20print%20e-Aadhaar%20PDF%20on%20A4%20and%20PVC%20card%20(85.6x54mm).%20100%25%20private%20in-browser.'],
   },
 };
@@ -172,7 +170,7 @@ export default function AadhaarCardPrintPage() {
           </div>
 
           <h1 className="text-2xl sm:text-4xl font-black text-slate-950 tracking-tight leading-tight">
-            Aadhaar Card Size in CM, Inch &amp; Exact Print Cropper
+            Aadhaar Card Print Size &amp; e-Aadhaar PDF Cropper
           </h1>
 
           <p className="text-sm sm:text-base text-slate-600 font-medium max-w-3xl leading-relaxed">

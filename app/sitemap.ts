@@ -85,17 +85,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/utility',
     '/social',
 
-    // PDF Compression Consolidations - keep the #hash versions as canonical
-    '/pdf/compress-to-100kb',
-    '/pdf/compress-to-200kb',
-    '/pdf/compress-to-300kb',
-    '/pdf/compress-to-500kb',
-    '/pdf/compress-to-1mb',
-
-    // Image Compression Consolidations
-    '/image/compress-to-20kb',
-    '/image/compress-to-50kb',
-    '/image/compress-to-100kb',
+    // Redirected legacy target size without dedicated directory
+    '/pdf/compress-to-50kb',
 
     // Exam Resizer Consolidations - these are merged into parent tools
     '/tools/railway-rrb-photo-resizer',

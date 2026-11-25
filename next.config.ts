@@ -132,52 +132,9 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // 1. PDF Target Size Consolidation (Merged into /pdf/compress with #hash)
-      {
-        source: '/pdf/compress-to-100kb',
-        destination: '/pdf/compress#100kb',
-        permanent: true,
-      },
       {
         source: '/pdf/compress-to-50kb',
-        destination: '/pdf/compress#50kb',
-        permanent: true,
-      },
-      {
-        source: '/pdf/compress-to-200kb',
-        destination: '/pdf/compress#200kb',
-        permanent: true,
-      },
-      {
-        source: '/pdf/compress-to-300kb',
-        destination: '/pdf/compress#300kb',
-        permanent: true,
-      },
-      {
-        source: '/pdf/compress-to-500kb',
-        destination: '/pdf/compress#500kb',
-        permanent: true,
-      },
-      {
-        source: '/pdf/compress-to-1mb',
-        destination: '/pdf/compress#1mb',
-        permanent: true,
-      },
-
-      // 2. Image Target Size Consolidation (Merged into /image/compress with #hash)
-      {
-        source: '/image/compress-to-20kb',
-        destination: '/image/compress#20kb',
-        permanent: true,
-      },
-      {
-        source: '/image/compress-to-50kb',
-        destination: '/image/compress#50kb',
-        permanent: true,
-      },
-      {
-        source: '/image/compress-to-100kb',
-        destination: '/image/compress#100kb',
+        destination: '/pdf/compress',
         permanent: true,
       },
 
