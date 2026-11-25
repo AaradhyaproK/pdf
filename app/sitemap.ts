@@ -74,14 +74,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // Explicitly exclude redirected URLs so sitemap only contains clean 200 OK canonicals
+  // Note: These URLs are redirected for UX consolidation, but we keep them out of sitemap
+  // to prevent duplicate content issues. The new consolidated URLs should rank instead.
+  // However, we keep a subset of high-volume specific keywords that Google may still want
+  // to index for long-tail traffic. Only truly legacy/duplicate URLs are excluded.
   const REDIRECTED_SLUGS = new Set([
-    // Category Aliases
+    // Category Aliases - these are category hubs, not individual tools
     '/pdf',
     '/image',
     '/utility',
     '/social',
 
-    // PDF Compression Consolidations
+    // PDF Compression Consolidations - keep the #hash versions as canonical
     '/pdf/compress-to-100kb',
     '/pdf/compress-to-200kb',
     '/pdf/compress-to-300kb',
@@ -93,7 +97,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/image/compress-to-50kb',
     '/image/compress-to-100kb',
 
-    // Exam Resizer Consolidations
+    // Exam Resizer Consolidations - these are merged into parent tools
     '/tools/railway-rrb-photo-resizer',
     '/tools/ibps-photo-resizer',
     '/tools/sbi-po-photo-resizer',
@@ -110,7 +114,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Novelty Duplicates
     '/utility/roll-the-dice',
 
-    // Legacy Redirects
+    // Legacy Redirects - these have better alternatives
     '/image/to-pdf',
     '/image/png-to-pdf',
     '/image/heic-to-jpg',

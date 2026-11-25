@@ -60,7 +60,12 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       'reduce pdf file size online free',
       'pdf compressor no upload to server',
       'shrink pdf size for email attachment',
-      'compress large pdf file fast'
+      'compress large pdf file fast',
+      'compress pdf under 100kb',
+      'compress pdf for government form',
+      'reduce pdf size for ssc exam',
+      'compress pdf for upsc form',
+      'pdf file size reducer online'
     ],
     category: 'pdf',
     howToSteps: [
@@ -86,7 +91,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/pdf/compress-to-200kb': {
     slug: '/pdf/compress#200kb',
     title: 'Compress PDF to 200KB Free Online — Form & Job Application Reducer',
-    metaTitle: 'Compress PDF to 200KB Free Online — Exact Size for Forms',
+    metaTitle: 'Compress PDF to 200KB Free Online — Exact Size for Forms | FileZenith',
     description: 'Compress PDF under 200KB online free for SSC, UPSC, Maharashtra 7/12 land records, and government job portals. Keep text crisp with 100% private in-browser compression. Zero upload.',
     keywords: [
       'compress pdf to 200kb',
@@ -94,7 +99,11 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       'pdf compressor under 200kb for government portal',
       'compress pdf to 200kb online without losing quality',
       'shrink pdf file size under 200kb in mobile',
-      'free pdf size reducer below 200kb no upload'
+      'free pdf size reducer below 200kb no upload',
+      'compress pdf for ssc cgl form',
+      'compress pdf for upsc otr',
+      'pdf size reducer 200kb for job application',
+      'reduce pdf below 200kb for portal upload'
     ],
     category: 'pdf',
     howToSteps: [
@@ -381,7 +390,13 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       'reduce image file size online free',
       'photo compressor no upload to server',
       'shrink image size for job application',
-      'compress jpg png photo fast'
+      'compress jpg png photo fast',
+      'compress image for ssc exam',
+      'compress image for upsc form',
+      'reduce photo size in kb online',
+      'image size reducer for government form',
+      'compress photo for railway exam',
+      'compress signature for bank exam'
     ],
     category: 'image',
     howToSteps: [
@@ -401,7 +416,7 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/image/compress-to-20kb': {
     slug: '/image/compress#20kb',
     title: 'Compress Image to 20KB Online Free — Signature & Photo Reducer for Forms',
-    metaTitle: 'Compress Image to 20KB Free Online — Signature & Photo Reducer',
+    metaTitle: 'Compress Image to 20KB Free Online — Signature & Photo Reducer | FileZenith',
     description: 'Compress image or signature under 20KB online free for SSC, UPSC, IBPS, and state recruitment portal uploads. 100% private in-browser compression.',
     keywords: [
       'compress image to 20kb',
@@ -409,7 +424,11 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       'reduce photo size to 20kb online',
       'jpg compressor under 20kb for govt exams',
       'shrink signature file size below 20kb',
-      'photo size reducer under 20kb no upload'
+      'photo size reducer under 20kb no upload',
+      'compress signature for ssc form',
+      'compress signature for upsc form',
+      'reduce photo size to 20kb for portal',
+      'signature size reducer 10 to 20 kb'
     ],
     category: 'image',
     howToSteps: [
@@ -436,7 +455,13 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       'jpg compressor under 50kb for government portal',
       'compress photo to 50kb online without losing clarity',
       'shrink image file size under 50kb in mobile',
-      'free photo size reducer below 50kb no upload'
+      'free photo size reducer below 50kb no upload',
+      'compress photo for ssc cgl form',
+      'compress photo for upsc otr',
+      'reduce photo size to 50kb for portal upload',
+      'image compressor under 50kb for form',
+      'compress image for railway form',
+      'photo size reducer for bank exam'
     ],
     category: 'image',
     howToSteps: [
@@ -456,9 +481,19 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
   '/image/compress-to-100kb': {
     slug: '/image/compress#100kb',
     title: 'Compress Image to 100KB Online Free — Fast Photo Reducer for ID & Forms',
-    metaTitle: 'Compress Image to 100KB Online Free — Fast Photo Reducer',
+    metaTitle: 'Compress Image to 100KB Online Free — Fast Photo Reducer | FileZenith',
     description: 'Compress and resize photos under 100KB online for job applications, identity cards, and website uploads. 100% private, instant & lossless in-browser.',
-    keywords: ['compress image to 100kb', 'photo size reducer 100kb', 'image compress under 100kb'],
+    keywords: [
+      'compress image to 100kb',
+      'photo size reducer 100kb',
+      'image compress under 100kb',
+      'compress photo for ssc form',
+      'compress photo for upsc form',
+      'reduce photo size to 100kb online',
+      'image size reducer for government portal',
+      'compress jpg to 100kb online',
+      'photo compressor 100kb for job application'
+    ],
     category: 'image',
     howToSteps: [
       { title: 'Upload Image', text: 'Select your JPEG or PNG file.' },
@@ -513,7 +548,16 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
       'us passport photo 2x2 maker no upload',
       'india passport photo maker 35x45mm',
       'schengen visa photo creator free',
-      'create printable 4x6 passport photo sheet'
+      'create printable 4x6 passport photo sheet',
+      'passport photo 3.5x4.5 cm online',
+      'india passport size photo generator',
+      'us visa photo 2x2 inches ds-160',
+      'schengen visa photo requirements',
+      'uk passport photo maker online',
+      'passport photo size converter online',
+      'make passport photo for ssc form',
+      'make passport photo for upsc form',
+      'passport photo for government exam'
     ],
     category: 'image',
     howToSteps: [
