@@ -1858,18 +1858,20 @@ export const SEO_REGISTRY: Record<string, ToolSEO> = {
 
   '/social/youtube-thumbnail-downloader': {
     slug: '/social/youtube-thumbnail-downloader',
-    title: 'YouTube Thumbnail & Photo Download (Full HD 1080p MaxRes)',
-    metaTitle: 'YouTube Photo Download Full HD 1080p — Thumbnail Saver | FileZenith',
-    description: 'Download YouTube video cover photos and thumbnails in 1080p Full HD (MaxRes), 640p HD, and HQ. Free YouTube photo download tool for creators and fair use.',
+    title: 'YouTube Thumbnail Downloader & Photo Download (Full HD 1080p)',
+    metaTitle: 'YouTube Thumbnail Downloader — Download 1080p Full HD Covers | FileZenith',
+    description: 'Download YouTube video cover photos and thumbnails in 1080p Full HD (MaxRes), 640p HD, and HQ. Free online YouTube thumbnail downloader for videos and Shorts.',
     keywords: [
-      'youtube photo download full hd 1080p',
+      'youtube thumbnail downloader',
+      'youtube thumbnail download',
+      'download youtube thumbnail',
       'youtube photo download',
       'youtube thumbnail download full hd 1080p',
       'youtube thumbnail viewer',
-      'youtube video cover preview hd 1080p',
-      'view youtube thumbnail image free',
-      'download youtube thumbnail full hd 1080p',
-      'youtube video cover photo download'
+      'youtube cover download 1080p',
+      'youtube video cover photo download',
+      'youtube shorts thumbnail download',
+      'maxresdefault download'
     ],
     category: 'social',
     howToSteps: [

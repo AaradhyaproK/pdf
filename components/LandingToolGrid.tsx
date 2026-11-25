@@ -353,7 +353,7 @@ export const ALL_TOOLS: ToolItem[] = [
   },
   {
     id: 'youtube-thumbnail-downloader',
-    name: 'YouTube Photo & Thumbnail Download (1080p)',
+    name: 'YouTube Thumbnail Downloader (1080p Full HD)',
     slug: '/social/youtube-thumbnail-downloader',
     desc: 'Download YouTube video cover photos and thumbnails in 1080p Full HD MaxRes, 640p HD, and 480p HQ.',
     category: 'social',
@@ -365,11 +365,11 @@ export const ALL_TOOLS: ToolItem[] = [
     hoverTitleClass: 'group-hover:text-rose-600',
     badgeStyle: 'bg-rose-50 text-rose-700 border-rose-200',
     keywords: [
-      'youtube photo download full hd 1080p',
-      'youtube photo download',
+      'youtube thumbnail downloader',
       'youtube thumbnail download',
+      'download youtube thumbnail',
+      'youtube photo download',
       'youtube cover download',
-      'maxresdefault',
       'download youtube thumbnail full hd 1080p'
     ],
   },
